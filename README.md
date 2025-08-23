@@ -1,2 +1,2 @@
-# bit-rot-website
-Copeland Gallery join the rot 7th - 10th august 2025
+# Phreaking-website
+Website for the Phreaking Collective
