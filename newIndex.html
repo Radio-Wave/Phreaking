@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phreaking Collective — Landing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles3.css">
+  <meta name="description" content="Phreaking Collective — computational art, bit rot, subversive tech, and glitch poetics.">
+</head>
+<body>
+  <div class="noise"></div>
+
+  <!-- Header / Logo (top-right) -->
+  <header class="site-header">
+    <div class="spacer"></div>
+    <a class="logo" href="#" aria-label="Phreaking Collective">
+      <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
+        <title id="title">Phreaking Collective</title>
+        <text class="word" x="58" y="28">PHREAKING</text>
+      </svg>
+    </a>
+  </header>
+
+  <!-- Main layout: 1/5 left, 4/5 right -->
+  <main class="layout">
+    <!-- Left column: small copy block -->
+    <aside class="left">
+      <h3>Home of the Phreaking Collective</h3>
+      <p>
+        The Phreaking Collective is a London-based group of emerging computational artists working across code, sculpture, sound, installation, and digital media. Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
+      </p>
+    </aside>
+
+    <!-- Right column: centered headline + film rail -->
+    <section class="right">
+      <div class="headline-wrap">
+        <h1>
+          iming to work with a emergin and new ethos of art. Through disruptive technologies and shared practice, we connect people, spread ideas, and open new spaces for creativity to take root
+        </h1>
+      </div>
+
+      <div class="film-rail">
+        <figure class="card">
+          <figcaption>BitRot</figcaption>
+          <div class="img img-1"></div>
+        </figure>
+        <figure class="card">
+          <figcaption>Coming Soon</figcaption>
+          <div class="img img-2"></div>
+        </figure>
+        <figure class="card">
+          <figcaption>Coming Soon</figcaption>
+          <div class="img img-3"></div>
+        </figure>
+        <figure class="card">
+          <figcaption>Coming Soon</figcaption>
+          <div class="img img-4"></div>
+        </figure>
+      </div>
+
+      <section class="cta inside">
+        <a class="button" href="mailto:info@phreaking.co.uk">Show with us</a>
+        <a class="button ghost" href="#projects">See projects</a>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Phreaking Collective — SE London.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
