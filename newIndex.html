@@ -3,81 +3,64 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Phreaking Collective — Landing</title>
+  <title>Phreaking Collective</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/newIndexStyles.css">
-  <meta name="description" content="Phreaking Collective — computational art, bit rot, subversive tech, and glitch poetics.">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles4.css">
+  <meta name="description" content="Phreaking Collective — computational artists working with code, objects, and networks.">
 </head>
 <body>
-  <div class="noise"></div>
+  <main class="layout" role="main">
+    <!-- Left column (1/5): logo + intro copy -->
+    <aside class="left" aria-label="Sidebar">
+      <a class="logo" href="/" aria-label="Phreaking Collective">
+        <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
+          <title id="title">Phreaking Collective</title>
+          <text class="word" x="58" y="28">PHREAKING</text>
+        </svg>
+      </a>
 
-  <!-- Header / Logo (top-right) -->
-  <header class="site-header">
-    <div class="spacer"></div>
-    <a class="logo" href="#" aria-label="Phreaking Collective">
-      <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
-        <title id="title">Phreaking Collective</title>
-        <text class="word" x="58" y="28">PHREAKING</text>
-      </svg>
-    </a>
-  </header>
-
-  <!-- Main layout: 1/5 left, 4/5 right -->
-  <main class="layout">
-    <!-- Left column: small copy block -->
-    <aside class="left">
-      <h3>Home of the Phreaking Collective</h3>
-      <p>
+      <h2 class="kicker">A lens for the unseen.</h2>
+      <p class="intro">
         The Phreaking Collective is a London-based group of emerging computational artists working across code, sculpture, sound, installation, and digital media. Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
       </p>
     </aside>
 
-    <!-- Right column: centered headline + film rail -->
+    <!-- Right column (4/5): headline + film strip + actions -->
     <section class="right">
-      <div class="headline-wrap">
-        <h1>
-          Working with a emerging and new ethos of art. Through disruptive technologies and shared practice, we connect people, spread ideas, and open new spaces for creativity to take root
-        </h1>
-      </div>
+      <h1 class="hero">
+        Next show: Coming soon
+      </h1>
 
-      <div class="film-rail">
+      <section class="film-rail" aria-label="Project previews">
         <figure class="card">
-          <figcaption>BitRot</figcaption>
-          <div class="img img-1">
-            <a href="index.html"></a><img src="assets/Index/bitRotLink.png">
-          </div>
+          <figcaption>(ISO/800) (ƒ/2.8) (1/125)</figcaption>
+          <img class="img" src="" alt="Project placeholder 1" />
         </figure>
         <figure class="card">
-          <figcaption>Coming Soon</figcaption>
-          <div class="img img-2">
-          <img src="assets/Index/CSLink.png">            
-          </div>
+          <figcaption>(ISO/800) (ƒ/1.8) (1/160)</figcaption>
+          <img class="img" src="" alt="Project placeholder 2" />
         </figure>
         <figure class="card">
-          <figcaption>Coming Soon</figcaption>
-          <div class="img img-3">
-            <img src="assets/Index/CSLink.png">
-          </div>
+          <figcaption>(ISO/1600) (ƒ/4.0) (1/60)</figcaption>
+          <img class="img" src="" alt="Project placeholder 3" />
         </figure>
         <figure class="card">
-          <figcaption>Coming Soon</figcaption>
-          <div class="img img-4">
-            <img src="assets/Index/CSLink.png">
-          </div>
+          <figcaption>(CLK/44.1kHz) (ERR/0x0F)</figcaption>
+          <img class="img" src="" alt="Project placeholder 4" />
         </figure>
-      </div>
-
-      <section class="cta inside">
-        <a class="button" href="mailto:info@phreaking.co.uk">Show with us</a>
-        <a class="button ghost" href="#projects">See projects</a>
       </section>
+
+      <nav class="actions" aria-label="Primary actions">
+        <a class="button" href="mailto:hello@phreaking.co.uk">Email us</a>
+        <a class="button ghost" href="#projects">Projects</a>
+      </nav>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Phreaking Collective — SE London.</p>
+    <p>© <span id="year"></span> Phreaking Collective — London.</p>
   </footer>
 
   <script>
