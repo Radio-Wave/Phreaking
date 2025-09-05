@@ -1,0 +1,129 @@
+/* Minimalist, black/white, mono-only */
+:root{
+  --bg: #000;
+  --ink: #fff;
+  --muted: #cfcfcf;
+  --rule: #fff;
+  --max: 1400px;
+  --g: clamp(14px, 3vw, 32px);
+  --pad: clamp(16px, 4vw, 36px);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height:1.4;
+}
+
+/* 1/5 + 4/5 layout */
+.layout{
+  max-width: var(--max);
+  margin: clamp(48px, 10vh, 96px) auto 0;
+  padding: 0 var(--pad) clamp(40px, 10vh, 80px);
+  display:grid;
+  grid-template-columns: 1fr 4fr;
+  gap: var(--g);
+}
+@media (max-width: 980px){
+  .layout{grid-template-columns: 1fr}
+}
+
+/* Left column */
+.left{
+  border-right: 1px solid var(--rule);
+  padding-right: var(--g);
+}
+@media (max-width: 980px){
+  .left{
+    border-right:none;
+    border-bottom:1px solid var(--rule);
+    padding-bottom: var(--g);
+    margin-bottom: var(--g);
+  }
+}
+
+.logo{
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+  color:var(--ink);
+  margin-bottom: 16px;
+}
+.logo .mark{height:34px; width:auto}
+.logo .word{
+  fill:currentColor;
+  font: 700 18px/1 "IBM Plex Mono", ui-monospace;
+  letter-spacing:1px;
+}
+
+/* Text blocks */
+.kicker{margin: 6px 0 10px 0; font-weight:700; font-size: 16px}
+.intro{margin:0; color:var(--muted); max-width: 44ch; font-size: 14px}
+
+/* Right column */
+.right{min-width:0}
+
+/* Hero */
+.hero{
+  margin: 0 0 var(--g) 0;
+  font-weight: 700;
+  font-size: clamp(28px, 5.4vw, 56px);
+  line-height: 1.1;
+  max-width: 26ch;
+}
+
+/* Film rail */
+.film-rail{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--g);
+  align-items:stretch;
+}
+@media (max-width: 980px){ .film-rail{grid-template-columns: repeat(2, 1fr)} }
+@media (max-width: 560px){ .film-rail{grid-template-columns: 1fr} }
+
+.card{
+  display:flex;
+  flex-direction:column;
+  border: 1px solid var(--rule);
+}
+.card figcaption{
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--muted);
+}
+.img{
+  width:100%;
+  aspect-ratio: 3 / 4;
+  height:auto;
+  object-fit: cover;
+  display:block;
+  background: #111; /* fallback if src empty */
+}
+
+/* Actions */
+.actions{ display:flex; gap:12px; margin-top: var(--g); }
+.button{
+  border: 1px solid var(--rule);
+  text-decoration:none;
+  color: var(--ink);
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.button.ghost{ background: transparent; }
+
+/* Footer */
+.site-footer{
+  border-top: 1px solid var(--rule);
+  text-align:center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 20px var(--pad) 36px;
+}
