@@ -46,6 +46,18 @@ body{
   }
 }
 
+/* Centered logo image in the left column */
+.imgLogo,
+.logoImg{
+  display:block;
+  width: clamp(160px, 28vw, 320px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto var(--g);       /* center horizontally + add spacing below */
+  object-fit: contain;
+}
+
+/* Optional: keep inline SVG/text logo tidy if you still use it */
 .logo{
   display:inline-flex;
   align-items:center;
@@ -76,20 +88,24 @@ body{
   max-width: 26ch;
 }
 
-/* Film rail */
+/* Film rail (cards) */
 .film-rail{
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);  /* 4 across on large screens */
+  grid-auto-rows: 1fr;                     /* equal row heights */
   gap: var(--g);
-  align-items:stretch;
+  align-items: stretch;
 }
-@media (max-width: 980px){ .film-rail{grid-template-columns: repeat(2, 1fr)} }
-@media (max-width: 560px){ .film-rail{grid-template-columns: 1fr} }
+@media (max-width: 980px){ .film-rail{ grid-template-columns: repeat(2, 1fr); } } /* tablets */
+@media (max-width: 560px){ .film-rail{ grid-template-columns: 1fr; } }            /* mobile */
 
 .card{
   display:flex;
   flex-direction:column;
+  height:100%;                     /* fill the grid cell */
   border: 1px solid var(--rule);
+  text-decoration: none;           /* safe if the whole card is a link */
+  color: inherit;
 }
 .card figcaption{
   font-size: 11px;
