@@ -47,7 +47,6 @@ body{
 }
 
 /* Centered logo image in the left column */
-.imgLogo,
 .logoImg{
   display:block;
   width: clamp(160px, 28vw, 320px);
