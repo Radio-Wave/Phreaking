@@ -368,7 +368,31 @@ section p a:hover {
   font-style: italic;
   color: var(--muted);           /* give event titles a muted contrast */
 }
+/* schedule list — scoped, higher specificity, and end-of-file if possible */
+section#schedule ul.pc-schedule-list {
+  list-style: none;
+  margin: 1em 0 0;
+  padding: 0;
+}
 
+section#schedule ul.pc-schedule-list > li {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
+  padding: 0.5em 0;
+  margin: 0; /* neutralise global margins */
+}
+
+section#schedule ul.pc-schedule-list > li:first-child {
+  border-top: none;
+}
+
+section#schedule ul.pc-schedule-list em {
+  font-style: italic;
+  color: var(--muted);
+}
 /* — Events grid: unified talks + workshops — */
 .events-grid {
   display: grid;
