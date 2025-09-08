@@ -1,209 +1,216 @@
+/* ================================
+   Fonts
+================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400&display=swap');
 
-/* — Reset & Basics — */
-* {
-  margin: 0;
-  padding: 0em;
-  box-sizing: border-box;
+/* ================================
+   Theme tokens
+================================ */
+:root{
+  --bg: #000;
+  --ink: #fff;
+  --muted: #cfcfcf;
+  --rule: #fff;
+
+  --pad: clamp(16px, 4vw, 36px);
+  --g: clamp(14px, 3vw, 32px);
+  --left: clamp(220px, 24vw, 360px);   /* sidebar width for BitRot page */
 }
-html {
-  scroll-behavior: smooth;
-}
+
+/* ================================
+   Reset & Base
+================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 body {
-  background: #000;
-  color: #fff;
-  /* font-family: 'Inter', sans-serif; */
-    font-family: 'Fira Mono','IBM Plex Mono', monospace;
-
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Fira Mono','IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
 }
-.gfm-embed iframe {
-    filter: invert(1);
-}
+a { color: var(--ink); text-decoration: none; }
+a:hover { opacity: .85; }
 
+/* GoFundMe: dark-mode invert */
+.gfm-embed iframe { filter: invert(1); }
 
-
-/* — Banner Marquee (continuous!) — */
-.banner {
-  background: #000;
-  color: #fff;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #444;
-}
-/* — grid container for artist cards — */
-.artists-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  margin: 2rem;       /* space below the “ARTISTS” heading */
+/* ================================
+   Marquee Banner
+================================ */
+.banner{
+  background:#000;
+  color:#fff;
+  font-size:0.9rem;
+  text-transform:uppercase;
+  padding:0.5rem 0;
+  border-bottom:1px solid #444;
+  margin: 0 0 var(--g) 0; /* allow spacing when used inside content */
 }
 
-@media (min-width: 700px) {
-  .artists-grid {
-    /* at 700px+ wide, lock into 3 equal columns */
-    grid-template-columns: repeat(3, 1fr);
+/* ================================
+   Left sidebar layout (BitRot)
+   Matches your index-page vibe
+================================ */
+.layout{ margin:0; padding:0; display:block; }
+
+.left{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--left);
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--pad);
+  background: var(--bg);
+  border-right: 1px solid var(--rule);
+  z-index: 10;
+}
+
+/* Main-site logo (left sidebar on index page uses this selector) */
+.logo img { width: 250px; height: auto; display:block; }
+
+/* Shared inline logo asset if you also use a generic .logoImg element */
+.logoImg{
+  display:block;
+  width: clamp(160px, 28vw, 320px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 var(--g) 0;
+  object-fit: contain;
+}
+
+/* BitRot page title mark — sized independently from .logo img */
+.BitRotLogo img{
+  display:block;
+  width: clamp(120px, 18vw, 220px);  /* smaller by default */
+  height:auto;
+  margin:0 0 var(--g) 0;
+  object-fit:contain;
+}
+
+/* Sidebar index list */
+.index{ margin: 8px 0 var(--g); }
+.index ul{
+  list-style:none;
+  margin:0; padding:0;
+  display:flex; flex-direction:column; gap:.4rem;
+}
+.index a{
+  display:inline-flex; align-items:center; gap:.5ch;
+  color:var(--muted);
+  font-weight:600; font-size:16px; letter-spacing:.01em; line-height:1.35;
+  transition: color .15s ease, transform .15s ease;
+}
+.index a::before{ content:"↗"; font-size:.9em; opacity:.7; transform: translateY(-1px); }
+.index a:hover{ color:var(--ink); }
+.index a:hover::before{ transform: translate(2px,-1px); }
+.index a[aria-current="page"]{ color:var(--ink); }
+
+/* Sidebar copy */
+.kicker{ margin: 6px 0 10px 0; font-weight:700; font-size:16px; }
+.intro{ margin:0; color:var(--muted); max-width:44ch; font-size:14px; }
+
+/* Right content column */
+.right{
+  margin-left: calc(var(--left) + var(--g));
+  padding: var(--pad);
+  min-width: 0;
+}
+
+/* Thin scrollbar nicety (desktop) */
+@media (hover:hover){
+  .left::-webkit-scrollbar{ width:10px; }
+  .left::-webkit-scrollbar-track{ background:#0a0a0a; }
+  .left::-webkit-scrollbar-thumb{ background:#222; }
+  .left::-webkit-scrollbar-thumb:hover{ background:#2d2d2d; }
+}
+
+/* Collapse sidebar on small screens */
+@media (max-width:980px){
+  .left{
+    position: static;
+    width:auto; height:auto;
+    border-right:none; border-bottom:1px solid var(--rule);
+    padding: var(--pad);
   }
-  body{
-    padding: 1em;
-}
-}
-
-/* — each bio card — */
-.artist-card {
-  border: 2px solid #fff;
-  border-radius: 4px;
-  padding: 1.5rem;
-  text-align: left;
-  display: flex;
-  flex-direction: column; 
-  height: 100%; /* ensures consistent card height */
-
+  .right{ margin-left:0; padding: var(--pad); }
+  .index ul{ flex-direction: row; flex-wrap: wrap; gap:.5rem 1rem; }
 }
 
-
-/* — artist name — */
-.artist-card h3 {
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  text-transform: lowercase;
+/* ================================
+   BitRot header: nav | logo | nav
+================================ */
+.hero{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* left nav | logo | right nav */
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem 0 1rem;
 }
 
-/* — bio text — */
-.artist-card p {
-  font-size: 1rem;
-  line-height: 1.5;
+/* keep BitRot mark centered */
+.BitRotLogo{ justify-self: center; }
 
-}
+/* nav columns + bullets removed */
+.nav{ width:100%; }
+.nav--left{  justify-self: start; text-align: left;  }
+.nav--right{ justify-self: end;   text-align: right; }
 
-.artist-link {
-  justify-content: space-between; 
-
-  margin-top: auto;
-  padding-top: 1rem; /* consistent spacing */
-
-}
-.artist-link a {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* — Page Layout — */
-.hero {
-  display: flex;
-  align-items: center;          /* vertical centering */
-  justify-content: center;      /* nav + logo + nav centered */
-  gap: 3rem;                    /* tighten the spacing */
-  padding-top: 2rem;            /* room below marquee */
-  flex-wrap: wrap;
-}
-/* — Side Nav (no more sticky) — */
-.nav {
-  width: auto; /* shrink-to-fit */
-}
-.nav ul {
+.hero .nav ul,
+nav ul{
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hero .nav ul{
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: .75rem;
 }
-.nav a {
+.hero .nav li::marker{ content:""; } /* extra safety */
+.nav a{
   color: #fff;
   text-decoration: none;
   text-transform: lowercase;
-  font-size: 1.3rem; /* bigger per your note */
+  font-size: 1.3rem;
   line-height: 1.4;
 }
-.nav--left {
-  text-align: left;
-}
-.nav--right {
-  text-align: right;
+
+/* Responsive header */
+@media (max-width: 800px){
+  .hero{ grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+  .nav--left, .nav--right{ justify-self: center; text-align: center; }
+  .hero .nav ul{ flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .75rem 1rem; }
+  .BitRotLogo img{ width: clamp(120px, 32vw, 220px); }
 }
 
-/* — Main & Logo — */
-.main {
-  text-align: center;
-}
-
-.logo img {
-  width: 250px; /* fixed size */
-}
-
-/* — Sections — */
-section {
-  margin: 4rem 0;
-}
-section h2 {
-    font-family: 'VT323', monospace;
-
+/* ================================
+   Section typography
+================================ */
+section{ margin: 4rem 0; }
+section h2{
+  font-family: 'VT323', monospace;
   font-size: 2rem;
   text-transform: uppercase;
-  margin-bottom: 1rem;
-  padding: 0.2em;
+  margin: 0 0 1rem 0;
+  padding: 0.2em 0;
 }
-section p {
+section p{
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
   font-size: 1rem;
 }
 
-@media screen and (max-width: 480px) {
-    html, body {
-    overflow-x: hidden;
-  }
-  .page {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    align-items: stretch;
-    flex-wrap: wrap;
-}
-
-  
-
-  /* .nav ul {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0;
-  } */
-
-  .nav a {
-    font-size: 1rem;
-  }
-
-  .logo h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  
-
-  }
-
-  section {
-    margin: 1rem 1rem;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-  }
-
-  section p {
-    font-size: 0.9rem;
-    /* padding: 0 1rem; */
-  }
-}
-
-/*  → Pull in a serif italic for the quote */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400&display=swap');
-
-/* — Intro Quote — */
-.intro-quote {
+/* Quote block */
+.intro-quote{
   font-family: 'Merriweather', serif;
   font-style: italic;
   font-size: 1.2rem;
@@ -213,94 +220,181 @@ section p {
   padding-left: 1rem;
   border-left: 4px solid #fff;
 }
-.intro-quote footer {
-  margin-top: 0.5rem;
-  font-style: normal;
-  font-size: 0.9rem;
-  color: #bbb;
+.intro-quote footer{ margin-top:.5rem; font-style:normal; font-size:.9rem; color:#bbb; }
+.intro-quote cite{ font-style:normal; font-weight:bold; }
+
+/* Links inside paragraphs */
+section p a { color:#fff; text-decoration: underline; }
+section p a:hover { opacity:.7; }
+
+/* ================================
+   Artists grid & cards
+================================ */
+.artists-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 2rem;
 }
-.intro-quote cite {
-  font-style: normal;
-  font-weight: bold;
+@media (min-width:700px){
+  .artists-grid{ grid-template-columns: repeat(3, 1fr); }
 }
 
-/* — Body Text — */
-.body-text {
-  max-width: 700px;
-  margin: 0 auto 2rem auto;
-  line-height: 1.6;
-  font-size: 1rem;
-  color: #eee;
-}
-.body-text p + p {
-  margin-top: 1.5rem;
-}
-
-/* — Keywords — */
-.keywords {
-  max-width: 700px;
-  margin: 0 auto 4rem auto;
-  text-align: left;
-}
-.keywords h3 {
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  color: #bbb;
-  margin-bottom: 0.5rem;
-}
-.keywords ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-}
-.keywords li {
-  font-size: 0.9rem;
-  color: #ddd;
-  background: rgba(255,255,255,0.05);
-  padding: 0.3rem 0.6rem;
-  border-radius: 3px;
-}
-
-
-.landscape-photo {
-  text-align: center;     /* center the figure & caption */
-  margin: 1rem 0;         /* vertical spacing */
-}
-
-.landscape-photo img {
-  display: block;         /* so margin auto works */
-  max-width: 100%;         /* cap at 80% of its container */
-  height: auto;           /* preserve aspect ratio */
-  margin: 0 auto;         /* center horizontally */
-  border-radius: 4px;     /* optional—soften the corners */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5); /* optional subtle shadow */
-}
-
-.landscape-photo figcaption {
-  font-size: 0.9rem;
-  color: #ccc;
-  margin-top: 0.5rem;
-  font-style: italic;
-}
-
-/* — Map styling — */
-.map-wrapper {
-  text-align: center;
-  margin: 2rem 0;
-}
-.map-wrapper iframe {
-  width: 80%;              /* your requested 80% width */
-  height: 400px;           /* adjust as you like */
-  border: none;
+.artist-card{
+  border: 2px solid #fff;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  padding: 1.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.artist-card h3{
+  font-size:1.6rem;
+  margin-bottom:1rem;
+  text-transform:lowercase;
+}
+.artist-card p{ font-size: 1rem; line-height: 1.5; }
+.artist-link{ margin-top:auto; padding-top:1rem; }
+.artist-link a{ color:#fff; text-decoration:underline; }
+
+/* ================================
+   Schedule (scoped)
+================================ */
+#schedule b,
+#schedule strong,
+#schedule .title { font-weight: 700; }
+
+#schedule time,
+#schedule i,
+#schedule em { font-style: italic; }
+
+section#schedule ul.pc-schedule-list{
+  list-style: none;
+  margin: 1em 0 0;
+  padding: 0;
+}
+section#schedule ul.pc-schedule-list > li{
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
+  padding: 0.5em 0;
+  margin: 0;
+}
+section#schedule ul.pc-schedule-list > li:first-child{ border-top:none; }
+section#schedule ul.pc-schedule-list em{ color: var(--muted); }
+
+/* ================================
+   Events grid & cards
+================================ */
+.events-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* always 2 across by default */
+  gap: 2rem;
+  margin: 2rem;
+}
+@media (max-width:600px){
+  .events-grid{ grid-template-columns: 1fr; }
 }
 
-/* — “Add to calendar” button — */
-.btn {
+.event-card{
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.25rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+.event-label{
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+.event-card h3{
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+  text-transform: lowercase;
+}
+.event-time{
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+.event-media{ margin: 0.5rem 0 1rem; width: 100%; }
+.event-media img{
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+}
+.event-desc{ line-height: 1.5; color: #eee; margin: 0.25rem 0 0.5rem; }
+.event-card .artist-link{ margin-top:auto; padding-top:1rem; }
+
+/* ================================
+   Photo grid (pc-gallery) + lightbox
+================================ */
+.pc-gallery{ --gap:6px; --maxw:1400px; margin:0 auto; max-width:var(--maxw); }
+
+.pc-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+@media (max-width:1100px){ .pc-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width:800px){  .pc-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:520px){  .pc-grid{ grid-template-columns: 1fr; } }
+
+.pc-item{ margin:0; position:relative; cursor:zoom-in; }
+.pc-item img{ width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+.pc-item figcaption{ display:none; }
+
+/* (lightbox placeholders retained) */
+.pc-lightbox{ position:fixed; inset:0; display:none; background:rgba(0,0,0,.95); z-index:9999; align-items:center; justify-content:center; }
+.pc-lightbox[aria-hidden="false"]{ display:flex; }
+.pc-lightbox__inner{ max-width:95vw; max-height:92vh; width:auto; height:auto; position:relative; }
+.pc-lightbox__img{ max-width:95vw; max-height:80vh; width:auto; height:auto; display:block; margin:0 auto; }
+.pc-lightbox__caption{ margin-top:10px; font-size:14px; color:#cfcfcf; text-align:center; line-height:1.4; }
+.pc-lightbox__btn{ position:absolute; top:50%; transform:translateY(-50%); border:1px solid #fff; background:transparent; color:#fff; padding:10px 14px; cursor:pointer; user-select:none; font-family:inherit; }
+.pc-lightbox__btn:hover{ background:rgba(255,255,255,.08); }
+.pc-lightbox__prev{ left:12px; } .pc-lightbox__next{ right:12px; }
+.pc-lightbox__close{ position:absolute; top:12px; right:12px; border:1px solid #fff; background:transparent; color:#fff; padding:6px 10px; cursor:pointer; }
+.pc-lightbox__backdrop{ position:absolute; inset:0; }
+
+/* ================================
+   Media blocks, map & buttons
+================================ */
+.landscape-photo{ text-align:center; margin:1rem 0; }
+.landscape-photo img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:0 auto;
+  border-radius:4px;
+  box-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+
+.map-wrapper{ text-align:center; margin:2rem 0; }
+.map-wrapper iframe{
+  width:80%;
+  height:400px;
+  border:none;
+  border-radius:4px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.5);
+}
+
+.btn{
   display: block;
   padding: 0.8rem 4rem;
   border: 2px solid #fff;
@@ -313,304 +407,22 @@ section p {
   margin-top: 1rem;
   transition: background 0.3s, color 0.3s;
 }
-.btn--calendar:hover {
-  background: #fff;
-  color: #000;
-}
+.btn--calendar:hover{ background:#fff; color:#000; }
+.btn-wrapper{ text-align:center; margin-top:1rem; }
 
-.btn-wrapper {
-  text-align: center;
-  margin-top: 1rem;   /* optional space above */
-}
-
-section p a {
-  color: #fff;
-  text-decoration: underline;
-}
-
-section p a:hover {
-  opacity: 0.7;
-}
-
-/* — Schedule-only typography — */
-#schedule b,
-#schedule strong,
-#schedule .title {
-  font-weight: 700;   /* bold titles only inside #schedule */
-}
-
-#schedule time,
-#schedule i,
-#schedule em {
-  font-style: italic; /* italic times only inside #schedule */
-}
-
-#schedule ul {
-  list-style: none;              /* remove default bullets */
-  padding: 0;
-  margin: 1em 0;
-}
-
-#schedule li {
-  font-family: "IBM Plex Mono", ui-monospace, monospace; /* match site font */
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--ink);             /* inherit your main text color */
-  border-top: 1px solid var(--rule);
-  padding: 0.5em 0;
-}
-
-#schedule li:first-child {
-  border-top: none;              /* no line above the first item */
-}
-
-#schedule em {
-  font-style: italic;
-  color: var(--muted);           /* give event titles a muted contrast */
-}
-/* schedule list — scoped, higher specificity, and end-of-file if possible */
-section#schedule ul.pc-schedule-list {
-  list-style: none;
-  margin: 1em 0 0;
-  padding: 0;
-}
-
-section#schedule ul.pc-schedule-list > li {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--ink);
-  border-top: 1px solid var(--rule);
-  padding: 0.5em 0;
-  margin: 0; /* neutralise global margins */
-}
-
-section#schedule ul.pc-schedule-list > li:first-child {
-  border-top: none;
-}
-
-section#schedule ul.pc-schedule-list em {
-  font-style: italic;
-  color: var(--muted);
-}
-/* — Events grid: unified talks + workshops — */
-.events-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin: 2rem; /* mirrors your artists-grid spacing */
-}
-@media (min-width: 700px) {
-  .events-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2×2 on desktop */
-  }
-}
-
-/* — Events Grid: force 2x2 layout unless phone — */
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* always 2 across */
-  gap: 2rem;
-  margin: 2rem;
-}
-@media (max-width: 600px) {
-  .events-grid {
-    grid-template-columns: 1fr;  /* collapse to single column on phones */
-  }
-}
-
-/* — Event Card — */
-.event-card {
-  text-align: left; /* consistent left alignment for all content */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* allow content to stretch full width */
-  padding: 1.25rem;
-}
-
-/* — Talk/Workshop Label — */
-.event-label {
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  border: 1px solid #fff;
-  border-radius: 999px;
-  padding: 0.15rem 0.5rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.9;
-}
-
-/* — Title + Time — */
-.event-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.25rem;
-  text-transform: lowercase;
-}
-.event-time {
-  font-style: italic;
-  display: block;
-  margin-bottom: 0.75rem;
-  opacity: 0.9;
-}
-
-/* — Image — */
-.event-media {
-  margin: 0.5rem 0 1rem;
-  width: 100%;
-}
-.event-media img {
-  width: 100%;                 /* full-width images */
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-  object-fit: cover;
-  aspect-ratio: 4 / 5;         /* optional: square format */
-}
-
-/* — Description — */
-.event-desc {
-  line-height: 1.5;
-  color: #eee;
-  margin: 0.25rem 0 0.5rem;
-}
-
-/* — CTA Link — */
-.event-card .artist-link {
-  margin-top: auto;
-  padding-top: 1rem;
-}
-.event-card .artist-link a {
-  text-decoration: underline;
-}
-
-/* --- Phreaking Gallery --- */
-.pc-gallery {
-  --gap: 6px;          /* thin margins */
-  --maxw: 1400px;      /* page max width if you want one */
-  margin: 0 auto;
-  max-width: var(--maxw);
-}
-
-.pc-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);  /* 4 across on large screens */
-  gap: var(--gap);
-}
-
-/* Responsive: 3/2/1 columns */
-@media (max-width: 1100px) {
-  .pc-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 800px) {
-  .pc-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .pc-grid { grid-template-columns: 1fr; }
-}
-
-.pc-item {
-  margin: 0;
-  position: relative;
-  cursor: zoom-in;
-}
-
-.pc-item img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1 / 1;           /* square thumbnails for a tidy grid */
-  object-fit: cover;             /* crop to square without distortion */
-  display: block;
-}
-
-.pc-item figcaption {
-  display: none; /* captions shown in lightbox only */
-}
-
-/* --- Lightbox Modal --- */
-.pc-lightbox {
-  position: fixed;
-  inset: 0;
-  display: none;
-  background: rgba(0,0,0,.95);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-}
-
-.pc-lightbox[aria-hidden="false"] { display: flex; }
-
-.pc-lightbox__inner {
-  max-width: 95vw;
-  max-height: 92vh;
-  width: auto;
-  height: auto;
-  position: relative;
-}
-
-.pc-lightbox__img {
-  max-width: 95vw;
-  max-height: 80vh;
-  width: auto;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-.pc-lightbox__caption {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #cfcfcf;
-  text-align: center;
-  line-height: 1.4;
-}
-
-/* Controls */
-.pc-lightbox__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 1px solid #fff;
-  background: transparent;
-  color: #fff;
-  padding: 10px 14px;
-  cursor: pointer;
-  user-select: none;
-  font-family: inherit;
-}
-
-.pc-lightbox__btn:hover { background: rgba(255,255,255,.08); }
-
-.pc-lightbox__prev { left: 12px; }
-.pc-lightbox__next { right: 12px; }
-
-.pc-lightbox__close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  border: 1px solid #fff;
-  background: transparent;
-  color: #fff;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
-/* allow click outside image to close */
-.pc-lightbox__backdrop {
-  position: absolute;
-  inset: 0;
-}
-
-/* --- Curatorial --- */
+/* ================================
+   Curatorial blurb
+================================ */
 .curatorial{
   margin: 2.5rem auto 3rem;
-  max-width: 780px;                 /* match prose width */
-  padding: 0 var(--pad, 16px);      /* respect your site padding vars */
+  max-width: 780px;
+  padding: 0 var(--pad, 16px);
   color: var(--ink);
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  text-align: left;                 
+  text-align: left;
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: 1rem;
 }
-
 .curatorial h3{
   margin: 0 0 .6rem 0;
   font-size: clamp(12px, 1.1vw, 14px);
@@ -619,7 +431,6 @@ section#schedule ul.pc-schedule-list em {
   letter-spacing: .06em;
   color: var(--muted);
 }
-
 .curatorial h1{
   margin: .15rem 0;
   font-size: clamp(16px, 1.7vw, 18px);
@@ -627,7 +438,27 @@ section#schedule ul.pc-schedule-list em {
   line-height: 1.5;
 }
 
-.curatorial{
-  border-top: 1px solid rgba(255,255,255,.15);
-  padding-top: 1rem;
+/* ================================
+   Footer (aligns to right column)
+================================ */
+.site-footer{
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: calc(var(--left) + var(--g));
+  padding: 20px var(--pad) 36px;
+}
+@media (max-width:980px){
+  .site-footer{ margin-left:0; }
+}
+
+/* ================================
+   Narrow-screen tweaks
+================================ */
+@media screen and (max-width: 480px){
+  html, body{ overflow-x:hidden; }
+  section{ margin: 1rem 1rem; }
+  section h2{ font-size: 1.5rem; }
+  section p{ font-size: 0.9rem; }
 }
