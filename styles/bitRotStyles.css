@@ -586,7 +586,7 @@ section#schedule ul.pc-schedule-list em{ color: var(--muted); }
   section p{ font-size: 0.9rem; }
 }
 :root{
-  --left-collapsed: 64px; /* width when collapsed */
+  --left-collapsed: 69px; /* width when collapsed */
   --logo-w: clamp(160px, 28vw, 320px);  /* same as your left-rail logo */
 
 }
