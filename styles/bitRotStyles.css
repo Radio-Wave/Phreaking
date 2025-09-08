@@ -573,14 +573,12 @@ section p a:hover {
 }
 
 .curatorial h1{
-  /* make H1s look like quiet list items */
   margin: .15rem 0;
   font-size: clamp(16px, 1.7vw, 18px);
   font-weight: 400;
   line-height: 1.5;
 }
 
-/* optional: subtle divider above, very faint */
 .curatorial{
   border-top: 1px solid rgba(255,255,255,.15);
   padding-top: 1rem;
