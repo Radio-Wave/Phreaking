@@ -1,14 +1,15 @@
 /* ================================
-   Bit Rot page — fixed left sidebar
-   Matches index page layout & type
-   ================================ */
-
+   Fonts
+================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400&display=swap');
 
-/* Theme tokens */
+/* ================================
+   Theme tokens
+================================ */
 :root{
   --bg: #000;
   --ink: #fff;
@@ -17,30 +18,47 @@
 
   --pad: clamp(16px, 4vw, 36px);
   --g: clamp(14px, 3vw, 32px);
-  --left: clamp(220px, 24vw, 360px);   /* sidebar width */
+  --left: clamp(220px, 24vw, 360px);   /* sidebar width for BitRot page */
 }
 
-/* Reset & base */
-*{ box-sizing: border-box; }
-html, body{ height:100%; }
-html{ scroll-behavior:smooth; }
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:'Fira Mono','IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  line-height:1.45;
+/* ================================
+   Reset & Base
+================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Fira Mono','IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height: 1.45;
   text-rendering: optimizeLegibility;
 }
+a { color: var(--ink); text-decoration: none; }
+a:hover { opacity: .85; }
 
-/* Links */
-a{ color:var(--ink); text-decoration:none; }
-a:hover{ opacity:.85; }
+/* GoFundMe: dark-mode invert */
+.gfm-embed iframe { filter: invert(1); }
 
-/* Layout root */
+/* ================================
+   Marquee Banner
+================================ */
+.banner{
+  background:#000;
+  color:#fff;
+  font-size:0.9rem;
+  text-transform:uppercase;
+  padding:0.5rem 0;
+  border-bottom:1px solid #444;
+  margin: 0 0 var(--g) 0; /* allow spacing when used inside content */
+}
+
+/* ================================
+   Left sidebar layout (BitRot)
+   Matches your index-page vibe
+================================ */
 .layout{ margin:0; padding:0; display:block; }
 
-/* LEFT — fixed sidebar */
 .left{
   position: fixed;
   top: 0;
@@ -55,41 +73,29 @@ a:hover{ opacity:.85; }
   z-index: 10;
 }
 
-/* Logo image */
-/* Smaller logo on BitRot page */
+/* Main-site logo (left sidebar on index page uses this selector) */
+.logo img { width: 250px; height: auto; display:block; }
+
+/* Shared inline logo asset if you also use a generic .logoImg element */
 .logoImg{
   display:block;
-  width: clamp(120px, 18vw, 220px); /* was ~160–320px */
+  width: clamp(160px, 28vw, 320px);
   max-width: 100%;
   height: auto;
   margin: 0 0 var(--g) 0;
   object-fit: contain;
 }
 
-/* Only shrink/style the Bit Rot logo (does NOT affect the PC logo) */
+/* BitRot page title mark — sized independently from .logo img */
 .BitRotLogo img{
-  display: block;
-  width: clamp(100px, 14vw, 200px); /* smaller than the PC logo */
-  height: auto;
-  margin: 0 0 var(--g) 0;           /* space below it */
-  object-fit: contain;
-  /* optional: soften it slightly */
-  /* opacity: .95; */
+  display:block;
+  width: clamp(120px, 18vw, 220px);  /* smaller by default */
+  height:auto;
+  margin:0 0 var(--g) 0;
+  object-fit:contain;
 }
 
-/* If you want it tighter on phones */
-@media (max-width: 980px){
-  .BitRotLogo img{
-    width: clamp(90px, 28vw, 180px);
-  }
-}
-
-
-
-
-.logo{ display:inline-block; }
-
-/* Sidebar index (same vibe as index page) */
+/* Sidebar index list */
 .index{ margin: 8px 0 var(--g); }
 .index ul{
   list-style:none;
@@ -107,177 +113,242 @@ a:hover{ opacity:.85; }
 .index a:hover::before{ transform: translate(2px,-1px); }
 .index a[aria-current="page"]{ color:var(--ink); }
 
-/* Sidebar text */
+/* Sidebar copy */
 .kicker{ margin: 6px 0 10px 0; font-weight:700; font-size:16px; }
 .intro{ margin:0; color:var(--muted); max-width:44ch; font-size:14px; }
-/* No bullets / no left indent for any nav list */
-nav ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
-/* (optional) If you want vertical spacing in navs */
-nav ul{
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-}
-
-/* belt-and-braces in case a UA marker leaks through */
-nav li::marker{ content: ""; }
-
-/* RIGHT — content column */
+/* Right content column */
 .right{
   margin-left: calc(var(--left) + var(--g));
   padding: var(--pad);
   min-width: 0;
 }
 
-/* Banner marquee inside right */
-.banner{
-  background:#000;
-  color:#fff;
-  font-size:0.9rem;
-  text-transform:uppercase;
-  padding:0.5rem 0;
-  border-bottom:1px solid #444;
-  margin: 0 0 var(--g) 0;
+/* Thin scrollbar nicety (desktop) */
+@media (hover:hover){
+  .left::-webkit-scrollbar{ width:10px; }
+  .left::-webkit-scrollbar-track{ background:#0a0a0a; }
+  .left::-webkit-scrollbar-thumb{ background:#222; }
+  .left::-webkit-scrollbar-thumb:hover{ background:#2d2d2d; }
 }
 
-/* Section headings (VT323) */
+/* Collapse sidebar on small screens */
+@media (max-width:980px){
+  .left{
+    position: static;
+    width:auto; height:auto;
+    border-right:none; border-bottom:1px solid var(--rule);
+    padding: var(--pad);
+  }
+  .right{ margin-left:0; padding: var(--pad); }
+  .index ul{ flex-direction: row; flex-wrap: wrap; gap:.5rem 1rem; }
+}
+
+/* ================================
+   BitRot header: nav | logo | nav
+================================ */
+.hero{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* left nav | logo | right nav */
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem 0 1rem;
+}
+
+/* keep BitRot mark centered */
+.BitRotLogo{ justify-self: center; }
+
+/* nav columns + bullets removed */
+.nav{ width:100%; }
+.nav--left{  justify-self: start; text-align: left;  }
+.nav--right{ justify-self: end;   text-align: right; }
+
+.hero .nav ul,
+nav ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hero .nav ul{
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.hero .nav li::marker{ content:""; } /* extra safety */
+.nav a{
+  color: #fff;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* Responsive header */
+@media (max-width: 800px){
+  .hero{ grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+  .nav--left, .nav--right{ justify-self: center; text-align: center; }
+  .hero .nav ul{ flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .75rem 1rem; }
+  .BitRotLogo img{ width: clamp(120px, 32vw, 220px); }
+}
+
+/* ================================
+   Section typography
+================================ */
+section{ margin: 4rem 0; }
 section h2{
-  font-family:'VT323', monospace;
-  font-size:2rem;
-  text-transform:uppercase;
-  margin:0 0 1rem 0;
-  padding:0.2em 0;
+  font-family: 'VT323', monospace;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+  padding: 0.2em 0;
 }
-
-/* Paragraphs */
 section p{
-  max-width:800px;
-  margin:0 auto;
-  line-height:1.6;
-  font-size:1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
 /* Quote block */
 .intro-quote{
-  font-family:'Merriweather', serif;
-  font-style:italic;
-  font-size:1.2rem;
-  color:#ddd;
-  margin:2rem auto;
-  max-width:700px;
-  padding-left:1rem;
-  border-left:4px solid #fff;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #ddd;
+  margin: 2rem auto;
+  max-width: 700px;
+  padding-left: 1rem;
+  border-left: 4px solid #fff;
 }
 .intro-quote footer{ margin-top:.5rem; font-style:normal; font-size:.9rem; color:#bbb; }
 .intro-quote cite{ font-style:normal; font-weight:bold; }
 
-/* Map */
-.map-wrapper{ text-align:center; margin:2rem 0; }
-.map-wrapper iframe{
-  width:80%; height:400px; border:none; border-radius:4px;
-  box-shadow:0 2px 8px rgba(0,0,0,.5);
-}
-
-/* Button */
-.btn{
-  display:block;
-  padding:.8rem 4rem;
-  border:2px solid #fff;
-  background:transparent;
-  color:#fff;
-  text-transform:uppercase;
-  font-size:1rem;
-  text-decoration:none;
-  border-radius:4px;
-  margin-top:1rem;
-  transition: background .3s, color .3s;
-}
-.btn--calendar:hover{ background:#fff; color:#000; }
-.btn-wrapper{ text-align:center; margin-top:1rem; }
-
 /* Links inside paragraphs */
-section p a{ color:#fff; text-decoration:underline; }
-section p a:hover{ opacity:.7; }
+section p a { color:#fff; text-decoration: underline; }
+section p a:hover { opacity:.7; }
 
-/* Artists grid */
+/* ================================
+   Artists grid & cards
+================================ */
 .artists-grid{
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap:2rem;
-  margin:2rem;
+  gap: 2rem;
+  margin: 2rem;
 }
 @media (min-width:700px){
   .artists-grid{ grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Artist cards */
 .artist-card{
-  border:2px solid #fff;
-  border-radius:4px;
-  padding:1.5rem;
-  text-align:left;
-  display:flex;
-  flex-direction:column;
-  height:100%;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .artist-card h3{
   font-size:1.6rem;
   margin-bottom:1rem;
   text-transform:lowercase;
 }
-.artist-card p{ font-size:1rem; line-height:1.5; }
+.artist-card p{ font-size: 1rem; line-height: 1.5; }
 .artist-link{ margin-top:auto; padding-top:1rem; }
 .artist-link a{ color:#fff; text-decoration:underline; }
 
-/* Events */
+/* ================================
+   Schedule (scoped)
+================================ */
+#schedule b,
+#schedule strong,
+#schedule .title { font-weight: 700; }
+
+#schedule time,
+#schedule i,
+#schedule em { font-style: italic; }
+
+section#schedule ul.pc-schedule-list{
+  list-style: none;
+  margin: 1em 0 0;
+  padding: 0;
+}
+section#schedule ul.pc-schedule-list > li{
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
+  padding: 0.5em 0;
+  margin: 0;
+}
+section#schedule ul.pc-schedule-list > li:first-child{ border-top:none; }
+section#schedule ul.pc-schedule-list em{ color: var(--muted); }
+
+/* ================================
+   Events grid & cards
+================================ */
 .events-grid{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:2rem;
-  margin:2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* always 2 across by default */
+  gap: 2rem;
+  margin: 2rem;
 }
 @media (max-width:600px){
-  .events-grid{ grid-template-columns:1fr; }
+  .events-grid{ grid-template-columns: 1fr; }
 }
+
 .event-card{
-  text-align:left;
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
-  padding:1.25rem;
-  border:1px solid #fff;
-  border-radius:4px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.25rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
 }
 .event-label{
-  display:inline-block;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-size:.75rem;
-  border:1px solid #fff;
-  border-radius:999px;
-  padding:.15rem .5rem;
-  margin-bottom:.5rem;
-  opacity:.9;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
 }
-.event-card h3{ font-size:1.3rem; margin-bottom:.25rem; text-transform:lowercase; }
-.event-time{ font-style:italic; display:block; margin-bottom:.75rem; opacity:.9; }
-.event-media{ margin:.5rem 0 1rem; width:100%; }
+.event-card h3{
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+  text-transform: lowercase;
+}
+.event-time{
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+.event-media{ margin: 0.5rem 0 1rem; width: 100%; }
 .event-media img{
-  width:100%; height:auto; border-radius:4px;
-  box-shadow:0 2px 8px rgba(0,0,0,.35);
-  object-fit:cover; aspect-ratio:4/5;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
 }
-.event-desc{ line-height:1.5; color:#eee; margin:.25rem 0 .5rem; }
+.event-desc{ line-height: 1.5; color: #eee; margin: 0.25rem 0 0.5rem; }
+.event-card .artist-link{ margin-top:auto; padding-top:1rem; }
 
-/* Photo grid (pc-gallery) */
+/* ================================
+   Photo grid (pc-gallery) + lightbox
+================================ */
 .pc-gallery{ --gap:6px; --maxw:1400px; margin:0 auto; max-width:var(--maxw); }
+
 .pc-grid{
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--gap);
 }
@@ -286,17 +357,14 @@ section p a:hover{ opacity:.7; }
 @media (max-width:520px){  .pc-grid{ grid-template-columns: 1fr; } }
 
 .pc-item{ margin:0; position:relative; cursor:zoom-in; }
-.pc-item img{
-  width:100%; height:100%;
-  aspect-ratio:1/1; object-fit:cover; display:block;
-}
+.pc-item img{ width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 .pc-item figcaption{ display:none; }
 
-/* (Optional) Lightbox placeholder selectors kept from your sheet */
+/* (lightbox placeholders retained) */
 .pc-lightbox{ position:fixed; inset:0; display:none; background:rgba(0,0,0,.95); z-index:9999; align-items:center; justify-content:center; }
 .pc-lightbox[aria-hidden="false"]{ display:flex; }
-.pc-lightbox__inner{ max-width:95vw; max-height:92vh; position:relative; }
-.pc-lightbox__img{ max-width:95vw; max-height:80vh; display:block; margin:0 auto; }
+.pc-lightbox__inner{ max-width:95vw; max-height:92vh; width:auto; height:auto; position:relative; }
+.pc-lightbox__img{ max-width:95vw; max-height:80vh; width:auto; height:auto; display:block; margin:0 auto; }
 .pc-lightbox__caption{ margin-top:10px; font-size:14px; color:#cfcfcf; text-align:center; line-height:1.4; }
 .pc-lightbox__btn{ position:absolute; top:50%; transform:translateY(-50%); border:1px solid #fff; background:transparent; color:#fff; padding:10px 14px; cursor:pointer; user-select:none; font-family:inherit; }
 .pc-lightbox__btn:hover{ background:rgba(255,255,255,.08); }
@@ -304,7 +372,9 @@ section p a:hover{ opacity:.7; }
 .pc-lightbox__close{ position:absolute; top:12px; right:12px; border:1px solid #fff; background:transparent; color:#fff; padding:6px 10px; cursor:pointer; }
 .pc-lightbox__backdrop{ position:absolute; inset:0; }
 
-/* Hero image wrapper you use at top of page */
+/* ================================
+   Media blocks, map & buttons
+================================ */
 .landscape-photo{ text-align:center; margin:1rem 0; }
 .landscape-photo img{
   display:block;
@@ -315,82 +385,80 @@ section p a:hover{ opacity:.7; }
   box-shadow:0 2px 8px rgba(0,0,0,.5);
 }
 
-/* GoFundMe inversion so it doesn't blind on black */
-.gfm-embed iframe{ filter: invert(1); }
-
-/* Footer (if present) aligns with right column */
-.site-footer{
-  border-top:1px solid var(--rule);
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  margin-left: calc(var(--left) + var(--g));
-  padding:20px var(--pad) 36px;
+.map-wrapper{ text-align:center; margin:2rem 0; }
+.map-wrapper iframe{
+  width:80%;
+  height:400px;
+  border:none;
+  border-radius:4px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.5);
 }
 
-/* Responsive: collapse sidebar on small screens */
-@media (max-width:980px){
-  .left{
-    position: static;
-    width:auto; height:auto;
-    border-right:none; border-bottom:1px solid var(--rule);
-    padding: var(--pad);
-  }
-  .right{ margin-left:0; padding: var(--pad); }
-  .site-footer{ margin-left:0; padding:20px var(--pad) 36px; }
-  .index ul{ flex-direction: row; flex-wrap: wrap; gap:.5rem 1rem; }
-}
-
-/* Thin scrollbar in sidebar (desktop nicety) */
-@media (hover:hover){
-  .left::-webkit-scrollbar{ width:10px; }
-  .left::-webkit-scrollbar-track{ background:#0a0a0a; }
-  .left::-webkit-scrollbar-thumb{ background:#222; }
-  .left::-webkit-scrollbar-thumb:hover{ background:#2d2d2d; }
-}
-
-/* --- Header layout: nav | logo | nav --- */
-.hero{
-  display: grid;
-  grid-template-columns: 1fr auto 1fr; /* left nav | logo | right nav */
-  align-items: center;
-  gap: 2.5rem;
-  padding: 2rem 0 1rem;
-}
-
-/* center the logo and size it */
-.BitRotLogo{ justify-self: center; }
-.BitRotLogo img{
+.btn{
   display: block;
-  width: clamp(120px, 18vw, 220px); /* adjust as you like */
-  height: auto;
+  padding: 0.8rem 4rem;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  transition: background 0.3s, color 0.3s;
+}
+.btn--calendar:hover{ background:#fff; color:#000; }
+.btn-wrapper{ text-align:center; margin-top:1rem; }
+
+/* ================================
+   Curatorial blurb
+================================ */
+.curatorial{
+  margin: 2.5rem auto 3rem;
+  max-width: 780px;
+  padding: 0 var(--pad, 16px);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-align: left;
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: 1rem;
+}
+.curatorial h3{
+  margin: 0 0 .6rem 0;
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+.curatorial h1{
+  margin: .15rem 0;
+  font-size: clamp(16px, 1.7vw, 18px);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-/* nav columns */
-.nav{ width:100%; }
-.nav--left{  justify-self: start; text-align: left;  }
-.nav--right{ justify-self: end;   text-align: right; }
-
-/* remove bullets + stack items vertically */
-.hero .nav ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
+/* ================================
+   Footer (aligns to right column)
+================================ */
+.site-footer{
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: calc(var(--left) + var(--g));
+  padding: 20px var(--pad) 36px;
 }
-.hero .nav li::marker{ content:""; } /* extra safety */
+@media (max-width:980px){
+  .site-footer{ margin-left:0; }
+}
 
-/* responsive: stack on small screens */
-@media (max-width: 800px){
-  .hero{
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    text-align: center;
-  }
-  .nav--left,
-  .nav--right{ justify-self: center; text-align: center; }
-  .hero .nav ul{ flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .75rem 1rem; }
-  .BitRotLogo img{ width: clamp(120px, 32vw, 220px); }
+/* ================================
+   Narrow-screen tweaks
+================================ */
+@media screen and (max-width: 480px){
+  html, body{ overflow-x:hidden; }
+  section{ margin: 1rem 1rem; }
+  section h2{ font-size: 1.5rem; }
+  section p{ font-size: 0.9rem; }
 }
