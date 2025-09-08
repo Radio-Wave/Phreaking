@@ -366,11 +366,132 @@ section#schedule ul.pc-schedule-list em{ color: var(--muted); }
 .pc-lightbox__inner{ max-width:95vw; max-height:92vh; width:auto; height:auto; position:relative; }
 .pc-lightbox__img{ max-width:95vw; max-height:80vh; width:auto; height:auto; display:block; margin:0 auto; }
 .pc-lightbox__caption{ margin-top:10px; font-size:14px; color:#cfcfcf; text-align:center; line-height:1.4; }
-.pc-lightbox__btn{ position:absolute; top:50%; transform:translateY(-50%); border:1px solid #fff; background:transparent; color:#fff; padding:10px 14px; cursor:pointer; user-select:none; font-family:inherit; }
-.pc-lightbox__btn:hover{ background:rgba(255,255,255,.08); }
-.pc-lightbox__prev{ left:12px; } .pc-lightbox__next{ right:12px; }
-.pc-lightbox__close{ position:absolute; top:12px; right:12px; border:1px solid #fff; background:transparent; color:#fff; padding:6px 10px; cursor:pointer; }
-.pc-lightbox__backdrop{ position:absolute; inset:0; }
+/* Flush-to-edges nav buttons for the lightbox */
+/* === Lightbox buttons: slightly bigger square, smaller glyph === */
+:root{
+  --lb-btn-size: 56px;          /* square size of the button */
+  --lb-font-size: 20px;         /* size of the ‹ › glyph */
+  --lb-gap: 16px;               /* distance from screen edge */
+  --lb-border: 1.5px;           /* border thickness */
+  --lb-radius: 10px;            /* rounded corners */
+}
+
+.pc-lightbox__btn{
+  position: fixed;              /* pin to viewport edges */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10010;
+  width: var(--lb-btn-size);
+  height: var(--lb-btn-size);
+  display: grid;
+  place-items: center;
+  border: var(--lb-border) solid rgba(255,255,255,.85);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  font-size: var(--lb-font-size);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* stick to far edges */
+.pc-lightbox__prev{ left: var(--lb-gap);  right: auto; }
+.pc-lightbox__next{ right: var(--lb-gap); left:  auto; }
+
+.pc-lightbox__btn:hover{ background: rgba(255,255,255,.08); }
+
+/* ensure arrows render even if the button has no inner HTML */
+/* .pc-lightbox__prev::before{ content: '‹'; }
+.pc-lightbox__next::before{ content: '›'; } */
+.pc-lightbox__btn > *{ pointer-events: none; } /* keep whole box clickable */
+
+/* mobile: slightly smaller square and tighter edges */
+@media (max-width: 640px){
+  :root{
+    --lb-btn-size: 48px;
+    --lb-font-size: 18px;
+    --lb-gap: 8px;
+    --lb-border: 1px;
+    --lb-radius: 8px;
+  }
+}
+/* Close button — fixed top-right, square, shows × */
+:root{
+  --lb-close-size: 48px;   /* square size */
+  --lb-close-font: 22px;   /* × size */
+  --lb-close-gap: 12px;    /* distance from edges */
+}
+
+/* button box */
+.pc-lightbox__close{
+  position: fixed; 
+  top: calc(var(--lb-close-gap) + env(safe-area-inset-top));
+  right: calc(var(--lb-close-gap) + env(safe-area-inset-right));
+  z-index: 10020;
+
+  width: var(--lb-close-size);
+  height: var(--lb-close-size);
+  display: grid;
+  place-items: center;
+
+  border: var(--lb-border, 1.5px) solid rgba(255,255,255,.85);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+:root{
+  --lb-close-size: 48px;   /* square size */
+  --lb-close-font: 22px;   /* × size */
+  --lb-close-gap: 12px;    /* distance from edges */
+}
+
+.pc-lightbox__close{
+  position: fixed;
+  top: calc(var(--lb-close-gap) + env(safe-area-inset-top));
+  right: calc(var(--lb-close-gap) + env(safe-area-inset-right));
+  z-index: 10020;
+
+  width: var(--lb-close-size);
+  height: var(--lb-close-size);
+  display: grid;
+  place-items: center;
+
+  border: 1.5px solid rgba(255,255,255,.85);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+
+  cursor: pointer;
+  user-select: none;
+
+  /* hide any real text like "Close" */
+  font-size: 0;
+}
+
+/* draw the × glyph */
+.pc-lightbox__close::before{
+  content: '×';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--lb-close-font);
+  line-height: 1;
+}
+
+.pc-lightbox__close:hover{ background: rgba(255,255,255,.08); }
+
+@media (max-width: 640px){
+  :root{
+    --lb-close-size: 42px;
+    --lb-close-font: 20px;
+    --lb-close-gap: 8px;
+  }
+}
+
+
 
 /* ================================
    Media blocks, map & buttons
