@@ -553,39 +553,35 @@ section p a:hover {
   inset: 0;
 }
 
-/* --- Curatorial Section --- */
-.curatorial {
-  margin: 4rem auto;
-  max-width: 800px;
-  text-align: center;
+/* --- Curatorial --- */
+.curatorial{
+  margin: 2.5rem auto 3rem;
+  max-width: 780px;                 /* match prose width */
+  padding: 0 var(--pad, 16px);      /* respect your site padding vars */
+  color: var(--ink);
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  color: var(--ink);   /* same text colour as rest of site */
+  text-align: left;                 
 }
 
-.curatorial h3 {
-  font-size: 0.9rem;
-  font-weight: normal;
+.curatorial h3{
+  margin: 0 0 .6rem 0;
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);   /* softer, secondary tone */
-  margin-bottom: 1rem;
+  letter-spacing: .06em;
+  color: var(--muted);
 }
 
-.curatorial h1 {
-  font-size: 1.2rem;
-  font-weight: normal;
-  margin: 0.4rem 0;
+.curatorial h1{
+  /* make H1s look like quiet list items */
+  margin: .15rem 0;
+  font-size: clamp(16px, 1.7vw, 18px);
+  font-weight: 400;
   line-height: 1.5;
 }
 
-/* optional subtle rule above/below */
-.curatorial::before,
-.curatorial::after {
-  content: "";
-  display: block;
-  height: 1px;
-  background: var(--rule);
-  opacity: 0.2;
-  margin: 2rem auto;
-  max-width: 400px;
+/* optional: subtle divider above, very faint */
+.curatorial{
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: 1rem;
 }
