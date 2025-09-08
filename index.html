@@ -17,7 +17,15 @@
 </head>
 
 <body>
+    <button id="sidebarToggle"
+        class="hamburger"
+        aria-label="Toggle sidebar"
+        aria-expanded="true">
+  <span></span><span></span><span></span>
+</button>
+
   <main class="layout" role="main">
+
     <!-- Fixed left sidebar (same as index) -->
     <aside class="left" aria-label="Sidebar">
       <a class="logo" href="/" aria-label="Phreaking Collective">
@@ -47,6 +55,11 @@
 
     <!-- Right content area -->
     <section class="right">
+            <header class="right-header" aria-hidden="true">
+    <a class="brand-inline" href="/">
+      <img src="assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+    </a>
+  </header>
       <!-- keep marquee if you like; now it sits in the right column -->
       <marquee class="banner" scrollamount="3" scrolldelay="0" behavior="scroll" loop="true" direction="left">
         COPELAND GALLERY 7TH–10TH AUGUST PRIVATE VIEW THURSDAY 7TH 5PM * COPELAND GALLERY 7TH–10TH AUGUST PRIVATE VIEW THURSDAY 7TH 5PM *
@@ -1098,6 +1111,7 @@
     </div>
 
   <script src="/scripts/bitRot.js"></script>
+  <script src="/scripts/script.js"></script>
 </body>
 
 </html>

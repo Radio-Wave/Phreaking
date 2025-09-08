@@ -12,6 +12,14 @@
 </head>
 
 <body>
+  <button id="sidebarToggle"
+        class="hamburger"
+        aria-label="Toggle sidebar"
+        aria-expanded="true">
+  <span></span><span></span><span></span>
+</button>
+
+
   <main class="layout" role="main">
     <!-- Left column (1/5) logo + intro copy -->
     <aside class="left" aria-label="Sidebar">
@@ -42,6 +50,11 @@
 
     <!-- Right column (4/5): headline + film strip + actions -->
 <section class="right">
+  <header class="right-header" aria-hidden="true">
+    <a class="brand-inline" href="/">
+      <img src="assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+    </a>
+  </header>
 
   <!-- Exhibitions -->
   <figure class="hero-media">
@@ -106,6 +119,9 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    
   </script>
+  <script src="/scripts/script.js"></script>
+
   </body>
 </html>

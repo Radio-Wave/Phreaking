@@ -17,6 +17,58 @@
   /* Fixed sidebar width */
   --left: clamp(220px, 24vw, 360px);
 }
+:root{
+  --left-collapsed: 64px; /* width when collapsed */
+  --logo-w: clamp(160px, 28vw, 320px);  /* same as your left-rail logo */
+
+}
+
+/* smooth anims (optional) */
+.left{ transition: width .25s ease, padding .25s ease; }
+.right{ transition: margin-left .25s ease; }
+
+/* collapsed layout */
+.sidebar-collapsed .left{
+  width: var(--left-collapsed);
+  padding: 14px 10px;
+}
+.sidebar-collapsed .right{
+  margin-left: calc(var(--left-collapsed) + var(--g));
+}
+
+/* shrink logo, hide long text when collapsed */
+.sidebar-collapsed .logoImg{ width: 42px; margin: 0 auto 8px; }
+.sidebar-collapsed .index,
+.sidebar-collapsed .kicker,
+.sidebar-collapsed .intro{ display: none; }
+
+/* hamburger “X” animation */
+.hamburger span{ transition: transform .2s ease, opacity .2s ease, width .2s ease; }
+.sidebar-collapsed .hamburger span:nth-child(1){ transform: translateY(6px) rotate(45deg) ; }
+.sidebar-collapsed .hamburger span:nth-child(2){ opacity: 0; width: 0; }
+.sidebar-collapsed .hamburger span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+/* Fixed brand that appears when sidebar is collapsed */
+.brand-fixed{
+  position: fixed;
+  top: 16px;
+  left: calc(14px + 40px + 10px);  /* hamburger left + button width + gap */
+  z-index: 100001;
+  display: none;                    /* hidden by default (expanded) */
+}
+.brand-fixed img{
+  height: 28px;                     /* tweak to taste */
+  width: auto;
+  display: block;
+}
+
+/* When collapsed: show fixed brand, hide the small rail logo entirely */
+.sidebar-collapsed .brand-fixed{ display: block; }
+.sidebar-collapsed .logoImg{ display: none; }  /* instead of shrinking */
+
+/* Optional: don’t show on small screens where the rail stacks anyway */
+@media (max-width: 640px){
+  .brand-fixed{ display: none !important; }
+}
 
 /* Base */
 * { box-sizing: border-box; }
@@ -41,6 +93,26 @@ a:hover { opacity: .85; }
   display: block;
 }
 
+.hamburger{
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 100000;        /* above the fixed sidebar */
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rule, #fff);
+  background: rgba(0,0,0,.25);
+  display: grid;          /* ensures it renders */
+  place-items: center;
+  cursor: pointer;
+}
+.hamburger span{
+  display:block;
+  width: 18px;
+  height: 2px;
+  background: var(--ink, #fff);
+  margin: 2px 0;
+}
 /* =======================
    LEFT — fixed sidebar
    ======================= */
@@ -223,7 +295,7 @@ a:hover { opacity: .85; }
 /* =======================
    RESPONSIVE
    ======================= */
-@media (max-width: 980px){
+@media (max-width: 640px){
   .left{
     position: static;
     width: auto;
@@ -260,4 +332,46 @@ a:hover { opacity: .85; }
   .left::-webkit-scrollbar-track{ background: #0a0a0a; }
   .left::-webkit-scrollbar-thumb{ background: #222; }
   .left::-webkit-scrollbar-thumb:hover{ background: #2d2d2d; }
+}
+/* inline logo that appears when the sidebar is collapsed */
+.right-header{
+  display: none;         /* hidden by default */
+  position: static;      /* NOT sticky/fixed */
+  z-index: auto;
+  margin: 0 0 var(--g) 0;
+}
+.brand-inline{ display:inline-block; }
+.brand-inline img{
+  width: var(--logo-w);  /* same size as the left-rail logo */
+  height: auto;
+  display: block;
+}
+
+/* collapse behavior */
+.sidebar-collapsed .right-header{ display:block; }
+.sidebar-collapsed .logoImg{ display:none; }  /* hide rail logo when collapsed */
+
+.sidebar-collapsed .right-header{
+  position: static !important;
+  top: auto !important;
+}
+
+
+/* Don’t shrink—just hide the big logo inside the collapsed rail */
+.sidebar-collapsed .logoImg{ display: none; }
+
+/* On small screens the rail stacks, so we don't need this header */
+@media (max-width: 640px){
+  .right-header{ display: none !important; }
+}
+
+/* Hide the hamburger on mobile */
+@media (max-width: 640px){
+  #sidebarToggle.hamburger{
+    display: none !important;
+  }
+
+  /* Guard rails so layout doesn’t jump if the collapsed class is present */
+  :root.sidebar-collapsed .left{ width: auto !important; padding: var(--pad) !important; }
+  :root.sidebar-collapsed .right{ margin-left: 0 !important; }
 }

@@ -1,3 +1,21 @@
+(() => {
+  const root = document.documentElement;
+  const btn  = document.getElementById('sidebarToggle');
+  if (!btn) return;
+
+  // restore previous choice
+  if (localStorage.getItem('pc-sidebar') === 'collapsed') {
+    root.classList.add('sidebar-collapsed');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', () => {
+    const collapsed = root.classList.toggle('sidebar-collapsed');
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    localStorage.setItem('pc-sidebar', collapsed ? 'collapsed' : 'expanded');
+  });
+})();
+
 (function () {
   const items = Array.from(document.querySelectorAll('.pc-item img'));
   if (!items.length) return;
@@ -78,4 +96,24 @@
     const dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 40) dx < 0 ? show(idx + 1) : show(idx - 1);
   }, {passive:true});
+
+
+
+
+  const root = document.documentElement;
+  const btn  = document.getElementById('sidebarToggle');
+
+  // restore previous choice
+  if (localStorage.getItem('pc-sidebar') === 'collapsed') {
+    root.classList.add('sidebar-collapsed');
+    btn?.setAttribute('aria-expanded', 'false');
+  }
+
+  btn?.addEventListener('click', () => {
+    root.classList.toggle('sidebar-collapsed');
+    const collapsed = root.classList.contains('sidebar-collapsed');
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    localStorage.setItem('pc-sidebar', collapsed ? 'collapsed' : 'expanded');
+  });
 })();
+
