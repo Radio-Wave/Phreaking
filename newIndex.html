@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Phreaking Collective</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,16 +10,28 @@
   <link rel="stylesheet" href="styles/stylesIndex.css">
   <meta name="description" content="Phreaking Collective — computational artists working with code, objects, and networks.">
 </head>
+
 <body>
   <main class="layout" role="main">
-    <!-- Left column (1/5): logo + intro copy -->
+    <!-- Left column (1/5) logo + intro copy -->
     <aside class="left" aria-label="Sidebar">
       <a class="logo" href="/" aria-label="Phreaking Collective">
+        
         <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
           <title id="title">Phreaking Collective</title>
 				  <img class="logoImg" src="assets/PhreakingLogoWhite.png">
         </svg>
-      </a>
+          </a>
+        <nav class="index" aria-label="Site index">
+      <ul>
+        <li><a href="exhibitions.html">exhibitions</a></li>
+        <li><a href="manifesto.html">manifesto</a></li>
+        <li><a href="about.html">about</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+
+    
 
 
       <h2 class="kicker">Home of the Phreaking Collective</h2>
@@ -29,45 +41,71 @@
     </aside>
 
     <!-- Right column (4/5): headline + film strip + actions -->
-    <section class="right">
-      <h1 class="hero">
-        Next show: Coming soon
-      </h1>
+<section class="right">
 
-      <section class="film-rail" aria-label="Project previews">
-        <a>
-          <figure class="card">
-          <figcaption>BitRot</figcaption>
-          <img class="img" src="assets/Index/bitRotLink.JPG" alt="Project placeholder 1" />
-        </figure>
-        </a>
-        <figure class="card">
-          <figcaption>Manifesto</figcaption>
-          <img class="img" src="assets/Index/CSLink.png" alt="Project placeholder 2" />
-        </figure>
-        <figure class="card">
-          <figcaption>About</figcaption>
-          <img class="img" src="assets/Index/CSLink.png" alt="Project placeholder 3" />
-        </figure>
-        <figure class="card">
-          <figcaption>Contact</figcaption>
-          <img class="img" src="assets/Index/CSLink.png" alt="Project placeholder 4" />
-        </figure>
-      </section>
+  <!-- Exhibitions -->
+  <figure class="hero-media">
+    <a href="BitRot.html">
+      <img src="assets/Index/bitRotLink.JPG" alt="Bit Rot exhibition poster">
+    </a>
+  </figure>
+  <h2 class="section-title">exhibitions</h2>
+  <p class="eyebrow">
+    <a class="exhibitions-link" href="BitRot.html">BitRot at Copeland Gallery</a>
+  </p>
+  <div class="exhibitions-grid">
+    <figure class="tile">
+      <a href="BitRot.html">
+        <img src="https://placehold.co/1200x800" alt="Placeholder exhibition image 1">
+      </a>
+    </figure>
+    <figure class="tile">
+      <a href="BitRot.html">
+        <img src="https://placehold.co/1200x800" alt="Placeholder exhibition image 2">
+      </a>
+    </figure>
+  </div>
 
-      <nav class="actions" aria-label="Primary actions">
-        <a class="button" href="mailto:hello@phreaking.co.uk">Email us</a>
-        <a class="button ghost" href="https://www.instagram.com/phreaking_collective">Instagram</a>
-      </nav>
-    </section>
+  <p class="note">Next show: coming soon in December 2025.</p>
+  <hr class="rule">
+
+
+  <!-- Manifesto -->
+  <h2 class="section-title">manifesto</h2>
+  <div class="copy">
+    <p>
+      Coming soon: our collective manifesto, outlining our principles, values, and vision for the intersection of art and technology.
+    </p>
+    <p><a href="manifesto.html">Read the full manifesto ↗</a></p>
+  </div>
+
+  <hr class="rule">
+
+  <!-- About -->
+  <h2 class="section-title">about</h2>
+  <div class="copy">
+    <p>
+      The Phreaking Collective is a London-based group of computational artists working
+      across code, sculpture, sound, installation and digital media. Formed in 2025,
+      we draw from a lineage of creative mischief and network disruption.
+    </p>
+    <p><a href="about.html">More about us ↗</a></p>
+  </div>
+
+</section>
+
   </main>
 
   <footer class="site-footer">
+          <nav class="actions" aria-label="Primary actions">
+        <a class="button" href="mailto:hello@phreaking.co.uk">Email us</a>
+        <a class="button ghost" href="https://www.instagram.com/phreaking_collective">Instagram</a>
+      </nav>
     <p>© <span id="year"></span> Phreaking Collective — London.</p>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-</body>
+  </body>
 </html>
