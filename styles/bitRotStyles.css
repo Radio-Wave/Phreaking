@@ -345,6 +345,30 @@ section p a:hover {
   font-style: italic; /* italic times only inside #schedule */
 }
 
+#schedule ul {
+  list-style: none;              /* remove default bullets */
+  padding: 0;
+  margin: 1em 0;
+}
+
+#schedule li {
+  font-family: "IBM Plex Mono", ui-monospace, monospace; /* match site font */
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);             /* inherit your main text color */
+  border-top: 1px solid var(--rule);
+  padding: 0.5em 0;
+}
+
+#schedule li:first-child {
+  border-top: none;              /* no line above the first item */
+}
+
+#schedule em {
+  font-style: italic;
+  color: var(--muted);           /* give event titles a muted contrast */
+}
+
 /* — Events grid: unified talks + workshops — */
 .events-grid {
   display: grid;
