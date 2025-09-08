@@ -264,6 +264,7 @@ section p {
   border-radius: 3px;
 }
 
+
 .landscape-photo {
   text-align: center;     /* center the figure & caption */
   margin: 1rem 0;         /* vertical spacing */
@@ -550,4 +551,41 @@ section p a:hover {
 .pc-lightbox__backdrop {
   position: absolute;
   inset: 0;
+}
+
+/* --- Curatorial Section --- */
+.curatorial {
+  margin: 4rem auto;
+  max-width: 800px;
+  text-align: center;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--ink);   /* same text colour as rest of site */
+}
+
+.curatorial h3 {
+  font-size: 0.9rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);   /* softer, secondary tone */
+  margin-bottom: 1rem;
+}
+
+.curatorial h1 {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 0.4rem 0;
+  line-height: 1.5;
+}
+
+/* optional subtle rule above/below */
+.curatorial::before,
+.curatorial::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--rule);
+  opacity: 0.2;
+  margin: 2rem auto;
+  max-width: 400px;
 }
