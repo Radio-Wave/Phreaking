@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Does Cloud Compute (ever) Precipitate — Phreaking Collective</title>
+  <meta name="description" content="A new Phreaking Collective show exploring clouds, compute and the weather of networks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- IBM Plex Mono to match the main site -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/does-cloud-compute.css" />
+  <link rel="stylesheet" href="styles/stylesIndex.css">
+
+</head>
+
+<body>
+  <!-- Parallax pixel-cloud layers -->
+  <canvas id="clouds-back" aria-hidden="true"></canvas>
+  <canvas id="clouds-front" aria-hidden="true"></canvas>
+  <button id="sidebarToggle"
+        class="hamburger"
+        aria-label="Toggle sidebar"
+        aria-expanded="true">
+  <span></span><span></span><span></span>
+</button>
+
+
+
+<main class="layout" role="main">
+  <!-- LEFT: the same sidebar you use elsewhere -->
+  <aside class="left" aria-label="Sidebar">
+    <a class="logo" href="/" aria-label="Phreaking Collective">
+        <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
+          <title id="title">Phreaking Collective</title>
+				  <img class="logoImg" src="assets/PhreakingLogoWhite.png">
+        </svg>    </a>
+
+    <nav class="index" aria-label="Site index">
+      <ul>
+        <li><a href="exhibitions.html">exhibitions</a></li>
+        <li><a href="manifesto.html">manifesto</a></li>
+        <li><a href="about.html">about</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+  
+
+      <h2 class="kicker">Home of the Phreaking Collective</h2>
+      <p class="intro">
+        The Phreaking Collective is a London-based group of emerging computational artists working across code, sculpture, sound, installation, and digital media. Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
+      </p>
+    </aside>
+<section class="right">
+    <!-- inline brand that shows when the sidebar is collapsed -->
+    <header class="right-header" aria-hidden="true">
+      <a class="brand-inline" href="/">
+        <img src="assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+      </a>
+    </header>
+
+    <div class="wrap">
+    <section class="hero">
+      <h1 class="title">
+        does cloud<br>
+        compute<br>
+        (ever)<br>
+        precipitate
+      </h1>
+      <p class="lede">
+        The Phreaking Collective invites you to <em>Does Cloud Compute (ever) Precipitate</em> —
+        a new show exploring what clouds remember, what networks leak, and what we choose
+        to let fall away.
+      </p>
+    </section>
+
+    <section class="meta">
+      <div class="meta-block">
+        <h2>Keywords</h2>
+        <ul class="keywords">
+          <li>Data Storm</Data></li><li>Hidden Infrastructures</li><li>Poetic Systems</li>
+        </ul>
+      </div>
+
+      <div class="meta-block">
+        <h2>Location</h2>
+        <p>Koppel Annex</p>
+        <!-- optional mini “map strip”—swap the src if you want to use the poster’s band -->
+        <!-- <img class="map-strip" src="assets/dccp-map-strip.png" alt="Location map strip"> -->
+      </div>
+
+      <div class="meta-block">
+        <h2>Dates</h2>
+        <p><span id="dates-text">TBA</span></p>
+        <button id="addCal" class="btn" type="button"
+          data-summary="Does Cloud Compute (ever) Precipitate — Phreaking Collective"
+          data-location="Koppel Annex"
+          data-start="2025-11-20T18:00:00"  <!-- TODO: set -->
+          data-end="2025-11-20T21:00:00"    <!-- TODO: set -->
+        >+ Add to calendar</button>
+        <small class="hint">TODO.</small>
+      </div>
+    </section>
+
+    <section class="body-copy">
+      <p>
+        Across installations, performances and web-born interventions, the show drifts between
+        network weather and human weathering. Expect foreground glitches, background fog,
+        and a few showers of computation.
+      </p>
+    </section>
+
+    <footer class="site-foot">
+      <p>&copy; Phreaking Collective</p>
+    </footer>
+  </main>
+
+
+  <script src="scripts/does-cloud-compute.js"></script>
+  <script src="/scripts/script.js"></script>
+
+</body>
+</html>
