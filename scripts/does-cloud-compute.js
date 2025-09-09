@@ -1,151 +1,104 @@
 /* -----------------------------------------------------------
-   Blocky cloud parallax (two pixel canvases + subtle drift)
+   Pixel-cloud parallax — smooth + sparse + foreground
    ----------------------------------------------------------- */
 (function(){
-  const back = document.getElementById('clouds-back');
+  const back  = document.getElementById('clouds-back');
   const front = document.getElementById('clouds-front');
+  const fore  = document.getElementById('clouds-fore') || (function(){
+    const c = document.createElement('canvas'); c.id='clouds-fore';
+    document.body.appendChild(c); return c;
+  })();
+
   const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   const layers = [
-    { cvs: back,  ctx: back.getContext('2d'),  px: 16, count: 26, speedX: 0.03, speedY: 0.00, alpha: 0.10 },
-    { cvs: front, ctx: front.getContext('2d'), px: 12, count: 20, speedX: 0.06, speedY: 0.00, alpha: 0.16 },
+    //   canvas , px,  count, speedX, speedY, alpha,   colour
+    { cvs: back,  px: 16, count: 12, speedX:  3, speedY: 0, alpha: 0.10, color:'#5A6671' }, // big/far
+    { cvs: front, px: 12, count:  8, speedX:  7, speedY: 0, alpha: 0.16, color:'#6a7782' }, // mid
+    { cvs: fore,  px: 10, count:  5, speedX:  1, speedY: 0, alpha: 0.22, color:'#7d8892', foreground:true }, // small/near
   ];
 
-  let W=0, H=0, t=0, mouseX=0, mouseY=0;
+  let W=0,H=0, scrollY=0, last=performance.now(), seeded=Math.random()*1000;
 
   function fit(){
-    W = window.innerWidth; H = window.innerHeight;
+    W=innerWidth; H=innerHeight;
     layers.forEach(L=>{
-      L.cvs.width  = W * DPR;
-      L.cvs.height = H * DPR;
-      L.cvs.style.width  = W + 'px';
-      L.cvs.style.height = H + 'px';
+      L.ctx = L.cvs.getContext('2d');
+      L.cvs.width  = W*DPR; L.cvs.height = H*DPR;
+      L.cvs.style.width=W+'px'; L.cvs.style.height=H+'px';
       L.ctx.setTransform(DPR,0,0,DPR,0,0);
       seed(L);
     });
   }
 
-  function rand(n){ return Math.random()*n; }
-  function rint(a,b){ return Math.floor(a+Math.random()*(b-a+1)); }
+  function rint(a,b){ return Math.floor(a + (Math.sin(seeded+=0.73)+1)/2 * (b-a+1)); }
+  function rand(n){  return ((Math.sin(seeded+=0.51)+1)/2) * n; }
 
-  function makeCloud(L){
-    // random chunky rectangle cloud made of pixel blocks
-    const blocks = [];
-    const w = rint(6, 18), h = rint(4, 12);          // cloud footprint in blocks
-    const gap = rint(0, 2);                          // jaggedness
+  function makeCloud(L, small=false){
+    const blocks=[];
+    const w = small ? rint(3,8)  : rint(6,18);
+    const h = small ? rint(2,6)  : rint(4,12);
+    const gap = small ? rint(0,1) : rint(0,2);
+
     for(let y=0;y<h;y++){
-      const rowWidth = w - rint(0,Math.min(gap,3));
-      for(let x=0; x<rowWidth; x++){
-        if(Math.random()<0.08) continue;             // holes
-        blocks.push({x, y});
+      const rowW = w - rint(0,Math.min(gap,2));
+      for(let x=0;x<rowW;x++){
+        if(Math.random()<0.07) continue;
+        blocks.push({x,y});
       }
     }
-    const scale = rint(3, 8);
+
+    const scale = small ? rint(2,4) : rint(3,8);
     const px = L.px;
     const cloudW = (w*px)*scale;
     const cloudH = (h*px)*scale;
     const x0 = rand(W + cloudW) - cloudW;
     const y0 = rand(H - cloudH);
-    return { blocks, scale, px, x:x0, y:y0, w:cloudW, h:cloudH, off: rand(1000) };
+    return { blocks, scale, px, x:x0, y:y0, w:cloudW, h:cloudH, phaseX: rand(1000), phaseY: rand(1000) };
   }
 
   function seed(L){
-    L.items = Array.from({length:L.count}, ()=>makeCloud(L));
+    const small = !!L.foreground;
+    L.items = Array.from({length:L.count}, ()=>makeCloud(L, small));
   }
 
-  function drawLayer(L, time){
-    const ctx = L.ctx;
-    ctx.clearRect(0,0,W,H);
-    ctx.globalAlpha = L.alpha;
+  function updateAndDraw(L, dt){
+    const ctx=L.ctx; ctx.clearRect(0,0,W,H); ctx.globalAlpha=L.alpha; ctx.fillStyle=L.color;
 
-    const mx = (mouseX/W - 0.5) * 20;  // subtle mouse parallax
-    const my = (mouseY/H - 0.5) * 12;
+    // parallax offsets from scroll
+    const sX = (scrollY * (L.foreground? 0.06 : 0.03));
+    const sY = (scrollY * (L.foreground? 0.02 : 0.01));
 
-    L.items.forEach(cl => {
-      const drift = (time*L.speedX) + cl.off;
-      let x = cl.x + (drift % (W + cl.w)) - cl.w; // wrap horizontally
-      let y = cl.y + Math.sin(drift*0.15)*2;
+    L.items.forEach(cl=>{
+      // accumulate phase with small cap so paused rAF won't jump
+      cl.phaseX += dt * L.speedX;
+      cl.phaseY += dt * L.speedY;
 
-      // depth offset (foreground moves more with mouse)
-      x += mx * (L === layers[1] ? 1.2 : 0.6);
-      y += my * (L === layers[1] ? 1.0 : 0.5);
+      // wrap X smoothly
+      let x = (cl.x + cl.phaseX + sX) % (W + cl.w);
+      if(x < -cl.w) x += (W + cl.w);
+      x -= cl.w; // start off-screen for wrap
+      const y = cl.y + Math.sin((cl.phaseX+cl.phaseY)*0.08)*1 + sY;
 
-      // draw blocks
-      ctx.fillStyle = '#5A6671'; // pixel clouds colour (subtle)
       const s = cl.scale * cl.px;
-      cl.blocks.forEach(b=>{
-        ctx.fillRect(Math.floor(x + b.x*s), Math.floor(y + b.y*s), s, s);
-      });
+      for(let i=0;i<cl.blocks.length;i++){
+        const b=cl.blocks[i];
+        ctx.fillRect((x + b.x*s)|0, (y + b.y*s)|0, s, s);
+      }
     });
-
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha=1;
   }
 
-  function frame(tms){
-    t = tms/1000;
-    layers.forEach(L => drawLayer(L, t));
+  function frame(now){
+    // cap dt to avoid big jumps (e.g., during scrolling)
+    let dt = (now - last)/1000; last = now;
+    if(dt > 0.05) dt = 0.016;   // reset to ~1 frame if long pause
+
+    layers.forEach(L => updateAndDraw(L, dt));
     requestAnimationFrame(frame);
   }
 
-  window.addEventListener('resize', fit, {passive:true});
-  window.addEventListener('mousemove', e=>{ mouseX = e.clientX; mouseY = e.clientY; }, {passive:true});
+  addEventListener('resize', fit, {passive:true});
+  addEventListener('scroll', ()=>{ scrollY = window.scrollY || 0; }, {passive:true});
   fit(); requestAnimationFrame(frame);
-})();
-
-/* -----------------------------------------------------------
-   “Add to Calendar” — generates a simple ICS download.
-   Update the data-start/data-end attributes in HTML once dates are fixed.
-   ----------------------------------------------------------- */
-(function(){
-  const btn = document.getElementById('addCal');
-  if(!btn) return;
-
-  btn.addEventListener('click', ()=>{
-    const title = btn.dataset.summary || document.title;
-    const loc   = btn.dataset.location || '';
-    const start = new Date(btn.dataset.start); // ISO
-    const end   = new Date(btn.dataset.end);
-
-    // guard if dates are still TBA
-    if(isNaN(start.getTime()) || isNaN(end.getTime())){
-      alert('Dates are TBA — update the button’s data-start/data-end in the HTML when confirmed.');
-      return;
-    }
-
-    function dt(d){ // YYYYMMDDTHHMMSSZ (UTC)
-      const pad = n => String(n).padStart(2,'0');
-      return d.getUTCFullYear()
-        + pad(d.getUTCMonth()+1)
-        + pad(d.getUTCDate())
-        + 'T'
-        + pad(d.getUTCHours())
-        + pad(d.getUTCMinutes())
-        + pad(d.getUTCSeconds())
-        + 'Z';
-    }
-
-    const ics = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//Phreaking Collective//DCCP//EN',
-      'BEGIN:VEVENT',
-      `UID:dccp-${Date.now()}@phreaking.co.uk`,
-      `DTSTAMP:${dt(new Date())}`,
-      `DTSTART:${dt(start)}`,
-      `DTEND:${dt(end)}`,
-      `SUMMARY:${title}`,
-      `LOCATION:${loc}`,
-      'END:VEVENT',
-      'END:VCALENDAR'
-    ].join('\r\n');
-
-    const blob = new Blob([ics], {type:'text/calendar'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'does-cloud-compute.ics';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  });
 })();

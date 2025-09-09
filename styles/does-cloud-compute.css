@@ -19,14 +19,18 @@ body{
 }
 
 /* fixed canvases for the pixel clouds */
-#clouds-back,#clouds-front{
+#clouds-back, #clouds-front, #clouds-fore{
   position:fixed; inset:0;
-  z-index:-2;
-  display:block;
-  width:100vw; height:100vh;
+  display:block; width:100vw; height:100vh;
   pointer-events:none;
 }
+#clouds-back{  z-index:-2; }
 #clouds-front{ z-index:-1; }
+/* foreground elements sit above content */
+#clouds-fore{  z-index:2; }
+
+/* ensure page content sits above back layers but below foreground */
+.wrap, .site-head, .site-foot { position:relative; z-index:3; }
 
 /* header */
 .site-head{
