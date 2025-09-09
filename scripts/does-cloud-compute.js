@@ -11,9 +11,9 @@
 
   // Layer config — very few items + tiny foreground parallax
   const layers = [
-    { cvs: back,  px: 16, count: 10, speed:  3, alpha: 0.10, color:'#5A6671', depth: 0.25 },
-    { cvs: front, px: 12, count:  7, speed:  6, alpha: 0.16, color:'#6A7782', depth: 0.50 },
-    { cvs: fore,  px: 10, count:  4, speed:  1, alpha: 0.18, color:'#7D8892', depth: 0.08 }, // far/slow
+    { cvs: back,  px: 16, count: 20, speed:  3, alpha: 0.10, color:'#5A6671', depth: 0.25 },
+    { cvs: front, px: 12, count: 15, speed:  6, alpha: 0.16, color:'#6A7782', depth: 0.50 },
+    { cvs: fore,  px: 10, count:  5,  speed:  1, alpha: 0.18, color:'#7D8892', depth: 0.08 },
   ];
 
   // Smoothed inputs
@@ -23,7 +23,7 @@
 
   // Seeded RNG so clouds don’t change mid-scroll
   function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296}}
-  const rnd = mulberry32(0xC10UD5); // “clouds”
+  const rnd = mulberry32(0xC10ED5); // valid hex seed
   const ri = (a,b)=>Math.floor(a + rnd()*(b-a+1));
 
   function fit(){
