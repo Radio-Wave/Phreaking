@@ -1,88 +1,126 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Does Cloud Compute (ever) Precipitate — Phreaking Collective</title>
-  <meta name="description" content="A new Phreaking Collective show exploring clouds, compute and the weather of networks." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- IBM Plex Mono to match the main site -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/does-cloud-compute.css" />
-</head>
-<body>
-  <!-- Parallax pixel-cloud layers -->
-  <canvas id="clouds-back" aria-hidden="true"></canvas>
-  <canvas id="clouds-front" aria-hidden="true"></canvas>
+/* Smooth, steady pixel clouds — no Y jitter, gentle X parallax + cursor */
+(function(){
+  const back  = document.getElementById('clouds-back');
+  const front = document.getElementById('clouds-front');
+  const fore  = document.getElementById('clouds-fore') || (()=>{
+    const c = document.createElement('canvas'); c.id='clouds-fore';
+    document.body.appendChild(c); return c;
+  })();
 
-  <!-- Top bar (kept minimal to match phreaking.co.uk) -->
-  <header class="site-head">
-    <a class="brand" href="/">Phreaking Collective</a>
-    <nav class="site-nav">
-      <a href="/exhibitions">exhibitions</a>
-      <a href="/manifesto">manifesto</a>
-      <a href="/about">about</a>
-      <a href="/contact">contact</a>
-    </nav>
-  </header>
+  const DPR = Math.min(devicePixelRatio || 1, 2);
 
-  <main class="wrap">
-    <section class="hero">
-      <h1 class="title">
-        does cloud<br>
-        compute<br>
-        (ever)<br>
-        precipitate
-      </h1>
-      <p class="lede">
-        The Phreaking Collective invites you to <em>Does Cloud Compute (ever) Precipitate</em> —
-        a new show exploring what clouds remember, what networks leak, and what we choose
-        to let fall away.
-      </p>
-    </section>
+  // Layer config — very few items + tiny foreground parallax
+  const layers = [
+    { cvs: back,  px: 16, count: 10, speed:  3, alpha: 0.10, color:'#5A6671', depth: 0.25 },
+    { cvs: front, px: 12, count:  7, speed:  6, alpha: 0.16, color:'#6A7782', depth: 0.50 },
+    { cvs: fore,  px: 10, count:  4, speed:  1, alpha: 0.18, color:'#7D8892', depth: 0.08 }, // far/slow
+  ];
 
-    <section class="meta">
-      <div class="meta-block">
-        <h2>Keywords</h2>
-        <ul class="keywords">
-          <li>Data Storm</Data></li><li>Hidden Infrastructures</li><li>Poetic Systems</li>
-        </ul>
-      </div>
+  // Smoothed inputs
+  let W=0,H=0, last=performance.now();
+  let scrollTargetX=0, scrollX=0;
+  let mouseTargetX=0, mouseTargetY=0, mouseX=0, mouseY=0;
 
-      <div class="meta-block">
-        <h2>Location</h2>
-        <p>Koppel Annex</p>
-        <!-- optional mini “map strip”—swap the src if you want to use the poster’s band -->
-        <!-- <img class="map-strip" src="assets/dccp-map-strip.png" alt="Location map strip"> -->
-      </div>
+  // Seeded RNG so clouds don’t change mid-scroll
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296}}
+  const rnd = mulberry32(0xC10UD5); // “clouds”
+  const ri = (a,b)=>Math.floor(a + rnd()*(b-a+1));
 
-      <div class="meta-block">
-        <h2>Dates</h2>
-        <p><span id="dates-text">TBA</span></p>
-        <button id="addCal" class="btn" type="button"
-          data-summary="Does Cloud Compute (ever) Precipitate — Phreaking Collective"
-          data-location="Koppel Annex"
-          data-start="2025-11-20T18:00:00"  <!-- TODO: set -->
-          data-end="2025-11-20T21:00:00"    <!-- TODO: set -->
-        >+ Add to calendar</button>
-        <small class="hint">TODO.</small>
-      </div>
-    </section>
+  function fit(){
+    W=innerWidth; H=innerHeight;
+    layers.forEach(L=>{
+      L.ctx = L.cvs.getContext('2d');
+      L.cvs.width  = W*DPR; L.cvs.height = H*DPR;
+      L.cvs.style.width=W+'px'; L.cvs.style.height=H+'px';
+      L.ctx.setTransform(DPR,0,0,DPR,0,0);
+      seed(L);
+    });
+  }
 
-    <section class="body-copy">
-      <p>
-        Across installations, performances and web-born interventions, the show drifts between
-        network weather and human weathering. Expect foreground glitches, background fog,
-        and a few showers of computation.
-      </p>
-    </section>
+  function makeCloud(L, small=false){
+    const blocks=[];
+    const w = small ? ri(3,7) : ri(6,15);
+    const h = small ? ri(2,5) : ri(4,10);
+    for(let y=0;y<h;y++){
+      const rowW = w - ri(0,2);
+      for(let x=0;x<rowW;x++){
+        if(rnd()<0.08) continue;
+        blocks.push({x,y});
+      }
+    }
+    const scale = small ? ri(2,3) : ri(3,7);
+    const px = L.px;
+    const cloudW = (w*px)*scale;
+    const cloudH = (h*px)*scale;
+    const x0 = rnd()*(W + cloudW) - cloudW;
+    const y0 = rnd()*(H - cloudH);
+    return { blocks, scale, px, x:x0, y:y0, w:cloudW, h:cloudH, t: rnd()*1000 };
+  }
 
-    <footer class="site-foot">
-      <p>&copy; Phreaking Collective</p>
-    </footer>
-  </main>
+  function seed(L){
+    const small = L === layers[2];
+    L.items = Array.from({length:L.count}, ()=>makeCloud(L, small));
+  }
 
-  <script src="scripts/does-cloud-compute.js"></script>
-</body>
-</html>
+  function lerp(a,b,k){ return a + (b-a)*k; }
+
+  function updateInputs(dt){
+    // smooth scroll → X offset only (no Y parallax)
+    scrollX = lerp(scrollX, scrollTargetX, 1 - Math.pow(0.001, dt*60));
+    // smooth mouse
+    mouseX  = lerp(mouseX,  mouseTargetX,  1 - Math.pow(0.0015, dt*60));
+    mouseY  = lerp(mouseY,  mouseTargetY,  1 - Math.pow(0.0015, dt*60));
+  }
+
+  function drawLayer(L, dt){
+    const ctx=L.ctx; ctx.clearRect(0,0,W,H); ctx.globalAlpha=L.alpha; ctx.fillStyle=L.color;
+
+    const mouseOffsetX = (mouseX - W/2) * 0.02 * L.depth; // subtle cursor parallax
+    const baseScrollX  = scrollX * L.depth;
+
+    L.items.forEach(cl=>{
+      cl.t += dt * L.speed;
+
+      // X movement: slow drift + smoothed scroll + slight cursor
+      let x = (cl.x + cl.t + baseScrollX + mouseOffsetX) % (W + cl.w);
+      if(x < -cl.w) x += (W + cl.w);
+      x -= cl.w; // start off-screen for wrap
+
+      // Y is FIXED — no scroll Y influence (kills twitch)
+      const y = cl.y + Math.sin(cl.t*0.05)*0.5; // tiny breathing only
+
+      const s = cl.scale*cl.px;
+      for(let i=0;i<cl.blocks.length;i++){
+        const b=cl.blocks[i];
+        ctx.fillRect((x + b.x*s)|0, (y + b.y*s)|0, s, s);
+      }
+    });
+
+    ctx.globalAlpha=1;
+  }
+
+  function frame(now){
+    let dt = (now-last)/1000; last = now;
+    if(dt>0.05) dt = 0.016;          // cap big pauses
+    updateInputs(dt);
+    layers.forEach(L=>drawLayer(L, dt));
+    requestAnimationFrame(frame);
+  }
+
+  // INPUTS
+  addEventListener('resize', fit, {passive:true});
+  addEventListener('mousemove', e=>{
+    mouseTargetX = e.clientX;
+    mouseTargetY = e.clientY;
+  }, {passive:true});
+
+  // map page scroll to a small X offset; scale keeps it minimal
+  const SCROLL_SCALE = 0.12; // reduce this for even less parallax
+  addEventListener('scroll', ()=>{
+    // don’t use raw value directly — store as target, we’ll lerp toward it
+    scrollTargetX = (window.scrollY || 0) * SCROLL_SCALE;
+  }, {passive:true});
+
+  fit();
+  requestAnimationFrame(frame);
+})();
