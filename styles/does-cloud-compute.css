@@ -113,3 +113,25 @@ body{
   color:var(--muted);
   font-size:.9em;
 }
+
+.logoImg{
+  display:block;
+  width: clamp(160px, 28vw, 320px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 var(--g) 0;
+  object-fit: contain;
+}
+.sidebar-collapsed .logoImg{ width: 42px; margin: 0 auto 8px; }
+.sidebar-collapsed .index,
+.sidebar-collapsed .kicker,
+.sidebar-collapsed .intro{ display: none; }
+.sidebar-collapsed .brand-fixed{ display: block; }
+.sidebar-collapsed .logoImg{ display: none; }  /* instead of shrinking */
+
+/* put near the end of does-cloud-compute.css */
+.right .wrap{
+  max-width: none;
+  width: 100%;
+  margin: 0;          /* no centering gutter */
+}
