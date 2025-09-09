@@ -74,6 +74,33 @@ a:hover { opacity: .85; }
   border-right: 1px solid var(--rule);
   z-index: 10;
 }
+/* — Keywords — */
+.keywords {
+  max-width: 700px;
+  margin: 0 auto 4rem auto;
+  text-align: left;
+}
+.keywords h3 {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: #bbb;
+  margin-bottom: 0.5rem;
+}
+.keywords ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+.keywords li {
+  font-size: 0.9rem;
+  color: #ddd;
+  background: rgba(255,255,255,0.05);
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+}
 
 /* Main-site logo (left sidebar on index page uses this selector) */
 .logo img { width: 250px; height: auto; display:block; }
@@ -95,6 +122,12 @@ a:hover { opacity: .85; }
   height:auto;
   margin:0 0 var(--g) 0;
   object-fit:contain;
+}
+
+.keywords{ list-style:none; padding:0; margin:.25rem 0 0 0; display:flex; gap:.8rem; flex-wrap:wrap; }
+.keywords li{
+  border:1px solid var(--rule);
+  padding:.4rem .6rem; white-space:nowrap;
 }
 
 /* Sidebar index list */
