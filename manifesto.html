@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manifesto — Phreaking Collective</title>
+  <meta name="description" content="The Phreaking Collective manifesto is brewing — glimpse the glitch while we write." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/sidebar.css" />
+  <link rel="stylesheet" href="styles/stylesIndex.css" />
+  <link rel="stylesheet" href="styles/manifesto.css" />
+</head>
+
+<body>
+  <div data-sidebar data-sidebar-active="manifesto.html"></div>
+
+  <main class="layout" role="main">
+    <section class="right">
+      <header class="right-header" aria-hidden="true">
+        <a class="brand-inline" href="/">
+          <img src="assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+        </a>
+      </header>
+
+      <div class="wrap">
+        <section class="hero">
+          <h1 class="title">Manifesto</h1>
+          <p class="lede">Coming soon:</p>
+        </section>
+
+        <section class="manifesto-placeholder" aria-labelledby="manifesto-stream-title">
+          <h2 id="manifesto-stream-title" class="sr-only">Manifesto placeholder</h2>
+          <p class="sr-only">Our manifesto is in progress. Enjoy the shifting glyphs while we draft.</p>
+          <div class="manifesto-stream" aria-hidden="true"></div>
+        </section>
+      </div>
+
+      <footer class="site-foot">
+        <p>&copy; <span id="manifestoYear"></span> Phreaking Collective</p>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('manifestoYear').textContent = new Date().getFullYear();
+  </script>
+  <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/manifesto.js"></script>
+</body>
+</html>

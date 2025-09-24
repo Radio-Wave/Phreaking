@@ -1,0 +1,104 @@
+body {
+  background: #000;
+  color: #fff;
+}
+
+.right {
+  position: relative;
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: clamp(640px, 62vw, 980px);
+  margin: 0;
+  padding: clamp(24px, 6vw, 60px) clamp(20px, 5vw, 48px) clamp(32px, 8vw, 80px);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(48px, 10vw, 112px);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hero {
+  padding-bottom: clamp(20px, 5vw, 40px);
+}
+
+.lede {
+  margin: 0;
+  font-size: clamp(18px, 3vw, 28px);
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+}
+
+.manifesto-placeholder {
+  position: relative;
+  border: 1px solid #fff;
+  background: #000;
+}
+
+.manifesto-stream {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(14px, 2vw, 22px);
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: clamp(24px, 6vw, 64px);
+  min-height: clamp(320px, 60vh, 640px);
+}
+
+.manifesto-stream span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.8em;
+  height: 1.1em;
+  color: #fff;
+  transition: color 0.35s ease, background-color 0.35s ease, outline-color 0.35s ease;
+}
+
+.manifesto-stream span.censored {
+  background: #fff;
+  color: #000;
+}
+
+.manifesto-stream span.highlight {
+  background: #000;
+  outline: 1px solid #fff;
+}
+
+.site-foot {
+  border-top: 1px solid #fff;
+  margin: clamp(40px, 9vw, 96px) clamp(20px, 5vw, 48px) clamp(24px, 5vw, 48px);
+  padding-top: clamp(16px, 3vw, 32px);
+  color: #bbb;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .manifesto-stream {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: clamp(18px, 8vw, 32px);
+  }
+
+  .manifesto-stream span {
+    height: 1em;
+  }
+}
