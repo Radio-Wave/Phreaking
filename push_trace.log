@@ -1,0 +1,250 @@
+23:04:20.105034 git.c:439               trace: built-in: git push origin main
+23:04:20.106735 run-command.c:655       trace: run_command: GIT_DIR=.git git remote-https origin https://github.com/Radio-Wave/Phreaking.git
+23:04:20.113818 git.c:725               trace: exec: git-remote-https origin https://github.com/Radio-Wave/Phreaking.git
+23:04:20.114412 run-command.c:655       trace: run_command: git-remote-https origin https://github.com/Radio-Wave/Phreaking.git
+23:04:20.126447 http.c:699              == Info: Couldn't find host github.com in the .netrc file; using defaults
+23:04:20.129990 http.c:699              == Info: Host github.com:443 was resolved.
+23:04:20.129996 http.c:699              == Info: IPv6: (none)
+23:04:20.129998 http.c:699              == Info: IPv4: 20.26.156.215
+23:04:20.130022 http.c:699              == Info:   Trying 20.26.156.215:443...
+23:04:20.148035 http.c:699              == Info: Connected to github.com (20.26.156.215) port 443
+23:04:20.148095 http.c:699              == Info: ALPN: curl offers http/1.1
+23:04:20.148342 http.c:699              == Info: (304) (OUT), TLS handshake, Client hello (1):
+23:04:20.152416 http.c:699              == Info:  CAfile: /etc/ssl/cert.pem
+23:04:20.152422 http.c:699              == Info:  CApath: none
+23:04:20.172479 http.c:699              == Info: (304) (IN), TLS handshake, Server hello (2):
+23:04:20.172696 http.c:699              == Info: (304) (IN), TLS handshake, Unknown (8):
+23:04:20.173801 http.c:699              == Info: (304) (IN), TLS handshake, Certificate (11):
+23:04:20.175578 http.c:699              == Info: (304) (IN), TLS handshake, CERT verify (15):
+23:04:20.175785 http.c:699              == Info: (304) (IN), TLS handshake, Finished (20):
+23:04:20.175885 http.c:699              == Info: (304) (OUT), TLS handshake, Finished (20):
+23:04:20.175895 http.c:699              == Info: SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256 / [blank] / UNDEF
+23:04:20.175898 http.c:699              == Info: ALPN: server accepted http/1.1
+23:04:20.175901 http.c:699              == Info: Server certificate:
+23:04:20.175908 http.c:699              == Info:  subject: CN=github.com
+23:04:20.175912 http.c:699              == Info:  start date: Feb  5 00:00:00 2025 GMT
+23:04:20.175916 http.c:699              == Info:  expire date: Feb  5 23:59:59 2026 GMT
+23:04:20.175923 http.c:699              == Info:  subjectAltName: host "github.com" matched cert's "github.com"
+23:04:20.175932 http.c:699              == Info:  issuer: C=GB; ST=Greater Manchester; L=Salford; O=Sectigo Limited; CN=Sectigo ECC Domain Validation Secure Server CA
+23:04:20.175938 http.c:699              == Info:  SSL certificate verify ok.
+23:04:20.175941 http.c:699              == Info: using HTTP/1.x
+23:04:20.175988 http.c:646              => Send header, 0000000215 bytes (0x000000d7)
+23:04:20.175993 http.c:658              => Send header: GET /Radio-Wave/Phreaking.git/info/refs?service=git-receive-pack HTTP/1.1
+23:04:20.175995 http.c:658              => Send header: Host: github.com
+23:04:20.175997 http.c:658              => Send header: User-Agent: git/2.40.1
+23:04:20.175998 http.c:658              => Send header: Accept: */*
+23:04:20.176000 http.c:658              => Send header: Accept-Encoding: deflate, gzip
+23:04:20.176002 http.c:658              => Send header: Accept-Language: en-GB, *;q=0.9
+23:04:20.176003 http.c:658              => Send header: Pragma: no-cache
+23:04:20.176005 http.c:658              => Send header:
+23:04:20.176015 http.c:699              == Info: Request completely sent off
+23:04:20.296147 http.c:646              <= Recv header, 0000000027 bytes (0x0000001b)
+23:04:20.296219 http.c:658              <= Recv header: HTTP/1.1 401 Unauthorized
+23:04:20.296235 http.c:646              <= Recv header, 0000000026 bytes (0x0000001a)
+23:04:20.296242 http.c:658              <= Recv header: Server: GitHub-Babel/3.0
+23:04:20.296252 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.296266 http.c:658              <= Recv header: Content-Security-Policy: default-src 'none'; sandbox
+23:04:20.296274 http.c:646              <= Recv header, 0000000041 bytes (0x00000029)
+23:04:20.296297 http.c:658              <= Recv header: Content-Type: text/plain; charset=UTF-8
+23:04:20.296308 http.c:646              <= Recv header, 0000000040 bytes (0x00000028)
+23:04:20.296313 http.c:658              <= Recv header: www-authenticate: Basic realm="GitHub"
+23:04:20.296323 http.c:646              <= Recv header, 0000000020 bytes (0x00000014)
+23:04:20.296329 http.c:658              <= Recv header: Content-Length: 74
+23:04:20.296334 http.c:646              <= Recv header, 0000000037 bytes (0x00000025)
+23:04:20.296342 http.c:658              <= Recv header: Date: Wed, 24 Sep 2025 22:04:20 GMT
+23:04:20.296348 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.296353 http.c:658              <= Recv header: X-Frame-Options: DENY
+23:04:20.296359 http.c:646              <= Recv header, 0000000073 bytes (0x00000049)
+23:04:20.296375 http.c:658              <= Recv header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+23:04:20.296381 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.296392 http.c:658              <= Recv header: X-GitHub-Request-Id: E0DA:76FFC:4A199:5BE55:68D46AE4
+23:04:20.296398 http.c:646              <= Recv header, 0000000002 bytes (0x00000002)
+23:04:20.296403 http.c:658              <= Recv header:
+23:04:20.296435 http.c:699              == Info: Connection #0 to host github.com left intact
+23:04:20.296552 run-command.c:655       trace: run_command: 'git credential-osxkeychain get'
+23:04:20.316498 git.c:725               trace: exec: git-credential-osxkeychain get
+23:04:20.317086 run-command.c:655       trace: run_command: git-credential-osxkeychain get
+23:04:20.340375 http.c:699              == Info: Found bundle for host: 0x6000039f4000 [serially]
+23:04:20.340435 http.c:699              == Info: Re-using existing connection with host github.com
+23:04:20.340450 http.c:699              == Info: Server auth using Basic with user '92101996'
+23:04:20.340653 http.c:646              => Send header, 0000000306 bytes (0x00000132)
+23:04:20.340667 http.c:658              => Send header: GET /Radio-Wave/Phreaking.git/info/refs?service=git-receive-pack HTTP/1.1
+23:04:20.340669 http.c:658              => Send header: Host: github.com
+23:04:20.340671 http.c:658              => Send header: Authorization: Basic <redacted>
+23:04:20.340673 http.c:658              => Send header: User-Agent: git/2.40.1
+23:04:20.340674 http.c:658              => Send header: Accept: */*
+23:04:20.340676 http.c:658              => Send header: Accept-Encoding: deflate, gzip
+23:04:20.340678 http.c:658              => Send header: Accept-Language: en-GB, *;q=0.9
+23:04:20.340680 http.c:658              => Send header: Pragma: no-cache
+23:04:20.340682 http.c:658              => Send header:
+23:04:20.340691 http.c:699              == Info: Request completely sent off
+23:04:20.496542 http.c:646              <= Recv header, 0000000017 bytes (0x00000011)
+23:04:20.496624 http.c:658              <= Recv header: HTTP/1.1 200 OK
+23:04:20.496641 http.c:646              <= Recv header, 0000000026 bytes (0x0000001a)
+23:04:20.496647 http.c:658              <= Recv header: Server: GitHub-Babel/3.0
+23:04:20.496660 http.c:646              <= Recv header, 0000000060 bytes (0x0000003c)
+23:04:20.496665 http.c:658              <= Recv header: Content-Type: application/x-git-receive-pack-advertisement
+23:04:20.496677 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.496688 http.c:658              <= Recv header: Content-Security-Policy: default-src 'none'; sandbox
+23:04:20.496695 http.c:646              <= Recv header, 0000000040 bytes (0x00000028)
+23:04:20.496710 http.c:658              <= Recv header: expires: Fri, 01 Jan 1980 00:00:00 GMT
+23:04:20.496718 http.c:646              <= Recv header, 0000000018 bytes (0x00000012)
+23:04:20.496723 http.c:658              <= Recv header: pragma: no-cache
+23:04:20.496729 http.c:646              <= Recv header, 0000000053 bytes (0x00000035)
+23:04:20.496734 http.c:658              <= Recv header: Cache-Control: no-cache, max-age=0, must-revalidate
+23:04:20.496740 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.496745 http.c:658              <= Recv header: Vary: Accept-Encoding
+23:04:20.496753 http.c:646              <= Recv header, 0000000028 bytes (0x0000001c)
+23:04:20.496758 http.c:658              <= Recv header: Transfer-Encoding: chunked
+23:04:20.496764 http.c:646              <= Recv header, 0000000037 bytes (0x00000025)
+23:04:20.496768 http.c:658              <= Recv header: Date: Wed, 24 Sep 2025 22:04:20 GMT
+23:04:20.496774 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.496778 http.c:658              <= Recv header: X-Frame-Options: DENY
+23:04:20.496784 http.c:646              <= Recv header, 0000000073 bytes (0x00000049)
+23:04:20.496795 http.c:658              <= Recv header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+23:04:20.496801 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.496806 http.c:658              <= Recv header: X-GitHub-Request-Id: E0DA:76FFC:4A1B0:5BE7A:68D46AE4
+23:04:20.496812 http.c:646              <= Recv header, 0000000002 bytes (0x00000002)
+23:04:20.496816 http.c:658              <= Recv header:
+23:04:20.496964 http.c:699              == Info: Connection #0 to host github.com left intact
+23:04:20.497083 run-command.c:655       trace: run_command: 'git credential-osxkeychain store'
+23:04:20.514674 git.c:725               trace: exec: git-credential-osxkeychain store
+23:04:20.515410 run-command.c:655       trace: run_command: git-credential-osxkeychain store
+23:04:20.539143 pkt-line.c:80           packet:          git< # service=git-receive-pack
+23:04:20.539171 pkt-line.c:80           packet:          git< 0000
+23:04:20.539181 pkt-line.c:80           packet:          git< fb79b50ae49eae9fbd9940df0e98ad450f4bf4b3 refs/github-services/pull/1/head\0report-status report-status-v2 delete-refs side-band-64k ofs-delta atomic object-format=sha1 quiet agent=github/spokes-receive-pack-acac8763c60f636c44baaf5c3887895cf5f55c30 push-options
+23:04:20.539195 pkt-line.c:80           packet:          git< 5b1a6e66f0f774f1c2bb6f16af2d99c02bb650cf refs/github-services/pull/2/head
+23:04:20.539203 pkt-line.c:80           packet:          git< d0ccebf85d67c5e04fb7e52d87e4add1ee2a09a8 refs/github-services/pull/3/head
+23:04:20.539205 pkt-line.c:80           packet:          git< 9d0c665c1049fac0880f8bcb8185baccf3df3a2d refs/github-services/pull/4/head
+23:04:20.539207 pkt-line.c:80           packet:          git< 7419299604224e91047ad3c87ea08e5c1d468b25 refs/github-services/pull/5/head
+23:04:20.539208 pkt-line.c:80           packet:          git< 6cbfd997341fe9b6d786ad63bf006df32774b74c refs/github-services/pull/6/head
+23:04:20.539214 pkt-line.c:80           packet:          git< 4607e7b769e3317454231b4c157a26a8e060ee90 refs/github-services/pull/7/head
+23:04:20.539215 pkt-line.c:80           packet:          git< dddc72ce1345e8d7e75f0fded593aa1bb23ade57 refs/github-services/pull/8/head
+23:04:20.539219 pkt-line.c:80           packet:          git< 6cbfd997341fe9b6d786ad63bf006df32774b74c refs/heads/cal-editing
+23:04:20.539225 pkt-line.c:80           packet:          git< 7419299604224e91047ad3c87ea08e5c1d468b25 refs/heads/font-change
+23:04:20.539227 pkt-line.c:80           packet:          git< fb79b50ae49eae9fbd9940df0e98ad450f4bf4b3 refs/heads/image
+23:04:20.539229 pkt-line.c:80           packet:          git< 629fd5f2a35b90c0d3913cd61935115da2fd5209 refs/heads/main
+23:04:20.539230 pkt-line.c:80           packet:          git< d9e88e65b34f9ec425e03ba84935a07c7184601b refs/heads/melissa-editing
+23:04:20.539232 pkt-line.c:80           packet:          git< 537570ab67d61e05feb791f306f9fb644e7171a0 refs/heads/melisssa's-branch
+23:04:20.539234 pkt-line.c:80           packet:          git< ef733856636b45e543ebc40dee25cb42aa9e90f5 refs/heads/working-with-grid-layout
+23:04:20.539235 pkt-line.c:80           packet:          git< 5b1a6e66f0f774f1c2bb6f16af2d99c02bb650cf refs/heads/xachBranch
+23:04:20.539237 pkt-line.c:80           packet:          git< 0000
+23:04:20.540153 pkt-line.c:80           packet:          git> refs/heads/main:refs/heads/main
+23:04:20.540157 pkt-line.c:80           packet:          git> 0000
+23:04:20.540172 run-command.c:655       trace: run_command: git send-pack --stateless-rpc --helper-status --thin --no-progress https://github.com/Radio-Wave/Phreaking.git/ --stdin
+23:04:20.545659 git.c:439               trace: built-in: git send-pack --stateless-rpc --helper-status --thin --no-progress https://github.com/Radio-Wave/Phreaking.git/ --stdin
+23:04:20.546155 pkt-line.c:80           packet:          git< refs/heads/main:refs/heads/main
+23:04:20.546161 pkt-line.c:80           packet:          git< 0000
+23:04:20.546165 pkt-line.c:80           packet:          git< fb79b50ae49eae9fbd9940df0e98ad450f4bf4b3 refs/github-services/pull/1/head\0report-status report-status-v2 delete-refs side-band-64k ofs-delta atomic object-format=sha1 quiet agent=github/spokes-receive-pack-acac8763c60f636c44baaf5c3887895cf5f55c30 push-options
+23:04:20.546174 pkt-line.c:80           packet:          git< 5b1a6e66f0f774f1c2bb6f16af2d99c02bb650cf refs/github-services/pull/2/head
+23:04:20.546179 pkt-line.c:80           packet:          git< d0ccebf85d67c5e04fb7e52d87e4add1ee2a09a8 refs/github-services/pull/3/head
+23:04:20.546181 pkt-line.c:80           packet:          git< 9d0c665c1049fac0880f8bcb8185baccf3df3a2d refs/github-services/pull/4/head
+23:04:20.546183 pkt-line.c:80           packet:          git< 7419299604224e91047ad3c87ea08e5c1d468b25 refs/github-services/pull/5/head
+23:04:20.546185 pkt-line.c:80           packet:          git< 6cbfd997341fe9b6d786ad63bf006df32774b74c refs/github-services/pull/6/head
+23:04:20.546188 pkt-line.c:80           packet:          git< 4607e7b769e3317454231b4c157a26a8e060ee90 refs/github-services/pull/7/head
+23:04:20.546190 pkt-line.c:80           packet:          git< dddc72ce1345e8d7e75f0fded593aa1bb23ade57 refs/github-services/pull/8/head
+23:04:20.546194 pkt-line.c:80           packet:          git< 6cbfd997341fe9b6d786ad63bf006df32774b74c refs/heads/cal-editing
+23:04:20.546196 pkt-line.c:80           packet:          git< 7419299604224e91047ad3c87ea08e5c1d468b25 refs/heads/font-change
+23:04:20.546198 pkt-line.c:80           packet:          git< fb79b50ae49eae9fbd9940df0e98ad450f4bf4b3 refs/heads/image
+23:04:20.546200 pkt-line.c:80           packet:          git< 629fd5f2a35b90c0d3913cd61935115da2fd5209 refs/heads/main
+23:04:20.546202 pkt-line.c:80           packet:          git< d9e88e65b34f9ec425e03ba84935a07c7184601b refs/heads/melissa-editing
+23:04:20.546204 pkt-line.c:80           packet:          git< 537570ab67d61e05feb791f306f9fb644e7171a0 refs/heads/melisssa's-branch
+23:04:20.546207 pkt-line.c:80           packet:          git< ef733856636b45e543ebc40dee25cb42aa9e90f5 refs/heads/working-with-grid-layout
+23:04:20.546209 pkt-line.c:80           packet:          git< 5b1a6e66f0f774f1c2bb6f16af2d99c02bb650cf refs/heads/xachBranch
+23:04:20.546210 pkt-line.c:80           packet:          git< 0000
+23:04:20.547292 pkt-line.c:80           packet:          git> 629fd5f2a35b90c0d3913cd61935115da2fd5209 84da78565f8466ad2761ebe53ecc2e0e4b043b97 refs/heads/main\0 report-status-v2 side-band-64k quiet object-format=sha1 agent=git/2.40.1
+23:04:20.547301 pkt-line.c:80           packet:          git> 0000
+23:04:20.547340 run-command.c:655       trace: run_command: git pack-objects --all-progress-implied --revs --stdout --thin --delta-base-offset -q
+23:04:20.547323 pkt-line.c:80           packet:          git< 00af629fd5f2a35b90c0d3913cd61935115da2fd5209 84da78565f8466ad2761ebe53ecc2e0e4b043b97 refs/heads/main\0 report-status-v2 side-band-64k quiet object-format=sha1 agent=git/2.40.10000
+23:04:20.551729 git.c:439               trace: built-in: git pack-objects --all-progress-implied --revs --stdout --thin --delta-base-offset -q
+23:04:20.553607 pkt-line.c:80           packet:          git< PACK ...
+23:04:20.557335 http.c:699              == Info: Found bundle for host: 0x6000039f4000 [serially]
+23:04:20.557352 http.c:699              == Info: Re-using existing connection with host github.com
+23:04:20.557359 http.c:699              == Info: Server auth using Basic with user '92101996'
+23:04:20.557470 http.c:646              => Send header, 0000000313 bytes (0x00000139)
+23:04:20.557492 http.c:658              => Send header: POST /Radio-Wave/Phreaking.git/git-receive-pack HTTP/1.1
+23:04:20.557493 http.c:658              => Send header: Host: github.com
+23:04:20.557494 http.c:658              => Send header: Authorization: Basic <redacted>
+23:04:20.557496 http.c:658              => Send header: User-Agent: git/2.40.1
+23:04:20.557497 http.c:658              => Send header: Content-Type: application/x-git-receive-pack-request
+23:04:20.557498 http.c:658              => Send header: Accept: application/x-git-receive-pack-result
+23:04:20.557499 http.c:658              => Send header: Content-Length: 4
+23:04:20.557500 http.c:658              => Send header:
+23:04:20.557502 http.c:699              == Info: upload completely sent off: 4 bytes
+23:04:20.703456 http.c:646              <= Recv header, 0000000017 bytes (0x00000011)
+23:04:20.703492 http.c:658              <= Recv header: HTTP/1.1 200 OK
+23:04:20.703501 http.c:646              <= Recv header, 0000000026 bytes (0x0000001a)
+23:04:20.703504 http.c:658              <= Recv header: Server: GitHub-Babel/3.0
+23:04:20.703513 http.c:646              <= Recv header, 0000000053 bytes (0x00000035)
+23:04:20.703516 http.c:658              <= Recv header: Content-Type: application/x-git-receive-pack-result
+23:04:20.703520 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.703527 http.c:658              <= Recv header: Content-Security-Policy: default-src 'none'; sandbox
+23:04:20.703531 http.c:646              <= Recv header, 0000000040 bytes (0x00000028)
+23:04:20.703538 http.c:658              <= Recv header: expires: Fri, 01 Jan 1980 00:00:00 GMT
+23:04:20.703541 http.c:646              <= Recv header, 0000000018 bytes (0x00000012)
+23:04:20.703544 http.c:658              <= Recv header: pragma: no-cache
+23:04:20.703547 http.c:646              <= Recv header, 0000000053 bytes (0x00000035)
+23:04:20.703549 http.c:658              <= Recv header: Cache-Control: no-cache, max-age=0, must-revalidate
+23:04:20.703552 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.703554 http.c:658              <= Recv header: Vary: Accept-Encoding
+23:04:20.703561 http.c:646              <= Recv header, 0000000019 bytes (0x00000013)
+23:04:20.703564 http.c:658              <= Recv header: Content-Length: 0
+23:04:20.703566 http.c:646              <= Recv header, 0000000037 bytes (0x00000025)
+23:04:20.703569 http.c:658              <= Recv header: Date: Wed, 24 Sep 2025 22:04:20 GMT
+23:04:20.703572 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.703574 http.c:658              <= Recv header: X-Frame-Options: DENY
+23:04:20.703577 http.c:646              <= Recv header, 0000000073 bytes (0x00000049)
+23:04:20.703584 http.c:658              <= Recv header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+23:04:20.703587 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.703598 http.c:658              <= Recv header: X-GitHub-Request-Id: E0DA:76FFC:4A1D4:5BE9D:68D46AE4
+23:04:20.703601 http.c:646              <= Recv header, 0000000002 bytes (0x00000002)
+23:04:20.703612 http.c:658              <= Recv header:
+23:04:20.703630 http.c:699              == Info: Connection #0 to host github.com left intact
+23:04:20.703688 http.c:699              == Info: Found bundle for host: 0x6000039f4000 [serially]
+23:04:20.703702 http.c:699              == Info: Re-using existing connection with host github.com
+23:04:20.703717 http.c:699              == Info: Server auth using Basic with user '92101996'
+23:04:20.703875 http.c:646              => Send header, 0000000387 bytes (0x00000183)
+23:04:20.703885 http.c:658              => Send header: POST /Radio-Wave/Phreaking.git/git-receive-pack HTTP/1.1
+23:04:20.703888 http.c:658              => Send header: Host: github.com
+23:04:20.703890 http.c:658              => Send header: Authorization: Basic <redacted>
+23:04:20.703892 http.c:658              => Send header: User-Agent: git/2.40.1
+23:04:20.703895 http.c:658              => Send header: Accept-Encoding: deflate, gzip
+23:04:20.703897 http.c:658              => Send header: Content-Type: application/x-git-receive-pack-request
+23:04:20.703899 http.c:658              => Send header: Accept: application/x-git-receive-pack-result
+23:04:20.703901 http.c:658              => Send header: Accept-Language: en-GB, *;q=0.9
+23:04:20.703903 http.c:658              => Send header: Transfer-Encoding: chunked
+23:04:20.703905 http.c:658              => Send header:
+23:04:20.703911 http.c:699              == Info: upload completely sent off: 14 bytes
+23:04:20.867534 http.c:646              <= Recv header, 0000000017 bytes (0x00000011)
+23:04:20.867584 http.c:658              <= Recv header: HTTP/1.1 200 OK
+23:04:20.867600 http.c:646              <= Recv header, 0000000026 bytes (0x0000001a)
+23:04:20.867605 http.c:658              <= Recv header: Server: GitHub-Babel/3.0
+23:04:20.867623 http.c:646              <= Recv header, 0000000053 bytes (0x00000035)
+23:04:20.867629 http.c:658              <= Recv header: Content-Type: application/x-git-receive-pack-result
+23:04:20.867636 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.867641 http.c:658              <= Recv header: Content-Security-Policy: default-src 'none'; sandbox
+23:04:20.867647 http.c:646              <= Recv header, 0000000040 bytes (0x00000028)
+23:04:20.867655 http.c:658              <= Recv header: expires: Fri, 01 Jan 1980 00:00:00 GMT
+23:04:20.867661 http.c:646              <= Recv header, 0000000018 bytes (0x00000012)
+23:04:20.867665 http.c:658              <= Recv header: pragma: no-cache
+23:04:20.867671 http.c:646              <= Recv header, 0000000053 bytes (0x00000035)
+23:04:20.867675 http.c:658              <= Recv header: Cache-Control: no-cache, max-age=0, must-revalidate
+23:04:20.867681 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.867686 http.c:658              <= Recv header: Vary: Accept-Encoding
+23:04:20.867694 http.c:646              <= Recv header, 0000000028 bytes (0x0000001c)
+23:04:20.867699 http.c:658              <= Recv header: Transfer-Encoding: chunked
+23:04:20.867705 http.c:646              <= Recv header, 0000000037 bytes (0x00000025)
+23:04:20.867709 http.c:658              <= Recv header: Date: Wed, 24 Sep 2025 22:04:20 GMT
+23:04:20.867715 http.c:646              <= Recv header, 0000000023 bytes (0x00000017)
+23:04:20.867721 http.c:658              <= Recv header: X-Frame-Options: DENY
+23:04:20.867727 http.c:646              <= Recv header, 0000000073 bytes (0x00000049)
+23:04:20.867740 http.c:658              <= Recv header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+23:04:20.867747 http.c:646              <= Recv header, 0000000054 bytes (0x00000036)
+23:04:20.867752 http.c:658              <= Recv header: X-GitHub-Request-Id: E0DA:76FFC:4A1E8:5BEBA:68D46AE4
+23:04:20.867758 http.c:646              <= Recv header, 0000000002 bytes (0x00000002)
+23:04:20.867762 http.c:658              <= Recv header:
+23:04:20.867797 http.c:699              == Info: Connection #0 to host github.com left intact
+send-pack: unexpected disconnect while reading sideband packet
+23:04:20.877705 pkt-line.c:80           packet:          git> 0000
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
