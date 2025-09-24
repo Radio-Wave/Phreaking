@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- IBM Plex Mono to match the main site -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/sidebar.css" />
   <link rel="stylesheet" href="styles/does-cloud-compute.css" />
   <link rel="stylesheet" href="styles/stylesIndex.css">
 
@@ -18,39 +19,11 @@
   <!-- Parallax pixel-cloud layers -->
   <canvas id="clouds-back" aria-hidden="true"></canvas>
   <canvas id="clouds-front" aria-hidden="true"></canvas>
-  <button id="sidebarToggle"
-        class="hamburger"
-        aria-label="Toggle sidebar"
-        aria-expanded="true">
-  <span></span><span></span><span></span>
-</button>
+  <div data-sidebar data-sidebar-active="exhibitions.html"></div>
 
 
 
 <main class="layout" role="main">
-  <!-- LEFT: the same sidebar you use elsewhere -->
-  <aside class="left" aria-label="Sidebar">
-    <a class="logo" href="/" aria-label="Phreaking Collective">
-        <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
-          <title id="title">Phreaking Collective</title>
-				  <img class="logoImg" src="assets/PhreakingLogoWhite.png">
-        </svg>    </a>
-
-    <nav class="index" aria-label="Site index">
-      <ul>
-        <li><a href="exhibitions.html">exhibitions</a></li>
-        <li><a href="manifesto.html">manifesto</a></li>
-        <li><a href="about.html">about</a></li>
-        <li><a href="contact.html">contact</a></li>
-      </ul>
-    </nav>
-  
-
-      <h2 class="kicker">Home of the Phreaking Collective</h2>
-      <p class="intro">
-        The Phreaking Collective is a London-based group of emerging computational artists working across code, sculpture, sound, installation, and digital media. Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
-      </p>
-    </aside>
 <section class="right">
     <!-- inline brand that shows when the sidebar is collapsed -->
     <header class="right-header" aria-hidden="true">
@@ -95,8 +68,8 @@
         <button id="addCal" class="btn" type="button"
           data-summary="Does Cloud Compute (ever) Precipitate — Phreaking Collective"
           data-location="Koppel Annex"
-          data-start="2025-11-20T18:00:00"  <!-- TODO: set -->
-          data-end="2025-11-20T21:00:00"    <!-- TODO: set -->
+          data-start="2025-11-20T18:00:00"
+          data-end="2025-11-20T21:00:00"
         >+ Add to calendar</button>
         <small class="hint">TODO.</small>
       </div>
@@ -114,10 +87,8 @@
       <p>&copy; Phreaking Collective</p>
     </footer>
   </main>
-
-
+  <script src="/scripts/sidebar.js"></script>
   <script src="/scripts/does-cloud-compute.js"></script>
-  <script src="/scripts/script.js"></script>
 
 </body>
 </html>

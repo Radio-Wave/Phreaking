@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BIT ROT — Copeland Gallery</title>
   <link rel="stylesheet" href="styles/bitRotStyles.css" />
+  <link rel="stylesheet" href="styles/sidebar.css" />
   <!-- VT323 for h2 -->
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
@@ -17,39 +18,9 @@
 </head>
 
 <body>
-    <button id="sidebarToggle"
-        class="hamburger"
-        aria-label="Toggle sidebar"
-        aria-expanded="true">
-  <span></span><span></span><span></span>
-</button>
+    <div data-sidebar></div>
 
   <main class="layout" role="main">
-
-    <!-- Fixed left sidebar (same as index) -->
-    <aside class="left" aria-label="Sidebar">
-      <a class="logo" href="/" aria-label="Phreaking Collective">
-        
-        <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
-          <title id="title">Phreaking Collective</title>
-				  <img class="logoImg" src="assets/PhreakingLogoWhite.png">
-        </svg>
-          </a>
-        <nav class="index" aria-label="Site index">
-      <ul>
-        <li><a href="exhibitions.html">exhibitions</a></li>
-        <li><a href="manifesto.html">manifesto</a></li>
-        <li><a href="about.html">about</a></li>
-        <li><a href="contact.html">contact</a></li>
-      </ul>
-    </nav>
-
-
-      <h2 class="kicker">Home of the Phreaking Collective</h2>
-      <p class="intro">
-        The Phreaking Collective is a London-based group of emerging computational artists working across code, sculpture, sound, installation, and digital media. Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
-      </p>
-    </aside>
 
     <!-- Right content area -->
     <section class="right">
@@ -1108,8 +1079,8 @@
       <h1>Nikos Antonio Kourous Vázquez</h1>
     </div>
 
+  <script src="/scripts/sidebar.js"></script>
   <script src="/scripts/bitRot.js"></script>
-  <script src="/scripts/script.js"></script>
 </body>
 
 </html>

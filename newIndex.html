@@ -7,46 +7,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/sidebar.css">
   <link rel="stylesheet" href="styles/stylesIndex.css">
   <meta name="description" content="Phreaking Collective — computational artists working with code, objects, and networks.">
 </head>
 
 <body>
-  <button id="sidebarToggle"
-        class="hamburger"
-        aria-label="Toggle sidebar"
-        aria-expanded="true">
-  <span></span><span></span><span></span>
-</button>
+  <div data-sidebar></div>
 
 
   <main class="layout" role="main">
-    <!-- Left column (1/5) logo + intro copy -->
-    <aside class="left" aria-label="Sidebar">
-      <a class="logo" href="/" aria-label="Phreaking Collective">
-        
-        <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="title">
-          <title id="title">Phreaking Collective</title>
-				  <img class="logoImg" src="assets/PhreakingLogoWhite.png">
-        </svg>
-          </a>
-        <nav class="index" aria-label="Site index">
-      <ul>
-        <li><a href="exhibitions.html">exhibitions</a></li>
-        <li><a href="manifesto.html">manifesto</a></li>
-        <li><a href="about.html">about</a></li>
-        <li><a href="contact.html">contact</a></li>
-      </ul>
-    </nav>
-
-    
-
-
-      <h2 class="kicker">Home of the Phreaking Collective</h2>
-      <p class="intro">
-        The Phreaking Collective is a London-based group of emerging computational artists working across code, sculpture, sound, installation, and digital media. Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
-      </p>
-    </aside>
 
     <!-- Right column (4/5): headline + film strip + actions -->
 <section class="right">
@@ -121,7 +91,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     
   </script>
-  <script src="/scripts/script.js"></script>
+  <script src="/scripts/sidebar.js"></script>
 
   </body>
 </html>
