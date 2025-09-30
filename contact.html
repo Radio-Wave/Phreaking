@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="has-sidebar">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,16 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/sidebar.css" />
-  <link rel="stylesheet" href="styles/static-pages.css" />
+  <link rel="stylesheet" href="styles/sidebar.css">
+  <link rel="stylesheet" href="styles/stylesIndex.css" />
+  <link rel="stylesheet" href="styles/static-pages.css">
+
 </head>
 
 <body>
-  <div data-sidebar data-sidebar-active="about"></div>
+  <div data-sidebar data-sidebar-active="contact.html"></div>
 
   <main class="layout" role="main">
     <section class="right">
-      <h1>Phreaking Collective</h1>
+      <h1>Contact</h1>
       <p>Drop us a line, see what we're up to or share something of your own.<br> These is where you can find us.</p>
       <nav class="contact-list" aria-label="Contact">
         <a class="contact-link" href="mailto:hello@phreaking.collective">Email — phreakingcollective@gmail.com</a>
@@ -26,6 +28,6 @@
     </section>
   </main>
 
-  <script src="/scripts/sidebar.js"></script>
+<script defer src="scripts/sidebar.js"></script>
 </body>
 </html>

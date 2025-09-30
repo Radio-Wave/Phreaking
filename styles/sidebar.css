@@ -9,7 +9,22 @@
   --pc-sidebar-bg: var(--bg, #000);
   --pc-sidebar-ink: var(--ink, #fff);
   --pc-sidebar-muted: var(--muted, #cfcfcf);
+   --pc-sidebar-logo-width-mobile: clamp(220px, 72vw, 420px);
+  --pc-sidebar-pad-top-mobile: 0px;   /* was var(--pc-sidebar-pad) */
+  --pc-sidebar-gap-mobile: 12px;  
 }
+
+/* default: no sidebar → no left margin */
+.right { margin-left: 0; }
+
+/* once the sidebar is injected, JS adds .has-sidebar to <html> */
+.has-sidebar .right{
+  margin-left: calc(var(--pc-sidebar-width) + var(--pc-sidebar-gap));
+}
+.has-sidebar.sidebar-collapsed .right{
+  margin-left: calc(var(--pc-sidebar-collapsed-width) + var(--pc-sidebar-gap));
+}
+
 
 [data-sidebar] {
   display: contents;
@@ -123,21 +138,32 @@
   font-size: 14px;
 }
 
-.right {
-  margin-left: calc(var(--pc-sidebar-width) + var(--pc-sidebar-gap));
-  padding: var(--pc-sidebar-pad);
+/* replace your existing .right and collapsed .right blocks with this */
+
+.right{
+  /* only offset by the rail width */
+  margin-left: var(--pc-sidebar-width);
+
+  /* equal gutters on both sides */
+  padding-block: var(--pc-sidebar-pad);
+  padding-inline: var(--pc-sidebar-gap);
   min-width: 0;
-  transition: margin-left 0.25s ease;
+  transition: margin-left .25s ease;
 }
+
+/* collapsed: same idea, just the slim rail width */
+.sidebar-collapsed .right{
+  margin-left: var(--pc-sidebar-collapsed-width);
+  padding-inline: var(--pc-sidebar-gap);
+}
+
 
 .sidebar-collapsed .left.pc-sidebar {
   width: var(--pc-sidebar-collapsed-width);
   padding: 14px 10px;
 }
 
-.sidebar-collapsed .right {
-  margin-left: calc(var(--pc-sidebar-collapsed-width) + var(--pc-sidebar-gap));
-}
+
 
 .sidebar-collapsed .logoImg {
   display: none;
@@ -161,18 +187,78 @@
 .sidebar-collapsed #sidebarToggle.hamburger span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
+@media (max-width:640px){
+  #sidebarToggle.hamburger{ display: none !important; }
+}
 
-@media (max-width: 640px) {
-  #sidebarToggle.hamburger {
-    display: none !important;
+
+/* ================================
+   Mobile stacking
+   ================================ */
+@media (max-width:640px){
+    /* smaller overall padding on the stacked rail */
+  :root{
+    --pc-sidebar-pad: 14px;     /* was larger; reduce the top whitespace */
   }
 
-  :root.sidebar-collapsed .left.pc-sidebar {
-    width: auto !important;
-    padding: var(--pc-sidebar-pad) !important;
+  .left{
+    padding: var(--pc-sidebar-pad) var(--pc-sidebar-pad) 16px;
+    border-bottom: 1px solid var(--pc-sidebar-border);
   }
 
-  :root.sidebar-collapsed .right {
-    margin-left: 0 !important;
+  /* make the logo bigger and reduce top margin */
+  .left .logoImg{
+    width: min(88vw, 420px);    /* bigger on mobile */
+    margin: 4px 0 14px;         /* less space above */
   }
+
+  /* keep the hamburger hidden on phones, as you already do */
+  #sidebarToggle.hamburger{ display:none !important; }
+  /* Rail becomes part of the flow */
+    .left.pc-sidebar{
+    /* reduce top padding only; keep side/bottom padding from your token */
+    padding: var(--pc-sidebar-pad-top-mobile) var(--pc-sidebar-pad) var(--pc-sidebar-pad);
+  }
+  .pc-sidebar .logoImg{
+    width: var(--pc-sidebar-logo-width-mobile);
+    margin: 0 0 var(--pc-sidebar-gap-mobile);
+    display: block;
+  }
+  .left.pc-sidebar{
+    position: static;
+    width: auto; height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--pc-sidebar-border);
+    padding: var(--pc-sidebar-pad);
+  }
+  .right{
+    margin-left: 0;
+    padding: var(--pc-sidebar-pad);
+  }
+  .site-footer{
+    margin-left: 0;
+    padding: 20px var(--pc-sidebar-pad) 36px;
+  }
+
+  /* Prevent “collapsed” class from forcing desktop layout on phones */
+  :root.sidebar-collapsed .left.pc-sidebar{ width: auto !important; padding: var(--pc-sidebar-pad) !important; }
+  :root.sidebar-collapsed .right{ margin-left: 0 !important; }
+
+  /* Optional: don't show inline brand on tiny screens */
+  .right-header{ display: none !important; }
+}
+
+/* ================================
+   Nice thin scrollbar (desktop)
+   ================================ */
+@media (hover:hover){
+  .left.pc-sidebar::-webkit-scrollbar{ width: 5px; }
+  .left.pc-sidebar::-webkit-scrollbar-track{ background: #0a0a0a; }
+  .left.pc-sidebar::-webkit-scrollbar-thumb{ background: #222; }
+  .left.pc-sidebar::-webkit-scrollbar-thumb:hover{ background: #2d2d2d; }
+}
+
+/* nudge the button right next to the rail when collapsed */
+.sidebar-collapsed #sidebarToggle.hamburger{
+  left: calc(var(--pc-sidebar-collapsed-width) + 8px); /* adjust 8px to taste */
 }
