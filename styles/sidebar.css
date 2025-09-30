@@ -12,6 +12,8 @@
    --pc-sidebar-logo-width-mobile: clamp(220px, 72vw, 420px);
   --pc-sidebar-pad-top-mobile: 0px;   /* was var(--pc-sidebar-pad) */
   --pc-sidebar-gap-mobile: 12px;  
+  --btn-top: 14px;
+  --btn-left: 14px;
 }
 
 /* default: no sidebar → no left margin */
@@ -24,7 +26,23 @@
 .has-sidebar.sidebar-collapsed .right{
   margin-left: calc(var(--pc-sidebar-collapsed-width) + var(--pc-sidebar-gap));
 }
-
+#sidebarToggle.hamburger{
+  position: fixed;
+  top: var(--btn-top);
+  left: var(--btn-left);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rule, #fff);
+  background: rgba(0,0,0,.25);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+/* make sure no state moves it */
+.sidebar-collapsed #sidebarToggle.hamburger{
+  left: var(--btn-left) !important;
+  top: var(--btn-top) !important;
+}
 
 [data-sidebar] {
   display: contents;
@@ -45,15 +63,7 @@
   cursor: pointer;
 }
 
-.pc-sidebar-toggle span,
-#sidebarToggle.hamburger span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: var(--pc-sidebar-ink);
-  margin: 2px 0;
-  transition: transform 0.2s ease, opacity 0.2s ease, width 0.2s ease;
-}
+
 
 .left.pc-sidebar {
   position: fixed;
@@ -175,18 +185,6 @@
   display: none;
 }
 
-.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(2) {
-  opacity: 0;
-  width: 0;
-}
-
-.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
 @media (max-width:640px){
   #sidebarToggle.hamburger{ display: none !important; }
 }
@@ -261,4 +259,41 @@
 /* nudge the button right next to the rail when collapsed */
 .sidebar-collapsed #sidebarToggle.hamburger{
   left: calc(var(--pc-sidebar-collapsed-width) + 8px); /* adjust 8px to taste */
+}
+
+/* --- keep the button fixed, but reset the inner bars layout --- */
+#sidebarToggle.hamburger{
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 100000;
+  width: 40px; height: 40px;
+  border: 1px solid var(--rule, #fff);
+  background: rgba(0,0,0,.25);
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+
+/* RESET anything earlier (absolute centering, custom transforms) */
+#sidebarToggle.hamburger span{
+  position: static;              /* undo absolute */
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--ink, #fff);
+  margin: 3px 0;                 /* stacks the 3 lines */
+  transform: none;               /* clear previous transforms */
+  opacity: 1;
+  transition: transform .2s ease, opacity .2s ease, width .2s ease;
+}
+
+/* === Your original “X” animation when collapsed === */
+:root.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(1){
+  transform: translateY(6px) rotate(45deg);
+}
+:root.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(2){
+  opacity: 0; width: 0;
+}
+:root.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(3){
+  transform: translateY(-6px) rotate(-45deg);
 }
