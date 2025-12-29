@@ -247,3 +247,15 @@ body{
 
 /* horizontal breaker that cancels .right padding so it bleeds edge to edge */
 
+.as-seen{
+  margin: 12px 0 20px 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.as-seen a{
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+}
+.as-seen a:hover{ opacity: .85; }
