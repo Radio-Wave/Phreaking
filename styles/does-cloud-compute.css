@@ -72,6 +72,7 @@ body{
   padding: var(--pad) 0;
   border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
+  margin-left: 0;
 }
 .meta-block:nth-child(1){ grid-column: span 5; }
 .meta-block:nth-child(2){ grid-column: span 4; }
@@ -96,7 +97,10 @@ body{
 
 .map-strip{ width:100%; height:auto; display:block; margin-top:.5rem; border:1px solid var(--rule); }
 
-.body-copy{ padding: var(--pad) 0; max-width: 75ch; color:var(--ink); }
+.body-copy{   max-width: 100ch;        /* control line length */
+  margin: 0;              /* no extra left gap */
+  padding: var(--pad) 0;  /* share the same left edge as .right */
+  color: var(--ink); }
 
 .btn{
   appearance:none; border:1px solid var(--ink); background:transparent; color:var(--ink);
@@ -129,9 +133,117 @@ body{
 .sidebar-collapsed .brand-fixed{ display: block; }
 .sidebar-collapsed .logoImg{ display: none; }  /* instead of shrinking */
 
-/* put near the end of does-cloud-compute.css */
+/* one rail for the whole right column */
+.right{
+  margin-left: calc(var(--left) + var(--g));
+  padding: var(--pad);                 /* keep this */
+  padding-right:0;
+}
+
+/* stop the inner wrapper from adding its own left inset */
 .right .wrap{
   max-width: none;
+  margin: 0;
   width: 100%;
-  margin: 0;          /* no centering gutter */
+
+  padding: 0;                          /* remove left padding */
 }
+.artists-grid{
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 0rem;
+}
+@media (min-width:700px){
+  .artists-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+.artist-card{
+  border: 2px solid #fff;
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.artist-card h3{
+  font-size:1.6rem;
+  margin-bottom:1rem;
+  text-transform:lowercase;
+}
+.artist-card p{ font-size: 1rem; line-height: 1.5; }
+.artist-link{ margin-top:auto; padding-top:1rem; }
+.artist-link a{ color:#fff; text-decoration:underline; }
+
+/* ================================
+   Events grid & cards
+================================ */
+.events-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* always 2 across by default */
+  gap: 2rem;
+  margin: 0rem;
+}
+@media (max-width:600px){
+  .events-grid{ grid-template-columns: 1fr; }
+}
+
+.event-card{
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.25rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+.event-label{
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+.event-card h3{
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+  text-transform: lowercase;
+}
+.event-time{
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+.event-media{ margin: 0.5rem 0 1rem; width: 100%; }
+.event-media img{
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+}
+.event-desc{ line-height: 1.5; color: #eee; margin: 0.25rem 0 0.5rem; }
+.event-card .artist-link{ margin-top:auto; padding-top:1rem; }
+
+/* section header + full-bleed breakers that align to the right column edges */
+.section-title{
+
+  font-weight: 700;
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.2;
+  letter-spacing: .01em;
+  padding-top: 1em;    
+  padding-bottom: 1em;    
+              /* the <hr> handles spacing */
+}
+
+/* horizontal breaker that cancels .right padding so it bleeds edge to edge */
+
