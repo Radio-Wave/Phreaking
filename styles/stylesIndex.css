@@ -22,6 +22,9 @@
   --logo-w: clamp(160px, 28vw, 320px);  /* same as your left-rail logo */
 
 }
+hr{
+  margin: 1.2rem 0;
+}
 
 /* smooth anims (optional) */
 .left{ transition: width .25s ease, padding .25s ease; }
