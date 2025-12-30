@@ -287,12 +287,13 @@ a:hover { opacity: .85; }
 
 /* Footer aligns with right content */
 .site-footer{
-  border-top: 1px solid var(--rule);
+  /* border-top: 1px solid var(--rule); */
   text-align: center;
   color: var(--muted);
   font-size: 12px;
   margin-left: calc(var(--left) + var(--g));
-  padding: 20px var(--pad) 36px;
+  /* padding-top:20px; */
+  /* padding: 20px var(--pad) 36px; */
 }
 
 /* =======================
@@ -377,4 +378,15 @@ a:hover { opacity: .85; }
   /* Guard rails so layout doesn’t jump if the collapsed class is present */
   :root.sidebar-collapsed .left{ width: auto !important; padding: var(--pad) !important; }
   :root.sidebar-collapsed .right{ margin-left: 0 !important; }
+}
+
+.sidebar-collapsed .site-footer{
+  margin-left: calc(var(--left-collapsed) + var(--g));
+}
+
+.site-footer .actions{
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin: 0 0 var(--g) 0;
 }

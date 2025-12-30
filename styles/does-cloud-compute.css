@@ -171,7 +171,7 @@ body{
 .artist-card h3{
   font-size:1.6rem;
   margin-bottom:1rem;
-  text-transform:lowercase;
+  /* text-transform:lowercase; */
 }
 .artist-card p{ font-size: 1rem; line-height: 1.5; }
 .artist-link{ margin-top:auto; padding-top:1rem; }
@@ -201,7 +201,7 @@ body{
 }
 .event-label{
   display: inline-block;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 0.08em;
   font-size: 0.75rem;
   border: 1px solid #fff;
