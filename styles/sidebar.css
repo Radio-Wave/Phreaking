@@ -13,7 +13,9 @@
   --pc-sidebar-pad-top-mobile: 0px;   /* was var(--pc-sidebar-pad) */
   --pc-sidebar-gap-mobile: 12px;  
   --btn-top: 14px;
-  --btn-left: 14px;
+  --btn-left: 18px;
+  --rail-shift: 6px;
+
 }
 
 /* default: no sidebar → no left margin */
@@ -68,7 +70,7 @@
 .left.pc-sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: var(--rail-shift);
   width: var(--pc-sidebar-width);
   height: 100vh;
   overflow-y: auto;
@@ -200,8 +202,9 @@
   }
 
   .left{
-    padding: var(--pc-sidebar-pad) var(--pc-sidebar-pad) 16px;
+    padding: var(--pc-sidebar-pad);
     border-bottom: 1px solid var(--pc-sidebar-border);
+    padding-left: 20px;
   }
 
   /* make the logo bigger and reduce top margin */
@@ -256,10 +259,7 @@
   .left.pc-sidebar::-webkit-scrollbar-thumb:hover{ background: #2d2d2d; }
 }
 
-/* nudge the button right next to the rail when collapsed */
-.sidebar-collapsed #sidebarToggle.hamburger{
-  left: calc(var(--pc-sidebar-collapsed-width) + 8px); /* adjust 8px to taste */
-}
+
 
 /* --- keep the button fixed, but reset the inner bars layout --- */
 #sidebarToggle.hamburger{
@@ -296,4 +296,30 @@
 }
 :root.sidebar-collapsed #sidebarToggle.hamburger span:nth-child(3){
   transform: translateY(-6px) rotate(-45deg);
+}
+
+
+
+.left.pc-sidebar{
+  padding-top: var(--pc-sidebar-pad);
+  padding-right: var(--pc-sidebar-pad);
+  padding-bottom: var(--pc-sidebar-pad);
+  padding-left: var(--btn-left);
+}
+
+.sidebar-collapsed .left.pc-sidebar{
+  padding-top: 14px;
+  padding-right: 10px;
+  padding-bottom: 14px;
+  padding-left: var(--btn-left);
+}
+
+#sidebarToggle.hamburger{
+  top: var(--btn-top);
+  left: var(--btn-left);
+}
+
+.sidebar-collapsed #sidebarToggle.hamburger{
+  top: var(--btn-top);
+  left: var(--btn-left);
 }

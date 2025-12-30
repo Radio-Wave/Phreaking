@@ -128,6 +128,7 @@ a:hover { opacity: .85; }
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: var(--pad);
+  
   background: var(--bg);
   border-right: 1px solid var(--rule); /* vertical bar pinned to left */
   z-index: 10;
