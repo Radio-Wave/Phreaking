@@ -70,7 +70,6 @@
 .left.pc-sidebar {
   position: fixed;
   top: 0;
-  left: var(--rail-shift);
   width: var(--pc-sidebar-width);
   height: 100vh;
   overflow-y: auto;
@@ -81,6 +80,7 @@
   z-index: 10;
   transition: width 0.25s ease, padding 0.25s ease;
 }
+
 
 .pc-sidebar .logoImg {
   display: block;
