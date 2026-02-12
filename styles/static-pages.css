@@ -35,6 +35,18 @@ body{
   margin-left: calc(var(--pc-sidebar-collapsed-width) + var(--pc-sidebar-gap));
 }
 
+/* Hero media (BitRot poster) */
+.hero-media{ margin: 0 0 1rem 0; }
+.hero-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio: 16/9;     /* keeps a calm window; remove if you want raw image ratio */
+  object-fit: cover;
+  background:#111;        /* fallback */
+  border: 1px solid var(--rule);
+}
+
 .right h1 {
   margin: 0;
   font-size: clamp(42px, 6vw, 72px);
