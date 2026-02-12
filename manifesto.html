@@ -38,14 +38,15 @@
         </section>
       </div>
 
-      <footer class="site-foot">
-        <p>&copy; <span id="manifestoYear"></span> Phreaking Collective</p>
-      </footer>
     </section>
   </main>
 
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+  </footer>
+
   <script>
-    document.getElementById('manifestoYear').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
   <script src="/scripts/sidebar.js"></script>
   <script src="/scripts/manifesto.js"></script>

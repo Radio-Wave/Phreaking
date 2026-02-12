@@ -483,10 +483,11 @@ My name is Dylan Morris, I am a 27 year-old mixed media visual artist working ou
 
         </div>
       </div>
-      <footer class="site-foot">
-        <p>&copy; Phreaking Collective</p>
-      </footer>
         </section>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+  </footer>
       <section id="events" aria-labelledby="events-heading"><br>
   
 
@@ -497,7 +498,10 @@ My name is Dylan Morris, I am a 27 year-old mixed media visual artist working ou
   </main>
   <script src="/scripts/sidebar.js"></script>
   <script src="/scripts/does-cloud-compute.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+  </script>
 </body>
 
 </html>
