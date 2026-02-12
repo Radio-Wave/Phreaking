@@ -24,7 +24,7 @@
   <main class="layout" role="main">
     <section class="right">
     <figure class="hero-media hero-full">
-        <a href="https://store.phreaking.co.uk/">
+        <a href="https://store.phreaking.co.uk/" target="_blank" rel="noreferrer">
           <img src="assets/PhreakMag/PHREAKMAG-BANNER.webp" alt="Phreak Mag Out Now">
         </a>
       </figure>
@@ -34,14 +34,19 @@
         <a class="contact-link" href="https://store.phreaking.co.uk/" target="_blank" rel="noreferrer">Order the most recent issue here</a>
         <p>Phreak Mag is a Computational Art Magazine, exploring the intersection of art, technology, and culture in the digital age. With the first issue launching with the show 'Does Cloud Compute (ever) Precipitate?'  </p>
       </nav>
-      <footer>&copy; Phreaking Collective</footer>
     </section>
-
-    
   </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+  </footer>
 
   
 
 <script defer src="scripts/sidebar.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
 </body>
 </html>

@@ -70,6 +70,9 @@
 .left.pc-sidebar {
   position: fixed;
   top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: var(--pc-sidebar-width);
   height: 100vh;
   overflow-y: auto;
@@ -138,7 +141,7 @@
 }
 
 .pc-sidebar .kicker {
-  margin: 6px 0 10px 0;
+  margin: 0 0 6px 0;
   font-weight: 700;
   font-size: 16px;
 }
@@ -148,6 +151,15 @@
   color: var(--pc-sidebar-muted);
   max-width: 44ch;
   font-size: 14px;
+}
+
+/* Footer wrapper sits at bottom of the sidebar so heading+intro stay together */
+.pc-sidebar .sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
 }
 
 /* replace your existing .right and collapsed .right blocks with this */
