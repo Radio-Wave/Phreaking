@@ -1,0 +1,6 @@
+/* Fix mobile gap on magazine.html with .has-sidebar class */
+@media (max-width: 640px) {
+  .has-sidebar .right {
+    margin-left: 0 !important;
+  }
+}

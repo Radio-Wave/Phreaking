@@ -194,6 +194,13 @@ footer {
   .right {
     margin-left: 0;
     min-height: 0; /* Remove full-height requirement on mobile */
+    padding: var(--pad, 16px);
+  }
+  
+  /* Reduce gap on full-width hero images on mobile */
+  .hero-media.hero-full {
+    margin: calc(-1 * var(--pad, -16px)) calc(-1 * var(--pad, -16px)) 0.5rem calc(-1 * var(--pad, -16px));
+    width: calc(100% + 2 * var(--pad, 16px));
   }
   
   /* Ensure collapsed state doesn't affect mobile */
