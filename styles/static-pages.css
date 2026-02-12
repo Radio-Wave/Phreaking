@@ -22,7 +22,7 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1rem;
   padding: clamp(3rem, 8vw, 6rem) 6vw;
   max-width: 720px;
   /* Match the sidebar width and gap from sidebar.css */
@@ -36,22 +36,38 @@ body{
 }
 
 /* Hero media (BitRot poster) */
-.hero-media{ margin: 0 0 1rem 0; }
+.hero-media{ margin: 0 0 0 0; }
 .hero-media img{
   display:block;
   width:100%;
   height:auto;
-  aspect-ratio: 16/9;     /* keeps a calm window; remove if you want raw image ratio */
+  /* aspect-ratio: 16/9;     keeps a calm window; remove if you want raw image ratio */
   object-fit: cover;
   background:#111;        /* fallback */
   border: 1px solid var(--rule);
+}
+.hero-media.hero-full{
+  margin: 0 0 var(--pc-sidebar-gap, var(--g)) 0;
+  width: 100%;
+  max-width: none;
+}
+
+.hero-media.hero-full img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.right .hero-media img{
+  width: 100% !important;
+  max-width: none !important;
+  display: block;
 }
 
 .right h1 {
   margin: 0;
   font-size: clamp(42px, 6vw, 72px);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .lede {
@@ -59,7 +75,7 @@ body{
   color: var(--muted);
   font-size: 14px;
   max-width: 60ch;
- margin: 0 0 1rem 0; 
+ margin: 0 0 0 0; 
 }
 
 .section-title {
@@ -86,7 +102,7 @@ p{
   font-size: 14px;
   max-width: 60ch;
 }
-p{ margin: 0 0 1rem 0; }
+p{ margin: 0 0 0 0; }
 .keywords {
   display: flex;
   flex-wrap: wrap;
@@ -95,7 +111,7 @@ p{ margin: 0 0 1rem 0; }
   list-style: none;
   font-size: clamp(14px, 1.6vw, 18px);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .contact-list {
@@ -104,7 +120,7 @@ p{ margin: 0 0 1rem 0; }
   gap: 0.5rem;
   font-size: clamp(16px, 2vw, 20px);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .contact-link {

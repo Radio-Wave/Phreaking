@@ -391,3 +391,36 @@ a:hover { opacity: .85; }
   justify-content: flex-start;
   margin: 0 0 var(--g) 0;
 }
+
+/* Contact link underline animation (kept from static-pages.css) */
+.contact-link {
+  color: var(--ink);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 0.15em;
+}
+.contact-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease-out;
+}
+.contact-link:focus-visible::after,
+.contact-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Extra spacing for inline page footer inside `.right` */
+.right footer {
+  margin-top: 4rem;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
