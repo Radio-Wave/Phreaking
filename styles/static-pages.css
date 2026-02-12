@@ -24,7 +24,7 @@ body{
   align-items: flex-start;
   gap: 1rem;
   padding: clamp(3rem, 8vw, 6rem) 6vw;
-  max-width: 720px;
+  max-width: 100%;
   /* Match the sidebar width and gap from sidebar.css */
   margin-left: calc(var(--pc-sidebar-width) + var(--pc-sidebar-gap));
   transition: margin-left 0.25s ease;
