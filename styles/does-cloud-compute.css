@@ -233,121 +233,6 @@ body{
 .event-desc{ line-height: 1.5; color: #eee; margin: 0.25rem 0 0.5rem; }
 .event-card .artist-link{ margin-top:auto; padding-top:1rem; }
 
-/* ================================
-   Artwork & documentation galleries
-   (shared lightbox styles reused from static-pages.css)
-================================ */
-.pc-gallery{ --gap:6px; --maxw:1400px; margin:0 auto; max-width:var(--maxw); width:100%; }
-
-.pc-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap);
-}
-.pc-gallery.three-wide .pc-grid{ grid-template-columns: repeat(3, 1fr); }
-@media (max-width:1100px){ .pc-grid{ grid-template-columns: repeat(3, 1fr); } }
-@media (max-width:800px){  .pc-grid{ grid-template-columns: repeat(2, 1fr); } }
-@media (max-width:520px){  .pc-grid{ grid-template-columns: 1fr; } }
-
-.pc-item{ margin:0; position:relative; cursor:zoom-in; }
-.pc-item{ aspect-ratio: 1 / 1; max-height: 420px; }
-.pc-item img{
-  width:100%;
-  height:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
-  max-height: 420px;
-}
-.pc-item figcaption{ display:none; }
-
-.gallery-block{ margin: 2rem 0; }
-
-/* Lightbox shell */
-.pc-lightbox{ position:fixed; inset:0; display:none; background:rgba(0,0,0,.95); z-index:9999; align-items:center; justify-content:center; }
-.pc-lightbox[aria-hidden="false"]{ display:flex; }
-.pc-lightbox__inner{ max-width:95vw; max-height:92vh; width:auto; height:auto; position:relative; }
-.pc-lightbox__img{ max-width:95vw; max-height:80vh; width:auto; height:auto; display:block; margin:0 auto; }
-.pc-lightbox__caption{ margin-top:10px; font-size:14px; color:#cfcfcf; text-align:center; line-height:1.4; }
-
-/* Lightbox controls */
-:root{
-  --lb-btn-size: 56px;
-  --lb-font-size: 20px;
-  --lb-gap: 16px;
-  --lb-border: 1.5px;
-  --lb-radius: 10px;
-  --lb-close-size: 48px;
-  --lb-close-font: 22px;
-  --lb-close-gap: 12px;
-}
-
-.pc-lightbox__btn{
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10010;
-  width: var(--lb-btn-size);
-  height: var(--lb-btn-size);
-  display: grid;
-  place-items: center;
-  border: var(--lb-border) solid rgba(255,255,255,.85);
-  background: rgba(0,0,0,.35);
-  color: #fff;
-  font-size: var(--lb-font-size);
-  line-height: 1;
-  cursor: pointer;
-  user-select: none;
-}
-
-.pc-lightbox__prev{ left: var(--lb-gap);  right: auto; }
-.pc-lightbox__next{ right: var(--lb-gap); left:  auto; }
-
-.pc-lightbox__btn:hover{ background: rgba(255,255,255,.08); }
-.pc-lightbox__btn > *{ pointer-events: none; }
-
-@media (max-width: 640px){
-  :root{
-    --lb-btn-size: 48px;
-    --lb-font-size: 18px;
-    --lb-gap: 8px;
-    --lb-border: 1px;
-    --lb-radius: 8px;
-  }
-}
-
-.pc-lightbox__close{
-  position: fixed;
-  top: calc(var(--lb-close-gap) + env(safe-area-inset-top));
-  right: calc(var(--lb-close-gap) + env(safe-area-inset-right));
-  z-index: 10020;
-
-  width: var(--lb-close-size);
-  height: var(--lb-close-size);
-  display: grid;
-  place-items: center;
-
-  border: var(--lb-border, 1.5px) solid rgba(255,255,255,.85);
-  background: rgba(0,0,0,.35);
-  color: #fff;
-
-  cursor: pointer;
-  user-select: none;
-  font-size: 0;
-}
-
-.pc-lightbox__close::before{
-  content: '×';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: var(--lb-close-font);
-  line-height: 1;
-}
-
-.pc-lightbox__close:hover{ background: rgba(255,255,255,.08); }
-
 /* section header + full-bleed breakers that align to the right column edges */
 .section-title{
 
@@ -382,29 +267,16 @@ body{
   border-top: 1px solid var(--rule);
   color: var(--muted);
   max-width: 420px;
-  font-size: 0.85rem; /* keep quieter than body copy */
 }
-.curatorial p{
-  font-size: inherit;   /* escape the global p { font-size: 14px; } rule */
-  line-height: 1.4;
-}
-.curatorial h1,
-.curatorial h3{
-  font-size: inherit;   /* clamp runaway heading sizes if old markup is present */
-  font-weight: 400;
-  margin: 0 0 .35rem 0;
-  line-height: 1.35;
-  letter-spacing: normal;
-}
-.curatorial-kicker{
+.curatorial h1{
   margin: 0 0 .35rem;
   letter-spacing: .12em;
   text-transform: uppercase;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
 }
-.curatorial-names{
+.curatorial h3{
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--ink);
   opacity: 0.7;
 }
