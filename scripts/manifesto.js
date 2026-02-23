@@ -2,7 +2,7 @@
   const stream = document.querySelector('.manifesto-stream');
   if (!stream) return;
 
-  const LENGTH = 2000;
+  const LENGTH = 2000-5;
   const BASE_CHANGE_CHANCE = 0.5;
   const HIGHLIGHT_CHANCE = 0.22;
   const CENSORED_GLYPH = '█';
