@@ -1,56 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="has-sidebar">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Does Cloud Compute (ever) Precipitate — Phreaking Collective</title>
+  <title>404 — Phreaking Collective</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/sidebar.css" />
-   <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+  <link rel="stylesheet" href="styles/stylesIndex.css" />
+  <link rel="stylesheet" href="styles/static-pages.css" />
+  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
 
   <style>
-    :root {
-      color-scheme: dark;
-    }
     body {
-      margin: 100px;
       min-height: 100vh;
-      background: #000;
-      color: #fff;
-      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      display: flex;
     }
     .layout {
-      display: flex;
-      flex: 1;
+      min-height: 100vh;
     }
-    .right {
-      display: flex;
-      flex-direction: column;
+    .right.error-page {
       justify-content: center;
-      align-items: flex-start;
       text-transform: uppercase;
       gap: 0.75rem;
+      max-width: 40rem;
+      padding-right: max(6vw, 24px);
     }
-    .right h1 {
-      margin: 0;
-      font-size: clamp(42px, 6vw, 72px);
-      letter-spacing: 0.08em;
-    }
-    .right p {
-      margin: 0;
+    .right.error-page p {
       color: rgba(255, 255, 255, 0.6);
       font-size: clamp(16px, 2vw, 22px);
       letter-spacing: 0.05em;
     }
-    footer {
-      margin-top: 2rem;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
+    @media (max-width: 640px) {
+      .layout {
+        min-height: auto;
+      }
+      .right.error-page {
+        min-height: calc(100vh - 12rem);
+        padding-right: var(--pad, 16px);
+      }
     }
   </style>
 </head>
@@ -59,13 +47,13 @@
   <div data-sidebar data-sidebar-active=""></div>
 
   <main class="layout" role="main">
-    <section class="right">
+    <section class="right error-page">
       <h1>404 error</h1>
       <p>(not a new show name)</p>
       <footer>&copy; Phreaking Collective</footer>
     </section>
   </main>
 
-  <script src="/scripts/sidebar.js"></script>
+  <script defer src="scripts/sidebar.js"></script>
 </body>
 </html>
