@@ -9,10 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/sidebar.css">
-  <link rel="stylesheet" href="styles/stylesIndex.css">
-  <link rel="stylesheet" href="styles/static-pages.css">
-  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/stylesIndex.css">
+  <link rel="stylesheet" href="../styles/static-pages.css">
+  <link rel="icon" href="../assets/PhreakingLogoSquare_white.ico" sizes="any">
 
   <style>
     .page-signals .right {
@@ -112,7 +112,7 @@
 </head>
 
 <body class="page-signals">
-  <div data-sidebar></div>
+  <div data-sidebar data-sidebar-src="../partials/sidebar.html"></div>
 
   <main class="layout" role="main">
     <section class="right">
@@ -241,7 +241,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  <script defer src="scripts/sidebar.js"></script>
+  <script defer src="../scripts/sidebar.js"></script>
 </body>
 
 </html>
