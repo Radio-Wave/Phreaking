@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Does Cloud Compute (ever) Precipitate — Phreaking Collective</title>
+  <meta name="description"
+    content="A new Phreaking Collective show exploring clouds, compute and the weather of networks." />
+  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- IBM Plex Mono to match the main site -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/does-cloud-compute.css" />
+  <link rel="stylesheet" href="/styles/stylesIndex.css">
+  <link rel="stylesheet" href="/styles/sidebar.css" />
+
+
+</head>
+
+<body>
+  <!-- Parallax pixel-cloud layers -->
+  <canvas id="clouds-back" aria-hidden="true"></canvas>
+  <canvas id="clouds-front" aria-hidden="true"></canvas>
+  <div data-sidebar data-sidebar-active="exhibitions.html"></div>
+
+
+
+  <main class="layout" role="main">
+    <section class="right">
+      <!-- inline brand that shows when the sidebar is collapsed -->
+      <header class="right-header" aria-hidden="true">
+        <a class="brand-inline" href="/">
+          <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+        </a>
+      </header>
+
+      <div class="wrap">
+        <section class="hero">
+          <h1 class="title">
+            Does Cloud<br>
+            Compute<br>
+            <em>(ever)</em><br>
+            Precipitate?
+          </h1>
+          <p class="lede">
+            The Phreaking Collective invited visitors to <em>Does Cloud Compute (ever) Precipitate?</em> - An exhibition that
+            asks a question and tells a poem. If clouds in nature condense and return as rain, can the digital cloud
+            ever give back what it takes? Can data come home to the people who made it?
+
+            
+          </p>
+        </section>
+
+        <section class="meta">
+          <div class="meta-block">
+            <h2>Keywords</h2>
+            <ul class="keywords">
+              <li>Data Storm</Data></li>
+              <li>Hidden Infrastructures</li>
+              <li>Poetic Systems</li>
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <h2>Location</h2>
+            <p>ANNEX By the Koppel Project <br><br>
+              1 Tiverton Street, London, <br> SE1 6NT, UK
+            </p>
+            <!-- optional mini “map strip”—swap the src if you want to use the poster’s band -->
+            <!-- <img class="map-strip" src="/assets/dccp-map-strip.png" alt="Location map strip"> -->
+          </div>
+
+          <div class="meta-block">
+            <h2>Dates</h2>
+            <p><span id="dates-text">Private view: <br> 9th Jan 2026, 18:00 - 21:00
+                <br> <br> Ran from: <br>10th - 25th Jan 2026, 10:00 - 17:00 </span></p>
+
+          </div>
+        </section>
+        <section id="about" aria-labelledby="about-heading">
+
+          <h2 id="about-heading" class="section-title">About</h2>
+
+
+          <section class="body-copy">
+            <p>
+              This show explores the hidden infrastructures that shape our lives, bringing materiality to the ethereal.
+              It
+              explores our relationship with the monoliths that are waking up, the environmental strain, the invisible
+              human labour, and the worries of pooled resources in an unreturning atmosphere. Working across
+              installations, sound works, generative systems and computational artwork, the exhibition examines the
+              quiet
+              romance in technological convenience.</p>
+
+            <p>The Cloud, an unseen network of servers, energy and labour - is made tangible, visible and audible.The
+              works confront the vast systems that silently maintain our lives, datacenters that feed on our energy and
+              attention and the dependent relationship we have, the systems behind each upload, generation and stream.
+            </p>
+
+            <p> Running alongside the two week show was a series of talks, workshops, discussions, film screenings and
+              performances where visitors were invited to look deeper into the unsung systems shaping our lives, and
+              reflect on the strange romance and hidden dependencies that define our connection to the cloud.
+
+            </p>
+          </section>
+          <hr>
+          <section class="body-copy" aria-labelledby="phreak-mag-heading">
+            <h3 id="phreak-mag-heading">Phreak Mag</h3>
+            <p>
+              The inaugural issue of <em>Phreak Mag</em> launched alongside this exhibition, extending its themes in
+              print and publishing new writing around art, networks and digital culture.
+              <a href="magazine.html">Click here for more about Phreak Mag</a>
+            </p>
+          </section>
+          <hr>
+          <section id="dccp-gallery" aria-labelledby="dccp-gallery-title">
+            <h3 id="dccp-gallery-title">Gallery</h3>
+            <section class="pc-gallery" aria-label="Does Cloud Compute exhibition gallery">
+              <div class="pc-grid">
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-01.webp" data-full="/assets/DCCeP/Artwork/DDCeP-01.jpg"
+                    alt="Wide Show of exhibtion" loading="lazy" decoding="async" />
+                  <figcaption>Showing at Annex by The Koppel Project</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-02.webp" data-full="/assets/DCCeP/Artwork/DDCeP-02.jpg"
+                    alt="Wide shot of whole exhibtion" loading="lazy" decoding="async" />
+                  <figcaption>Showing at Annex by The Koppel Project</figcaption>
+
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-03.webp" data-full="/assets/DCCeP/Artwork/DDCeP-03.jpg"
+                    alt="Wide shot of whole exhibtion" loading="lazy" decoding="async" />
+                  <figcaption>Showing at Annex by The Koppel Project</figcaption>
+
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-04.webp" data-full="/assets/DCCeP/Artwork/DDCeP-04.jpg"
+                    alt="LED Panels and steel, from above" loading="lazy" decoding="async" />
+                  <figcaption>I Live There, With you - Xach Hill</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-05.webp" data-full="/assets/DCCeP/Artwork/DDCeP-05.jpg"
+                    alt="LED Panels and steel" loading="lazy" decoding="async" />
+                  <figcaption>I Live There, With you - Xach Hill</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-06.webp" data-full="/assets/DCCeP/Artwork/DDCeP-06.jpg"
+                    alt="Potatos nailed to a wall with a screen of a Potato" loading="lazy" decoding="async" />
+                  <figcaption>I Potato, Self Portrait - Nikos Antonio Kourous Vázquez</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-07.webp" data-full="/assets/DCCeP/Artwork/DDCeP-07.jpg"
+                    alt="Potatos nailed to a wall with a screen of a Potato" loading="lazy" decoding="async" />
+                  <figcaption>I Potato, Self Portrait - Nikos Antonio Kourous Vázquez</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-08.webp" data-full="/assets/DCCeP/Artwork/DDCeP-08.jpg"
+                    alt="A screen held with metal bars, showing erotic material" loading="lazy" decoding="async" />
+                  <figcaption>Joy - Lyra Robbinson</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-09.webp" data-full="/assets/DCCeP/Artwork/DDCeP-09.jpg"
+                    alt="A screen held with metal bars, showing erotic material" loading="lazy" decoding="async" />
+                  <figcaption>Joy - Lyra Robbinson</figcaption>
+                </figure>
+                
+              <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-18.webp" data-full="/assets/DCCeP/Artwork/DDCeP-18.jpg"
+                    alt="A screen held with metal bars, showing a still life scene of fruit in the centre" loading="lazy" decoding="async" />
+                  <figcaption>Master in Training - Yunzhi / Melissa Li</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-19.webp" data-full="/assets/DCCeP/Artwork/DDCeP-19.jpg"
+                    alt="A screen held with metal bars, showing a still life scene of fruit in the centre" loading="lazy" decoding="async" />
+                  <figcaption>Master in Training - Yunzhi / Melissa Li</figcaption>
+                </figure>
+
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-10.webp" data-full="/assets/DCCeP/Artwork/DDCeP-10.jpg"
+                    alt="An iPad on Facetime, blending into the wall" loading="lazy" decoding="async" />
+                  <figcaption>Window - Robin Leverton</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-11.webp" data-full="/assets/DCCeP/Artwork/DDCeP-11.jpg"
+                    alt="Bottles on a wall, lit up" loading="lazy" decoding="async" />
+                  <figcaption>Bottled Up - Jack Jessé</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-12.webp" data-full="/assets/DCCeP/Artwork/DDCeP-12.jpg"
+                    alt="Bottles on a wall, lit up" loading="lazy" decoding="async" />
+                  <figcaption>Bottled Up - Jack Jessé</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-13.webp" data-full="/assets/DCCeP/Artwork/DDCeP-13.jpg"
+                    alt="An iPad on Facetime, blending into the wall" loading="lazy" decoding="async" />
+                  <figcaption>Window - Robin Leverton</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-14.webp" data-full="/assets/DCCeP/Artwork/DDCeP-14.jpg"
+                    alt="Screen surrounded by wires, with a plate on a webbrowser" loading="lazy" decoding="async" />
+                  <figcaption>Recursive Wait - David Lazar</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-15.webp" data-full="/assets/DCCeP/Artwork/DDCeP-15.jpg"
+                    alt="Screen surrounded by wires, with a plate on a webbrowser" loading="lazy" decoding="async" />
+                  <figcaption>Recursive Wait - David Lazar</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-16.webp" data-full="/assets/DCCeP/Artwork/DDCeP-16.jpg"
+                    alt="Screen surrounded by wires, with a plate on a webbrowser" loading="lazy" decoding="async" />
+                  <figcaption>Angel Duster - Dylan Morris</figcaption>
+                </figure>
+
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-21.webp" data-full="/assets/DCCeP/Artwork/DDCeP-21.jpg"
+                    alt="Screen surrounded by wires, with a plate on a webbrowser" loading="lazy" decoding="async" />
+                  <figcaption>Angel Duster - Dylan Morris</figcaption>
+                </figure>
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-17.webp" data-full="/assets/DCCeP/Artwork/DDCeP-17.jpg"
+                    alt="Screen surrounded by wires, with a plate on a webbrowser" loading="lazy" decoding="async" />
+                  <figcaption>Precipitation Network  - Phoenix Isla Kea & Jasmine Broadhurst </figcaption>
+                </figure>
+
+                <figure class="pc-item">
+                  <img src="/assets/DCCeP/Artwork/DDCeP-20.webp" data-full="/assets/DCCeP/Artwork/DDCeP-20.jpg"
+                    alt="Screen surrounded by wires, with a plate on a webbrowser" loading="lazy" decoding="async" />
+                  <figcaption>Precipitation Network  - Phoenix Isla Kea & Jasmine Broadhurst </figcaption>
+                </figure>
+  
+              </div>
+            </section>
+          </section>
+          <p class="as-seen">
+            As seen on:
+            <a href="https://thekoppelproject.com/events/does-cloud-compute-ever-precipitate-phreaking-collective-annex"
+              target="_blank" rel="noopener">
+              The Koppel Project
+            </a>
+          </p>
+
+
+        </section>
+
+
+        <section id="artists" aria-labelledby="artists-heading">
+          <hr>
+
+          <h2 id="artists-heading" class="section-title">Artists</h2>
+
+          <div class="artists-grid">
+            <div class="artist-card">
+              <h3>Yunzhi / Melissa Li</h3>
+              <p>
+                A Chengdu-born, London-based computational artist whose practice spans interactive installations,
+                web-based experiments and immersive 3D environments. She examines how images, code, and audience
+                interaction shape our sense of identity, memory and place. At the heart of Li’s work is the translation
+                of
+                the intangible experiences, making the unseen visible.
+              </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://melissayunzhi.li/" target="_blank" rel="noopener">
+                  melissayunzhi.li
+                </a>
+              </div>
+            </div>
+
+            <div class="artist-card">
+              <h3>Xach Hill</h3>
+              <p>
+                Xach Hill is British-Kiwi transmedia artist, curator and creative technologist working across sculpture,
+                code, and poetry. He explores the entanglement of human memory and machine logic, often using AI, LED
+                matrices, and hacked hardware to question what it means to be seen, remembered, or misinterpreted by a
+                system. Rooted in both computational poetics and glitch aesthetics, his work invites audiences into
+                spaces
+                where identity, intimacy, and error co-exist.
+
+              </p>
+
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://xachhill.com" target="_blank" rel="noopener">
+                  xachhill.com
+                </a>
+              </div>
+            </div>
+
+            <div class="artist-card">
+              <h3>Nikos Antonio Kourous Vázquez</h3>
+              <p>
+                My work stems from a desire to challenge and expand prevailing narratives around machine learning: what
+                it
+                is,
+                how it functions, and how it might evolve. As ‘machine learning' becomes the mythologized term
+                ‘artificial
+                intelligence,' as user-machine relationships become engraved, and as companies scramble to innovate and
+                incorporate it, I feel compelled to create space for the technology to define itself.
+              </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://nikos.kourous.net/" target="_blank" rel="noopener">
+                  nikos.kourous.net
+                </a>
+              </div>
+            </div>
+
+
+            <div class="artist-card">
+              <h3>Lyra Robinson</h3>
+              <p>
+                is a transdisciplinary new media artist, whose work spans performance, installation, and video.
+                She works primarily with ones and zeroes; manipulating experimental machine vision and deep learning
+                processes.
+              </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://lyrarobinson.art/" target="_blank" rel="noopener">
+                  lyrarobinson.art
+                </a>
+              </div>
+            </div>
+
+            <div class="artist-card">
+              <h3>Jack Jessé</h3>
+              <p>
+                explores relationships between fauna, flora and machines by investigating movement, land and
+                digital culture through emerging technologies, interactive installations, and data visualisation. His
+                work
+                explores human-machine collaborations, shifting between macro and micro perspectives, both stepping back
+                to observe broader geopolitical systems and zooming in to reveal the microscopic worlds of ecology and
+                materiality. <br>
+              </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://jackjesse.xyz" target="_blank" rel="noopener">
+                  jackjesse.xyz
+                </a>
+              </div>
+            </div>
+
+
+            <div class="artist-card">
+              <h3>Robin Leverton</h3>
+              <p>
+                Robin Leverton (b. 1995, UK) is a Croydon-based artist, curator, technologist, and researcher. His work
+                explores the materiality and ontology of artificial intelligence, particularly in relation to identity,
+                embodiment, and agency. His practice spans sculpture, painting, printmaking, and installation,
+                integrating cutting edge technologies into traditional arts practices. </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://robinlevertonart.com/" target="_blank" rel="noopener">
+                  robinlevertonart.com
+                </a>
+              </div>
+            </div>
+
+            <div class="artist-card">
+              <h3>Phoenix Isla Kea </h3>
+              <p>
+                Phoenix Isla Kea (b. 2003) is a London-born Polynesian artist working with computation, sound, and
+                installation. With a background in photography and film, her current practice explores the psychological
+                and
+                emotional textures of online life, particularly the aesthetics of seduction, digital exploitation, and
+                algorithmic control.
+                Blending technical systems with embodied inquiry - Kea builds web environments, manipulates found media,
+                and
+                composes machinic forms shaped as much by emotional intensity - rage, longing, obsession, as by logic.
+                Her research interrogates girlhood as a tactical identity, and the feedback loops between visibility,
+                desire,
+                and control in algorithmic culture.
+              </p>
+            </div>
+
+            <div class="artist-card">
+              <h3>Jasmine Broadhurst</h3>
+              <p>
+                Jasmine Broadhurst is an interdisciplinary artist working across computational and physical systems and
+                material processes. Her practice explores tension between lived human experience and technological
+                structures.
+
+                She graduated from Central Saint Martins with a degree in Fashion Design Knitwear. This education
+                grounded her practice in material sensitivity, embodied making, and an understanding of machines as
+                physical collaborators. She is drawn to systems and processes that operate imperfectly, where technology
+                functions as a creative collaborator: transforming cold infrastructure into a means of questioning and
+                reflection. Moments of friction are central to her practice, embracing uncertainty and tension as
+                integral components of meaning.
+              </p>
+            </div>
+
+            <div class="artist-card">
+              <h3>David Lazãr</h3>
+              <p>
+                My practice operates at the intersection of software engineering and artistic research, examining
+                technology not as a neutral tool but as an infrastructure that shapes identity, behavior, and public
+                space. Through installations, web-based works, and AI-driven experiments, I expose systems of
+                automation, surveillance, and data extraction, translating invisible mechanisms into embodied
+                experiences. Grounded in research, my process visualizes technological power structures and their
+                ethical consequences. Shaped by my background in tech, I work with small-scale, sustainable computing
+                informed by permacomputing principles, emphasizing transparency, care, and ecological responsibility. My
+                work invites critical reflection on progress, efficiency, and the futures we imagine for technology.
+              </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://davidlazar.co/artist" target="_blank" rel="noopener">
+                  davidlazar.co
+                </a>
+              </div>
+            </div>
+
+            <div class="artist-card">
+              <h3>Dylan Morris</h3>
+              <p>
+                My name is Dylan Morris, I am a 27 year-old mixed media visual artist working out of South-East London.
+                I use mostly found materials that have their own narrative in a wider cultural context and manipulate
+                them to communicate something personal, attempting to create a harmony between the communal experience
+                and my own. I'm interested in reflecting on the experience of growing up in an increasingly complex
+                digital environment. I try to examine the contested terrain of contemporary media culture, understand
+                the forces at play and eventually subvert the forces of commercialist cultural control. </p>
+              <div class="artist-link">
+                <br>
+                more at:
+                <a href="https://dylanbmorris.com/" target="_blank" rel="noopener">
+                  dylanbmorris.com
+                </a>
+              </div>
+            </div>
+
+          </div>
+      </div>
+
+      <hr>
+      <h2>Events</h2>
+      <div class="events-grid">
+        <article class="artist-card event-card">
+          <span class="event-label">Workshop</span>
+          <h3>Noisy spaces</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Sunday 11th January - 13:00-15:30</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="Noisy Spaces Event Gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/NOISEY_SPACES_V2 Medium.jpeg" alt="HTML event artwork" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.webp" data-full="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.jpeg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.webp" data-full="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.jpeg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.webp" data-full="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.jpeg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.webp" data-full="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.jpeg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.webp" data-full="/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.jpeg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+          Kat Macdonald's for a workshop explored technology as it relates to collective sound making, taking participants through a history of London’s experimental collective performance scene of the 1970’s and how those methods can be adapted and applied to our current art culture.
+          <br>
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/noisy-spaces-workshop-by-kat-macdonald-tickets-1979652367522?"
+              target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Workshop</span>
+          <h3>I Want to be a website!</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Wednesday 14th January — 18:00–20:00</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="I Want to be a website event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/CLWorkshopPosterLD.png" alt="HTML event artwork" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.webp" data-full="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.webp" data-full="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.webp" data-full="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.webp" data-full="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.webp" data-full="/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            Cranberry Lemonade @cranberry_lemonade presents ‘I want to be a website,” a hands-on, beginner-friendly
+            personal web-making workshop. Participants explored HTML, CSS and JavaScript, creating personalised and
+            poetic webpages to demystify web creation and tell their own digital stories and identities. <br>
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/i-want-to-be-a-website-html-workshop-with-cranberry-lemonade-tickets-1980383534462"
+              target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+        <article class="artist-card event-card">
+          <span class="event-label">Peformance Lecture</span>
+          <h3>Counter Modelling</h3>
+          <time class="event-time" datetime="2026-01-16T17:00+00:00">Friday 16th January — 18:00–19:00</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="Counter Modelling event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/lucia-rebolino.jpeg" alt="Counter Modelling talk poster"
+                  loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/CounterModeling/CounterModelling-1.webp" data-full="/assets/DCCeP/Events/CounterModeling/CounterModelling-1.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/CounterModeling/CounterModelling-2.webp" data-full="/assets/DCCeP/Events/CounterModeling/CounterModelling-2.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/CounterModeling/CounterModelling-3.webp" data-full="/assets/DCCeP/Events/CounterModeling/CounterModelling-3.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/CounterModeling/CounterModelling-4.webp" data-full="/assets/DCCeP/Events/CounterModeling/CounterModelling-4.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/CounterModeling/CounterModelling-5.webp" data-full="/assets/DCCeP/Events/CounterModeling/CounterModelling-5.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            A web-based performance exploring climate modelling through digital aesthetics and architectural thinking.
+            Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling
+            challenges the aesthetics of computational realism, presenting climate prediction as a site of tension
+            between technological development and climate futures, shaped by power, uncertainty, and abstraction.<br>
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/counter-modelling-talk-with-lucia-rebolino-tickets-1979651981367"
+              target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Workshop</span>
+          <h3>Extremely Standardised Fun</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Saturday 17th January — 11:00–14:00</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="Extremely Standardised Fun event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/MAT_HILL2edit.png" alt="Mat Hill workshop poster" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.webp" data-full="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.jpg"
+                  alt="Event documentation from the workshop" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.webp" data-full="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.jpg"
+                  alt="Event documentation from the workshop" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.webp" data-full="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.jpg"
+                  alt="Event documentation from the workshop" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.webp" data-full="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.jpg"
+                  alt="Event documentation from the workshop" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.webp" data-full="/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.jpg"
+                  alt="Event documentation from the workshop" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            Why are file formats? are they real? what???
+            This workshop explored what file formats really are, where they came from, and why they make us suffer.
+            It started with an intro to Permacomputing, and how speculative art projects could save
+            engineering!
+            Then, participants learned just enough computer science to be dangerous.
+            With these new skills, they explored the surprisingly philosophical worlds of bytebeats,
+            generative image-making, and Unicode-art.
+            By the end, participants were wondering why they ever relied on software to do things for them, and uninstall
+            chatGPT forever!!!
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/1980592583734?aff=oddtdtcreator" target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Lecture</span>
+          <h3>AI As Material</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Saturday 17th January — 15:00–16:00</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="AI As Material event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/terence-poster.jpeg" alt="AI As Material talk poster" loading="lazy"
+                  decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.webp" data-full="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.webp" data-full="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.webp" data-full="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.webp" data-full="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.webp" data-full="/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            By Artist/Researcher Terence Broad, the talk includes new ways of understanding and engaging critically
+            with AI within creative practice.<br>
+            This talk showed how practices that treat AI as a material, rather than a tool or creative agent,
+            artists were able to make critical works that presented new ways of understanding and making sense of these
+            unfathomably complex computational systems. <br>
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/ai-as-material-talk-with-terence-broad-tickets-1980306630440"
+              target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Event</span>
+          <h3>Open Projector</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Saturday 17th January — 17:00–20:00</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="Open Projector event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/openprojector-v1.jpg" alt="Open projector event artwork" loading="lazy"
+                  decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/OpenProj/Nikos-Open-Proj-1.webp" data-full="/assets/OpenProj/Nikos-Open-Proj-1.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/OpenProj/Nikos-Open-Proj-2.webp" data-full="/assets/OpenProj/Nikos-Open-Proj-2.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/OpenProj/Nikos-Open-Proj-3.webp" data-full="/assets/OpenProj/Nikos-Open-Proj-3.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/OpenProj/Nikos-Open-Proj-5.webp" data-full="/assets/OpenProj/Nikos-Open-Proj-5.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/OpenProj/Nikos-Open-Proj-6.webp" data-full="/assets/OpenProj/Nikos-Open-Proj-6.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            On Saturday evening, the 17th, we hosted our open projector night. Everyone was welcome to come and
+            present their projects. Whether a project was finished, a work in progress, or already publicised, this
+            was a great opportunity to share it and gather feedback from fellow artists and enthusiasts.
+            <br>
+            Just show up, no pre-registration is needed.
+            <p class="artist-link">
+            <a href="open-projector.html"
+              target="_blank" rel="noopener">Next Event Info Here!</a>
+          </p>
+
+          
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Talk</span>
+          <h3>Cloud-Watching Through My Window</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Sunday 18th January — 13:00–14:00</time>
+
+          <section class="pc-gallery three-wide event-gallery"
+            aria-label="Cloud-Watching Through My Window event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/robin-leverton.jpeg" alt="Cloud-watching talk artwork" loading="lazy"
+                  decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.webp" data-full="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.webp" data-full="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.webp" data-full="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.webp" data-full="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.webp" data-full="/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            A flâneur's guide to mapping the new geographies of connection. Contemplating on internet and
+            communications infrastructures, participants took a walk through the window piece from one side of the wall to
+            the other. In so doing, they passed through various forms of physical and digital infrastructures that
+            mediate and feed on our data emissions, exploring the topography of the contemporary internet.
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/cloud-watching-through-my-window-talk-by-robin-leveron-tickets-1980321224090?aff=oddtdtcreator"
+              target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Workshop</span>
+          <h3>Intro to Creative Coding for Artists </h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Sunday 18th January — 15:00–19:00</time>
+
+          <section class="pc-gallery three-wide event-gallery"
+            aria-label="Intro to Creative Coding for Artists event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/CABLEGL_MARGOT2.png" alt="Cables.gl workshop poster" loading="lazy"
+                  decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Intro2/CreativeCoding-1.webp" data-full="/assets/DCCeP/Events/Intro2/CreativeCoding-1.jpg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Intro2/CreativeCoding-2.webp" data-full="/assets/DCCeP/Events/Intro2/CreativeCoding-2.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Intro2/CreativeCoding-3.webp" data-full="/assets/DCCeP/Events/Intro2/CreativeCoding-3.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Intro2/CreativeCoding-4.webp" data-full="/assets/DCCeP/Events/Intro2/CreativeCoding-4.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/Intro2/CreativeCoding-5.webp" data-full="/assets/DCCeP/Events/Intro2/CreativeCoding-5.jpg"
+                  alt="Exhibition installation detail" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            The aim of this workshop with Margot McEwen would be to teach the basics of using Cables.gl, a (free and
+            open
+            source) node-based live coding language for building things with WebGL.
+            Participants learned how to manipulate live and pre-recorded moving images, how to
+            create and modify simple video effects, and how to interact with them through various I/O,
+            then combine what they had learnt to make something unique </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/intro-to-creative-coding-for-artists-workshop-with-margot-mcewen-tickets-1980628014709?aff=oddtdtcreator"
+              target="_blank" rel="noopener">Event Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Event</span>
+          <h3>Film night</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Wednesday 21st January — 18:00–19:30</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="Film night event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/filmNight.jpeg" alt="Film night event artwork" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/FilmNight/FilmNight-1.webp" data-full="/assets/DCCeP/Events/FilmNight/FilmNight-1.jpeg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/FilmNight/FilmNight-2.webp" data-full="/assets/DCCeP/Events/FilmNight/FilmNight-2.jpeg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/FilmNight/FilmNight-3.webp" data-full="/assets/DCCeP/Events/FilmNight/FilmNight-3.jpeg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/FilmNight/FilmNight-4.webp" data-full="/assets/DCCeP/Events/FilmNight/FilmNight-4.jpeg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/FilmNight/FilmNight-5.webp" data-full="/assets/DCCeP/Events/FilmNight/FilmNight-5.jpeg"
+                  alt="Event documentation from the exhibition" loading="lazy" decoding="async">
+              </figure>
+              
+            </div>
+          </section>
+
+          <p class="event-desc">
+            An evening of computational, experimental, and artist-led short films that bend narrative, fracture
+            reality, and play at the edges of code, image, and memory. These works push the medium through
+            storytelling, inventive editing, and striking visual languages.
+
+            The screening took place at ANNEX by The Koppel Project on Wednesday 21st January, 18:00–20:00, with a
+            communal conversation around contemporary computational film.
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/1980717293745?aff=oddtdtcreator" target="_blank" rel="noopener">Event
+              Completed</a>
+          </p>
+        </article>
+
+        <article class="artist-card event-card">
+          <span class="event-label">Event</span>
+          <h3>Closing Event</h3>
+          <time class="event-time" datetime="2026-01-17T17:00+00:00">Friday 23rd Janurary — 18:00-21:00</time>
+
+          <section class="pc-gallery three-wide event-gallery" aria-label="Closing event gallery">
+            <div class="pc-grid">
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/CLOSINGEVENT.jpeg" alt="Closing event poster" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.webp" data-full="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.jpeg"
+                  alt="Event documentation from the closing event" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.webp" data-full="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.jpeg"
+                  alt="Event documentation from the closing event" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.webp" data-full="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.jpeg"
+                  alt="Event documentation from the closing event" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.webp" data-full="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.jpeg"
+                  alt="Event documentation from the closing event" loading="lazy" decoding="async">
+              </figure>
+              <figure class="pc-item">
+                <img src="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.webp" data-full="/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.jpeg"
+                  alt="Event documentation from the closing event" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <p class="event-desc">
+            The closing event of "Does Cloud Compute (ever) Precipitate?" featured a panel discussion
+            with participating artists and curators. Attendees reflected on the themes explored throughout the exhibition,
+            shared insights, and engaged in a lively conversation about the future of technology, art, and our
+            relationship with the cloud.
+            <br>
+            Additionally from 6:00 PM onwards, there was a line-up of live-coding performances by London Live Coding
+            groups, finishing the exhibition programme with music and code.
+          </p>
+          <p class="artist-link">
+            <a href="https://www.eventbrite.co.uk/e/1981052075085?aff=oddtdtcreator" target="_blank" rel="noopener">Event
+              Completed</a>
+          </p>
+        </article>
+
+      </div>
+
+      <div class="curatorial">
+
+        <h3>Exhibition / Programme Curators:</h3>
+        <h1>Xach Hill</h1>
+        <h1>Yunzhi/Melissa Li</h1>
+        <br>
+        <h3>Talk Curators:</h3>
+        <h1>Nikos Antonio Kourous Vázquez</h1>
+        <h1>Lyra Robbinson</h1>
+        <br>
+        <h3>Workshop Curator:</h3>
+        <h1>Phoenix Isla Kea</h1>
+        <br>
+        <h3>Exhibition Technician:</h3>
+        <h1>Eryn English-Polch</h1>
+      </div>
+
+
+
+    </section>
+
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+    </footer>
+    <section id="events" aria-labelledby="events-heading"><br>
+
+
+
+
+    </section>
+
+  </main>
+  <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/gallery.js"></script>
+  <script src="/scripts/does-cloud-compute.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
+
+
+</body>
+
+</html>

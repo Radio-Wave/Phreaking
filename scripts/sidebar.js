@@ -9,7 +9,7 @@
   }
 
   hosts.forEach(host => {
-    const src = host.getAttribute('data-sidebar-src') || 'partials/sidebar.html';
+    const src = host.getAttribute('data-sidebar-src') || '/partials/sidebar.html';
     const activeHint = host.getAttribute('data-sidebar-active') || '';
 
     fetch(src)

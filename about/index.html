@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" class="has-sidebar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Phreaking Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/static-pages.css" />
+  <link rel="stylesheet" href="/styles/sidebar.css" />
+  <link rel="stylesheet" href="/styles/stylesIndex.css" />
+ <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+
+</head>
+
+<body>
+  <div data-sidebar data-sidebar-active="about.html"></div>
+
+  <main class="layout" role="main">
+    <section class="right">
+      <h1>About us</h1>
+      <p class="lede">The Phreaking Collective is a London-based group of emerging computational artists working across code,
+        sculpture, sound, installation, and digital media. 
+        <br><br>
+        Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
+ 
+       
+        <p> The main organisers, curators, coordinators are: Xach Hill, Yunzhi/Melissa Li, Nikos Kourous, Lyra Robinson. <br>Others members include: Jack Jessé, Phoenix Isla Kea, Rizq Yazed, Eryn English-Polch.</p>
+      
+    </section>
+
+        <section class="right">
+      <h2>Contact Us</h2>
+      <p>Drop us a line, see what we're up to or share something of your own.<br> These is where you can find us.</p>
+      <nav class="contact-list" aria-label="Contact">
+        <a class="contact-link" href="mailto:phreakingcollective@gmail.com">Email — phreakingcollective@gmail.com</a>
+        <a class="contact-link" href="https://instagram.com/phreaking_collective" target="_blank" rel="noreferrer">Instagram — @phreaking_collective</a>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="/scripts/sidebar.js"></script>
+
+</body>
+</html>
