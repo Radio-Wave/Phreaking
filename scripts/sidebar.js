@@ -1,8 +1,18 @@
 (() => {
+  const isMobile = window.innerWidth <= 1040;
+
+  const isCalendarPage =
+    document.body?.classList?.contains('page-calendar');
+
+  if (isMobile && isCalendarPage) {
+    return; // 🔴 HARD STOP: no fetch, no DOM, nothing
+  }
+
   const STORAGE_KEY = 'pc-sidebar';
   let toggleInitialised = false;
 
   const hosts = Array.from(document.querySelectorAll('[data-sidebar]'));
+
   if (!hosts.length) {
     wireToggle();
     return;
