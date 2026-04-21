@@ -130,10 +130,37 @@
       font-size: 12px;
       color: var(--muted);
     }
+    /* hidden by default (desktop) */
+.mobile-home-btn {
+  display: none;
+}
+
 
     /* MOBILE */
 
     @media (max-width: 1040px) {
+  .mobile-home-btn {
+    display: block;
+    margin-top: 1.5rem;
+    width: 100%;
+    border: 1px solid var(--rule);
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    text-transform: lowercase;
+  }
+
+  .mobile-home-btn:hover {
+    background: white;
+    color: black;
+  }
+
+  .mobile-home-btn:active {
+    transform: translateY(2px) scale(0.98);
+  }
 
       html.has-sidebar {
         /* disable sidebar layout on mobile */
@@ -173,6 +200,9 @@
         * subscribing means events will automatically appear and update in your calendar.
       </p>
 
+      <div class="mobile-home-btn" onclick="window.location.href='/'">
+  Homepage
+</div>
     </section>
   </main>
 

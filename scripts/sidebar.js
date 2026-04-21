@@ -1,4 +1,9 @@
 (() => {
+  const isMobile = window.innerWidth <= 1040;
+  const isCalendarPage = document.body.classList.contains('page-calendar');
+
+  // ONLY disable sidebar on mobile calendar page
+  if (isMobile && isCalendarPage) return;
   const STORAGE_KEY = 'pc-sidebar';
   let toggleInitialised = false;
 
