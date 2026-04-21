@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="en" class="has-sidebar">
-
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -237,6 +236,20 @@
   </script>
 
   <script defer src="../scripts/sidebar.js"></script>
+  
+<script>
+  function handleSidebar() {
+    const html = document.documentElement;
 
+    if (window.innerWidth > 1040) {
+      html.classList.add('has-sidebar');
+    } else {
+      html.classList.remove('has-sidebar');
+    }
+  }
+
+  handleSidebar();
+  window.addEventListener('resize', handleSidebar);
+</script>
 </body>
 </html>
