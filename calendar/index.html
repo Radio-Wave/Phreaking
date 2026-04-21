@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phreaking Calendar</title>
+  <meta name="description" content="Subscribe to the Phreaking Collective calendar." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/stylesIndex.css">
+  <link rel="stylesheet" href="../styles/static-pages.css">
+
+  <link rel="icon" href="../assets/PhreakingLogoSquare_white.ico" sizes="any">
+
+  <style>
+    .page-calendar .right {
+      max-width: 72ch;
+      align-items: flex-start;
+    }
+
+    .calendar-intro {
+      max-width: 60ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .primary-btn {
+      margin-top: 2rem;
+      border: 1px solid var(--rule);
+      background: black;
+      color: white;
+      padding: 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+
+    .primary-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    .primary-btn:active {
+      transform: translateY(2px) scale(0.98);
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      padding: 1rem;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: black;
+      border: 1px solid var(--rule);
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 520px;
+      transform: translateY(20px) scale(0.98);
+      transition: all 0.2s ease;
+    }
+
+    .modal.active .modal-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      margin-bottom: 1rem;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .calendar-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 1rem;
+    }
+
+    .calendar-btn {
+      border: 1px solid var(--rule);
+      background: black;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      user-select: none;
+    }
+
+    .calendar-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    .calendar-btn:active {
+      transform: translateY(2px) scale(0.98);
+      background: white;
+      color: black;
+    }
+
+    .modal-close {
+      margin-top: 1.2rem;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .note {
+      margin-top: 1.5rem;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    /* hidden by default (desktop) */
+.mobile-home-btn {
+  display: none;
+  width:50%;
+}
+
+
+    /* MOBILE */
+
+    @media (max-width: 1040px) {
+  .mobile-home-btn {
+    display: block;
+    margin-top: 1.5rem;
+    width: 100%;
+    border: 1px solid var(--rule);
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    text-transform: lowercase;
+  }
+
+  .mobile-home-btn:hover {
+    background: white;
+    color: black;
+  }
+
+  .mobile-home-btn:active {
+    transform: translateY(2px) scale(0.98);
+  }
+
+      html.has-sidebar {
+        /* disable sidebar layout on mobile */
+      }
+
+      .calendar-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .page-calendar .right {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="page-calendar">
+
+  <!-- SIDEBAR (desktop only via CSS system) -->
+  <div data-sidebar data-sidebar-src="../partials/sidebar.html"></div>
+
+  <main class="layout" role="main">
+    <section class="right">
+
+      <h1>Phreaking Calendar</h1>
+      <section class="section-title">Subscribe to events</section>
+
+      <p class="calendar-intro">
+        a calendar you can subscribe to so that you can automatically stay up-to-date with our events and shows.
+      </p>
+
+      <div class="primary-btn" id="openModal">
+        Subscribe to Calendar
+      </div>
+
+      <p class="note">
+        * subscribing means events will automatically appear and update in your calendar.
+      </p>
+
+      <div class="mobile-home-btn" onclick="window.location.href='/'">
+  Homepage
+</div>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+
+  <div class="modal" id="calendarModal">
+    <div class="modal-content">
+
+      <div class="modal-header">Choose your calendar</div>
+
+      <div class="calendar-buttons">
+
+        <div class="calendar-btn" id="appleBtn">Apple Calendar</div>
+        <div class="calendar-btn" id="googleBtn">Google Calendar</div>
+        <div class="calendar-btn" id="outlookBtn">Outlook</div>
+        <div class="calendar-btn" id="otherBtn">Other (ICS)</div>
+
+      </div>
+
+      <div class="modal-close" id="closeModal">close</div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('calendarModal');
+    const openBtn = document.getElementById('openModal');
+    const closeBtn = document.getElementById('closeModal');
+
+    openBtn.onclick = () => modal.classList.add('active');
+    closeBtn.onclick = () => modal.classList.remove('active');
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const ics = "https://calendar.google.com/calendar/ical/3902ff71dc3fb1b056a764966090f6b1ac8e31893f53c7a6ee3064a9eddd189e%40group.calendar.google.com/public/basic.ics";
+    const webcal = ics.replace("https://", "webcal://");
+
+    document.getElementById('appleBtn').onclick = () => {
+      window.location.href = webcal;
+    };
+
+    document.getElementById('googleBtn').onclick = () => {
+      window.open("https://calendar.google.com/calendar/u/0/r?cid=" + encodeURIComponent(ics), "_blank");
+    };
+
+    document.getElementById('outlookBtn').onclick = () => {
+      window.open("https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addsubscription&url=" + encodeURIComponent(ics), "_blank");
+    };
+
+    document.getElementById('otherBtn').onclick = () => {
+      window.open(ics, "_blank");
+    };
+  </script>
+
+  <script defer src="../scripts/sidebar.js"></script>
+  
+<script>
+  function handleSidebar() {
+    const html = document.documentElement;
+
+    if (window.innerWidth > 1040) {
+      html.classList.add('has-sidebar');
+    } else {
+      html.classList.remove('has-sidebar');
+    }
+  }
+
+  handleSidebar();
+  window.addEventListener('resize', handleSidebar);
+</script>
+</body>
+</html>
