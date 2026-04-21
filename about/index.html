@@ -60,16 +60,19 @@
       align-items: center;
       justify-content: center;
       font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-size: clamp(5px, 0.95vw, 11px);
+      font-size: 11px;
       line-height: 1.05;
       white-space: pre;
       color: var(--muted);
       text-align: center;
-      overflow: hidden;
+      overflow: visible;
+      max-width: 100%;
+      max-height: 100%;
+      transform-origin: center center;
     }
     @media (max-width: 640px){
       .member-grid{ grid-template-columns: 1fr; }
-      .member-ascii{ font-size: clamp(6px, 2.2vw, 11px); }
+      .member-ascii{ font-size: 11px; }
     }
   </style>
 </head>
@@ -247,6 +250,41 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    function fitMemberAscii() {
+      const asciiBlocks = document.querySelectorAll('.member-ascii');
+
+      asciiBlocks.forEach((block) => {
+        const box = block.closest('.member-box');
+        if (!box) return;
+
+        block.style.fontSize = '11px';
+
+        const name = box.querySelector('.member-name');
+        const boxStyle = window.getComputedStyle(box);
+        const nameHeight = name ? name.getBoundingClientRect().height : 0;
+        const nameStyle = name ? window.getComputedStyle(name) : null;
+        const nameMarginBottom = nameStyle ? parseFloat(nameStyle.marginBottom) : 0;
+        const availableWidth = box.clientWidth - parseFloat(boxStyle.paddingLeft) - parseFloat(boxStyle.paddingRight);
+        const availableHeight = box.clientHeight - parseFloat(boxStyle.paddingTop) - parseFloat(boxStyle.paddingBottom) - nameHeight - nameMarginBottom;
+
+        if (availableWidth <= 0 || availableHeight <= 0) return;
+
+        const measuredWidth = block.scrollWidth;
+        const measuredHeight = block.scrollHeight;
+
+        if (!measuredWidth || !measuredHeight) return;
+
+        const scale = Math.min(1, availableWidth / measuredWidth, availableHeight / measuredHeight);
+        block.style.fontSize = `${Math.max(5, 11 * scale)}px`;
+      });
+    }
+
+    window.addEventListener('load', fitMemberAscii);
+    window.addEventListener('resize', fitMemberAscii);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(fitMemberAscii);
+    }
   </script>
   <script src="/scripts/sidebar.js"></script>
 
