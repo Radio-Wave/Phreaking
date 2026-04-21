@@ -11,7 +11,67 @@
   <link rel="stylesheet" href="/styles/sidebar.css" />
   <link rel="stylesheet" href="/styles/stylesIndex.css" />
  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
-
+  <style>
+    .members-heading{
+      font-size: clamp(20px, 2.6vw, 28px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.75rem 0;
+      color: var(--ink);
+      width: 100%;
+    }
+    .member-grid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(12px, 2vw, 20px);
+      width: 100%;
+      margin: 0 0 1.5rem 0;
+    }
+    .member-box{
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--rule);
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: clamp(10px, 2vw, 22px);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .member-name{
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-weight: 600;
+      font-size: clamp(18px, 2.6vw, 30px);
+      letter-spacing: 0.05em;
+      margin: 0 0 0.4rem 0;
+      text-align: center;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.1;
+      width: 100%;
+    }
+    .member-ascii{
+      flex: 1;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(5px, 0.95vw, 11px);
+      line-height: 1.05;
+      white-space: pre;
+      color: var(--muted);
+      text-align: center;
+      overflow: hidden;
+    }
+    @media (max-width: 640px){
+      .member-grid{ grid-template-columns: 1fr; }
+      .member-ascii{ font-size: clamp(6px, 2.2vw, 11px); }
+    }
+  </style>
 </head>
 
 <body>
@@ -21,16 +81,157 @@
     <section class="right">
       <h1>About us</h1>
       <p class="lede">The Phreaking Collective is a London-based group of emerging computational artists working across code,
-        sculpture, sound, installation, and digital media. 
+        sculpture, sound, installation, and digital media.
         <br><br>
         Formed in 2025, the collective takes its name from phreaking, a term initially used to describe the subversive practice of hacking telephone systems in the 1960s and 70s. Drawing from this lineage of creative mischief and network disruption, the Phreaking Collective reclaims the term as a gesture toward experimentation, resistance, and intimacy within digital systems.
- 
-       
-        <p> The main organisers, curators, coordinators are: Xach Hill, Yunzhi/Melissa Li, Nikos Kourous, Lyra Robinson. <br>Others members include: Jack Jessé, Phoenix Isla Kea, Rizq Yazed, Eryn English-Polch.</p>
-      
+      </p>
+
+      <h2 class="members-heading">Organisers</h2>
+      <div class="member-grid">
+        <article class="member-box">
+          <h3 class="member-name">Xach Hill</h3>
+<pre class="member-ascii">         .----------.
+       .'            '.
+      /                \
+     |   .---.   .---.  |
+     |   | o |   | o |  |
+     |   '---'   '---'  |
+     |         |        |
+     |       \___/      |
+      \                /
+       '-.__________.-'
+          |        |
+         /|        |\
+        / |________| \
+       /________________\</pre>
+        </article>
+
+        <article class="member-box">
+          <h3 class="member-name">Yunzhi / Melissa Li</h3>
+<pre class="member-ascii">       /||||||||||||\
+      //|============|\\
+     //||            ||\\
+    || || .---. .---. ||||
+    || || | O | | O | ||||
+    || ||  '-'   '-'  ||||
+    || ||      /\     ||||
+    || ||    /    \   ||||
+     \ ||   \______/  ||/
+      \||____________||/
+       ||            ||
+       ||            ||
+       //            \\</pre>
+        </article>
+
+        <article class="member-box">
+          <h3 class="member-name">Nikos Kourous</h3>
+<pre class="member-ascii">          ________
+        /::::::::::\
+       /::::::::::::\
+      |:: ___   ___::|
+      |::|o.o| |o.o|:|
+      |::'---' '---':|
+      |::::   .   :::|
+      |:::# #####  ::|
+      /###############\
+     /#################\
+     ##################
+     \################/
+      \##############/
+       \############/
+        \__________/</pre>
+        </article>
+
+        <article class="member-box">
+          <h3 class="member-name">Lyra Robinson</h3>
+<pre class="member-ascii">        @@  @@  @@  @@
+      @@@@@@@@@@@@@@@@@
+     @@@@@@@@@@@@@@@@@@@
+    @@@@  ___     ___ @@@
+    @@@  /o.o\   /o.o\@@
+    @@@  \___/   \___/@@
+    @@@@       .      @@@
+    @@@@    \_____/   @@@
+     @@@@             @@@
+       @@@@@@@@@@@@@@@@
+          |       |
+          |       |
+         _|_______|_</pre>
+        </article>
+      </div>
+
+      <h2 class="members-heading">Other Members</h2>
+      <div class="member-grid">
+        <article class="member-box">
+          <h3 class="member-name">Jack Jessé</h3>
+<pre class="member-ascii">         ____________
+        /            \
+       /   \\\   ///   \
+      |  .============. |
+      |  | o  ||   o | |
+      |  '============' |
+      |         .       |
+      |       \___/     |
+       \              /
+        '-.________.-'
+           |      |
+          /|      |\
+         /_|______|_\</pre>
+        </article>
+
+        <article class="member-box">
+          <h3 class="member-name">Phoenix Isla Kea</h3>
+<pre class="member-ascii">         \|  |  |/
+          \\ | //
+           \\|//
+         ___\|/___
+       .'         '.
+      /   .     .   \
+     |     -----     |
+     |    \_____/    |
+      \             /
+       '._________.'
+          |     |
+         /|     |\
+        / |_____| \</pre>
+        </article>
+
+        <article class="member-box">
+          <h3 class="member-name">Rizq Yazed</h3>
+<pre class="member-ascii">         ___________
+       /=============\
+      /===============\
+     |  .-----------.  |
+     | |   _    _   | |
+     | |  (o)  (o)  | |
+     | |      .     | |
+     | |   \_____/  | |
+     |  '-----------'  |
+      \_______________/
+          |       |
+          |       |
+         _|_______|_</pre>
+        </article>
+
+        <article class="member-box">
+          <h3 class="member-name">Eryn English-Polch</h3>
+<pre class="member-ascii">      .===============.
+     /|               |\
+    / |  ___     ___  | \
+   /  | |o.o|   |o.o| |  \
+  |   |    . . .      |   |
+  |   |    \___/      |   |
+   \  |               |  /
+    \ |_______________| /
+     \|               |/
+         |        |
+         |        |
+        _|________|_</pre>
+        </article>
+      </div>
     </section>
 
-        <section class="right">
+    <section class="right">
       <h2>Contact Us</h2>
       <p>Drop us a line, see what we're up to or share something of your own.<br> These is where you can find us.</p>
       <nav class="contact-list" aria-label="Contact">
