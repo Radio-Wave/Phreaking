@@ -214,8 +214,30 @@ a:hover { opacity: .85; }
 }
 .exhibitions-link{
   border-bottom: 1px solid var(--rule);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 .exhibitions-link:hover{ opacity: .8; }
+
+/* Monthly Events poster grid */
+.events-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--g);
+  margin: 0 0 1rem 0;
+}
+.event-card{ display: block; }
+.event-card img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+}
+@media (max-width: 560px){
+  .events-grid{ grid-template-columns: 1fr; }
+}
 
 /* Hero media (BitRot poster) */
 .hero-media{ margin: 0 0 1rem 0; }
