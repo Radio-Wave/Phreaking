@@ -200,7 +200,7 @@ a:hover { opacity: .85; }
 /* Section titles (Cargo-ish weight) */
 .section-title{
   font-weight: 700;
-  font-size: clamp(18px, 2.4vw, 26px);
+  font-size: clamp(18px, 2.4vw, 30px);
   line-height: 1.2;
   margin: 0 0 .6rem 0;
   letter-spacing: .01em;
