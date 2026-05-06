@@ -12,65 +12,179 @@
   <link rel="stylesheet" href="/styles/stylesIndex.css" />
  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
   <style>
+
     .members-heading{
-      font-size: clamp(20px, 2.6vw, 28px);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin: 1.5rem 0 0.75rem 0;
-      color: var(--ink);
-      width: 100%;
-    }
-    .member-grid{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: clamp(12px, 2vw, 20px);
-      width: 100%;
-      margin: 0 0 1.5rem 0;
-    }
-    .member-box{
-      position: relative;
-      aspect-ratio: 1 / 1;
-      border: 1px solid var(--rule);
-      background: #0a0a0a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: clamp(10px, 2vw, 22px);
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-    .member-name{
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-weight: 600;
-      font-size: clamp(18px, 2.6vw, 30px);
-      letter-spacing: 0.05em;
-      margin: 0 0 0.4rem 0;
-      text-align: center;
-      color: #fff;
-      text-transform: uppercase;
-      line-height: 1.1;
-      width: 100%;
-    }
-    .member-ascii{
-      flex: 1;
-      margin: 0;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-size: clamp(1px, 0.95vw, 12px);
-      line-height: 1.05;
-      white-space: pre;
-      color: var(--muted);
-      text-align: center;
-      overflow: hidden;
-    }
-    @media (max-width: 640px){
-      .member-grid{ grid-template-columns: 1fr; }
-      .member-ascii{ font-size: clamp(6px, 2.2vw, 11px); }
-    }
+  font-size: clamp(20px, 2.2vw, 26px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 1.2rem 0 0.6rem 0;
+  color: var(--ink);
+  width: 100%;
+}
+
+.member-grid{
+  display: grid;
+
+  /* 4 smaller squares per row */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 1rem 0;
+}
+
+.member-box{
+  position: relative;
+  aspect-ratio: 1 / 1;
+
+  border: 1px solid #fff;
+  background: #0a0a0a;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 6px; /* thinner inner border spacing */
+
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.member-name{
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 600;
+
+  font-size: clamp(10px, 0.8vw, 14px);
+
+  letter-spacing: 0.03em;
+  margin: 0 0 0.2rem 0;
+
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1;
+  width: 100%;
+}
+
+.member-ascii{
+  flex: 1;
+  margin: 0;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* slightly larger again */
+  font-size: clamp(1.8px, 0.44vw, 20px);
+
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+
+  white-space: pre;
+  color: var(--muted);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* tablet */
+@media (max-width: 1100px){
+  .member-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* mobile */
+@media (max-width: 700px){
+  .member-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .member-ascii{
+    font-size: clamp(2px, 0.9vw, 6px);
+  }
+}
+
+/* very small phones */
+@media (max-width: 480px){
+  .member-grid{
+    grid-template-columns: 1fr;
+  }
+
+  /*clickable ascii profilessssz*/
+
+  .member-box{
+  position: relative;
+  aspect-ratio: 1 / 1;
+
+  border: 1px solid #fff;
+  background: #0a0a0a;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+/* hover */
+.member-box:hover{
+  transform: translateY(-3px);
+
+  border-color: #ffffff;
+
+  background: #111;
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,0.15),
+    inset 0 0 20px rgba(255,255,255,0.03);
+}
+
+/* active click */
+.member-box:active{
+  transform: translateY(0px) scale(0.985);
+}
+
+/* keyboard accessibility */
+.member-box:focus-visible{
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* animate text */
+.member-name,
+.member-ascii{
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+/* subtle zoom */
+.member-box:hover .member-name{
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.member-box:hover .member-ascii{
+  transform: scale(1.03);
+  color: #d8d8d8;
+}
+}
   </style>
 </head> 
 
@@ -88,9 +202,8 @@
 
       <h2 class="members-heading">Phreaks</h2>
       <div class="member-grid">
-        <article class="member-box">
-          <h3 class="member-name">Xach Hill</h3>
-<pre class="member-ascii">
+<a class="member-box" href="https://xachhill.com/About.html" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Xach Hill</h3><pre class="member-ascii">
                                                                        
                                                                        
                                    . .                                 
@@ -135,11 +248,11 @@
 =++.++@=%+@@:..............................%@##@+%+*+**%#====+..       
 -=#@@==+*@@*@..............................%%###*###+###+====*-=-.     
 :#@..#=##=#--%.............................-**+*++===+=-:====.-====.   </pre>
-        </article>
+        </a>
 
-        <article class="member-box">
-          <h3 class="member-name">Yunzhi / Melissa Li</h3>
-<pre class="member-ascii">                                                                    
+<a class="member-box" href="https://melissayunzhi.li/" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Yunzhi / Melissa Li</h3>
+<pre class="member-ascii">                                                                 
                                                                        
                            -=+#@@#-#+*##                               
                        :#=%@@@@%%@@@@@@%@#+.                           
@@ -184,10 +297,10 @@
 #@%@@%#@@%@@@@@*@#@@@@@@@@@@%.-:@@%%@@@@#%#@@@*@@%@@@@@@@@@@%*%@@%@@@@@
 #@@@#@@%##@%%#%%%%#*#*+*%#%@@@@@@**@:#**+**#***=##@*#--.@*=*#*####**:..
 </pre>
-        </article>
+        </a>
 
-        <article class="member-box">
-          <h3 class="member-name">Nikos Kourous</h3>
+<a class="member-box" href="https://nikos.kourous.net/" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Nikos Kourous</h3>
 <pre class="member-ascii">  
 
                                                                          
@@ -239,11 +352,13 @@
 +%%@##@#@#+#-#=##@.@%#@%%%%%@*@@@%%@@@@@%%%%*@#%%%%@%@%%%%%@%@%@%#%@%@=
 :+=+==***%.#-###=%.*++**+*==++-+**+++====+=+::++*+++*=++++*++++==**+*=+
 
-</pre>
-        </article>
 
-        <article class="member-box">
-          <h3 class="member-name">Lyra Robinson</h3>
+
+</pre>
+</a>
+
+<a class="member-box" href="https://lyrarobinson.art/" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Lyra Robinson</h3>
 <pre class="member-ascii"> 
 
                                                                        
@@ -295,13 +410,12 @@
   -#@%%@%%%%@%%@%%%%%%%%%%%%@%@@%@@%%#%%%##%#%#%#%#%##@*##@%%####%*%%#-
   -**+++======++=+-=========---==---=-=--=------:--=-++-===---------=-.
 </pre>
-        </article>
+</a>
       </div>
 
       <div class="member-grid">
-        <article class="member-box">
-          <h3 class="member-name">Jack Jessé</h3>
-<pre class="member-ascii"> 
+<a class="member-box" href="https://www.instagram.com/jack__jesse/" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Jack Jessé</h3><pre class="member-ascii"> 
   
                                                                        
                                                                       
@@ -351,11 +465,10 @@
 =@#@@  .   .     .....  @#@@%#+##*%@*%##*+##@**#%*.#+@+%*##@@#%##++*#+.
 -@+@                    @   .=. .:       ..    .  .. .:-: .      ::  . 
 </pre>
-        </article>
+</a>
 
-        <article class="member-box">
-          <h3 class="member-name">Phoenix Isla Kea</h3>
-<pre class="member-ascii"> 
+<a class="member-box" href="https://www.instagram.com/phoenixislakea/" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Phoenix Isla Kea</h3><pre class="member-ascii"> 
                                                                          
                                                                        
                                 .                                      
@@ -401,11 +514,10 @@
     #: +.--+=+=--:-::-::. .-    #-=-+#++#@@%   ::*=-: :=%==+%+:-=#**=- 
 
 </pre>
-        </article>
+</a>
 
-        <article class="member-box">
-          <h3 class="member-name">Rizq Yazed</h3>
-<pre class="member-ascii">  
+<a class="member-box" href="https://www.rizqyazed.xyz/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnVkLdV5IJ_gF0FxUkrkMow8CMppDmEvkrguEQh9u83VMZ5gpJ8kHtU3cEcXY_aem_krYiWNig6Co6MD5HjqX0XA" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Rizq Yazed</h3><pre class="member-ascii">  
 
                                                                        
                                                                        
@@ -457,11 +569,10 @@
   :: : . ::...-=:.......:  -@@               :   -. ...   ... -...=.-. 
 
 </pre>
-        </article>
+</a>
 
-        <article class="member-box">
-          <h3 class="member-name">Eryn English-Polch</h3>
-<pre class="member-ascii">
+<a class="member-box" href="https://www.instagram.com/eryneep" target="_blank" rel="noreferrer">
+  <h3 class="member-name">Eryn English-Polch</h3><pre class="member-ascii">
 
                                                                        
                                                                          
@@ -510,7 +621,7 @@
  .#****+*+*=-----:--.=++==-+=++++-*=+-**++==++************##%+**%@@@   
   **++---::          .   ..:...     ...::::-==-+-+-===-----=+=----==@@*
 </pre>
-        </article>
+</a>
       </div>
     </section>
 
