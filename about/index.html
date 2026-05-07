@@ -13,7 +13,7 @@
  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
   <style>
 
-    .members-heading{
+.members-heading{
   font-size: clamp(20px, 2.2vw, 26px);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -24,10 +24,7 @@
 
 .member-grid{
   display: grid;
-
-  /* 4 smaller squares per row */
   grid-template-columns: repeat(4, minmax(0, 1fr));
-
   gap: 10px;
   width: 100%;
   margin: 0 0 1rem 0;
@@ -44,10 +41,18 @@
   flex-direction: column;
   align-items: center;
 
-  padding: 6px; /* thinner inner border spacing */
+  padding: 6px;
 
   overflow: hidden;
   box-sizing: border-box;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  color: inherit;
+
+  /* IMPORTANT */
+  transform-origin: center;
 }
 
 .member-name{
@@ -77,7 +82,6 @@
 
   font-family: "IBM Plex Mono", ui-monospace, monospace;
 
-  /* slightly larger again */
   font-size: clamp(1.8px, 0.44vw, 20px);
 
   line-height: 0.86;
@@ -89,103 +93,175 @@
   overflow: hidden;
 }
 
+/* ========================================= */
+/* DESKTOP HOVER EFFECTS */
+/* REPLACE ONLY THIS SECTION TO TEST NEW FX */
+/* ========================================= */
+/* ========================================= */
+/* HARD GLITCH FLASH */
+/* ========================================= */
+
+.member-box{
+  transition: filter 0.08s linear;
+}
+
+@media (hover: hover) and (pointer: fine){
+
+  .member-box:hover{
+    animation:
+      hardGlitchFlash 0.82s forwards;
+
+    z-index: 10;
+  }
+
+}
+
+/* ONE-TIME FLASH + GLITCH SETTLE */
+
+@keyframes hardGlitchFlash{
+
+  0%{
+    transform:
+      translate(0px,0px)
+      scale(1);
+
+    filter:
+      invert(0);
+
+    box-shadow:
+      0 0 0px rgba(255,255,255,0);
+  }
+
+  /* violent entry */
+  6%{
+    transform:
+      translate(-8px,4px)
+      scale(1.11)
+      skewX(-3deg);
+
+    filter:
+      invert(1);
+
+    box-shadow:
+      0 0 22px rgba(255,255,255,0.9);
+  }
+
+  /* flash instantly ends */
+  9%{
+    transform:
+      translate(7px,-5px)
+      scale(1.02)
+      skewX(2deg);
+
+    filter:
+      invert(0);
+  }
+
+  /* glitch fragmentation */
+  16%{
+    transform:
+      translate(-6px,2px)
+      scale(1.085)
+      skewX(-2deg);
+  }
+
+  24%{
+    transform:
+      translate(5px,-3px)
+      scale(1.03)
+      skewX(1deg);
+  }
+
+  33%{
+    transform:
+      translate(-4px,1px)
+      scale(1.075);
+  }
+
+  42%{
+    transform:
+      translate(3px,-2px)
+      scale(1.04);
+  }
+
+  52%{
+    transform:
+      translate(-2px,1px)
+      scale(1.065);
+  }
+
+  64%{
+    transform:
+      translate(2px,-1px)
+      scale(1.048);
+  }
+
+  78%{
+    transform:
+      translate(-1px,0px)
+      scale(1.058);
+  }
+
+  100%{
+    transform:
+      translate(0px,0px)
+      scale(1.055);
+
+    filter:
+      invert(0);
+
+    box-shadow:
+      0 0 6px rgba(255,255,255,0.15);
+  }
+}
+/* ========================================= */
+/* END HOVER SECTION */
+/* ========================================= */
+
 /* tablet */
 @media (max-width: 1100px){
+
   .member-grid{
     grid-template-columns: repeat(3, 1fr);
   }
+
 }
 
 /* mobile */
 @media (max-width: 700px){
+
   .member-grid{
     grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .member-box{
+    padding: 2px;
+  }
+
+  .member-name{
+    font-size: 10px;
+    margin-bottom: 2px;
   }
 
   .member-ascii{
-    font-size: clamp(2px, 0.9vw, 6px);
+    font-size: clamp(2.8px, 1.15vw, 6px);
+    line-height: 0.82;
+    letter-spacing: -0.03em;
   }
+
 }
 
 /* very small phones */
 @media (max-width: 480px){
+
   .member-grid{
     grid-template-columns: 1fr;
   }
 
-  /*clickable ascii profilessssz*/
-
-  .member-box{
-  position: relative;
-  aspect-ratio: 1 / 1;
-
-  border: 1px solid #fff;
-  background: #0a0a0a;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 6px;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  text-decoration: none;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease,
-    box-shadow 0.18s ease;
 }
 
-/* hover */
-.member-box:hover{
-  transform: translateY(-3px);
-
-  border-color: #ffffff;
-
-  background: #111;
-
-  box-shadow:
-    0 0 12px rgba(255,255,255,0.15),
-    inset 0 0 20px rgba(255,255,255,0.03);
-}
-
-/* active click */
-.member-box:active{
-  transform: translateY(0px) scale(0.985);
-}
-
-/* keyboard accessibility */
-.member-box:focus-visible{
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
-/* animate text */
-.member-name,
-.member-ascii{
-  transition:
-    transform 0.18s ease,
-    color 0.18s ease,
-    opacity 0.18s ease;
-}
-
-/* subtle zoom */
-.member-box:hover .member-name{
-  transform: translateY(-1px);
-  color: #fff;
-}
-
-.member-box:hover .member-ascii{
-  transform: scale(1.03);
-  color: #d8d8d8;
-}
-}
-  </style>
+</style>
 </head> 
 
 <body>
