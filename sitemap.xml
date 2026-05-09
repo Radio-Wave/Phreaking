@@ -1,36 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
+  <!-- Home -->
   <url>
     <loc>https://phreaking.co.uk/</loc>
+
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDceP/DDCeP-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/bitrotcover.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Index/BitRotShowImg5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Index/BitRotShowImg4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/MixedSignals/Mixed-Signals-Poster-general-homepage.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjectorPoster.jpg</image:loc>
+    </image:image>
   </url>
 
+  <!-- About -->
   <url>
     <loc>https://phreaking.co.uk/about/</loc>
   </url>
 
+  <!-- Exhibitions -->
   <url>
     <loc>https://phreaking.co.uk/exhibitions/</loc>
+
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDceP/DDCeP-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Index/BitRotShowImg.php.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-5.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-7.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-2.webp</image:loc>
+    </image:image>
   </url>
 
+  <!-- BitRot -->
   <url>
     <loc>https://phreaking.co.uk/BitRot/</loc>
   </url>
 
+  <!-- Does Cloud Compute Ever Precipitate -->
   <url>
     <loc>https://phreaking.co.uk/does-cloud-compute-ever-precipitate/</loc>
   </url>
 
+  <!-- Mixed Signals -->
   <url>
     <loc>https://phreaking.co.uk/mixed-signals/</loc>
+
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/MixedSignals/MixedSignals1-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/MixedSignals/MixedSignals1-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/MixedSignals/MixedSignals1-6.webp</image:loc>
+    </image:image>
   </url>
 
+  <!-- Open Projector -->
   <url>
     <loc>https://phreaking.co.uk/open-projector/</loc>
+
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector_3-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector_3-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-7.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-6.webp</image:loc>
+    </image:image>
   </url>
-  
+
+  <!-- Phreak Mag -->
   <url>
     <loc>https://phreaking.co.uk/phreak-mag/</loc>
   </url>
