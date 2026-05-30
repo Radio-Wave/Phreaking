@@ -1079,7 +1079,7 @@
     pill.style.transform = `translateX(${rect.left - parentRect.left}px)`;
   }
 
-  function setFilter(filter, updateUrl = true){
+function setFilter(filter, updateUrl = true){
     filterButtons.forEach(btn=>{
       const active = btn.dataset.filter === filter;
       btn.classList.toggle('active', active);
@@ -1103,9 +1103,8 @@
     movePill(activeButton);
 
     if (updateUrl) {
-      const url = new URL(window.location);
-      url.searchParams.set('filter', filter);
-      window.history.pushState({ filter: filter }, '', url);
+      const newUrl = filter === 'all' ? window.location.pathname : `#${filter}`;
+      window.history.pushState(null, '', newUrl);
     }
   }
 
@@ -1116,21 +1115,25 @@
   });
 
   window.addEventListener('load', ()=>{
-    const urlParams = new URLSearchParams(window.location.search);
-    const filterFromUrl = urlParams.get('filter');
-    const validFilters = ['all', 'talks', 'workshops', 'performances', 'screenings'];
+    const hashFilter = window.location.hash.replace('#', '');
+    const validFilters = ['talks', 'workshops', 'performances', 'screenings'];
 
-    if (filterFromUrl && validFilters.includes(filterFromUrl)) {
-      setFilter(filterFromUrl, false);
+    if (hashFilter && validFilters.includes(hashFilter)) {
+      setFilter(hashFilter, false);
     } else {
-      movePill(document.querySelector('.filter-btn.active'));
+      setFilter('all', false);
     }
   });
 
-  window.addEventListener('popstate', ()=>{
-    const urlParams = new URLSearchParams(window.location.search);
-    const filterFromUrl = urlParams.get('filter') || 'all';
-    setFilter(filterFromUrl, false);
+  window.addEventListener('hashchange', ()=>{
+    const hashFilter = window.location.hash.replace('#', '');
+    const validFilters = ['talks', 'workshops', 'performances', 'screenings'];
+    
+    if (hashFilter && validFilters.includes(hashFilter)) {
+      setFilter(hashFilter, false);
+    } else {
+      setFilter('all', false);
+    }
   });
 
   window.addEventListener('resize', ()=>{
