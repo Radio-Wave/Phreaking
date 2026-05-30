@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Past Events — Phreaking Collective</title>
+  <meta name="description" content="Explore past talks, workshops, performances, and screenings from Phreaking Collective exhibitions including BitRot and Does Cloud Compute (ever) Participate?." />
+  <meta name="keywords" content="Phreaking Collective, past events, talks, workshops, performances, screenings, BitRot, Does Cloud Compute, digital art, computational art, London exhibitions" />
+
+  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+  <link rel="stylesheet" href="/styles/sidebar.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400&display=swap');
+
+    :root{
+      --bg: #000;
+      --ink: #fff;
+      --muted: #cfcfcf;
+      --rule: #fff;
+      --pad: clamp(16px, 4vw, 36px);
+      --g: clamp(14px, 3vw, 32px);
+      --left: clamp(220px, 24vw, 360px);
+      --logo-w: clamp(160px, 28vw, 320px);
+      --transition: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:var(--bg);
+      color:var(--ink);
+      font-family:'Fira Mono','IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      line-height:1.45;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:var(--ink);
+      text-decoration:none;
+    }
+
+    .inline-link {
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    .layout{
+      display:block;
+    }
+
+    .right{
+      padding:var(--pad);
+      margin-left:calc(var(--left) + var(--g));
+      min-height:100vh;
+    }
+
+    @media(max-width:640px){
+      .right{
+        margin-left:0;
+      }
+    }
+
+    .right-header{
+      display:none;
+      margin-bottom:var(--g);
+    }
+
+    .brand-inline img{
+      width:var(--logo-w);
+      height:auto;
+      display:block;
+    }
+
+    .sidebar-collapsed .right-header{
+      display:block;
+    }
+
+    .banner{
+      background:#000;
+      color:#fff;
+      font-size:.9rem;
+      text-transform:uppercase;
+      padding:.5rem 0;
+      border-bottom:1px solid #444;
+      margin:0 0 var(--g) 0;
+    }
+
+    .hero{
+      padding:2rem 0 3rem;
+      border-bottom:1px solid rgba(255,255,255,.15);
+      margin-bottom:3rem;
+    }
+
+    .hero-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:2rem;
+      flex-wrap:wrap;
+    }
+
+    .hero-copy{
+      max-width:720px;
+    }
+
+    .eyebrow{
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+      margin-bottom:1rem;
+    }
+
+    h1{
+      font-family:'VT323', monospace;
+      font-size:clamp(3rem,9vw,6rem);
+      line-height:.92;
+      text-transform:uppercase;
+      margin-bottom:1rem;
+    }
+
+    .hero p{
+      max-width:680px;
+      color:#e0e0e0;
+      font-size:1rem;
+      line-height:1.7;
+    }
+
+    @media(max-width:820px){
+      .hero-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    .filter-shell{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:#000;
+      padding:1rem 0 1.5rem;
+      margin-bottom:2rem;
+    }
+
+    .filter-bar{
+      position:relative;
+      display:flex;
+      gap:.5rem;
+      border:1px solid #fff;
+      border-radius:0;
+      padding:.35rem;
+      overflow:hidden;
+      width:fit-content;
+      flex-wrap:wrap;
+      background:#000;
+    }
+
+    .filter-pill{
+      position:absolute;
+      top:.35rem;
+      left:0;
+      height:calc(100% - .7rem);
+      background:#fff;
+      border-radius:0;
+      transition:all .35s var(--transition);
+      z-index:0;
+    }
+
+    .filter-btn{
+      position:relative;
+      z-index:1;
+      appearance:none;
+      border:none;
+      background:transparent;
+      color:#fff;
+      padding:.85rem 1.4rem;
+      font-family:'Fira Mono','IBM Plex Mono',monospace;
+      font-size:.9rem;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:color .25s ease;
+      border-radius:0;
+      white-space:nowrap;
+    }
+
+    .filter-btn.active{
+      color:#000;
+    }
+
+    section.category-section{
+      margin-bottom:5rem;
+    }
+
+    section.category-section.hidden{
+      display:none;
+    }
+
+    .section-heading{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:2rem;
+      flex-wrap:wrap;
+    }
+
+    .section-heading h2{
+      font-family:'VT323', monospace;
+      font-size:3rem;
+      text-transform:uppercase;
+      line-height:1;
+    }
+
+    .section-count{
+      border:1px solid #fff;
+      padding:.25rem .75rem;
+      border-radius:999px;
+      font-size:.8rem;
+      text-transform:uppercase;
+      color:#cfcfcf;
+    }
+
+    .event-stack{
+      display:flex;
+      flex-direction:column;
+      gap:2rem;
+    }
+
+    .event-card{
+      border:1px solid #fff;
+      padding:1.5rem;
+      border-radius:4px;
+      background:rgba(255,255,255,.01);
+      transition:background .2s ease,border-color .2s ease;
+    }
+
+    .event-card:hover{
+      background:rgba(255,255,255,.03);
+    }
+
+    .event-top{
+      display:flex;
+      justify-content:space-between;
+      gap:2rem;
+      margin-bottom:1rem;
+      flex-wrap:wrap;
+    }
+
+    .event-meta{
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+    }
+
+    .event-type{
+      display:inline-flex;
+      width:fit-content;
+      border:1px solid #fff;
+      border-radius:999px;
+      padding:.15rem .6rem;
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      opacity:.9;
+    }
+
+    .event-card h3{
+      font-size:1.6rem;
+      line-height:1.2;
+      text-transform:capitalize;
+      margin-bottom:.4rem;
+    }
+
+    .event-credit{
+      color:#d0d0d0;
+      font-size:.95rem;
+      line-height:1.6;
+    }
+
+    .event-credit strong{
+      color:#fff;
+      font-weight:600;
+    }
+
+    .event-series{
+      text-align:right;
+      color:#bdbdbd;
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+
+    .event-description{
+      margin:1.25rem 0 1.5rem;
+      color:#efefef;
+      max-width:980px;
+      line-height:1.75;
+      font-size:.97rem;
+    }
+
+    .image-row{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.5rem;
+    }
+
+    .image-row button{
+      appearance:none;
+      border:none;
+      background:none;
+      cursor:zoom-in;
+      padding:0;
+    }
+
+    .image-row img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      border-radius:4px;
+      border:1px solid rgba(255,255,255,.15);
+      transition:opacity .2s ease, transform .2s ease;
+      display:block;
+    }
+
+    .image-row img:hover{
+      opacity:.88;
+      transform:scale(.985);
+    }
+
+    @media(max-width:760px){
+      .image-row{
+        grid-template-columns:1fr;
+      }
+
+      .event-top{
+        flex-direction:column;
+      }
+
+      .event-series{
+        text-align:left;
+      }
+    }
+
+    .pc-lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.95);
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+    }
+
+    .pc-lightbox[aria-hidden="false"]{
+      display:flex;
+    }
+
+    .pc-lightbox__inner{
+      max-width:95vw;
+      max-height:92vh;
+      position:relative;
+    }
+
+    .pc-lightbox__img{
+      max-width:95vw;
+      max-height:80vh;
+      width:auto;
+      height:auto;
+      display:block;
+      border-radius:4px;
+    }
+
+    .pc-lightbox__caption{
+      margin-top:1rem;
+      color:#cfcfcf;
+      text-align:center;
+      font-size:.9rem;
+      line-height:1.5;
+    }
+
+    .pc-lightbox__btn,
+    .pc-lightbox__close{
+      position:fixed;
+      width:54px;
+      height:54px;
+      border:1.5px solid rgba(255,255,255,.85);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index:10010;
+      transition:background .2s ease;
+    }
+
+    .pc-lightbox__btn:hover,
+    .pc-lightbox__close:hover{
+      background:rgba(255,255,255,.08);
+    }
+
+    .pc-lightbox__prev{
+      left:16px;
+      top:50%;
+      transform:translateY(-50%);
+    }
+
+    .pc-lightbox__next{
+      right:16px;
+      top:50%;
+      transform:translateY(-50%);
+    }
+
+    .pc-lightbox__close{
+      top:16px;
+      right:16px;
+      font-size:0;
+    }
+
+    .pc-lightbox__close::before{
+      content:'×';
+      position:absolute;
+      font-size:24px;
+      line-height:1;
+    }
+
+    .site-footer{
+      border-top:1px solid var(--rule);
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      margin-left:calc(var(--left) + var(--g));
+      padding:20px var(--pad) 36px;
+    }
+
+    @media(max-width:640px){
+      .site-footer{
+        margin-left:0;
+      }
+
+      .filter-bar{
+        width:100%;
+        justify-content:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"Past Events",
+    "url":"https://phreaking.co.uk/past-events",
+    "description":"Archive of past talks, workshops, performances, and screenings from Phreaking Collective.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"Phreaking Collective",
+      "url":"https://phreaking.co.uk"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+<div data-sidebar data-sidebar-src="/partials/sidebar.html"></div>
+
+<main class="layout" role="main">
+  <section class="right">
+
+    <header class="right-header" aria-hidden="true">
+      <a class="brand-inline" href="/">
+        <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+      </a>
+    </header>
+
+    <marquee class="banner" scrollamount="3" scrolldelay="0" behavior="scroll" loop="true" direction="left">
+      PHREAKING COLLECTIVE PAST EVENTS ARCHIVE * TALKS * WORKSHOPS * SCREENINGS * PERFORMANCES * PHREAKING COLLECTIVE PAST EVENTS ARCHIVE *
+    </marquee>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">Archive / 2025–2026</div>
+          <h1 id="page-title">Past Events</h1>
+          <p>
+            A growing archive of talks, workshops, performances, screenings, and experimental gatherings hosted by the Phreaking Collective across <a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> and <a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="filter-shell">
+      <div class="filter-bar" role="tablist" aria-label="Past events filter">
+        <div class="filter-pill" aria-hidden="true"></div>
+
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+          All
+        </button>
+
+        <button class="filter-btn" data-filter="talks" role="tab" aria-selected="false">
+          Talks
+        </button>
+
+        <button class="filter-btn" data-filter="workshops" role="tab" aria-selected="false">
+          Workshops
+        </button>
+
+        <button class="filter-btn" data-filter="performances" role="tab" aria-selected="false">
+          Performances
+        </button>
+
+        <button class="filter-btn" data-filter="screenings" role="tab" aria-selected="false">
+          Screenings
+        </button>
+      </div>
+    </div>
+
+    <!-- TALKS -->
+    <section class="category-section" data-category="talks">
+      <div class="section-heading">
+        <h2>Talks</h2>
+        <div class="section-count">5 Events</div>
+      </div>
+
+      <div class="event-stack">
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina</h3>
+                <div class="event-credit">
+                  <strong><a href="https://erinrobinson.xyz/" target="_blank" rel="noreferrer" class="inline-link">Erin Robinson</a> & <a href="https://www.anthonyfrisby.com/" target="_blank" rel="noreferrer" class="inline-link">Anthony Frisby</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">
+            This lecture explored the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience. Through a post-structuralist and postmodernist lens, the pair discussed artificial intimacies, eroticism, and digital embodiment, reflecting on how the creation of the award winning work offered autoethnographic insights into sex, selfhood, and computational desire.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" alt="Artificial Intimacies lecture image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" alt="Artificial Intimacies lecture image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" alt="Artificial Intimacies lecture image 3">
+            </button>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>Long Live The New Flesh (or Whatever)</h3>
+                <div class="event-credit">
+                  <strong><a href="https://dianjoy.me/" target="_blank" rel="noreferrer" class="inline-link">Dian Joy</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">
+            In this lecture, Dian Joy explored how desire increasingly functions as a mechanism of discipline and ideological capture within the contemporary digital landscape. Drawing from media theory, philosophy, and digital folklore, the talk interrogated how online platforms reshape desire through algorithmic environments, meme culture, and emergent mythologies through a close reading of Videodrome as a proto-Internet allegory.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" alt="Long Live The New Flesh lecture image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" alt="Long Live The New Flesh lecture image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" alt="Long Live The New Flesh lecture image 3">
+            </button>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>Cloud-Watching Through My Window</h3>
+                <div class="event-credit">
+                  <strong><a href="https://robinlevertonart.com/" target="_blank" rel="noreferrer" class="inline-link">Robin Leverton</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">
+            A flâneur's guide to mapping the new geographies of connection. Contemplating on internet and communications infrastructures, participants took a walk through the window piece from one side of the wall to the other. In so doing, they passed through various forms of physical and digital infrastructures that mediate and feed on our data emissions, exploring the topography of the contemporary internet.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp" alt="Cloud-Watching Through My Window image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp" alt="Cloud-Watching Through My Window image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp" alt="Cloud-Watching Through My Window image 3">
+            </button>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>Counter-Modelling</h3>
+                <div class="event-credit">
+                  <strong><a href="https://luciarebolino.com/" target="_blank" rel="noreferrer" class="inline-link">Lucia Rebolino</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">
+            A web-based performance exploring climate modelling through digital aesthetics and architectural thinking. Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling challenged the aesthetics of computational realism, presenting climate prediction as a site of tension between technological development and climate futures, shaped by power, uncertainty, and abstraction.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp" alt="Counter-Modelling image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp" alt="Counter-Modelling image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp" data-full="/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp" alt="Counter-Modelling image 3">
+            </button>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>AI as Material</h3>
+                <div class="event-credit">
+                  <strong><a href="https://terencebroad.com/" target="_blank" rel="noreferrer" class="inline-link">Terence Broad</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">
+            This talk showed how practices that treat AI as a material, rather than a tool or creative agent, artists were able to make critical works that presented new ways of understanding and making sense of these unfathomably complex computational systems.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp" alt="AI as Material image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp" alt="AI as Material image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp" alt="AI as Material image 3">
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- WORKSHOPS -->
+    <section class="category-section" data-category="workshops">
+      <div class="section-heading">
+        <h2>Workshops</h2>
+        <div class="section-count">6 Events</div>
+      </div>
+
+      <div class="event-stack">
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Oops, You Found A Glitch</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.cranberrylemonade.xyz/" target="_blank" rel="noreferrer" class="inline-link">Cranberry Lemonade</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">
+            When web-hosting company Glitch.com shut down overnight, dozens of playful self-made sites from our past workshops vanished, replaced by the error screen “Well. You found a glitch.” All that remains are tiny thumbnail previews we rescued onto an Are.na board, like digital fossils of a lost web.
+            <br><br>
+            In this hands-on session, we revived those dead pages: decoded the previews, inspected colours, layouts, images and GIFs to reverse-engineer each site’s vibe, and rebuilt them from scratch using HTML, CSS and basic JavaScript.
+          </p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Object Oriented Storytelling: From Field to Virtual</h3>
+                <div class="event-credit">
+                  <strong><a href="https://melissayunzhi.li/" target="_blank" rel="noreferrer" class="inline-link">Mellisa Li Yunzhi</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">
+            In this two-hour workshop, we learnt to treat everyday objects as narrative anchors that bridge physical material to virtual, inspired by methods from Melissa's project Home is a Dwelling Path.
+          </p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Noisy Spaces</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Further details and documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>I Want To Be A Website</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Further details and documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Extremely Standardised Fun</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Further details and documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Intro To Creative Coding For Artists</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Further details and documentation coming soon.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PERFORMANCES -->
+    <section class="category-section" data-category="performances">
+      <div class="section-heading">
+        <h2>Performances</h2>
+        <div class="section-count">8 Events</div>
+      </div>
+
+      <div class="event-stack">
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Orangespy</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.orangespy.io/about" target="_blank" rel="noreferrer" class="inline-link">Orangespy</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Lagtime Seedling Bitrot</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link">Lagtime Seedling</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Yiding Zhang</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Yiding Zhang</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Thatsoundsexciting</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Thatsoundsexciting</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Claire</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Claire</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Deposilk</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Deposilk</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Lagtime Seedling</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link">Lagtime Seedling</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Livecoders</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Livecoders</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Archival details and media documentation coming soon.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SCREENINGS -->
+    <section class="category-section" data-category="screenings">
+      <div class="section-heading">
+        <h2>Screenings</h2>
+        <div class="section-count">1 Event</div>
+      </div>
+
+      <div class="event-stack">
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Screening</span>
+              <div>
+                <h3>Phreaking Film Night</h3>
+                <div class="event-credit">
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Various Artists</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Further details, programme notes, and screening documentation coming soon.</p>
+        </article>
+
+      </div>
+    </section>
+
+  </section>
+</main>
+
+<footer class="site-footer">
+  © Phreaking Collective — Past Events Archive
+</footer>
+
+<div class="pc-lightbox" aria-hidden="true">
+  <button class="pc-lightbox__close" aria-label="Close image viewer"></button>
+  <button class="pc-lightbox__btn pc-lightbox__prev" aria-label="Previous image">‹</button>
+
+  <div class="pc-lightbox__inner">
+    <img class="pc-lightbox__img" src="" alt="">
+    <div class="pc-lightbox__caption"></div>
+  </div>
+
+  <button class="pc-lightbox__btn pc-lightbox__next" aria-label="Next image">›</button>
+</div>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.category-section');
+  const pill = document.querySelector('.filter-pill');
+
+  function movePill(button){
+    if(!button) return;
+    const parentRect = button.parentElement.getBoundingClientRect();
+    const rect = button.getBoundingClientRect();
+
+    pill.style.width = rect.width + 'px';
+    pill.style.height = rect.height + 'px';
+    pill.style.transform = `translateX(${rect.left - parentRect.left}px)`;
+  }
+
+  function setFilter(filter, updateUrl = true){
+    filterButtons.forEach(btn=>{
+      const active = btn.dataset.filter === filter;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-selected', active);
+    });
+
+    if(filter === 'all'){
+      sections.forEach(section=>{
+        section.classList.remove('hidden');
+      });
+    } else {
+      sections.forEach(section=>{
+        section.classList.toggle(
+          'hidden',
+          section.dataset.category !== filter
+        );
+      });
+    }
+
+    const activeButton = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+    movePill(activeButton);
+
+    if (updateUrl) {
+      const url = new URL(window.location);
+      url.searchParams.set('filter', filter);
+      window.history.pushState({ filter: filter }, '', url);
+    }
+  }
+
+  filterButtons.forEach(button=>{
+    button.addEventListener('click', ()=>{
+      setFilter(button.dataset.filter, true);
+    });
+  });
+
+  window.addEventListener('load', ()=>{
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterFromUrl = urlParams.get('filter');
+    const validFilters = ['all', 'talks', 'workshops', 'performances', 'screenings'];
+
+    if (filterFromUrl && validFilters.includes(filterFromUrl)) {
+      setFilter(filterFromUrl, false);
+    } else {
+      movePill(document.querySelector('.filter-btn.active'));
+    }
+  });
+
+  window.addEventListener('popstate', ()=>{
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterFromUrl = urlParams.get('filter') || 'all';
+    setFilter(filterFromUrl, false);
+  });
+
+  window.addEventListener('resize', ()=>{
+    movePill(document.querySelector('.filter-btn.active'));
+  });
+
+  // LIGHTBOX
+  const galleryImages = Array.from(document.querySelectorAll('.image-row img'));
+  const lightbox = document.querySelector('.pc-lightbox');
+  const lightboxImg = document.querySelector('.pc-lightbox__img');
+  const lightboxCaption = document.querySelector('.pc-lightbox__caption');
+  const closeBtn = document.querySelector('.pc-lightbox__close');
+  const prevBtn = document.querySelector('.pc-lightbox__prev');
+  const nextBtn = document.querySelector('.pc-lightbox__next');
+
+  let currentIndex = 0;
+
+  function openLightbox(index){
+    currentIndex = index;
+    const img = galleryImages[currentIndex];
+
+    lightboxImg.src = img.dataset.full || img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = img.alt;
+
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox(direction){
+    if (galleryImages.length === 0) return;
+    currentIndex =
+      (currentIndex + direction + galleryImages.length) %
+      galleryImages.length;
+
+    openLightbox(currentIndex);
+  }
+
+  galleryImages.forEach((img,index)=>{
+    img.parentElement.addEventListener('click', ()=>{
+      openLightbox(index);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  nextBtn.addEventListener('click', ()=>{
+    updateLightbox(1);
+  });
+
+  prevBtn.addEventListener('click', ()=>{
+    updateLightbox(-1);
+  });
+
+  lightbox.addEventListener('click', (e)=>{
+    if(e.target === lightbox){
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e)=>{
+    if(lightbox.getAttribute('aria-hidden') === 'false'){
+      if(e.key === 'Escape'){
+        closeLightbox();
+      }
+
+      if(e.key === 'ArrowRight'){
+        updateLightbox(1);
+      }
+
+      if(e.key === 'ArrowLeft'){
+        updateLightbox(-1);
+      }
+    }
+  });
+</script>
+<script defer src="/scripts/sidebar.js"></script>
+
+</body>
+</html>
