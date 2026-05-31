@@ -3,9 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 7 + 8: Open Graph, Twitter Card, Canonical
+       ═══════════════════════════════════════════════════ -->
   <title>Past Events — Phreaking Collective</title>
-  <meta name="description" content="Explore past talks, workshops, performances, and screenings from Phreaking Collective exhibitions including BitRot and Does Cloud Compute (ever) Participate?." />
-  <meta name="keywords" content="Phreaking Collective, past events, talks, workshops, performances, screenings, BitRot, Does Cloud Compute, digital art, computational art, London exhibitions" />
+  <meta name="description" content="Archive of talks, workshops, performances, and screenings organised by Phreaking Collective across the BitRot and Does Cloud Compute (ever) Participate? exhibitions, London, 2025–2026. Participants include Lucia Rebolino, Terence Broad, Robin Leverton, Erin Robinson, Anthony Frisby, Dian Joy, Kat Macdonald, Cranberry Lemonade, Matt Hill, Margot McEwen, Melissa Li Yunzhi, Lagtime Seedling, Deposilk, Yiding Zhang, Orangespy, and others." />
+  <meta name="keywords" content="Phreaking Collective, past events, talks, workshops, performances, screenings, BitRot, Does Cloud Compute, digital art, computational art, AI art, live coding, algorithmic art, experimental media, creative coding, electronic art, internet art, new media art, digital culture, computational aesthetics, artist talks, art workshops, performance art, London art events, media archaeology, internet infrastructure, critical AI, new media" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Phreaking Collective" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://phreaking.co.uk/past-events" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Phreaking Collective" />
+  <meta property="og:title" content="Past Events — Phreaking Collective" />
+  <meta property="og:description" content="Archive of talks, workshops, performances, and screenings from Phreaking Collective exhibitions BitRot and Does Cloud Compute (ever) Participate?, London, 2025–2026." />
+  <meta property="og:url" content="https://phreaking.co.uk/past-events" />
+  <meta property="og:image" content="https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp" />
+  <meta property="og:locale" content="en_GB" />
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@phreakingco" />
+  <meta name="twitter:creator" content="@phreakingco" />
+  <meta name="twitter:title" content="Past Events — Phreaking Collective" />
+  <meta name="twitter:description" content="Archive of talks, workshops, performances, and screenings from Phreaking Collective exhibitions BitRot and Does Cloud Compute (ever) Participate?, London, 2025–2026." />
+  <meta name="twitter:image" content="https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp" />
 
   <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
   <link rel="stylesheet" href="/styles/sidebar.css" />
@@ -493,262 +519,1424 @@
         margin-left:0;
       }
     }
+
+    /* ═══════════════════════════════════════
+       SECTION 12: Screen-reader-only utility
+       ═══════════════════════════════════════ */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
   </style>
 
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 2 + 3 + 6 + 10: Comprehensive JSON-LD @graph
+       Includes: Organization, WebPage, CollectionPage,
+       BreadcrumbList, Exhibitions (CreativeWork/ExhibitionEvent),
+       Person entities, all Events, ImageObjects, ItemList
+       ═══════════════════════════════════════════════════════════ -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"CollectionPage",
-    "name":"Past Events",
-    "url":"https://phreaking.co.uk/past-events",
-    "description":"Archive of past talks, workshops, performances, and screenings from Phreaking Collective.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"Phreaking Collective",
-      "url":"https://phreaking.co.uk"
-    }
+    "@context": "https://schema.org",
+    "@graph": [
+
+      {
+        "@type": "Organization",
+        "@id": "https://phreaking.co.uk/#phreaking",
+        "name": "Phreaking Collective",
+        "url": "https://phreaking.co.uk",
+        "sameAs": ["https://phreaking.co.uk"],
+        "description": "Phreaking Collective is a London-based arts organisation presenting talks, workshops, performances, and screenings exploring digital art, computational art, AI art, live coding, new media, and internet culture.",
+        "knowsAbout": [
+          "digital art","computational art","AI art","live coding","algorithmic art",
+          "experimental media","creative coding","electronic art","internet art",
+          "new media art","digital culture","computational aesthetics","media archaeology",
+          "internet infrastructure","critical AI"
+        ],
+        "event": [
+          {"@id": "https://phreaking.co.uk/#bitrot"},
+          {"@id": "https://phreaking.co.uk/#does-cloud-compute"}
+        ]
+      },
+
+      {
+        "@type": "WebPage",
+        "@id": "https://phreaking.co.uk/past-events#webpage",
+        "url": "https://phreaking.co.uk/past-events",
+        "name": "Past Events — Phreaking Collective",
+        "description": "Archive of past talks, workshops, performances, and screenings from Phreaking Collective exhibitions including BitRot and Does Cloud Compute (ever) Participate?.",
+        "inLanguage": "en-GB",
+        "isPartOf": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "breadcrumb": {"@id": "https://phreaking.co.uk/past-events#breadcrumb"},
+        "about": [
+          {"@id": "https://phreaking.co.uk/#bitrot"},
+          {"@id": "https://phreaking.co.uk/#does-cloud-compute"}
+        ],
+        "keywords": "digital art, computational art, AI art, live coding, algorithmic art, experimental media, creative coding, London art events, new media art, media archaeology, critical AI"
+      },
+
+      {
+        "@type": "CollectionPage",
+        "@id": "https://phreaking.co.uk/past-events",
+        "name": "Past Events",
+        "url": "https://phreaking.co.uk/past-events",
+        "description": "Archive of past talks, workshops, performances, and screenings from Phreaking Collective.",
+        "publisher": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "hasPart": [
+          {"@id": "https://phreaking.co.uk/past-events#event-counter-modelling"},
+          {"@id": "https://phreaking.co.uk/past-events#event-ai-as-material"},
+          {"@id": "https://phreaking.co.uk/past-events#event-cloud-watching"},
+          {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"},
+          {"@id": "https://phreaking.co.uk/past-events#event-long-live"},
+          {"@id": "https://phreaking.co.uk/past-events#event-noisy-spaces"},
+          {"@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website"},
+          {"@id": "https://phreaking.co.uk/past-events#event-extremely-standardised"},
+          {"@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding"},
+          {"@id": "https://phreaking.co.uk/past-events#event-oops-glitch"},
+          {"@id": "https://phreaking.co.uk/past-events#event-object-oriented"},
+          {"@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting"},
+          {"@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael"},
+          {"@id": "https://phreaking.co.uk/past-events#event-deposilk"},
+          {"@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc"},
+          {"@id": "https://phreaking.co.uk/past-events#event-algorave-london"},
+          {"@id": "https://phreaking.co.uk/past-events#event-orangespy"},
+          {"@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot"},
+          {"@id": "https://phreaking.co.uk/past-events#event-yiding-zhang"},
+          {"@id": "https://phreaking.co.uk/past-events#event-phreaking-film-night"}
+        ]
+      },
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://phreaking.co.uk/past-events#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Phreaking Collective",
+            "item": "https://phreaking.co.uk"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Past Events",
+            "item": "https://phreaking.co.uk/past-events"
+          }
+        ]
+      },
+
+      {
+        "@type": ["CreativeWork", "ExhibitionEvent"],
+        "@id": "https://phreaking.co.uk/#bitrot",
+        "name": "BitRot",
+        "url": "https://phreaking.co.uk/BitRot",
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "about": ["digital art","computational art","new media","media archaeology","live coding","internet art"],
+        "subjectOf": [
+          {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"},
+          {"@id": "https://phreaking.co.uk/past-events#event-long-live"},
+          {"@id": "https://phreaking.co.uk/past-events#event-oops-glitch"},
+          {"@id": "https://phreaking.co.uk/past-events#event-object-oriented"},
+          {"@id": "https://phreaking.co.uk/past-events#event-orangespy"},
+          {"@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot"},
+          {"@id": "https://phreaking.co.uk/past-events#event-yiding-zhang"}
+        ]
+      },
+
+      {
+        "@type": ["CreativeWork", "ExhibitionEvent"],
+        "@id": "https://phreaking.co.uk/#does-cloud-compute",
+        "name": "Does Cloud Compute (ever) Participate?",
+        "url": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/",
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "about": ["AI art","cloud computing","internet infrastructure","computational art","critical AI","live coding"],
+        "subjectOf": [
+          {"@id": "https://phreaking.co.uk/past-events#event-counter-modelling"},
+          {"@id": "https://phreaking.co.uk/past-events#event-ai-as-material"},
+          {"@id": "https://phreaking.co.uk/past-events#event-cloud-watching"},
+          {"@id": "https://phreaking.co.uk/past-events#event-noisy-spaces"},
+          {"@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website"},
+          {"@id": "https://phreaking.co.uk/past-events#event-extremely-standardised"},
+          {"@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding"},
+          {"@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting"},
+          {"@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael"},
+          {"@id": "https://phreaking.co.uk/past-events#event-deposilk"},
+          {"@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc"},
+          {"@id": "https://phreaking.co.uk/past-events#event-algorave-london"},
+          {"@id": "https://phreaking.co.uk/past-events#event-phreaking-film-night"}
+        ]
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-lucia-rebolino",
+        "name": "Lucia Rebolino",
+        "url": "https://luciarebolino.com/",
+        "sameAs": ["https://luciarebolino.com/"],
+        "jobTitle": "Artist",
+        "description": "Artist working with web performance, climate modelling aesthetics, digital architecture, and computational realism.",
+        "knowsAbout": ["climate modelling","digital aesthetics","web performance","computational art","AI"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-counter-modelling"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-terence-broad",
+        "name": "Terence Broad",
+        "url": "https://terencebroad.com/",
+        "sameAs": ["https://terencebroad.com/"],
+        "jobTitle": "Artist and Researcher",
+        "description": "Artist and researcher exploring AI as artistic material, generative systems, and critical approaches to machine learning in creative practice.",
+        "knowsAbout": ["AI as material","machine learning","generative art","computational art","critical AI"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-ai-as-material"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-robin-leverton",
+        "name": "Robin Leverton",
+        "url": "https://robinlevertonart.com/",
+        "sameAs": ["https://robinlevertonart.com/"],
+        "jobTitle": "Artist",
+        "description": "Artist exploring internet infrastructure, digital geographies, and communications networks.",
+        "knowsAbout": ["internet infrastructure","digital geography","network culture","new media art"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-cloud-watching"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-erin-robinson",
+        "name": "Erin Robinson",
+        "url": "https://erinrobinson.xyz/",
+        "sameAs": ["https://erinrobinson.xyz/"],
+        "jobTitle": "Artist",
+        "description": "Artist whose practice spans digital embodiment, artificial intimacy, and critical theory, co-creator of the award-winning work XXX Machina.",
+        "knowsAbout": ["digital embodiment","artificial intimacy","post-structuralism","computational art","AI"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-anthony-frisby",
+        "name": "Anthony Frisby",
+        "url": "https://www.anthonyfrisby.com/",
+        "sameAs": ["https://www.anthonyfrisby.com/"],
+        "jobTitle": "Artist",
+        "description": "Artist exploring eroticism, selfhood, and computational desire, co-creator of the award-winning work XXX Machina.",
+        "knowsAbout": ["digital embodiment","artificial intimacy","postmodernism","computational art"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-dian-joy",
+        "name": "Dian Joy",
+        "url": "https://dianjoy.me/",
+        "sameAs": ["https://dianjoy.me/"],
+        "jobTitle": "Artist",
+        "description": "Artist and writer working with media theory, digital folklore, platform culture, and algorithmic desire.",
+        "knowsAbout": ["media theory","digital folklore","platform culture","algorithmic systems","internet culture"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-long-live"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-kat-macdonald",
+        "name": "Kat Macdonald",
+        "url": "https://otherkat.com/",
+        "sameAs": ["https://otherkat.com/"],
+        "jobTitle": "Artist and Workshop Facilitator",
+        "description": "Artist exploring collective sound making, experimental performance, and the history of London's experimental collective performance scene.",
+        "knowsAbout": ["sound art","collective performance","experimental music","digital culture"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-noisy-spaces"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-cranberry-lemonade",
+        "name": "Cranberry Lemonade",
+        "url": "https://www.cranberrylemonade.xyz/",
+        "sameAs": ["https://www.cranberrylemonade.xyz/"],
+        "jobTitle": "Artist and Workshop Facilitator",
+        "description": "Artist and educator running beginner-friendly web-making workshops covering HTML, CSS, and JavaScript for personal and poetic webpages.",
+        "knowsAbout": ["web design","HTML","CSS","JavaScript","internet art","digital storytelling"],
+        "subjectOf": [
+          {"@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website"},
+          {"@id": "https://phreaking.co.uk/past-events#event-oops-glitch"}
+        ]
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-matt-hill",
+        "name": "Matt Hill",
+        "url": "https://mat-hill.xyz/",
+        "sameAs": ["https://mat-hill.xyz/"],
+        "jobTitle": "Artist and Workshop Facilitator",
+        "description": "Artist exploring file formats, permacomputing, bytebeats, generative image-making, and Unicode-art.",
+        "knowsAbout": ["permacomputing","file formats","generative art","creative coding","algorithmic art"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-extremely-standardised"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-margot-mcewen",
+        "name": "Margot McEwen",
+        "url": "https://magot.neocities.org/",
+        "sameAs": ["https://magot.neocities.org/"],
+        "jobTitle": "Artist and Workshop Facilitator",
+        "description": "Artist facilitating workshops in creative coding, WebGL, live coding tools, and interactive visual systems for artists.",
+        "knowsAbout": ["creative coding","WebGL","live coding","Cables.gl","interactive visuals","generative art"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-melissa-li-yunzhi",
+        "name": "Melissa Li Yunzhi",
+        "url": "https://melissayunzhi.li/",
+        "sameAs": ["https://melissayunzhi.li/"],
+        "jobTitle": "Artist and Workshop Facilitator",
+        "description": "Artist working with object-oriented storytelling, bridging physical material and virtual worlds, creator of Home is a Dwelling Path.",
+        "knowsAbout": ["object-oriented storytelling","narrative art","digital art","new media"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-object-oriented"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-lagtime-seedling",
+        "name": "Lagtime Seedling",
+        "url": "https://www.instagram.com/lagtime__seedling/",
+        "sameAs": ["https://www.instagram.com/lagtime__seedling/"],
+        "jobTitle": "Performer",
+        "description": "Performer who creates audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano, without traditional music software.",
+        "knowsAbout": ["browser-based performance","live coding","audio-visual composition","internet art","ASMR"],
+        "subjectOf": [
+          {"@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc"},
+          {"@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot"}
+        ]
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-deposilk",
+        "name": "Deposilk",
+        "url": "https://www.instagram.com/depositsilk/",
+        "sameAs": ["https://www.instagram.com/depositsilk/"],
+        "jobTitle": "Performer",
+        "description": "Performer who appeared at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026.",
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-deposilk"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-yiding-zhang",
+        "name": "Yiding Zhang",
+        "url": "https://yidingzhang.cargo.site/",
+        "sameAs": ["https://yidingzhang.cargo.site/"],
+        "jobTitle": "Performer",
+        "description": "Performer and artist whose live practice uses a custom-built modular synthesizer.",
+        "knowsAbout": ["modular synthesis","electronic music","performance art"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-yiding-zhang"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-orangespy",
+        "name": "Orangespy",
+        "url": "https://www.orangespy.io/about",
+        "sameAs": ["https://www.orangespy.io/about"],
+        "jobTitle": "Performer",
+        "description": "Performer integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity to create responsive performance environments.",
+        "knowsAbout": ["live coding","algorithmic composition","generative visuals","AI art","interactive performance"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-orangespy"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-thatsoundsexciting",
+        "name": "That Sounds Exciting!",
+        "url": "https://www.instagram.com/thatsoundsexciting/",
+        "sameAs": ["https://www.instagram.com/thatsoundsexciting/"],
+        "jobTitle": "Performer",
+        "description": "Live coding performance group who performed at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026.",
+        "knowsAbout": ["live coding","algorithmic performance","creative coding"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting"}
+      },
+
+      {
+        "@type": "Person",
+        "@id": "https://phreaking.co.uk/#person-claire-mcmichael",
+        "name": "Claire McMichael",
+        "jobTitle": "Performer",
+        "description": "Performer who appeared at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026.",
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael"}
+      },
+
+      {
+        "@type": "Organization",
+        "@id": "https://phreaking.co.uk/#org-algorave-london",
+        "name": "Algorave London",
+        "url": "https://www.instagram.com/algorave_london/",
+        "sameAs": ["https://www.instagram.com/algorave_london/"],
+        "description": "London live coding collective performing algorithmic and generative music and visuals, part of the global Algorave movement.",
+        "knowsAbout": ["live coding","algorave","algorithmic music","generative art"],
+        "subjectOf": {"@id": "https://phreaking.co.uk/past-events#event-algorave-london"}
+      },
+
+      {
+        "@type": "Event",
+        "@id": "https://phreaking.co.uk/past-events#event-counter-modelling",
+        "name": "Counter-Modelling",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-lucia-rebolino"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A web-based performance exploring climate modelling through digital aesthetics and architectural thinking. Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling challenged the aesthetics of computational realism, presenting climate prediction as a site of tension between technological development and climate futures.",
+        "keywords": "climate modelling, digital aesthetics, computational realism, web performance, AI, architecture",
+        "image": [
+          {"@id": "https://phreaking.co.uk/past-events#img-counter-modelling-1"},
+          {"@id": "https://phreaking.co.uk/past-events#img-counter-modelling-2"},
+          {"@id": "https://phreaking.co.uk/past-events#img-counter-modelling-3"}
+        ]
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-counter-modelling-1",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp",
+        "name": "Lucia Rebolino presenting Counter-Modelling at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026",
+        "description": "Lucia Rebolino presenting Counter-Modelling at Phreaking Collective",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-counter-modelling"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-counter-modelling-2",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp",
+        "name": "Lucia Rebolino during Counter-Modelling talk at Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-counter-modelling"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-counter-modelling-3",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp",
+        "name": "Audience at Lucia Rebolino's Counter-Modelling presentation, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026",
+        "creditText": "Photo: Xach Hill",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-counter-modelling"}
+      },
+
+      {
+        "@type": "Event",
+        "@id": "https://phreaking.co.uk/past-events#event-ai-as-material",
+        "name": "AI as Material",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-terence-broad"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A talk showing how practices that treat AI as a material rather than a tool or creative agent allow artists to make critical works presenting new ways of understanding unfathomably complex computational systems.",
+        "keywords": "AI as material, machine learning, critical AI, generative art, computational art",
+        "image": [
+          {"@id": "https://phreaking.co.uk/past-events#img-ai-material-1"},
+          {"@id": "https://phreaking.co.uk/past-events#img-ai-material-2"},
+          {"@id": "https://phreaking.co.uk/past-events#img-ai-material-3"}
+        ]
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-ai-material-1",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp",
+        "name": "Terence Broad presenting AI as Material at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-ai-as-material"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-ai-material-2",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp",
+        "name": "Terence Broad during AI as Material talk at Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-ai-as-material"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-ai-material-3",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp",
+        "name": "Audience at Terence Broad's AI as Material presentation, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-ai-as-material"}
+      },
+
+      {
+        "@type": "Event",
+        "@id": "https://phreaking.co.uk/past-events#event-cloud-watching",
+        "name": "Cloud-Watching Through My Window",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-robin-leverton"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A flâneur's guide to mapping the new geographies of connection, exploring internet and communications infrastructures, physical and digital topographies, and contemporary data emissions.",
+        "keywords": "internet infrastructure, digital geography, network culture, data, cloud computing",
+        "image": [
+          {"@id": "https://phreaking.co.uk/past-events#img-cloud-watching-1"},
+          {"@id": "https://phreaking.co.uk/past-events#img-cloud-watching-2"},
+          {"@id": "https://phreaking.co.uk/past-events#img-cloud-watching-3"}
+        ]
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-cloud-watching-1",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp",
+        "name": "Robin Leverton presenting Cloud-Watching Through My Window at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-cloud-watching"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-cloud-watching-2",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp",
+        "name": "Robin Leverton during Cloud-Watching Through My Window talk, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-cloud-watching"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-cloud-watching-3",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp",
+        "name": "Audience at Robin Leverton's Cloud-Watching Through My Window presentation, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026",
+        "creditText": "Photo: Nikos Kourous",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-cloud-watching"}
+      },
+
+      {
+        "@type": "Event",
+        "@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies",
+        "name": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": [
+          {"@id": "https://phreaking.co.uk/#person-erin-robinson"},
+          {"@id": "https://phreaking.co.uk/#person-anthony-frisby"}
+        ],
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A lecture exploring the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience, discussing artificial intimacies, eroticism, and digital embodiment.",
+        "keywords": "artificial intimacy, digital embodiment, post-structuralism, postmodernism, computational desire, XXX Machina",
+        "image": [
+          {"@id": "https://phreaking.co.uk/past-events#img-artificial-intimacies-1"},
+          {"@id": "https://phreaking.co.uk/past-events#img-artificial-intimacies-2"},
+          {"@id": "https://phreaking.co.uk/past-events#img-artificial-intimacies-3"}
+        ]
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-artificial-intimacies-1",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp",
+        "name": "Erin Robinson and Anthony Frisby presenting Artificial Intimacies and Erotics of the Synthetic Self at Phreaking Collective's BitRot exhibition, London, 2025",
+        "creditText": "Photo: Nikos Kourous Vazquez",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-artificial-intimacies-2",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp",
+        "name": "Erin Robinson and Anthony Frisby during their lecture on XXX Machina at BitRot, Phreaking Collective, London, 2025",
+        "creditText": "Photo: Xach Hill",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-artificial-intimacies-3",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp",
+        "name": "Audience at Erin Robinson and Anthony Frisby's Artificial Intimacies lecture, BitRot, Phreaking Collective, London, 2025",
+        "creditText": "Photo: Xach Hill",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"}
+      },
+
+      {
+        "@type": "Event",
+        "@id": "https://phreaking.co.uk/past-events#event-long-live",
+        "name": "Long Live The New Flesh (or Whatever)",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-dian-joy"},
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A lecture exploring how desire functions as a mechanism of discipline and ideological capture within the contemporary digital landscape, drawing from media theory, philosophy, and digital folklore, with a close reading of Videodrome.",
+        "keywords": "media theory, digital folklore, desire, platform culture, algorithmic culture, Videodrome, meme culture",
+        "image": [
+          {"@id": "https://phreaking.co.uk/past-events#img-long-live-1"},
+          {"@id": "https://phreaking.co.uk/past-events#img-long-live-2"},
+          {"@id": "https://phreaking.co.uk/past-events#img-long-live-3"}
+        ]
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-long-live-1",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp",
+        "name": "Dian Joy presenting Long Live The New Flesh (or Whatever) at Phreaking Collective's BitRot exhibition, London, 2025",
+        "creditText": "Photo: Melissa Li Yunzhi",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-long-live"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-long-live-2",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp",
+        "name": "Dian Joy during Long Live The New Flesh (or Whatever) lecture at BitRot, Phreaking Collective, London, 2025",
+        "creditText": "Photo: Melissa Li Yunzhi",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-long-live"}
+      },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://phreaking.co.uk/past-events#img-long-live-3",
+        "contentUrl": "https://phreaking.co.uk/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp",
+        "name": "Audience at Dian Joy's Long Live The New Flesh lecture, BitRot, Phreaking Collective, London, 2025",
+        "creditText": "Photo: Xach Hill",
+        "about": {"@id": "https://phreaking.co.uk/past-events#event-long-live"}
+      },
+
+      {
+        "@type": "EducationEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-noisy-spaces",
+        "name": "Noisy Spaces",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-kat-macdonald"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A workshop exploring technology as it relates to collective sound making, tracing London's experimental collective performance scene of the 1970s and how those methods apply to current art culture.",
+        "keywords": "sound art, collective performance, experimental music, workshop, London, 1970s"
+      },
+
+      {
+        "@type": "EducationEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website",
+        "name": "I Want To Be A Website",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-cranberry-lemonade"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A hands-on, beginner-friendly personal web-making workshop exploring HTML, CSS and JavaScript to create personalised and poetic webpages and tell digital stories.",
+        "keywords": "web design, HTML, CSS, JavaScript, internet art, digital storytelling, workshop"
+      },
+
+      {
+        "@type": "EducationEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-extremely-standardised",
+        "name": "Extremely Standardised Fun",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-matt-hill"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A workshop covering file formats, permacomputing, bytebeats, generative image-making, and Unicode-art, introduced through speculative art projects and computer science fundamentals.",
+        "keywords": "permacomputing, file formats, bytebeats, generative art, Unicode art, computer science, workshop"
+      },
+
+      {
+        "@type": "EducationEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding",
+        "name": "Intro To Creative Coding For Artists",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-margot-mcewen"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A workshop exploring Cables.gl, a free open-source node-based live coding tool for WebGL development, covering live video manipulation, interactive visuals, and input devices including MIDI and webcams.",
+        "keywords": "creative coding, Cables.gl, WebGL, live coding, interactive visuals, MIDI, workshop"
+      },
+
+      {
+        "@type": "EducationEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-oops-glitch",
+        "name": "Oops, You Found A Glitch",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-cranberry-lemonade"},
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A hands-on workshop reviving dead pages from Glitch.com's shutdown, reverse-engineering lost websites from thumbnail previews and rebuilding them from scratch using HTML, CSS and JavaScript.",
+        "keywords": "HTML, CSS, JavaScript, glitch art, web archaeology, internet culture, workshop"
+      },
+
+      {
+        "@type": "EducationEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-object-oriented",
+        "name": "Object Oriented Storytelling: From Field to Virtual",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-melissa-li-yunzhi"},
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A two-hour workshop treating everyday objects as narrative anchors bridging physical material to virtual, inspired by methods from Melissa Li Yunzhi's project Home is a Dwelling Path.",
+        "keywords": "storytelling, object-oriented narrative, digital art, new media, workshop"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting",
+        "name": "That Sounds Exciting!",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-thatsoundsexciting"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A live coding performance by the live coding group That Sounds Exciting!",
+        "keywords": "live coding, algorithmic performance, creative coding, performance"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael",
+        "name": "Claire McMichael",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-claire-mcmichael"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A performance by Claire McMichael at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026.",
+        "keywords": "performance art, experimental performance, London"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-deposilk",
+        "name": "Deposilk",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-deposilk"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "A performance by Deposilk at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026.",
+        "keywords": "performance art, experimental performance, London"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc",
+        "name": "Lagtime Seedling",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-lagtime-seedling"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano, creating narrative and musical journeys through overlooked corners of the web.",
+        "keywords": "browser performance, audio-visual, live coding, YouTube, internet art, ASMR"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-algorave-london",
+        "name": "London live coding group",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#org-algorave-london"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "Live coders from Algorave London, featuring Sinsé, Nadezhda, and Daniel performing algorithmic and generative music.",
+        "keywords": "live coding, algorave, algorithmic music, generative art, performance"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-orangespy",
+        "name": "Orangespy",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-orangespy"},
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A live coding performance integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
+        "keywords": "live coding, algorithmic composition, generative visuals, AI art, performance"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot",
+        "name": "Lagtime Seedling Bitrot",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-lagtime-seedling"},
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A live browser window performance using YouTube video tabs, an online piano, and overlapping browser windows, with a more improvised approach as Lagtime Seedling browsed the web and played piano melodies live.",
+        "keywords": "browser performance, audio-visual, improvisation, internet art, live performance"
+      },
+
+      {
+        "@type": "PerformanceEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-yiding-zhang",
+        "name": "Yiding Zhang",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "performer": {"@id": "https://phreaking.co.uk/#person-yiding-zhang"},
+        "about": {"@id": "https://phreaking.co.uk/#bitrot"},
+        "description": "A live performance using a custom-built modular synthesizer.",
+        "keywords": "modular synthesis, electronic music, performance art, synthesizer"
+      },
+
+      {
+        "@type": "ScreeningEvent",
+        "@id": "https://phreaking.co.uk/past-events#event-phreaking-film-night",
+        "name": "Phreaking Film Night",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2026",
+        "location": {"@type": "Place", "name": "London"},
+        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
+        "about": {"@id": "https://phreaking.co.uk/#does-cloud-compute"},
+        "description": "An evening of computational, experimental, and artist-led short films bending narrative, fracturing reality, and playing at the edges of code, image, and memory. Featuring films by Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins (Nukleopatra), Ned Caderni, Iman Javaid and Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen.",
+        "keywords": "experimental film, artist film, short film, computational art, screening, London"
+      },
+
+      {
+        "@type": "ItemList",
+        "@id": "https://phreaking.co.uk/past-events#event-list",
+        "name": "Phreaking Collective Past Events",
+        "description": "Complete list of past events organised by Phreaking Collective",
+        "numberOfItems": 20,
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"item":{"@id":"https://phreaking.co.uk/past-events#event-counter-modelling"}},
+          {"@type":"ListItem","position":2,"item":{"@id":"https://phreaking.co.uk/past-events#event-ai-as-material"}},
+          {"@type":"ListItem","position":3,"item":{"@id":"https://phreaking.co.uk/past-events#event-cloud-watching"}},
+          {"@type":"ListItem","position":4,"item":{"@id":"https://phreaking.co.uk/past-events#event-artificial-intimacies"}},
+          {"@type":"ListItem","position":5,"item":{"@id":"https://phreaking.co.uk/past-events#event-long-live"}},
+          {"@type":"ListItem","position":6,"item":{"@id":"https://phreaking.co.uk/past-events#event-noisy-spaces"}},
+          {"@type":"ListItem","position":7,"item":{"@id":"https://phreaking.co.uk/past-events#event-i-want-to-be-a-website"}},
+          {"@type":"ListItem","position":8,"item":{"@id":"https://phreaking.co.uk/past-events#event-extremely-standardised"}},
+          {"@type":"ListItem","position":9,"item":{"@id":"https://phreaking.co.uk/past-events#event-intro-creative-coding"}},
+          {"@type":"ListItem","position":10,"item":{"@id":"https://phreaking.co.uk/past-events#event-oops-glitch"}},
+          {"@type":"ListItem","position":11,"item":{"@id":"https://phreaking.co.uk/past-events#event-object-oriented"}},
+          {"@type":"ListItem","position":12,"item":{"@id":"https://phreaking.co.uk/past-events#event-that-sounds-exciting"}},
+          {"@type":"ListItem","position":13,"item":{"@id":"https://phreaking.co.uk/past-events#event-claire-mcmichael"}},
+          {"@type":"ListItem","position":14,"item":{"@id":"https://phreaking.co.uk/past-events#event-deposilk"}},
+          {"@type":"ListItem","position":15,"item":{"@id":"https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc"}},
+          {"@type":"ListItem","position":16,"item":{"@id":"https://phreaking.co.uk/past-events#event-algorave-london"}},
+          {"@type":"ListItem","position":17,"item":{"@id":"https://phreaking.co.uk/past-events#event-orangespy"}},
+          {"@type":"ListItem","position":18,"item":{"@id":"https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot"}},
+          {"@type":"ListItem","position":19,"item":{"@id":"https://phreaking.co.uk/past-events#event-yiding-zhang"}},
+          {"@type":"ListItem","position":20,"item":{"@id":"https://phreaking.co.uk/past-events#event-phreaking-film-night"}}
+        ]
+      }
+
+    ]
   }
   </script>
+
 </head>
 
 <body>
 
+<!-- ═══════════════════════════════════════════════
+     SECTION 9: AI Overview / sr-only semantic summary
+     ═══════════════════════════════════════════════ -->
+<div class="sr-only" role="note" aria-label="Archive summary for search engines">
+  Past Events archive documenting talks, workshops, screenings, and performances organised by Phreaking Collective between 2025 and 2026. Events were presented through two exhibitions: BitRot (2025) and Does Cloud Compute (ever) Participate? (2026), both held in London. Participants and contributors include Lucia Rebolino, Terence Broad, Robin Leverton, Dian Joy, Erin Robinson, Anthony Frisby, Kat Macdonald, Cranberry Lemonade, Matt Hill, Margot McEwen, Melissa Li Yunzhi, Claire McMichael, Lagtime Seedling, Deposilk, Yiding Zhang, Orangespy, That Sounds Exciting!, and Algorave London. Films were screened by Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins, Ned Caderni, Iman Javaid, Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen. Topics span digital art, computational art, AI art, live coding, algorithmic art, experimental media, creative coding, internet art, new media art, media archaeology, internet infrastructure, and critical AI.
+</div>
+
 <div data-sidebar data-sidebar-src="/partials/sidebar.html"></div>
 
-<main class="layout" role="main">
+<!-- ═══════════════════════════════════════
+     SECTION 12: landmark role on main
+     ═══════════════════════════════════════ -->
+<main class="layout" role="main" aria-label="Past Events archive">
   <section class="right">
 
     <header class="right-header" aria-hidden="true">
-      <a class="brand-inline" href="/">
-        <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+      <a class="brand-inline" href="/" aria-label="Phreaking Collective home">
+        <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective logo" loading="lazy" decoding="async" width="320" height="auto">
       </a>
     </header>
 
-    <marquee class="banner" scrollamount="3" scrolldelay="0" behavior="scroll" loop="true" direction="left">
+    <marquee class="banner" scrollamount="3" scrolldelay="0" behavior="scroll" loop="true" direction="left" aria-hidden="true">
       PHREAKING COLLECTIVE PAST EVENTS ARCHIVE * TALKS * WORKSHOPS * SCREENINGS * PERFORMANCES * PHREAKING COLLECTIVE PAST EVENTS ARCHIVE *
     </marquee>
 
+    <!-- ═══════════════════════════════════════
+         SECTION 12: hero with aria-labelledby
+         ═══════════════════════════════════════ -->
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow">Archive / 2025–2026</div>
+          <div class="eyebrow" aria-hidden="true">Archive / 2025–2026</div>
           <h1 id="page-title">Past Events</h1>
           <p>
-            A growing archive of talks, workshops, performances, screenings, and experimental gatherings hosted by the Phreaking Collective across <a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> and <a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a>.
+            A growing archive of talks, workshops, performances, screenings, and experimental gatherings hosted by the Phreaking Collective across <a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a> and <a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" aria-label="Does Cloud Compute (ever) Participate? exhibition by Phreaking Collective">Does Cloud Compute (ever) Participate?</a>.
           </p>
         </div>
       </div>
     </section>
 
-    <div class="filter-shell">
+    <!-- ═══════════════════════════════════════
+         Filter controls — unchanged functionality
+         ═══════════════════════════════════════ -->
+    <div class="filter-shell" role="navigation" aria-label="Filter past events by category">
       <div class="filter-controls">
         <div class="filter-bar" role="tablist" aria-label="Past events filter">
           <div class="filter-pill" aria-hidden="true"></div>
 
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-controls="section-talks section-workshops section-performances section-screenings">
             All
           </button>
 
-          <button class="filter-btn" data-filter="talks" role="tab" aria-selected="false">
+          <button class="filter-btn" data-filter="talks" role="tab" aria-selected="false" aria-controls="section-talks">
             Talks
           </button>
 
-          <button class="filter-btn" data-filter="workshops" role="tab" aria-selected="false">
+          <button class="filter-btn" data-filter="workshops" role="tab" aria-selected="false" aria-controls="section-workshops">
             Workshops
           </button>
 
-          <button class="filter-btn" data-filter="performances" role="tab" aria-selected="false">
+          <button class="filter-btn" data-filter="performances" role="tab" aria-selected="false" aria-controls="section-performances">
             Performances
           </button>
 
-          <button class="filter-btn" data-filter="screenings" role="tab" aria-selected="false">
+          <button class="filter-btn" data-filter="screenings" role="tab" aria-selected="false" aria-controls="section-screenings">
             Screenings
           </button>
         </div>
 
-        <button id="sort-btn" class="sort-btn">Sort: Newest First ↓</button>
+        <button id="sort-btn" class="sort-btn" aria-label="Toggle sort order of events">Sort: Newest First ↓</button>
       </div>
     </div>
 
-    <section class="category-section" data-category="talks">
+    <!-- ═══════════════════════════════════════════════════════════
+         TALKS SECTION
+         Sections 5, 11, 12: itemscope, data-* attributes, aria
+         ═══════════════════════════════════════════════════════════ -->
+    <section
+      class="category-section"
+      id="section-talks"
+      data-category="talks"
+      aria-labelledby="heading-talks"
+      data-exhibition="bitrot does-cloud-compute"
+    >
       <div class="section-heading">
-        <h2>Talks</h2>
-        <div class="section-count">5 Events</div>
+        <h2 id="heading-talks">Talks</h2>
+        <div class="section-count" aria-label="5 talk events">5 Events</div>
       </div>
 
       <div class="event-stack">
 
-        <article class="event-card">
+        <!-- TALK: Counter-Modelling -->
+        <article
+          class="event-card"
+          id="event-counter-modelling"
+          itemscope
+          itemtype="https://schema.org/Event"
+          data-event="counter-modelling"
+          data-person="lucia-rebolino"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-counter-modelling"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="climate modelling, digital aesthetics, computational realism, web performance, AI">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Talk</span>
+              <span class="event-type" aria-label="Event type: Talk">Talk</span>
               <div>
-                <h3>Counter-Modelling</h3>
+                <h3 id="title-counter-modelling" itemprop="name">Counter-Modelling</h3>
                 <div class="event-credit">
-                  <strong><a href="https://luciarebolino.com/" target="_blank" rel="noreferrer" class="inline-link">Lucia Rebolino</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="lucia-rebolino"
+                  >
+                    <a href="https://luciarebolino.com/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Lucia Rebolino's website">
+                      <span itemprop="name">Lucia Rebolino</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             A web-based performance exploring climate modelling through digital aesthetics and architectural thinking. Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling challenged the aesthetics of computational realism, presenting climate prediction as a site of tension between technological development and climate futures, shaped by power, uncertainty, and abstraction.
           </p>
 
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp" alt="Counter-Modelling image 1">
+          <div class="image-row" role="list" aria-label="Photos from Counter-Modelling">
+            <button role="listitem" aria-label="View photo 1 of Counter-Modelling by Lucia Rebolino">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_05.webp"
+                  alt="Lucia Rebolino presenting Counter-Modelling at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                  itemprop="image"
+                >
+                <figcaption class="sr-only">Lucia Rebolino presenting Counter-Modelling, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp" alt="Counter-Modelling image 2">
+            <button role="listitem" aria-label="View photo 2 of Counter-Modelling by Lucia Rebolino">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Lucia_Rebolino_Counter_Modelling_Talk_13.webp"
+                  alt="Lucia Rebolino during Counter-Modelling talk at Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Lucia Rebolino, Counter-Modelling, Does Cloud Compute (ever) Participate?, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp" data-full="/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp" alt="Counter-Modelling image 3">
+            <button role="listitem" aria-label="View photo 3 of Counter-Modelling by Lucia Rebolino">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp"
+                  data-full="/assets/Past-events-archive/Xach_Hill_Lucia_Rebolino_Counter_Modelling_Talk_02.webp"
+                  alt="Audience at Lucia Rebolino's Counter-Modelling presentation, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Audience at Counter-Modelling by Lucia Rebolino, Does Cloud Compute (ever) Participate?, 2026. Photo: Xach Hill.</figcaption>
+              </figure>
             </button>
           </div>
         </article>
 
-        <article class="event-card">
+        <!-- TALK: AI as Material -->
+        <article
+          class="event-card"
+          id="event-ai-as-material"
+          itemscope
+          itemtype="https://schema.org/Event"
+          data-event="ai-as-material"
+          data-person="terence-broad"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-ai-as-material"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="AI as material, machine learning, critical AI, generative art, computational art">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Talk</span>
+              <span class="event-type" aria-label="Event type: Talk">Talk</span>
               <div>
-                <h3>AI as Material</h3>
+                <h3 id="title-ai-as-material" itemprop="name">AI as Material</h3>
                 <div class="event-credit">
-                  <strong><a href="https://terencebroad.com/" target="_blank" rel="noreferrer" class="inline-link">Terence Broad</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="terence-broad"
+                  >
+                    <a href="https://terencebroad.com/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Terence Broad's website">
+                      <span itemprop="name">Terence Broad</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             This talk showed how practices that treat AI as a material, rather than a tool or creative agent, artists were able to make critical works that presented new ways of understanding and making sense of these unfathomably complex computational systems.
           </p>
 
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp" alt="AI as Material image 1">
+          <div class="image-row" role="list" aria-label="Photos from AI as Material">
+            <button role="listitem" aria-label="View photo 1 of AI as Material by Terence Broad">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_11.webp"
+                  alt="Terence Broad presenting AI as Material at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                  itemprop="image"
+                >
+                <figcaption class="sr-only">Terence Broad presenting AI as Material, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp" alt="AI as Material image 2">
+            <button role="listitem" aria-label="View photo 2 of AI as Material by Terence Broad">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_17.webp"
+                  alt="Terence Broad during AI as Material talk at Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Terence Broad, AI as Material, Does Cloud Compute (ever) Participate?, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp" alt="AI as Material image 3">
+            <button role="listitem" aria-label="View photo 3 of AI as Material by Terence Broad">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Terence_Broad_AI_as_Material_20.webp"
+                  alt="Audience at Terence Broad's AI as Material presentation, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Audience at AI as Material by Terence Broad, Does Cloud Compute (ever) Participate?, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
           </div>
         </article>
 
-        <article class="event-card">
+        <!-- TALK: Cloud-Watching Through My Window -->
+        <article
+          class="event-card"
+          id="event-cloud-watching"
+          itemscope
+          itemtype="https://schema.org/Event"
+          data-event="cloud-watching-through-my-window"
+          data-person="robin-leverton"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-cloud-watching"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="internet infrastructure, digital geography, network culture, data emissions, cloud computing">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Talk</span>
+              <span class="event-type" aria-label="Event type: Talk">Talk</span>
               <div>
-                <h3>Cloud-Watching Through My Window</h3>
+                <h3 id="title-cloud-watching" itemprop="name">Cloud-Watching Through My Window</h3>
                 <div class="event-credit">
-                  <strong><a href="https://robinlevertonart.com/" target="_blank" rel="noreferrer" class="inline-link">Robin Leverton</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="robin-leverton"
+                  >
+                    <a href="https://robinlevertonart.com/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Robin Leverton's website">
+                      <span itemprop="name">Robin Leverton</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             A flâneur's guide to mapping the new geographies of connection. Contemplating on internet and communications infrastructures, participants took a walk through the window piece from one side of the wall to the other. In so doing, they passed through various forms of physical and digital infrastructures that mediate and feed on our data emissions, exploring the topography of the contemporary internet.
           </p>
 
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp" alt="Cloud-Watching Through My Window image 1">
+          <div class="image-row" role="list" aria-label="Photos from Cloud-Watching Through My Window">
+            <button role="listitem" aria-label="View photo 1 of Cloud-Watching Through My Window by Robin Leverton">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_13.webp"
+                  alt="Robin Leverton presenting Cloud-Watching Through My Window at Phreaking Collective's Does Cloud Compute (ever) Participate? exhibition, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                  itemprop="image"
+                >
+                <figcaption class="sr-only">Robin Leverton presenting Cloud-Watching Through My Window, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp" alt="Cloud-Watching Through My Window image 2">
+            <button role="listitem" aria-label="View photo 2 of Cloud-Watching Through My Window by Robin Leverton">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_15.webp"
+                  alt="Robin Leverton during Cloud-Watching Through My Window talk, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Robin Leverton, Cloud-Watching Through My Window, Does Cloud Compute (ever) Participate?, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp" data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp" alt="Cloud-Watching Through My Window image 3">
+            <button role="listitem" aria-label="View photo 3 of Cloud-Watching Through My Window by Robin Leverton">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp"
+                  data-full="/assets/Past-events-archive/Nikos_Kourous_Robin_Leverton_Talk_20.webp"
+                  alt="Audience at Robin Leverton's Cloud-Watching Through My Window presentation, Does Cloud Compute (ever) Participate?, Phreaking Collective, London, 2026"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Audience at Cloud-Watching Through My Window, Does Cloud Compute (ever) Participate?, 2026. Photo: Nikos Kourous.</figcaption>
+              </figure>
             </button>
           </div>
         </article>
         
-        <article class="event-card">
+        <!-- TALK: Artificial Intimacies -->
+        <article
+          class="event-card"
+          id="event-artificial-intimacies"
+          itemscope
+          itemtype="https://schema.org/Event"
+          data-event="artificial-intimacies-erotics-synthetic-self"
+          data-person="erin-robinson anthony-frisby"
+          data-exhibition="bitrot"
+          aria-labelledby="title-artificial-intimacies"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="artificial intimacy, digital embodiment, post-structuralism, postmodernism, computational desire, XXX Machina">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Talk</span>
+              <span class="event-type" aria-label="Event type: Talk">Talk</span>
               <div>
-                <h3>Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina</h3>
+                <h3 id="title-artificial-intimacies" itemprop="name">Artificial Intimacies &amp; Erotics of the Synthetic Self: Making XXX Machina</h3>
                 <div class="event-credit">
-                  <strong><a href="https://erinrobinson.xyz/" target="_blank" rel="noreferrer" class="inline-link">Erin Robinson</a> & <a href="https://www.anthonyfrisby.com/" target="_blank" rel="noreferrer" class="inline-link">Anthony Frisby</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong>
+                    <span itemprop="performer" itemscope itemtype="https://schema.org/Person" data-person="erin-robinson">
+                      <a href="https://erinrobinson.xyz/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Erin Robinson's website"><span itemprop="name">Erin Robinson</span></a>
+                    </span>
+                    &amp;
+                    <span itemprop="performer" itemscope itemtype="https://schema.org/Person" data-person="anthony-frisby">
+                      <a href="https://www.anthonyfrisby.com/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Anthony Frisby's website"><span itemprop="name">Anthony Frisby</span></a>
+                    </span>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             This lecture explored the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience. Through a post-structuralist and postmodernist lens, the pair discussed artificial intimacies, eroticism, and digital embodiment, reflecting on how the creation of the award winning work offered autoethnographic insights into sex, selfhood, and computational desire.
           </p>
 
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" alt="Artificial Intimacies lecture image 1">
+          <div class="image-row" role="list" aria-label="Photos from Artificial Intimacies and Erotics of the Synthetic Self">
+            <button role="listitem" aria-label="View photo 1 of Artificial Intimacies by Erin Robinson and Anthony Frisby">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp"
+                  data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp"
+                  alt="Erin Robinson and Anthony Frisby presenting Artificial Intimacies and Erotics of the Synthetic Self at Phreaking Collective's BitRot exhibition, London, 2025"
+                  loading="lazy"
+                  decoding="async"
+                  itemprop="image"
+                >
+                <figcaption class="sr-only">Erin Robinson and Anthony Frisby presenting Artificial Intimacies, BitRot, Phreaking Collective, London, 2025. Photo: Nikos Kourous Vazquez.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" alt="Artificial Intimacies lecture image 2">
+            <button role="listitem" aria-label="View photo 2 of Artificial Intimacies by Erin Robinson and Anthony Frisby">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp"
+                  data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp"
+                  alt="Erin Robinson and Anthony Frisby during their lecture on XXX Machina at BitRot, Phreaking Collective, London, 2025"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Erin Robinson and Anthony Frisby during the XXX Machina lecture, BitRot, 2025. Photo: Xach Hill.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" alt="Artificial Intimacies lecture image 3">
+            <button role="listitem" aria-label="View photo 3 of Artificial Intimacies by Erin Robinson and Anthony Frisby">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp"
+                  data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp"
+                  alt="Audience at Erin Robinson and Anthony Frisby's Artificial Intimacies lecture, BitRot, Phreaking Collective, London, 2025"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Audience at Artificial Intimacies lecture, BitRot, Phreaking Collective, 2025. Photo: Xach Hill.</figcaption>
+              </figure>
             </button>
           </div>
         </article>
 
-        <article class="event-card">
+        <!-- TALK: Long Live The New Flesh -->
+        <article
+          class="event-card"
+          id="event-long-live"
+          itemscope
+          itemtype="https://schema.org/Event"
+          data-event="long-live-the-new-flesh"
+          data-person="dian-joy"
+          data-exhibition="bitrot"
+          aria-labelledby="title-long-live"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="media theory, digital folklore, desire, platform culture, algorithmic culture, Videodrome, meme culture">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Talk</span>
+              <span class="event-type" aria-label="Event type: Talk">Talk</span>
               <div>
-                <h3>Long Live The New Flesh (or Whatever)</h3>
+                <h3 id="title-long-live" itemprop="name">Long Live The New Flesh (or Whatever)</h3>
                 <div class="event-credit">
-                  <strong><a href="https://dianjoy.me/" target="_blank" rel="noreferrer" class="inline-link">Dian Joy</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="dian-joy"
+                  >
+                    <a href="https://dianjoy.me/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Dian Joy's website">
+                      <span itemprop="name">Dian Joy</span>
+                    </a>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             In this lecture, Dian Joy explored how desire increasingly functions as a mechanism of discipline and ideological capture within the contemporary digital landscape. Drawing from media theory, philosophy, and digital folklore, the talk interrogated how online platforms reshape desire through algorithmic environments, meme culture, and emergent mythologies through a close reading of Videodrome as a proto-Internet allegory.
           </p>
 
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" alt="Long Live The New Flesh lecture image 1">
+          <div class="image-row" role="list" aria-label="Photos from Long Live The New Flesh">
+            <button role="listitem" aria-label="View photo 1 of Long Live The New Flesh by Dian Joy">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp"
+                  data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp"
+                  alt="Dian Joy presenting Long Live The New Flesh (or Whatever) at Phreaking Collective's BitRot exhibition, London, 2025"
+                  loading="lazy"
+                  decoding="async"
+                  itemprop="image"
+                >
+                <figcaption class="sr-only">Dian Joy presenting Long Live The New Flesh (or Whatever), BitRot, Phreaking Collective, London, 2025. Photo: Melissa Li Yunzhi.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" alt="Long Live The New Flesh lecture image 2">
+            <button role="listitem" aria-label="View photo 2 of Long Live The New Flesh by Dian Joy">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp"
+                  data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp"
+                  alt="Dian Joy during Long Live The New Flesh (or Whatever) lecture at BitRot, Phreaking Collective, London, 2025"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Dian Joy, Long Live The New Flesh (or Whatever), BitRot, 2025. Photo: Melissa Li Yunzhi.</figcaption>
+              </figure>
             </button>
 
-            <button>
-              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" alt="Long Live The New Flesh lecture image 3">
+            <button role="listitem" aria-label="View photo 3 of Long Live The New Flesh by Dian Joy">
+              <figure>
+                <img
+                  src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp"
+                  data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp"
+                  alt="Audience at Dian Joy's Long Live The New Flesh lecture, BitRot, Phreaking Collective, London, 2025"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <figcaption class="sr-only">Audience at Long Live The New Flesh, BitRot, 2025. Photo: Xach Hill.</figcaption>
+              </figure>
             </button>
           </div>
         </article>
@@ -756,130 +1944,313 @@
       </div>
     </section>
 
-    <section class="category-section" data-category="workshops">
+    <!-- ═══════════════════════════════════════════════════════════
+         WORKSHOPS SECTION
+         ═══════════════════════════════════════════════════════════ -->
+    <section
+      class="category-section"
+      id="section-workshops"
+      data-category="workshops"
+      aria-labelledby="heading-workshops"
+      data-exhibition="bitrot does-cloud-compute"
+    >
       <div class="section-heading">
-        <h2>Workshops</h2>
-        <div class="section-count">6 Events</div>
+        <h2 id="heading-workshops">Workshops</h2>
+        <div class="section-count" aria-label="6 workshop events">6 Events</div>
       </div>
 
       <div class="event-stack">
 
-        <article class="event-card">
+        <!-- WORKSHOP: Noisy Spaces -->
+        <article
+          class="event-card"
+          id="event-noisy-spaces"
+          itemscope
+          itemtype="https://schema.org/EducationEvent"
+          data-event="noisy-spaces"
+          data-person="kat-macdonald"
+          data-workshop="noisy-spaces"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-noisy-spaces"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="sound art, collective performance, experimental music, workshop">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Workshop</span>
+              <span class="event-type" aria-label="Event type: Workshop">Workshop</span>
               <div>
-                <h3>Noisy Spaces</h3>
+                <h3 id="title-noisy-spaces" itemprop="name">Noisy Spaces</h3>
                 <div class="event-credit">
-                  <strong><a href="https://otherkat.com/" target="_blank" rel="noreferrer" class="inline-link">Kat Macdonald</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="kat-macdonald"
+                  >
+                    <a href="https://otherkat.com/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Kat Macdonald's website">
+                      <span itemprop="name">Kat Macdonald</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">In this workshop, Kat Macdonald explored technology as it relates to collective sound making, taking participants through a history of London’s experimental collective performance scene of the 1970’s and how those methods can be adapted and applied to our current art culture.</p>
+          <p class="event-description" itemprop="description">In this workshop, Kat Macdonald explored technology as it relates to collective sound making, taking participants through a history of London's experimental collective performance scene of the 1970's and how those methods can be adapted and applied to our current art culture.</p>
         </article>
 
-        <article class="event-card">
+        <!-- WORKSHOP: I Want To Be A Website -->
+        <article
+          class="event-card"
+          id="event-i-want-to-be-a-website"
+          itemscope
+          itemtype="https://schema.org/EducationEvent"
+          data-event="i-want-to-be-a-website"
+          data-person="cranberry-lemonade"
+          data-workshop="i-want-to-be-a-website"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-i-want-to-be-a-website"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="web design, HTML, CSS, JavaScript, internet art, digital storytelling, workshop">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Workshop</span>
+              <span class="event-type" aria-label="Event type: Workshop">Workshop</span>
               <div>
-                <h3>I Want To Be A Website</h3>
+                <h3 id="title-i-want-to-be-a-website" itemprop="name">I Want To Be A Website</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.cranberrylemonade.xyz/" target="_blank" rel="noreferrer" class="inline-link">Cranberry lemonade</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="cranberry-lemonade"
+                  >
+                    <a href="https://www.cranberrylemonade.xyz/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Cranberry Lemonade's website">
+                      <span itemprop="name">Cranberry lemonade</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">A hands-on, beginner-friendly personal web-making workshop. Exploring HTML, CSS and JavaScript, to create personalised and poetic webpages, to demystify web creation and tell your own digital stories and identities.</p>
+          <p class="event-description" itemprop="description">A hands-on, beginner-friendly personal web-making workshop. Exploring HTML, CSS and JavaScript, to create personalised and poetic webpages, to demystify web creation and tell your own digital stories and identities.</p>
         </article>
 
-        <article class="event-card">
+        <!-- WORKSHOP: Extremely Standardised Fun -->
+        <article
+          class="event-card"
+          id="event-extremely-standardised-fun"
+          itemscope
+          itemtype="https://schema.org/EducationEvent"
+          data-event="extremely-standardised-fun"
+          data-person="matt-hill"
+          data-workshop="extremely-standardised-fun"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-extremely-standardised"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="permacomputing, file formats, bytebeats, generative art, Unicode art, computer science, workshop">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Workshop</span>
+              <span class="event-type" aria-label="Event type: Workshop">Workshop</span>
               <div>
-                <h3>Extremely Standardised Fun</h3>
+                <h3 id="title-extremely-standardised" itemprop="name">Extremely Standardised Fun</h3>
                 <div class="event-credit">
-                  <strong><a href="https://mat-hill.xyz/" target="_blank" rel="noreferrer" class="inline-link">Matt Hill</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="matt-hill"
+                  >
+                    <a href="https://mat-hill.xyz/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Matt Hill's website">
+                      <span itemprop="name">Matt Hill</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Why are file formats? Are they real? What??? In this workshop, we learnt what file formats really are, where they came from, and why they make us suffer. It started off with an intro to Permacomputing, and how speculative art projects could save engineering. Then, we will learnt just enough computer science to be dangerous. With these new skills, we explored the surprisingly philosophical worlds of bytebeats, generative image-making, and Unicode-art.</p>
+          <p class="event-description" itemprop="description">Why are file formats? Are they real? What??? In this workshop, we learnt what file formats really are, where they came from, and why they make us suffer. It started off with an intro to Permacomputing, and how speculative art projects could save engineering. Then, we will learnt just enough computer science to be dangerous. With these new skills, we explored the surprisingly philosophical worlds of bytebeats, generative image-making, and Unicode-art.</p>
         </article>
 
-        <article class="event-card">
+        <!-- WORKSHOP: Intro To Creative Coding -->
+        <article
+          class="event-card"
+          id="event-intro-creative-coding"
+          itemscope
+          itemtype="https://schema.org/EducationEvent"
+          data-event="intro-to-creative-coding-for-artists"
+          data-person="margot-mcewen"
+          data-workshop="intro-creative-coding"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-intro-creative-coding"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="creative coding, Cables.gl, WebGL, live coding, interactive visuals, MIDI, workshop">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Workshop</span>
+              <span class="event-type" aria-label="Event type: Workshop">Workshop</span>
               <div>
-                <h3>Intro To Creative Coding For Artists</h3>
+                <h3 id="title-intro-creative-coding" itemprop="name">Intro To Creative Coding For Artists</h3>
                 <div class="event-credit">
-                  <strong><a href="https://magot.neocities.org/" target="_blank" rel="noreferrer" class="inline-link">Margot McEwen</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="margot-mcewen"
+                  >
+                    <a href="https://magot.neocities.org/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Margot McEwen's website">
+                      <span itemprop="name">Margot McEwen</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">This workshop to explored Cables.gl, a free, open-source, node-based live coding tool for WebGL development. We learnt how to manipulate live and pre-recorded video, create and modify simple video effects, and make your creations interactive. We covered how to use input devices such as the mouse, keyboard, MIDI controllers, gamepads, and webcams to drive your visual systems.</p>
+          <p class="event-description" itemprop="description">This workshop to explored Cables.gl, a free, open-source, node-based live coding tool for WebGL development. We learnt how to manipulate live and pre-recorded video, create and modify simple video effects, and make your creations interactive. We covered how to use input devices such as the mouse, keyboard, MIDI controllers, gamepads, and webcams to drive your visual systems.</p>
         </article>
 
-        <article class="event-card">
+        <!-- WORKSHOP: Oops, You Found A Glitch -->
+        <article
+          class="event-card"
+          id="event-oops-glitch"
+          itemscope
+          itemtype="https://schema.org/EducationEvent"
+          data-event="oops-you-found-a-glitch"
+          data-person="cranberry-lemonade"
+          data-workshop="oops-you-found-a-glitch"
+          data-exhibition="bitrot"
+          aria-labelledby="title-oops-glitch"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="HTML, CSS, JavaScript, glitch art, web archaeology, internet culture, workshop">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Workshop</span>
+              <span class="event-type" aria-label="Event type: Workshop">Workshop</span>
               <div>
-                <h3>Oops, You Found A Glitch</h3>
+                <h3 id="title-oops-glitch" itemprop="name">Oops, You Found A Glitch</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.cranberrylemonade.xyz/" target="_blank" rel="noreferrer" class="inline-link">Cranberry Lemonade</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="cranberry-lemonade"
+                  >
+                    <a href="https://www.cranberrylemonade.xyz/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Cranberry Lemonade's website">
+                      <span itemprop="name">Cranberry Lemonade</span>
+                    </a>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">
-            When web-hosting company Glitch.com shut down overnight, dozens of playful self-made sites from our past workshops vanished, replaced by the error screen “Well. You found a glitch.” All that remains are tiny thumbnail previews we rescued onto an Are.na board, like digital fossils of a lost web.
+          <p class="event-description" itemprop="description">
+            When web-hosting company Glitch.com shut down overnight, dozens of playful self-made sites from our past workshops vanished, replaced by the error screen "Well. You found a glitch." All that remains are tiny thumbnail previews we rescued onto an Are.na board, like digital fossils of a lost web.
             <br><br>
-            In this hands-on session, we revived those dead pages: decoded the previews, inspected colours, layouts, images and GIFs to reverse-engineer each site’s vibe, and rebuilt them from scratch using HTML, CSS and basic JavaScript.
+            In this hands-on session, we revived those dead pages: decoded the previews, inspected colours, layouts, images and GIFs to reverse-engineer each site's vibe, and rebuilt them from scratch using HTML, CSS and basic JavaScript.
           </p>
         </article>
 
-        <article class="event-card">
+        <!-- WORKSHOP: Object Oriented Storytelling -->
+        <article
+          class="event-card"
+          id="event-object-oriented-storytelling"
+          itemscope
+          itemtype="https://schema.org/EducationEvent"
+          data-event="object-oriented-storytelling-from-field-to-virtual"
+          data-person="melissa-li-yunzhi"
+          data-workshop="object-oriented-storytelling"
+          data-exhibition="bitrot"
+          aria-labelledby="title-object-oriented"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="storytelling, object-oriented narrative, digital art, new media, workshop">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Workshop</span>
+              <span class="event-type" aria-label="Event type: Workshop">Workshop</span>
               <div>
-                <h3>Object Oriented Storytelling: From Field to Virtual</h3>
+                <h3 id="title-object-oriented" itemprop="name">Object Oriented Storytelling: From Field to Virtual</h3>
                 <div class="event-credit">
-                  <strong><a href="https://melissayunzhi.li/" target="_blank" rel="noreferrer" class="inline-link">Mellisa Li Yunzhi</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="melissa-li-yunzhi"
+                  >
+                    <a href="https://melissayunzhi.li/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Melissa Li Yunzhi's website">
+                      <span itemprop="name">Mellisa Li Yunzhi</span>
+                    </a>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             In this two-hour workshop, we learnt to treat everyday objects as narrative anchors that bridge physical material to virtual, inspired by methods from Melissa's project Home is a Dwelling Path.
           </p>
         </article>
@@ -887,195 +2258,463 @@
       </div>
     </section>
 
-    <section class="category-section" data-category="performances">
+    <!-- ═══════════════════════════════════════════════════════════
+         PERFORMANCES SECTION
+         ═══════════════════════════════════════════════════════════ -->
+    <section
+      class="category-section"
+      id="section-performances"
+      data-category="performances"
+      aria-labelledby="heading-performances"
+      data-exhibition="bitrot does-cloud-compute"
+    >
       <div class="section-heading">
-        <h2>Performances</h2>
-        <div class="section-count">8 Events</div>
+        <h2 id="heading-performances">Performances</h2>
+        <div class="section-count" aria-label="8 performance events">8 Events</div>
       </div>
 
       <div class="event-stack">
 
-        <article class="event-card">
+        <!-- PERFORMANCE: That Sounds Exciting! -->
+        <article
+          class="event-card"
+          id="event-that-sounds-exciting"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="that-sounds-exciting"
+          data-person="thatsoundsexciting"
+          data-performance="that-sounds-exciting"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-that-sounds-exciting"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="live coding, algorithmic performance, creative coding, performance">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>That Sounds Exciting!</h3>
+                <h3 id="title-that-sounds-exciting" itemprop="name">That Sounds Exciting!</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.instagram.com/thatsoundsexciting/" target="_blank" rel="noreferrer" class="inline-link">Thatsoundsexciting</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="thatsoundsexciting"
+                  >
+                    <a href="https://www.instagram.com/thatsoundsexciting/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="That Sounds Exciting on Instagram">
+                      <span itemprop="name">Thatsoundsexciting</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">A live coding performance by the live coding group ‘That Sounds Exciting!’</p>
+          <p class="event-description" itemprop="description">A live coding performance by the live coding group 'That Sounds Exciting!'</p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: Claire McMichael -->
+        <article
+          class="event-card"
+          id="event-claire-mcmichael"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="claire-mcmichael"
+          data-person="claire-mcmichael"
+          data-performance="claire-mcmichael"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-claire-mcmichael"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="performance art, experimental performance, London">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>Claire McMichael</h3>
+                <h3 id="title-claire-mcmichael" itemprop="name">Claire McMichael</h3>
                 <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Claire McMichael</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="claire-mcmichael"
+                  >
+                    <a href="about:blank" target="_blank" rel="noreferrer" class="inline-link" aria-label="Claire McMichael">
+                      <span itemprop="name">Claire McMichael</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description"> </p>
+          <p class="event-description" itemprop="description"> </p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: Deposilk -->
+        <article
+          class="event-card"
+          id="event-deposilk"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="deposilk"
+          data-person="deposilk"
+          data-performance="deposilk"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-deposilk"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="performance art, experimental performance, London">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>Deposilk</h3>
+                <h3 id="title-deposilk" itemprop="name">Deposilk</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.instagram.com/depositsilk/" target="_blank" rel="noreferrer" class="inline-link">Deposilk</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="deposilk"
+                  >
+                    <a href="https://www.instagram.com/depositsilk/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Deposilk on Instagram">
+                      <span itemprop="name">Deposilk</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description"> </p>
+          <p class="event-description" itemprop="description"> </p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: Lagtime Seedling (DCC) -->
+        <article
+          class="event-card"
+          id="event-lagtime-seedling-dcc"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="lagtime-seedling"
+          data-person="lagtime-seedling"
+          data-performance="lagtime-seedling"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-lagtime-seedling-dcc"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="browser performance, audio-visual, live coding, YouTube, internet art, ASMR">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>Lagtime Seedling</h3>
+                <h3 id="title-lagtime-seedling-dcc" itemprop="name">Lagtime Seedling</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link">Lagtime Seedling</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="lagtime-seedling"
+                  >
+                    <a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Lagtime Seedling on Instagram">
+                      <span itemprop="name">Lagtime Seedling</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using a large number of live youtube.com video tabs. Through a meticulously choreographed way of using their laptop, they create narrative and musical journeys through strange and overlooked corners of the web. Transparency and accessibility is central to their practice: Lagtime Seedling doesn’t use any traditional music software. Instead, all their sound comes from youtube tabs and a piano keyboard on a separate virtualpiano.net browser window. They interact with their browser as anyone could, using keyboard shortcuts to navigate many tabs and windows quickly, and interact with videos through youtube's default hotkeys. The sound and visuals of lagtime’s compositions, being pulled straight from youtube, carry on a certain algorithmic qualia. Full of ASMR, slime squishing, nail scratching, and soft spoken words, their compositions reflect the overstimulating experience of being online. Through a carefully arranged score, lagtime recontextualises online content, extracting overlooked emotion embedded within it.
+          <p class="event-description" itemprop="description">Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using a large number of live youtube.com video tabs. Through a meticulously choreographed way of using their laptop, they create narrative and musical journeys through strange and overlooked corners of the web. Transparency and accessibility is central to their practice: Lagtime Seedling doesn't use any traditional music software. Instead, all their sound comes from youtube tabs and a piano keyboard on a separate virtualpiano.net browser window. They interact with their browser as anyone could, using keyboard shortcuts to navigate many tabs and windows quickly, and interact with videos through youtube's default hotkeys. The sound and visuals of lagtime's compositions, being pulled straight from youtube, carry on a certain algorithmic qualia. Full of ASMR, slime squishing, nail scratching, and soft spoken words, their compositions reflect the overstimulating experience of being online. Through a carefully arranged score, lagtime recontextualises online content, extracting overlooked emotion embedded within it.
 </p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: London live coding group (Algorave London) -->
+        <article
+          class="event-card"
+          id="event-algorave-london"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="london-live-coding-group-algorave-london"
+          data-person="algorave-london"
+          data-performance="algorave-london"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-algorave-london"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="live coding, algorave, algorithmic music, generative art, performance">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>London live coding group</h3>
+                <h3 id="title-algorave-london" itemprop="name">London live coding group</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.instagram.com/algorave_london/" target="_blank" rel="noreferrer" class="inline-link">Algorave London</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
+                    data-person="algorave-london"
+                  >
+                    <a href="https://www.instagram.com/algorave_london/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Algorave London on Instagram">
+                      <span itemprop="name">Algorave London</span>
+                    </a>
+                  </strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Live coders from Algorave London, featuring Sinsé (@ladysinsemilla), Nadezhda (@nadyaviaproxy), and Daniel (@algorave_london) others</p>
+          <p class="event-description" itemprop="description">Live coders from Algorave London, featuring Sinsé (@ladysinsemilla), Nadezhda (@nadyaviaproxy), and Daniel (@algorave_london) others</p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: Orangespy -->
+        <article
+          class="event-card"
+          id="event-orangespy"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="orangespy"
+          data-person="orangespy"
+          data-performance="orangespy"
+          data-exhibition="bitrot"
+          aria-labelledby="title-orangespy"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="live coding, algorithmic composition, generative visuals, AI art, interactive performance">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>Orangespy</h3>
+                <h3 id="title-orangespy" itemprop="name">Orangespy</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.orangespy.io/about" target="_blank" rel="noreferrer" class="inline-link">Orangespy</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="orangespy"
+                  >
+                    <a href="https://www.orangespy.io/about" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Orangespy's website">
+                      <span itemprop="name">Orangespy</span>
+                    </a>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">A live coding performance by Orangespy who integrates real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity to create responsive environments.</p>
+          <p class="event-description" itemprop="description">A live coding performance by Orangespy who integrates real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity to create responsive environments.</p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: Lagtime Seedling BitRot -->
+        <article
+          class="event-card"
+          id="event-lagtime-seedling-bitrot"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="lagtime-seedling-bitrot"
+          data-person="lagtime-seedling"
+          data-performance="lagtime-seedling-bitrot"
+          data-exhibition="bitrot"
+          aria-labelledby="title-lagtime-seedling-bitrot"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="browser performance, audio-visual, improvisation, internet art, live performance">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>Lagtime Seedling Bitrot</h3>
+                <h3 id="title-lagtime-seedling-bitrot" itemprop="name">Lagtime Seedling Bitrot</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link">Lagtime Seedling</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="lagtime-seedling"
+                  >
+                    <a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Lagtime Seedling on Instagram">
+                      <span itemprop="name">Lagtime Seedling</span>
+                    </a>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">A live browser window performance by Lagtime Seedling who uses youtube video tabs, an online piano, and overlapping browser windows to create narrative audio-visual compositions. This set involved a more improvised approach to their otherwise heavily choreographed process as they browsed the web and piano melodies live on stage.</p>
+          <p class="event-description" itemprop="description">A live browser window performance by Lagtime Seedling who uses youtube video tabs, an online piano, and overlapping browser windows to create narrative audio-visual compositions. This set involved a more improvised approach to their otherwise heavily choreographed process as they browsed the web and piano melodies live on stage.</p>
         </article>
 
-        <article class="event-card">
+        <!-- PERFORMANCE: Yiding Zhang -->
+        <article
+          class="event-card"
+          id="event-yiding-zhang"
+          itemscope
+          itemtype="https://schema.org/PerformanceEvent"
+          data-event="yiding-zhang"
+          data-person="yiding-zhang"
+          data-performance="yiding-zhang"
+          data-exhibition="bitrot"
+          aria-labelledby="title-yiding-zhang"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2025">
+          <meta itemprop="keywords" content="modular synthesis, electronic music, performance art, synthesizer">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Performance</span>
+              <span class="event-type" aria-label="Event type: Performance">Performance</span>
               <div>
-                <h3>Yiding Zhang</h3>
+                <h3 id="title-yiding-zhang" itemprop="name">Yiding Zhang</h3>
                 <div class="event-credit">
-                  <strong><a href="https://yidingzhang.cargo.site/" target="_blank" rel="noreferrer" class="inline-link">Yiding Zhang</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                  <strong
+                    itemprop="performer"
+                    itemscope
+                    itemtype="https://schema.org/Person"
+                    data-person="yiding-zhang"
+                  >
+                    <a href="https://yidingzhang.cargo.site/" target="_blank" rel="noreferrer" class="inline-link" itemprop="url" aria-label="Yiding Zhang's website">
+                      <span itemprop="name">Yiding Zhang</span>
+                    </a>
+                  </strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="BitRot exhibition by Phreaking Collective">BitRot</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+            <div class="event-series" aria-label="Exhibition: BitRot, 2025"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
           </div>
 
-          <p class="event-description">A live performance using a custom-build modular synthesizer.</p>
+          <p class="event-description" itemprop="description">A live performance using a custom-build modular synthesizer.</p>
         </article>
 
       </div>
     </section>
 
-    <section class="category-section" data-category="screenings">
+    <!-- ═══════════════════════════════════════════════════════════
+         SCREENINGS SECTION
+         ═══════════════════════════════════════════════════════════ -->
+    <section
+      class="category-section"
+      id="section-screenings"
+      data-category="screenings"
+      aria-labelledby="heading-screenings"
+      data-exhibition="does-cloud-compute"
+    >
       <div class="section-heading">
-        <h2>Screenings</h2>
-        <div class="section-count">1 Event</div>
+        <h2 id="heading-screenings">Screenings</h2>
+        <div class="section-count" aria-label="1 screening event">1 Event</div>
       </div>
 
       <div class="event-stack">
 
-        <article class="event-card">
+        <!-- SCREENING: Phreaking Film Night -->
+        <article
+          class="event-card"
+          id="event-phreaking-film-night"
+          itemscope
+          itemtype="https://schema.org/ScreeningEvent"
+          data-event="phreaking-film-night"
+          data-exhibition="does-cloud-compute"
+          aria-labelledby="title-phreaking-film-night"
+        >
+          <meta itemprop="eventStatus" content="https://schema.org/EventScheduled">
+          <meta itemprop="eventAttendanceMode" content="https://schema.org/OfflineEventAttendanceMode">
+          <meta itemprop="startDate" content="2026">
+          <meta itemprop="keywords" content="experimental film, artist film, short film, computational art, screening, London">
+          <span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Phreaking Collective">
+            <meta itemprop="url" content="https://phreaking.co.uk">
+          </span>
+
           <div class="event-top">
             <div class="event-meta">
-              <span class="event-type">Screening</span>
+              <span class="event-type" aria-label="Event type: Screening">Screening</span>
               <div>
-                <h3>Phreaking Film Night</h3>
+                <h3 id="title-phreaking-film-night" itemprop="name">Phreaking Film Night</h3>
                 <div class="event-credit">
                   <strong>Various Artists</strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link" itemprop="about" aria-label="Does Cloud Compute (ever) Participate? exhibition">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
             </div>
 
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+            <div class="event-series" aria-label="Exhibition: Does Cloud Compute, 2026"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">
+          <p class="event-description" itemprop="description">
             An evening of computational, experimental, and artist-led short films that bend narrative, fracture reality, and play at the edges of code, image, and memory. These works pushed the medium through storytelling, inventive editing, and striking visual languages.
             <br><br>
             Featuring films by: Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins (Nukleopatra), Ned Caderni, Iman Javaid and Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen.
@@ -1088,17 +2727,17 @@
   </section>
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" role="contentinfo" aria-label="Site footer">
   © Phreaking Collective — Past Events Archive
 </footer>
 
-<div class="pc-lightbox" aria-hidden="true">
+<div class="pc-lightbox" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Image viewer">
   <button class="pc-lightbox__close" aria-label="Close image viewer"></button>
   <button class="pc-lightbox__btn pc-lightbox__prev" aria-label="Previous image">‹</button>
 
   <div class="pc-lightbox__inner">
     <img class="pc-lightbox__img" src="" alt="">
-    <div class="pc-lightbox__caption"></div>
+    <div class="pc-lightbox__caption" aria-live="polite"></div>
   </div>
 
   <button class="pc-lightbox__btn pc-lightbox__next" aria-label="Next image">›</button>
