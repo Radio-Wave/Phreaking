@@ -157,6 +157,14 @@
       margin-bottom:2rem;
     }
 
+    .filter-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .filter-bar{
       position:relative;
       display:flex;
@@ -200,6 +208,24 @@
 
     .filter-btn.active{
       color:#000;
+    }
+
+    .sort-btn {
+      border: 1px solid #fff;
+      background: transparent;
+      color: #fff;
+      padding: .85rem 1.4rem;
+      font-family: 'Fira Mono', 'IBM Plex Mono', monospace;
+      font-size: .9rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+      white-space: nowrap;
+    }
+
+    .sort-btn:hover {
+      background: #fff;
+      color: #000;
     }
 
     section.category-section{
@@ -354,6 +380,20 @@
       .event-series{
         text-align:left;
       }
+
+      .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-bar {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .sort-btn {
+        width: 100%;
+      }
     }
 
     .pc-lightbox{
@@ -452,11 +492,6 @@
       .site-footer{
         margin-left:0;
       }
-
-      .filter-bar{
-        width:100%;
-        justify-content:center;
-      }
     }
   </style>
 
@@ -506,32 +541,35 @@
     </section>
 
     <div class="filter-shell">
-      <div class="filter-bar" role="tablist" aria-label="Past events filter">
-        <div class="filter-pill" aria-hidden="true"></div>
+      <div class="filter-controls">
+        <div class="filter-bar" role="tablist" aria-label="Past events filter">
+          <div class="filter-pill" aria-hidden="true"></div>
 
-        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
-          All
-        </button>
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+            All
+          </button>
 
-        <button class="filter-btn" data-filter="talks" role="tab" aria-selected="false">
-          Talks
-        </button>
+          <button class="filter-btn" data-filter="talks" role="tab" aria-selected="false">
+            Talks
+          </button>
 
-        <button class="filter-btn" data-filter="workshops" role="tab" aria-selected="false">
-          Workshops
-        </button>
+          <button class="filter-btn" data-filter="workshops" role="tab" aria-selected="false">
+            Workshops
+          </button>
 
-        <button class="filter-btn" data-filter="performances" role="tab" aria-selected="false">
-          Performances
-        </button>
+          <button class="filter-btn" data-filter="performances" role="tab" aria-selected="false">
+            Performances
+          </button>
 
-        <button class="filter-btn" data-filter="screenings" role="tab" aria-selected="false">
-          Screenings
-        </button>
+          <button class="filter-btn" data-filter="screenings" role="tab" aria-selected="false">
+            Screenings
+          </button>
+        </div>
+
+        <button id="sort-btn" class="sort-btn">Sort: Newest First ↓</button>
       </div>
     </div>
 
-    <!-- TALKS -->
     <section class="category-section" data-category="talks">
       <div class="section-heading">
         <h2>Talks</h2>
@@ -539,76 +577,6 @@
       </div>
 
       <div class="event-stack">
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Talk</span>
-              <div>
-                <h3>Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina</h3>
-                <div class="event-credit">
-                  <strong><a href="https://erinrobinson.xyz/" target="_blank" rel="noreferrer" class="inline-link">Erin Robinson</a> & <a href="https://www.anthonyfrisby.com/" target="_blank" rel="noreferrer" class="inline-link">Anthony Frisby</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
-          </div>
-
-          <p class="event-description">
-            This lecture explored the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience. Through a post-structuralist and postmodernist lens, the pair discussed artificial intimacies, eroticism, and digital embodiment, reflecting on how the creation of the award winning work offered autoethnographic insights into sex, selfhood, and computational desire.
-          </p>
-
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" alt="Artificial Intimacies lecture image 1">
-            </button>
-
-            <button>
-              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" alt="Artificial Intimacies lecture image 2">
-            </button>
-
-            <button>
-              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" alt="Artificial Intimacies lecture image 3">
-            </button>
-          </div>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Talk</span>
-              <div>
-                <h3>Long Live The New Flesh (or Whatever)</h3>
-                <div class="event-credit">
-                  <strong><a href="https://dianjoy.me/" target="_blank" rel="noreferrer" class="inline-link">Dian Joy</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
-          </div>
-
-          <p class="event-description">
-            In this lecture, Dian Joy explored how desire increasingly functions as a mechanism of discipline and ideological capture within the contemporary digital landscape. Drawing from media theory, philosophy, and digital folklore, the talk interrogated how online platforms reshape desire through algorithmic environments, meme culture, and emergent mythologies through a close reading of Videodrome as a proto-Internet allegory.
-          </p>
-
-          <div class="image-row">
-            <button>
-              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" alt="Long Live The New Flesh lecture image 1">
-            </button>
-
-            <button>
-              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" alt="Long Live The New Flesh lecture image 2">
-            </button>
-
-            <button>
-              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" alt="Long Live The New Flesh lecture image 3">
-            </button>
-          </div>
-        </article>
 
         <article class="event-card">
           <div class="event-top">
@@ -715,10 +683,79 @@
           </div>
         </article>
 
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina</h3>
+                <div class="event-credit">
+                  <strong><a href="https://erinrobinson.xyz/" target="_blank" rel="noreferrer" class="inline-link">Erin Robinson</a> & <a href="https://www.anthonyfrisby.com/" target="_blank" rel="noreferrer" class="inline-link">Anthony Frisby</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">
+            This lecture explored the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience. Through a post-structuralist and postmodernist lens, the pair discussed artificial intimacies, eroticism, and digital embodiment, reflecting on how the creation of the award winning work offered autoethnographic insights into sex, selfhood, and computational desire.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp" alt="Artificial Intimacies lecture image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp" alt="Artificial Intimacies lecture image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" data-full="/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp" alt="Artificial Intimacies lecture image 3">
+            </button>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Talk</span>
+              <div>
+                <h3>Long Live The New Flesh (or Whatever)</h3>
+                <div class="event-credit">
+                  <strong><a href="https://dianjoy.me/" target="_blank" rel="noreferrer" class="inline-link">Dian Joy</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">
+            In this lecture, Dian Joy explored how desire increasingly functions as a mechanism of discipline and ideological capture within the contemporary digital landscape. Drawing from media theory, philosophy, and digital folklore, the talk interrogated how online platforms reshape desire through algorithmic environments, meme culture, and emergent mythologies through a close reading of Videodrome as a proto-Internet allegory.
+          </p>
+
+          <div class="image-row">
+            <button>
+              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp" alt="Long Live The New Flesh lecture image 1">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp" alt="Long Live The New Flesh lecture image 2">
+            </button>
+
+            <button>
+              <img src="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" data-full="/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp" alt="Long Live The New Flesh lecture image 3">
+            </button>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- WORKSHOPS -->
     <section class="category-section" data-category="workshops">
       <div class="section-heading">
         <h2>Workshops</h2>
@@ -726,6 +763,82 @@
       </div>
 
       <div class="event-stack">
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Noisy Spaces</h3>
+                <div class="event-credit">
+                  <strong><a href="https://otherkat.com/" target="_blank" rel="noreferrer" class="inline-link">Kat Macdonald</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">In this workshop, Kat Macdonald explored technology as it relates to collective sound making, taking participants through a history of London’s experimental collective performance scene of the 1970’s and how those methods can be adapted and applied to our current art culture.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>I Want To Be A Website</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.cranberrylemonade.xyz/" target="_blank" rel="noreferrer" class="inline-link">Cranberry lemonade</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">A hands-on, beginner-friendly personal web-making workshop. Exploring HTML, CSS and JavaScript, to create personalised and poetic webpages, to demystify web creation and tell your own digital stories and identities.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Extremely Standardised Fun</h3>
+                <div class="event-credit">
+                  <strong><a href="https://mat-hill.xyz/" target="_blank" rel="noreferrer" class="inline-link">Matt Hill</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">Why are file formats? Are they real? What??? In this workshop, we learnt what file formats really are, where they came from, and why they make us suffer. It started off with an intro to Permacomputing, and how speculative art projects could save engineering. Then, we will learnt just enough computer science to be dangerous. With these new skills, we explored the surprisingly philosophical worlds of bytebeats, generative image-making, and Unicode-art.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Workshop</span>
+              <div>
+                <h3>Intro To Creative Coding For Artists</h3>
+                <div class="event-credit">
+                  <strong><a href="https://magot.neocities.org/" target="_blank" rel="noreferrer" class="inline-link">Margot McEwen</a></strong> — 2026<br>
+                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
+          </div>
+
+          <p class="event-description">This workshop to explored Cables.gl, a free, open-source, node-based live coding tool for WebGL development. We learnt how to manipulate live and pre-recorded video, create and modify simple video effects, and make your creations interactive. We covered how to use input devices such as the mouse, keyboard, MIDI controllers, gamepads, and webcams to drive your visual systems.</p>
+        </article>
 
         <article class="event-card">
           <div class="event-top">
@@ -771,86 +884,9 @@
           </p>
         </article>
 
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Workshop</span>
-              <div>
-                <h3>Noisy Spaces</h3>
-                <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
-          </div>
-
-          <p class="event-description">Further details and documentation coming soon.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Workshop</span>
-              <div>
-                <h3>I Want To Be A Website</h3>
-                <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
-          </div>
-
-          <p class="event-description">Further details and documentation coming soon.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Workshop</span>
-              <div>
-                <h3>Extremely Standardised Fun</h3>
-                <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
-          </div>
-
-          <p class="event-description">Further details and documentation coming soon.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Workshop</span>
-              <div>
-                <h3>Intro To Creative Coding For Artists</h3>
-                <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Artist</a></strong> — 2026<br>
-                  Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
-          </div>
-
-          <p class="event-description">Further details and documentation coming soon.</p>
-        </article>
-
       </div>
     </section>
 
-    <!-- PERFORMANCES -->
     <section class="category-section" data-category="performances">
       <div class="section-heading">
         <h2>Performances</h2>
@@ -864,66 +900,9 @@
             <div class="event-meta">
               <span class="event-type">Performance</span>
               <div>
-                <h3>Orangespy</h3>
+                <h3>That Sounds Exciting!</h3>
                 <div class="event-credit">
-                  <strong><a href="https://www.orangespy.io/about" target="_blank" rel="noreferrer" class="inline-link">Orangespy</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
-          </div>
-
-          <p class="event-description">Archival details and media documentation coming soon.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Performance</span>
-              <div>
-                <h3>Lagtime Seedling Bitrot</h3>
-                <div class="event-credit">
-                  <strong><a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link">Lagtime Seedling</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
-          </div>
-
-          <p class="event-description">Archival details and media documentation coming soon.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Performance</span>
-              <div>
-                <h3>Yiding Zhang</h3>
-                <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Yiding Zhang</a></strong> — 2025<br>
-                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
-          </div>
-
-          <p class="event-description">Archival details and media documentation coming soon.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <div class="event-meta">
-              <span class="event-type">Performance</span>
-              <div>
-                <h3>Thatsoundsexciting</h3>
-                <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Thatsoundsexciting</a></strong> — 2026<br>
+                  <strong><a href="https://www.instagram.com/thatsoundsexciting/" target="_blank" rel="noreferrer" class="inline-link">Thatsoundsexciting</a></strong> — 2026<br>
                   Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
@@ -932,7 +911,7 @@
             <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Archival details and media documentation coming soon.</p>
+          <p class="event-description">A live coding performance by the live coding group ‘That Sounds Exciting!’</p>
         </article>
 
         <article class="event-card">
@@ -940,9 +919,9 @@
             <div class="event-meta">
               <span class="event-type">Performance</span>
               <div>
-                <h3>Claire</h3>
+                <h3>Claire McMichael</h3>
                 <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Claire</a></strong> — 2026<br>
+                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Claire McMichael</a></strong> — 2026<br>
                   Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
@@ -951,7 +930,7 @@
             <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Archival details and media documentation coming soon.</p>
+          <p class="event-description"> </p>
         </article>
 
         <article class="event-card">
@@ -961,7 +940,7 @@
               <div>
                 <h3>Deposilk</h3>
                 <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Deposilk</a></strong> — 2026<br>
+                  <strong><a href="https://www.instagram.com/depositsilk/" target="_blank" rel="noreferrer" class="inline-link">Deposilk</a></strong> — 2026<br>
                   Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
@@ -970,7 +949,7 @@
             <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Archival details and media documentation coming soon.</p>
+          <p class="event-description"> </p>
         </article>
 
         <article class="event-card">
@@ -989,7 +968,8 @@
             <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Archival details and media documentation coming soon.</p>
+          <p class="event-description">Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using a large number of live youtube.com video tabs. Through a meticulously choreographed way of using their laptop, they create narrative and musical journeys through strange and overlooked corners of the web. Transparency and accessibility is central to their practice: Lagtime Seedling doesn’t use any traditional music software. Instead, all their sound comes from youtube tabs and a piano keyboard on a separate virtualpiano.net browser window. They interact with their browser as anyone could, using keyboard shortcuts to navigate many tabs and windows quickly, and interact with videos through youtube's default hotkeys. The sound and visuals of lagtime’s compositions, being pulled straight from youtube, carry on a certain algorithmic qualia. Full of ASMR, slime squishing, nail scratching, and soft spoken words, their compositions reflect the overstimulating experience of being online. Through a carefully arranged score, lagtime recontextualises online content, extracting overlooked emotion embedded within it.
+</p>
         </article>
 
         <article class="event-card">
@@ -997,9 +977,9 @@
             <div class="event-meta">
               <span class="event-type">Performance</span>
               <div>
-                <h3>Livecoders</h3>
+                <h3>London live coding group</h3>
                 <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Livecoders</a></strong> — 2026<br>
+                  <strong><a href="https://www.instagram.com/algorave_london/" target="_blank" rel="noreferrer" class="inline-link">Algorave London</a></strong> — 2026<br>
                   Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
@@ -1008,13 +988,69 @@
             <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Archival details and media documentation coming soon.</p>
+          <p class="event-description">Live coders from Algorave London, featuring Sinsé (@ladysinsemilla), Nadezhda (@nadyaviaproxy), and Daniel (@algorave_london) others</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Orangespy</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.orangespy.io/about" target="_blank" rel="noreferrer" class="inline-link">Orangespy</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">A live coding performance by Orangespy who integrates real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity to create responsive environments.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Lagtime Seedling Bitrot</h3>
+                <div class="event-credit">
+                  <strong><a href="https://www.instagram.com/lagtime__seedling/" target="_blank" rel="noreferrer" class="inline-link">Lagtime Seedling</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">A live browser window performance by Lagtime Seedling who uses youtube video tabs, an online piano, and overlapping browser windows to create narrative audio-visual compositions. This set involved a more improvised approach to their otherwise heavily choreographed process as they browsed the web and piano melodies live on stage.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-top">
+            <div class="event-meta">
+              <span class="event-type">Performance</span>
+              <div>
+                <h3>Yiding Zhang</h3>
+                <div class="event-credit">
+                  <strong><a href="https://yidingzhang.cargo.site/" target="_blank" rel="noreferrer" class="inline-link">Yiding Zhang</a></strong> — 2025<br>
+                  Part of <strong><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-series"><a href="https://phreaking.co.uk/BitRot" target="_blank" rel="noreferrer" class="inline-link">BitRot</a> / 2025</div>
+          </div>
+
+          <p class="event-description">A live performance using a custom-build modular synthesizer.</p>
         </article>
 
       </div>
     </section>
 
-    <!-- SCREENINGS -->
     <section class="category-section" data-category="screenings">
       <div class="section-heading">
         <h2>Screenings</h2>
@@ -1030,7 +1066,7 @@
               <div>
                 <h3>Phreaking Film Night</h3>
                 <div class="event-credit">
-                  <strong><a href="about:blank" target="_blank" rel="noreferrer" class="inline-link">Various Artists</a></strong> — 2026<br>
+                  <strong>Various Artists</strong> — 2026<br>
                   Part of <strong><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute (ever) Participate?</a></strong>
                 </div>
               </div>
@@ -1039,7 +1075,11 @@
             <div class="event-series"><a href="https://phreaking.co.uk/does-cloud-compute-ever-precipitate/" target="_blank" rel="noreferrer" class="inline-link">Does Cloud Compute</a> / 2026</div>
           </div>
 
-          <p class="event-description">Further details, programme notes, and screening documentation coming soon.</p>
+          <p class="event-description">
+            An evening of computational, experimental, and artist-led short films that bend narrative, fracture reality, and play at the edges of code, image, and memory. These works pushed the medium through storytelling, inventive editing, and striking visual languages.
+            <br><br>
+            Featuring films by: Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins (Nukleopatra), Ned Caderni, Iman Javaid and Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen.
+          </p>
         </article>
 
       </div>
@@ -1065,10 +1105,12 @@
 </div>
 
 <script>
-  const filterButtons = document.querySelectorAll('.filter-btn');
+  const filterButtons = document.querySelectorAll('.filter-btn:not(.sort-btn)');
   const sections = document.querySelectorAll('.category-section');
   const pill = document.querySelector('.filter-pill');
+  const sortBtn = document.getElementById('sort-btn');
 
+  // URL Hash Filtering
   function movePill(button){
     if(!button) return;
     const parentRect = button.parentElement.getBoundingClientRect();
@@ -1079,7 +1121,7 @@
     pill.style.transform = `translateX(${rect.left - parentRect.left}px)`;
   }
 
-function setFilter(filter, updateUrl = true){
+  function setFilter(filter, updateUrl = true){
     filterButtons.forEach(btn=>{
       const active = btn.dataset.filter === filter;
       btn.classList.toggle('active', active);
@@ -1138,6 +1180,21 @@ function setFilter(filter, updateUrl = true){
 
   window.addEventListener('resize', ()=>{
     movePill(document.querySelector('.filter-btn.active'));
+  });
+
+  // SORTING TOGGLE
+  let isDescending = true; // Default state
+
+  sortBtn.addEventListener('click', () => {
+    isDescending = !isDescending;
+    sortBtn.textContent = isDescending ? 'Sort: Newest First ↓' : 'Sort: Oldest First ↑';
+
+    const eventStacks = document.querySelectorAll('.event-stack');
+    eventStacks.forEach(stack => {
+      const cards = Array.from(stack.children);
+      cards.reverse();
+      cards.forEach(card => stack.appendChild(card));
+    });
   });
 
   // LIGHTBOX
