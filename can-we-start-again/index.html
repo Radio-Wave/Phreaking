@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Can We Start Again? — Phreaking Collective</title>
+  <meta name="description"
+    content="Can We Start Again? — A new exhibition by Phreaking Collective." />
+  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles/can-we-start-again.css" />
+  <link rel="stylesheet" href="/styles/stylesIndex.css">
+  <link rel="stylesheet" href="/styles/sidebar.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://phreaking.co.uk/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Exhibitions",
+        "item": "https://phreaking.co.uk/exhibitions/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Can We Start Again?",
+        "item": "https://phreaking.co.uk/can-we-start-again/"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Spiral path layers -->
+  <canvas id="cwsa-stars" aria-hidden="true"></canvas>
+  <canvas id="cwsa-paths"  aria-hidden="true"></canvas>
+
+  <div data-sidebar data-sidebar-active="exhibitions.html"></div>
+
+  <main class="layout" role="main">
+    <section class="right">
+      <header class="right-header" aria-hidden="true">
+        <a class="brand-inline" href="/">
+          <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+        </a>
+      </header>
+
+      <div class="wrap">
+
+        <section class="hero">
+          <h1 class="title">
+            Can We<br>
+            Start<br>
+            Again?
+          </h1>
+          <p class="lede">
+            A new exhibition by the Phreaking Collective.
+          </p>
+        </section>
+
+        <section class="meta" aria-label="Exhibition quick info">
+          <div class="meta-block">
+            <h2>Keywords</h2>
+            <ul class="keywords">
+              <li>Reset</li>
+              <li>Regeneration</li>
+              <li>Systems</li>
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <h2>Location</h2>
+            <p>TBC</p>
+          </div>
+
+          <div class="meta-block">
+            <h2>Dates</h2>
+            <p>Coming soon</p>
+          </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-heading">
+          <h2 id="about-heading" class="section-title">About</h2>
+          <section class="body-copy">
+            <p>
+              More information about <em>Can We Start Again?</em> coming soon.
+            </p>
+          </section>
+        </section>
+
+      </div>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Phreaking Collective — London.</p>
+      </footer>
+    </section>
+  </main>
+
+  <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/can-we-start-again.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
