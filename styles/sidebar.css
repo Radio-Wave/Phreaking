@@ -257,6 +257,8 @@
    ================================ */
 @media (max-width:640px){
     /* smaller overall padding on the stacked rail */
+  .pc-sidebar .sidebar-footer { display: none; }
+
   :root{
     --pc-sidebar-pad: 14px;     /* was larger; reduce the top whitespace */
   }
