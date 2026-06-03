@@ -103,6 +103,8 @@
     if (match) {
       match.setAttribute('aria-current', 'page');
       match.classList.add('active');
+      const details = match.closest('details');
+      if (details) details.open = true;
     }
   }
 })();

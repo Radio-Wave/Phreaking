@@ -140,6 +140,54 @@
   color: var(--pc-sidebar-ink);
 }
 
+/* Events collapsible (details/summary) */
+.pc-sidebar .index details {
+  display: contents;
+}
+
+.pc-sidebar .index details > ul {
+  margin: 0.2rem 0 0.2rem 1.1rem;
+  gap: 0.35rem;
+}
+
+.pc-sidebar .index details > ul a {
+  font-size: 14px;
+}
+
+.pc-sidebar .index summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  color: var(--pc-sidebar-muted);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.pc-sidebar .index summary::-webkit-details-marker { display: none; }
+.pc-sidebar .index summary::marker { display: none; }
+
+.pc-sidebar .index summary::before {
+  content: "↗";
+  font-size: 0.9em;
+  opacity: 0.7;
+  transform: translateY(-1px);
+}
+
+.pc-sidebar .index summary:hover,
+.pc-sidebar .index details[open] > summary {
+  color: var(--pc-sidebar-ink);
+}
+
+.pc-sidebar .index summary:hover::before,
+.pc-sidebar .index details[open] > summary::before {
+  transform: translate(2px, -1px);
+}
+
 .pc-sidebar .kicker {
   margin: 0 0 6px 0;
   font-weight: 700;

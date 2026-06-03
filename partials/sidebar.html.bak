@@ -7,10 +7,7 @@
 
 <aside class="left pc-sidebar" aria-label="Sidebar">
   <a class="logo" href="/" aria-label="Phreaking Collective">
-    <svg class="mark" viewBox="0 0 220 40" role="img" aria-labelledby="sidebar-logo-title">
-      <title id="sidebar-logo-title">Phreaking Collective</title>
-      <img class="logoImg" src="assets/PhreakingLogoWhite.png" alt="Phreaking Collective logo">
-    </svg>
+    <img class="logoImg" src="assets/PhreakingLogoWhite.png" alt="Phreaking Collective logo">
   </a>
 
   <nav class="index" aria-label="Site index">
@@ -18,7 +15,16 @@
       <li><a href="exhibitions/index.html">exhibitions</a></li>
       <li><a href="manifesto.html">manifesto</a></li>
       <li><a href="magazine.html">phreak mag</a></li>
-      <li><a href="open-projector.html">open projector</a></li>
+      <li>
+        <details>
+          <summary>events</summary>
+          <ul>
+            <li><a href="mixed-signals.html">mixed signals</a></li>
+            <li><a href="open-projector.html">open projector</a></li>
+            <li><a href="past-events.html">past events</a></li>
+          </ul>
+        </details>
+      </li>
       <li><a href="about.html">about</a></li>
       <li><a href="https://store.phreaking.co.uk" target="_blank" rel="noopener">store</a></li>
     </ul>
