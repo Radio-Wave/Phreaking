@@ -115,6 +115,15 @@
         "media archaeology",
         "live coding",
         "internet art"
+      ],
+      "exhibitionCategory": "hosted",
+      "sortOrder": 2,
+      "description": "Our inaugural show in Copeland Gallery on decay, entropy, and the poetry of corrupted data. A multi-room show featuring installations, type experiments, and audiovisual pieces from the collective.",
+      "linkLabel": "BitRot",
+      "images": [
+        {"src": "/assets/Index/BitRotShowImg.php.webp", "alt": "BitRot exhibition poster"},
+        {"src": "/assets/Index/BitRotShowImg1.webp", "alt": "BitRot installation view"},
+        {"src": "/assets/Index/BitRotShowImg2.webp", "alt": "BitRot gallery detail"}
       ]
     },
     {
@@ -145,6 +154,16 @@
         "computational art",
         "critical AI",
         "live coding"
+      ],
+      "exhibitionCategory": "hosted",
+      "sortOrder": 1,
+      "description": "A question about hidden infrastructures, energy, and the weather systems of data. Installations, sound, and computational works translate the cloud into something tangible.",
+      "nameHtml": "Does Cloud Compute <em>(ever)</em> Precipitate?",
+      "linkLabel": "DCCeP",
+      "images": [
+        {"src": "/assets/ExhibitionEx/DDceP/DDCeP-1.webp", "alt": "Does Cloud Compute (ever) Precipitate? poster"},
+        {"src": "/assets/ExhibitionEx/DDceP/DDCeP-2.webp", "alt": "DCCeP event poster"},
+        {"src": "/assets/ExhibitionEx/DDceP/DDCeP-3.webp", "alt": "Workshop poster for DCCeP"}
       ]
     },
     {
@@ -1764,6 +1783,63 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       }
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#exhibition-ddw",
+      "name": "Digital Design Weekend - V&A South Kensington",
+      "exhibitionCategory": "featured",
+      "sortOrder": 1,
+      "url": "https://www.vam.ac.uk/event/a2bO4rKGZn/digital-design-weekend-2025",
+      "description": "Part of London Design Festival, a programming of interactive art at South Kensington.",
+      "linkLabel": "V&A Gallery",
+      "images": [
+        {"src": "/assets/ExhibitionEx/DDW/DDW-2.webp", "alt": "Artwork installed in V&A"},
+        {"src": "/assets/ExhibitionEx/DDW/DDW-1.webp", "alt": "Artwork installed in V&A"},
+        {"src": "/assets/ExhibitionEx/DDW/DDW-3.webp", "alt": "Artwork installed in V&A"},
+        {"src": "/assets/ExhibitionEx/DDW/DDW-4.webp", "alt": "Artwork installed in V&A"},
+        {"src": "/assets/ExhibitionEx/DDW/DDW-5.webp", "alt": "Artwork installed in V&A"},
+        {"src": "/assets/ExhibitionEx/DDW/DDW-7.webp", "alt": "Artwork installed in V&A"}
+      ]
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#exhibition-tpg",
+      "name": "Flickr Foundation x The Photographers Gallery",
+      "exhibitionCategory": "featured",
+      "sortOrder": 2,
+      "url": "https://thephotographersgallery.org.uk/whats-on/flickr-foundation-x-camberwell-computational-arts-takeover",
+      "description": "Invited to work with the Flickr Foundation's API.",
+      "linkLabel": "Photographers Gallery",
+      "images": [
+        {"src": "/assets/ExhibitionEx/TPG/TPG-1.webp", "alt": "Artwork installed in The Photographers Gallery"},
+        {"src": "/assets/ExhibitionEx/TPG/TPG-2.webp", "alt": "Artwork installed in The Photographers Gallery"},
+        {"src": "/assets/ExhibitionEx/TPG/TPG-3.webp", "alt": "Artwork installed in The Photographers Gallery"},
+        {"src": "/assets/ExhibitionEx/TPG/TPG-4.webp", "alt": "Artwork installed in The Photographers Gallery"},
+        {"src": "/assets/ExhibitionEx/TPG/TPG-5.webp", "alt": "Artwork installed in The Photographers Gallery"},
+        {"src": "/assets/ExhibitionEx/TPG/TPG-6.webp", "alt": "Artwork installed in The Photographers Gallery"}
+      ]
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#exhibition-folder02",
+      "name": "Folder 02 - Cranberry Lemonaide",
+      "exhibitionCategory": "featured",
+      "sortOrder": 3,
+      "url": "https://www.cranberrylemonade.xyz/library/folder02",
+      "description": "Folder02 in Milbank tower - May 2025. Organised by sister collective Cranberry Lemonaide.",
+      "linkLabel": "Folder02",
+      "images": [
+        {"src": "/assets/ExhibitionEx/Folder02/F02-1.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-2.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-3.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-4.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-5.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-6.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-7.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-8.webp", "alt": "Artwork at Folder02"},
+        {"src": "/assets/ExhibitionEx/Folder02/F02-9.webp", "alt": "Artwork at Folder02"}
+      ]
     }
   ]
 }

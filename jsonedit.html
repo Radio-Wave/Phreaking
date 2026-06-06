@@ -205,6 +205,32 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   color:#9a9a90;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;text-align:center;line-height:1.4;}
 .r-cwsa .eposter img{width:100%;height:100%;object-fit:cover;display:block;}
 
+/* ── RENDER: EXHIBITIONS ── */
+.r-exh{padding:2rem;background:#0b0b0c;min-height:100%;font-family:'IBM Plex Mono',monospace;color:#e8e8ec;}
+.r-exh .sec-head{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:#b0b0bb;
+  margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #2a2a2d;}
+.r-exh .exh-block{margin-bottom:2rem;}
+.r-exh .exh-title{font-size:1.15rem;font-weight:500;margin-bottom:.65rem;line-height:1.3;}
+.r-exh .exh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.65rem;}
+.r-exh .exh-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;}
+.r-exh .exh-desc{color:#ccc;font-size:.85rem;line-height:1.6;margin-bottom:.4rem;}
+.r-exh .exh-link a{color:#e8e8ec;text-decoration:underline;font-size:.85rem;}
+.r-exh hr{border:none;border-top:1px solid #2a2a2d;margin:1.5rem 0;}
+
+/* ── EXHIBITION LIST ITEMS ── */
+.exh-items-section{border-bottom:1px solid var(--brd);padding-bottom:6px;margin-bottom:4px;}
+.exh-items-head{padding:10px 14px 6px;display:flex;align-items:center;justify-content:space-between;}
+.exh-items-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);}
+.exh-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;
+  border-left:2px solid transparent;transition:.1s;}
+.exh-item:hover{background:rgba(255,255,255,.04);}
+.exh-item.active{background:rgba(34,197,94,.1);border-left-color:var(--ok);}
+.exh-cat{font-size:9px;padding:2px 5px;border-radius:3px;white-space:nowrap;flex-shrink:0;
+  font-family:var(--mono);font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.exh-cat-h{background:rgba(34,197,94,.18);color:var(--ok);}
+.exh-cat-f{background:rgba(245,158,11,.18);color:var(--warn);}
+.exh-item-name{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
+
 /* ── STATUS BAR ── */
 .sbar{position:fixed;bottom:0;left:0;right:0;height:22px;background:var(--accent);
   display:flex;align-items:center;padding:0 12px;font-size:10px;font-family:var(--mono);gap:14px;z-index:100;}
@@ -337,6 +363,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <option value="__add__">+ Add new exhibition…</option>
   </select>
   <select class="sel" onchange="setStyle(this.value)">
+    <option value="exh">Render: Exhibitions</option>
     <option value="dcc">Render: Does Cloud Compute</option>
     <option value="pe">Render: Past Events</option>
     <option value="minimal">Render: Minimal</option>
@@ -560,6 +587,34 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   </div>
 </div>
 
+<!-- New Exhibition Entry Modal -->
+<div class="modal-ov" id="newExhModal">
+  <div class="modal" style="width:400px;">
+    <h3>New Exhibition Entry</h3>
+    <div class="fields">
+      <div class="field">
+        <label>Exhibition Name *</label>
+        <input type="text" id="neExhName" placeholder="e.g. Open Projector Festival"
+          onkeydown="if(event.key==='Enter')submitNewExhibition()">
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <select id="neExhCat">
+          <option value="hosted">Hosted by Phreaking Collective</option>
+          <option value="featured">Featuring Phreaking Collective members</option>
+        </select>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7;">
+      Creates a new <code style="font-family:var(--mono)">ExhibitionEvent</code> entry you can fill in immediately.
+    </p>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeNewExhibitionModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitNewExhibition()">Create</button>
+    </div>
+  </div>
+</div>
+
 <!-- GitHub Config Modal -->
 <div class="modal-ov" id="ghModal">
   <div class="modal" style="width:440px;">
@@ -620,7 +675,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 let data = null;
 let curIdx = null;
 let exhFilter = 'all';
-let renderStyle = 'dcc';
+let renderStyle = 'exh';
 let prevFilter = 'all';
 
 const imgConvState   = {}; // key: `${curIdx}_${imgIdx}`
@@ -653,6 +708,14 @@ const TYPE_MAP = {
   PerformingArtsEvent:'Performance', ScreeningEvent:'Screening'
 };
 const EVENT_TYPES = new Set(['EducationEvent','Event','PerformingArtsEvent','ScreeningEvent','SocialEvent']);
+
+function isExhibition(item){
+  if(!item) return false;
+  const t=item['@type'];
+  if(!t) return false;
+  return (Array.isArray(t)?t:[t]).includes('ExhibitionEvent');
+}
+function getExhibitions(){ return data?data['@graph'].filter(isExhibition):[]; }
 
 // ── UTILS ──────────────────────────────────────────────────
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -880,14 +943,42 @@ function setPF(v,btn){
 function renderList(){
   const el=document.getElementById('elist');
   if(!data){ el.innerHTML='<div class="empty"><div class="empty-ico">⬡</div><h3>No JSON loaded</h3><p>Load from site or upload a file.</p></div>'; return; }
+
+  let html='';
+
+  // ── Exhibitions section ──
+  const exhs=getExhibitions();
+  if(exhs.length){
+    const hosted=exhs.filter(e=>e.exhibitionCategory==='hosted').sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+    const featured=exhs.filter(e=>e.exhibitionCategory==='featured').sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+    const rest=exhs.filter(e=>!e.exhibitionCategory).sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+    html+=`<div class="exh-items-section">
+      <div class="exh-items-head">
+        <span class="exh-items-label">Exhibitions</span>
+        <button class="btn btn-ok btn-sm" onclick="showNewExhibitionModal()">+ New</button>
+      </div>`;
+    [...hosted,...featured,...rest].forEach(ex=>{
+      const gi=data['@graph'].indexOf(ex);
+      const cat=ex.exhibitionCategory||'';
+      const catCls=cat==='hosted'?'exh-cat-h':cat==='featured'?'exh-cat-f':'';
+      const catLbl=cat==='hosted'?'hosted':cat==='featured'?'featured':'';
+      html+=`<div class="exh-item${curIdx===gi?' active':''}" onclick="selectEvent(${gi})">
+        ${catLbl?`<span class="exh-cat ${catCls}">${catLbl}</span>`:''}
+        <span class="exh-item-name">${esc(ex.name||'Untitled')}</span>
+        ${ex.sortOrder!=null?`<span class="eitem-ord">#${ex.sortOrder}</span>`:''}
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // ── Events section ──
   const evs=getEvents();
-  if(!evs.length){ el.innerHTML='<div class="empty"><div class="empty-ico">∅</div><h3>No events found</h3><p>Add a new event to get started.</p></div>'; return; }
+  if(!evs.length && !exhs.length){ el.innerHTML='<div class="empty"><div class="empty-ico">∅</div><h3>No events found</h3><p>Add a new event to get started.</p></div>'; return; }
 
   const groups={};
   evs.forEach(ev=>{ const k=ev.exhibition||'untagged'; if(!groups[k])groups[k]=[]; groups[k].push(ev); });
   Object.values(groups).forEach(g=>g.sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99)));
 
-  let html='';
   const order=['does-cloud-compute','bitrot','untagged'];
   const keys=[...order.filter(k=>groups[k]),...Object.keys(groups).filter(k=>!order.includes(k))];
 
@@ -926,6 +1017,7 @@ function closeEdit(){
 
 function buildForm(){
   const ev=data['@graph'][curIdx]; if(!ev) return;
+  if(isExhibition(ev)){ buildExhibitionForm(ev); return; }
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
   const imgs=ev.images||[];
@@ -970,6 +1062,39 @@ function buildForm(){
       <div class="field"><label>End Date</label>
         <input id="ef-end" value="${esc(ev.endDate||'')}" placeholder="2025" oninput="liveUp()"></div>
     </div>
+    <div class="field"><label>Images</label>
+      <div class="imgs-editor" id="imgsEd">${imgs.map(imgRow).join('')}</div>
+      <button class="add-img" onclick="addImg()">+ Add Image</button>
+    </div>`;
+  restoreAllConvUI();
+}
+
+function buildExhibitionForm(ex){
+  document.getElementById('editTitle').textContent=ex.name||'Untitled Exhibition';
+  const cat=ex.exhibitionCategory||'hosted';
+  const imgs=ex.images||[];
+  document.getElementById('editBody').innerHTML=`
+    <div class="field"><label>Exhibition Name</label>
+      <input id="ef-name" value="${esc(ex.name||'')}" oninput="liveUp()"></div>
+    <div class="field">
+      <label>Name HTML <span style="font-weight:400;color:var(--muted)">(optional — preserves &lt;em&gt; etc.)</span></label>
+      <input id="ef-name-html" value="${esc(ex.nameHtml||'')}" placeholder="e.g. Does Cloud Compute &lt;em&gt;(ever)&lt;/em&gt; Precipitate?" style="font-family:var(--mono);font-size:11px;" oninput="liveUp()"></div>
+    <div class="frow">
+      <div class="field"><label>Category</label>
+        <select id="ef-cat" onchange="liveUp()">
+          <option value="hosted"${cat==='hosted'?' selected':''}>Hosted by Phreaking</option>
+          <option value="featured"${cat==='featured'?' selected':''}>Featuring PC members</option>
+        </select></div>
+      <div class="field"><label>Sort Order</label>
+        <input type="number" id="ef-sort" value="${ex.sortOrder??''}" min="1" oninput="liveUp()"></div>
+    </div>
+    <div class="field"><label>URL</label>
+      <input type="url" id="ef-url" value="${esc(ex.url||'')}" placeholder="https://phreaking.co.uk/…" oninput="liveUp()"></div>
+    <div class="field"><label>Description</label>
+      <textarea id="ef-desc" rows="4" oninput="liveUp()">${esc(ex.description||'')}</textarea></div>
+    <div class="field">
+      <label>Link Label <span style="font-weight:400;color:var(--muted)">(used in "View the full X page ↗")</span></label>
+      <input id="ef-link-label" value="${esc(ex.linkLabel||'')}" placeholder="e.g. DCCeP, BitRot, V&amp;A Gallery" oninput="liveUp()"></div>
     <div class="field"><label>Images</label>
       <div class="imgs-editor" id="imgsEd">${imgs.map(imgRow).join('')}</div>
       <button class="add-img" onclick="addImg()">+ Add Image</button>
@@ -1222,10 +1347,16 @@ function downloadConvert(imgIdx, type){
 
 // Returns the repo-relative path for a converted image (no leading slash)
 function imgAssetPath(ev, imgIdx, type){
-  const exh     = ev.exhibition || '';
-  const evSlug  = ev.name ? slug(ev.name) : 'event';
-  const n       = imgIdx + 1;
-  const ext     = type === 'webp' ? '.webp' : '.jpg';
+  const evSlug = ev.name ? slug(ev.name) : 'item';
+  const n      = imgIdx + 1;
+  const ext    = type === 'webp' ? '.webp' : '.jpg';
+
+  // Exhibition entries go into assets/ExhibitionEx/<slug>/
+  if(isExhibition(ev)){
+    return `assets/ExhibitionEx/${evSlug}/${evSlug}_${n}${ext}`;
+  }
+
+  const exh = ev.exhibition || '';
   let folder;
   if      (exh === 'can-we-start-again') folder = `assets/CanWeStartAgain/Events/${evSlug}`;
   else if (exh === 'does-cloud-compute') folder = `assets/DCCeP/Events/${evSlug}`;
@@ -1248,8 +1379,24 @@ function applyConvertPaths(imgIdx){
   toast('Paths updated','ok');
 }
 
+function liveUpExhibition(ex){
+  const g=id=>document.getElementById(id)?.value;
+  const s=g('ef-sort');
+  ex.name        = g('ef-name')       || ex.name;
+  ex.nameHtml    = g('ef-name-html')  ?? ex.nameHtml;
+  ex.exhibitionCategory = g('ef-cat') || ex.exhibitionCategory;
+  ex.sortOrder   = s ? parseInt(s)    : ex.sortOrder;
+  ex.url         = g('ef-url')        ?? ex.url;
+  ex.description = g('ef-desc')       ?? ex.description;
+  ex.linkLabel   = g('ef-link-label') ?? ex.linkLabel;
+  markUnsaved();
+  document.getElementById('editTitle').textContent = ex.name || 'Untitled Exhibition';
+  renderPreview();
+}
+
 function liveUp(){
   const ev=data['@graph'][curIdx]; if(!ev) return;
+  if(isExhibition(ev)){ liveUpExhibition(ev); return; }
   const g=id=>document.getElementById(id)?.value;
   const s=g('ef-sort');
   ev.name=g('ef-name')||ev.name;
@@ -1360,7 +1507,13 @@ function submitNewEvent(){
 // ── PREVIEW ───────────────────────────────────────────────
 function renderPreview(){
   const frame=document.getElementById('prevFrame');
-  if(!data){ frame.innerHTML='<div class="prev-ph">Load a JSON file to preview events</div>'; return; }
+  if(!data){ frame.innerHTML='<div class="prev-ph">Load a JSON file to preview</div>'; return; }
+
+  if(renderStyle==='exh'){
+    frame.innerHTML=renderExhibitionsPage();
+    return;
+  }
+
   const evs=getEvents()
     .filter(ev=>prevFilter==='all'||ev.exhibition===prevFilter)
     .sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
@@ -1491,6 +1644,46 @@ function renderCWSA(evs){
     });
     h+=`</div>`;
   });
+  return h+'</div>';
+}
+
+function renderExhibitionsPage(){
+  const exhs=getExhibitions();
+  if(!exhs.length) return '<div class="prev-ph" style="color:#444">No ExhibitionEvent entries found in JSON</div>';
+
+  const hosted  = exhs.filter(e=>e.exhibitionCategory==='hosted') .sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+  const featured= exhs.filter(e=>e.exhibitionCategory==='featured').sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+  const rest    = exhs.filter(e=>!e.exhibitionCategory);
+
+  function renderBlock(ex){
+    const href=esc(ex.url||'#');
+    const title=ex.nameHtml || esc(ex.name||'Untitled');
+    const imgs=(ex.images||[]).map((img,i)=>{
+      const src=imgPreviewURL(ex,i,'src')||img.src;
+      return `<img src="${esc(src)}" alt="${esc(img.alt||'')}" loading="lazy">`;
+    }).join('');
+    const linkLabel=ex.linkLabel||ex.name||'Exhibition';
+    return `<div class="exh-block">
+      <div class="exh-title">${title}</div>
+      ${imgs?`<div class="exh-grid">${imgs}</div>`:''}
+      <div class="exh-desc">${esc(ex.description||'')}</div>
+      <div class="exh-link"><a href="${href}" target="_blank" rel="noopener">View the full ${esc(linkLabel)} page ↗</a></div>
+    </div>`;
+  }
+
+  let h='<div class="r-exh">';
+  if(hosted.length){
+    h+=`<div class="sec-head">Exhibitions hosted by Phreaking Collective</div>`;
+    h+=hosted.map(renderBlock).join('<hr>');
+  }
+  if(featured.length){
+    h+=`<div class="sec-head" style="margin-top:2rem">Exhibitions featuring Phreaking Collective members</div>`;
+    h+=featured.map(renderBlock).join('<hr>');
+  }
+  if(rest.length){
+    h+=`<div class="sec-head" style="margin-top:2rem">Other</div>`;
+    h+=rest.map(renderBlock).join('<hr>');
+  }
   return h+'</div>';
 }
 
@@ -1905,6 +2098,47 @@ async function uploadImgToGitHub(imgIdx, type){
   }
 }
 
+// ── NEW EXHIBITION ENTRY ──────────────────────────────────
+function showNewExhibitionModal(){
+  document.getElementById('newExhModal').classList.add('on');
+  document.getElementById('neExhName').value='';
+  document.getElementById('neExhCat').value='hosted';
+  setTimeout(()=>document.getElementById('neExhName').focus(),50);
+}
+function closeNewExhibitionModal(){
+  document.getElementById('newExhModal').classList.remove('on');
+}
+function submitNewExhibition(){
+  const nameEl=document.getElementById('neExhName');
+  const name=nameEl.value.trim(); if(!name){ nameEl.focus(); return; }
+  const cat=document.getElementById('neExhCat').value;
+
+  if(!data) data={'@context':'https://schema.org','@graph':[]};
+  if(!Array.isArray(data['@graph'])) data['@graph']=[];
+
+  const maxOrd=getExhibitions().reduce((m,e)=>Math.max(m,e.sortOrder||0),0);
+  const newExh={
+    '@type':'ExhibitionEvent',
+    '@id':`https://phreaking.co.uk/#exhibition-${slug(name)}`,
+    name,
+    exhibitionCategory: cat,
+    sortOrder: maxOrd+1,
+    url:'',
+    description:'',
+    linkLabel:'',
+    images:[]
+  };
+
+  data['@graph'].push(newExh);
+  markUnsaved();
+  closeNewExhibitionModal();
+  const newIdx=data['@graph'].length-1;
+  renderList();
+  renderPreview();
+  selectEvent(newIdx);
+  toast('Exhibition "'+name+'" created','ok');
+}
+
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', ()=>{
   // Auto-fill slug from display name in the add-exhibition modal
@@ -1933,6 +2167,7 @@ document.addEventListener('keydown', e=>{
     if(document.getElementById('addTypeModal').classList.contains('on')) closeAddTypeModal();
     if(document.getElementById('calPicker').style.display !== 'none') calClose();
     if(document.getElementById('ghModal').classList.contains('on')) closeGhModal();
+    if(document.getElementById('newExhModal').classList.contains('on')) closeNewExhibitionModal();
   }
 });
 </script>
