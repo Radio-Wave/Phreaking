@@ -182,6 +182,29 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .r-min .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:.5rem 0 .9rem;}
 .r-min .gallery-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;}
 
+/* ── RENDER: CAN WE START AGAIN ── */
+.r-cwsa{padding:2rem;background:#161614;min-height:100%;font-family:'IBM Plex Mono',monospace;color:#e8e8e0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  background-size:250px 250px;}
+.r-cwsa .sec-head{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#7ab020;opacity:.85;margin-bottom:1.25rem;padding-bottom:.45rem;border-bottom:1px solid #282824;}
+.r-cwsa .estack{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2.5rem;}
+.r-cwsa .ecard{display:grid;grid-template-columns:1fr 120px;gap:1.5rem;
+  border:1px solid #282824;padding:1.25rem;background:rgba(22,22,20,.82);}
+.r-cwsa .ebody{display:flex;flex-direction:column;gap:.45rem;}
+.r-cwsa .elabel{display:inline-flex;border:1px solid #282824;padding:.18rem .5rem;
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#7ab020;width:fit-content;}
+.r-cwsa .ecard h3{font-size:1rem;font-weight:600;color:#e8e8e0;margin:0;line-height:1.2;}
+.r-cwsa .etime{font-size:.78rem;color:#9a9a90;}
+.r-cwsa .edesc{font-size:.8rem;color:#9a9a90;line-height:1.6;
+  display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;margin:0;}
+.r-cwsa .elink{font-size:.78rem;margin-top:auto;padding-top:.5rem;}
+.r-cwsa .elink a{color:#7ab020;text-decoration:underline;text-underline-offset:.18em;}
+.r-cwsa .eposter{aspect-ratio:3/4;border:1px solid #282824;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  color:#9a9a90;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;text-align:center;line-height:1.4;}
+.r-cwsa .eposter img{width:100%;height:100%;object-fit:cover;display:block;}
+
 /* ── STATUS BAR ── */
 .sbar{position:fixed;bottom:0;left:0;right:0;height:22px;background:var(--accent);
   display:flex;align-items:center;padding:0 12px;font-size:10px;font-family:var(--mono);gap:14px;z-index:100;}
@@ -317,6 +340,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <option value="dcc">Render: Does Cloud Compute</option>
     <option value="pe">Render: Past Events</option>
     <option value="minimal">Render: Minimal</option>
+    <option value="cwsa">Render: Can We Start Again?</option>
   </select>
   <div class="tb-right">
     <div class="udot" id="udot" title="Unsaved changes"></div>
@@ -1341,7 +1365,7 @@ function renderPreview(){
     .filter(ev=>prevFilter==='all'||ev.exhibition===prevFilter)
     .sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
   if(!evs.length){ frame.innerHTML='<div class="prev-ph">No events match this filter</div>'; return; }
-  const fn={dcc:renderDCC,pe:renderPE,minimal:renderMin}[renderStyle]||renderDCC;
+  const fn={dcc:renderDCC,pe:renderPE,minimal:renderMin,cwsa:renderCWSA}[renderStyle]||renderDCC;
   frame.innerHTML=fn(evs);
 }
 
@@ -1435,6 +1459,34 @@ function renderMin(evs){
         ${imgs}
         <p class="edesc">${esc(ev.description||'')}</p>
         ${ev.eventCompletedUrl?`<p class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></p>`:''}
+      </div>`;
+    });
+    h+=`</div>`;
+  });
+  return h+'</div>';
+}
+
+function renderCWSA(evs){
+  const g=groupByExh(evs);
+  let h='<div class="r-cwsa">';
+  const _ord=['can-we-start-again','does-cloud-compute','bitrot','untagged'];
+  [..._ord.filter(k=>g[k]),...Object.keys(g).filter(k=>!_ord.includes(k))].forEach(exh=>{
+    h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="estack">`;
+    g[exh].forEach(ev=>{
+      const src=ev.images&&ev.images.length?(imgPreviewURL(ev,0,'src')||ev.images[0].src):'';
+      const alt=ev.images&&ev.images.length?ev.images[0].alt||'':'';
+      const poster=src
+        ?`<div class="eposter"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy"></div>`
+        :`<div class="eposter">No image</div>`;
+      h+=`<div class="ecard">
+        <div class="ebody">
+          <span class="elabel">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
+          <h3>${esc(ev.name||'Untitled')}</h3>
+          ${ev.displayDate?`<div class="etime">${esc(ev.displayDate)}</div>`:''}
+          <p class="edesc">${esc(ev.description||'')}</p>
+          ${ev.eventCompletedUrl?`<div class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank" rel="noopener">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></div>`:''}
+        </div>
+        ${poster}
       </div>`;
     });
     h+=`</div>`;

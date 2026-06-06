@@ -321,6 +321,22 @@ hr {
 .cwsa-filter-btn.active { background: var(--ink); color: var(--bg); }
 .cwsa-filter-btn:hover:not(.active) { color: var(--ink); }
 
+.cwsa-filter-btn[data-filter="Talk"] { color: #6ecce0; }
+.cwsa-filter-btn[data-filter="Talk"].active { background: rgba(46,122,148,0.18); color: #6ecce0; }
+.cwsa-filter-btn[data-filter="Talk"]:hover:not(.active) { background: rgba(46,122,148,0.08); color: #6ecce0; }
+
+.cwsa-filter-btn[data-filter="Event"] { color: var(--accent); }
+.cwsa-filter-btn[data-filter="Event"].active { background: rgba(122,176,32,0.18); color: var(--accent); }
+.cwsa-filter-btn[data-filter="Event"]:hover:not(.active) { background: rgba(122,176,32,0.08); color: var(--accent); }
+
+.cwsa-filter-btn[data-filter="Workshop"] { color: #d4a055; }
+.cwsa-filter-btn[data-filter="Workshop"].active { background: rgba(180,120,40,0.18); color: #d4a055; }
+.cwsa-filter-btn[data-filter="Workshop"]:hover:not(.active) { background: rgba(180,120,40,0.08); color: #d4a055; }
+
+.cwsa-filter-btn[data-filter="Performance"] { color: #c480dd; }
+.cwsa-filter-btn[data-filter="Performance"].active { background: rgba(140,60,160,0.18); color: #c480dd; }
+.cwsa-filter-btn[data-filter="Performance"]:hover:not(.active) { background: rgba(140,60,160,0.08); color: #c480dd; }
+
 /* ---- Event cards ---- */
 .cwsa-events-list {
   display: flex;
@@ -355,6 +371,26 @@ hr {
   letter-spacing: 0.08em;
   color: var(--accent);
   width: fit-content;
+}
+.cwsa-event-card[data-label="Talk"] .cwsa-event-label {
+  color: #6ecce0;
+  border-color: rgba(46,122,148,0.25);
+  background: rgba(46,122,148,0.10);
+}
+.cwsa-event-card[data-label="Event"] .cwsa-event-label {
+  color: var(--accent);
+  border-color: rgba(122,176,32,0.25);
+  background: rgba(122,176,32,0.10);
+}
+.cwsa-event-card[data-label="Workshop"] .cwsa-event-label {
+  color: #d4a055;
+  border-color: rgba(180,120,40,0.25);
+  background: rgba(180,120,40,0.10);
+}
+.cwsa-event-card[data-label="Performance"] .cwsa-event-label {
+  color: #c480dd;
+  border-color: rgba(140,60,160,0.25);
+  background: rgba(140,60,160,0.10);
 }
 .cwsa-event-title {
   font-size: clamp(14px, 2vw, 18px);
