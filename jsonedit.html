@@ -211,6 +211,21 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .modal .fields{display:flex;flex-direction:column;gap:11px;}
 .modal-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;}
 
+/* ── GH INFO PANEL ── */
+.gh-label-row{display:flex;align-items:center;justify-content:space-between;}
+.gh-info-btn{background:transparent;border:1px solid var(--brd);color:var(--muted);
+  border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:700;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;line-height:1;
+  transition:.15s;flex-shrink:0;}
+.gh-info-btn:hover,.gh-info-btn.on{border-color:var(--acc2);color:var(--acc2);}
+.gh-info-panel{display:none;background:var(--bg);border:1px solid var(--brd);border-radius:6px;
+  padding:11px 13px;font-size:11px;line-height:1.7;color:var(--muted);margin-top:6px;}
+.gh-info-panel.on{display:block;}
+.gh-info-panel ol{padding-left:16px;display:flex;flex-direction:column;gap:3px;}
+.gh-info-panel a{color:var(--acc2);}
+.gh-info-panel code{font-family:var(--mono);background:rgba(255,255,255,.07);
+  padding:0 4px;border-radius:3px;font-size:10px;}
+
 /* preview placeholder */
 .prev-ph{display:flex;align-items:center;justify-content:center;height:100%;
   color:#444;font-family:'IBM Plex Mono',monospace;font-size:13px;}
@@ -304,6 +319,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   </select>
   <div class="tb-right">
     <div class="udot" id="udot" title="Unsaved changes"></div>
+    <button class="btn btn-ghost btn-sm" onclick="openGhModal()" title="GitHub settings">⚙ GitHub</button>
+    <button class="btn btn-primary" id="ghPushBtn" onclick="pushToGitHub()">↑ Push to GitHub</button>
     <button class="btn btn-ok" onclick="downloadJSON()">↓ Download JSON</button>
   </div>
 </div>
@@ -362,7 +379,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 <div class="toast" id="toast"></div>
 
 <div class="loading" id="loading">
-  <div class="loading-box">Loading JSON…</div>
+  <div class="loading-box" id="loadingMsg">Loading JSON…</div>
 </div>
 
 <!-- Add Event Modal -->
@@ -518,6 +535,61 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   </div>
 </div>
 
+<!-- GitHub Config Modal -->
+<div class="modal-ov" id="ghModal">
+  <div class="modal" style="width:440px;">
+    <h3>GitHub Configuration</h3>
+    <div class="fields">
+      <div class="frow">
+        <div class="field">
+          <label>Owner (user / org) *</label>
+          <input type="text" id="ghOwner" placeholder="e.g. phreaking-collective" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+        <div class="field">
+          <label>Repository *</label>
+          <input type="text" id="ghRepo" placeholder="e.g. phreaking.co.uk" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field">
+          <label>Branch</label>
+          <input type="text" id="ghBranch" placeholder="main" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+        <div class="field">
+          <label>File path</label>
+          <input type="text" id="ghPath" placeholder="json/schema.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+      </div>
+      <div class="field">
+        <div class="gh-label-row">
+          <label>Personal Access Token *</label>
+          <button type="button" class="gh-info-btn" id="ghInfoBtn" onclick="toggleGhInfo()" title="How to get a token">?</button>
+        </div>
+        <input type="password" id="ghToken" placeholder="ghp_…" style="font-family:var(--mono);" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        <div class="gh-info-panel" id="ghInfoPanel">
+          <ol>
+            <li>On GitHub, click your avatar → <strong>Settings</strong></li>
+            <li>Scroll to <strong>Developer settings</strong> (bottom of left sidebar)</li>
+            <li>Choose <strong>Fine-grained tokens</strong> → <strong>Generate new token</strong></li>
+            <li>Set <strong>Resource owner</strong> to <code>radio-wave</code> and pick the <code>phreaking</code> repo under <em>Only select repositories</em></li>
+            <li>Under <strong>Repository permissions</strong> set <strong>Contents</strong> to <code>Read and write</code></li>
+            <li>Click <strong>Generate token</strong>, copy it, paste it above</li>
+          </ol>
+          <p style="margin-top:8px;">For a classic token: use <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener">github.com/settings/tokens/new</a> and tick the <code>repo</code> scope.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7;">
+      Token needs <code style="font-family:var(--mono)">Contents: Read &amp; write</code> (fine-grained) or <code style="font-family:var(--mono)">repo</code> scope (classic).<br>
+      Stored only in your browser's <code style="font-family:var(--mono)">localStorage</code> — never sent anywhere except GitHub.
+    </p>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeGhModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveGhConfig()">Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── STATE ──────────────────────────────────────────────────
 let data = null;
@@ -526,7 +598,8 @@ let exhFilter = 'all';
 let renderStyle = 'dcc';
 let prevFilter = 'all';
 
-const imgConvState = {}; // key: `${curIdx}_${imgIdx}`
+const imgConvState   = {}; // key: `${curIdx}_${imgIdx}`
+const imgPreviewCache = {}; // key: `${graphIdx}_${imgIdx}` → {webp: blobURL, jpeg: blobURL}
 
 // Dynamic lists — populated from JSON on load, user can extend
 let knownExhibitions = ['does-cloud-compute', 'bitrot'];
@@ -858,8 +931,12 @@ function buildForm(){
       </div></div>
     <div class="field"><label>Description</label>
       <textarea id="ef-desc" rows="5" oninput="liveUp()">${esc(ev.description||'')}</textarea></div>
-    <div class="field"><label>Event Completed URL</label>
-      <input type="url" id="ef-url" value="${esc(ev.eventCompletedUrl||'')}" placeholder="https://eventbrite.co.uk/e/…" oninput="liveUp()"></div>
+    <div class="frow">
+      <div class="field"><label>Link URL</label>
+        <input type="url" id="ef-url" value="${esc(ev.eventCompletedUrl||'')}" placeholder="https://eventbrite.co.uk/e/…" oninput="liveUp()"></div>
+      <div class="field"><label>Link Label</label>
+        <input id="ef-url-label" value="${esc(ev.eventCompletedUrlLabel||'')}" placeholder="Event Completed" oninput="liveUp()"></div>
+    </div>
     <div class="frow">
       <div class="field"><label>Start Date</label>
         <input id="ef-start" value="${esc(ev.startDate||'')}" placeholder="2025" oninput="liveUp()"></div>
@@ -931,8 +1008,14 @@ function addImg(){
 function removeImg(i){
   const ev=data['@graph'][curIdx];
   ev.images.splice(i,1);
-  // Indices shift after removal — clear all conv state for this event
-  Object.keys(imgConvState).filter(k=>k.startsWith(curIdx+'_')).forEach(k=>delete imgConvState[k]);
+  // Indices shift — wipe all conv + preview state for this event
+  const prefix=curIdx+'_';
+  Object.keys(imgConvState).filter(k=>k.startsWith(prefix)).forEach(k=>delete imgConvState[k]);
+  Object.keys(imgPreviewCache).filter(k=>k.startsWith(prefix)).forEach(k=>{
+    URL.revokeObjectURL(imgPreviewCache[k].webp);
+    URL.revokeObjectURL(imgPreviewCache[k].jpeg);
+    delete imgPreviewCache[k];
+  });
   markUnsaved(); liveUp();
   document.getElementById('imgsEd').innerHTML=(ev.images||[]).map(imgRow).join('');
 }
@@ -946,6 +1029,20 @@ function setImg(i,field,val){
 
 // ── IMAGE CONVERSION ──────────────────────────────────────
 function imgConvKey(imgIdx){ return curIdx+'_'+imgIdx; }
+
+function dataURLToBlob(dataURL){
+  const parts=dataURL.split(','), mime=parts[0].match(/:(.*?);/)[1], bin=atob(parts[1]);
+  const arr=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+  return new Blob([arr],{type:mime});
+}
+
+// Returns a live blob URL for preview, or null if none cached
+function imgPreviewURL(ev, imgIdx, which){
+  const gi=data['@graph'].indexOf(ev);
+  const c=imgPreviewCache[gi+'_'+imgIdx];
+  return c ? (which==='full' ? c.jpeg : c.webp) : null;
+}
 
 function handleImgUpload(imgIdx, input){
   const file=input.files[0]; if(!file) return;
@@ -985,7 +1082,7 @@ function convertToWebP(imgEl){
 function convertToJPEG(imgEl, quality){
   const canvas=document.createElement('canvas');
   let w=imgEl.naturalWidth, h=imgEl.naturalHeight;
-  const MAX=2400;
+  const MAX=6000;
   if(w>MAX||h>MAX){ const s=Math.min(MAX/w,MAX/h); w=Math.round(w*s); h=Math.round(h*s); }
   canvas.width=w; canvas.height=h;
   canvas.getContext('2d').drawImage(imgEl,0,0,w,h);
@@ -1000,7 +1097,17 @@ function convertImgBoth(imgIdx, imgEl){
   const jpeg=convertToJPEG(imgEl,prevQ/100);
   imgConvState[key]={srcImg:imgEl, webpDataURL:webp.dataURL, webpSize:webp.sizeKB,
     jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:prevQ};
+
+  // Replace any old blob URLs for this slot, then create fresh ones
+  const old=imgPreviewCache[key];
+  if(old){ URL.revokeObjectURL(old.webp); URL.revokeObjectURL(old.jpeg); }
+  imgPreviewCache[key]={
+    webp:URL.createObjectURL(dataURLToBlob(webp.dataURL)),
+    jpeg:URL.createObjectURL(dataURLToBlob(jpeg.dataURL))
+  };
+
   showConvUI(imgIdx);
+  renderPreview(); // show uploaded image live in preview panel
 }
 
 function showConvUI(imgIdx){
@@ -1047,6 +1154,14 @@ function updateJpegQuality(imgIdx, val){
     jSize.className='img-convert-size'+(res.sizeKB>1024?' warn':'');
   }
   if(el('ico-qual-label-'+imgIdx)) el('ico-qual-label-'+imgIdx).textContent=val+'%';
+
+  // Refresh jpeg blob URL so the live preview reflects new quality
+  const pkey=imgConvKey(imgIdx);
+  if(imgPreviewCache[pkey]){
+    URL.revokeObjectURL(imgPreviewCache[pkey].jpeg);
+    imgPreviewCache[pkey].jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL));
+    renderPreview();
+  }
 }
 
 function downloadConvert(imgIdx, type){
@@ -1088,6 +1203,7 @@ function liveUp(){
   ev.displayDate=g('ef-date')??ev.displayDate;
   ev.description=g('ef-desc')??ev.description;
   ev.eventCompletedUrl=g('ef-url')??ev.eventCompletedUrl;
+  ev.eventCompletedUrlLabel=g('ef-url-label')??ev.eventCompletedUrlLabel;
   ev.startDate=g('ef-start')??ev.startDate;
   ev.endDate=g('ef-end')??ev.endDate;
   markUnsaved();
@@ -1158,7 +1274,7 @@ function submitNewEvent(){
       '@type': type,
       '@id':  `https://phreaking.co.uk/past-events#event-${slug(name)}`,
       name, exhibition: exh, label, displayDate: ddate, sortOrder: maxOrd+1,
-      images: [], eventCompletedUrl: '', description: '',
+      images: [], eventCompletedUrl: '', eventCompletedUrlLabel: '', description: '',
       startDate: String(new Date().getFullYear()),
       endDate:   String(new Date().getFullYear()),
       organizer: {'@id':'https://phreaking.co.uk/#phreaking'}
@@ -1196,11 +1312,16 @@ function renderPreview(){
   frame.innerHTML=fn(evs);
 }
 
-function galleryDCC(imgs){
+function galleryDCC(ev){
+  const imgs=ev.images;
   if(!imgs||!imgs.length) return '';
   return `<div class="gallery"><div class="gallery-grid">${
-    imgs.slice(0,3).map(img=>`<img src="${esc(img.src)}" alt="${esc(img.alt)}" loading="lazy"${img.full&&img.full!==img.src?` data-full="${esc(img.full)}"`:''}>`)
-    .join('')}</div></div>`;
+    imgs.slice(0,3).map((img,i)=>{
+      const src =imgPreviewURL(ev,i,'src') ||img.src;
+      const full=imgPreviewURL(ev,i,'full')||img.full||img.src;
+      return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy"${full&&full!==src?` data-full="${esc(full)}"`:''}>`;
+    }).join('')
+  }</div></div>`;
 }
 
 function groupByExh(evs){
@@ -1219,9 +1340,9 @@ function renderDCC(evs){
         <span class="elabel">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
         <h3>${esc(ev.name||'Untitled')}</h3>
         ${ev.displayDate?`<time class="etime">${esc(ev.displayDate)}</time>`:''}
-        ${galleryDCC(ev.images)}
+        ${galleryDCC(ev)}
         <p class="edesc">${esc(ev.description||'')}</p>
-        <p class="elink"><a href="${esc(ev.eventCompletedUrl||'#')}" target="_blank" rel="noopener">Event Completed</a></p>
+        <p class="elink"><a href="${esc(ev.eventCompletedUrl||'#')}" target="_blank" rel="noopener">${esc(ev.eventCompletedUrlLabel||'Event Completed')}</a></p>
       </article>`;
     });
     h+=`</div>`;
@@ -1237,7 +1358,10 @@ function renderPE(evs){
     h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="estack">`;
     g[exh].forEach(ev=>{
       const imgRow=ev.images&&ev.images.length?`<div class="imgrow">${
-        ev.images.slice(0,3).map(img=>`<img src="${esc(img.src)}" alt="${esc(img.alt)}" loading="lazy">`).join('')
+        ev.images.slice(0,3).map((img,i)=>{
+          const src=imgPreviewURL(ev,i,'src')||img.src;
+          return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy">`;
+        }).join('')
       }</div>`:'';
       h+=`<div class="ecard">
         <div class="etop">
@@ -1250,7 +1374,7 @@ function renderPE(evs){
         </div>
         ${imgRow}
         <div class="edesc">${esc(ev.description||'')}</div>
-        ${ev.eventCompletedUrl?`<div class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">Event Completed ↗</a></div>`:''}
+        ${ev.eventCompletedUrl?`<div class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></div>`:''}
       </div>`;
     });
     h+=`</div>`;
@@ -1266,7 +1390,10 @@ function renderMin(evs){
     h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="evgrid">`;
     g[exh].forEach(ev=>{
       const imgs=ev.images&&ev.images.length?`<div class="gallery-grid">${
-        ev.images.slice(0,3).map(img=>`<img src="${esc(img.src)}" alt="${esc(img.alt)}" loading="lazy">`).join('')
+        ev.images.slice(0,3).map((img,i)=>{
+          const src=imgPreviewURL(ev,i,'src')||img.src;
+          return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy">`;
+        }).join('')
       }</div>`:'';
       h+=`<div class="ecard">
         <span class="elabel">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
@@ -1274,7 +1401,7 @@ function renderMin(evs){
         ${ev.displayDate?`<time class="etime">${esc(ev.displayDate)}</time>`:''}
         ${imgs}
         <p class="edesc">${esc(ev.description||'')}</p>
-        ${ev.eventCompletedUrl?`<p class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">Event Completed ↗</a></p>`:''}
+        ${ev.eventCompletedUrl?`<p class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></p>`:''}
       </div>`;
     });
     h+=`</div>`;
@@ -1446,6 +1573,121 @@ document.addEventListener('click', e=>{
   if(!picker.contains(e.target) && !e.target.closest('.cal-trigger')) calClose();
 }, true);
 
+// ── GITHUB API ────────────────────────────────────────────
+const GH_KEY = 'phreaking_gh_config';
+
+function ghLoad(){ try{ return JSON.parse(localStorage.getItem(GH_KEY))||{}; }catch{ return {}; } }
+function ghSave(cfg){ localStorage.setItem(GH_KEY, JSON.stringify(cfg)); }
+
+function toggleGhInfo(){
+  document.getElementById('ghInfoPanel').classList.toggle('on');
+  document.getElementById('ghInfoBtn').classList.toggle('on');
+}
+
+function openGhModal(){
+  const cfg = ghLoad();
+  document.getElementById('ghOwner').value  = cfg.owner  || 'radio-wave';
+  document.getElementById('ghRepo').value   = cfg.repo   || 'phreaking';
+  document.getElementById('ghBranch').value = cfg.branch || 'main';
+  document.getElementById('ghPath').value   = cfg.path   || 'json/schema.json';
+  document.getElementById('ghToken').value  = cfg.token  || '';
+  document.getElementById('ghModal').classList.add('on');
+  setTimeout(()=>document.getElementById('ghOwner').focus(), 50);
+}
+function closeGhModal(){
+  document.getElementById('ghModal').classList.remove('on');
+  document.getElementById('ghInfoPanel').classList.remove('on');
+  document.getElementById('ghInfoBtn').classList.remove('on');
+}
+
+function saveGhConfig(){
+  const cfg = {
+    owner:  document.getElementById('ghOwner').value.trim(),
+    repo:   document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    path:   document.getElementById('ghPath').value.trim()   || 'json/schema.json',
+    token:  document.getElementById('ghToken').value.trim(),
+  };
+  if(!cfg.owner || !cfg.repo){ toast('Owner and repository are required'); return; }
+  if(!cfg.token){ toast('Personal access token is required'); return; }
+  ghSave(cfg);
+  closeGhModal();
+  updateGhButton();
+  toast('GitHub config saved', 'ok');
+}
+
+function updateGhButton(){
+  const cfg = ghLoad();
+  const btn = document.getElementById('ghPushBtn');
+  if(!btn) return;
+  const ready = cfg.owner && cfg.repo && cfg.token;
+  btn.title = ready ? `Push to ${cfg.owner}/${cfg.repo}` : 'Configure GitHub first (⚙ GitHub)';
+  btn.style.opacity = ready ? '1' : '0.55';
+}
+
+async function pushToGitHub(){
+  if(!data){ toast('No JSON loaded — nothing to push'); return; }
+  const cfg = ghLoad();
+  if(!cfg.owner || !cfg.repo || !cfg.token){ openGhModal(); return; }
+
+  const owner  = cfg.owner  || 'radio-wave';
+  const repo   = cfg.repo   || 'phreaking';
+  const token  = cfg.token;
+  const branch = cfg.branch || 'main';
+  const path   = cfg.path   || 'json/schema.json';
+  const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+    'Content-Type': 'application/json',
+  };
+
+  const loadEl = document.getElementById('loading');
+  const msgEl  = document.getElementById('loadingMsg');
+  msgEl.textContent = 'Pushing to GitHub…';
+  loadEl.classList.add('on');
+
+  try {
+    // 1. Get current file SHA (needed to update an existing file)
+    let sha = null;
+    const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
+    if(getRes.ok){
+      sha = (await getRes.json()).sha;
+    } else if(getRes.status !== 404){
+      const err = await getRes.json().catch(()=>({}));
+      throw new Error(err.message || `GitHub API ${getRes.status}`);
+    }
+
+    // 2. Base64-encode the JSON (UTF-8 safe)
+    const jsonStr = JSON.stringify(data, null, 2);
+    const bytes   = new TextEncoder().encode(jsonStr);
+    const binary  = Array.from(bytes, b => String.fromCharCode(b)).join('');
+    const content = btoa(binary);
+
+    // 3. Commit the file
+    const body = { message: `Update ${path} via JSON editor`, content, branch };
+    if(sha) body.sha = sha;
+
+    const putRes = await fetch(apiBase, { method:'PUT', headers, body: JSON.stringify(body) });
+    if(!putRes.ok){
+      const err = await putRes.json().catch(()=>({}));
+      throw new Error(err.message || `GitHub API ${putRes.status}`);
+    }
+
+    markSaved();
+    setStatus(`Pushed to ${owner}/${repo}`, getEvents().length + ' events');
+    toast('Pushed to GitHub successfully!', 'ok');
+
+  } catch(e){
+    toast('Push failed: ' + e.message);
+    setStatus('Push failed');
+  } finally {
+    loadEl.classList.remove('on');
+    msgEl.textContent = 'Loading JSON…';
+  }
+}
+
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', ()=>{
   // Auto-fill slug from display name in the add-exhibition modal
@@ -1458,6 +1700,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
   setStatus('Ready — loading from site…');
   loadFromSite();
+  updateGhButton();
 });
 
 document.addEventListener('keydown', e=>{
@@ -1471,6 +1714,7 @@ document.addEventListener('keydown', e=>{
     if(document.getElementById('addLabelModal').classList.contains('on')) closeAddLabelModal();
     if(document.getElementById('addTypeModal').classList.contains('on')) closeAddTypeModal();
     if(document.getElementById('calPicker').style.display !== 'none') calClose();
+    if(document.getElementById('ghModal').classList.contains('on')) closeGhModal();
   }
 });
 </script>
