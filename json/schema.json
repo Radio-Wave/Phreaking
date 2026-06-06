@@ -1742,14 +1742,20 @@
       ]
     },
     {
-      "@type": "EducationEvent",
+      "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-test",
-      "name": "test",
+      "name": "Private View",
       "exhibition": "can-we-start-again",
-      "label": "Workshop",
-      "displayDate": "",
-      "sortOrder": 11,
-      "images": [],
+      "label": "Event",
+      "displayDate": "Saturday 6th June — 18:00–21:00",
+      "sortOrder": 1,
+      "images": [
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        }
+      ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
       "description": "",
