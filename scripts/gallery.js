@@ -1,9 +1,7 @@
-// Lightweight shared gallery lightbox (borrowed from BitRot page)
-// Usage: include after markup that follows .pc-gallery > .pc-grid > .pc-item > img + figcaption
+// Lightweight shared gallery lightbox
+// Supports dynamically-added .pc-item img via event delegation — items list is
+// rebuilt from the current DOM on every open so new images are always included.
 (() => {
-  const items = Array.from(document.querySelectorAll('.pc-item img'));
-  if (!items.length) return;
-
   const lb = document.createElement('div');
   lb.className = 'pc-lightbox';
   lb.setAttribute('aria-hidden', 'true');
@@ -19,15 +17,18 @@
   `;
   document.body.appendChild(lb);
 
-  const imgEl = lb.querySelector('.pc-lightbox__img');
-  const capEl = lb.querySelector('.pc-lightbox__caption');
+  const imgEl  = lb.querySelector('.pc-lightbox__img');
+  const capEl  = lb.querySelector('.pc-lightbox__caption');
   const prevBtn = lb.querySelector('.pc-lightbox__prev');
   const nextBtn = lb.querySelector('.pc-lightbox__next');
   const closeBtn = lb.querySelector('.pc-lightbox__close');
 
+  let items = [];
   let idx = 0;
 
   function show(i) {
+    // Rebuild from DOM on every open so dynamic content is included
+    items = Array.from(document.querySelectorAll('.pc-item img'));
     idx = (i + items.length) % items.length;
     const thumb = items[idx];
     const full = thumb.getAttribute('data-full') || thumb.src;
@@ -49,24 +50,34 @@
     imgEl.removeAttribute('src');
   }
 
-  items.forEach((img, i) => {
-    img.addEventListener('click', () => show(i));
-    img.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        show(i);
-      }
-    });
-    img.tabIndex = 0;
+  // Event delegation: handles both static and dynamically-added .pc-item images
+  document.addEventListener('click', e => {
+    const img = e.target.closest('.pc-item img');
+    if (!img) return;
+    const allItems = Array.from(document.querySelectorAll('.pc-item img'));
+    show(allItems.indexOf(img));
   });
+
+  document.addEventListener('keydown', e => {
+    const img = e.target.closest('.pc-item img');
+    if (!img) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const allItems = Array.from(document.querySelectorAll('.pc-item img'));
+      show(allItems.indexOf(img));
+    }
+  });
+
+  // Make all current .pc-item images keyboard-focusable; new ones get tabIndex via CSS cursor
+  document.querySelectorAll('.pc-item img').forEach(img => { img.tabIndex = 0; });
 
   prevBtn.addEventListener('click', () => show(idx - 1));
   nextBtn.addEventListener('click', () => show(idx + 1));
   closeBtn.addEventListener('click', hide);
-  lb.addEventListener('click', (e) => {
+  lb.addEventListener('click', e => {
     if (e.target.hasAttribute('data-close')) hide();
   });
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', e => {
     if (lb.getAttribute('aria-hidden') === 'true') return;
     if (e.key === 'Escape') hide();
     if (e.key === 'ArrowLeft') show(idx - 1);
@@ -74,8 +85,8 @@
   });
 
   let startX = 0;
-  imgEl.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
-  imgEl.addEventListener('touchend', (e) => {
+  imgEl.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  imgEl.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 40) (dx < 0 ? show(idx + 1) : show(idx - 1));
   }, { passive: true });
