@@ -1,1134 +1,1763 @@
 {
-    "@context": "https://schema.org",
-    "@graph": [
-
-      {
-        "@type": "Organization",
-        "@id": "https://phreaking.co.uk/#phreaking",
-        "name": "Phreaking Collective",
-        "url": "https://phreaking.co.uk",
-        "sameAs": ["https://phreaking.co.uk"],
-        "description": "Phreaking Collective is a London-based arts organisation presenting talks, workshops, performances, and screenings exploring digital art, computational art, AI art, live coding, new media, and internet culture.",
-        "knowsAbout": [
-          "digital art","computational art","AI art","live coding","algorithmic art",
-          "experimental media","creative coding","electronic art","internet art",
-          "new media art","digital culture","computational aesthetics","media archaeology",
-          "internet infrastructure","critical AI"
-        ],
-        "event": [
-          {"@id": "https://phreaking.co.uk/#bitrot"},
-          {"@id": "https://phreaking.co.uk/#does-cloud-compute"}
-        ]
-      },
-
-      {
-        "@type": "WebPage",
-        "@id": "https://phreaking.co.uk/past-events#webpage",
-        "url": "https://phreaking.co.uk/past-events",
-        "name": "Past Events — Phreaking Collective",
-        "description": "Archive of past talks, workshops, performances, and screenings from Phreaking Collective exhibitions including BitRot and Does Cloud Compute (ever) Precipitate?.",
-        "inLanguage": "en-GB",
-        "isPartOf": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "breadcrumb": {"@id": "https://phreaking.co.uk/past-events#breadcrumb"},
-        "about": [
-          {"@id": "https://phreaking.co.uk/#bitrot"},
-          {"@id": "https://phreaking.co.uk/#does-cloud-compute"}
-        ],
-        "keywords": "digital art, computational art, AI art, live coding, algorithmic art, experimental media, creative coding, London art events, new media art, media archaeology, critical AI"
-      },
-
-      {
-        "@type": "CollectionPage",
-        "@id": "https://phreaking.co.uk/past-events",
-        "name": "Past Events",
-        "url": "https://phreaking.co.uk/past-events",
-        "description": "Archive of past talks, workshops, performances, and screenings from Phreaking Collective.",
-        "publisher": {"@id": "https://phreaking.co.uk/#phreaking"}
-      },
-
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://phreaking.co.uk/past-events#breadcrumb",
-        "itemListElement": [
-          {"@type":"ListItem","position":1,"name":"Phreaking Collective","item":"https://phreaking.co.uk"},
-          {"@type":"ListItem","position":2,"name":"Past Events","item":"https://phreaking.co.uk/past-events"}
-        ]
-      },
-
-      {
-        "@type": ["CreativeWork","ExhibitionEvent"],
-        "@id": "https://phreaking.co.uk/#bitrot",
-        "name": "BitRot",
-        "url": "https://phreaking.co.uk/BitRot",
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "startDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://phreaking.co.uk/#phreaking",
+      "name": "Phreaking Collective",
+      "url": "https://phreaking.co.uk",
+      "sameAs": [
+        "https://phreaking.co.uk"
+      ],
+      "description": "Phreaking Collective is a London-based arts organisation presenting talks, workshops, performances, and screenings exploring digital art, computational art, AI art, live coding, new media, and internet culture.",
+      "knowsAbout": [
+        "digital art",
+        "computational art",
+        "AI art",
+        "live coding",
+        "algorithmic art",
+        "experimental media",
+        "creative coding",
+        "electronic art",
+        "internet art",
+        "new media art",
+        "digital culture",
+        "computational aesthetics",
+        "media archaeology",
+        "internet infrastructure",
+        "critical AI"
+      ],
+      "event": [
+        {
+          "@id": "https://phreaking.co.uk/#bitrot"
         },
-        "about": ["digital art","computational art","new media","media archaeology","live coding","internet art"]
+        {
+          "@id": "https://phreaking.co.uk/#does-cloud-compute"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://phreaking.co.uk/past-events#webpage",
+      "url": "https://phreaking.co.uk/past-events",
+      "name": "Past Events — Phreaking Collective",
+      "description": "Archive of past talks, workshops, performances, and screenings from Phreaking Collective exhibitions including BitRot and Does Cloud Compute (ever) Precipitate?.",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://phreaking.co.uk/#phreaking"
       },
-
-      {
-        "@type": ["CreativeWork","ExhibitionEvent"],
-        "@id": "https://phreaking.co.uk/#does-cloud-compute",
-        "name": "Does Cloud Compute (ever) Precipitate?",
-        "url": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/",
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "startDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "about": ["AI art","cloud computing","internet infrastructure","computational art","critical AI","live coding"]
+      "breadcrumb": {
+        "@id": "https://phreaking.co.uk/past-events#breadcrumb"
       },
-
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-lucia-rebolino",
-        "name": "Lucia Rebolino",
-        "url": "https://luciarebolino.com/",
-        "sameAs": ["https://luciarebolino.com/"],
-        "jobTitle": "Artist",
-        "description": "Artist working with web performance, climate modelling aesthetics, digital architecture, and computational realism.",
-        "knowsAbout": ["climate modelling","digital aesthetics","web performance","computational art","AI"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-terence-broad",
-        "name": "Terence Broad",
-        "url": "https://terencebroad.com/",
-        "sameAs": ["https://terencebroad.com/"],
-        "jobTitle": "Artist and Researcher",
-        "description": "Artist and researcher exploring AI as artistic material, generative systems, and critical approaches to machine learning in creative practice.",
-        "knowsAbout": ["AI as material","machine learning","generative art","computational art","critical AI"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-robin-leverton",
-        "name": "Robin Leverton",
-        "url": "https://robinlevertonart.com/",
-        "sameAs": ["https://robinlevertonart.com/"],
-        "jobTitle": "Artist",
-        "description": "Artist exploring internet infrastructure, digital geographies, and communications networks.",
-        "knowsAbout": ["internet infrastructure","digital geography","network culture","new media art"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-erin-robinson",
-        "name": "Erin Robinson",
-        "url": "https://erinrobinson.xyz/",
-        "sameAs": ["https://erinrobinson.xyz/"],
-        "jobTitle": "Artist",
-        "description": "Artist whose practice spans digital embodiment, artificial intimacy, and critical theory, co-creator of the award-winning work XXX Machina.",
-        "knowsAbout": ["digital embodiment","artificial intimacy","post-structuralism","computational art","AI"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-anthony-frisby",
-        "name": "Anthony Frisby",
-        "url": "https://www.anthonyfrisby.com/",
-        "sameAs": ["https://www.anthonyfrisby.com/"],
-        "jobTitle": "Artist",
-        "description": "Artist exploring eroticism, selfhood, and computational desire, co-creator of the award-winning work XXX Machina.",
-        "knowsAbout": ["digital embodiment","artificial intimacy","postmodernism","computational art"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-dian-joy",
-        "name": "Dian Joy",
-        "url": "https://dianjoy.me/",
-        "sameAs": ["https://dianjoy.me/"],
-        "jobTitle": "Artist",
-        "description": "Artist and writer working with media theory, digital folklore, platform culture, and algorithmic desire.",
-        "knowsAbout": ["media theory","digital folklore","platform culture","algorithmic systems","internet culture"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-kat-macdonald",
-        "name": "Kat Macdonald",
-        "url": "https://otherkat.com/",
-        "sameAs": ["https://otherkat.com/"],
-        "jobTitle": "Artist and Workshop Facilitator",
-        "description": "Artist exploring collective sound making, experimental performance, and the history of London's experimental collective performance scene.",
-        "knowsAbout": ["sound art","collective performance","experimental music","digital culture"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-cranberry-lemonade",
-        "name": "Cranberry Lemonade",
-        "url": "https://www.cranberrylemonade.xyz/",
-        "sameAs": ["https://www.cranberrylemonade.xyz/"],
-        "jobTitle": "Artist and Workshop Facilitator",
-        "description": "Artist and educator running beginner-friendly web-making workshops covering HTML, CSS, and JavaScript for personal and poetic webpages.",
-        "knowsAbout": ["web design","HTML","CSS","JavaScript","internet art","digital storytelling"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-matt-hill",
-        "name": "Matt Hill",
-        "url": "https://mat-hill.xyz/",
-        "sameAs": ["https://mat-hill.xyz/"],
-        "jobTitle": "Artist and Workshop Facilitator",
-        "description": "Artist exploring file formats, permacomputing, bytebeats, generative image-making, and Unicode-art.",
-        "knowsAbout": ["permacomputing","file formats","generative art","creative coding","algorithmic art"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-margot-mcewen",
-        "name": "Margot McEwen",
-        "url": "https://magot.neocities.org/",
-        "sameAs": ["https://magot.neocities.org/"],
-        "jobTitle": "Artist and Workshop Facilitator",
-        "description": "Artist facilitating workshops in creative coding, WebGL, live coding tools, and interactive visual systems for artists.",
-        "knowsAbout": ["creative coding","WebGL","live coding","Cables.gl","interactive visuals","generative art"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-melissa-li-yunzhi",
-        "name": "Melissa Li Yunzhi",
-        "url": "https://melissayunzhi.li/",
-        "sameAs": ["https://melissayunzhi.li/"],
-        "jobTitle": "Artist and Workshop Facilitator",
-        "description": "Artist working with object-oriented storytelling, bridging physical material and virtual worlds, creator of Home is a Dwelling Path.",
-        "knowsAbout": ["object-oriented storytelling","narrative art","digital art","new media"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-lagtime-seedling",
-        "name": "Lagtime Seedling",
-        "url": "https://www.instagram.com/lagtime__seedling/",
-        "sameAs": ["https://www.instagram.com/lagtime__seedling/"],
-        "jobTitle": "Performer",
-        "description": "Performer who creates audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano, without traditional music software.",
-        "knowsAbout": ["browser-based performance","live coding","audio-visual composition","internet art","ASMR"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-deposilk",
-        "name": "Deposit Silk",
-        "url": "https://www.instagram.com/depositsilk/",
-        "sameAs": ["https://www.instagram.com/depositsilk/"],
-        "jobTitle": "Performer",
-        "description": "Performer who appeared at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026."
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-yiding-zhang",
-        "name": "Yiding Zhang",
-        "url": "https://yidingzhang.cargo.site/",
-        "sameAs": ["https://yidingzhang.cargo.site/"],
-        "jobTitle": "Performer",
-        "description": "Performer and artist whose live practice uses a custom-built modular synthesizer.",
-        "knowsAbout": ["modular synthesis","electronic music","performance art"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-orangespy",
-        "name": "Orangespy",
-        "url": "https://www.orangespy.io/about",
-        "sameAs": ["https://www.orangespy.io/about"],
-        "jobTitle": "Performer",
-        "description": "Performer integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
-        "knowsAbout": ["live coding","algorithmic composition","generative visuals","AI art","interactive performance"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-thatsoundsexciting",
-        "name": "That Sounds Exciting!",
-        "url": "https://www.instagram.com/thatsoundsexciting/",
-        "sameAs": ["https://www.instagram.com/thatsoundsexciting/"],
-        "jobTitle": "Performer",
-        "description": "Live coding performance group who performed at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
-        "knowsAbout": ["live coding","algorithmic performance","creative coding"]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://phreaking.co.uk/#person-claire-mcmichael",
-        "name": "Claire McMichael",
-        "url": "https://www.instagram.com/achillmicecream",
-        "sameAs": ["https://www.instagram.com/achillmicecream"],
-        "jobTitle": "Performer",
-        "description": "Performer who appeared at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026."
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://phreaking.co.uk/#org-algorave-london",
-        "name": "Algorave London",
-        "url": "https://www.instagram.com/algorave_london/",
-        "sameAs": ["https://www.instagram.com/algorave_london/"],
-        "description": "London live coding collective performing algorithmic and generative music and visuals, part of the global Algorave movement.",
-        "knowsAbout": ["live coding","algorave","algorithmic music","generative art"]
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-counter-modelling",
-        "name": "Counter-Modelling",
-        "url": "https://phreaking.co.uk/past-events#event-counter-modelling",
-        "exhibition": "does-cloud-compute",
-        "label": "Talk",
-        "displayDate": "Friday 16th January — 18:00–19:00",
-        "sortOrder": 3,
-        "images": [
-          {"src": "/assets/DCCeP/lucia-rebolino.jpeg", "full": "/assets/DCCeP/lucia-rebolino.jpeg", "alt": "Counter-Modelling talk poster"},
-          {"src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-1.webp", "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-1.jpg", "alt": "Lucia Rebolino presenting Counter-Modelling"},
-          {"src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-2.webp", "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-2.jpg", "alt": "Counter-Modelling exhibition detail"},
-          {"src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-3.webp", "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-3.jpg", "alt": "Counter-Modelling documentation"},
-          {"src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-4.webp", "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-4.jpg", "alt": "Counter-Modelling exhibition detail"},
-          {"src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-5.webp", "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-5.jpg", "alt": "Counter-Modelling exhibition detail"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/counter-modelling-talk-with-lucia-rebolino-tickets-1979651981367",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
+      "about": [
+        {
+          "@id": "https://phreaking.co.uk/#bitrot"
         },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-lucia-rebolino"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A web-based performance exploring climate modelling through digital aesthetics and architectural thinking. Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling challenged the aesthetics of computational realism, presenting climate prediction as a site of tension between technological development and climate futures.",
-        "keywords": "climate modelling, digital aesthetics, computational realism, web performance, AI, architecture"
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-ai-as-material",
-        "name": "AI as Material",
-        "url": "https://phreaking.co.uk/past-events#event-ai-as-material",
-        "exhibition": "does-cloud-compute",
-        "label": "Lecture",
-        "displayDate": "Saturday 17th January — 15:00–16:00",
-        "sortOrder": 5,
-        "images": [
-          {"src": "/assets/DCCeP/terence-poster.jpeg", "full": "/assets/DCCeP/terence-poster.jpeg", "alt": "AI as Material talk poster"},
-          {"src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.webp", "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.jpg", "alt": "Terence Broad presenting AI as Material"},
-          {"src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.webp", "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.jpg", "alt": "AI as Material exhibition detail"},
-          {"src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.webp", "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.jpg", "alt": "AI as Material exhibition detail"},
-          {"src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.webp", "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.jpg", "alt": "AI as Material exhibition detail"},
-          {"src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.webp", "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.jpg", "alt": "AI as Material exhibition detail"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/ai-as-material-talk-with-terence-broad-tickets-1980306630440",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-terence-broad"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A talk showing how practices that treat AI as a material rather than a tool or creative agent allow artists to make critical works presenting new ways of understanding unfathomably complex computational systems.",
-        "keywords": "AI as material, machine learning, critical AI, generative art, computational art"
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-cloud-watching",
-        "name": "Cloud-Watching Through My Window",
-        "url": "https://phreaking.co.uk/past-events#event-cloud-watching",
-        "exhibition": "does-cloud-compute",
-        "label": "Talk",
-        "displayDate": "Sunday 18th January — 13:00–14:00",
-        "sortOrder": 7,
-        "images": [
-          {"src": "/assets/DCCeP/robin-leverton.jpeg", "full": "/assets/DCCeP/robin-leverton.jpeg", "alt": "Cloud-Watching Through My Window talk poster"},
-          {"src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.webp", "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.jpg", "alt": "Robin Leverton presenting Cloud-Watching"},
-          {"src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.webp", "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.jpg", "alt": "Cloud-Watching exhibition detail"},
-          {"src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.webp", "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.jpg", "alt": "Cloud-Watching documentation"},
-          {"src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.webp", "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.jpg", "alt": "Cloud-Watching exhibition detail"},
-          {"src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.webp", "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.jpg", "alt": "Cloud-Watching exhibition detail"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/cloud-watching-through-my-window-talk-by-robin-leveron-tickets-1980321224090?aff=oddtdtcreator",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-robin-leverton"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A flâneur's guide to mapping the new geographies of connection, exploring internet and communications infrastructures, physical and digital topographies, and contemporary data emissions.",
-        "keywords": "internet infrastructure, digital geography, network culture, data, cloud computing"
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies",
-        "name": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina",
-        "url": "https://phreaking.co.uk/past-events#event-artificial-intimacies",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": [
-          {"@id": "https://phreaking.co.uk/#person-erin-robinson"},
-          {"@id": "https://phreaking.co.uk/#person-anthony-frisby"}
-        ],
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A lecture exploring the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience, discussing artificial intimacies, eroticism, and digital embodiment.",
-        "keywords": "artificial intimacy, digital embodiment, post-structuralism, postmodernism, computational desire, XXX Machina"
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-long-live",
-        "name": "Long Live The New Flesh (or Whatever)",
-        "url": "https://phreaking.co.uk/past-events#event-long-live",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-dian-joy"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A lecture exploring how desire functions as a mechanism of discipline and ideological capture within the contemporary digital landscape, drawing from media theory, philosophy, and digital folklore, with a close reading of Videodrome.",
-        "keywords": "media theory, digital folklore, desire, platform culture, algorithmic culture, Videodrome, meme culture"
-      },
-
-      {
-        "@type": "EducationEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-noisy-spaces",
-        "name": "Noisy Spaces",
-        "url": "https://www.eventbrite.co.uk/e/noisy-spaces-workshop-by-kat-macdonald-tickets-1979652367522",
-        "exhibition": "does-cloud-compute",
-        "label": "Workshop",
-        "displayDate": "Sunday 11th January — 13:00–15:30",
-        "sortOrder": 1,
-        "images": [
-          {"src": "/assets/DCCeP/NOISEY_SPACES_V2 Medium.jpeg", "full": "/assets/DCCeP/NOISEY_SPACES_V2 Medium.jpeg", "alt": "Noisy Spaces workshop poster"},
-          {"src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.webp", "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.jpeg", "alt": "Participants at Noisy Spaces workshop"},
-          {"src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.webp", "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.jpeg", "alt": "Noisy Spaces workshop documentation"},
-          {"src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.webp", "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.jpeg", "alt": "Noisy Spaces collective sound making"},
-          {"src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.webp", "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.jpeg", "alt": "Noisy Spaces workshop detail"},
-          {"src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.webp", "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.jpeg", "alt": "Noisy Spaces workshop detail"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/noisy-spaces-workshop-by-kat-macdonald-tickets-1979652367522?",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-kat-macdonald"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A workshop exploring technology as it relates to collective sound making, tracing London's experimental collective performance scene of the 1970s and how those methods apply to current art culture.",
-        "keywords": "sound art, collective performance, experimental music, workshop, London, 1970s"
-      },
-
-      {
-        "@type": "EducationEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website",
-        "name": "I Want To Be A Website",
-        "url": "https://www.eventbrite.co.uk/e/i-want-to-be-a-website-html-workshop-with-cranberry-lemonade-tickets-1980383534462",
-        "exhibition": "does-cloud-compute",
-        "label": "Workshop",
-        "displayDate": "Wednesday 14th January — 18:00–20:00",
-        "sortOrder": 2,
-        "images": [
-          {"src": "/assets/DCCeP/CLWorkshopPosterLD.png", "full": "/assets/DCCeP/CLWorkshopPosterLD.png", "alt": "I Want To Be A Website workshop poster"},
-          {"src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.webp", "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.jpg", "alt": "Participants building personal webpages"},
-          {"src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.webp", "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.jpg", "alt": "I Want To Be A Website workshop documentation"},
-          {"src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.webp", "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.jpg", "alt": "I Want To Be A Website workshop detail"},
-          {"src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.webp", "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.jpg", "alt": "I Want To Be A Website workshop detail"},
-          {"src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.webp", "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.jpg", "alt": "Attendees sharing web experiments"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/i-want-to-be-a-website-html-workshop-with-cranberry-lemonade-tickets-1980383534462",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-cranberry-lemonade"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A hands-on, beginner-friendly personal web-making workshop exploring HTML, CSS and JavaScript to create personalised and poetic webpages and tell digital stories.",
-        "keywords": "web design, HTML, CSS, JavaScript, internet art, digital storytelling, workshop"
-      },
-
-      {
-        "@type": "EducationEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-extremely-standardised",
-        "name": "Extremely Standardised Fun",
-        "url": "https://www.eventbrite.co.uk/e/1980592583734",
-        "exhibition": "does-cloud-compute",
-        "label": "Workshop",
-        "displayDate": "Saturday 17th January — 11:00–14:00",
-        "sortOrder": 4,
-        "images": [
-          {"src": "/assets/DCCeP/MAT_HILL2edit.png", "full": "/assets/DCCeP/MAT_HILL2edit.png", "alt": "Extremely Standardised Fun workshop poster"},
-          {"src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.webp", "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.jpg", "alt": "Participants at Extremely Standardised Fun"},
-          {"src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.webp", "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.jpg", "alt": "Extremely Standardised Fun workshop documentation"},
-          {"src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.webp", "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.jpg", "alt": "Extremely Standardised Fun workshop detail"},
-          {"src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.webp", "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.jpg", "alt": "Extremely Standardised Fun workshop detail"},
-          {"src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.webp", "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.jpg", "alt": "Attendees exploring generative techniques"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1980592583734?aff=oddtdtcreator",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-matt-hill"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A workshop covering file formats, permacomputing, bytebeats, generative image-making, and Unicode-art, introduced through speculative art projects and computer science fundamentals.",
-        "keywords": "permacomputing, file formats, bytebeats, generative art, Unicode art, computer science, workshop"
-      },
-
-      {
-        "@type": "EducationEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding",
-        "name": "Intro To Creative Coding For Artists",
-        "url": "https://www.eventbrite.co.uk/e/intro-to-creative-coding-for-artists-workshop-with-margot-mcewen-tickets-1980628014709",
-        "exhibition": "does-cloud-compute",
-        "label": "Workshop",
-        "displayDate": "Sunday 18th January — 15:00–19:00",
-        "sortOrder": 8,
-        "images": [
-          {"src": "/assets/DCCeP/CABLEGL_MARGOT2.png", "full": "/assets/DCCeP/CABLEGL_MARGOT2.png", "alt": "Intro To Creative Coding For Artists workshop poster"},
-          {"src": "/assets/DCCeP/Events/Intro2/CreativeCoding-1.webp", "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-1.jpg", "alt": "Participants learning Cables.gl"},
-          {"src": "/assets/DCCeP/Events/Intro2/CreativeCoding-2.webp", "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-2.jpg", "alt": "Creative coding workshop documentation"},
-          {"src": "/assets/DCCeP/Events/Intro2/CreativeCoding-3.webp", "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-3.jpg", "alt": "Creative coding workshop detail"},
-          {"src": "/assets/DCCeP/Events/Intro2/CreativeCoding-4.webp", "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-4.jpg", "alt": "Creative coding workshop detail"},
-          {"src": "/assets/DCCeP/Events/Intro2/CreativeCoding-5.webp", "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-5.jpg", "alt": "Attendees experimenting with interactive visuals"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/intro-to-creative-coding-for-artists-workshop-with-margot-mcewen-tickets-1980628014709?aff=oddtdtcreator",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-margot-mcewen"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A workshop exploring Cables.gl, a free open-source node-based live coding tool for WebGL development, covering live video manipulation, interactive visuals, and input devices including MIDI and webcams.",
-        "keywords": "creative coding, Cables.gl, WebGL, live coding, interactive visuals, MIDI, workshop"
-      },
-
-      {
-        "@type": "EducationEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-oops-glitch",
-        "name": "Oops, You Found A Glitch",
-        "url": "https://www.eventbrite.co.uk/e/oops-you-found-a-glitch-html-workshop-tickets-1547997645629",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-cranberry-lemonade"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A hands-on workshop reviving dead pages from Glitch.com's shutdown, reverse-engineering lost websites from thumbnail previews and rebuilding them from scratch using HTML, CSS and JavaScript.",
-        "keywords": "HTML, CSS, JavaScript, glitch art, web archaeology, internet culture, workshop"
-      },
-
-      {
-        "@type": "EducationEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-object-oriented",
-        "name": "Object Oriented Storytelling: From Field to Virtual",
-        "url": "https://www.eventbrite.co.uk/e/object-oriented-storytelling-from-field-to-virtual-tickets-1553270286239",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-melissa-li-yunzhi"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A two-hour workshop treating everyday objects as narrative anchors bridging physical material to virtual, inspired by methods from Melissa Li Yunzhi's project Home is a Dwelling Path.",
-        "keywords": "storytelling, object-oriented narrative, digital art, new media, workshop"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting",
-        "name": "That Sounds Exciting!",
-        "url": "https://phreaking.co.uk/past-events#event-that-sounds-exciting",
-        "exhibition": "does-cloud-compute",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-thatsoundsexciting"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A live coding performance by the live coding group That Sounds Exciting!",
-        "keywords": "live coding, algorithmic performance, creative coding, performance"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael",
-        "name": "Claire McMichael",
-        "url": "https://phreaking.co.uk/past-events#event-claire-mcmichael",
-        "exhibition": "does-cloud-compute",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-claire-mcmichael"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A performance by Claire McMichael at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
-        "keywords": "performance art, experimental performance, London"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-deposilk",
-        "name": "Deposit Silk",
-        "url": "https://phreaking.co.uk/past-events#event-deposilk",
-        "exhibition": "does-cloud-compute",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-deposilk"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "A performance by Deposit Silk at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
-        "keywords": "performance art, experimental performance, London"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc",
-        "name": "Lagtime Seedling",
-        "url": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc",
-        "exhibition": "does-cloud-compute",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-lagtime-seedling"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano.",
-        "keywords": "browser performance, audio-visual, live coding, YouTube, internet art, ASMR"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-algorave-london",
-        "name": "London live coding group",
-        "url": "https://phreaking.co.uk/past-events#event-algorave-london",
-        "exhibition": "does-cloud-compute",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#org-algorave-london"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "Live coders from Algorave London, featuring Sinsé, Nadezhda, and Daniel performing algorithmic and generative music.",
-        "keywords": "live coding, algorave, algorithmic music, generative art, performance"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-orangespy",
-        "name": "Orangespy",
-        "url": "https://phreaking.co.uk/past-events#event-orangespy",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-orangespy"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A live coding performance integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
-        "keywords": "live coding, algorithmic composition, generative visuals, AI art, performance"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot",
-        "name": "Lagtime Seedling Bitrot",
-        "url": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-lagtime-seedling"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A live browser window performance using YouTube video tabs, an online piano, and overlapping browser windows.",
-        "keywords": "browser performance, audio-visual, improvisation, internet art, live performance"
-      },
-
-      {
-        "@type": "PerformanceEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-yiding-zhang",
-        "name": "Yiding Zhang",
-        "url": "https://phreaking.co.uk/past-events#event-yiding-zhang",
-        "exhibition": "bitrot",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2025",
-        "endDate": "2025",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "performer": {"@id": "https://phreaking.co.uk/#person-yiding-zhang"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2025"
-        },
-        "description": "A live performance using a custom-built modular synthesizer.",
-        "keywords": "modular synthesis, electronic music, performance art, synthesizer"
-      },
-
-      {
-        "@type": "ScreeningEvent",
-        "@id": "https://phreaking.co.uk/past-events#event-phreaking-film-night",
-        "name": "Phreaking Film Night",
-        "url": "https://www.eventbrite.co.uk/e/1980717293745",
-        "exhibition": "does-cloud-compute",
-        "label": "Screening",
-        "displayDate": "Wednesday 21st January — 18:00–19:30",
-        "sortOrder": 9,
-        "images": [
-          {"src": "/assets/DCCeP/filmNight.jpeg", "full": "/assets/DCCeP/filmNight.jpeg", "alt": "Phreaking Film Night poster"},
-          {"src": "/assets/DCCeP/Events/FilmNight/FilmNight-1.webp", "full": "/assets/DCCeP/Events/FilmNight/FilmNight-1.jpeg", "alt": "Film night documentation"},
-          {"src": "/assets/DCCeP/Events/FilmNight/FilmNight-2.webp", "full": "/assets/DCCeP/Events/FilmNight/FilmNight-2.jpeg", "alt": "Film night documentation"},
-          {"src": "/assets/DCCeP/Events/FilmNight/FilmNight-3.webp", "full": "/assets/DCCeP/Events/FilmNight/FilmNight-3.jpeg", "alt": "Film night documentation"},
-          {"src": "/assets/DCCeP/Events/FilmNight/FilmNight-4.webp", "full": "/assets/DCCeP/Events/FilmNight/FilmNight-4.jpeg", "alt": "Film night documentation"},
-          {"src": "/assets/DCCeP/Events/FilmNight/FilmNight-5.webp", "full": "/assets/DCCeP/Events/FilmNight/FilmNight-5.jpeg", "alt": "Film night documentation"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1980717293745?aff=oddtdtcreator",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "Phreaking Collective",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "An evening of computational, experimental, and artist-led short films bending narrative, fracturing reality, and playing at the edges of code, image, and memory. Featuring films by Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins (Nukleopatra), Ned Caderni, Iman Javaid and Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen.",
-        "keywords": "experimental film, artist film, short film, computational art, screening, London"
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-open-projector",
-        "name": "Open Projector",
-        "url": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/open-projector.html",
-        "exhibition": "does-cloud-compute",
-        "label": "Event",
-        "displayDate": "Saturday 17th January — 17:00–20:00",
-        "sortOrder": 6,
-        "images": [
-          {"src": "/assets/DCCeP/openprojector-v1.jpg", "full": "/assets/DCCeP/openprojector-v1.jpg", "alt": "Open Projector event poster"},
-          {"src": "/assets/OpenProj/Nikos-Open-Proj-1.webp", "full": "/assets/OpenProj/Nikos-Open-Proj-1.jpg", "alt": "Open Projector documentation"},
-          {"src": "/assets/OpenProj/Nikos-Open-Proj-2.webp", "full": "/assets/OpenProj/Nikos-Open-Proj-2.jpg", "alt": "Open Projector documentation"},
-          {"src": "/assets/OpenProj/Nikos-Open-Proj-3.webp", "full": "/assets/OpenProj/Nikos-Open-Proj-3.jpg", "alt": "Open Projector documentation"},
-          {"src": "/assets/OpenProj/Nikos-Open-Proj-5.webp", "full": "/assets/OpenProj/Nikos-Open-Proj-5.jpg", "alt": "Open Projector documentation"},
-          {"src": "/assets/OpenProj/Nikos-Open-Proj-6.webp", "full": "/assets/OpenProj/Nikos-Open-Proj-6.jpg", "alt": "Open Projector documentation"}
-        ],
-        "eventCompletedUrl": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/open-projector.html",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "ANNEX by The Koppel Project",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "1 Tiverton Street",
-            "addressLocality": "London",
-            "postalCode": "SE1 6NT",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "An open projector night where everyone was welcome to come and present their projects. Whether a project was finished, a work in progress, or already publicised — a great opportunity to share and gather feedback from fellow artists and enthusiasts. No pre-registration needed.",
-        "keywords": "open projector, artist presentations, project sharing, community, Does Cloud Compute"
-      },
-
-      {
-        "@type": "Event",
-        "@id": "https://phreaking.co.uk/past-events#event-closing-dccep",
-        "name": "Closing Event",
-        "url": "https://www.eventbrite.co.uk/e/1981052075085",
-        "exhibition": "does-cloud-compute",
-        "label": "Event",
-        "displayDate": "Friday 23rd January — 18:00–21:00",
-        "sortOrder": 10,
-        "images": [
-          {"src": "/assets/DCCeP/CLOSINGEVENT.jpeg", "full": "/assets/DCCeP/CLOSINGEVENT.jpeg", "alt": "Closing Event poster"},
-          {"src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.webp", "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.jpeg", "alt": "Closing event documentation"},
-          {"src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.webp", "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.jpeg", "alt": "Closing event documentation"},
-          {"src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.webp", "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.jpeg", "alt": "Closing event documentation"},
-          {"src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.webp", "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.jpeg", "alt": "Closing event documentation"},
-          {"src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.webp", "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.jpeg", "alt": "Closing event documentation"}
-        ],
-        "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1981052075085?aff=oddtdtcreator",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventPastdue",
-        "startDate": "2026",
-        "endDate": "2026",
-        "location": {
-          "@type": "Place",
-          "name": "ANNEX by The Koppel Project",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "1 Tiverton Street",
-            "addressLocality": "London",
-            "postalCode": "SE1 6NT",
-            "addressCountry": "GB"
-          }
-        },
-        "organizer": {"@id": "https://phreaking.co.uk/#phreaking"},
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "GBP",
-          "availability": "https://schema.org/SoldOut",
-          "validFrom": "2026"
-        },
-        "description": "The closing event of Does Cloud Compute (ever) Precipitate? featured a panel discussion with participating artists and curators, followed by a line-up of live-coding performances by London live coding groups including That Sounds Exciting!, Algorave London, Lagtime Seedling, Deposit Silk, and Claire McMichael.",
-        "keywords": "closing event, panel discussion, live coding, performance, Does Cloud Compute"
-      },
-
-      {
-        "@type": "ItemList",
-        "@id": "https://phreaking.co.uk/past-events#event-list",
-        "name": "Phreaking Collective Past Events",
-        "numberOfItems": 22,
-        "itemListElement": [
-          {"@type":"ListItem","position":1,"item":{"@id":"https://phreaking.co.uk/past-events#event-counter-modelling"}},
-          {"@type":"ListItem","position":2,"item":{"@id":"https://phreaking.co.uk/past-events#event-ai-as-material"}},
-          {"@type":"ListItem","position":3,"item":{"@id":"https://phreaking.co.uk/past-events#event-cloud-watching"}},
-          {"@type":"ListItem","position":4,"item":{"@id":"https://phreaking.co.uk/past-events#event-artificial-intimacies"}},
-          {"@type":"ListItem","position":5,"item":{"@id":"https://phreaking.co.uk/past-events#event-long-live"}},
-          {"@type":"ListItem","position":6,"item":{"@id":"https://phreaking.co.uk/past-events#event-noisy-spaces"}},
-          {"@type":"ListItem","position":7,"item":{"@id":"https://phreaking.co.uk/past-events#event-i-want-to-be-a-website"}},
-          {"@type":"ListItem","position":8,"item":{"@id":"https://phreaking.co.uk/past-events#event-extremely-standardised"}},
-          {"@type":"ListItem","position":9,"item":{"@id":"https://phreaking.co.uk/past-events#event-intro-creative-coding"}},
-          {"@type":"ListItem","position":10,"item":{"@id":"https://phreaking.co.uk/past-events#event-oops-glitch"}},
-          {"@type":"ListItem","position":11,"item":{"@id":"https://phreaking.co.uk/past-events#event-object-oriented"}},
-          {"@type":"ListItem","position":12,"item":{"@id":"https://phreaking.co.uk/past-events#event-that-sounds-exciting"}},
-          {"@type":"ListItem","position":13,"item":{"@id":"https://phreaking.co.uk/past-events#event-claire-mcmichael"}},
-          {"@type":"ListItem","position":14,"item":{"@id":"https://phreaking.co.uk/past-events#event-deposilk"}},
-          {"@type":"ListItem","position":15,"item":{"@id":"https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc"}},
-          {"@type":"ListItem","position":16,"item":{"@id":"https://phreaking.co.uk/past-events#event-algorave-london"}},
-          {"@type":"ListItem","position":17,"item":{"@id":"https://phreaking.co.uk/past-events#event-orangespy"}},
-          {"@type":"ListItem","position":18,"item":{"@id":"https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot"}},
-          {"@type":"ListItem","position":19,"item":{"@id":"https://phreaking.co.uk/past-events#event-yiding-zhang"}},
-          {"@type":"ListItem","position":20,"item":{"@id":"https://phreaking.co.uk/past-events#event-phreaking-film-night"}},
-          {"@type":"ListItem","position":21,"item":{"@id":"https://phreaking.co.uk/past-events#event-open-projector"}},
-          {"@type":"ListItem","position":22,"item":{"@id":"https://phreaking.co.uk/past-events#event-closing-dccep"}}
-        ]
+        {
+          "@id": "https://phreaking.co.uk/#does-cloud-compute"
+        }
+      ],
+      "keywords": "digital art, computational art, AI art, live coding, algorithmic art, experimental media, creative coding, London art events, new media art, media archaeology, critical AI"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://phreaking.co.uk/past-events",
+      "name": "Past Events",
+      "url": "https://phreaking.co.uk/past-events",
+      "description": "Archive of past talks, workshops, performances, and screenings from Phreaking Collective.",
+      "publisher": {
+        "@id": "https://phreaking.co.uk/#phreaking"
       }
-
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://phreaking.co.uk/past-events#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Phreaking Collective",
+          "item": "https://phreaking.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Past Events",
+          "item": "https://phreaking.co.uk/past-events"
+        }
+      ]
+    },
+    {
+      "@type": [
+        "CreativeWork",
+        "ExhibitionEvent"
+      ],
+      "@id": "https://phreaking.co.uk/#bitrot",
+      "name": "BitRot",
+      "url": "https://phreaking.co.uk/BitRot",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "startDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "about": [
+        "digital art",
+        "computational art",
+        "new media",
+        "media archaeology",
+        "live coding",
+        "internet art"
+      ]
+    },
+    {
+      "@type": [
+        "CreativeWork",
+        "ExhibitionEvent"
+      ],
+      "@id": "https://phreaking.co.uk/#does-cloud-compute",
+      "name": "Does Cloud Compute (ever) Precipitate?",
+      "url": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "startDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "about": [
+        "AI art",
+        "cloud computing",
+        "internet infrastructure",
+        "computational art",
+        "critical AI",
+        "live coding"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-lucia-rebolino",
+      "name": "Lucia Rebolino",
+      "url": "https://luciarebolino.com/",
+      "sameAs": [
+        "https://luciarebolino.com/"
+      ],
+      "jobTitle": "Artist",
+      "description": "Artist working with web performance, climate modelling aesthetics, digital architecture, and computational realism.",
+      "knowsAbout": [
+        "climate modelling",
+        "digital aesthetics",
+        "web performance",
+        "computational art",
+        "AI"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-terence-broad",
+      "name": "Terence Broad",
+      "url": "https://terencebroad.com/",
+      "sameAs": [
+        "https://terencebroad.com/"
+      ],
+      "jobTitle": "Artist and Researcher",
+      "description": "Artist and researcher exploring AI as artistic material, generative systems, and critical approaches to machine learning in creative practice.",
+      "knowsAbout": [
+        "AI as material",
+        "machine learning",
+        "generative art",
+        "computational art",
+        "critical AI"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-robin-leverton",
+      "name": "Robin Leverton",
+      "url": "https://robinlevertonart.com/",
+      "sameAs": [
+        "https://robinlevertonart.com/"
+      ],
+      "jobTitle": "Artist",
+      "description": "Artist exploring internet infrastructure, digital geographies, and communications networks.",
+      "knowsAbout": [
+        "internet infrastructure",
+        "digital geography",
+        "network culture",
+        "new media art"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-erin-robinson",
+      "name": "Erin Robinson",
+      "url": "https://erinrobinson.xyz/",
+      "sameAs": [
+        "https://erinrobinson.xyz/"
+      ],
+      "jobTitle": "Artist",
+      "description": "Artist whose practice spans digital embodiment, artificial intimacy, and critical theory, co-creator of the award-winning work XXX Machina.",
+      "knowsAbout": [
+        "digital embodiment",
+        "artificial intimacy",
+        "post-structuralism",
+        "computational art",
+        "AI"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-anthony-frisby",
+      "name": "Anthony Frisby",
+      "url": "https://www.anthonyfrisby.com/",
+      "sameAs": [
+        "https://www.anthonyfrisby.com/"
+      ],
+      "jobTitle": "Artist",
+      "description": "Artist exploring eroticism, selfhood, and computational desire, co-creator of the award-winning work XXX Machina.",
+      "knowsAbout": [
+        "digital embodiment",
+        "artificial intimacy",
+        "postmodernism",
+        "computational art"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-dian-joy",
+      "name": "Dian Joy",
+      "url": "https://dianjoy.me/",
+      "sameAs": [
+        "https://dianjoy.me/"
+      ],
+      "jobTitle": "Artist",
+      "description": "Artist and writer working with media theory, digital folklore, platform culture, and algorithmic desire.",
+      "knowsAbout": [
+        "media theory",
+        "digital folklore",
+        "platform culture",
+        "algorithmic systems",
+        "internet culture"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-kat-macdonald",
+      "name": "Kat Macdonald",
+      "url": "https://otherkat.com/",
+      "sameAs": [
+        "https://otherkat.com/"
+      ],
+      "jobTitle": "Artist and Workshop Facilitator",
+      "description": "Artist exploring collective sound making, experimental performance, and the history of London's experimental collective performance scene.",
+      "knowsAbout": [
+        "sound art",
+        "collective performance",
+        "experimental music",
+        "digital culture"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-cranberry-lemonade",
+      "name": "Cranberry Lemonade",
+      "url": "https://www.cranberrylemonade.xyz/",
+      "sameAs": [
+        "https://www.cranberrylemonade.xyz/"
+      ],
+      "jobTitle": "Artist and Workshop Facilitator",
+      "description": "Artist and educator running beginner-friendly web-making workshops covering HTML, CSS, and JavaScript for personal and poetic webpages.",
+      "knowsAbout": [
+        "web design",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "internet art",
+        "digital storytelling"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-matt-hill",
+      "name": "Matt Hill",
+      "url": "https://mat-hill.xyz/",
+      "sameAs": [
+        "https://mat-hill.xyz/"
+      ],
+      "jobTitle": "Artist and Workshop Facilitator",
+      "description": "Artist exploring file formats, permacomputing, bytebeats, generative image-making, and Unicode-art.",
+      "knowsAbout": [
+        "permacomputing",
+        "file formats",
+        "generative art",
+        "creative coding",
+        "algorithmic art"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-margot-mcewen",
+      "name": "Margot McEwen",
+      "url": "https://magot.neocities.org/",
+      "sameAs": [
+        "https://magot.neocities.org/"
+      ],
+      "jobTitle": "Artist and Workshop Facilitator",
+      "description": "Artist facilitating workshops in creative coding, WebGL, live coding tools, and interactive visual systems for artists.",
+      "knowsAbout": [
+        "creative coding",
+        "WebGL",
+        "live coding",
+        "Cables.gl",
+        "interactive visuals",
+        "generative art"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-melissa-li-yunzhi",
+      "name": "Melissa Li Yunzhi",
+      "url": "https://melissayunzhi.li/",
+      "sameAs": [
+        "https://melissayunzhi.li/"
+      ],
+      "jobTitle": "Artist and Workshop Facilitator",
+      "description": "Artist working with object-oriented storytelling, bridging physical material and virtual worlds, creator of Home is a Dwelling Path.",
+      "knowsAbout": [
+        "object-oriented storytelling",
+        "narrative art",
+        "digital art",
+        "new media"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-lagtime-seedling",
+      "name": "Lagtime Seedling",
+      "url": "https://www.instagram.com/lagtime__seedling/",
+      "sameAs": [
+        "https://www.instagram.com/lagtime__seedling/"
+      ],
+      "jobTitle": "Performer",
+      "description": "Performer who creates audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano, without traditional music software.",
+      "knowsAbout": [
+        "browser-based performance",
+        "live coding",
+        "audio-visual composition",
+        "internet art",
+        "ASMR"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-deposilk",
+      "name": "Deposit Silk",
+      "url": "https://www.instagram.com/depositsilk/",
+      "sameAs": [
+        "https://www.instagram.com/depositsilk/"
+      ],
+      "jobTitle": "Performer",
+      "description": "Performer who appeared at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026."
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-yiding-zhang",
+      "name": "Yiding Zhang",
+      "url": "https://yidingzhang.cargo.site/",
+      "sameAs": [
+        "https://yidingzhang.cargo.site/"
+      ],
+      "jobTitle": "Performer",
+      "description": "Performer and artist whose live practice uses a custom-built modular synthesizer.",
+      "knowsAbout": [
+        "modular synthesis",
+        "electronic music",
+        "performance art"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-orangespy",
+      "name": "Orangespy",
+      "url": "https://www.orangespy.io/about",
+      "sameAs": [
+        "https://www.orangespy.io/about"
+      ],
+      "jobTitle": "Performer",
+      "description": "Performer integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
+      "knowsAbout": [
+        "live coding",
+        "algorithmic composition",
+        "generative visuals",
+        "AI art",
+        "interactive performance"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-thatsoundsexciting",
+      "name": "That Sounds Exciting!",
+      "url": "https://www.instagram.com/thatsoundsexciting/",
+      "sameAs": [
+        "https://www.instagram.com/thatsoundsexciting/"
+      ],
+      "jobTitle": "Performer",
+      "description": "Live coding performance group who performed at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
+      "knowsAbout": [
+        "live coding",
+        "algorithmic performance",
+        "creative coding"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#person-claire-mcmichael",
+      "name": "Claire McMichael",
+      "url": "https://www.instagram.com/achillmicecream",
+      "sameAs": [
+        "https://www.instagram.com/achillmicecream"
+      ],
+      "jobTitle": "Performer",
+      "description": "Performer who appeared at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://phreaking.co.uk/#org-algorave-london",
+      "name": "Algorave London",
+      "url": "https://www.instagram.com/algorave_london/",
+      "sameAs": [
+        "https://www.instagram.com/algorave_london/"
+      ],
+      "description": "London live coding collective performing algorithmic and generative music and visuals, part of the global Algorave movement.",
+      "knowsAbout": [
+        "live coding",
+        "algorave",
+        "algorithmic music",
+        "generative art"
+      ]
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-counter-modelling",
+      "name": "Counter-Modelling",
+      "url": "https://phreaking.co.uk/past-events#event-counter-modelling",
+      "exhibition": "does-cloud-compute",
+      "label": "Talk",
+      "displayDate": "Friday 16th January — 18:00–19:00",
+      "sortOrder": 3,
+      "images": [
+        {
+          "src": "/assets/DCCeP/lucia-rebolino.jpeg",
+          "full": "/assets/DCCeP/lucia-rebolino.jpeg",
+          "alt": "Counter-Modelling talk poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-1.webp",
+          "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-1.jpg",
+          "alt": "Lucia Rebolino presenting Counter-Modelling"
+        },
+        {
+          "src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-2.webp",
+          "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-2.jpg",
+          "alt": "Counter-Modelling exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-3.webp",
+          "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-3.jpg",
+          "alt": "Counter-Modelling documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-4.webp",
+          "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-4.jpg",
+          "alt": "Counter-Modelling exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/CounterModeling/CounterModelling-5.webp",
+          "full": "/assets/DCCeP/Events/CounterModeling/CounterModelling-5.jpg",
+          "alt": "Counter-Modelling exhibition detail"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/counter-modelling-talk-with-lucia-rebolino-tickets-1979651981367",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-lucia-rebolino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A web-based performance exploring climate modelling through digital aesthetics and architectural thinking. Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling challenged the aesthetics of computational realism, presenting climate prediction as a site of tension between technological development and climate futures.",
+      "keywords": "climate modelling, digital aesthetics, computational realism, web performance, AI, architecture"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-ai-as-material",
+      "name": "AI as Material",
+      "url": "https://phreaking.co.uk/past-events#event-ai-as-material",
+      "exhibition": "does-cloud-compute",
+      "label": "Lecture",
+      "displayDate": "Saturday 17th January — 15:00–16:00",
+      "sortOrder": 5,
+      "images": [
+        {
+          "src": "/assets/DCCeP/terence-poster.jpeg",
+          "full": "/assets/DCCeP/terence-poster.jpeg",
+          "alt": "AI as Material talk poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.webp",
+          "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.jpg",
+          "alt": "Terence Broad presenting AI as Material"
+        },
+        {
+          "src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.webp",
+          "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.jpg",
+          "alt": "AI as Material exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.webp",
+          "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.jpg",
+          "alt": "AI as Material exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.webp",
+          "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.jpg",
+          "alt": "AI as Material exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.webp",
+          "full": "/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.jpg",
+          "alt": "AI as Material exhibition detail"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/ai-as-material-talk-with-terence-broad-tickets-1980306630440",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-terence-broad"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A talk showing how practices that treat AI as a material rather than a tool or creative agent allow artists to make critical works presenting new ways of understanding unfathomably complex computational systems.",
+      "keywords": "AI as material, machine learning, critical AI, generative art, computational art"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-cloud-watching",
+      "name": "Cloud-Watching Through My Window",
+      "url": "https://phreaking.co.uk/past-events#event-cloud-watching",
+      "exhibition": "does-cloud-compute",
+      "label": "Talk",
+      "displayDate": "Sunday 18th January — 13:00–14:00",
+      "sortOrder": 7,
+      "images": [
+        {
+          "src": "/assets/DCCeP/robin-leverton.jpeg",
+          "full": "/assets/DCCeP/robin-leverton.jpeg",
+          "alt": "Cloud-Watching Through My Window talk poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.webp",
+          "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.jpg",
+          "alt": "Robin Leverton presenting Cloud-Watching"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.webp",
+          "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.jpg",
+          "alt": "Cloud-Watching exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.webp",
+          "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.jpg",
+          "alt": "Cloud-Watching documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.webp",
+          "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.jpg",
+          "alt": "Cloud-Watching exhibition detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.webp",
+          "full": "/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.jpg",
+          "alt": "Cloud-Watching exhibition detail"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/cloud-watching-through-my-window-talk-by-robin-leveron-tickets-1980321224090?aff=oddtdtcreator",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-robin-leverton"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A flâneur's guide to mapping the new geographies of connection, exploring internet and communications infrastructures, physical and digital topographies, and contemporary data emissions.",
+      "keywords": "internet infrastructure, digital geography, network culture, data, cloud computing"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies",
+      "name": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina",
+      "url": "https://phreaking.co.uk/past-events#event-artificial-intimacies",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": [
+        {
+          "@id": "https://phreaking.co.uk/#person-erin-robinson"
+        },
+        {
+          "@id": "https://phreaking.co.uk/#person-anthony-frisby"
+        }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A lecture exploring the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience, discussing artificial intimacies, eroticism, and digital embodiment.",
+      "keywords": "artificial intimacy, digital embodiment, post-structuralism, postmodernism, computational desire, XXX Machina"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-long-live",
+      "name": "Long Live The New Flesh (or Whatever)",
+      "url": "https://phreaking.co.uk/past-events#event-long-live",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-dian-joy"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A lecture exploring how desire functions as a mechanism of discipline and ideological capture within the contemporary digital landscape, drawing from media theory, philosophy, and digital folklore, with a close reading of Videodrome.",
+      "keywords": "media theory, digital folklore, desire, platform culture, algorithmic culture, Videodrome, meme culture"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-noisy-spaces",
+      "name": "Noisy Spaces",
+      "url": "https://www.eventbrite.co.uk/e/noisy-spaces-workshop-by-kat-macdonald-tickets-1979652367522",
+      "exhibition": "does-cloud-compute",
+      "label": "Workshop",
+      "displayDate": "Sunday 11th January — 13:00–15:30",
+      "sortOrder": 1,
+      "images": [
+        {
+          "src": "/assets/DCCeP/NOISEY_SPACES_V2 Medium.jpeg",
+          "full": "/assets/DCCeP/NOISEY_SPACES_V2 Medium.jpeg",
+          "alt": "Noisy Spaces workshop poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.webp",
+          "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.jpeg",
+          "alt": "Participants at Noisy Spaces workshop"
+        },
+        {
+          "src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.webp",
+          "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.jpeg",
+          "alt": "Noisy Spaces workshop documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.webp",
+          "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.jpeg",
+          "alt": "Noisy Spaces collective sound making"
+        },
+        {
+          "src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.webp",
+          "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.jpeg",
+          "alt": "Noisy Spaces workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.webp",
+          "full": "/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.jpeg",
+          "alt": "Noisy Spaces workshop detail"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/noisy-spaces-workshop-by-kat-macdonald-tickets-1979652367522?",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-kat-macdonald"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A workshop exploring technology as it relates to collective sound making, tracing London's experimental collective performance scene of the 1970s and how those methods apply to current art culture.",
+      "keywords": "sound art, collective performance, experimental music, workshop, London, 1970s"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website",
+      "name": "I Want To Be A Website",
+      "url": "https://www.eventbrite.co.uk/e/i-want-to-be-a-website-html-workshop-with-cranberry-lemonade-tickets-1980383534462",
+      "exhibition": "does-cloud-compute",
+      "label": "Workshop",
+      "displayDate": "Wednesday 14th January — 18:00–20:00",
+      "sortOrder": 2,
+      "images": [
+        {
+          "src": "/assets/DCCeP/CLWorkshopPosterLD.png",
+          "full": "/assets/DCCeP/CLWorkshopPosterLD.png",
+          "alt": "I Want To Be A Website workshop poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.webp",
+          "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.jpg",
+          "alt": "Participants building personal webpages"
+        },
+        {
+          "src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.webp",
+          "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.jpg",
+          "alt": "I Want To Be A Website workshop documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.webp",
+          "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.jpg",
+          "alt": "I Want To Be A Website workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.webp",
+          "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.jpg",
+          "alt": "I Want To Be A Website workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.webp",
+          "full": "/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.jpg",
+          "alt": "Attendees sharing web experiments"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/i-want-to-be-a-website-html-workshop-with-cranberry-lemonade-tickets-1980383534462",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-cranberry-lemonade"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A hands-on, beginner-friendly personal web-making workshop exploring HTML, CSS and JavaScript to create personalised and poetic webpages and tell digital stories.",
+      "keywords": "web design, HTML, CSS, JavaScript, internet art, digital storytelling, workshop"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-extremely-standardised",
+      "name": "Extremely Standardised Fun",
+      "url": "https://www.eventbrite.co.uk/e/1980592583734",
+      "exhibition": "does-cloud-compute",
+      "label": "Workshop",
+      "displayDate": "Saturday 17th January — 11:00–14:00",
+      "sortOrder": 4,
+      "images": [
+        {
+          "src": "/assets/DCCeP/MAT_HILL2edit.png",
+          "full": "/assets/DCCeP/MAT_HILL2edit.png",
+          "alt": "Extremely Standardised Fun workshop poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.webp",
+          "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.jpg",
+          "alt": "Participants at Extremely Standardised Fun"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.webp",
+          "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.jpg",
+          "alt": "Extremely Standardised Fun workshop documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.webp",
+          "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.jpg",
+          "alt": "Extremely Standardised Fun workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.webp",
+          "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.jpg",
+          "alt": "Extremely Standardised Fun workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.webp",
+          "full": "/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.jpg",
+          "alt": "Attendees exploring generative techniques"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1980592583734?aff=oddtdtcreator",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-matt-hill"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A workshop covering file formats, permacomputing, bytebeats, generative image-making, and Unicode-art, introduced through speculative art projects and computer science fundamentals.",
+      "keywords": "permacomputing, file formats, bytebeats, generative art, Unicode art, computer science, workshop"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding",
+      "name": "Intro To Creative Coding For Artists",
+      "url": "https://www.eventbrite.co.uk/e/intro-to-creative-coding-for-artists-workshop-with-margot-mcewen-tickets-1980628014709",
+      "exhibition": "does-cloud-compute",
+      "label": "Workshop",
+      "displayDate": "Sunday 18th January — 15:00–19:00",
+      "sortOrder": 8,
+      "images": [
+        {
+          "src": "/assets/DCCeP/CABLEGL_MARGOT2.png",
+          "full": "/assets/DCCeP/CABLEGL_MARGOT2.png",
+          "alt": "Intro To Creative Coding For Artists workshop poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Intro2/CreativeCoding-1.webp",
+          "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-1.jpg",
+          "alt": "Participants learning Cables.gl"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Intro2/CreativeCoding-2.webp",
+          "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-2.jpg",
+          "alt": "Creative coding workshop documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Intro2/CreativeCoding-3.webp",
+          "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-3.jpg",
+          "alt": "Creative coding workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Intro2/CreativeCoding-4.webp",
+          "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-4.jpg",
+          "alt": "Creative coding workshop detail"
+        },
+        {
+          "src": "/assets/DCCeP/Events/Intro2/CreativeCoding-5.webp",
+          "full": "/assets/DCCeP/Events/Intro2/CreativeCoding-5.jpg",
+          "alt": "Attendees experimenting with interactive visuals"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/intro-to-creative-coding-for-artists-workshop-with-margot-mcewen-tickets-1980628014709?aff=oddtdtcreator",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-margot-mcewen"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A workshop exploring Cables.gl, a free open-source node-based live coding tool for WebGL development, covering live video manipulation, interactive visuals, and input devices including MIDI and webcams.",
+      "keywords": "creative coding, Cables.gl, WebGL, live coding, interactive visuals, MIDI, workshop"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-oops-glitch",
+      "name": "Oops, You Found A Glitch",
+      "url": "https://www.eventbrite.co.uk/e/oops-you-found-a-glitch-html-workshop-tickets-1547997645629",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-cranberry-lemonade"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A hands-on workshop reviving dead pages from Glitch.com's shutdown, reverse-engineering lost websites from thumbnail previews and rebuilding them from scratch using HTML, CSS and JavaScript.",
+      "keywords": "HTML, CSS, JavaScript, glitch art, web archaeology, internet culture, workshop"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-object-oriented",
+      "name": "Object Oriented Storytelling: From Field to Virtual",
+      "url": "https://www.eventbrite.co.uk/e/object-oriented-storytelling-from-field-to-virtual-tickets-1553270286239",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-melissa-li-yunzhi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A two-hour workshop treating everyday objects as narrative anchors bridging physical material to virtual, inspired by methods from Melissa Li Yunzhi's project Home is a Dwelling Path.",
+      "keywords": "storytelling, object-oriented narrative, digital art, new media, workshop"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting",
+      "name": "That Sounds Exciting!",
+      "url": "https://phreaking.co.uk/past-events#event-that-sounds-exciting",
+      "exhibition": "does-cloud-compute",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-thatsoundsexciting"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A live coding performance by the live coding group That Sounds Exciting!",
+      "keywords": "live coding, algorithmic performance, creative coding, performance"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael",
+      "name": "Claire McMichael",
+      "url": "https://phreaking.co.uk/past-events#event-claire-mcmichael",
+      "exhibition": "does-cloud-compute",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-claire-mcmichael"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A performance by Claire McMichael at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
+      "keywords": "performance art, experimental performance, London"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-deposilk",
+      "name": "Deposit Silk",
+      "url": "https://phreaking.co.uk/past-events#event-deposilk",
+      "exhibition": "does-cloud-compute",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-deposilk"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "A performance by Deposit Silk at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
+      "keywords": "performance art, experimental performance, London"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc",
+      "name": "Lagtime Seedling",
+      "url": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc",
+      "exhibition": "does-cloud-compute",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-lagtime-seedling"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano.",
+      "keywords": "browser performance, audio-visual, live coding, YouTube, internet art, ASMR"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-algorave-london",
+      "name": "London live coding group",
+      "url": "https://phreaking.co.uk/past-events#event-algorave-london",
+      "exhibition": "does-cloud-compute",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#org-algorave-london"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "Live coders from Algorave London, featuring Sinsé, Nadezhda, and Daniel performing algorithmic and generative music.",
+      "keywords": "live coding, algorave, algorithmic music, generative art, performance"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-orangespy",
+      "name": "Orangespy",
+      "url": "https://phreaking.co.uk/past-events#event-orangespy",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-orangespy"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A live coding performance integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
+      "keywords": "live coding, algorithmic composition, generative visuals, AI art, performance"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot",
+      "name": "Lagtime Seedling Bitrot",
+      "url": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-lagtime-seedling"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A live browser window performance using YouTube video tabs, an online piano, and overlapping browser windows.",
+      "keywords": "browser performance, audio-visual, improvisation, internet art, live performance"
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-yiding-zhang",
+      "name": "Yiding Zhang",
+      "url": "https://phreaking.co.uk/past-events#event-yiding-zhang",
+      "exhibition": "bitrot",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2025",
+      "endDate": "2025",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "performer": {
+        "@id": "https://phreaking.co.uk/#person-yiding-zhang"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2025"
+      },
+      "description": "A live performance using a custom-built modular synthesizer.",
+      "keywords": "modular synthesis, electronic music, performance art, synthesizer"
+    },
+    {
+      "@type": "ScreeningEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-phreaking-film-night",
+      "name": "Phreaking Film Night",
+      "url": "https://www.eventbrite.co.uk/e/1980717293745",
+      "exhibition": "does-cloud-compute",
+      "label": "Screening",
+      "displayDate": "Wednesday 21st January — 18:00–19:30",
+      "sortOrder": 9,
+      "images": [
+        {
+          "src": "/assets/DCCeP/filmNight.jpeg",
+          "full": "/assets/DCCeP/filmNight.jpeg",
+          "alt": "Phreaking Film Night poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/FilmNight/FilmNight-1.webp",
+          "full": "/assets/DCCeP/Events/FilmNight/FilmNight-1.jpeg",
+          "alt": "Film night documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/FilmNight/FilmNight-2.webp",
+          "full": "/assets/DCCeP/Events/FilmNight/FilmNight-2.jpeg",
+          "alt": "Film night documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/FilmNight/FilmNight-3.webp",
+          "full": "/assets/DCCeP/Events/FilmNight/FilmNight-3.jpeg",
+          "alt": "Film night documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/FilmNight/FilmNight-4.webp",
+          "full": "/assets/DCCeP/Events/FilmNight/FilmNight-4.jpeg",
+          "alt": "Film night documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/FilmNight/FilmNight-5.webp",
+          "full": "/assets/DCCeP/Events/FilmNight/FilmNight-5.jpeg",
+          "alt": "Film night documentation"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1980717293745?aff=oddtdtcreator",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "An evening of computational, experimental, and artist-led short films bending narrative, fracturing reality, and playing at the edges of code, image, and memory. Featuring films by Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins (Nukleopatra), Ned Caderni, Iman Javaid and Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen.",
+      "keywords": "experimental film, artist film, short film, computational art, screening, London"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-open-projector",
+      "name": "Open Projector",
+      "url": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/open-projector.html",
+      "exhibition": "does-cloud-compute",
+      "label": "Event",
+      "displayDate": "Saturday 17th January — 17:00–20:00",
+      "sortOrder": 6,
+      "images": [
+        {
+          "src": "/assets/DCCeP/openprojector-v1.jpg",
+          "full": "/assets/DCCeP/openprojector-v1.jpg",
+          "alt": "Open Projector event poster"
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-1.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-1.jpg",
+          "alt": "Open Projector documentation"
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-2.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-2.jpg",
+          "alt": "Open Projector documentation"
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-3.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-3.jpg",
+          "alt": "Open Projector documentation"
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-5.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-5.jpg",
+          "alt": "Open Projector documentation"
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-6.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-6.jpg",
+          "alt": "Open Projector documentation"
+        }
+      ],
+      "eventCompletedUrl": "https://phreaking.co.uk/does-cloud-compute-ever-precipitate/open-projector.html",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "ANNEX by The Koppel Project",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1 Tiverton Street",
+          "addressLocality": "London",
+          "postalCode": "SE1 6NT",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "An open projector night where everyone was welcome to come and present their projects. Whether a project was finished, a work in progress, or already publicised — a great opportunity to share and gather feedback from fellow artists and enthusiasts. No pre-registration needed.",
+      "keywords": "open projector, artist presentations, project sharing, community, Does Cloud Compute"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-closing-dccep",
+      "name": "Closing Event",
+      "url": "https://www.eventbrite.co.uk/e/1981052075085",
+      "exhibition": "does-cloud-compute",
+      "label": "Event",
+      "displayDate": "Friday 23rd January — 18:00–21:00",
+      "sortOrder": 10,
+      "images": [
+        {
+          "src": "/assets/DCCeP/CLOSINGEVENT.jpeg",
+          "full": "/assets/DCCeP/CLOSINGEVENT.jpeg",
+          "alt": "Closing Event poster"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.webp",
+          "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.jpeg",
+          "alt": "Closing event documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.webp",
+          "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.jpeg",
+          "alt": "Closing event documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.webp",
+          "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.jpeg",
+          "alt": "Closing event documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.webp",
+          "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.jpeg",
+          "alt": "Closing event documentation"
+        },
+        {
+          "src": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.webp",
+          "full": "/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.jpeg",
+          "alt": "Closing event documentation"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1981052075085?aff=oddtdtcreator",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventPastdue",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "ANNEX by The Koppel Project",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1 Tiverton Street",
+          "addressLocality": "London",
+          "postalCode": "SE1 6NT",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/SoldOut",
+        "validFrom": "2026"
+      },
+      "description": "The closing event of Does Cloud Compute (ever) Precipitate? featured a panel discussion with participating artists and curators, followed by a line-up of live-coding performances by London live coding groups including That Sounds Exciting!, Algorave London, Lagtime Seedling, Deposit Silk, and Claire McMichael.",
+      "keywords": "closing event, panel discussion, live coding, performance, Does Cloud Compute"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://phreaking.co.uk/past-events#event-list",
+      "name": "Phreaking Collective Past Events",
+      "numberOfItems": 22,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-counter-modelling"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-ai-as-material"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-cloud-watching"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-artificial-intimacies"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-long-live"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-noisy-spaces"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-i-want-to-be-a-website"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-extremely-standardised"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-intro-creative-coding"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-oops-glitch"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-object-oriented"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-that-sounds-exciting"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-claire-mcmichael"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-deposilk"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-dcc"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-algorave-london"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-orangespy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-lagtime-seedling-bitrot"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-yiding-zhang"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-phreaking-film-night"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-open-projector"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@id": "https://phreaking.co.uk/past-events#event-closing-dccep"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-test",
+      "name": "test",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "",
+      "sortOrder": 11,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      }
+    }
+  ]
+}
