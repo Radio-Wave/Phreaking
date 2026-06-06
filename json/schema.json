@@ -1751,14 +1751,14 @@
       "sortOrder": 1,
       "images": [
         {
-          "src": "",
-          "full": "",
+          "src": "/assets/CanWeStartAgain/Events/private-view/private-view_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/private-view/private-view_1.jpg",
           "alt": ""
         }
       ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
-      "description": "",
+      "description": "Exhibition Opening",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
