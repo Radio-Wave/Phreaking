@@ -310,6 +310,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <option value="all">All Exhibitions</option>
     <option value="does-cloud-compute">Does Cloud Compute</option>
     <option value="bitrot">BitRot</option>
+    <option value="can-we-start-again">Can We Start Again?</option>
     <option value="__add__">+ Add new exhibition…</option>
   </select>
   <select class="sel" onchange="setStyle(this.value)">
@@ -320,7 +321,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   <div class="tb-right">
     <div class="udot" id="udot" title="Unsaved changes"></div>
     <button class="btn btn-ghost btn-sm" onclick="openGhModal()" title="GitHub settings">⚙ GitHub</button>
-    <button class="btn btn-primary" id="ghPushBtn" onclick="pushToGitHub()">↑ Push to GitHub</button>
+    <button class="btn btn-primary" id="ghPushBtn" onclick="pushToGitHub()">↑ Push to GitHub<span id="ghPushBadge" style="display:none;background:rgba(255,255,255,.22);border-radius:3px;padding:1px 6px;font-size:11px;margin-left:6px;vertical-align:middle;"></span></button>
     <button class="btn btn-ok" onclick="downloadJSON()">↓ Download JSON</button>
   </div>
 </div>
@@ -600,9 +601,10 @@ let prevFilter = 'all';
 
 const imgConvState   = {}; // key: `${curIdx}_${imgIdx}`
 const imgPreviewCache = {}; // key: `${graphIdx}_${imgIdx}` → {webp: blobURL, jpeg: blobURL}
+const stagedImages   = new Map(); // repoPath → {content (base64), label}
 
 // Dynamic lists — populated from JSON on load, user can extend
-let knownExhibitions = ['does-cloud-compute', 'bitrot'];
+let knownExhibitions = ['does-cloud-compute', 'bitrot', 'can-we-start-again'];
 let knownLabels = ['Workshop', 'Talk', 'Performance', 'Screening', 'Event'];
 let knownTypes = [
   {value:'EducationEvent', label:'Workshop'},
@@ -619,6 +621,7 @@ let pendingANCb   = '';
 const EXH_NAMES = {
   'does-cloud-compute': 'Does Cloud Compute (ever) Precipitate?',
   'bitrot': 'BitRot',
+  'can-we-start-again': 'Can We Start Again?',
   'untagged': 'Untagged'
 };
 const TYPE_MAP = {
@@ -968,10 +971,12 @@ function imgRow(img,i){
     <div class="img-convert-out" id="ico-${i}" style="display:none">
       <div class="img-convert-panels">
         <div class="img-convert-panel">
-          <span class="img-convert-panel-label">Preview · WebP</span>
+          <span class="img-convert-panel-label">Thumbnail · WebP</span>
           <img id="ico-webp-img-${i}" src="" alt="webp preview">
           <span class="img-convert-size" id="ico-webp-size-${i}">—</span>
-          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'webp')">↓ .webp</button>
+          <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-webp-${i}" onclick="stageImg(${i},'webp')">+ Save for push</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub(${i},'webp')">↑ Upload now</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'webp')">↓ Download</button>
         </div>
         <div class="img-convert-panel">
           <span class="img-convert-panel-label">Full · JPEG</span>
@@ -983,15 +988,16 @@ function imgRow(img,i){
               oninput="updateJpegQuality(${i},this.value)">
             <span id="ico-qual-label-${i}" style="min-width:30px">85%</span>
           </div>
-          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'jpeg')">↓ .jpg</button>
+          <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-jpeg-${i}" onclick="stageImg(${i},'jpeg')">+ Save for push</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub(${i},'jpeg')">↑ Upload now</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'jpeg')">↓ Download</button>
         </div>
       </div>
       <button class="img-apply-paths" onclick="applyConvertPaths(${i})">↗ Auto-fill src &amp; full paths</button>
       <div class="img-disclaimer">
-        <strong>Where to put the files:</strong> Place in <code>images/events/</code> at the site root,
-        then click "Auto-fill" or paste the paths above manually.<br>
-        Expected filenames: <code id="ico-fname-${i}">eventslug_${i+1}.webp</code> &nbsp;/&nbsp;
-        <code id="ico-fname-full-${i}">eventslug_${i+1}.jpg</code>
+        <strong>Target folder:</strong> <code id="ico-folder-${i}">—</code><br>
+        Filenames: <code id="ico-fname-${i}">—</code> &nbsp;/&nbsp; <code id="ico-fname-full-${i}">—</code><br>
+        Click <strong>↑ Upload</strong> to push directly to GitHub, or <strong>↓ Download</strong> to save manually.
       </div>
     </div>
   </div>`;
@@ -1117,8 +1123,6 @@ function showConvUI(imgIdx){
   out.style.display='block';
 
   const ev=data?.['@graph']?.[curIdx];
-  const evSlug=ev?.name?slug(ev.name):'event';
-  const base=`${evSlug}_${imgIdx+1}`;
 
   const el=id=>document.getElementById(id);
   if(el('ico-webp-img-'+imgIdx))  el('ico-webp-img-'+imgIdx).src=s.webpDataURL;
@@ -1128,11 +1132,27 @@ function showConvUI(imgIdx){
     jSize.textContent=s.jpegSize+' KB'+(s.jpegSize>1024?' ⚠ >1 MB':'');
     jSize.className='img-convert-size'+(s.jpegSize>1024?' warn':'');
   }
-  if(el('ico-jpeg-img-'+imgIdx))       el('ico-jpeg-img-'+imgIdx).src=s.jpegDataURL;
-  if(el('ico-qual-slider-'+imgIdx))    el('ico-qual-slider-'+imgIdx).value=s.quality;
-  if(el('ico-qual-label-'+imgIdx))     el('ico-qual-label-'+imgIdx).textContent=s.quality+'%';
-  if(el('ico-fname-'+imgIdx))          el('ico-fname-'+imgIdx).textContent=base+'.webp';
-  if(el('ico-fname-full-'+imgIdx))     el('ico-fname-full-'+imgIdx).textContent=base+'.jpg';
+  if(el('ico-jpeg-img-'+imgIdx))    el('ico-jpeg-img-'+imgIdx).src=s.jpegDataURL;
+  if(el('ico-qual-slider-'+imgIdx)) el('ico-qual-slider-'+imgIdx).value=s.quality;
+  if(el('ico-qual-label-'+imgIdx))  el('ico-qual-label-'+imgIdx).textContent=s.quality+'%';
+
+  // Populate folder/filename info using exhibition-aware paths
+  if(ev){
+    const webpPath = imgAssetPath(ev, imgIdx, 'webp');
+    const jpegPath = imgAssetPath(ev, imgIdx, 'jpeg');
+    const folder   = webpPath.replace(/\/[^/]+$/, '/');
+    if(el('ico-folder-'+imgIdx))    el('ico-folder-'+imgIdx).textContent=folder;
+    if(el('ico-fname-'+imgIdx))     el('ico-fname-'+imgIdx).textContent=webpPath.split('/').pop();
+    if(el('ico-fname-full-'+imgIdx))el('ico-fname-full-'+imgIdx).textContent=jpegPath.split('/').pop();
+
+    // Restore "Saved" state on stage buttons if already queued
+    const markStaged = (btnId) => {
+      const b = el(btnId);
+      if(b){ b.textContent='✓ Saved'; b.style.background='var(--ok)'; b.style.color='#000'; }
+    };
+    if(stagedImages.has(webpPath)) markStaged('ico-stage-webp-'+imgIdx);
+    if(stagedImages.has(jpegPath)) markStaged('ico-stage-jpeg-'+imgIdx);
+  }
 }
 
 function restoreAllConvUI(){
@@ -1176,12 +1196,25 @@ function downloadConvert(imgIdx, type){
   toast('Downloaded '+fname,'ok');
 }
 
+// Returns the repo-relative path for a converted image (no leading slash)
+function imgAssetPath(ev, imgIdx, type){
+  const exh     = ev.exhibition || '';
+  const evSlug  = ev.name ? slug(ev.name) : 'event';
+  const n       = imgIdx + 1;
+  const ext     = type === 'webp' ? '.webp' : '.jpg';
+  let folder;
+  if      (exh === 'can-we-start-again') folder = `assets/CanWeStartAgain/Events/${evSlug}`;
+  else if (exh === 'does-cloud-compute') folder = `assets/DCCeP/Events/${evSlug}`;
+  else if (exh === 'bitrot')             folder = `assets/BitRotEventImgs/${evSlug}`;
+  else                                   folder = `assets/${slug(exh)||'other'}/Events/${evSlug}`;
+  return `${folder}/${evSlug}_${n}${ext}`;
+}
+
 function applyConvertPaths(imgIdx){
   const ev=data?.['@graph']?.[curIdx];
   if(!ev||!ev.images?.[imgIdx]) return;
-  const evSlug=ev.name?slug(ev.name):'event';
-  const src =`images/events/${evSlug}_${imgIdx+1}.webp`;
-  const full=`images/events/${evSlug}_${imgIdx+1}.jpg`;
+  const src  = '/'+imgAssetPath(ev, imgIdx, 'webp');
+  const full = '/'+imgAssetPath(ev, imgIdx, 'jpeg');
   ev.images[imgIdx].src=src;
   ev.images[imgIdx].full=full;
   markUnsaved(); renderPreview();
@@ -1635,7 +1668,6 @@ async function pushToGitHub(){
   const token  = cfg.token;
   const branch = cfg.branch || 'main';
   const path   = cfg.path   || 'json/schema.json';
-  const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -1645,11 +1677,38 @@ async function pushToGitHub(){
 
   const loadEl = document.getElementById('loading');
   const msgEl  = document.getElementById('loadingMsg');
-  msgEl.textContent = 'Pushing to GitHub…';
   loadEl.classList.add('on');
 
   try {
-    // 1. Get current file SHA (needed to update an existing file)
+    // 1. Upload all staged images
+    const staged = [...stagedImages.entries()];
+    for(let si = 0; si < staged.length; si++){
+      const [repoPath, {content, label}] = staged[si];
+      msgEl.textContent = `Uploading image ${si + 1} of ${staged.length}: ${label}…`;
+      const imgBase = `https://api.github.com/repos/${owner}/${repo}/contents/${repoPath}`;
+      let sha = null;
+      const getRes = await fetch(`${imgBase}?ref=${branch}`, { headers });
+      if(getRes.ok) sha = (await getRes.json()).sha;
+      else if(getRes.status !== 404){
+        const err = await getRes.json().catch(()=>({}));
+        throw new Error(`Image upload failed (${label}): ${err.message || getRes.status}`);
+      }
+      const body = { message: `Upload image: ${repoPath}`, content, branch };
+      if(sha) body.sha = sha;
+      const putRes = await fetch(imgBase, { method:'PUT', headers, body: JSON.stringify(body) });
+      if(!putRes.ok){
+        const err = await putRes.json().catch(()=>({}));
+        throw new Error(`Image upload failed (${label}): ${err.message || putRes.status}`);
+      }
+    }
+
+    // Clear the staged queue after successful image uploads
+    stagedImages.clear();
+    updateStagedBadge();
+
+    // 2. Push the JSON
+    msgEl.textContent = 'Pushing JSON…';
+    const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
     let sha = null;
     const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
     if(getRes.ok){
@@ -1659,13 +1718,11 @@ async function pushToGitHub(){
       throw new Error(err.message || `GitHub API ${getRes.status}`);
     }
 
-    // 2. Base64-encode the JSON (UTF-8 safe)
     const jsonStr = JSON.stringify(data, null, 2);
     const bytes   = new TextEncoder().encode(jsonStr);
     const binary  = Array.from(bytes, b => String.fromCharCode(b)).join('');
     const content = btoa(binary);
 
-    // 3. Commit the file
     const body = { message: `Update ${path} via JSON editor`, content, branch };
     if(sha) body.sha = sha;
 
@@ -1676,12 +1733,120 @@ async function pushToGitHub(){
     }
 
     markSaved();
+    const imgCount = staged.length;
     setStatus(`Pushed to ${owner}/${repo}`, getEvents().length + ' events');
-    toast('Pushed to GitHub successfully!', 'ok');
+    toast(imgCount > 0
+      ? `Pushed: ${imgCount} image${imgCount > 1 ? 's' : ''} + JSON`
+      : 'Pushed to GitHub!', 'ok');
 
   } catch(e){
     toast('Push failed: ' + e.message);
     setStatus('Push failed');
+  } finally {
+    loadEl.classList.remove('on');
+    msgEl.textContent = 'Loading JSON…';
+  }
+}
+
+// ── STAGE IMAGES FOR BATCH PUSH ──────────────────────────
+function stageImg(imgIdx, type){
+  const cfg = ghLoad();
+  if(!cfg.owner || !cfg.repo || !cfg.token){ openGhModal(); return; }
+
+  const key = imgConvKey(imgIdx);
+  const s   = imgConvState[key];
+  if(!s){ toast('No converted image — upload a file first'); return; }
+
+  const ev = data?.['@graph']?.[curIdx];
+  if(!ev) return;
+
+  const repoPath = imgAssetPath(ev, imgIdx, type);
+  const dataURL  = type === 'webp' ? s.webpDataURL : s.jpegDataURL;
+  const content  = dataURL.split(',')[1];
+  const fname    = repoPath.split('/').pop();
+
+  stagedImages.set(repoPath, { content, label: fname });
+  applyConvertPaths(imgIdx);
+  updateStagedBadge();
+
+  // Update the button to show it's queued
+  const btn = document.getElementById(`ico-stage-${type}-${imgIdx}`);
+  if(btn){ btn.textContent = '✓ Saved'; btn.style.background = 'var(--ok)'; btn.style.color = '#000'; }
+
+  toast(`Saved: ${fname} — will push with JSON`, 'ok');
+}
+
+function updateStagedBadge(){
+  const count  = stagedImages.size;
+  const badge  = document.getElementById('ghPushBadge');
+  const btn    = document.getElementById('ghPushBtn');
+  if(!badge) return;
+  if(count > 0){
+    badge.style.display = 'inline';
+    badge.textContent   = `+${count} img${count > 1 ? 's' : ''}`;
+    if(btn) btn.title   = `Push JSON + ${count} staged image${count > 1 ? 's' : ''}`;
+  } else {
+    badge.style.display = 'none';
+    if(btn) btn.title   = '';
+  }
+}
+
+// ── IMAGE UPLOAD TO GITHUB ────────────────────────────────
+async function uploadImgToGitHub(imgIdx, type){
+  const cfg = ghLoad();
+  if(!cfg.owner || !cfg.repo || !cfg.token){ openGhModal(); return; }
+
+  const key = imgConvKey(imgIdx);
+  const s   = imgConvState[key];
+  if(!s){ toast('No converted image — upload a file first'); return; }
+
+  const ev = data?.['@graph']?.[curIdx];
+  if(!ev){ return; }
+
+  const repoPath = imgAssetPath(ev, imgIdx, type);
+  const dataURL  = type === 'webp' ? s.webpDataURL : s.jpegDataURL;
+  const content  = dataURL.split(',')[1]; // already base64
+
+  const branch  = cfg.branch || 'main';
+  const apiBase = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${repoPath}`;
+  const headers = {
+    'Authorization':        `Bearer ${cfg.token}`,
+    'Accept':               'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+    'Content-Type':         'application/json',
+  };
+
+  const loadEl = document.getElementById('loading');
+  const msgEl  = document.getElementById('loadingMsg');
+  const fname  = repoPath.split('/').pop();
+  msgEl.textContent = `Uploading ${fname}…`;
+  loadEl.classList.add('on');
+
+  try {
+    // Get existing SHA if file already exists
+    let sha = null;
+    const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
+    if(getRes.ok) sha = (await getRes.json()).sha;
+    else if(getRes.status !== 404){
+      const err = await getRes.json().catch(()=>({}));
+      throw new Error(err.message || `GitHub API ${getRes.status}`);
+    }
+
+    const body = { message: `Upload image: ${repoPath}`, content, branch };
+    if(sha) body.sha = sha;
+
+    const putRes = await fetch(apiBase, { method:'PUT', headers, body: JSON.stringify(body) });
+    if(!putRes.ok){
+      const err = await putRes.json().catch(()=>({}));
+      throw new Error(err.message || `GitHub API ${putRes.status}`);
+    }
+
+    toast(`Uploaded: ${fname}`, 'ok');
+    // Auto-fill the src/full paths in the JSON after successful upload
+    applyConvertPaths(imgIdx);
+
+  } catch(e){
+    toast('Upload failed: ' + e.message);
   } finally {
     loadEl.classList.remove('on');
     msgEl.textContent = 'Loading JSON…';
@@ -1701,6 +1866,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   setStatus('Ready — loading from site…');
   loadFromSite();
   updateGhButton();
+  updateStagedBadge();
 });
 
 document.addEventListener('keydown', e=>{
