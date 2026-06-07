@@ -32,10 +32,10 @@
       var graph = data['@graph'] || [];
 
       var hosted = graph.filter(function (item) {
-        return item.exhibitionCategory === 'hosted';
+        return item.exhibitionCategory === 'hosted' && item.visible !== false;
       });
       var featured = graph.filter(function (item) {
-        return item.exhibitionCategory === 'featured';
+        return item.exhibitionCategory === 'featured' && item.visible !== false;
       });
 
       hosted.sort(function (a, b) { return (a.sortOrder || 999) - (b.sortOrder || 999); });

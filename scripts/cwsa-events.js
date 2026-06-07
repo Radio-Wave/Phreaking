@@ -88,7 +88,7 @@
       });
 
       var events = graph.filter(function (item) {
-        return item.exhibition === 'can-we-start-again';
+        return item.exhibition === 'can-we-start-again' && item.visible !== false;
       });
 
       events.sort(function (a, b) {
