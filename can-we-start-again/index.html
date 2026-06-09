@@ -209,18 +209,20 @@
           </div>
         </section>
 
-        <section id="exhibition" aria-labelledby="exhibition-heading">
+        <!-- <section id="exhibition" aria-labelledby="exhibition-heading">
           <h2 id="exhibition-heading" class="section-title">Exhibition</h2>
           <section class="body-copy">
             <p>Exhibition details coming soon.</p>
           </section>
-        </section>
+        </section> -->
 
         <section id="artists" aria-labelledby="artists-heading">
           <h2 id="artists-heading" class="section-title">Artists</h2>
-          <section class="body-copy">
-            <p>Artist information coming soon.</p>
-          </section>
+          <div class="artists-grid" id="artists-grid" data-exhibition="can-we-start-again">
+            <p class="cwsa-loading">Loading artists&hellip;</p>
+          </div>
+
+          <p>More artists announced soon.</p>
         </section>
 
       </div>
@@ -234,6 +236,7 @@
   <script src="/scripts/sidebar.js"></script>
   <script src="/scripts/can-we-start-again.js"></script>
   <script src="/scripts/cwsa-events.js"></script>
+  <script src="/scripts/artists.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>

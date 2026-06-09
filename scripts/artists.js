@@ -63,7 +63,7 @@
     .then(function (r) { return r.json(); })
     .then(function (data) {
       var artists = (data['@graph'] || [])
-        .filter(function (a) { return a.exhibition === exhibition; })
+        .filter(function (a) { return a.exhibition === exhibition && a.visible !== false; })
         .sort(function (a, b) { return (a.sortOrder || 999) - (b.sortOrder || 999); });
 
       if (artists.length === 0) {

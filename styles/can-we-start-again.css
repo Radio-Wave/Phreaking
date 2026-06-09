@@ -454,6 +454,55 @@ hr {
 #exhibition,
 #artists { padding-top: var(--pad); }
 
+/* ---- Artists ---- */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--g);
+  padding: 1rem 0 var(--pad);
+}
+@media (min-width: 760px) {
+  .artists-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.artist-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--rule);
+  background: rgba(22, 22, 20, 0.82);
+  padding: 1.25rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.artist-card:hover {
+  border-color: rgba(122, 176, 32, 0.45);
+  background: rgba(28, 28, 26, 0.88);
+}
+.artist-card h3 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(15px, 2vw, 19px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.artist-card p {
+  margin: 0;
+  font-size: clamp(12px, 1.4vw, 14px);
+  line-height: 1.6;
+  color: var(--muted);
+}
+.artist-link {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: clamp(11px, 1.3vw, 13px);
+  color: var(--muted);
+}
+.artist-link a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.artist-link a:hover { color: var(--ink); }
+
 /* ---- Footer ---- */
 .site-footer {
   margin-top: calc(var(--pad) * 2);
