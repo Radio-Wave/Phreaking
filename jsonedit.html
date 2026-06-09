@@ -351,12 +351,50 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .cal-trigger{background:var(--inp);border:1px solid var(--brd);color:var(--muted);border-radius:5px;
   padding:6px 9px;cursor:pointer;font-size:14px;transition:.15s;flex-shrink:0;line-height:1;}
 .cal-trigger:hover{color:var(--ink);border-color:#444;background:rgba(255,255,255,.04);}
+
+/* ── MODE TABS (Events / Artists) ── */
+.mode-tabs{display:flex;gap:2px;background:var(--inp);border:1px solid var(--brd);border-radius:7px;padding:2px;flex-shrink:0;}
+.mtab{background:transparent;border:none;color:var(--muted);font-family:var(--ui);font-size:12px;font-weight:500;
+  padding:5px 14px;border-radius:5px;cursor:pointer;transition:.15s;white-space:nowrap;}
+.mtab:hover{color:var(--ink);}
+.mtab.on{background:var(--accent);color:#fff;}
+
+/* ── ARRAY (list) EDITOR — sameAs / knowsAbout ── */
+.arr-editor{display:flex;flex-direction:column;gap:6px;}
+.arr-row{display:flex;gap:6px;align-items:center;}
+.arr-row input{flex:1;background:var(--inp);border:1px solid var(--brd);color:var(--ink);
+  padding:6px 8px;border-radius:5px;font-family:var(--mono);font-size:11px;}
+.arr-row input:focus{outline:none;border-color:var(--accent);}
+.arr-row button{flex-shrink:0;}
+.add-arr{display:flex;align-items:center;justify-content:center;gap:5px;padding:6px;
+  border:1px dashed var(--brd);border-radius:5px;background:transparent;color:var(--muted);
+  cursor:pointer;font-family:var(--ui);font-size:11px;width:100%;transition:.15s;}
+.add-arr:hover{color:var(--ink);border-color:#444;}
+
+/* ── RENDER: ARTISTS ── */
+.r-artists{padding:2rem;background:#0b0b0c;min-height:100%;font-family:'IBM Plex Mono',monospace;color:#e8e8ec;}
+.r-artists .sec-head{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:#b0b0bb;
+  margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #2a2a2d;}
+.r-artists .agrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2.5rem;}
+.r-artists .acard{border:1px solid #2a2a2d;border-radius:6px;padding:1.25rem;display:flex;flex-direction:column;background:rgba(255,255,255,.015);}
+.r-artists .acard h3{font-size:1.1rem;font-weight:500;margin-bottom:.15rem;text-transform:none;}
+.r-artists .ajob{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#7a7a88;margin-bottom:.6rem;}
+.r-artists .adesc{font-size:.83rem;line-height:1.6;color:#cfcfd6;margin-bottom:.7rem;}
+.r-artists .atags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.7rem;}
+.r-artists .atag{font-size:.68rem;border:1px solid #2a2a2d;border-radius:999px;padding:.12rem .5rem;color:#9a9aa5;}
+.r-artists .alink{margin-top:auto;}
+.r-artists .alink a{color:#fff;text-decoration:underline;font-size:.83rem;}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand">PHREAKING <span>/ JSON EDITOR</span></div>
+  <div class="sep"></div>
+  <div class="mode-tabs">
+    <button class="mtab on" data-mode="events" onclick="setMode('events')">Events</button>
+    <button class="mtab" data-mode="artists" onclick="setMode('artists')">Artists</button>
+  </div>
   <div class="sep"></div>
   <button class="btn btn-ghost" onclick="loadFromSite()">↺ Load from Site</button>
   <label class="btn btn-ghost" style="cursor:pointer">
@@ -371,7 +409,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <option value="can-we-start-again">Can We Start Again?</option>
     <option value="__add__">+ Add new exhibition…</option>
   </select>
-  <select class="sel" onchange="setStyle(this.value)">
+  <select class="sel" id="renderSel" onchange="setStyle(this.value)">
     <option value="exh">Render: Exhibitions</option>
     <option value="dcc">Render: Does Cloud Compute</option>
     <option value="pe">Render: Past Events</option>
@@ -391,8 +429,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   <div class="pleft">
     <div id="listWrap" style="display:flex;flex-direction:column;height:100%;overflow:hidden;">
       <div class="pleft-head">
-        <h2>Events</h2>
-        <button class="btn btn-primary btn-sm" onclick="showAddModal()">+ New</button>
+        <h2 id="listHeadTitle">Events</h2>
+        <button class="btn btn-primary btn-sm" id="newItemBtn" onclick="newItem()">+ New</button>
       </div>
       <div class="elist" id="elist">
         <div class="empty">
@@ -411,6 +449,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
       <div class="pedit-body" id="editBody"></div>
       <div class="pedit-foot">
         <button class="btn btn-primary" style="flex:1" onclick="saveEdit()">Save</button>
+        <button class="btn btn-ghost btn-sm" id="dupArtistBtn" onclick="duplicateArtist()" style="display:none" title="Duplicate this profile for another exhibition">⧉ Duplicate</button>
         <button class="btn btn-err btn-sm" onclick="deleteEvent()">Delete</button>
       </div>
     </div>
@@ -490,6 +529,55 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <div class="modal-foot">
       <button class="btn btn-ghost" type="button" onclick="closeAddModal()">Cancel</button>
       <button class="btn btn-primary" type="button" onclick="submitNewEvent()">Create Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Artist Modal -->
+<div class="modal-ov" id="addArtistModal">
+  <div class="modal" style="width:400px;">
+    <h3>New Artist</h3>
+    <div class="fields">
+      <div class="field"><label>Artist Name *</label>
+        <input type="text" id="naName" placeholder="e.g. Jane Doe" onkeydown="if(event.key==='Enter')submitNewArtist()"></div>
+      <div class="field">
+        <label>Exhibition *</label>
+        <select id="naExh" data-prev="" onchange="anChange(this,'exh','')">
+          <option value="bitrot">BitRot</option>
+          <option value="does-cloud-compute">Does Cloud Compute (ever) Precipitate?</option>
+          <option value="__add__">+ Add new exhibition…</option>
+        </select>
+      </div>
+      <div class="field"><label>Job Title</label>
+        <input type="text" id="naJob" value="Artist" placeholder="Artist"></div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7;">
+      Creates a new <code style="font-family:var(--mono)">Person</code> entry in <code style="font-family:var(--mono)">artists.json</code> you can fill in immediately.
+    </p>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" onclick="closeAddArtistModal()">Cancel</button>
+      <button class="btn btn-primary" type="button" onclick="submitNewArtist()">Create Artist</button>
+    </div>
+  </div>
+</div>
+
+<!-- Duplicate Artist Modal -->
+<div class="modal-ov" id="dupArtistModal">
+  <div class="modal" style="width:380px;">
+    <h3>Duplicate Artist</h3>
+    <div class="fields">
+      <div class="field">
+        <label>Copy to exhibition *</label>
+        <select id="dupExh" class="sel" style="width:100%"></select>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7;">
+      Creates a full copy of <strong id="dupArtistName" style="color:var(--ink)"></strong> in the chosen exhibition,
+      with a new identifier and sort order. Edit the copy's bio independently afterwards.
+    </p>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeDupArtistModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmDupArtist()">Duplicate</button>
     </div>
   </div>
 </div>
@@ -646,9 +734,13 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
           <input type="text" id="ghBranch" placeholder="main" onkeydown="if(event.key==='Enter')saveGhConfig()">
         </div>
         <div class="field">
-          <label>File path</label>
+          <label>Events file path</label>
           <input type="text" id="ghPath" placeholder="json/schema.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
         </div>
+      </div>
+      <div class="field">
+        <label>Artists file path</label>
+        <input type="text" id="ghArtistsPath" placeholder="json/artists.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
       </div>
       <div class="field">
         <div class="gh-label-row">
@@ -682,7 +774,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 
 <script>
 // ── STATE ──────────────────────────────────────────────────
-let data = null;
+let mode = 'events';                       // 'events' | 'artists'
+const datasets = { events:null, artists:null };
+const unsaved  = { events:false, artists:false };
+let data = null;                           // mirror of datasets[mode]
 let curIdx = null;
 let exhFilter = 'all';
 let renderStyle = 'exh';
@@ -742,8 +837,9 @@ function setStatus(t,c=''){
   document.getElementById('stext').textContent=t;
   document.getElementById('scount').textContent=c;
 }
-function markUnsaved(){ document.getElementById('udot').classList.add('on'); }
-function markSaved(){ document.getElementById('udot').classList.remove('on'); }
+function markUnsaved(){ unsaved[mode]=true; updateUnsavedDot(); }
+function markSaved(){ unsaved[mode]=false; updateUnsavedDot(); }
+function updateUnsavedDot(){ document.getElementById('udot').classList.toggle('on', !!unsaved[mode]); }
 
 function isEvent(item){
   if(!item||!item['@type']) return false;
@@ -752,6 +848,43 @@ function isEvent(item){
 }
 function getEvents(){ return data?data['@graph'].filter(isEvent):[]; }
 function typeLabel(t){ const a=Array.isArray(t)?t[0]:t; return TYPE_MAP[a]||a||'Event'; }
+
+function isArtist(item){
+  if(!item||!item['@type']) return false;
+  const t=item['@type'];
+  return Array.isArray(t)?t.includes('Person'):t==='Person';
+}
+function getArtists(){ return data?data['@graph'].filter(isArtist):[]; }
+function countLabel(){
+  return mode==='artists' ? getArtists().length+' artists' : getEvents().length+' events';
+}
+
+// ── MODE SWITCH (Events / Artists) ────────────────────────
+function setMode(m){
+  if(m===mode) return;
+  if(curIdx!==null) closeEdit();
+  mode = m;
+  data = datasets[mode];
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('on', b.dataset.mode===m));
+  // Events-only render selector
+  const rs=document.getElementById('renderSel'); if(rs) rs.style.display = m==='events'?'':'none';
+  // List header + reset filters
+  document.getElementById('listHeadTitle').textContent = m==='artists'?'Artists':'Events';
+  exhFilter='all'; prevFilter='all';
+  const tb=document.getElementById('tbExhSel'); if(tb){ tb.value='all'; tb.dataset.prev='all'; }
+  updateUnsavedDot();
+  if(!datasets[mode]){
+    loadFromSite();           // first visit to this mode — fetch it
+  } else {
+    extractFromData();
+    renderList(); renderPreview();
+    refreshExhDropdowns(); refreshPrevFilters();
+    setStatus('Editing '+(m==='artists'?'artists':'events'), countLabel());
+  }
+}
+
+// "+ New" button dispatcher
+function newItem(){ mode==='artists' ? showAddArtistModal() : showAddModal(); }
 
 // ── OPTION BUILDERS ───────────────────────────────────────
 function exhOptions(cur){
@@ -895,18 +1028,21 @@ function refreshPrevFilters(){
 // ── EXTRACT KNOWN VALUES FROM JSON ────────────────────────
 function extractFromData(){
   if(!data) return;
-  getEvents().forEach(ev=>{
+  const items = mode==='artists' ? getArtists() : getEvents();
+  items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
       knownExhibitions.push(ev.exhibition);
       if(!EXH_NAMES[ev.exhibition]){
         EXH_NAMES[ev.exhibition]=ev.exhibition.split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
       }
     }
-    if(ev.label&&!knownLabels.includes(ev.label)) knownLabels.push(ev.label);
-    const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
-    if(t&&!knownTypes.find(x=>x.value===t)){
-      knownTypes.push({value:t,label:TYPE_MAP[t]||t});
-      EVENT_TYPES.add(t);
+    if(mode==='events'){
+      if(ev.label&&!knownLabels.includes(ev.label)) knownLabels.push(ev.label);
+      const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
+      if(t&&!knownTypes.find(x=>x.value===t)){
+        knownTypes.push({value:t,label:TYPE_MAP[t]||t});
+        EVENT_TYPES.add(t);
+      }
     }
   });
 }
@@ -914,10 +1050,11 @@ function extractFromData(){
 // ── LOAD / SAVE ────────────────────────────────────────────
 async function loadFromSite(){
   document.getElementById('loading').classList.add('on');
+  const url = mode==='artists' ? '/json/artists.json' : '/json/schema.json';
   try{
-    const r=await fetch('/json/schema.json');
+    const r=await fetch(url);
     if(!r.ok) throw new Error('HTTP '+r.status);
-    data=await r.json(); onLoaded('Loaded from site');
+    data=await r.json(); onLoaded(mode==='artists'?'Loaded artists from site':'Loaded from site');
   }catch(e){
     toast('Could not load from site: '+e.message); setStatus('Load failed');
   }finally{ document.getElementById('loading').classList.remove('on'); }
@@ -930,16 +1067,19 @@ function loadFromFile(e){
   r.readAsText(f);
 }
 function onLoaded(msg){
+  datasets[mode]=data;
   extractFromData();
   markSaved(); renderList(); renderPreview();
   refreshExhDropdowns(); refreshPrevFilters();
-  const ev=getEvents(); setStatus(msg, ev.length+' events'); toast(msg,'ok');
+  setStatus(msg, countLabel()); toast(msg,'ok');
 }
 function downloadJSON(){
+  if(!data){ toast('Nothing to download'); return; }
+  const fname = mode==='artists' ? 'artists.json' : 'schema.json';
   const s=JSON.stringify(data,null,2);
   const a=Object.assign(document.createElement('a'),{
-    href:URL.createObjectURL(new Blob([s],{type:'application/json'})), download:'schema.json'});
-  a.click(); markSaved(); toast('Downloaded schema.json','ok');
+    href:URL.createObjectURL(new Blob([s],{type:'application/json'})), download:fname});
+  a.click(); markSaved(); toast('Downloaded '+fname,'ok');
 }
 
 // ── FILTERS ───────────────────────────────────────────────
@@ -968,6 +1108,7 @@ function setPF(v,btn){
 function renderList(){
   const el=document.getElementById('elist');
   if(!data){ el.innerHTML='<div class="empty"><div class="empty-ico">⬡</div><h3>No JSON loaded</h3><p>Load from site or upload a file.</p></div>'; return; }
+  if(mode==='artists'){ renderArtistList(el); return; }
 
   let html='';
   let exhHtml='';
@@ -1038,6 +1179,38 @@ function renderList(){
   el.innerHTML=(html||'<div class="empty"><div class="empty-ico">∅</div><h3>No events match filter</h3></div>')+exhHtml;
 }
 
+// ── ARTIST LIST ───────────────────────────────────────────
+function renderArtistList(el){
+  const arts=getArtists();
+  if(!arts.length){ el.innerHTML='<div class="empty"><div class="empty-ico">∅</div><h3>No artists found</h3><p>Add a new artist to get started.</p></div>'; return; }
+
+  const groups={};
+  arts.forEach(a=>{ const k=a.exhibition||'untagged'; (groups[k]||(groups[k]=[])).push(a); });
+  Object.values(groups).forEach(g=>g.sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99)));
+
+  const order=['can-we-start-again','does-cloud-compute','bitrot','untagged'];
+  const keys=[...order.filter(k=>groups[k]),...Object.keys(groups).filter(k=>!order.includes(k))];
+
+  let html='';
+  keys.forEach(exh=>{
+    if(exhFilter!=='all'&&exh!==exhFilter) return;
+    const grpCollapsed=collapsedGroups.has(exh);
+    html+=`<div class="exh-group${grpCollapsed?' collapsed':''}" data-key="${esc(exh)}"><div class="exh-label" onclick="toggleGroup('${esc(exh)}')" title="Click to collapse/expand"><span class="exh-group-toggle">▾</span>${esc(EXH_NAMES[exh]||exh)}</div>`;
+    groups[exh].forEach(a=>{
+      const gi=data['@graph'].indexOf(a);
+      const hidden=a.visible===false;
+      html+=`<div class="eitem${curIdx===gi?' active':''}${hidden?' eitem-hidden':''}" onclick="selectEvent(${gi})">
+        <span class="eitem-tag">${esc(a.jobTitle||'Artist')}</span>
+        <span class="eitem-name">${esc(a.name||'Untitled')}</span>
+        ${hidden?'<span class="eitem-vis-badge">hidden</span>':''}
+        ${a.sortOrder!=null?`<span class="eitem-ord">#${a.sortOrder}</span>`:''}
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  el.innerHTML=html||'<div class="empty"><div class="empty-ico">∅</div><h3>No artists match filter</h3></div>';
+}
+
 // ── EDIT FORM ─────────────────────────────────────────────
 function selectEvent(gi){ curIdx=gi; renderList(); openEdit(); }
 
@@ -1047,6 +1220,8 @@ function openEdit(){
   document.getElementById('listWrap').style.display='none';
   document.getElementById('editPanel').classList.add('on');
   buildForm();
+  const db=document.getElementById('dupArtistBtn');
+  if(db) db.style.display = mode==='artists' ? 'inline-flex' : 'none';
 }
 function closeEdit(){
   curIdx=null;
@@ -1059,6 +1234,7 @@ function closeEdit(){
 
 function buildForm(){
   const ev=data['@graph'][curIdx]; if(!ev) return;
+  if(mode==='artists'){ buildArtistForm(ev); return; }
   if(isExhibition(ev)){ buildExhibitionForm(ev); return; }
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
@@ -1152,6 +1328,96 @@ function buildExhibitionForm(ex){
       <button class="add-img" onclick="addImg()">+ Add Image</button>
     </div>`;
   restoreAllConvUI();
+}
+
+// ── ARTIST EDIT FORM ──────────────────────────────────────
+function buildArtistForm(ar){
+  document.getElementById('editTitle').textContent=ar.name||'Untitled Artist';
+  const sameAs=Array.isArray(ar.sameAs)?ar.sameAs:[];
+  const knows =Array.isArray(ar.knowsAbout)?ar.knowsAbout:[];
+  document.getElementById('editBody').innerHTML=`
+    <div class="field"><label>Artist Name</label>
+      <input id="ef-name" value="${esc(ar.name||'')}" oninput="liveUp()"></div>
+    <div class="frow">
+      <div class="field"><label>Exhibition</label>
+        <select id="ef-exh" data-prev="${esc(ar.exhibition||'')}" onchange="anChange(this,'exh','liveUp')">
+          ${exhOptions(ar.exhibition||'')}
+        </select></div>
+      <div class="field"><label>Sort Order</label>
+        <input type="number" id="ef-sort" value="${ar.sortOrder??''}" min="1" oninput="liveUp()"></div>
+    </div>
+    <div class="frow">
+      <div class="field"><label>Job Title</label>
+        <input id="ef-jobtitle" value="${esc(ar.jobTitle||'')}" placeholder="Artist" oninput="liveUp()"></div>
+      <div class="field"><label>Visibility</label>
+        <select id="ef-visible" onchange="liveUp()">
+          <option value="true" ${ar.visible!==false?'selected':''}>Visible</option>
+          <option value="false" ${ar.visible===false?'selected':''}>Hidden</option>
+        </select></div>
+    </div>
+    <div class="field"><label>Description</label>
+      <textarea id="ef-desc" rows="6" oninput="liveUp()">${esc(ar.description||'')}</textarea></div>
+    <div class="frow">
+      <div class="field"><label>URL</label>
+        <input type="url" id="ef-url" value="${esc(ar.url||'')}" placeholder="https://example.com" oninput="liveUp()"></div>
+      <div class="field"><label>Link Label</label>
+        <input id="ef-linklabel" value="${esc(ar.linkLabel||'')}" placeholder="example.com" oninput="liveUp()"></div>
+    </div>
+    <div class="field"><label>Knows About <span style="font-weight:400;color:var(--muted)">(keywords / tags)</span></label>
+      <div class="arr-editor" id="arr-knowsAbout">${knows.map((v,i)=>arrRow('knowsAbout',v,i)).join('')}</div>
+      <button class="add-arr" onclick="addArr('knowsAbout')">+ Add keyword</button></div>
+    <div class="field"><label>Same As <span style="font-weight:400;color:var(--muted)">(profile / social URLs)</span></label>
+      <div class="arr-editor" id="arr-sameAs">${sameAs.map((v,i)=>arrRow('sameAs',v,i)).join('')}</div>
+      <button class="add-arr" onclick="addArr('sameAs')">+ Add URL</button></div>
+    <div class="field"><label>@id <span style="font-weight:400;color:var(--muted)">(JSON-LD identifier)</span></label>
+      <input id="ef-id" value="${esc(ar['@id']||'')}" style="font-family:var(--mono);font-size:11px;" oninput="liveUp()"></div>`;
+}
+
+// Array (list) field editors — used for artist sameAs / knowsAbout
+function arrRow(field,val,i){
+  return `<div class="arr-row">
+    <input value="${esc(val)}" onchange="setArr('${field}',${i},this.value)">
+    <button class="btn btn-err btn-sm" onclick="removeArr('${field}',${i})">×</button>
+  </div>`;
+}
+function rebuildArr(field){
+  const c=document.getElementById('arr-'+field);
+  const ev=data['@graph'][curIdx];
+  if(c&&ev) c.innerHTML=(ev[field]||[]).map((v,i)=>arrRow(field,v,i)).join('');
+}
+function addArr(field){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  if(!Array.isArray(ev[field])) ev[field]=[];
+  ev[field].push('');
+  markUnsaved(); rebuildArr(field);
+}
+function removeArr(field,i){
+  const ev=data['@graph'][curIdx]; if(!ev||!Array.isArray(ev[field])) return;
+  ev[field].splice(i,1);
+  markUnsaved(); rebuildArr(field); renderPreview();
+}
+function setArr(field,i,val){
+  const ev=data['@graph'][curIdx]; if(!ev||!Array.isArray(ev[field])) return;
+  ev[field][i]=val;
+  markUnsaved(); renderPreview();
+}
+
+function liveUpArtist(ar){
+  const g=id=>document.getElementById(id)?.value;
+  const s=g('ef-sort');
+  ar.name        = g('ef-name')     || ar.name;
+  ar.exhibition  = g('ef-exh')      || ar.exhibition;
+  ar.jobTitle    = g('ef-jobtitle') ?? ar.jobTitle;
+  ar.sortOrder   = s ? parseInt(s)  : ar.sortOrder;
+  ar.description = g('ef-desc')     ?? ar.description;
+  ar.url         = g('ef-url')      ?? ar.url;
+  ar.linkLabel   = g('ef-linklabel')?? ar.linkLabel;
+  const id=g('ef-id'); if(id!==undefined&&id!=='') ar['@id']=id;
+  const vis=g('ef-visible');
+  if(vis!==undefined){ if(vis==='false') ar.visible=false; else delete ar.visible; }
+  markUnsaved();
+  document.getElementById('editTitle').textContent=ar.name||'Untitled Artist';
+  renderPreview();
 }
 
 function imgRow(img,i){
@@ -1449,6 +1715,7 @@ function liveUpExhibition(ex){
 
 function liveUp(){
   const ev=data['@graph'][curIdx]; if(!ev) return;
+  if(mode==='artists'){ liveUpArtist(ev); return; }
   if(isExhibition(ev)){ liveUpExhibition(ev); return; }
   const g=id=>document.getElementById(id)?.value;
   const s=g('ef-sort');
@@ -1472,7 +1739,7 @@ function saveEdit(){ liveUp(); renderList(); toast('Saved','ok'); }
 function deleteEvent(){
   if(!confirm(`Delete "${data['@graph'][curIdx]?.name}"?`)) return;
   data['@graph'].splice(curIdx,1); markUnsaved();
-  closeEdit(); renderPreview(); toast('Event deleted');
+  closeEdit(); renderPreview(); toast((mode==='artists'?'Artist':'Event')+' deleted');
 }
 
 // ── ADD MODAL ─────────────────────────────────────────────
@@ -1564,6 +1831,8 @@ function renderPreview(){
   const frame=document.getElementById('prevFrame');
   if(!data){ frame.innerHTML='<div class="prev-ph">Load a JSON file to preview</div>'; return; }
 
+  if(mode==='artists'){ renderArtistsPreview(frame); return; }
+
   if(renderStyle==='exh'){
     frame.innerHTML=renderExhibitionsPage();
     return;
@@ -1576,6 +1845,33 @@ function renderPreview(){
   if(!evs.length){ frame.innerHTML='<div class="prev-ph">No events match this filter</div>'; return; }
   const fn={dcc:renderDCC,pe:renderPE,minimal:renderMin,cwsa:renderCWSA}[renderStyle]||renderDCC;
   frame.innerHTML=fn(evs);
+}
+
+function renderArtistsPreview(frame){
+  const arts=getArtists()
+    .filter(a=>a.visible!==false)
+    .filter(a=>prevFilter==='all'||a.exhibition===prevFilter)
+    .sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+  if(!arts.length){ frame.innerHTML='<div class="prev-ph">No artists match this filter</div>'; return; }
+
+  const g={}; arts.forEach(a=>{ const k=a.exhibition||'untagged'; (g[k]||(g[k]=[])).push(a); });
+  const order=['can-we-start-again','does-cloud-compute','bitrot','untagged'];
+  let h='<div class="r-artists">';
+  [...order.filter(k=>g[k]),...Object.keys(g).filter(k=>!order.includes(k))].forEach(exh=>{
+    h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="agrid">`;
+    g[exh].forEach(a=>{
+      const tags=(a.knowsAbout||[]).map(t=>`<span class="atag">${esc(t)}</span>`).join('');
+      h+=`<article class="acard">
+        <h3>${esc(a.name||'Untitled')}</h3>
+        <div class="ajob">${esc(a.jobTitle||'Artist')}</div>
+        <p class="adesc">${esc(a.description||'')}</p>
+        ${tags?`<div class="atags">${tags}</div>`:''}
+        ${a.url?`<p class="alink"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.linkLabel||a.url)} ↗</a></p>`:''}
+      </article>`;
+    });
+    h+=`</div>`;
+  });
+  frame.innerHTML=h+'</div>';
 }
 
 function galleryDCC(ev){
@@ -1924,6 +2220,7 @@ function openGhModal(){
   document.getElementById('ghRepo').value   = cfg.repo   || 'phreaking';
   document.getElementById('ghBranch').value = cfg.branch || 'main';
   document.getElementById('ghPath').value   = cfg.path   || 'json/schema.json';
+  document.getElementById('ghArtistsPath').value = cfg.artistsPath || 'json/artists.json';
   document.getElementById('ghToken').value  = cfg.token  || '';
   document.getElementById('ghModal').classList.add('on');
   setTimeout(()=>document.getElementById('ghOwner').focus(), 50);
@@ -1940,6 +2237,7 @@ function saveGhConfig(){
     repo:   document.getElementById('ghRepo').value.trim(),
     branch: document.getElementById('ghBranch').value.trim() || 'main',
     path:   document.getElementById('ghPath').value.trim()   || 'json/schema.json',
+    artistsPath: document.getElementById('ghArtistsPath').value.trim() || 'json/artists.json',
     token:  document.getElementById('ghToken').value.trim(),
   };
   if(!cfg.owner || !cfg.repo){ toast('Owner and repository are required'); return; }
@@ -1968,7 +2266,9 @@ async function pushToGitHub(){
   const repo   = cfg.repo   || 'phreaking';
   const token  = cfg.token;
   const branch = cfg.branch || 'main';
-  const path   = cfg.path   || 'json/schema.json';
+  const path   = mode==='artists'
+    ? (cfg.artistsPath || 'json/artists.json')
+    : (cfg.path || 'json/schema.json');
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -2035,7 +2335,7 @@ async function pushToGitHub(){
 
     markSaved();
     const imgCount = staged.length;
-    setStatus(`Pushed to ${owner}/${repo}`, getEvents().length + ' events');
+    setStatus(`Pushed to ${owner}/${repo}`, countLabel());
     toast(imgCount > 0
       ? `Pushed: ${imgCount} image${imgCount > 1 ? 's' : ''} + JSON`
       : 'Pushed to GitHub!', 'ok');
@@ -2196,6 +2496,110 @@ function submitNewExhibition(){
   toast('Exhibition "'+name+'" created','ok');
 }
 
+// ── NEW ARTIST ────────────────────────────────────────────
+function showAddArtistModal(){
+  document.getElementById('addArtistModal').classList.add('on');
+  document.getElementById('naName').value='';
+  document.getElementById('naJob').value='Artist';
+  const naExh=document.getElementById('naExh');
+  if(naExh){
+    naExh.innerHTML=exhOptions('');
+    naExh.value=knownExhibitions.includes('bitrot')?'bitrot':(knownExhibitions[0]||'bitrot');
+    naExh.dataset.prev=naExh.value;
+  }
+  setTimeout(()=>document.getElementById('naName').focus(),50);
+}
+function closeAddArtistModal(){ document.getElementById('addArtistModal').classList.remove('on'); }
+function submitNewArtist(){
+  const nameEl=document.getElementById('naName');
+  const name=nameEl.value.trim(); if(!name){ toast('Enter an artist name'); return; }
+
+  if(!data){ data={'@context':'https://schema.org','@graph':[]}; }
+  if(!Array.isArray(data['@graph'])) data['@graph']=[];
+  datasets.artists=data;
+
+  const exhEl=document.getElementById('naExh');
+  const jobEl=document.getElementById('naJob');
+  const exh=(exhEl&&exhEl.value!=='__add__')?exhEl.value:(knownExhibitions[0]||'bitrot');
+  const job=(jobEl&&jobEl.value.trim())||'Artist';
+  const short=exh==='does-cloud-compute'?'dccep':exh;
+
+  const maxOrd=getArtists().filter(a=>a.exhibition===exh).reduce((m,a)=>Math.max(m,a.sortOrder||0),0);
+  const newArt={
+    '@type':'Person',
+    '@id':`https://phreaking.co.uk/#artist-${slug(name)}-${short}`,
+    name, exhibition:exh, jobTitle:job,
+    description:'', url:'', linkLabel:'',
+    sameAs:[], knowsAbout:[],
+    affiliation:{'@id':'https://phreaking.co.uk/#phreaking'},
+    sortOrder:maxOrd+1
+  };
+
+  data['@graph'].push(newArt);
+  markUnsaved();
+  const newIdx=data['@graph'].length-1;
+  closeAddArtistModal();
+  renderList();
+  renderPreview();
+  selectEvent(newIdx);
+  toast('Artist created: '+name,'ok');
+  setStatus('Editing: '+name, countLabel());
+}
+
+// ── DUPLICATE ARTIST (re-use profile for another exhibition) ─
+let dupSourceIdx = null;
+function duplicateArtist(){
+  if(mode!=='artists') return;
+  const ar=data?.['@graph']?.[curIdx]; if(!ar) return;
+  dupSourceIdx=curIdx;
+  const sel=document.getElementById('dupExh');
+  // Default to the first exhibition that isn't the artist's current one
+  const others=knownExhibitions.filter(k=>k!==ar.exhibition);
+  const def=others[0]||ar.exhibition;
+  sel.innerHTML=knownExhibitions.map(k=>
+    `<option value="${esc(k)}"${k===def?' selected':''}>${esc(EXH_NAMES[k]||k)}</option>`
+  ).join('')+`<option value="__add__">+ Add new exhibition…</option>`;
+  sel.dataset.prev=def;
+  sel.onchange=()=>anChange(sel,'exh','');
+  document.getElementById('dupArtistName').textContent=ar.name||'this artist';
+  document.getElementById('dupArtistModal').classList.add('on');
+}
+function closeDupArtistModal(){ document.getElementById('dupArtistModal').classList.remove('on'); }
+
+function uniqueArtistId(name, exh){
+  const short=exh==='does-cloud-compute'?'dccep':exh;
+  const base=`https://phreaking.co.uk/#artist-${slug(name||'artist')}-${short}`;
+  const existing=new Set((data['@graph']||[]).map(x=>x['@id']).filter(Boolean));
+  if(!existing.has(base)) return base;
+  let n=2; while(existing.has(`${base}-${n}`)) n++;
+  return `${base}-${n}`;
+}
+
+function confirmDupArtist(){
+  if(dupSourceIdx===null) return;
+  const src=data?.['@graph']?.[dupSourceIdx];
+  const exhSel=document.getElementById('dupExh');
+  const exh=exhSel.value;
+  if(!src||exh==='__add__'){ return; }
+
+  const copy=JSON.parse(JSON.stringify(src)); // deep clone (preserves description, sameAs, knowsAbout, etc.)
+  copy.exhibition=exh;
+  const maxOrd=getArtists().filter(a=>a.exhibition===exh).reduce((m,a)=>Math.max(m,a.sortOrder||0),0);
+  copy.sortOrder=maxOrd+1;
+  copy['@id']=uniqueArtistId(copy.name, exh);
+
+  data['@graph'].push(copy);
+  markUnsaved();
+  const newIdx=data['@graph'].length-1;
+  closeDupArtistModal();
+  dupSourceIdx=null;
+  // Make sure the new copy is visible even if a filter would hide it
+  if(exhFilter!=='all' && exhFilter!==exh){ exhFilter='all'; const tb=document.getElementById('tbExhSel'); if(tb){ tb.value='all'; tb.dataset.prev='all'; } }
+  renderList(); renderPreview(); selectEvent(newIdx);
+  toast('Duplicated to '+(EXH_NAMES[exh]||exh),'ok');
+  setStatus('Editing: '+(copy.name||'Artist'), countLabel());
+}
+
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', ()=>{
   // Auto-fill slug from display name in the add-exhibition modal
@@ -2219,6 +2623,8 @@ document.addEventListener('keydown', e=>{
   }
   if(e.key==='Escape'){
     if(document.getElementById('addModal').classList.contains('on'))    closeAddModal();
+    if(document.getElementById('addArtistModal').classList.contains('on')) closeAddArtistModal();
+    if(document.getElementById('dupArtistModal').classList.contains('on')) closeDupArtistModal();
     if(document.getElementById('addExhModal').classList.contains('on')) closeAddExhModal();
     if(document.getElementById('addLabelModal').classList.contains('on')) closeAddLabelModal();
     if(document.getElementById('addTypeModal').classList.contains('on')) closeAddTypeModal();
