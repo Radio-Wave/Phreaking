@@ -8,19 +8,47 @@
           "title": "Tools",
           "description": "Software, generators, utilities, archives, browsers, and live systems.",
           "links": [
-            { "label": "Pixlr Editor", "url": "https://pixlr.com/editor/", "note": "Online image editor." },
-            { "label": "Kid Pix", "url": "https://kidpix.app/", "note": "Online drawing software" },
-            { "label": "Memo Note Pad", "url": "https://www.memonotepad.com/", "note": "Online Note Pad" }
+            {
+              "label": "Pixlr Editor",
+              "url": "https://pixlr.com/editor/",
+              "note": "Online image editor."
+            },
+            {
+              "label": "Kid Pix",
+              "url": "https://kidpix.app/",
+              "note": "Online drawing software"
+            },
+            {
+              "label": "Memo Note Pad",
+              "url": "https://www.memonotepad.com/",
+              "note": "Online Note Pad"
+            }
           ]
         },
         {
           "title": "Materials",
           "description": "Source texts, datasets, image banks, references, tutorials, or feeds.",
           "links": [
-            { "label": "Opens Random google street view", "url": "https://www.mapcrunch.com/", "note": "Have to click random first when the page loads" },
-            { "label": "Insecam", "url": "http://www.insecam.org/en/byrating/", "note": "Live CCTV Cams Worldwide" },
-            { "label": "Wikipedia Random Page", "url": "http://wikipedia.org/wiki/Special:Random", "note": "Takes you to a random Wikipedia article." },
-            { "label": "Fake Name Generator", "url": "https://www.fakenamegenerator.com/gen-male-en-uk.php", "note": "Create a Fake Identity" }
+            {
+              "label": "Opens Random google street view",
+              "url": "https://www.mapcrunch.com/",
+              "note": "Have to click random first when the page loads"
+            },
+            {
+              "label": "Insecam",
+              "url": "http://www.insecam.org/en/byrating/",
+              "note": "Live CCTV Cams Worldwide"
+            },
+            {
+              "label": "Wikipedia Random Page",
+              "url": "http://wikipedia.org/wiki/Special:Random",
+              "note": "Takes you to a random Wikipedia article."
+            },
+            {
+              "label": "Fake Name Generator",
+              "url": "https://www.fakenamegenerator.com/gen-male-en-uk.php",
+              "note": "Create a Fake Identity"
+            }
           ]
         }
       ]
@@ -33,19 +61,47 @@
           "title": "Tools",
           "description": "Software, generators, utilities, archives, browsers, and live systems.",
           "links": [
-            { "label": "Pixlr Editor", "url": "https://pixlr.com/editor/", "note": "Online image editor." },
-            { "label": "Reverse Image Search", "url": "https://images.google.com/", "note": "Search for images using another image as the query." },
-            { "label": "Mosaic", "url": "https://mosaic.constraint.systems", "note": "Mixes images" },
-            { "label": "Google Sheets", "url": "https://docs.google.com/spreadsheets/u/0/create?usp=sheets_home&ths=true", "note": "Free spreadsheet application." }
+            {
+              "label": "Pixlr Editor",
+              "url": "https://pixlr.com/editor/",
+              "note": "Online image editor."
+            },
+            {
+              "label": "Reverse Image Search",
+              "url": "https://images.google.com/",
+              "note": "Search for images using another image as the query."
+            },
+            {
+              "label": "Mosaic",
+              "url": "https://mosaic.constraint.systems",
+              "note": "Mixes images"
+            },
+            {
+              "label": "Google Sheets",
+              "url": "https://docs.google.com/spreadsheets/u/0/create?usp=sheets_home&ths=true",
+              "note": "Free spreadsheet application."
+            }
           ]
         },
         {
           "title": "Materials",
           "description": "Source texts, datasets, image banks, references, tutorials, or feeds.",
           "links": [
-            { "label": "Wikipedia Random Page", "url": "http://wikipedia.org/wiki/Special:Random", "note": "Takes you to a random Wikipedia article." },
-            { "label": "No Clip", "url": "https://noclip.website/", "note": "Archive of 3D game worlds" },
-            { "label": "Frame Lack", "url": "https://famelack.com/", "note": "Live TV from across the world" }
+            {
+              "label": "Wikipedia Random Page",
+              "url": "http://wikipedia.org/wiki/Special:Random",
+              "note": "Takes you to a random Wikipedia article."
+            },
+            {
+              "label": "No Clip",
+              "url": "https://noclip.website/",
+              "note": "Archive of 3D game worlds"
+            },
+            {
+              "label": "Frame Lack",
+              "url": "https://famelack.com/",
+              "note": "Live TV from across the world"
+            }
           ]
         }
       ]
@@ -53,18 +109,59 @@
     {
       "id": 3,
       "slug": "signals",
+      "panels": [
+        {
+          "title": "Tools",
+          "description": "Software, generators, utilities, archives, browsers, and live systems.",
+          "links": [
+            {
+              "label": "Teachable Machine",
+              "url": "https://teachablemachine.withgoogle.com/train/image",
+              "note": "Simple image classification tool"
+            },
+            {
+              "label": "Teachable Machine Visualizer",
+              "url": "/teachable-machine/",
+              "note": "Local Site"
+            },
+            {
+              "label": "Share Drive",
+              "url": "https://drive.google.com/drive/folders/1QCJtK0FdtGWLgyPtjqeHvJnK15fF3ihq?usp=sharing",
+              "note": "Share your machines"
+            },
+            {
+              "label": "Image to Audio",
+              "url": "https://image-to-audio.pages.dev/",
+              "note": "Convert images to audio"
+            },
+            {
+              "label": "Image to Audio 2",
+              "url": "https://nsspot.herokuapp.com/imagetoaudio/",
+              "note": "Convert images to audio"
+            },
+            {
+              "label": "Audiomass",
+              "url": "https://audiomass.co/",
+              "note": "Online Audio Editor"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "",
       "current": true,
       "panels": [
         {
           "title": "Tools",
           "description": "Software, generators, utilities, archives, browsers, and live systems.",
           "links": [
-            { "label": "Teachable Machine", "url": "https://teachablemachine.withgoogle.com/train/image", "note": "Simple image classification tool" },
-            { "label": "Teachable Machine Visualizer", "url": "/teachable-machine/", "note": "Local Site" },
-            { "label": "Share Drive", "url": "https://drive.google.com/drive/folders/1QCJtK0FdtGWLgyPtjqeHvJnK15fF3ihq?usp=sharing", "note": "Share your machines" },
-            { "label": "Image to Audio", "url": "https://image-to-audio.pages.dev/", "note": "Convert images to audio" },
-            { "label": "Image to Audio 2", "url": "https://nsspot.herokuapp.com/imagetoaudio/", "note": "Convert images to audio" },
-            { "label": "Audiomass", "url": "https://audiomass.co/", "note": "Online Audio Editor" }
+            {
+              "label": "test",
+              "url": "test.com",
+              "note": "test case"
+            }
           ]
         }
       ]
