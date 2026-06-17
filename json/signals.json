@@ -2,7 +2,6 @@
   "sessions": [
     {
       "id": 1,
-      "slug": "signals2",
       "panels": [
         {
           "title": "Tools",
@@ -55,7 +54,6 @@
     },
     {
       "id": 2,
-      "slug": "signals1",
       "panels": [
         {
           "title": "Tools",
@@ -108,7 +106,6 @@
     },
     {
       "id": 3,
-      "slug": "signals",
       "panels": [
         {
           "title": "Tools",
@@ -150,7 +147,6 @@
     },
     {
       "id": 4,
-      "slug": "signals",
       "current": true,
       "panels": [
         {

@@ -2697,7 +2697,7 @@ function newSignalsSession(){
   if(!data||!Array.isArray(data.sessions)){ data={sessions:[]}; datasets.signals=data; }
   const maxId=data.sessions.reduce((m,s)=>Math.max(m,s.id||0),0);
   const id=maxId+1;
-  const sess={ id, slug:'', current:false,
+  const sess={ id, current:false,
     panels:[{title:'Tools',description:'Software, generators, utilities, archives, browsers, and live systems.',links:[{label:'',url:'',note:''}]}] };
   data.sessions.push(sess);
   markUnsaved();
@@ -2732,12 +2732,8 @@ function buildSignalsForm(s){
       </div>`;
   }).join('');
   document.getElementById('editBody').innerHTML=`
-    <div class="frow">
-      <div class="field"><label>Session ID</label>
-        <input type="number" id="sf-id" min="1" value="${s.id??''}" oninput="liveUpSignals()"></div>
-      <div class="field"><label>Slug (page folder)</label>
-        <input id="sf-slug" value="${esc(s.slug||'')}" placeholder="e.g. signals" style="font-family:var(--mono);font-size:11px;" oninput="liveUpSignals()"></div>
-    </div>
+    <div class="field"><label>Session ID</label>
+      <input type="number" id="sf-id" min="1" value="${s.id??''}" oninput="liveUpSignals()"></div>
     <div class="field"><label>Current session</label>
       <select id="sf-current" onchange="liveUpSignals()">
         <option value="false"${s.current?'':' selected'}>No</option>
@@ -2756,7 +2752,6 @@ function liveUpSignals(){
   const g=id=>document.getElementById(id);
   const idv=g('sf-id')?.value;
   if(idv!==undefined && idv!=='') s.id=parseInt(idv);
-  const slugEl=g('sf-slug'); if(slugEl) s.slug=slugEl.value.trim();
   const cur=g('sf-current')?.value;
   if(cur==='true'){ data.sessions.forEach(x=>{ if(x!==s) delete x.current; }); s.current=true; }
   else if(cur==='false'){ delete s.current; }
