@@ -144,23 +144,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": 4,
-      "current": true,
-      "panels": [
-        {
-          "title": "Tools",
-          "description": "Software, generators, utilities, archives, browsers, and live systems.",
-          "links": [
-            {
-              "label": "test",
-              "url": "test.com",
-              "note": "test case"
-            }
-          ]
-        }
-      ]
     }
   ]
 }
