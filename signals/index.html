@@ -104,6 +104,35 @@
       color: var(--ink);
     }
 
+    .signals-sessions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .signals-sessions button {
+      font: inherit;
+      cursor: pointer;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--rule);
+      background: transparent;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .signals-sessions button:hover {
+      color: var(--ink);
+    }
+
+    .signals-sessions button.is-active {
+      background: var(--ink);
+      color: var(--bg, #000);
+      border-color: var(--ink);
+    }
+
     @media (max-width: 1040px) {
       .signals-grid {
         grid-template-columns: 1fr;
@@ -123,137 +152,12 @@
         Useful links, resources, and references for the Mixed Signals.
       </p>
 
-      <section class="signals-grid" aria-label="Signals resource lists">
-        <article class="signals-panel" aria-labelledby="signals-tools-title">
-          <h2 id="signals-tools-title">Tools</h2>
-          <p>Software, generators, utilities, archives, browsers, and live systems.</p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th class="col-number">No.</th>
-                <th class="col-link">Link</th>
-                <th>Use / Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="col-number"><span class="signals-tag">1</span></td>
-                <td><a href="https://teachablemachine.withgoogle.com/train/image" target="_blank" rel="noreferrer">Teachable Machine</a></td>
-                <td>Simple image classification tool</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">2</span></td>
-                <td><a href="\teachable-machine\" target="_blank" rel="noreferrer">Teachable Machine Visualizer</a></td>
-                <td>Local Site</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">3</span></td>
-                <td><a href="https://drive.google.com/drive/folders/1QCJtK0FdtGWLgyPtjqeHvJnK15fF3ihq?usp=sharing" target="_blank" rel="noreferrer">Share Drive</a></td>
-                <td>Share your machines</td>
-              </tr>
-              
-              <tr>
-                <td class="col-number"><span class="signals-tag">4</span></td>
-                <td><a href="https://image-to-audio.pages.dev/" target="_blank" rel="noreferrer">Image to Audio</a></td>
-                <td>Convert images to audio</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">5</span></td>
-                <td><a href="https://nsspot.herokuapp.com/imagetoaudio/" target="_blank" rel="noreferrer">Image to Audio 2</a></td>
-                <td>Convert images to audio</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">6</span></td>
-                <td><a href="https://audiomass.co/" target="_blank" rel="noreferrer">Audiomass</a></td>
-                <td>Online Audio Editor</td>
-              </tr>
+      <nav class="signals-sessions" role="tablist" aria-label="Choose a session" data-signals-nav>
+        <!-- Session tabs are rendered by ../scripts/signals.js -->
+      </nav>
 
-
-            </tbody>
-          </table>
-        </article>
-
-        <!-- <article class="signals-panel" aria-labelledby="signals-materials-title">
-          <h2 id="signals-materials-title">Materials</h2>
-          <p>Source texts, datasets, image banks, references, tutorials, or feeds.</p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th class="col-number">No.</th>
-                <th class="col-link">Link</th>
-                <th>Use / Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="col-number"><span class="signals-tag">1</span></td>
-                <td><a href="https://www.mapcrunch.com/" target="_blank" rel="noreferrer">Opens Random google street view</a></td>
-                <td>Have to click random first when the page loads</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">2</span></td>
-                <td><a href="http://www.insecam.org/en/byrating/" target="_blank" rel="noreferrer">Insecam</a></td>
-                <td>Live CCTV Cams Worldwide</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">3</span></td>
-                <td><a href="http://wikipedia.org/wiki/Special:Random" target="_blank" rel="noreferrer">Wikipedia Random Page</a></td>
-                <td>Takes you to a random Wikipedia article.</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">4</span></td>
-                <td><a href="https://www.fakenamegenerator.com/gen-male-en-uk.php" target="_blank" rel="noreferrer">Fake Name Generator</a></td>
-                <td>Create a Fake Identity</td>
-              </tr>
-              <!-- <tr>
-                <td class="col-number"><span class="signals-tag">3</span></td>
-                <td><a href="https://example.com" target="_blank" rel="noreferrer">Add Material Link 3</a></td>
-                <td>Use for contrast, extension, or discussion.</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">4</span></td>
-                <td><a href="https://example.com" target="_blank" rel="noreferrer">Add Material Link 4</a></td>
-                <td>Optional extra link.</td>
-              </tr> -->
-            </tbody>
-          </table>
-        </article> 
-
-        <!-- <article class="signals-panel" aria-labelledby="signals-subjects-title">
-          <h2 id="signals-subjects-title">Subjects</h2>
-          <p>People, themes, case studies, repositories, collections, and topic clusters.</p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th class="col-number">No.</th>
-                <th class="col-link">Link</th>
-                <th>Use / Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="col-number"><span class="signals-tag">1</span></td>
-                <td><a href="https://example.com" target="_blank" rel="noreferrer">Add Subject Link 1</a></td>
-                <td>Main subject for the opening part of the session.</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">2</span></td>
-                <td><a href="https://example.com" target="_blank" rel="noreferrer">Add Subject Link 2</a></td>
-                <td>Second subject to pivot or expand from.</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">3</span></td>
-                <td><a href="https://example.com" target="_blank" rel="noreferrer">Add Subject Link 3</a></td>
-                <td>Use for comparison or parallel research.</td>
-              </tr>
-              <tr>
-                <td class="col-number"><span class="signals-tag">4</span></td>
-                <td><a href="https://example.com" target="_blank" rel="noreferrer">Add Subject Link 4</a></td>
-                <td>Optional extra link.</td>
-              </tr>
-            </tbody>
-          </table>
-        </article> -->
+      <section class="signals-grid" aria-label="Signals resource lists" data-signals-grid>
+        <!-- Panels are rendered from ../json/signals.json by ../scripts/signals.js -->
       </section>
       <br>
       <a href="https://drive.google.com/drive/folders/1piVkVCzIiBiNAT3RBfc_8lz7rexAPOVx" target="_blank" rel="noreferrer">Upload</a>
@@ -272,6 +176,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
   <script defer src="../scripts/sidebar.js"></script>
+  <script defer src="../scripts/signals.js"></script>
 </body>
 
 </html>

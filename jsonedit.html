@@ -384,6 +384,39 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .r-artists .atag{font-size:.68rem;border:1px solid #2a2a2d;border-radius:999px;padding:.12rem .5rem;color:#9a9aa5;}
 .r-artists .alink{margin-top:auto;}
 .r-artists .alink a{color:#fff;text-decoration:underline;font-size:.83rem;}
+
+/* ── RENDER: SIGNALS (Mixed Signals) ── */
+.r-signals{padding:2rem;background:#0b0b0c;min-height:100%;font-family:'IBM Plex Mono',monospace;color:#e8e8ec;}
+.r-signals .sig-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem;}
+.r-signals .sig-tab{font:inherit;cursor:pointer;padding:.4rem .9rem;border:1px solid #2a2a2d;background:transparent;
+  color:#9a9aa5;letter-spacing:.06em;text-transform:uppercase;font-size:12px;}
+.r-signals .sig-tab:hover{color:#fff;}
+.r-signals .sig-tab.on{background:#e8e8ec;color:#0b0b0c;border-color:#e8e8ec;}
+.r-signals .sig-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;align-items:start;}
+.r-signals .sig-panel{border:1px solid #2a2a2d;background:rgba(255,255,255,.03);min-width:0;}
+.r-signals .sig-panel h3{margin:0;padding:1rem 1rem .6rem;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;}
+.r-signals .sig-desc{padding:0 1rem 1rem;color:#9a9aa5;font-size:.85rem;margin:0;}
+.r-signals table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;}
+.r-signals th,.r-signals td{padding:.75rem 1rem;border-top:1px solid rgba(255,255,255,.18);vertical-align:top;text-align:left;}
+.r-signals th{color:#e8e8ec;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+.r-signals td{color:#9a9aa5;word-break:break-word;}
+.r-signals .col-number{width:64px;color:#e8e8ec;}
+.r-signals .col-link{width:46%;}
+.r-signals a{color:#e8e8ec;text-decoration:underline;text-underline-offset:.18em;}
+.r-signals .sig-tag{display:inline-flex;align-items:center;justify-content:center;min-width:2rem;
+  padding:.15rem .4rem;border:1px solid #2a2a2d;color:#e8e8ec;}
+.r-signals .sig-empty{color:#666;font-size:.85rem;padding:1rem;}
+@media(max-width:1100px){.r-signals .sig-grid{grid-template-columns:1fr;}}
+
+/* signals edit-form sub-blocks reuse .img-entry shell */
+.sig-link-entry{background:var(--surf);border:1px solid var(--brd);border-radius:5px;padding:9px;display:flex;flex-direction:column;gap:6px;}
+.sig-link-entry input{background:var(--bg);border:1px solid var(--brd);color:var(--ink);
+  padding:5px 7px;border-radius:4px;font-family:var(--mono);font-size:11px;width:100%;}
+.sig-link-entry input:focus{outline:none;border-color:var(--accent);}
+.sig-panel-block{background:var(--bg);border:1px solid var(--brd);border-radius:6px;padding:11px;display:flex;flex-direction:column;gap:8px;}
+.sig-panel-block>input{background:var(--surf);border:1px solid var(--brd);color:var(--ink);
+  padding:6px 8px;border-radius:5px;font-family:var(--ui);font-size:12px;width:100%;}
+.sig-panel-block>input:focus{outline:none;border-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -394,6 +427,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   <div class="mode-tabs">
     <button class="mtab on" data-mode="events" onclick="setMode('events')">Events</button>
     <button class="mtab" data-mode="artists" onclick="setMode('artists')">Artists</button>
+    <button class="mtab" data-mode="signals" onclick="setMode('signals')">Signals</button>
   </div>
   <div class="sep"></div>
   <button class="btn btn-ghost" onclick="loadFromSite()">↺ Load from Site</button>
@@ -738,9 +772,15 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
           <input type="text" id="ghPath" placeholder="json/schema.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
         </div>
       </div>
-      <div class="field">
-        <label>Artists file path</label>
-        <input type="text" id="ghArtistsPath" placeholder="json/artists.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+      <div class="frow">
+        <div class="field">
+          <label>Artists file path</label>
+          <input type="text" id="ghArtistsPath" placeholder="json/artists.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+        <div class="field">
+          <label>Signals file path</label>
+          <input type="text" id="ghSignalsPath" placeholder="json/signals.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
       </div>
       <div class="field">
         <div class="gh-label-row">
@@ -774,9 +814,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 
 <script>
 // ── STATE ──────────────────────────────────────────────────
-let mode = 'events';                       // 'events' | 'artists'
-const datasets = { events:null, artists:null };
-const unsaved  = { events:false, artists:false };
+let mode = 'events';                       // 'events' | 'artists' | 'signals'
+const datasets = { events:null, artists:null, signals:null };
+const unsaved  = { events:false, artists:false, signals:false };
 let data = null;                           // mirror of datasets[mode]
 let curIdx = null;
 let exhFilter = 'all';
@@ -822,7 +862,7 @@ function isExhibition(item){
   if(!t) return false;
   return (Array.isArray(t)?t:[t]).includes('ExhibitionEvent');
 }
-function getExhibitions(){ return data?data['@graph'].filter(isExhibition):[]; }
+function getExhibitions(){ return (data&&data['@graph'])?data['@graph'].filter(isExhibition):[]; }
 
 // ── UTILS ──────────────────────────────────────────────────
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -846,7 +886,7 @@ function isEvent(item){
   const t=item['@type'];
   return Array.isArray(t)?t.some(x=>EVENT_TYPES.has(x)):EVENT_TYPES.has(t);
 }
-function getEvents(){ return data?data['@graph'].filter(isEvent):[]; }
+function getEvents(){ return (data&&data['@graph'])?data['@graph'].filter(isEvent):[]; }
 function typeLabel(t){ const a=Array.isArray(t)?t[0]:t; return TYPE_MAP[a]||a||'Event'; }
 
 function isArtist(item){
@@ -854,8 +894,10 @@ function isArtist(item){
   const t=item['@type'];
   return Array.isArray(t)?t.includes('Person'):t==='Person';
 }
-function getArtists(){ return data?data['@graph'].filter(isArtist):[]; }
+function getArtists(){ return (data&&data['@graph'])?data['@graph'].filter(isArtist):[]; }
+function getSignalsSessions(){ return (data&&Array.isArray(data.sessions))?data.sessions:[]; }
 function countLabel(){
+  if(mode==='signals') return getSignalsSessions().length+' sessions';
   return mode==='artists' ? getArtists().length+' artists' : getEvents().length+' events';
 }
 
@@ -868,10 +910,12 @@ function setMode(m){
   document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('on', b.dataset.mode===m));
   // Events-only render selector
   const rs=document.getElementById('renderSel'); if(rs) rs.style.display = m==='events'?'':'none';
+  // Exhibition select is irrelevant in signals mode
+  const tb=document.getElementById('tbExhSel'); if(tb) tb.style.display = m==='signals'?'none':'';
   // List header + reset filters
-  document.getElementById('listHeadTitle').textContent = m==='artists'?'Artists':'Events';
+  document.getElementById('listHeadTitle').textContent = m==='signals'?'Sessions':(m==='artists'?'Artists':'Events');
   exhFilter='all'; prevFilter='all';
-  const tb=document.getElementById('tbExhSel'); if(tb){ tb.value='all'; tb.dataset.prev='all'; }
+  if(tb){ tb.value='all'; tb.dataset.prev='all'; }
   updateUnsavedDot();
   if(!datasets[mode]){
     loadFromSite();           // first visit to this mode — fetch it
@@ -879,12 +923,12 @@ function setMode(m){
     extractFromData();
     renderList(); renderPreview();
     refreshExhDropdowns(); refreshPrevFilters();
-    setStatus('Editing '+(m==='artists'?'artists':'events'), countLabel());
+    setStatus('Editing '+(m==='signals'?'sessions':(m==='artists'?'artists':'events')), countLabel());
   }
 }
 
 // "+ New" button dispatcher
-function newItem(){ mode==='artists' ? showAddArtistModal() : showAddModal(); }
+function newItem(){ mode==='signals' ? newSignalsSession() : mode==='artists' ? showAddArtistModal() : showAddModal(); }
 
 // ── OPTION BUILDERS ───────────────────────────────────────
 function exhOptions(cur){
@@ -1021,13 +1065,22 @@ function refreshExhDropdowns(newKey){
 }
 function refreshPrevFilters(){
   const pf=document.getElementById('prevFilters'); if(!pf) return;
+  if(mode==='signals'){
+    const sessions=getSignalsSessions().slice().sort((a,b)=>(a.id||0)-(b.id||0));
+    let activeId;
+    if(prevFilter==='all'){ const a=sessions.find(s=>s.current)||sessions[sessions.length-1]; activeId=a?a.id:null; }
+    else activeId=Number(prevFilter);
+    pf.innerHTML=sessions.map(s=>`<button class="pfbtn${s.id===activeId?' on':''}" onclick="setSignalsTab(${s.id})">${esc(s.current?'This session':'Session '+s.id)}</button>`).join('')
+      || '<span class="prev-label" style="opacity:.6">No sessions</span>';
+    return;
+  }
   pf.innerHTML=`<button class="pfbtn${prevFilter==='all'?' on':''}" onclick="setPF('all',this)">All</button>`+
     knownExhibitions.map(k=>`<button class="pfbtn${prevFilter===k?' on':''}" onclick="setPF('${esc(k)}',this)">${esc(EXH_NAMES[k]||k)}</button>`).join('');
 }
 
 // ── EXTRACT KNOWN VALUES FROM JSON ────────────────────────
 function extractFromData(){
-  if(!data) return;
+  if(!data||mode==='signals') return;
   const items = mode==='artists' ? getArtists() : getEvents();
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
@@ -1050,11 +1103,12 @@ function extractFromData(){
 // ── LOAD / SAVE ────────────────────────────────────────────
 async function loadFromSite(){
   document.getElementById('loading').classList.add('on');
-  const url = mode==='artists' ? '/json/artists.json' : '/json/schema.json';
+  const url = mode==='artists' ? '/json/artists.json' : mode==='signals' ? '/json/signals.json' : '/json/schema.json';
+  const okMsg = mode==='artists' ? 'Loaded artists from site' : mode==='signals' ? 'Loaded signals from site' : 'Loaded from site';
   try{
     const r=await fetch(url);
     if(!r.ok) throw new Error('HTTP '+r.status);
-    data=await r.json(); onLoaded(mode==='artists'?'Loaded artists from site':'Loaded from site');
+    data=await r.json(); onLoaded(okMsg);
   }catch(e){
     toast('Could not load from site: '+e.message); setStatus('Load failed');
   }finally{ document.getElementById('loading').classList.remove('on'); }
@@ -1075,7 +1129,7 @@ function onLoaded(msg){
 }
 function downloadJSON(){
   if(!data){ toast('Nothing to download'); return; }
-  const fname = mode==='artists' ? 'artists.json' : 'schema.json';
+  const fname = mode==='artists' ? 'artists.json' : mode==='signals' ? 'signals.json' : 'schema.json';
   const s=JSON.stringify(data,null,2);
   const a=Object.assign(document.createElement('a'),{
     href:URL.createObjectURL(new Blob([s],{type:'application/json'})), download:fname});
@@ -1108,6 +1162,7 @@ function setPF(v,btn){
 function renderList(){
   const el=document.getElementById('elist');
   if(!data){ el.innerHTML='<div class="empty"><div class="empty-ico">⬡</div><h3>No JSON loaded</h3><p>Load from site or upload a file.</p></div>'; return; }
+  if(mode==='signals'){ renderSignalsList(el); return; }
   if(mode==='artists'){ renderArtistList(el); return; }
 
   let html='';
@@ -1233,6 +1288,7 @@ function closeEdit(){
 }
 
 function buildForm(){
+  if(mode==='signals'){ buildSignalsForm(data.sessions[curIdx]); return; }
   const ev=data['@graph'][curIdx]; if(!ev) return;
   if(mode==='artists'){ buildArtistForm(ev); return; }
   if(isExhibition(ev)){ buildExhibitionForm(ev); return; }
@@ -1714,6 +1770,7 @@ function liveUpExhibition(ex){
 }
 
 function liveUp(){
+  if(mode==='signals'){ liveUpSignals(); return; }
   const ev=data['@graph'][curIdx]; if(!ev) return;
   if(mode==='artists'){ liveUpArtist(ev); return; }
   if(isExhibition(ev)){ liveUpExhibition(ev); return; }
@@ -1737,6 +1794,13 @@ function liveUp(){
 }
 function saveEdit(){ liveUp(); renderList(); toast('Saved','ok'); }
 function deleteEvent(){
+  if(mode==='signals'){
+    const s=data.sessions[curIdx];
+    if(!confirm(`Delete ${s?.current?'this session':'Session '+s?.id}?`)) return;
+    data.sessions.splice(curIdx,1); markUnsaved();
+    closeEdit(); renderPreview(); refreshPrevFilters(); toast('Session deleted');
+    return;
+  }
   if(!confirm(`Delete "${data['@graph'][curIdx]?.name}"?`)) return;
   data['@graph'].splice(curIdx,1); markUnsaved();
   closeEdit(); renderPreview(); toast((mode==='artists'?'Artist':'Event')+' deleted');
@@ -1831,6 +1895,7 @@ function renderPreview(){
   const frame=document.getElementById('prevFrame');
   if(!data){ frame.innerHTML='<div class="prev-ph">Load a JSON file to preview</div>'; return; }
 
+  if(mode==='signals'){ renderSignalsPreview(frame); return; }
   if(mode==='artists'){ renderArtistsPreview(frame); return; }
 
   if(renderStyle==='exh'){
@@ -2221,6 +2286,7 @@ function openGhModal(){
   document.getElementById('ghBranch').value = cfg.branch || 'main';
   document.getElementById('ghPath').value   = cfg.path   || 'json/schema.json';
   document.getElementById('ghArtistsPath').value = cfg.artistsPath || 'json/artists.json';
+  document.getElementById('ghSignalsPath').value = cfg.signalsPath || 'json/signals.json';
   document.getElementById('ghToken').value  = cfg.token  || '';
   document.getElementById('ghModal').classList.add('on');
   setTimeout(()=>document.getElementById('ghOwner').focus(), 50);
@@ -2238,6 +2304,7 @@ function saveGhConfig(){
     branch: document.getElementById('ghBranch').value.trim() || 'main',
     path:   document.getElementById('ghPath').value.trim()   || 'json/schema.json',
     artistsPath: document.getElementById('ghArtistsPath').value.trim() || 'json/artists.json',
+    signalsPath: document.getElementById('ghSignalsPath').value.trim() || 'json/signals.json',
     token:  document.getElementById('ghToken').value.trim(),
   };
   if(!cfg.owner || !cfg.repo){ toast('Owner and repository are required'); return; }
@@ -2268,7 +2335,9 @@ async function pushToGitHub(){
   const branch = cfg.branch || 'main';
   const path   = mode==='artists'
     ? (cfg.artistsPath || 'json/artists.json')
-    : (cfg.path || 'json/schema.json');
+    : mode==='signals'
+      ? (cfg.signalsPath || 'json/signals.json')
+      : (cfg.path || 'json/schema.json');
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -2599,6 +2668,170 @@ function confirmDupArtist(){
   toast('Duplicated to '+(EXH_NAMES[exh]||exh),'ok');
   setStatus('Editing: '+(copy.name||'Artist'), countLabel());
 }
+
+// ── SIGNALS (Mixed Signals pages) ─────────────────────────
+// signals.json shape: { sessions:[ { id, slug, current, panels:[ { title, description, links:[ {label,url,note} ] } ] } ] }
+function signalsLabel(s){ return s.current ? 'This session' : 'Session '+(s.id??'?'); }
+
+// LIST
+function renderSignalsList(el){
+  const sessions=getSignalsSessions();
+  if(!sessions.length){ el.innerHTML='<div class="empty"><div class="empty-ico">∅</div><h3>No sessions found</h3><p>Add a new session to get started.</p></div>'; return; }
+  const ordered=sessions.map((s,i)=>({s,i})).sort((a,b)=>(a.s.id||0)-(b.s.id||0));
+  let html='<div class="exh-group" data-key="__signals__"><div class="exh-label" style="cursor:default">Mixed Signals sessions</div>';
+  ordered.forEach(({s,i})=>{
+    const panels=(s.panels||[]).length;
+    const links=(s.panels||[]).reduce((n,p)=>n+((p.links||[]).length),0);
+    html+=`<div class="eitem${curIdx===i?' active':''}" onclick="selectEvent(${i})">
+      <span class="eitem-tag">${s.current?'current':'#'+esc(String(s.id))}</span>
+      <span class="eitem-name">${esc(signalsLabel(s))}</span>
+      <span class="eitem-ord" title="panels · links">${panels}p · ${links}l</span>
+    </div>`;
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+// NEW SESSION
+function newSignalsSession(){
+  if(!data||!Array.isArray(data.sessions)){ data={sessions:[]}; datasets.signals=data; }
+  const maxId=data.sessions.reduce((m,s)=>Math.max(m,s.id||0),0);
+  const id=maxId+1;
+  const sess={ id, slug:'', current:false,
+    panels:[{title:'Tools',description:'Software, generators, utilities, archives, browsers, and live systems.',links:[{label:'',url:'',note:''}]}] };
+  data.sessions.push(sess);
+  markUnsaved();
+  const idx=data.sessions.length-1;
+  renderList(); renderPreview(); refreshPrevFilters(); selectEvent(idx);
+  toast('Session '+id+' created','ok');
+  setStatus('Editing Session '+id, countLabel());
+}
+
+// EDIT FORM
+function buildSignalsForm(s){
+  if(!s) return;
+  document.getElementById('editTitle').textContent=signalsLabel(s);
+  const panels=s.panels||[];
+  const panelsHtml=panels.map((p,pi)=>{
+    const links=(p.links||[]).map((l,li)=>`
+      <div class="sig-link-entry">
+        <div class="img-entry-head"><span>Link ${li+1}</span>
+          <button class="btn btn-err btn-sm" onclick="removeSignalsLink(${pi},${li})">Remove</button></div>
+        <input id="sf-p${pi}-l${li}-label" placeholder="label (e.g. Audiomass)" value="${esc(l.label||'')}" oninput="liveUpSignals()">
+        <input id="sf-p${pi}-l${li}-url" placeholder="url (https://… or /local/)" value="${esc(l.url||'')}" oninput="liveUpSignals()">
+        <input id="sf-p${pi}-l${li}-note" placeholder="use / notes" value="${esc(l.note||'')}" oninput="liveUpSignals()">
+      </div>`).join('');
+    return `
+      <div class="sig-panel-block">
+        <div class="img-entry-head"><span>Panel ${pi+1}</span>
+          <button class="btn btn-err btn-sm" onclick="removeSignalsPanel(${pi})">Remove panel</button></div>
+        <input id="sf-p${pi}-title" placeholder="panel title (e.g. Tools)" value="${esc(p.title||'')}" oninput="liveUpSignals()">
+        <input id="sf-p${pi}-desc" placeholder="panel description" value="${esc(p.description||'')}" oninput="liveUpSignals()">
+        <div style="display:flex;flex-direction:column;gap:7px">${links}</div>
+        <button class="add-img" onclick="addSignalsLink(${pi})">+ Add link</button>
+      </div>`;
+  }).join('');
+  document.getElementById('editBody').innerHTML=`
+    <div class="frow">
+      <div class="field"><label>Session ID</label>
+        <input type="number" id="sf-id" min="1" value="${s.id??''}" oninput="liveUpSignals()"></div>
+      <div class="field"><label>Slug (page folder)</label>
+        <input id="sf-slug" value="${esc(s.slug||'')}" placeholder="e.g. signals" style="font-family:var(--mono);font-size:11px;" oninput="liveUpSignals()"></div>
+    </div>
+    <div class="field"><label>Current session</label>
+      <select id="sf-current" onchange="liveUpSignals()">
+        <option value="false"${s.current?'':' selected'}>No</option>
+        <option value="true"${s.current?' selected':''}>Yes — labelled "This session"</option>
+      </select></div>
+    <div class="field"><label>Panels</label>
+      <div id="sf-panels" style="display:flex;flex-direction:column;gap:10px">${panelsHtml||'<p style="color:var(--muted);font-size:12px">No panels yet.</p>'}</div>
+      <button class="add-img" style="margin-top:8px" onclick="addSignalsPanel()">+ Add panel</button>
+    </div>`;
+}
+function rebuildSignalsForm(){ buildSignalsForm(data.sessions[curIdx]); }
+
+// LIVE UPDATE — scrape DOM back into the model
+function liveUpSignals(){
+  const s=data.sessions[curIdx]; if(!s) return;
+  const g=id=>document.getElementById(id);
+  const idv=g('sf-id')?.value;
+  if(idv!==undefined && idv!=='') s.id=parseInt(idv);
+  const slugEl=g('sf-slug'); if(slugEl) s.slug=slugEl.value.trim();
+  const cur=g('sf-current')?.value;
+  if(cur==='true'){ data.sessions.forEach(x=>{ if(x!==s) delete x.current; }); s.current=true; }
+  else if(cur==='false'){ delete s.current; }
+  (s.panels||[]).forEach((p,pi)=>{
+    const t=g(`sf-p${pi}-title`); if(t) p.title=t.value;
+    const d=g(`sf-p${pi}-desc`); if(d) p.description=d.value;
+    (p.links||[]).forEach((l,li)=>{
+      const lb=g(`sf-p${pi}-l${li}-label`); if(lb) l.label=lb.value;
+      const u=g(`sf-p${pi}-l${li}-url`);   if(u)  l.url=u.value;
+      const nt=g(`sf-p${pi}-l${li}-note`); if(nt) l.note=nt.value;
+    });
+  });
+  markUnsaved();
+  document.getElementById('editTitle').textContent=signalsLabel(s);
+  renderPreview(); refreshPrevFilters();
+}
+
+function addSignalsPanel(){
+  liveUpSignals();
+  const s=data.sessions[curIdx]; if(!s) return;
+  (s.panels||(s.panels=[])).push({title:'',description:'',links:[{label:'',url:'',note:''}]});
+  markUnsaved(); rebuildSignalsForm(); renderPreview();
+}
+function removeSignalsPanel(pi){
+  liveUpSignals();
+  const s=data.sessions[curIdx]; if(!s||!s.panels) return;
+  s.panels.splice(pi,1);
+  markUnsaved(); rebuildSignalsForm(); renderPreview();
+}
+function addSignalsLink(pi){
+  liveUpSignals();
+  const p=data.sessions[curIdx]?.panels?.[pi]; if(!p) return;
+  (p.links||(p.links=[])).push({label:'',url:'',note:''});
+  markUnsaved(); rebuildSignalsForm(); renderPreview();
+}
+function removeSignalsLink(pi,li){
+  liveUpSignals();
+  const p=data.sessions[curIdx]?.panels?.[pi]; if(!p||!p.links) return;
+  p.links.splice(li,1);
+  markUnsaved(); rebuildSignalsForm(); renderPreview();
+}
+
+// PREVIEW — mirrors the live signals page (tab bar + link tables)
+function signalsActiveSession(sessions){
+  if(prevFilter==='all') return sessions.find(s=>s.current)||sessions[sessions.length-1];
+  return sessions.find(s=>String(s.id)===String(prevFilter))||sessions.find(s=>s.current)||sessions[sessions.length-1];
+}
+function renderSignalsPreview(frame){
+  const sessions=getSignalsSessions().slice().sort((a,b)=>(a.id||0)-(b.id||0));
+  if(!sessions.length){ frame.innerHTML='<div class="prev-ph">No sessions to preview</div>'; return; }
+  const active=signalsActiveSession(sessions);
+  const tabs=sessions.map(s=>
+    `<button class="sig-tab${s===active?' on':''}" onclick="setSignalsTab(${s.id})">${esc(s.current?'This session':String(s.id))}</button>`
+  ).join('');
+  const panels=(active.panels||[]).map(p=>{
+    const rows=(p.links||[]).map((l,i)=>`<tr>
+        <td class="col-number"><span class="sig-tag">${i+1}</span></td>
+        <td>${l.url?`<a href="${esc(l.url)}" target="_blank" rel="noreferrer">${esc(l.label||l.url)}</a>`:esc(l.label||'')}</td>
+        <td>${esc(l.note||'')}</td>
+      </tr>`).join('');
+    return `<article class="sig-panel">
+      <h3>${esc(p.title||'Untitled')}</h3>
+      ${p.description?`<p class="sig-desc">${esc(p.description)}</p>`:''}
+      <table>
+        <thead><tr><th class="col-number">No.</th><th class="col-link">Link</th><th>Use / Notes</th></tr></thead>
+        <tbody>${rows||'<tr><td colspan="3" class="sig-empty">No links yet.</td></tr>'}</tbody>
+      </table>
+    </article>`;
+  }).join('');
+  frame.innerHTML=`<div class="r-signals">
+    <div class="sig-tabs">${tabs}</div>
+    <div class="sig-grid">${panels||'<p class="sig-empty">No panels in this session.</p>'}</div>
+  </div>`;
+}
+function setSignalsTab(id){ prevFilter=String(id); renderPreview(); refreshPrevFilters(); }
 
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', ()=>{
