@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Live Model — Phreaking Collective</title>
+
+  <!-- Unlisted: keep out of indexes -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles/sidebar.css" />
+  <link rel="stylesheet" href="/styles/stylesIndex.css" />
+
+  <style>
+    /* ================================
+       Teachable Machine — page CSS
+       Phreaking style: black field,
+       hard white rules, IBM Plex Mono
+       ================================ */
+    .tm-wrap {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(18px, 3vw, 32px);
+    }
+
+    .tm-title {
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 56px);
+      letter-spacing: 0.04em;
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    .tm-lede {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 64ch;
+      margin: 0;
+    }
+
+    /* ---- Upload / control panel ---- */
+    .tm-panel {
+      border: 1px solid var(--rule);
+      padding: clamp(14px, 2.4vw, 22px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tm-dropzone {
+      border: 1px dashed var(--rule);
+      padding: clamp(20px, 4vw, 40px);
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.15s ease, opacity 0.15s ease;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .tm-dropzone:hover,
+    .tm-dropzone.is-drag {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+    }
+    .tm-dropzone strong { color: var(--ink); font-weight: 700; }
+    .tm-dropzone input[type="file"] { display: none; }
+
+    .tm-filelist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: 12px;
+      color: var(--muted);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .tm-filelist li::before { content: "→ "; opacity: 0.7; }
+    .tm-filelist li.ok { color: var(--ink); }
+    .tm-filelist li.missing { color: #ff6b6b; }
+
+    .tm-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tm-btn {
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      background: transparent;
+      padding: 10px 16px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s ease, opacity 0.15s ease;
+    }
+    .tm-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
+    .tm-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .tm-status {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      min-height: 1.2em;
+    }
+    .tm-status.error { color: #ff6b6b; }
+
+    /* ---- Stage: webcam card + readout ---- */
+    .tm-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+      gap: clamp(18px, 3vw, 32px);
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .tm-stage { grid-template-columns: 1fr; }
+    }
+
+    /* Artist-card: large feed, hard white border, caption strip */
+    .tm-card {
+      border: 1px solid var(--rule);
+      background: #000;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tm-feed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #0a0a0a;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+    .tm-feed canvas,
+    .tm-feed video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .tm-feed__placeholder {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0 18px;
+    }
+    .tm-card__caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tm-card__caption strong { color: var(--ink); font-weight: 700; }
+
+    /* ---- Confidence readout ---- */
+    .tm-readout {
+      border: 1px solid var(--rule);
+      padding: clamp(14px, 2.2vw, 20px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 100%;
+    }
+    .tm-readout__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 10px;
+    }
+    .tm-readout__title {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+    .tm-bars { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+
+    /* ---- Scavenger switch ---- */
+    .tm-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tm-switch input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+    .tm-switch__track {
+      flex: none;
+      width: 36px;
+      height: 18px;
+      border: 1px solid var(--rule);
+      background: #000;
+      position: relative;
+      transition: background 0.15s ease;
+    }
+    .tm-switch__knob {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 14px;
+      height: 14px;
+      background: var(--ink);
+      transition: transform 0.15s ease;
+    }
+    .tm-switch input:checked + .tm-switch__track { background: rgba(255, 255, 255, 0.18); }
+    .tm-switch input:checked + .tm-switch__track .tm-switch__knob { transform: translateX(18px); }
+    .tm-switch input:checked ~ .tm-switch__text { color: var(--ink); }
+    .tm-switch input:focus-visible + .tm-switch__track { outline: 1px solid var(--ink); outline-offset: 2px; }
+
+    .tm-bar__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+    .tm-bar__label {
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: opacity 0.15s linear;
+    }
+    /* Locked-on label in scavenger mode */
+    .tm-bar.is-locked .tm-bar__label {
+      color: var(--ink);
+      opacity: 1 !important;
+    }
+    .tm-bar.is-locked .tm-bar__label::after {
+      content: " ●";
+      font-size: 0.8em;
+    }
+    .tm-bar__val {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .tm-bar__track {
+      height: 14px;
+      border: 1px solid var(--rule);
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .tm-bar__fill {
+      position: absolute;
+      inset: 0 100% 0 0;
+      background: var(--ink);
+      width: 0;
+      transition: width 0.12s linear;
+    }
+    /* Leading class: invert for emphasis */
+    .tm-bar.is-top .tm-bar__label,
+    .tm-bar.is-top .tm-bar__val { color: var(--ink); }
+    .tm-bar.is-top .tm-bar__track { box-shadow: 0 0 0 1px var(--rule); }
+
+    .tm-empty {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .tm-help {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+    .tm-help code {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1px 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div data-sidebar></div>
+
+  <main class="layout" role="main">
+    <section class="right">
+      <header class="right-header" aria-hidden="true">
+        <a class="brand-inline" href="/">
+          <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective">
+        </a>
+      </header>
+
+      <div class="tm-wrap">
+
+        <div>
+          <h1 class="tm-title">Live Model</h1>
+          <p class="tm-lede">
+            Drop in a Google Teachable Machine image model and run it against your
+            webcam in real time. Nothing is uploaded — the model loads and runs
+            entirely in your browser.
+          </p>
+        </div>
+
+        <!-- Upload panel -->
+        <div class="tm-panel">
+          <label class="tm-dropzone" id="dropzone">
+            <input type="file" id="fileInput" accept=".zip,.json,.bin,application/json,application/zip" multiple>
+            <span>
+              <strong>Drop the Teachable Machine .zip here</strong> or click to choose<br>
+              accepts the exported <strong>.zip</strong>, or the unzipped
+              <strong>model.json</strong>, <strong>metadata.json</strong> &amp;
+              <strong>weights.bin</strong>
+            </span>
+          </label>
+
+          <ul class="tm-filelist" id="fileList">
+            <li class="missing" data-slot="model">model.json</li>
+            <li class="missing" data-slot="metadata">metadata.json</li>
+            <li class="missing" data-slot="weights">weights.bin</li>
+          </ul>
+
+          <div class="tm-controls">
+            <button class="tm-btn" id="startBtn" disabled>Load &amp; start camera</button>
+            <button class="tm-btn" id="stopBtn" disabled>Stop</button>
+            <span class="tm-status" id="status">Awaiting model files…</span>
+          </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="tm-stage">
+          <figure class="tm-card" style="margin:0;">
+            <div class="tm-feed" id="feed">
+              <div class="tm-feed__placeholder" id="feedPlaceholder">camera offline</div>
+            </div>
+            <figcaption class="tm-card__caption">
+              <span><strong>Webcam</strong> · live inference</span>
+              <span id="fpsLabel">—</span>
+            </figcaption>
+          </figure>
+
+          <div class="tm-readout">
+            <div class="tm-readout__head">
+              <h2 class="tm-readout__title">Confidence</h2>
+              <label class="tm-switch"
+                title="Hide every label until the model is sure — discover what it's spotting.">
+                <input type="checkbox" id="scavengerToggle">
+                <span class="tm-switch__track"><span class="tm-switch__knob"></span></span>
+                <span class="tm-switch__text">Scavenger</span>
+              </label>
+            </div>
+            <div class="tm-bars" id="bars">
+              <p class="tm-empty">Load a model to see class predictions.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="tm-help">
+          Export from Teachable Machine: open your image project →
+          <code>Export Model</code> → <code>TensorFlow.js</code> →
+          <code>Download my model</code>. Drop the downloaded <code>.zip</code> in
+          directly — no need to unzip.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- TensorFlow.js + Teachable Machine image library + JSZip -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+  <script src="/scripts/sidebar.js"></script>
+
+  <script>
+    (() => {
+      const fileInput = document.getElementById('fileInput');
+      const dropzone = document.getElementById('dropzone');
+      const fileList = document.getElementById('fileList');
+      const startBtn = document.getElementById('startBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      const statusEl = document.getElementById('status');
+      const feed = document.getElementById('feed');
+      const placeholder = document.getElementById('feedPlaceholder');
+      const barsEl = document.getElementById('bars');
+      const fpsLabel = document.getElementById('fpsLabel');
+      const scavengerToggle = document.getElementById('scavengerToggle');
+
+      // Scavenger mode: labels stay hidden, fading in with confidence on an
+      // exponential curve, then "lock" visible once they pass the threshold.
+      const LOCK_THRESHOLD = 0.95;
+      const FADE_EXPONENT = 3.5; // higher = subtler at low confidence
+      let scavenger = false;
+
+      const slots = { model: null, metadata: null, weights: null };
+      let model = null;
+      let webcam = null;
+      let running = false;
+      let rafId = null;
+      let barRefs = [];
+      let lastFrame = performance.now();
+
+      function setStatus(msg, isError) {
+        statusEl.textContent = msg;
+        statusEl.classList.toggle('error', !!isError);
+      }
+
+      function classify(file) {
+        const name = file.name.toLowerCase();
+        if (name.endsWith('.bin')) return 'weights';
+        if (name.includes('metadata')) return 'metadata';
+        if (name.endsWith('.json')) return 'model';
+        return null;
+      }
+
+      function isZip(file) {
+        return file.name.toLowerCase().endsWith('.zip') ||
+          file.type === 'application/zip' ||
+          file.type === 'application/x-zip-compressed';
+      }
+
+      async function intakeZip(file) {
+        if (typeof JSZip === 'undefined') {
+          setStatus('ZIP support failed to load — drop the unzipped files instead.', true);
+          return;
+        }
+        setStatus('Unpacking ' + file.name + '…');
+        try {
+          const zip = await JSZip.loadAsync(file);
+          const entries = Object.values(zip.files).filter(e => !e.dir);
+          let found = 0;
+          for (const entry of entries) {
+            // ignore folder prefixes / macOS junk
+            const base = entry.name.split('/').pop();
+            if (!base || base.startsWith('.') || base.startsWith('__MACOSX')) continue;
+            const fake = { name: base, type: '' };
+            const slot = classify(fake);
+            if (!slot) continue;
+            const blob = await entry.async('blob');
+            slots[slot] = new File([blob], base);
+            found++;
+          }
+          refreshFileList();
+          if (!found) setStatus('No model files found inside ' + file.name + '.', true);
+        } catch (err) {
+          console.error(err);
+          setStatus('Could not read ZIP: ' + (err?.message || err), true);
+        }
+      }
+
+      async function intakeFiles(files) {
+        for (const file of Array.from(files)) {
+          if (isZip(file)) {
+            await intakeZip(file);
+          } else {
+            const slot = classify(file);
+            if (slot) slots[slot] = file;
+          }
+        }
+        refreshFileList();
+      }
+
+      function refreshFileList() {
+        fileList.querySelectorAll('li').forEach(li => {
+          const slot = li.dataset.slot;
+          const file = slots[slot];
+          if (file) {
+            li.textContent = file.name;
+            li.classList.add('ok');
+            li.classList.remove('missing');
+          } else {
+            li.textContent = `${slot}` + (slot === 'weights' ? '.bin' : '.json');
+            li.classList.remove('ok');
+            li.classList.add('missing');
+          }
+        });
+        const ready = slots.model && slots.metadata && slots.weights;
+        startBtn.disabled = !ready || running;
+        if (ready && !running) setStatus('Model files ready — start the camera.');
+      }
+
+      /* ---- File input wiring ---- */
+      fileInput.addEventListener('change', e => intakeFiles(e.target.files));
+
+      ['dragenter', 'dragover'].forEach(ev =>
+        dropzone.addEventListener(ev, e => {
+          e.preventDefault();
+          dropzone.classList.add('is-drag');
+        })
+      );
+      ['dragleave', 'drop'].forEach(ev =>
+        dropzone.addEventListener(ev, e => {
+          e.preventDefault();
+          dropzone.classList.remove('is-drag');
+        })
+      );
+      dropzone.addEventListener('drop', e => {
+        if (e.dataTransfer?.files?.length) intakeFiles(e.dataTransfer.files);
+      });
+
+      /* ---- Build the confidence readout ---- */
+      function buildBars(classes) {
+        barsEl.innerHTML = '';
+        barRefs = classes.map(name => {
+          const row = document.createElement('div');
+          row.className = 'tm-bar';
+
+          const head = document.createElement('div');
+          head.className = 'tm-bar__head';
+          const label = document.createElement('span');
+          label.className = 'tm-bar__label';
+          label.textContent = name;
+          label.title = name;
+          const val = document.createElement('span');
+          val.className = 'tm-bar__val';
+          val.textContent = '0%';
+          head.append(label, val);
+
+          const track = document.createElement('div');
+          track.className = 'tm-bar__track';
+          const fill = document.createElement('div');
+          fill.className = 'tm-bar__fill';
+          track.append(fill);
+
+          row.append(head, track);
+          barsEl.append(row);
+          return { row, label, val, fill, locked: false };
+        });
+        applyScavengerState();
+      }
+
+      // Reset locks and hide/show labels to match the current toggle state.
+      function applyScavengerState() {
+        barRefs.forEach(ref => {
+          ref.locked = false;
+          ref.row.classList.remove('is-locked');
+          ref.label.style.opacity = scavenger ? '0' : '1';
+        });
+      }
+
+      /* ---- Load model + start webcam ---- */
+      async function start() {
+        if (!slots.model || !slots.metadata || !slots.weights) return;
+        startBtn.disabled = true;
+        setStatus('Loading model…');
+
+        try {
+          model = await tmImage.loadFromFiles(slots.model, slots.weights, slots.metadata);
+          const classNames = model.getClassLabels();
+          buildBars(classNames);
+
+          setStatus('Requesting camera…');
+          const size = 480;
+          webcam = new tmImage.Webcam(size, size, true); // flip = mirror
+          await webcam.setup();
+          await webcam.play();
+
+          placeholder.remove();
+          feed.append(webcam.canvas);
+
+          running = true;
+          stopBtn.disabled = false;
+          startBtn.disabled = true;
+          setStatus('Running.');
+          lastFrame = performance.now();
+          loop();
+        } catch (err) {
+          console.error(err);
+          setStatus('Error: ' + (err?.message || err), true);
+          startBtn.disabled = false;
+        }
+      }
+
+      async function loop() {
+        if (!running) return;
+        webcam.update();
+        const preds = await model.predict(webcam.canvas);
+
+        let topIdx = 0;
+        for (let i = 1; i < preds.length; i++) {
+          if (preds[i].probability > preds[topIdx].probability) topIdx = i;
+        }
+
+        preds.forEach((p, i) => {
+          const ref = barRefs[i];
+          if (!ref) return;
+          const pct = p.probability * 100;
+          ref.fill.style.width = pct.toFixed(1) + '%';
+          ref.val.textContent = pct.toFixed(0) + '%';
+          ref.row.classList.toggle('is-top', i === topIdx);
+
+          if (scavenger) {
+            if (!ref.locked) {
+              if (p.probability >= LOCK_THRESHOLD) {
+                ref.locked = true;
+                ref.row.classList.add('is-locked');
+                ref.label.style.opacity = '1';
+              } else {
+                // exponential fade-in — barely visible until quite confident
+                ref.label.style.opacity = Math.pow(p.probability, FADE_EXPONENT).toFixed(3);
+              }
+            }
+          } else {
+            ref.label.style.opacity = '1';
+          }
+        });
+
+        const now = performance.now();
+        const fps = 1000 / (now - lastFrame);
+        lastFrame = now;
+        fpsLabel.textContent = fps.toFixed(0) + ' fps';
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        if (webcam) {
+          try { webcam.stop(); } catch (e) { /* no-op */ }
+          if (webcam.canvas && webcam.canvas.parentNode) webcam.canvas.remove();
+          webcam = null;
+        }
+        if (!feed.querySelector('.tm-feed__placeholder')) {
+          const ph = document.createElement('div');
+          ph.className = 'tm-feed__placeholder';
+          ph.textContent = 'camera offline';
+          feed.append(ph);
+        }
+        stopBtn.disabled = true;
+        fpsLabel.textContent = '—';
+        refreshFileList();
+        setStatus('Stopped.');
+      }
+
+      scavengerToggle.addEventListener('change', () => {
+        scavenger = scavengerToggle.checked;
+        applyScavengerState();
+      });
+
+      startBtn.addEventListener('click', start);
+      stopBtn.addEventListener('click', stop);
+      window.addEventListener('beforeunload', () => { if (running) stop(); });
+
+      refreshFileList();
+    })();
+  </script>
+</body>
+
+</html>
