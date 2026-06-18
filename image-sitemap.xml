@@ -32,6 +32,19 @@
   </url>
 
   <url>
+    <loc>https://phreaking.co.uk/can-we-start-again/</loc>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/CanWeStartAgainBanner.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/CWSTA-Logo-Clean-White.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/private-view/private-view_1.webp</image:loc>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://phreaking.co.uk/BitRot/</loc>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/BitRotShowImgs/Room3Horizontal_1.JPG</image:loc>
