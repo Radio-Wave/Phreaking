@@ -56,4 +56,9 @@
     <loc>https://phreaking.co.uk/phreak-mag/</loc>
   </url>
 
+  <!-- Contact -->
+  <url>
+    <loc>https://phreaking.co.uk/contact/</loc>
+  </url>
+
 </urlset>
