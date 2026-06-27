@@ -2097,6 +2097,75 @@
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true
+    },
+    {
+      "@type": "PerformingArtsEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-slow-impulse",
+      "name": "Slow Impulse - Experimental Music Night",
+      "exhibition": "can-we-start-again",
+      "label": "Experimental Performance Night",
+      "displayDate": "Sunday 12th July — 18:00–22:00",
+      "sortOrder": 16,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_1.jpg",
+          "alt": "Poster for slow impulse night"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Large sound all experimental music night",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-phreak-mag-launch-party",
+      "name": "Print isn’t Dead",
+      "exhibition": "can-we-start-again",
+      "label": "Event",
+      "displayDate": "Wednesday 15th July — 19:00–20:00",
+      "sortOrder": 17,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Join us to celebrate the launch of issue #2 of Phreak Mag. Hear from the magazine editor, and a panel talk with selected writers and artists from the magazine",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-mixed-signals",
+      "name": "Mixed Signals",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Wednesday 8th July — 13:00–15:00",
+      "sortOrder": 18,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/mixed-signals/mixed-signals_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/mixed-signals/mixed-signals_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Monthly Computational Arts Jam.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true
     }
   ]
 }
