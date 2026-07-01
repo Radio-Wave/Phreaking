@@ -2097,6 +2097,119 @@
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true
+    },
+    {
+      "@type": "ScreeningEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-slow-impulse",
+      "name": "Slow Impulse",
+      "exhibition": "can-we-start-again",
+      "label": "Experimental Performance Night",
+      "displayDate": "Sunday 12th July — 18:00–22:00",
+      "sortOrder": 16,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_1.jpg",
+          "alt": "Poster for slow impulse night"
+        }
+      ],
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/slow-impulse-an-experimental-sound-night-tickets-1992718307099?utm_experiment=test_share_listing&aff=ebdsshios&sg=65f15e3bf18b44be93f1e36988116634065ccba8a6191315b03904197bbddbcace7a01307bb53228418https://www.eventbrite.co.uk/e/slow-impulse-an-experimental-sound-night-tickets-19927183070994",
+      "eventCompletedUrlLabel": "Tickets Out Now",
+      "description": "Slow Impulse will be an evening of experimental sound night that journeys through traditional, analogue, and technological ways of sound making. Join us in a large school hall for this very exciting, beautiful, and immersive sound night!",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-phreak-mag-launch-party",
+      "name": "Print isn’t Dead",
+      "exhibition": "can-we-start-again",
+      "label": "Event",
+      "displayDate": "Wednesday 15th July — 19:00–20:00",
+      "sortOrder": 17,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Join us to celebrate the launch of issue #2 of Phreak Mag. Hear from the magazine editor, and a panel talk with selected writers and artists from the magazine",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-mixed-signals",
+      "name": "Mixed Signals",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Wednesday 8th July — 13:00–15:00",
+      "sortOrder": 18,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/mixed-signals/mixed-signals_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/mixed-signals/mixed-signals_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Monthly Computational Arts Jam.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-atay-ilgun-spiral",
+      "name": "Atay Ilgun - spiral",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Thursday 9th July & Friday 10th July — 18:30–19:30",
+      "sortOrder": 19,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Taking his artistic practice spanning early AI, crypto and protocol art, and recent cultural endeavours, this talk thinks through the sense of cultural time and the hype cycle, taking the spiral as a counterform to read emergence and obsolescence alongside each other. It moves toward a question about memory: what happens when memory is externalised into infrastructures that move faster than the practices they record? Network art and protocol art are proposed as a potential next step in digital practice, and as a counterform against the regimes in which the technical supports of cultural memory turn over before they can carry their own contents.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-nina-davies",
+      "name": "Nina Davies",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Saturday 11th July — 18:00–21:00",
+      "sortOrder": 20,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/nina-davies/nina-davies_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/nina-davies/nina-davies_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
     }
   ]
 }
