@@ -4,6 +4,7 @@
   if (!listEl) return;
 
   var allCards = [];
+  var dayGroups = [];
 
   function applyFilter(filter) {
     filterBtns.forEach(function (btn) {
@@ -12,6 +13,11 @@
     allCards.forEach(function (card) {
       var label = card.dataset.label || '';
       card.hidden = filter !== 'all' && label !== filter;
+    });
+    // Hide a day heading when every event under it is filtered out.
+    dayGroups.forEach(function (group) {
+      var anyVisible = group.cards.some(function (card) { return !card.hidden; });
+      group.heading.hidden = !anyVisible;
     });
   }
 
@@ -45,10 +51,6 @@
       ? '<span class="cwsa-event-label">' + event.label + '</span>'
       : '';
 
-    var date = event.displayDate
-      ? '<p class="cwsa-event-date">' + event.displayDate + '</p>'
-      : '';
-
     var credits = performerNames.length
       ? '<p class="cwsa-event-date">' + performerNames.join(', ') + '</p>'
       : '';
@@ -67,7 +69,6 @@
       '<div class="cwsa-event-body">' +
         label +
         '<h3 class="cwsa-event-title">' + event.name + '</h3>' +
-        date +
         credits +
         desc +
         link +
@@ -102,9 +103,23 @@
         return;
       }
 
+      var currentDay = null;
+      var currentGroup = null;
       events.forEach(function (event) {
+        var day = event.displayDate || '';
+        if (day !== currentDay) {
+          currentDay = day;
+          var heading = document.createElement('h3');
+          heading.className = 'cwsa-day-heading';
+          heading.textContent = day;
+          listEl.appendChild(heading);
+          currentGroup = { heading: heading, cards: [] };
+          dayGroups.push(currentGroup);
+        }
+
         var card = buildCard(event, persons);
         allCards.push(card);
+        if (currentGroup) currentGroup.cards.push(card);
         listEl.appendChild(card);
       });
     })

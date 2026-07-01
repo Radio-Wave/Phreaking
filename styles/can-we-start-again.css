@@ -350,6 +350,18 @@ hr {
   font-size: clamp(12px, 1.5vw, 14px);
   font-style: italic;
 }
+.cwsa-day-heading {
+  margin: 1rem 0 -0.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: clamp(13px, 1.8vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cwsa-day-heading:first-child { margin-top: 0; }
+.cwsa-day-heading[hidden] { display: none; }
 .cwsa-event-card {
   display: grid;
   grid-template-columns: 1fr 130px;
