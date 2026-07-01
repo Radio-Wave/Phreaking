@@ -2099,7 +2099,7 @@
       "visible": true
     },
     {
-      "@type": "PerformingArtsEvent",
+      "@type": "ScreeningEvent",
       "@id": "https://phreaking.co.uk/past-events#event-slow-impulse",
       "name": "Slow Impulse",
       "exhibition": "can-we-start-again",
@@ -2113,8 +2113,8 @@
           "alt": "Poster for slow impulse night"
         }
       ],
-      "eventCompletedUrl": "",
-      "eventCompletedUrlLabel": "",
+      "eventCompletedUrl": "https://www.eventbrite.co.uk/e/slow-impulse-an-experimental-sound-night-tickets-1992718307099?utm_experiment=test_share_listing&aff=ebdsshios&sg=65f15e3bf18b44be93f1e36988116634065ccba8a6191315b03904197bbddbcace7a01307bb53228418https://www.eventbrite.co.uk/e/slow-impulse-an-experimental-sound-night-tickets-19927183070994",
+      "eventCompletedUrlLabel": "Tickets Out Now",
       "description": "Slow Impulse will be an evening of experimental sound night that journeys through traditional, analogue, and technological ways of sound making. Join us in a large school hall for this very exciting, beautiful, and immersive sound night!",
       "startDate": "2026",
       "endDate": "2026",
@@ -2184,7 +2184,32 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-nina-davies",
+      "name": "Nina Davies",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Saturday 11th July — 18:00–21:00",
+      "sortOrder": 20,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/nina-davies/nina-davies_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/nina-davies/nina-davies_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
     }
   ]
 }
