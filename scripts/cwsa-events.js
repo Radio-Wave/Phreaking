@@ -60,9 +60,10 @@
       : '';
 
     var link = '';
-    if (event.url && event.url !== '' && event.eventCompletedUrl !== '') {
-      var href = event.eventCompletedUrl || event.url;
-      link = '<div class="cwsa-event-link"><a href="' + href + '">Booking Link</a></div>';
+    var href = event.eventCompletedUrl || event.url || '';
+    if (href !== '') {
+      var linkLabel = event.eventCompletedUrlLabel || 'Booking Link';
+      link = '<div class="cwsa-event-link"><a href="' + href + '" target="_blank" rel="noopener">' + linkLabel + '</a></div>';
     }
 
     card.innerHTML =
