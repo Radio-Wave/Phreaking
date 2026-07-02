@@ -202,11 +202,20 @@
         <section id="events" aria-labelledby="events-heading">
           <h2 id="events-heading" class="section-title">All Events</h2>
 
-          <div class="cwsa-filter-bar" role="group" aria-label="Filter events by type">
+          <div class="cwsa-filter-bar" role="group" aria-label="Filter events by type" data-filter-group="type">
             <button class="cwsa-filter-btn active" data-filter="all">All</button>
             <button class="cwsa-filter-btn" data-filter="Talk">Talks</button>
             <button class="cwsa-filter-btn" data-filter="Event">Events</button>
             <button class="cwsa-filter-btn" data-filter="Workshop">Workshops</button>
+          </div>
+
+          <div class="cwsa-filter-bar" role="group" aria-label="Filter events by day" data-filter-group="day">
+            <button class="cwsa-filter-btn active" data-day="all">All Days</button>
+            <button class="cwsa-filter-btn" data-day="Wed">Wed</button>
+            <button class="cwsa-filter-btn" data-day="Thu">Thu</button>
+            <button class="cwsa-filter-btn" data-day="Fri">Fri</button>
+            <button class="cwsa-filter-btn" data-day="Sat">Sat</button>
+            <button class="cwsa-filter-btn" data-day="Sun">Sun</button>
           </div>
 
           <div id="cwsa-events-list" class="cwsa-events-list" aria-live="polite">

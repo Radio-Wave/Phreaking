@@ -1,5 +1,6 @@
 (function () {
-  var filterBtns = document.querySelectorAll('.cwsa-filter-btn');
+  var typeBtns = document.querySelectorAll('[data-filter-group="type"] .cwsa-filter-btn');
+  var dayBtns = document.querySelectorAll('[data-filter-group="day"] .cwsa-filter-btn');
   var listEl = document.getElementById('cwsa-events-list');
   if (!listEl) return;
 
@@ -12,6 +13,27 @@
   function splitDisplayDate(dd) {
     var parts = (dd || '').split('—');
     return { day: parts[0].trim(), time: (parts[1] || '').trim() };
+  }
+
+  var MONTHS = {
+    jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+    jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12
+  };
+
+  // Derive a chronological sort key from a displayDate string, e.g.
+  // "Wednesday 8th July — 19:30–20:30" -> 7 * 100000 + 8 * 1000 + (19*60+30).
+  // Events order by month, then day-of-month, then start time. Anything we
+  // can't parse sorts to the end so it never scrambles the dated events.
+  function chronoKey(displayDate) {
+    var dd = displayDate || '';
+    var dm = dd.match(/(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)/);
+    if (!dm) return Infinity;
+    var day = parseInt(dm[1], 10);
+    var month = MONTHS[dm[2].slice(0, 3).toLowerCase()];
+    if (!month) return Infinity;
+    var tm = dd.match(/(\d{1,2}):(\d{2})/);
+    var startMin = tm ? parseInt(tm[1], 10) * 60 + parseInt(tm[2], 10) : 0;
+    return month * 100000 + day * 1000 + startMin;
   }
 
   function performerNames(event) {
@@ -29,13 +51,15 @@
     return names;
   }
 
-  function applyFilter(filter) {
-    filterBtns.forEach(function (btn) {
-      btn.classList.toggle('active', btn.dataset.filter === filter);
-    });
+  var activeType = 'all';
+  var activeDay = 'all';
+
+  // Show a card only when it matches both the type and day filters.
+  function applyFilters() {
     allCards.forEach(function (card) {
-      var label = card.dataset.label || '';
-      card.hidden = filter !== 'all' && label !== filter;
+      var typeOk = activeType === 'all' || (card.dataset.label || '') === activeType;
+      var dayOk = activeDay === 'all' || (card.dataset.day || '') === activeDay;
+      card.hidden = !(typeOk && dayOk);
     });
     // Hide a day heading when every event under it is filtered out.
     dayGroups.forEach(function (group) {
@@ -44,8 +68,20 @@
     });
   }
 
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () { applyFilter(btn.dataset.filter); });
+  typeBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      activeType = btn.dataset.filter;
+      typeBtns.forEach(function (b) { b.classList.toggle('active', b === btn); });
+      applyFilters();
+    });
+  });
+
+  dayBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      activeDay = btn.dataset.day;
+      dayBtns.forEach(function (b) { b.classList.toggle('active', b === btn); });
+      applyFilters();
+    });
   });
 
   /* ---------------------------------------------------------------
@@ -250,6 +286,8 @@
     var card = document.createElement('article');
     card.className = 'cwsa-event-card';
     card.dataset.label = event.label || '';
+    // Weekday key (Wed/Thu/Fri/Sat/Sun) for the day filter, from the displayDate.
+    card.dataset.day = splitDisplayDate(event.displayDate).day.slice(0, 3);
     card.dataset.index = index;
     var idSlug = (event['@id'] || '').split('#')[1];
     if (idSlug) card.id = 'evt-' + idSlug;
@@ -329,8 +367,10 @@
         return item.exhibition === 'can-we-start-again' && item.visible !== false;
       });
 
+      // Sort chronologically off the actual dates in displayDate, so the list
+      // stays in real date/time order without a hand-maintained sortOrder.
       events.sort(function (a, b) {
-        return (a.sortOrder || 999) - (b.sortOrder || 999);
+        return chronoKey(a.displayDate) - chronoKey(b.displayDate);
       });
 
       eventsData = events;
