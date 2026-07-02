@@ -1996,7 +1996,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": false
     },
     {
       "@type": "Event",
@@ -2021,7 +2021,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": false
     },
     {
       "@type": "Event",
@@ -2046,7 +2046,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": false
     },
     {
       "@type": "Event",
@@ -2071,7 +2071,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": false
     },
     {
       "@type": "Event",
@@ -2096,7 +2096,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": false
     },
     {
       "@type": "ScreeningEvent",
