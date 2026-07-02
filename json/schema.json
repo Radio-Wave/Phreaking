@@ -2129,7 +2129,7 @@
       "name": "Print isn’t Dead",
       "exhibition": "can-we-start-again",
       "label": "Event",
-      "displayDate": "Wednesday 15th July — 19:00–20:00",
+      "displayDate": "Wednesday 8th July — 19:00–20:00",
       "sortOrder": 17,
       "images": [],
       "eventCompletedUrl": "",
@@ -2173,7 +2173,7 @@
       "name": "Atay Ilgun - spiral",
       "exhibition": "can-we-start-again",
       "label": "Talk",
-      "displayDate": "Thursday 9th July & Friday 10th July — 18:30–19:30",
+      "displayDate": "Friday 10th July — 18:30–19:30",
       "sortOrder": 19,
       "images": [],
       "eventCompletedUrl": "",
@@ -2192,7 +2192,7 @@
       "name": "Nina Davies",
       "exhibition": "can-we-start-again",
       "label": "Talk",
-      "displayDate": "Saturday 11th July — 18:00–21:00",
+      "displayDate": "Saturday 11th July — 19:30–20:30",
       "sortOrder": 20,
       "images": [
         {
@@ -2203,7 +2203,349 @@
       ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
+      "description": "Speed Running the World of Things. As part of this programme Nina Davies opens up her research in progress, presenting it as a fragmented talk. Opening with teenagers speedrunning a Scientology building, she traces a series of tangents through Boston Dynamics' dancing robots, NASA's 'riding the skin' VR experiments, and the world models that teach physical AI to rehearse being in our world before it arrives. Drawing on several years of research into what happens to human movement when it leaves the body, the talk arrives at a single question: as physical AI inherits human movement to navigate a human-built world, what new forms of embodied literacy must we develop to navigate it in return?",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-libi-engine",
+      "name": "Worldbuilding as Resistance: Creating 3D Sanctuaries",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Wednesday 8th July — 15:00–17:00",
+      "sortOrder": 21,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "In a digital world dominated by corporate platforms and surveillance, worldbuilding is an act of resistance. Join this hands-on workshop and reclaim the web by creating your own sovereign 3D sanctuaries — virtual art galleries, personal rooms, tree-lined worlds, or tranquil escapes that are yours to own, shape, and share with just a link. Using the browser-based Libi Engine, you will worldbuild at a personal scale: bring your own assets or start with ready-made models, then decorate and personalise your space with lighting, atmosphere, audio, and meaningful details. No prior experience is required — just bring curiosity and a laptop (a mouse is recommended). By the end of this two-hour workshop you will have a fully accessible, standalone 3D world that can be shared through the web. Hosted by Ameer Ali and Ericka Simon.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-olivia-ema",
+      "name": "Olivia Ema",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Wednesday 8th July — 18:00–19:00",
+      "sortOrder": 22,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
       "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-cwsa-opening-drinks",
+      "name": "Metel Upa + Jin / Opening Drinks & Social",
+      "exhibition": "can-we-start-again",
+      "label": "Performance",
+      "displayDate": "Wednesday 8th July — 20:00–21:30",
+      "sortOrder": 24,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Opening drinks and social with performances by Metel Upa and Jin.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-sophie-encrypted-embroidery",
+      "name": "Encrypted Embroidery",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Thursday 9th July — 13:30–15:30",
+      "sortOrder": 25,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "An encrypted embroidery workshop with Sophie.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-kat-macdonald-ringtone",
+      "name": "Ringtone Workshop",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Thursday 9th July — 16:00–18:00",
+      "sortOrder": 26,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "When did you last hear your ringtone? Artist Kat Macdonald leads participants through the history of ringtone customisation and the politics of sound in the commons. Using the Ring Tone Text Transfer Language (RTTTL), developed by Nokia in 1996 as a method of making and easily sharing ringtones between early mobile phones, participants make their own shareable ringtones. Bring your laptop!",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-daniel-synte",
+      "name": "No Notes: Making Music with SyntÉ",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Thursday 9th July — 18:00–20:00",
+      "sortOrder": 27,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "What is SyntÉ and how do you make music without notes?! We take over our machines by delving into their software guts, then install and play with SyntÉ, a live coding language for sound. Please bring a laptop if you can; headphones are helpful but not necessary. Led by Daniel.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "PerformanceEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-cwsa-algorave",
+      "name": "Algorave",
+      "exhibition": "can-we-start-again",
+      "label": "Performance",
+      "displayDate": "Thursday 9th July — 20:00–21:30",
+      "sortOrder": 28,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-cranberry-lemonade-cwsa",
+      "name": "Cranberry Lemonade — Hyperlink Workshop",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Friday 10th July — 13:00–15:30",
+      "sortOrder": 29,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "A hyperlink workshop with Cranberry Lemonade.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-cellular-atomita-music",
+      "name": "Cellular Atomita Music",
+      "exhibition": "can-we-start-again",
+      "label": "Workshop",
+      "displayDate": "Friday 10th July — 16:00–17:00",
+      "sortOrder": 30,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-melissa-li-cwsa",
+      "name": "Melissa Yunzhi Li",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Friday 10th July — 17:30–18:00",
+      "sortOrder": 31,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "From Concrete to Cyberspace. In this 30-minute performance lecture, Melissa explores how urban architecture from the 1990s and digital platforms from the 2000s meet identity formation and social needs in Georgia, while navigating through a 3D built world.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-marcus-round",
+      "name": "Marcus Round",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Friday 10th July — 18:00–18:30",
+      "sortOrder": 32,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "A performance lecture on his tarot cards, AI, and life and death.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "ScreeningEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-cwsa-film-night",
+      "name": "Film Night",
+      "exhibition": "can-we-start-again",
+      "label": "Screening",
+      "displayDate": "Friday 10th July — 19:30–21:00",
+      "sortOrder": 33,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-perma-computing-day-1",
+      "name": "Perma Computing — Day 1",
+      "exhibition": "can-we-start-again",
+      "label": "Event",
+      "displayDate": "Saturday 11th July — 11:30–13:30",
+      "sortOrder": 34,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Perma Computing using the space for their internal festival.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-phreaking-panel-talk",
+      "name": "Phreaking Panel Talk",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Saturday 11th July — 14:00–14:30",
+      "sortOrder": 35,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "A panel talk through the themes of the project, our works, and the festival.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-cwsa-open-projector",
+      "name": "Open Projector",
+      "exhibition": "can-we-start-again",
+      "label": "Event",
+      "displayDate": "Saturday 11th July — 14:30–16:30",
+      "sortOrder": 36,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-tiziana-alocci",
+      "name": "Tiziana Alocci",
+      "exhibition": "can-we-start-again",
+      "label": "Talk",
+      "displayDate": "Saturday 11th July — 17:30–19:00",
+      "sortOrder": 37,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Designing Futures Through Absence of Data. As our digital systems increasingly optimise for speed, extraction, prediction, and surveillance, what happens to everything they cannot measure? In this talk, data artist and lecturer Tiziana Alocci argues why the absence of data — or what is not counted — matters, sometimes even more than what is recorded. Drawing on projects that transform invisible data such as soundscapes, personal testimonies, found online data, and electromagnetic fields into data-driven installations, she explores how alternative forms of data collection can challenge dominant technological narratives and reveal what contemporary systems routinely overlook.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-cwsa-social-hangout",
+      "name": "Social Hangout",
+      "exhibition": "can-we-start-again",
+      "label": "Event",
+      "displayDate": "Saturday 11th July — 20:30–22:00",
+      "sortOrder": 38,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": false
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-perma-computing-day-2",
+      "name": "Perma Computing — Day 2",
+      "exhibition": "can-we-start-again",
+      "label": "Event",
+      "displayDate": "Sunday 12th July — 11:30–13:30",
+      "sortOrder": 39,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "Perma Computing using the space for their internal festival.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {

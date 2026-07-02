@@ -188,73 +188,16 @@
             </p>
           </section>
         </section>
-<!-- 
-        <section id="timetable" aria-labelledby="timetable-heading">
+<section id="timetable" aria-labelledby="timetable-heading">
           <h2 id="timetable-heading" class="section-title">Timetable</h2>
-          <div class="timetable-scroll">
-            <div class="timetable" role="table" aria-label="Festival schedule 8–12 July">
-              <div class="tt-header" role="row">
-                <div class="tt-time-col" role="columnheader" aria-label="Time"></div>
-                <div class="tt-day" role="columnheader"><span class="tt-day-abbr">Wed</span><span class="tt-day-date">8 Jul</span></div>
-                <div class="tt-day" role="columnheader"><span class="tt-day-abbr">Thu</span><span class="tt-day-date">9 Jul</span></div>
-                <div class="tt-day" role="columnheader"><span class="tt-day-abbr">Fri</span><span class="tt-day-date">10 Jul</span></div>
-                <div class="tt-day" role="columnheader"><span class="tt-day-abbr">Sat</span><span class="tt-day-date">11 Jul</span></div>
-                <div class="tt-day" role="columnheader"><span class="tt-day-abbr">Sun</span><span class="tt-day-date">12 Jul</span></div>
-              </div>
-              <div class="tt-body">
-                <div class="tt-row" role="row">
-                  <div class="tt-time" role="rowheader">10:00</div>
-                  <div class="tt-cell" role="cell"><div class="tt-block tt-block--open">Exhibition Open</div></div>
-                  <div class="tt-cell" role="cell"><div class="tt-block tt-block--open">Exhibition Open</div></div>
-                  <div class="tt-cell" role="cell"><div class="tt-block tt-block--open">Exhibition Open</div></div>
-                  <div class="tt-cell" role="cell"><div class="tt-block tt-block--open">Exhibition Open</div></div>
-                  <div class="tt-cell" role="cell"><div class="tt-block tt-block--open">Exhibition Open</div></div>
-                </div>
-                <div class="tt-row" role="row">
-                  <div class="tt-time" role="rowheader">12:00</div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                </div>
-                <div class="tt-row" role="row">
-                  <div class="tt-time" role="rowheader">14:00</div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                </div>
-                <div class="tt-row" role="row">
-                  <div class="tt-time" role="rowheader">16:00</div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                </div>
-                <div class="tt-row" role="row">
-                  <div class="tt-time" role="rowheader">18:00</div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                </div>
-                <div class="tt-row" role="row">
-                  <div class="tt-time" role="rowheader">20:00</div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                  <div class="tt-cell" role="cell"></div>
-                </div>
-              </div>
+          <div class="ttg-legend" id="ttg-legend" aria-hidden="true"></div>
+          <div class="ttg-scroll">
+            <div id="cwsa-timetable" class="ttg" aria-label="Festival schedule 8–12 July">
+              <p class="cwsa-loading">Loading timetable&hellip;</p>
             </div>
           </div>
-          <p class="tt-note">Full programme to be announced.</p>
-        </section> -->
+          <p class="tt-note">Tap an event to jump to its full details below.</p>
+        </section>
 
         <section id="events" aria-labelledby="events-heading">
           <h2 id="events-heading" class="section-title">All Events</h2>
@@ -298,6 +241,7 @@
   <script src="/scripts/sidebar.js"></script>
   <script src="/scripts/can-we-start-again.js"></script>
   <script src="/scripts/cwsa-events.js"></script>
+  <script src="/scripts/cwsa-timetable.js"></script>
   <script src="/scripts/artists.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();

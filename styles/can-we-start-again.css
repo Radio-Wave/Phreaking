@@ -411,6 +411,12 @@ hr {
   margin: 0;
   line-height: 1.2;
 }
+.cwsa-event-time {
+  font-size: clamp(11px, 1.3vw, 13px);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
 .cwsa-event-date {
   font-size: clamp(11px, 1.3vw, 13px);
   color: var(--muted);
@@ -514,6 +520,147 @@ hr {
   text-underline-offset: 0.18em;
 }
 .artist-link a:hover { color: var(--ink); }
+
+/* ---- Timetable grid (time-proportional) ---- */
+.ttg-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+}
+.ttg-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(9px, 1.1vw, 11px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ttg-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.ttg-dot--talk        { background: #6ecce0; }
+.ttg-dot--workshop    { background: #d4a055; }
+.ttg-dot--performance { background: #c480dd; }
+.ttg-dot--screening   { background: #e0866e; }
+.ttg-dot--event       { background: var(--accent); }
+
+.ttg-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ttg {
+  min-width: 640px;
+  border: 1px solid var(--rule);
+  background: rgba(22, 22, 20, 0.55);
+  font-size: 12px;
+}
+
+.ttg-head { display: grid; border-bottom: 1px solid var(--rule); }
+.ttg-corner { border-right: 1px solid var(--rule); }
+.ttg-dayhead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  border-right: 1px solid var(--rule);
+}
+.ttg-dayhead:last-child { border-right: none; }
+.ttg-dayabbr { text-transform: uppercase; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; }
+.ttg-daydate { color: var(--muted); font-size: clamp(9px, 1vw, 10px); }
+
+.ttg-allday { display: grid; border-bottom: 1px solid var(--rule); }
+.ttg-allday-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.35rem 0.4rem;
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-right: 1px solid var(--rule);
+}
+.ttg-allday-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px;
+  border-right: 1px solid var(--rule);
+}
+.ttg-allday-cell:last-child { border-right: none; }
+.ttg-chip {
+  appearance: none;
+  border: 1px solid rgba(122, 176, 32, 0.5);
+  background: rgba(122, 176, 32, 0.12);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 10px;
+  text-align: left;
+  padding: 2px 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ttg-chip:hover { background: rgba(122, 176, 32, 0.22); }
+
+.ttg-body { display: grid; }
+.ttg-gutter { position: relative; border-right: 1px solid var(--rule); }
+.ttg-hour {
+  position: absolute;
+  right: 6px;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 10px;
+}
+.ttg-col { position: relative; border-right: 1px solid var(--rule); }
+.ttg-col:last-child { border-right: none; }
+
+.ttg-block {
+  position: absolute;
+  box-sizing: border-box;
+  appearance: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 3px 5px;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid var(--rule);
+  border-left-width: 3px;
+  background: rgba(40, 40, 36, 0.92);
+  color: var(--ink);
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.ttg-block:hover { filter: brightness(1.25); transform: translateY(-1px); z-index: 5; }
+.ttg-block-time { color: var(--muted); font-size: 9px; letter-spacing: 0.03em; }
+.ttg-block-title {
+  font-size: 11px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.ttg-block--talk        { border-left-color: #6ecce0; }
+.ttg-block--talk .ttg-block-title        { color: #6ecce0; }
+.ttg-block--workshop    { border-left-color: #d4a055; }
+.ttg-block--workshop .ttg-block-title    { color: #d4a055; }
+.ttg-block--performance { border-left-color: #c480dd; }
+.ttg-block--performance .ttg-block-title { color: #c480dd; }
+.ttg-block--screening   { border-left-color: #e0866e; }
+.ttg-block--screening .ttg-block-title   { color: #e0866e; }
+.ttg-block--event       { border-left-color: var(--accent); }
+.ttg-block--event .ttg-block-title       { color: var(--accent); }
+
+/* Flash highlight when a timetable block jumps to its card */
+.cwsa-card-flash {
+  animation: cwsa-flash 1.6s ease;
+}
+@keyframes cwsa-flash {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(122, 176, 32, 0); }
+  15% { box-shadow: 0 0 0 2px var(--accent); }
+}
 
 /* ---- Footer ---- */
 .site-footer {

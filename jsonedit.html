@@ -135,6 +135,12 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .pfbtn{padding:3px 9px;border-radius:4px;background:transparent;border:1px solid var(--brd);
   color:var(--muted);font-family:var(--ui);font-size:11px;cursor:pointer;transition:.15s;}
 .pfbtn.on{background:rgba(255,255,255,.1);color:var(--ink);border-color:#555;}
+.hidden-toggle.on{background:rgba(239,68,68,.18);color:var(--err);border-color:rgba(239,68,68,.5);}
+/* hidden items surfaced in preview when "hidden view" is on */
+.prev-hidden{position:relative;opacity:.62;outline:1px dashed rgba(239,68,68,.55);outline-offset:2px;}
+.prev-hidden::after{content:"hidden";position:absolute;top:4px;right:4px;z-index:2;
+  font-size:9px;font-family:var(--mono);padding:1px 5px;border-radius:3px;
+  background:rgba(239,68,68,.9);color:#fff;letter-spacing:.03em;pointer-events:none;}
 
 .prev-frame{flex:1;overflow-y:auto;}
 .prev-frame::-webkit-scrollbar{width:7px;}
@@ -493,6 +499,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   <div class="pright">
     <div class="prev-bar">
       <span class="prev-label">Preview</span>
+      <button class="pfbtn hidden-toggle" id="hiddenToggle" onclick="toggleHidden(this)"
+        title="Switch between production view (hidden events omitted, exactly as the live site shows them) and hidden view (all events shown, hidden ones flagged)">Production view</button>
       <div class="prev-filters" id="prevFilters">
         <button class="pfbtn on" onclick="setPF('all',this)">All</button>
         <button class="pfbtn" onclick="setPF('can-we-start-again',this)">Can We Start Again?</button>
@@ -822,6 +830,7 @@ let curIdx = null;
 let exhFilter = 'all';
 let renderStyle = 'exh';
 let prevFilter = 'all';
+let showHidden = false;                     // false = production view, true = show hidden events too
 let savedListScroll = 0;
 const collapsedGroups = new Set();
 
@@ -1154,9 +1163,17 @@ function toggleGroup(key){
 }
 function setPF(v,btn){
   prevFilter=v;
-  document.querySelectorAll('.pfbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.prev-filters .pfbtn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on'); renderPreview();
 }
+function toggleHidden(btn){
+  showHidden=!showHidden;
+  btn.classList.toggle('on',showHidden);
+  btn.textContent=showHidden?'Hidden view':'Production view';
+  renderPreview();
+}
+// Marks a card as hidden in the preview (only relevant while "hidden view" is on)
+function hiddenClass(o){ return o&&o.visible===false?' prev-hidden':''; }
 
 // ── EVENT LIST ────────────────────────────────────────────
 function renderList(){
@@ -1904,7 +1921,7 @@ function renderPreview(){
   }
 
   const evs=getEvents()
-    .filter(ev=>ev.visible!==false)
+    .filter(ev=>showHidden||ev.visible!==false)
     .filter(ev=>prevFilter==='all'||ev.exhibition===prevFilter)
     .sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
   if(!evs.length){ frame.innerHTML='<div class="prev-ph">No events match this filter</div>'; return; }
@@ -1914,7 +1931,7 @@ function renderPreview(){
 
 function renderArtistsPreview(frame){
   const arts=getArtists()
-    .filter(a=>a.visible!==false)
+    .filter(a=>showHidden||a.visible!==false)
     .filter(a=>prevFilter==='all'||a.exhibition===prevFilter)
     .sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
   if(!arts.length){ frame.innerHTML='<div class="prev-ph">No artists match this filter</div>'; return; }
@@ -1926,7 +1943,7 @@ function renderArtistsPreview(frame){
     h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="agrid">`;
     g[exh].forEach(a=>{
       const tags=(a.knowsAbout||[]).map(t=>`<span class="atag">${esc(t)}</span>`).join('');
-      h+=`<article class="acard">
+      h+=`<article class="acard${hiddenClass(a)}">
         <h3>${esc(a.name||'Untitled')}</h3>
         <div class="ajob">${esc(a.jobTitle||'Artist')}</div>
         <p class="adesc">${esc(a.description||'')}</p>
@@ -1963,7 +1980,7 @@ function renderDCC(evs){
   [..._ord.filter(k=>g[k]),...Object.keys(g).filter(k=>!_ord.includes(k))].forEach(exh=>{
     h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="evgrid">`;
     g[exh].forEach(ev=>{
-      h+=`<article class="ecard">
+      h+=`<article class="ecard${hiddenClass(ev)}">
         <span class="elabel">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
         <h3>${esc(ev.name||'Untitled')}</h3>
         ${ev.displayDate?`<time class="etime">${esc(ev.displayDate)}</time>`:''}
@@ -1990,7 +2007,7 @@ function renderPE(evs){
           return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy">`;
         }).join('')
       }</div>`:'';
-      h+=`<div class="ecard">
+      h+=`<div class="ecard${hiddenClass(ev)}">
         <div class="etop">
           <div>
             <span class="etype">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
@@ -2022,7 +2039,7 @@ function renderMin(evs){
           return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy">`;
         }).join('')
       }</div>`:'';
-      h+=`<div class="ecard">
+      h+=`<div class="ecard${hiddenClass(ev)}">
         <span class="elabel">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
         <h3>${esc(ev.name||'Untitled')}</h3>
         ${ev.displayDate?`<time class="etime">${esc(ev.displayDate)}</time>`:''}
@@ -2048,7 +2065,7 @@ function renderCWSA(evs){
       const poster=src
         ?`<div class="eposter"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy"></div>`
         :`<div class="eposter">No image</div>`;
-      h+=`<div class="ecard">
+      h+=`<div class="ecard${hiddenClass(ev)}">
         <div class="ebody">
           <span class="elabel">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
           <h3>${esc(ev.name||'Untitled')}</h3>
@@ -2068,9 +2085,10 @@ function renderExhibitionsPage(){
   const exhs=getExhibitions();
   if(!exhs.length) return '<div class="prev-ph" style="color:#444">No ExhibitionEvent entries found in JSON</div>';
 
-  const hosted  = exhs.filter(e=>e.exhibitionCategory==='hosted'   && e.visible!==false).sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
-  const featured= exhs.filter(e=>e.exhibitionCategory==='featured' && e.visible!==false).sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
-  const rest    = exhs.filter(e=>!e.exhibitionCategory && e.visible!==false);
+  const vis=e=>showHidden||e.visible!==false;
+  const hosted  = exhs.filter(e=>e.exhibitionCategory==='hosted'   && vis(e)).sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+  const featured= exhs.filter(e=>e.exhibitionCategory==='featured' && vis(e)).sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
+  const rest    = exhs.filter(e=>!e.exhibitionCategory && vis(e));
 
   function renderBlock(ex){
     const href=esc(ex.url||'#');
@@ -2080,7 +2098,7 @@ function renderExhibitionsPage(){
       return `<img src="${esc(src)}" alt="${esc(img.alt||'')}" loading="lazy">`;
     }).join('');
     const linkLabel=ex.linkLabel||ex.name||'Exhibition';
-    return `<div class="exh-block">
+    return `<div class="exh-block${hiddenClass(ex)}">
       <div class="exh-title">${title}</div>
       ${imgs?`<div class="exh-grid">${imgs}</div>`:''}
       <div class="exh-desc">${esc(ex.description||'')}</div>

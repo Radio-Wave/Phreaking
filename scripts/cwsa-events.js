@@ -6,6 +6,12 @@
   var allCards = [];
   var dayGroups = [];
 
+  // "Wednesday 8th July — 19:30–20:30" -> { day: "Wednesday 8th July", time: "19:30–20:30" }
+  function splitDisplayDate(dd) {
+    var parts = (dd || '').split('—');
+    return { day: parts[0].trim(), time: (parts[1] || '').trim() };
+  }
+
   function applyFilter(filter) {
     filterBtns.forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.filter === filter);
@@ -41,6 +47,8 @@
     var card = document.createElement('article');
     card.className = 'cwsa-event-card';
     card.dataset.label = event.label || '';
+    var idSlug = (event['@id'] || '').split('#')[1];
+    if (idSlug) card.id = 'evt-' + idSlug;
 
     var img = event.images && event.images.length > 0 ? event.images[0] : null;
     var poster = img
@@ -49,6 +57,11 @@
 
     var label = event.label
       ? '<span class="cwsa-event-label">' + event.label + '</span>'
+      : '';
+
+    var timeStr = splitDisplayDate(event.displayDate).time;
+    var time = timeStr
+      ? '<p class="cwsa-event-time">' + timeStr + '</p>'
       : '';
 
     var credits = performerNames.length
@@ -70,6 +83,7 @@
       '<div class="cwsa-event-body">' +
         label +
         '<h3 class="cwsa-event-title">' + event.name + '</h3>' +
+        time +
         credits +
         desc +
         link +
@@ -107,7 +121,7 @@
       var currentDay = null;
       var currentGroup = null;
       events.forEach(function (event) {
-        var day = event.displayDate || '';
+        var day = splitDisplayDate(event.displayDate).day;
         if (day !== currentDay) {
           currentDay = day;
           var heading = document.createElement('h3');
