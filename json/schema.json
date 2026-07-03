@@ -2405,7 +2405,7 @@
       "name": "Melissa Yunzhi Li",
       "exhibition": "can-we-start-again",
       "label": "Talk",
-      "displayDate": "Friday 10th July — 17:30–18:00",
+      "displayDate": "Friday 10th July — 16:30–17:00",
       "sortOrder": 31,
       "images": [
         {
@@ -2430,9 +2430,15 @@
       "name": "Marcus Round",
       "exhibition": "can-we-start-again",
       "label": "Talk",
-      "displayDate": "Friday 10th July — 18:00–18:30",
+      "displayDate": "Friday 10th July — 17:30–18:00",
       "sortOrder": 32,
-      "images": [],
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/marcus-round/marcus-round_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/marcus-round/marcus-round_1.jpg",
+          "alt": ""
+        }
+      ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
       "description": "A performance lecture on his tarot cards, AI, and life and death.",
