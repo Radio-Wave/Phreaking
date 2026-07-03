@@ -2258,8 +2258,8 @@
       "sortOrder": 22,
       "images": [
         {
-          "src": "",
-          "full": "",
+          "src": "/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_1.jpg",
           "alt": ""
         }
       ],
@@ -2469,10 +2469,16 @@
       "label": "Screening",
       "displayDate": "Friday 10th July — 19:30–21:00",
       "sortOrder": 33,
-      "images": [],
+      "images": [
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        }
+      ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
-      "description": "Film night of Computational Arts Film, Moving Image and 4D work.",
+      "description": "Film night of Computational Arts Film, Moving Image and 4D work.\n\nFull Lineup Announced soon",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
@@ -2488,9 +2494,15 @@
       "label": "Event",
       "displayDate": "Saturday 11th July — 11:30–13:30",
       "sortOrder": 34,
-      "images": [],
-      "eventCompletedUrl": "",
-      "eventCompletedUrlLabel": "",
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/perma-computing-day-1/perma-computing-day-1_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/perma-computing-day-1/perma-computing-day-1_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "https://london.permacomputing.net/posts/index.html",
+      "eventCompletedUrlLabel": "Info on Perma Computing Here!",
       "description": "Festival of Perma Computing.",
       "startDate": "2026",
       "endDate": "2026",
@@ -2607,9 +2619,15 @@
       "label": "Event",
       "displayDate": "Sunday 12th July — 11:30–13:30",
       "sortOrder": 39,
-      "images": [],
-      "eventCompletedUrl": "",
-      "eventCompletedUrlLabel": "",
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/perma-computing-day-2/perma-computing-day-2_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/perma-computing-day-2/perma-computing-day-2_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "https://london.permacomputing.net/posts/index.html",
+      "eventCompletedUrlLabel": "Info on Perma Computing",
       "description": "Festival of Perma Computing.",
       "startDate": "2026",
       "endDate": "2026",
