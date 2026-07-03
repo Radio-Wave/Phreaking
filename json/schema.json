@@ -2514,7 +2514,13 @@
       "label": "Event",
       "displayDate": "Saturday 11th July — 14:30–16:30",
       "sortOrder": 36,
-      "images": [],
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/open-projector-vs/open-projector-vs_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/open-projector-vs/open-projector-vs_1.jpg",
+          "alt": ""
+        }
+      ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
       "description": "Phreaks Monthly Open Projector Returns!\n\nWith some retuning faces and open presentations.",
