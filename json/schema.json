@@ -2256,10 +2256,16 @@
       "label": "Talk",
       "displayDate": "Wednesday 8th July — 18:00–19:00",
       "sortOrder": 22,
-      "images": [],
+      "images": [
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        }
+      ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
-      "description": "",
+      "description": "Olivia Ema is a lecturer at University of the Arts London, a digital artist, and founder of a creative technology studio. She shares her observations on how interactive digital art and technology shape the way we perceive space, ourselves, and each other.\n\nSpeaking as a Black woman working in creative technology, the talk reflects on how identity and intuition shape the systems and worlds we build. It explores how digital systems, built using interactive software like Touchdesigner, can hold presence, respond to a room, and shift something in people almost without them noticing.\n\nDrawing on Olivia's projects, including an interactive floor installation reflecting on grief and large-scale installations across London from Outernet to Piccadilly, the session moves through both the technical process and what's actually driving it underneath.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
@@ -2344,7 +2350,13 @@
       "label": "Workshop",
       "displayDate": "Thursday 9th July — 18:00–20:00",
       "sortOrder": 27,
-      "images": [],
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_1.jpg",
+          "alt": ""
+        }
+      ],
       "eventCompletedUrl": "",
       "eventCompletedUrlLabel": "",
       "description": "What is SyntÉ and how do you make music without notes?! We take over our machines by delving into their software guts, then install and play with SyntÉ, a live coding language for sound. Please bring a laptop if you can; headphones are helpful but not necessary. Led by Daniel.",
