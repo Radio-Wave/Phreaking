@@ -144,6 +144,49 @@
           ]
         }
       ]
+    },
+    {
+      "id": 4,
+      "current": true,
+      "panels": [
+        {
+          "title": "Materials",
+          "description": "Software, generators, utilities, archives, browsers, and live systems.",
+          "links": [
+            {
+              "label": "Wikipedia",
+              "url": "http://wikipedia.org/wiki/Special:Random",
+              "note": "Random Wikipedia Article"
+            },
+            {
+              "label": "Google Images",
+              "url": "https://images.google.com/",
+              "note": "Photo index"
+            },
+            {
+              "label": "No Clip",
+              "url": "https://noclip.website/",
+              "note": "3D World Engine"
+            }
+          ]
+        },
+        {
+          "title": "Tools",
+          "description": "",
+          "links": [
+            {
+              "label": "pixlr",
+              "url": "https://pixlr.com/editor/",
+              "note": "Online Image Editor"
+            },
+            {
+              "label": "Google Sheets",
+              "url": "https://docs.google.com/spreadsheets/u/0/",
+              "note": "New spreadsheet"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
