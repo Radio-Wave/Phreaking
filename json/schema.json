@@ -2660,6 +2660,31 @@
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-algorythem",
+      "name": "AlgoRythem",
+      "exhibition": "can-we-start-again",
+      "label": "Performance",
+      "displayDate": "Thursday 9th July — 20:00–21:30",
+      "sortOrder": 41,
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Events/algorythem/algorythem_1.webp",
+          "full": "/assets/CanWeStartAgain/Events/algorythem/algorythem_1.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "",
+      "description": "An Evening with London Live Coding Group",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true
     }
   ]
 }
