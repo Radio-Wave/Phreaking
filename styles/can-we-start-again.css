@@ -113,14 +113,44 @@ body {
   line-height: 1.7;
 }
 
+.location-map-link {
+  display: block;
+  line-height: 0;
+}
 .location-map {
   display: block;
   width: 100%;
-  min-height: 180px;
+  height: auto;
   border: 1px solid var(--rule);
   border-radius: 8px;
   background: #0f0f0e;
+  transition: border-color 0.2s ease;
 }
+.location-map-link:hover .location-map,
+.location-map-link:focus-visible .location-map {
+  border-color: var(--accent);
+}
+
+.location-directions {
+  line-height: 1.7;
+}
+
+.location-w3w {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.location-w3w-label {
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.location-w3w a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.location-w3w a:hover { text-decoration: underline; }
 
 .keywords {
   list-style: none;
