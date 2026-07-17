@@ -339,10 +339,13 @@ hr {
 
 /* ---- Event cards ---- */
 .cwsa-events-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1.25rem;
   padding-bottom: var(--pad);
+}
+@media (min-width: 1000px) {
+  .cwsa-events-list { grid-template-columns: repeat(2, 1fr); }
 }
 .cwsa-loading,
 .cwsa-no-events {
@@ -351,6 +354,7 @@ hr {
   font-style: italic;
 }
 .cwsa-day-heading {
+  grid-column: 1 / -1;
   margin: 1rem 0 -0.25rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
@@ -442,6 +446,7 @@ hr {
   text-underline-offset: 0.18em;
 }
 .cwsa-event-poster {
+  position: relative;
   aspect-ratio: 3/4;
   border: 1px solid var(--rule);
   display: flex;
@@ -460,6 +465,18 @@ hr {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.cwsa-event-poster-count {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 0.12rem 0.42rem;
+  border: 1px solid var(--rule);
+  background: rgba(12, 12, 11, 0.82);
+  color: var(--ink);
+  font-size: clamp(8px, 1vw, 10px);
+  letter-spacing: 0.06em;
+  line-height: 1.4;
 }
 @media (max-width: 600px) {
   .cwsa-event-card { grid-template-columns: 1fr; }
@@ -645,12 +662,45 @@ body.cwsa-modal-open { overflow: hidden; }
   max-width: 100%;
   line-height: 0;
 }
-.cwsa-modal__poster img {
+.cwsa-modal__poster > img {
   display: block;
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 58vh;
+}
+.cwsa-modal__thumbs {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  overflow-x: auto;
+  border-top: 1px solid var(--rule);
+  line-height: 0;
+}
+.cwsa-modal__thumb {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid var(--rule);
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0.5;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+.cwsa-modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cwsa-modal__thumb:hover,
+.cwsa-modal__thumb:focus-visible { opacity: 0.8; }
+.cwsa-modal__thumb.active {
+  opacity: 1;
+  border-color: var(--type);
 }
 .cwsa-modal__poster--empty {
   display: flex;
@@ -765,7 +815,7 @@ body.cwsa-modal-open { overflow: hidden; }
     width: 100%;
     white-space: normal;
   }
-  .cwsa-modal__poster img { max-height: 56vh; }
+  .cwsa-modal__poster > img { max-height: 56vh; }
   .cwsa-modal__scroll { padding-bottom: 84px; }
   .cwsa-modal__hint { display: none; }
   .cwsa-modal__foot {
@@ -793,7 +843,8 @@ body.cwsa-modal-open { overflow: hidden; }
 
 /* ---- Placeholder sections ---- */
 #exhibition,
-#artists { padding-top: var(--pad); }
+#artists,
+#credits { padding-top: var(--pad); }
 
 /* ---- Artists ---- */
 .artists-grid {
@@ -843,6 +894,63 @@ body.cwsa-modal-open { overflow: hidden; }
   text-underline-offset: 0.18em;
 }
 .artist-link a:hover { color: var(--ink); }
+
+/* ---- Credits ---- */
+.credits-intro {
+  margin: 0 0 var(--g);
+  color: var(--muted);
+  font-size: clamp(13px, 1.6vw, 15px);
+}
+.credits-tiers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding-bottom: var(--pad);
+}
+.credits-tier {
+  border: 1px solid rgba(122, 176, 32, 0.35);
+  background: rgba(122, 176, 32, 0.07);
+  padding: 1.1rem 1.25rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.credits-tier:hover {
+  border-color: rgba(122, 176, 32, 0.5);
+  background: rgba(122, 176, 32, 0.09);
+}
+.credits-tier-label {
+  margin: 0 0 0.75rem;
+  font-size: clamp(10px, 1.3vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.credits-names {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+}
+.credits-names li {
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.credits-names a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.credits-names a:hover,
+.credits-names a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
 
 /* ---- Timetable grid (time-proportional) ---- */
 .ttg-legend {

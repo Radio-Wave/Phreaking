@@ -1523,6 +1523,12 @@ function imgRow(img,i){
           <img id="ico-jpeg-img-${i}" src="" alt="jpeg preview">
           <span class="img-convert-size" id="ico-jpeg-size-${i}">—</span>
           <div class="img-quality-row">
+            <span>W</span>
+            <input type="range" min="400" max="6000" step="50" value="2000" id="ico-width-slider-${i}"
+              oninput="updateJpegWidth(${i},this.value)">
+            <span id="ico-width-label-${i}" style="min-width:44px">2000px</span>
+          </div>
+          <div class="img-quality-row">
             <span>Q</span>
             <input type="range" min="30" max="100" value="85" id="ico-qual-slider-${i}"
               oninput="updateJpegQuality(${i},this.value)">
@@ -1625,11 +1631,11 @@ function convertToWebP(imgEl){
   return {dataURL, sizeKB};
 }
 
-function convertToJPEG(imgEl, quality){
+function convertToJPEG(imgEl, quality, maxWidth){
   const canvas=document.createElement('canvas');
   let w=imgEl.naturalWidth, h=imgEl.naturalHeight;
-  const MAX=6000;
-  if(w>MAX||h>MAX){ const s=Math.min(MAX/w,MAX/h); w=Math.round(w*s); h=Math.round(h*s); }
+  const MAX=maxWidth||2000;
+  if(w>MAX){ const s=MAX/w; w=Math.round(w*s); h=Math.round(h*s); }
   canvas.width=w; canvas.height=h;
   canvas.getContext('2d').drawImage(imgEl,0,0,w,h);
   const dataURL=canvas.toDataURL('image/jpeg',quality);
@@ -1639,10 +1645,11 @@ function convertToJPEG(imgEl, quality){
 function convertImgBoth(imgIdx, imgEl){
   const key=imgConvKey(imgIdx);
   const prevQ=imgConvState[key]?.quality||85;
+  const prevW=imgConvState[key]?.maxWidth||Math.min(imgEl.naturalWidth,2000);
   const webp=convertToWebP(imgEl);
-  const jpeg=convertToJPEG(imgEl,prevQ/100);
+  const jpeg=convertToJPEG(imgEl,prevQ/100,prevW);
   imgConvState[key]={srcImg:imgEl, webpDataURL:webp.dataURL, webpSize:webp.sizeKB,
-    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:prevQ};
+    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:prevQ, maxWidth:prevW};
 
   // Replace any old blob URLs for this slot, then create fresh ones
   const old=imgPreviewCache[key];
@@ -1675,6 +1682,9 @@ function showConvUI(imgIdx){
   if(el('ico-jpeg-img-'+imgIdx))    el('ico-jpeg-img-'+imgIdx).src=s.jpegDataURL;
   if(el('ico-qual-slider-'+imgIdx)) el('ico-qual-slider-'+imgIdx).value=s.quality;
   if(el('ico-qual-label-'+imgIdx))  el('ico-qual-label-'+imgIdx).textContent=s.quality+'%';
+  const wSlider=el('ico-width-slider-'+imgIdx);
+  if(wSlider){ wSlider.max=Math.max(s.srcImg.naturalWidth,400); wSlider.value=s.maxWidth; }
+  if(el('ico-width-label-'+imgIdx)) el('ico-width-label-'+imgIdx).textContent=s.maxWidth+'px';
 
   // Populate folder/filename info using exhibition-aware paths
   if(ev){
@@ -1704,7 +1714,7 @@ function updateJpegQuality(imgIdx, val){
   const key=imgConvKey(imgIdx);
   const s=imgConvState[key]; if(!s) return;
   s.quality=parseInt(val);
-  const res=convertToJPEG(s.srcImg,s.quality/100);
+  const res=convertToJPEG(s.srcImg,s.quality/100,s.maxWidth);
   s.jpegDataURL=res.dataURL; s.jpegSize=res.sizeKB;
   const el=id=>document.getElementById(id);
   if(el('ico-jpeg-img-'+imgIdx)) el('ico-jpeg-img-'+imgIdx).src=res.dataURL;
@@ -1716,6 +1726,30 @@ function updateJpegQuality(imgIdx, val){
   if(el('ico-qual-label-'+imgIdx)) el('ico-qual-label-'+imgIdx).textContent=val+'%';
 
   // Refresh jpeg blob URL so the live preview reflects new quality
+  const pkey=imgConvKey(imgIdx);
+  if(imgPreviewCache[pkey]){
+    URL.revokeObjectURL(imgPreviewCache[pkey].jpeg);
+    imgPreviewCache[pkey].jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL));
+    renderPreview();
+  }
+}
+
+function updateJpegWidth(imgIdx, val){
+  const key=imgConvKey(imgIdx);
+  const s=imgConvState[key]; if(!s) return;
+  s.maxWidth=parseInt(val);
+  const res=convertToJPEG(s.srcImg,s.quality/100,s.maxWidth);
+  s.jpegDataURL=res.dataURL; s.jpegSize=res.sizeKB;
+  const el=id=>document.getElementById(id);
+  if(el('ico-jpeg-img-'+imgIdx)) el('ico-jpeg-img-'+imgIdx).src=res.dataURL;
+  const jSize=el('ico-jpeg-size-'+imgIdx);
+  if(jSize){
+    jSize.textContent=res.sizeKB+' KB'+(res.sizeKB>1024?' ⚠ >1 MB':'');
+    jSize.className='img-convert-size'+(res.sizeKB>1024?' warn':'');
+  }
+  if(el('ico-width-label-'+imgIdx)) el('ico-width-label-'+imgIdx).textContent=val+'px';
+
+  // Refresh jpeg blob URL so the live preview reflects new width
   const pkey=imgConvKey(imgIdx);
   if(imgPreviewCache[pkey]){
     URL.revokeObjectURL(imgPreviewCache[pkey].jpeg);
