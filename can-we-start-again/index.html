@@ -176,6 +176,7 @@
           <a href="#events">All events</a><span class="jump-sep">,</span>
           <a href="#exhibition">Exhibition</a><span class="jump-sep">,</span>
           <a href="#artists">Artists</a><span class="jump-sep">,</span>
+          <span data-gallery-reveal="can-we-start-again" style="display:none"><a href="#gallery">Gallery</a><span class="jump-sep">,</span></span>
           <a href="#credits">Credits</a>
         </nav>
 
@@ -240,6 +241,15 @@
           <p>More artists announced soon.</p>
         </section>
 
+        <section id="gallery" aria-labelledby="gallery-heading" data-gallery-section style="display:none">
+          <h2 id="gallery-heading" class="section-title">Gallery</h2>
+          <section class="pc-gallery" aria-label="Can We Start Again gallery">
+            <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+                 The whole section stays hidden until the gallery has images. -->
+            <div class="pc-grid" id="cwsa-gallery-grid" data-gallery-id="can-we-start-again" data-gallery-hide-empty></div>
+          </section>
+        </section>
+
         <section id="credits" aria-labelledby="credits-heading">
           <h2 id="credits-heading" class="section-title">Credits</h2>
           <p class="credits-intro"><em>Can We Start Again?</em> brought to you by:</p>
@@ -291,6 +301,8 @@
   </main>
 
   <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/site-gallery.js"></script>
+  <script src="/scripts/gallery.js"></script>
   <script src="/scripts/can-we-start-again.js"></script>
   <script src="/scripts/cwsa-events.js"></script>
   <script src="/scripts/cwsa-timetable.js"></script>

@@ -1,0 +1,615 @@
+{
+  "galleries": [
+    {
+      "id": "mixed-signals",
+      "title": "Mixed Signals — Previous Sessions",
+      "short": "Mixed Signals",
+      "page": "/mixed-signals/",
+      "thumbDir": "assets/MixedSignals",
+      "fullDir": "assets/MixedSignals",
+      "filePrefix": "MixedSignals",
+      "images": [
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-1.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-1.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-2.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-2.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-3.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-3.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-4.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-4.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-5.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-5.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-6.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-6.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-7.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-7.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-8.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-8.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals1-9.webp",
+          "full": "/assets/MixedSignals/MixedSignals1-9.jpeg",
+          "alt": "Mixed Signals event",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "open-projector",
+      "title": "Open Projector — Gallery",
+      "short": "Open Projector",
+      "page": "/open-projector/",
+      "thumbDir": "assets/OpenProj",
+      "fullDir": "assets/OpenProj",
+      "filePrefix": "OpenProjector",
+      "images": [
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-1.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-1.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-2.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-2.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-3.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-3.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-4.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-4.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-5.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-5.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-6.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-6.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-7.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-7.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector_3-8.webp",
+          "full": "/assets/OpenProj/OpenProjector_3-8.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-7.webp",
+          "full": "/assets/OpenProj/OpenProjector-7.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-1.webp",
+          "full": "/assets/OpenProj/OpenProjector-1.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-2.webp",
+          "full": "/assets/OpenProj/OpenProjector-2.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-3.webp",
+          "full": "/assets/OpenProj/OpenProjector-3.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-4.webp",
+          "full": "/assets/OpenProj/OpenProjector-4.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-5.webp",
+          "full": "/assets/OpenProj/OpenProjector-5.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-6.webp",
+          "full": "/assets/OpenProj/OpenProjector-6.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-1.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-1.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-2.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-2.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-3.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-3.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-4.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-4.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-5.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-5.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/Nikos-Open-Proj-6.webp",
+          "full": "/assets/OpenProj/Nikos-Open-Proj-6.jpg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "bitrot-show",
+      "title": "BitRot — Exhibition",
+      "short": "BitRot Show",
+      "page": "/BitRot/",
+      "thumbDir": "assets/BitRotShowImgs/Thumbnails",
+      "fullDir": "assets/BitRotShowImgs",
+      "filePrefix": "BitRotShow",
+      "images": [
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/Room3Horizontal_1.webp",
+          "full": "/assets/BitRotShowImgs/Room3Horizontal_1.JPG",
+          "alt": "Wide show of gallery with art installation",
+          "caption": "BitRot Room 3"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/Room2.webp",
+          "full": "/assets/BitRotShowImgs/Room2.JPG",
+          "alt": "Wide shot of a gallery with art installations",
+          "caption": "BitRot Room 2"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/Room1Vertical.webp",
+          "full": "/assets/BitRotShowImgs/Room1Vertical.JPG",
+          "alt": "Gallery Wide Shot",
+          "caption": "BitRot Room 1"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/Room3Vertical.webp",
+          "full": "/assets/BitRotShowImgs/Room3Vertical.JPG",
+          "alt": "Gallery Wide Shot",
+          "caption": "BitRot Room 3"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistZepu.webp",
+          "full": "/assets/BitRotShowImgs/ArtistZepu.jpg",
+          "alt": "sculpture with skylight behind",
+          "caption": "A rather favourable I - Zepu Li"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistYunzhi.webp",
+          "full": "/assets/BitRotShowImgs/ArtistYunzhi.JPG",
+          "alt": "Hear how you look, see how you sound",
+          "caption": "Hear how you look, see how you sound — Yunzhi/Melissa Li"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistXach.webp",
+          "full": "/assets/BitRotShowImgs/ArtistXach.JPG",
+          "alt": "The place where its buried",
+          "caption": "The place where its buried — Xach Hill"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistNikos.webp",
+          "full": "/assets/BitRotShowImgs/ArtistNikos.JPG",
+          "alt": "Monitors stacked on-top cinder blocks",
+          "caption": "Chorus Inútil - Nikos Antonio Kourous Vázquez"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLyra.webp",
+          "full": "/assets/BitRotShowImgs/ArtistLyra.JPG",
+          "alt": "Gone Fishing",
+          "caption": "Gone Fishing — Lyra Robinson"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistJackJessePaula.webp",
+          "full": "/assets/BitRotShowImgs/ArtistJackJessePaula.JPG",
+          "alt": "Caught on CCTV",
+          "caption": "Caught on CCTV — Jack Jessé and Paula Molina"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLouise.webp",
+          "full": "/assets/BitRotShowImgs/ArtistLouise.jpg",
+          "alt": "i tried to remember but….",
+          "caption": "i tried to remember but…. — Louise Wan"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistJin.webp",
+          "full": "/assets/BitRotShowImgs/ArtistJin.jpg",
+          "alt": "Subtle Crisis",
+          "caption": "Subtle Crisis — Jin Xie"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistPhonex.webp",
+          "full": "/assets/BitRotShowImgs/ArtistPhonex.jpg",
+          "alt": "fyp",
+          "caption": "fyp — Phoenix Isla Kea"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistMetalUPA.webp",
+          "full": "/assets/BitRotShowImgs/ArtistMetalUPA.jpg",
+          "alt": "Internet Checkpoints",
+          "caption": "Internet Checkpoints — METAL_UPA"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLucyTypeface.webp",
+          "full": "/assets/BitRotShowImgs/ArtistLucyTypeface.jpeg",
+          "alt": "TYPEFACE",
+          "caption": "TYPEFACE — Lucy Ellis"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/Artist.webp",
+          "full": "/assets/BitRotShowImgs/ArtistCharlotte.jpg",
+          "alt": "Me, Her, and the Computer",
+          "caption": "Me, Her, and the Computer — Charlotte Young and Phoebe Rayner"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistMaisy.webp",
+          "full": "/assets/BitRotShowImgs/ArtistMaisy.JPG",
+          "alt": "I Missed the Bus Because it Wasn't; Real",
+          "caption": "I Missed the Bus Because it Wasn't Real — Maisy Charlton"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistRizq.webp",
+          "full": "/assets/BitRotShowImgs/ArtistRizq.jpg",
+          "alt": "memes are the only true contemporary art",
+          "caption": "memes are the only true contemporary art — Rizq Yazed"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistEryn.webp",
+          "full": "/assets/BitRotShowImgs/ArtistEryn.jpg",
+          "alt": "The screens I had weren't enough; I had to go out and get three more",
+          "caption": "The screens I had weren't enough; I had to go out and get three more — Eryn English-Polch"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLucyApple.webp",
+          "full": "/assets/BitRotShowImgs/ArtistLucyApple.jpg",
+          "alt": "Edu2000",
+          "caption": "Edu2000 — Lucy Ellis"
+        }
+      ]
+    },
+    {
+      "id": "bitrot-events",
+      "title": "BitRot — Workshops & Talks",
+      "short": "BitRot Events",
+      "page": "/BitRot/",
+      "thumbDir": "assets/BitRotEventImgs/thumbs",
+      "fullDir": "assets/BitRotEventImgs",
+      "filePrefix": "BitRotEvent",
+      "images": [
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/DianJoy1.webp",
+          "full": "/assets/BitRotEventImgs/DianJoy1.JPG",
+          "alt": "Audience watching performance lecture by Dian Joy under purple lighting",
+          "caption": "Long live the new flesh (or whatever) — Dian Joy"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/DianJoy2.webp",
+          "full": "/assets/BitRotEventImgs/DianJoy2.JPG",
+          "alt": "Crowd gathered in front of projection during Dian Joy’s lecture",
+          "caption": "Long live the new flesh (or whatever) — Dian Joy"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/DianJoy3.webp",
+          "full": "/assets/BitRotEventImgs/DianJoy3.JPG",
+          "alt": "Stage setup with glowing lights during Dian Joy performance lecture",
+          "caption": "Long live the new flesh (or whatever) — Dian Joy"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/DianJoy4.webp",
+          "full": "/assets/BitRotEventImgs/DianJoy4.jpg",
+          "alt": "Performer on stage at Long live the new flesh event",
+          "caption": "Long live the new flesh (or whatever) — Dian Joy"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/DianJoy5.webp",
+          "full": "/assets/BitRotEventImgs/DianJoy5.jpg",
+          "alt": "Purple-lit room with audience and projection screen at Dian Joy’s talk",
+          "caption": "Long live the new flesh (or whatever) — Dian Joy"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Erin-Anthony1.webp",
+          "full": "/assets/BitRotEventImgs/Erin-Anthony1.jpg",
+          "alt": "Speaker presenting text on screen at Copeland Gallery",
+          "caption": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina — Erin Robinson & Anthony Frisby"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Erin-Anthony2.webp",
+          "full": "/assets/BitRotEventImgs/Erin-Anthony2.jpg",
+          "alt": "Projected visuals during Artificial Intimacies talk",
+          "caption": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina — Erin Robinson & Anthony Frisby"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Erin-Anthony3.webp",
+          "full": "/assets/BitRotEventImgs/Erin-Anthony3.jpg",
+          "alt": "Audience watching Artificial Intimacies lecture",
+          "caption": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina — Erin Robinson & Anthony Frisby"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Erin-Anthony4.webp",
+          "full": "/assets/BitRotEventImgs/Erin-Anthony4.jpg",
+          "alt": "Close-up of speaker presenting at Artificial Intimacies event",
+          "caption": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina — Erin Robinson & Anthony Frisby"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Erin-Anthony5.webp",
+          "full": "/assets/BitRotEventImgs/Erin-Anthony5.jpg",
+          "alt": "Audience and speaker during Artificial Intimacies talk",
+          "caption": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina — Erin Robinson & Anthony Frisby"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch1.webp",
+          "full": "/assets/BitRotEventImgs/Glitch1.JPG",
+          "alt": "Group gathered around laptops during glitch workshop",
+          "caption": "oops, you found a glitch — Public HTML Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch2.webp",
+          "full": "/assets/BitRotEventImgs/Glitch2.JPG",
+          "alt": "Participants coding together at glitch workshop",
+          "caption": "oops, you found a glitch — Public HTML Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch3.webp",
+          "full": "/assets/BitRotEventImgs/Glitch3.JPG",
+          "alt": "Workshop table with laptops open during glitch session",
+          "caption": "oops, you found a glitch — Public HTML Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch4.webp",
+          "full": "/assets/BitRotEventImgs/Glitch4.JPG",
+          "alt": "Participants looking at HTML code during glitch workshop",
+          "caption": "oops, you found a glitch — Public HTML Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch5.webp",
+          "full": "/assets/BitRotEventImgs/Glitch5.JPG",
+          "alt": "Facilitator showing screen at glitch workshop",
+          "caption": "oops, you found a glitch — Public HTML Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning1.webp",
+          "full": "/assets/BitRotEventImgs/Scanning1.JPG",
+          "alt": "Group discussion at 3D scanning workshop",
+          "caption": "Object Oriented Storytelling: From Field to Virtual — 3D Scanning & Worldbuilding Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning2.webp",
+          "full": "/assets/BitRotEventImgs/Scanning2.jpg",
+          "alt": "Participants experimenting with scanning tools",
+          "caption": "Object Oriented Storytelling: From Field to Virtual — 3D Scanning & Worldbuilding Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning3.webp",
+          "full": "/assets/BitRotEventImgs/Scanning3.jpg",
+          "alt": "Installation view with 3D scan visuals on wall",
+          "caption": "Object Oriented Storytelling: From Field to Virtual — 3D Scanning & Worldbuilding Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning4.webp",
+          "full": "/assets/BitRotEventImgs/Scanning4.jpg",
+          "alt": "Workshop participants learning scanning methods",
+          "caption": "Object Oriented Storytelling: From Field to Virtual — 3D Scanning & Worldbuilding Workshop"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning5.webp",
+          "full": "/assets/BitRotEventImgs/Scanning5.JPEG",
+          "alt": "3D scanning demonstration with projection",
+          "caption": "Object Oriented Storytelling: From Field to Virtual — 3D Scanning & Worldbuilding Workshop"
+        }
+      ]
+    },
+    {
+      "id": "dccep",
+      "title": "Does Cloud Compute — Gallery",
+      "short": "DCCeP",
+      "page": "/does-cloud-compute-ever-precipitate/",
+      "thumbDir": "assets/DCCeP/Artwork",
+      "fullDir": "assets/DCCeP/Artwork",
+      "filePrefix": "DDCeP",
+      "images": [
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-01.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-01.jpg",
+          "alt": "Wide Show of exhibtion",
+          "caption": "Showing at Annex by The Koppel Project"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-02.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-02.jpg",
+          "alt": "Wide shot of whole exhibtion",
+          "caption": "Showing at Annex by The Koppel Project"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-03.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-03.jpg",
+          "alt": "Wide shot of whole exhibtion",
+          "caption": "Showing at Annex by The Koppel Project"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-04.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-04.jpg",
+          "alt": "LED Panels and steel, from above",
+          "caption": "I Live There, With you - Xach Hill"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-05.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-05.jpg",
+          "alt": "LED Panels and steel",
+          "caption": "I Live There, With you - Xach Hill"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-06.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-06.jpg",
+          "alt": "Potatos nailed to a wall with a screen of a Potato",
+          "caption": "I Potato, Self Portrait - Nikos Antonio Kourous Vázquez"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-07.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-07.jpg",
+          "alt": "Potatos nailed to a wall with a screen of a Potato",
+          "caption": "I Potato, Self Portrait - Nikos Antonio Kourous Vázquez"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-08.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-08.jpg",
+          "alt": "A screen held with metal bars, showing erotic material",
+          "caption": "Joy - Lyra Robbinson"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-09.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-09.jpg",
+          "alt": "A screen held with metal bars, showing erotic material",
+          "caption": "Joy - Lyra Robbinson"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-18.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-18.jpg",
+          "alt": "A screen held with metal bars, showing a still life scene of fruit in the centre",
+          "caption": "Master in Training - Yunzhi / Melissa Li"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-19.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-19.jpg",
+          "alt": "A screen held with metal bars, showing a still life scene of fruit in the centre",
+          "caption": "Master in Training - Yunzhi / Melissa Li"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-10.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-10.jpg",
+          "alt": "An iPad on Facetime, blending into the wall",
+          "caption": "Window - Robin Leverton"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-11.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-11.jpg",
+          "alt": "Bottles on a wall, lit up",
+          "caption": "Bottled Up - Jack Jessé"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-12.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-12.jpg",
+          "alt": "Bottles on a wall, lit up",
+          "caption": "Bottled Up - Jack Jessé"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-13.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-13.jpg",
+          "alt": "An iPad on Facetime, blending into the wall",
+          "caption": "Window - Robin Leverton"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-14.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-14.jpg",
+          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "caption": "Recursive Wait - David Lazar"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-15.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-15.jpg",
+          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "caption": "Recursive Wait - David Lazar"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-16.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-16.jpg",
+          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "caption": "Angel Duster - Dylan Morris"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-21.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-21.jpg",
+          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "caption": "Angel Duster - Dylan Morris"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-17.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-17.jpg",
+          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "caption": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-20.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-20.jpg",
+          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "caption": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst"
+        }
+      ]
+    },
+    {
+      "id": "can-we-start-again",
+      "title": "Can We Start Again? — Gallery",
+      "short": "CWSA",
+      "page": "/can-we-start-again/",
+      "thumbDir": "assets/CanWeStartAgain/Gallery",
+      "fullDir": "assets/CanWeStartAgain/Gallery",
+      "filePrefix": "CWSA",
+      "images": []
+    }
+  ]
+}

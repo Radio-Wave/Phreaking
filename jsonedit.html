@@ -423,6 +423,38 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .sig-panel-block>input{background:var(--surf);border:1px solid var(--brd);color:var(--ink);
   padding:6px 8px;border-radius:5px;font-family:var(--ui);font-size:12px;width:100%;}
 .sig-panel-block>input:focus{outline:none;border-color:var(--accent);}
+.arch-summary-row{display:flex;justify-content:space-between;gap:10px;padding:5px 8px;border:1px solid var(--brd);border-radius:5px;background:var(--bg);}
+
+/* ── GALLERIES LIST ── */
+.gal-count{font-weight:400;font-size:9px;background:rgba(255,255,255,.08);border-radius:8px;padding:1px 6px;letter-spacing:0;}
+.gal-item{display:flex;align-items:center;gap:10px;padding:6px;margin:2px 10px;border:1px solid var(--brd);border-radius:6px;
+  cursor:pointer;background:var(--bg);border-left:2px solid transparent;transition:.1s;}
+.gal-item:hover{background:rgba(255,255,255,.04);}
+.gal-item.active{background:rgba(99,102,241,.12);border-left-color:var(--accent);}
+.gal-thumb{width:46px;height:46px;flex-shrink:0;border-radius:4px;object-fit:cover;background:#111;border:1px solid var(--brd);}
+.gal-thumb-ph{width:46px;height:46px;flex-shrink:0;border-radius:4px;background:#111;border:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:16px;}
+.gal-item-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.gal-item-alt{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.gal-item-alt.muted{color:var(--muted);font-style:italic;}
+.gal-item-path{font-size:10px;font-family:var(--mono);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.gal-item-tag{font-size:9px;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--muted);
+  font-family:var(--mono);white-space:nowrap;flex-shrink:0;}
+.gal-reorder{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+.gal-reorder button{background:transparent;border:1px solid var(--brd);color:var(--muted);border-radius:3px;
+  width:20px;height:18px;font-size:9px;line-height:1;cursor:pointer;padding:0;}
+.gal-reorder button:hover{color:var(--ink);border-color:#444;}
+.gal-form-thumb{width:100%;max-height:180px;object-fit:contain;border-radius:5px;border:1px solid var(--brd);background:#111;}
+
+/* ── GALLERY PREVIEW ── */
+.r-gallery{padding:2rem;background:#0b0b0c;min-height:100%;font-family:'IBM Plex Mono',monospace;color:#e8e8ec;}
+.r-gallery .sec-head{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:#b0b0bb;
+  margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #2a2a2d;}
+.r-gallery .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:2rem;}
+.r-gallery .gal-grid figure{margin:0;position:relative;}
+.r-gallery .gal-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:3px;}
+.r-gallery .gal-grid figcaption{font-size:.62rem;color:#9a9aa5;padding:.25rem 0 .4rem;line-height:1.4;}
+.r-gallery .gal-empty{color:#666;font-size:.85rem;padding:1rem 0 2rem;}
 </style>
 </head>
 <body>
@@ -434,6 +466,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <button class="mtab on" data-mode="events" onclick="setMode('events')">Events</button>
     <button class="mtab" data-mode="artists" onclick="setMode('artists')">Artists</button>
     <button class="mtab" data-mode="signals" onclick="setMode('signals')">Signals</button>
+    <button class="mtab" data-mode="gallery" onclick="setMode('gallery')">Galleries</button>
   </div>
   <div class="sep"></div>
   <button class="btn btn-ghost" onclick="loadFromSite()">↺ Load from Site</button>
@@ -457,6 +490,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <option value="cwsa">Render: Can We Start Again?</option>
   </select>
   <div class="tb-right">
+    <button class="btn btn-ghost btn-sm" onclick="openArchiveModal()" title="Sync the Open Projector archive from the Google Sheet">🗂 OP Archive</button>
+    <div class="sep"></div>
     <div class="udot" id="udot" title="Unsaved changes"></div>
     <button class="btn btn-ghost btn-sm" onclick="openGhModal()" title="GitHub settings">⚙ GitHub</button>
     <button class="btn btn-primary" id="ghPushBtn" onclick="pushToGitHub()">↑ Push to GitHub<span id="ghPushBadge" style="display:none;background:rgba(255,255,255,.22);border-radius:3px;padding:1px 6px;font-size:11px;margin-left:6px;vertical-align:middle;"></span></button>
@@ -790,6 +825,16 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
           <input type="text" id="ghSignalsPath" placeholder="json/signals.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
         </div>
       </div>
+      <div class="frow">
+        <div class="field">
+          <label>Galleries file path</label>
+          <input type="text" id="ghGalleryPath" placeholder="json/galleries.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+        <div class="field">
+          <label>Open Projector archive file path</label>
+          <input type="text" id="ghArchivePath" placeholder="json/open-projector-archive.json" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+        </div>
+      </div>
       <div class="field">
         <div class="gh-label-row">
           <label>Personal Access Token *</label>
@@ -820,11 +865,37 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   </div>
 </div>
 
+<!-- Open Projector Archive Sync Modal -->
+<div class="modal-ov" id="archiveModal">
+  <div class="modal" style="width:640px;max-width:92vw;">
+    <h3>Open Projector Archive Sync</h3>
+    <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:6px;">
+      Pulls the current rows from the
+      <a href="https://docs.google.com/spreadsheets/d/1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk/edit?gid=0#gid=0" target="_blank" rel="noopener">Open Projector Google Sheet</a>,
+      parses them into <code style="font-family:var(--mono)">json/open-projector-archive.json</code>'s shape, and lets you review before pushing. The sheet is the source of truth — edit content there, then sync here. Nothing is written until you click Push.
+    </p>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" id="archFetchBtn" onclick="fetchOpenProjectorSheet()">🔄 Fetch from Google Sheet</button>
+      <span id="archStatus" style="font-size:12px;color:var(--muted);">Not fetched yet.</span>
+    </div>
+    <div id="archSummaryList" style="margin-top:14px;max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;"></div>
+    <details style="margin-top:10px;">
+      <summary style="cursor:pointer;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;">Raw JSON preview</summary>
+      <textarea id="archJsonPreview" readonly style="width:100%;height:220px;margin-top:8px;background:var(--inp);border:1px solid var(--brd);color:var(--ink);font-family:var(--mono);font-size:11px;padding:9px;border-radius:5px;resize:vertical;"></textarea>
+    </details>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeArchiveModal()">Close</button>
+      <button class="btn btn-ok" id="archDownloadBtn" disabled onclick="downloadArchiveJSON()">↓ Download JSON</button>
+      <button class="btn btn-primary" id="archPushBtn" disabled onclick="pushArchiveToGitHub()">↑ Push to GitHub</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── STATE ──────────────────────────────────────────────────
-let mode = 'events';                       // 'events' | 'artists' | 'signals'
-const datasets = { events:null, artists:null, signals:null };
-const unsaved  = { events:false, artists:false, signals:false };
+let mode = 'events';                       // 'events' | 'artists' | 'signals' | 'gallery'
+const datasets = { events:null, artists:null, signals:null, gallery:null };
+const unsaved  = { events:false, artists:false, signals:false, gallery:false };
 let data = null;                           // mirror of datasets[mode]
 let curIdx = null;
 let exhFilter = 'all';
@@ -907,6 +978,7 @@ function getArtists(){ return (data&&data['@graph'])?data['@graph'].filter(isArt
 function getSignalsSessions(){ return (data&&Array.isArray(data.sessions))?data.sessions:[]; }
 function countLabel(){
   if(mode==='signals') return getSignalsSessions().length+' sessions';
+  if(mode==='gallery') return galFlat().length+' images in '+getGalleries().length+' galleries';
   return mode==='artists' ? getArtists().length+' artists' : getEvents().length+' events';
 }
 
@@ -919,10 +991,11 @@ function setMode(m){
   document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('on', b.dataset.mode===m));
   // Events-only render selector
   const rs=document.getElementById('renderSel'); if(rs) rs.style.display = m==='events'?'':'none';
-  // Exhibition select is irrelevant in signals mode
-  const tb=document.getElementById('tbExhSel'); if(tb) tb.style.display = m==='signals'?'none':'';
+  // Exhibition select is irrelevant in signals / gallery mode
+  const tb=document.getElementById('tbExhSel'); if(tb) tb.style.display = (m==='signals'||m==='gallery')?'none':'';
   // List header + reset filters
-  document.getElementById('listHeadTitle').textContent = m==='signals'?'Sessions':(m==='artists'?'Artists':'Events');
+  document.getElementById('listHeadTitle').textContent =
+    m==='signals'?'Sessions':(m==='gallery'?'Galleries':(m==='artists'?'Artists':'Events'));
   exhFilter='all'; prevFilter='all';
   if(tb){ tb.value='all'; tb.dataset.prev='all'; }
   updateUnsavedDot();
@@ -932,12 +1005,12 @@ function setMode(m){
     extractFromData();
     renderList(); renderPreview();
     refreshExhDropdowns(); refreshPrevFilters();
-    setStatus('Editing '+(m==='signals'?'sessions':(m==='artists'?'artists':'events')), countLabel());
+    setStatus('Editing '+(m==='signals'?'sessions':(m==='gallery'?'gallery':(m==='artists'?'artists':'events'))), countLabel());
   }
 }
 
 // "+ New" button dispatcher
-function newItem(){ mode==='signals' ? newSignalsSession() : mode==='artists' ? showAddArtistModal() : showAddModal(); }
+function newItem(){ mode==='signals' ? newSignalsSession() : mode==='gallery' ? newGalleryImage() : mode==='artists' ? showAddArtistModal() : showAddModal(); }
 
 // ── OPTION BUILDERS ───────────────────────────────────────
 function exhOptions(cur){
@@ -1074,6 +1147,12 @@ function refreshExhDropdowns(newKey){
 }
 function refreshPrevFilters(){
   const pf=document.getElementById('prevFilters'); if(!pf) return;
+  if(mode==='gallery'){
+    const gals=getGalleries();
+    pf.innerHTML=`<button class="pfbtn${prevFilter==='all'?' on':''}" onclick="setGalTab('all')">All</button>`+
+      gals.map(g=>`<button class="pfbtn${prevFilter===g.id?' on':''}" onclick="setGalTab('${esc(g.id)}')">${esc(g.short||g.id)}</button>`).join('');
+    return;
+  }
   if(mode==='signals'){
     const sessions=getSignalsSessions().slice().sort((a,b)=>(a.id||0)-(b.id||0));
     let activeId;
@@ -1089,7 +1168,7 @@ function refreshPrevFilters(){
 
 // ── EXTRACT KNOWN VALUES FROM JSON ────────────────────────
 function extractFromData(){
-  if(!data||mode==='signals') return;
+  if(!data||mode==='signals'||mode==='gallery') return;
   const items = mode==='artists' ? getArtists() : getEvents();
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
@@ -1112,8 +1191,8 @@ function extractFromData(){
 // ── LOAD / SAVE ────────────────────────────────────────────
 async function loadFromSite(){
   document.getElementById('loading').classList.add('on');
-  const url = mode==='artists' ? '/json/artists.json' : mode==='signals' ? '/json/signals.json' : '/json/schema.json';
-  const okMsg = mode==='artists' ? 'Loaded artists from site' : mode==='signals' ? 'Loaded signals from site' : 'Loaded from site';
+  const url = mode==='artists' ? '/json/artists.json' : mode==='signals' ? '/json/signals.json' : mode==='gallery' ? '/json/galleries.json' : '/json/schema.json';
+  const okMsg = mode==='artists' ? 'Loaded artists from site' : mode==='signals' ? 'Loaded signals from site' : mode==='gallery' ? 'Loaded galleries from site' : 'Loaded from site';
   try{
     const r=await fetch(url);
     if(!r.ok) throw new Error('HTTP '+r.status);
@@ -1138,7 +1217,7 @@ function onLoaded(msg){
 }
 function downloadJSON(){
   if(!data){ toast('Nothing to download'); return; }
-  const fname = mode==='artists' ? 'artists.json' : mode==='signals' ? 'signals.json' : 'schema.json';
+  const fname = mode==='artists' ? 'artists.json' : mode==='signals' ? 'signals.json' : mode==='gallery' ? 'galleries.json' : 'schema.json';
   const s=JSON.stringify(data,null,2);
   const a=Object.assign(document.createElement('a'),{
     href:URL.createObjectURL(new Blob([s],{type:'application/json'})), download:fname});
@@ -1180,6 +1259,7 @@ function renderList(){
   const el=document.getElementById('elist');
   if(!data){ el.innerHTML='<div class="empty"><div class="empty-ico">⬡</div><h3>No JSON loaded</h3><p>Load from site or upload a file.</p></div>'; return; }
   if(mode==='signals'){ renderSignalsList(el); return; }
+  if(mode==='gallery'){ renderGalleryList(el); return; }
   if(mode==='artists'){ renderArtistList(el); return; }
 
   let html='';
@@ -1306,6 +1386,7 @@ function closeEdit(){
 
 function buildForm(){
   if(mode==='signals'){ buildSignalsForm(data.sessions[curIdx]); return; }
+  if(mode==='gallery'){ buildGalleryForm(); return; }
   const ev=data['@graph'][curIdx]; if(!ev) return;
   if(mode==='artists'){ buildArtistForm(ev); return; }
   if(isExhibition(ev)){ buildExhibitionForm(ev); return; }
@@ -1822,6 +1903,7 @@ function liveUpExhibition(ex){
 
 function liveUp(){
   if(mode==='signals'){ liveUpSignals(); return; }
+  if(mode==='gallery'){ liveUpGallery(); return; }
   const ev=data['@graph'][curIdx]; if(!ev) return;
   if(mode==='artists'){ liveUpArtist(ev); return; }
   if(isExhibition(ev)){ liveUpExhibition(ev); return; }
@@ -1852,6 +1934,7 @@ function deleteEvent(){
     closeEdit(); renderPreview(); refreshPrevFilters(); toast('Session deleted');
     return;
   }
+  if(mode==='gallery'){ deleteGalleryImage(); return; }
   if(!confirm(`Delete "${data['@graph'][curIdx]?.name}"?`)) return;
   data['@graph'].splice(curIdx,1); markUnsaved();
   closeEdit(); renderPreview(); toast((mode==='artists'?'Artist':'Event')+' deleted');
@@ -1947,6 +2030,7 @@ function renderPreview(){
   if(!data){ frame.innerHTML='<div class="prev-ph">Load a JSON file to preview</div>'; return; }
 
   if(mode==='signals'){ renderSignalsPreview(frame); return; }
+  if(mode==='gallery'){ renderGalleryPreview(frame); return; }
   if(mode==='artists'){ renderArtistsPreview(frame); return; }
 
   if(renderStyle==='exh'){
@@ -2339,6 +2423,8 @@ function openGhModal(){
   document.getElementById('ghPath').value   = cfg.path   || 'json/schema.json';
   document.getElementById('ghArtistsPath').value = cfg.artistsPath || 'json/artists.json';
   document.getElementById('ghSignalsPath').value = cfg.signalsPath || 'json/signals.json';
+  document.getElementById('ghGalleryPath').value = cfg.galleryPath || 'json/galleries.json';
+  document.getElementById('ghArchivePath').value = cfg.archivePath || 'json/open-projector-archive.json';
   document.getElementById('ghToken').value  = cfg.token  || '';
   document.getElementById('ghModal').classList.add('on');
   setTimeout(()=>document.getElementById('ghOwner').focus(), 50);
@@ -2357,6 +2443,8 @@ function saveGhConfig(){
     path:   document.getElementById('ghPath').value.trim()   || 'json/schema.json',
     artistsPath: document.getElementById('ghArtistsPath').value.trim() || 'json/artists.json',
     signalsPath: document.getElementById('ghSignalsPath').value.trim() || 'json/signals.json',
+    galleryPath: document.getElementById('ghGalleryPath').value.trim() || 'json/galleries.json',
+    archivePath: document.getElementById('ghArchivePath').value.trim() || 'json/open-projector-archive.json',
     token:  document.getElementById('ghToken').value.trim(),
   };
   if(!cfg.owner || !cfg.repo){ toast('Owner and repository are required'); return; }
@@ -2389,7 +2477,9 @@ async function pushToGitHub(){
     ? (cfg.artistsPath || 'json/artists.json')
     : mode==='signals'
       ? (cfg.signalsPath || 'json/signals.json')
-      : (cfg.path || 'json/schema.json');
+      : mode==='gallery'
+        ? (cfg.galleryPath || 'json/galleries.json')
+        : (cfg.path || 'json/schema.json');
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -2464,6 +2554,195 @@ async function pushToGitHub(){
   } catch(e){
     toast('Push failed: ' + e.message);
     setStatus('Push failed');
+  } finally {
+    loadEl.classList.remove('on');
+    msgEl.textContent = 'Loading JSON…';
+  }
+}
+
+// ── OPEN PROJECTOR ARCHIVE SYNC ──────────────────────────
+const OP_ARCHIVE_SHEET_ID = '1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk';
+const OP_ARCHIVE_GID = '0';
+let archiveData = null;
+
+function openArchiveModal(){
+  document.getElementById('archiveModal').classList.add('on');
+  renderArchivePreview();
+}
+function closeArchiveModal(){
+  document.getElementById('archiveModal').classList.remove('on');
+}
+
+// Minimal RFC4180 CSV parser: handles quoted fields, embedded commas/newlines, doubled-quote escaping.
+function parseCSV(text){
+  const rows = []; let row = []; let field = ''; let inQuotes = false;
+  for(let i = 0; i < text.length; i++){
+    const c = text[i];
+    if(inQuotes){
+      if(c === '"'){
+        if(text[i + 1] === '"'){ field += '"'; i++; }
+        else inQuotes = false;
+      } else field += c;
+    } else if(c === '"'){
+      inQuotes = true;
+    } else if(c === ','){
+      row.push(field); field = '';
+    } else if(c === '\r'){
+      // skip — paired \n handles the row break
+    } else if(c === '\n'){
+      row.push(field); rows.push(row); row = []; field = '';
+    } else field += c;
+  }
+  if(field.length || row.length){ row.push(field); rows.push(row); }
+  return rows;
+}
+
+// Turns the sheet's raw rows into { events:[{ id, label, date, presenters:[...] }] }.
+// Session headers look like "OPEN PROJECTOR #3 -- 31.03.26" (optionally prefixed "NEXT:");
+// a stray duplicate header row mid-table (same id as the session already open) is dropped;
+// blank rows and the trailing site-contact rows (phreaking.co.uk / phreakingcollective) are skipped.
+// Presenter numbers are reassigned 1..N per session from row order, ignoring the sheet's own
+// numbering gaps so a dropped duplicate header never shows up as a missing number.
+function buildArchiveFromRows(rows){
+  const events = [];
+  let current = null;
+  const HEADER_RE = /OPEN PROJECTOR\s*#?\s*(\d+)/i;
+  const DATE_RE = /(\d{1,2}\.\d{1,2}\.\d{2,4})/;
+  const isBlankRow = (r) => r.every((c) => !String(c || '').trim());
+
+  rows.forEach((r, i) => {
+    if(i === 0) return; // column header row
+    if(isBlankRow(r)) return;
+
+    const name = String(r[1] || '').trim();
+    const project = String(r[2] || '').trim();
+    const link = String(r[3] || '').trim();
+    const socials = String(r[4] || '').trim();
+
+    const headerMatch = name.match(HEADER_RE);
+    if(headerMatch){
+      const id = Number(headerMatch[1]);
+      if(current && current.id === id) return; // stray duplicate header row
+      const dateMatch = name.match(DATE_RE);
+      current = { id, label: `Open Projector #${id}`, date: dateMatch ? dateMatch[1] : '', presenters: [] };
+      events.push(current);
+      return;
+    }
+
+    if(/phreaking\.co\.uk|phreakingcollective/i.test(name) && !project && !link && !socials) return;
+
+    if(!current) return; // row before any recognised session header
+
+    current.presenters.push({
+      number: null,
+      name: name || '--',
+      project: project || '--',
+      link: link || '--',
+      socials: socials || '--',
+    });
+  });
+
+  events.forEach((ev) => ev.presenters.forEach((p, idx) => { p.number = idx + 1; }));
+  events.sort((a, b) => a.id - b.id);
+  return { events };
+}
+
+async function fetchOpenProjectorSheet(){
+  const btn = document.getElementById('archFetchBtn');
+  const statusEl = document.getElementById('archStatus');
+  btn.disabled = true;
+  statusEl.textContent = 'Fetching from Google Sheets…';
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${OP_ARCHIVE_SHEET_ID}/export?format=csv&gid=${OP_ARCHIVE_GID}`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error(`Sheet fetch failed: ${res.status}`);
+    const text = (await res.text()).replace(/^﻿/, '');
+    const rows = parseCSV(text);
+    const built = buildArchiveFromRows(rows);
+    if(!built.events.length) throw new Error('No sessions found — sheet layout may have changed.');
+
+    archiveData = built;
+    renderArchivePreview();
+    const totalPresenters = built.events.reduce((n, e) => n + e.presenters.length, 0);
+    statusEl.textContent = `Parsed ${built.events.length} sessions · ${totalPresenters} presenters. Review below, then push.`;
+    document.getElementById('archPushBtn').disabled = false;
+    document.getElementById('archDownloadBtn').disabled = false;
+    toast('Sheet parsed — review before pushing', 'ok');
+  } catch(e){
+    statusEl.textContent = 'Fetch failed: ' + e.message;
+    toast('Sheet fetch failed: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderArchivePreview(){
+  const listEl = document.getElementById('archSummaryList');
+  const jsonEl = document.getElementById('archJsonPreview');
+  if(!archiveData){ listEl.innerHTML = ''; jsonEl.value = ''; return; }
+  listEl.innerHTML = archiveData.events.map((e) =>
+    `<div class="arch-summary-row"><span>${esc(e.label)} <span style="color:var(--muted)">(${esc(e.date)})</span></span><span style="color:var(--muted)">${e.presenters.length} presenters</span></div>`
+  ).join('');
+  jsonEl.value = JSON.stringify(archiveData, null, 2);
+}
+
+function downloadArchiveJSON(){
+  if(!archiveData){ toast('Fetch from the sheet first'); return; }
+  const blob = new Blob([JSON.stringify(archiveData, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'open-projector-archive.json';
+  a.click();
+  toast('Downloaded open-projector-archive.json', 'ok');
+}
+
+async function pushArchiveToGitHub(){
+  if(!archiveData){ toast('Fetch from the sheet first'); return; }
+  const cfg = ghLoad();
+  if(!cfg.owner || !cfg.repo || !cfg.token){ closeArchiveModal(); openGhModal(); return; }
+
+  const owner = cfg.owner, repo = cfg.repo, token = cfg.token, branch = cfg.branch || 'main';
+  const path = cfg.archivePath || 'json/open-projector-archive.json';
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+    'Content-Type': 'application/json',
+  };
+
+  const loadEl = document.getElementById('loading');
+  const msgEl = document.getElementById('loadingMsg');
+  loadEl.classList.add('on');
+  msgEl.textContent = 'Pushing Open Projector archive…';
+
+  try {
+    const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    let sha = null;
+    const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
+    if(getRes.ok){
+      sha = (await getRes.json()).sha;
+    } else if(getRes.status !== 404){
+      const err = await getRes.json().catch(() => ({}));
+      throw new Error(err.message || `GitHub API ${getRes.status}`);
+    }
+
+    const jsonStr = JSON.stringify(archiveData, null, 2);
+    const bytes = new TextEncoder().encode(jsonStr);
+    const binary = Array.from(bytes, (b) => String.fromCharCode(b)).join('');
+    const content = btoa(binary);
+
+    const body = { message: `Update ${path} via JSON editor (Open Projector sync)`, content, branch };
+    if(sha) body.sha = sha;
+
+    const putRes = await fetch(apiBase, { method: 'PUT', headers, body: JSON.stringify(body) });
+    if(!putRes.ok){
+      const err = await putRes.json().catch(() => ({}));
+      throw new Error(err.message || `GitHub API ${putRes.status}`);
+    }
+
+    toast('Pushed Open Projector archive to GitHub!', 'ok');
+  } catch(e){
+    toast('Push failed: ' + e.message);
   } finally {
     loadEl.classList.remove('on');
     msgEl.textContent = 'Loading JSON…';
@@ -2880,6 +3159,341 @@ function renderSignalsPreview(frame){
 }
 function setSignalsTab(id){ prevFilter=String(id); renderPreview(); refreshPrevFilters(); }
 
+// ── GALLERIES (site-wide image galleries) ─────────────────
+// galleries.json shape: { galleries:[ { id, title, short, page, thumbDir, fullDir, filePrefix,
+//                                       images:[ {src, full, alt, caption} ] } ] }
+// Each gallery renders on its page via /scripts/site-gallery.js; captions show in the lightbox.
+function getGalleries(){ return (data&&Array.isArray(data.galleries))?data.galleries:[]; }
+// Flat index across all galleries — curIdx in gallery mode indexes into this
+function galFlat(){
+  const out=[];
+  getGalleries().forEach((gal,g)=>(gal.images||[]).forEach((im,ii)=>out.push({gal,g,im,ii,flat:out.length})));
+  return out;
+}
+const galConv = new Map(); // image object → {srcImg, webpDataURL, webpSize, jpegDataURL, jpegSize, quality, maxWidth}
+const galPrev = new Map(); // image object → {webp, jpeg} blob URLs for freshly-uploaded, not-yet-pushed images
+
+function galBasename(p){ return String(p||'').split('/').pop(); }
+function galThumbOf(im){ const c=galPrev.get(im); return c?c.webp:(im.src||''); }
+function galCur(){ return galFlat()[curIdx]||null; }
+
+// Next unused "<prefix>-<n>" basename for a gallery (checked against every gallery + staged uploads)
+function galNewBase(gal){
+  const used=new Set();
+  getGalleries().forEach(x=>(x.images||[]).forEach(im=>{ used.add(galBasename(im.src)); used.add(galBasename(im.full)); }));
+  stagedImages.forEach((_,k)=>used.add(galBasename(k)));
+  let n=1;
+  while(used.has(`${gal.filePrefix}-${n}.webp`)||used.has(`${gal.filePrefix}-${n}.jpeg`)) n++;
+  return `${gal.filePrefix}-${n}`;
+}
+
+// ── LIST (grouped by gallery, collapsible) ──
+function renderGalleryList(el){
+  const gals=getGalleries();
+  if(!gals.length){ el.innerHTML='<div class="empty"><div class="empty-ico">▦</div><h3>No galleries loaded</h3><p>Load from site or upload galleries.json.</p></div>'; return; }
+  let html=''; let fi=0;
+  gals.forEach((gal,g)=>{
+    const key='gal:'+(gal.id||g);
+    const collapsed=collapsedGroups.has(key);
+    const count=(gal.images||[]).length;
+    html+=`<div class="exh-group${collapsed?' collapsed':''}" data-key="${esc(key)}">
+      <div class="exh-label" onclick="toggleGroup('${esc(key)}')" title="Click to collapse/expand">
+        <span class="exh-group-toggle">▾</span>${esc(gal.short||gal.title||gal.id)}
+        <span class="gal-count">${count}</span>
+        <button class="btn btn-ok btn-sm" onclick="event.stopPropagation();galAdd(${g})" title="Upload image(s) — converted &amp; named automatically">+ Add</button>
+      </div>`;
+    (gal.images||[]).forEach((im)=>{
+      const thumb=galThumbOf(im);
+      const label=im.caption||im.alt;
+      html+=`<div class="gal-item eitem${curIdx===fi?' active':''}" onclick="selectEvent(${fi})">
+        <div class="gal-reorder">
+          <button title="Move up" onclick="event.stopPropagation();galMove(${fi},-1)">▲</button>
+          <button title="Move down" onclick="event.stopPropagation();galMove(${fi},1)">▼</button>
+        </div>
+        ${thumb?`<img class="gal-thumb" src="${esc(thumb)}" alt="" loading="lazy">`:'<div class="gal-thumb-ph">▦</div>'}
+        <div class="gal-item-meta">
+          <span class="gal-item-alt${label?'':' muted'}">${label?esc(label):'no caption / alt'}</span>
+          <span class="gal-item-path">${esc(galBasename(im.src)||'—')}</span>
+        </div>
+        ${galPrev.has(im)?'<span class="gal-item-tag">new</span>':''}
+      </div>`;
+      fi++;
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+
+// ── ADD IMAGES (multi-file: pick → convert → auto-name → stage) ──
+// Topbar "+ New" — adds to the currently selected image's gallery, else the first
+function newGalleryImage(){
+  const cur=galCur();
+  galAdd(cur?cur.g:0);
+}
+function galAdd(g){
+  const gal=getGalleries()[g];
+  if(!gal){ toast('No gallery to add to — load galleries.json first'); return; }
+  const input=document.createElement('input');
+  input.type='file'; input.accept='image/*'; input.multiple=true;
+  input.onchange=()=>{
+    const files=[...input.files]; if(!files.length) return;
+    let done=0, lastIm=null;
+    files.forEach(file=>{
+      const reader=new FileReader();
+      reader.onload=e=>{
+        const imgEl=new Image();
+        imgEl.onload=()=>{
+          const base=galNewBase(gal);
+          const im={ src:'/'+gal.thumbDir+'/'+base+'.webp', full:'/'+gal.fullDir+'/'+base+'.jpeg', alt:'', caption:'' };
+          (gal.images||(gal.images=[])).push(im);
+          galConvert(im, imgEl);
+          galStageIm(im, true);          // auto-stage if GitHub is configured (silent otherwise)
+          markUnsaved();
+          lastIm=im;
+          if(++done===files.length){
+            renderList(); renderPreview(); refreshPrevFilters();
+            const target=galFlat().find(f=>f.im===lastIm);
+            if(target) selectEvent(target.flat);
+            toast(done>1?done+' images added & converted':'Image added & converted','ok');
+          }
+        };
+        imgEl.src=e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+  input.click();
+}
+
+// ── CONVERSION ──
+function galConvert(im, imgEl){
+  const prev=galConv.get(im)||{};
+  const q=prev.quality||85;
+  const w=prev.maxWidth||Math.min(imgEl.naturalWidth,2000);
+  const webp=convertToWebP(imgEl);
+  const jpeg=convertToJPEG(imgEl,q/100,w);
+  galConv.set(im,{srcImg:imgEl, webpDataURL:webp.dataURL, webpSize:webp.sizeKB,
+    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:q, maxWidth:w});
+  const old=galPrev.get(im);
+  if(old){ URL.revokeObjectURL(old.webp); URL.revokeObjectURL(old.jpeg); }
+  galPrev.set(im,{
+    webp:URL.createObjectURL(dataURLToBlob(webp.dataURL)),
+    jpeg:URL.createObjectURL(dataURLToBlob(jpeg.dataURL))
+  });
+}
+
+// Replace the pixels of the selected entry (keeps its paths)
+function galHandleUpload(input){
+  const cur=galCur(); if(!cur) return;
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const imgEl=new Image();
+    imgEl.onload=()=>{
+      galConvert(cur.im, imgEl);
+      galStageIm(cur.im, true);
+      buildGalleryForm();
+      renderList(); renderPreview();
+      toast('Image replaced & converted','ok');
+    };
+    imgEl.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── EDIT FORM ──
+function buildGalleryForm(){
+  const cur=galCur(); if(!cur) return;
+  const {gal,g,im}=cur;
+  document.getElementById('editTitle').textContent=(im.caption||im.alt||galBasename(im.src)||'Image')+' — '+(gal.short||gal.id);
+  const thumb=galThumbOf(im);
+  const s=galConv.get(im);
+  const hasConv=!!s;
+  const galOpts=getGalleries().map((x,xi)=>`<option value="${xi}"${xi===g?' selected':''}>${esc(x.short||x.id)}</option>`).join('');
+  document.getElementById('editBody').innerHTML=`
+    ${thumb?`<img class="gal-form-thumb" src="${esc(thumb)}" alt="">`:'<div class="gal-thumb-ph" style="width:100%;height:120px;font-size:28px">▦</div>'}
+    <div class="field"><label>Caption (shown in lightbox)</label>
+      <input id="gf-caption" placeholder="e.g. Artwork Title — Artist Name" value="${esc(im.caption||'')}" oninput="liveUpGallery()"></div>
+    <div class="field"><label>Alt text (accessibility / SEO)</label>
+      <input id="gf-alt" placeholder="Describe the image" value="${esc(im.alt||'')}" oninput="liveUpGallery()"></div>
+    <div class="frow">
+      <div class="field"><label>Gallery</label>
+        <select onchange="galMoveTo(this.value)">${galOpts}</select></div>
+      <div class="field"><label>&nbsp;</label>
+        <label class="btn btn-ghost btn-sm" style="cursor:pointer;justify-content:center">↻ Replace image
+          <input type="file" accept="image/*" style="display:none" onchange="galHandleUpload(this)"></label></div>
+    </div>
+    <div class="field"><label>Thumbnail path (webp)</label>
+      <input id="gf-src" style="font-family:var(--mono);font-size:11px" value="${esc(im.src||'')}" onchange="galSetPath('src',this.value)"></div>
+    <div class="field"><label>Full path (lightbox)</label>
+      <input id="gf-full" style="font-family:var(--mono);font-size:11px" value="${esc(im.full||'')}" onchange="galSetPath('full',this.value)"></div>
+    <div class="img-convert-out" id="gico" style="display:${hasConv?'block':'none'}">
+      <div class="img-convert-panels">
+        <div class="img-convert-panel">
+          <span class="img-convert-panel-label">Thumbnail · WebP</span>
+          <img id="gico-webp-img" src="${hasConv?s.webpDataURL:''}" alt="webp preview">
+          <span class="img-convert-size" id="gico-webp-size">${hasConv?s.webpSize+' KB':'—'}</span>
+        </div>
+        <div class="img-convert-panel">
+          <span class="img-convert-panel-label">Full · JPEG</span>
+          <img id="gico-jpeg-img" src="${hasConv?s.jpegDataURL:''}" alt="jpeg preview">
+          <span class="img-convert-size${hasConv&&s.jpegSize>1024?' warn':''}" id="gico-jpeg-size">${hasConv?s.jpegSize+' KB'+(s.jpegSize>1024?' ⚠ >1 MB':''):'—'}</span>
+          <div class="img-quality-row"><span>W</span>
+            <input type="range" min="400" max="6000" step="50" id="gico-width" value="${hasConv?s.maxWidth:2000}" oninput="galUpdateWidth(this.value)">
+            <span id="gico-width-label" style="min-width:44px">${hasConv?s.maxWidth:2000}px</span></div>
+          <div class="img-quality-row"><span>Q</span>
+            <input type="range" min="30" max="100" id="gico-qual" value="${hasConv?s.quality:85}" oninput="galUpdateQuality(this.value)">
+            <span id="gico-qual-label" style="min-width:30px">${hasConv?s.quality:85}%</span></div>
+        </div>
+      </div>
+      <button class="btn btn-ok" style="width:100%;margin-top:8px" id="gf-stage-btn" onclick="galStageBtn()">+ Save image for push</button>
+    </div>
+    <div class="img-disclaimer" style="margin-top:4px">
+      <strong>${esc(gal.title||gal.id)}</strong> → shows on <code>${esc(gal.page||'?')}</code><br>
+      New files upload to <code>${esc(gal.thumbDir)}/</code> on <strong>↑ Push to GitHub</strong>,
+      and <code>galleries.json</code> updates in the same push.
+      ${hasConv?'':'<br>Use <strong>↻ Replace image</strong> to re-convert this entry.'}
+    </div>`;
+  galRefreshStageBtn();
+}
+
+function liveUpGallery(){
+  const cur=galCur(); if(!cur) return;
+  const alt=document.getElementById('gf-alt');         if(alt) cur.im.alt=alt.value;
+  const cap=document.getElementById('gf-caption');     if(cap) cur.im.caption=cap.value;
+  markUnsaved();
+  document.getElementById('editTitle').textContent=(cur.im.caption||cur.im.alt||galBasename(cur.im.src)||'Image')+' — '+(cur.gal.short||cur.gal.id);
+  renderPreview();
+}
+
+function galSetPath(field, val){
+  const cur=galCur(); if(!cur) return;
+  const oldWebp=(cur.im.src||'').replace(/^\//,''), oldJpeg=(cur.im.full||'').replace(/^\//,'');
+  cur.im[field]=val;
+  if(galConv.has(cur.im)){ stagedImages.delete(oldWebp); stagedImages.delete(oldJpeg); galStageIm(cur.im, true); }
+  markUnsaved(); renderList(); renderPreview(); galRefreshStageBtn();
+}
+
+// Move the selected image to another gallery (fresh uploads are renamed to the target's prefix)
+function galMoveTo(targetG){
+  const cur=galCur(); if(!cur) return;
+  const target=getGalleries()[parseInt(targetG)];
+  if(!target||target===cur.gal){ return; }
+  cur.gal.images.splice(cur.ii,1);
+  (target.images||(target.images=[])).push(cur.im);
+  if(galConv.has(cur.im)){
+    // not yet committed — rename files to match the target gallery
+    const oldWebp=(cur.im.src||'').replace(/^\//,''), oldJpeg=(cur.im.full||'').replace(/^\//,'');
+    stagedImages.delete(oldWebp); stagedImages.delete(oldJpeg);
+    const base=galNewBase(target);
+    cur.im.src='/'+target.thumbDir+'/'+base+'.webp';
+    cur.im.full='/'+target.fullDir+'/'+base+'.jpeg';
+    galStageIm(cur.im, true);
+  }
+  markUnsaved();
+  curIdx=galFlat().findIndex(f=>f.im===cur.im);
+  renderList(); renderPreview(); buildGalleryForm();
+  toast('Moved to '+(target.short||target.id),'ok');
+}
+
+function galUpdateQuality(val){
+  const cur=galCur(); if(!cur) return;
+  const s=galConv.get(cur.im); if(!s) return;
+  s.quality=parseInt(val);
+  const res=convertToJPEG(s.srcImg,s.quality/100,s.maxWidth);
+  s.jpegDataURL=res.dataURL; s.jpegSize=res.sizeKB;
+  galApplyJpegUI(res,'gico-qual-label',val+'%');
+  galRefreshJpegBlob(cur.im,res); galRestageIfStaged(cur.im);
+}
+function galUpdateWidth(val){
+  const cur=galCur(); if(!cur) return;
+  const s=galConv.get(cur.im); if(!s) return;
+  s.maxWidth=parseInt(val);
+  const res=convertToJPEG(s.srcImg,s.quality/100,s.maxWidth);
+  s.jpegDataURL=res.dataURL; s.jpegSize=res.sizeKB;
+  galApplyJpegUI(res,'gico-width-label',val+'px');
+  galRefreshJpegBlob(cur.im,res); galRestageIfStaged(cur.im);
+}
+function galApplyJpegUI(res, labelId, labelText){
+  const img=document.getElementById('gico-jpeg-img'); if(img) img.src=res.dataURL;
+  const sz=document.getElementById('gico-jpeg-size');
+  if(sz){ sz.textContent=res.sizeKB+' KB'+(res.sizeKB>1024?' ⚠ >1 MB':''); sz.className='img-convert-size'+(res.sizeKB>1024?' warn':''); }
+  const lbl=document.getElementById(labelId); if(lbl) lbl.textContent=labelText;
+}
+function galRefreshJpegBlob(im,res){
+  const p=galPrev.get(im);
+  if(p){ URL.revokeObjectURL(p.jpeg); p.jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL)); renderPreview(); }
+}
+
+// ── STAGING ──
+function galStageIm(im, silent){
+  const s=galConv.get(im); if(!s||!im) return false;
+  const cfg=ghLoad();
+  if(!cfg.owner||!cfg.repo||!cfg.token){ if(!silent) openGhModal(); return false; }
+  const webpPath=(im.src||'').replace(/^\//,''), jpegPath=(im.full||'').replace(/^\//,'');
+  if(webpPath) stagedImages.set(webpPath,{content:s.webpDataURL.split(',')[1], label:galBasename(webpPath)});
+  if(jpegPath) stagedImages.set(jpegPath,{content:s.jpegDataURL.split(',')[1], label:galBasename(jpegPath)});
+  updateStagedBadge();
+  return true;
+}
+function galStageBtn(){
+  const cur=galCur(); if(!cur) return;
+  if(galStageIm(cur.im)){ galRefreshStageBtn(); toast('Saved — will push with JSON','ok'); }
+}
+function galRestageIfStaged(im){
+  const s=galConv.get(im); if(!s) return;
+  const webpPath=(im.src||'').replace(/^\//,''), jpegPath=(im.full||'').replace(/^\//,'');
+  if(stagedImages.has(webpPath)) stagedImages.set(webpPath,{content:s.webpDataURL.split(',')[1], label:galBasename(webpPath)});
+  if(stagedImages.has(jpegPath)) stagedImages.set(jpegPath,{content:s.jpegDataURL.split(',')[1], label:galBasename(jpegPath)});
+}
+function galRefreshStageBtn(){
+  const cur=galCur(); const btn=document.getElementById('gf-stage-btn'); if(!cur||!btn) return;
+  if(stagedImages.has((cur.im.src||'').replace(/^\//,''))){ btn.textContent='✓ Saved for push'; btn.style.background='var(--ok)'; btn.style.color='#000'; }
+  else{ btn.textContent='+ Save image for push'; btn.style.background=''; btn.style.color=''; }
+}
+
+// ── REORDER (within a gallery) ──
+function galMove(flatIdx, dir){
+  const flat=galFlat();
+  const entry=flat[flatIdx]; if(!entry) return;
+  const j=entry.ii+dir;
+  if(j<0||j>=entry.gal.images.length) return;
+  const selIm=galFlat()[curIdx]?.im||null;
+  [entry.gal.images[entry.ii],entry.gal.images[j]]=[entry.gal.images[j],entry.gal.images[entry.ii]];
+  if(selIm!==null) curIdx=galFlat().findIndex(f=>f.im===selIm);
+  markUnsaved(); renderList(); renderPreview();
+}
+
+// ── DELETE ──
+function deleteGalleryImage(){
+  const cur=galCur(); if(!cur) return;
+  if(!confirm('Remove this image from '+(cur.gal.short||cur.gal.id)+'?\n\nThe JSON entry is removed. Any file already committed to the repo is left in place.')) return;
+  stagedImages.delete((cur.im.src||'').replace(/^\//,'')); stagedImages.delete((cur.im.full||'').replace(/^\//,''));
+  const p=galPrev.get(cur.im);
+  if(p){ URL.revokeObjectURL(p.webp); URL.revokeObjectURL(p.jpeg); }
+  galPrev.delete(cur.im); galConv.delete(cur.im);
+  cur.gal.images.splice(cur.ii,1);
+  markUnsaved(); updateStagedBadge();
+  closeEdit(); renderPreview(); refreshPrevFilters(); toast('Image removed');
+}
+
+// ── PREVIEW (mirrors the live gallery grids; captions shown for editing) ──
+function renderGalleryPreview(frame){
+  const gals=getGalleries().filter(g=>prevFilter==='all'||g.id===prevFilter);
+  if(!gals.length){ frame.innerHTML='<div class="prev-ph">No galleries to preview</div>'; return; }
+  const sections=gals.map(gal=>{
+    const imgs=gal.images||[];
+    const cells=imgs.map(im=>{
+      const thumb=galThumbOf(im);
+      return `<figure>${thumb?`<img src="${esc(thumb)}" alt="${esc(im.alt||'')}" loading="lazy">`:''}${im.caption?`<figcaption>${esc(im.caption)}</figcaption>`:''}</figure>`;
+    }).join('');
+    return `<div class="sec-head">${esc(gal.title||gal.id)} — ${imgs.length} image${imgs.length===1?'':'s'} · <span style="text-transform:none">${esc(gal.page||'')}</span></div>
+      ${imgs.length?`<div class="gal-grid">${cells}</div>`:'<p class="gal-empty">No images yet — use + Add in the list panel.</p>'}`;
+  }).join('');
+  frame.innerHTML=`<div class="r-gallery">${sections}</div>`;
+}
+function setGalTab(id){ prevFilter=id; renderPreview(); refreshPrevFilters(); }
+
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', ()=>{
   // Auto-fill slug from display name in the add-exhibition modal
@@ -2911,6 +3525,7 @@ document.addEventListener('keydown', e=>{
     if(document.getElementById('calPicker').style.display !== 'none') calClose();
     if(document.getElementById('ghModal').classList.contains('on')) closeGhModal();
     if(document.getElementById('newExhModal').classList.contains('on')) closeNewExhibitionModal();
+    if(document.getElementById('archiveModal').classList.contains('on')) closeArchiveModal();
   }
 });
 </script>

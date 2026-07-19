@@ -76,7 +76,9 @@
     <section id="mixed-signals-gallery" aria-labelledby="mixed-signals-gallery-title">
         <h3 id="mixed-signals-gallery-title">Previous Sessions</h3>
         <section class="pc-gallery" aria-label="Mixed Signals gallery">
-          <div class="pc-grid" id="mixed-signals-gallery-grid">
+          <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+               The figures below are a static fallback shown only if that JSON can't be fetched. -->
+          <div class="pc-grid" id="mixed-signals-gallery-grid" data-gallery-id="mixed-signals">
 
             <figure class="pc-item">
               <img src="/assets/MixedSignals/MixedSignals1-1.webp" data-full="/assets/MixedSignals/MixedSignals1-1.jpeg" alt="Mixed Signals event" loading="lazy" decoding="async" />
@@ -124,6 +126,7 @@
   </main>
 
   <script defer src="/scripts/sidebar.js"></script>
+  <script defer src="/scripts/site-gallery.js"></script>
   <script defer src="/scripts/gallery.js"></script>
   <script defer src="/scripts/calendar.js"></script>
 </body>
