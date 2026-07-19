@@ -682,12 +682,6 @@
       "fullDir": "assets/CanWeStartAgain/Gallery",
       "filePrefix": "CWSA",
       "images": [
-        {
-          "src": "/assets/CanWeStartAgain/Gallery/DELETEME.webp",
-          "full": "/assets/CanWeStartAgain/Gallery/DELETEME.jpeg",
-          "alt": "Person presenting at open projector event",
-          "caption": ""
-        }
       ]
     }
   ]
