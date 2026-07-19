@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -40,12 +40,87 @@
       <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/CWSTA-Logo-Clean-White.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/private-view/private-view_1.webp</image:loc>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/phreak-mag-launch-party-2/phreak-mag-launch-party-2_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/mixed-signals/mixed-signals_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/atay-ilgun-spiral/atay-ilgun-spiral_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/nina-davies/nina-davies_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/cranberry-lemonade-hyperlink-workshop/cranberry-lemonade-hyperlink-workshop_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/marcus-round/marcus-round_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/film-night/film-night_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/perma-computing-day-1/perma-computing-day-1_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/phreaking-panel-talk/phreaking-panel-talk_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/open-projector-vs/open-projector-vs_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/tiziana-alocci/tiziana-alocci_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/social-hangout/social-hangout_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/perma-computing-day-2/perma-computing-day-2_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/opening-party/opening-party_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/algorythem/algorythem_1.jpg</image:loc>
     </image:image>
   </url>
 
   <url>
     <loc>https://phreaking.co.uk/BitRot/</loc>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Talk_Erin.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Talk_DIan.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/workshop_glitch.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Workshop_Melissa.png</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/BitRotShowImgs/Room3Horizontal_1.JPG</image:loc>
     </image:image>
@@ -105,18 +180,6 @@
     </image:image>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/BitRotShowImgs/ArtistLucyApple.jpg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/Talk_Erin.png</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/Talk_DIan.png</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/workshop_glitch.png</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/Workshop_Melissa.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/BitRotEventImgs/DianJoy1.JPG</image:loc>
@@ -244,6 +307,186 @@
     </image:image>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/DCCeP/Artwork/DDCeP-20.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/lucia-rebolino.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/CounterModeling/CounterModelling-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/CounterModeling/CounterModelling-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/CounterModeling/CounterModelling-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/CounterModeling/CounterModelling-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/CounterModeling/CounterModelling-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/terence-poster.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/robin-leverton.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Cloud-Watching/CloudWatching-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Cloud-Watching/CloudWatching-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/NOISEY_SPACES_V2%20Medium.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/NoisySpaces/NoisySpaces-2.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/NoisySpaces/NoisySpaces-4.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/CLWorkshopPosterLD.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/MAT_HILL2edit.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/CABLEGL_MARGOT2.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Intro2/CreativeCoding-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Intro2/CreativeCoding-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Intro2/CreativeCoding-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Intro2/CreativeCoding-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/Intro2/CreativeCoding-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/filmNight.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/FilmNight/FilmNight-1.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/FilmNight/FilmNight-2.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/FilmNight/FilmNight-3.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/FilmNight/FilmNight-4.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/FilmNight/FilmNight-5.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/openprojector-v1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/Nikos-Open-Proj-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/Nikos-Open-Proj-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/Nikos-Open-Proj-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/Nikos-Open-Proj-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/Nikos-Open-Proj-6.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/CLOSINGEVENT.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ClosingEvent/ClosingEvent-1.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ClosingEvent/ClosingEvent-2.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ClosingEvent/ClosingEvent-3.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ClosingEvent/ClosingEvent-4.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/ClosingEvent/ClosingEvent-5.jpeg</image:loc>
     </image:image>
   </url>
 
@@ -515,6 +758,91 @@
     </image:image>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/DCCeP/Events/FilmNight/FilmNight-5.jpeg</image:loc>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://phreaking.co.uk/exhibitions/</loc>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Index/BitRotShowImg.php.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Index/BitRotShowImg1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/Index/BitRotShowImg2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDceP/DDCeP-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDceP/DDCeP-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDceP/DDCeP-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDW/DDW-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDW/DDW-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDW/DDW-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDW/DDW-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDW/DDW-5.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/DDW/DDW-7.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/TPG/TPG-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/TPG/TPG-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/TPG/TPG-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/TPG/TPG-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/TPG/TPG-5.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/TPG/TPG-6.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-5.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-6.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-7.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-8.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/ExhibitionEx/Folder02/F02-9.webp</image:loc>
     </image:image>
   </url>
 

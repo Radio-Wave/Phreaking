@@ -2544,12 +2544,24 @@ async function pushToGitHub(){
       throw new Error(err.message || `GitHub API ${putRes.status}`);
     }
 
+    // 3. Keep the image sitemap in sync — events & gallery pushes change site images
+    let sitemapNote = '';
+    if(mode==='events' || mode==='gallery'){
+      msgEl.textContent = 'Updating image sitemap…';
+      try { await pushImageSitemap(headers, owner, repo, branch); }
+      catch(e){
+        console.error('image sitemap update failed:', e);
+        sitemapNote = ' — image sitemap update failed: ' + e.message;
+      }
+    }
+
     markSaved();
     const imgCount = staged.length;
     setStatus(`Pushed to ${owner}/${repo}`, countLabel());
-    toast(imgCount > 0
+    const okMsg = imgCount > 0
       ? `Pushed: ${imgCount} image${imgCount > 1 ? 's' : ''} + JSON`
-      : 'Pushed to GitHub!', 'ok');
+      : 'Pushed to GitHub!';
+    toast(okMsg + sitemapNote, sitemapNote ? '' : 'ok');
 
   } catch(e){
     toast('Push failed: ' + e.message);
@@ -2558,6 +2570,187 @@ async function pushToGitHub(){
     loadEl.classList.remove('on');
     msgEl.textContent = 'Loading JSON…';
   }
+}
+
+// ── IMAGE SITEMAP ─────────────────────────────────────────
+// image-sitemap.xml is regenerated from schema.json + galleries.json on every push
+// that can change images (Events / Galleries mode). Hand-picked page images that
+// live in no JSON (covers, banners, posters) are kept in this static seed list.
+const SITE_ORIGIN = 'https://phreaking.co.uk';
+const SITEMAP_STATIC = {
+  '/': [
+    '/assets/Websitecoverphoto-v2.jpg',
+    '/assets/ExhibitionEx/DDceP/DDCeP-3.webp',
+    '/assets/ExhibitionEx/DDceP/DDCeP-2.webp',
+    '/assets/bitrotcover.jpg',
+    '/assets/Index/BitRotShowImg5.jpg',
+    '/assets/Index/BitRotShowImg4.jpg',
+    '/assets/MixedSignals/Mixed-Signals-Poster-general-homepage.webp',
+    '/assets/OpenProj/OpenProjectorGeneralWeb.jpeg',
+  ],
+  '/can-we-start-again/': [
+    '/assets/CanWeStartAgain/CanWeStartAgainBanner.jpeg',
+    '/assets/CanWeStartAgain/CWSTA-Logo-Clean-White.png',
+  ],
+  '/BitRot/': [
+    '/assets/Talk_Erin.png',
+    '/assets/Talk_DIan.png',
+    '/assets/workshop_glitch.png',
+    '/assets/Workshop_Melissa.png',
+  ],
+  '/phreak-mag/': [
+    '/assets/PhreakMag/PHREAKMAG-BANNER.webp',
+  ],
+  // /past-events/ is a fully static page (its JS only injects JSON-LD + filtering),
+  // so its image list is maintained here, mirroring the page markup.
+  '/past-events/': [
+    '/assets/DCCeP/Events/CounterModeling/CounterModelling-3.jpg',
+    '/assets/DCCeP/Events/CounterModeling/CounterModelling-1.jpg',
+    '/assets/DCCeP/Events/CounterModeling/CounterModelling-2.jpg',
+    '/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-2.jpg',
+    '/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-3.jpg',
+    '/assets/DCCeP/Events/AiAsMaterial/AiAsMaterial-4.jpg',
+    '/assets/DCCeP/Events/Cloud-Watching/CloudWatching-1.jpg',
+    '/assets/DCCeP/Events/Cloud-Watching/CloudWatching-2.jpg',
+    '/assets/DCCeP/Events/Cloud-Watching/CloudWatching-5.jpg',
+    '/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp',
+    '/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp',
+    '/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp',
+    '/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp',
+    '/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp',
+    '/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp',
+    '/assets/DCCeP/Events/NoisySpaces/NoisySpaces-1.jpeg',
+    '/assets/DCCeP/Events/NoisySpaces/NoisySpaces-3.jpeg',
+    '/assets/DCCeP/Events/NoisySpaces/NoisySpaces-5.jpeg',
+    '/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-1.jpg',
+    '/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-3.jpg',
+    '/assets/DCCeP/Events/IWTBAW/IWantToBeAWebsite-5.jpg',
+    '/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-1.jpg',
+    '/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-3.jpg',
+    '/assets/DCCeP/Events/ExFunWorkshop/FunWorkshop-6.jpg',
+    '/assets/DCCeP/Events/Intro2/CreativeCoding-1.jpg',
+    '/assets/DCCeP/Events/Intro2/CreativeCoding-3.jpg',
+    '/assets/DCCeP/Events/Intro2/CreativeCoding-5.jpg',
+    '/assets/BitRotEventImgs/Glitch1.JPG',
+    '/assets/BitRotEventImgs/Glitch2.JPG',
+    '/assets/BitRotEventImgs/Glitch5.JPG',
+    '/assets/BitRotEventImgs/Scanning1.JPG',
+    '/assets/BitRotEventImgs/Scanning2.jpg',
+    '/assets/BitRotEventImgs/Scanning5.JPEG',
+    '/assets/Past-events-archive/Xach_TSA_DDCEP1.jpeg',
+    '/assets/Past-events-archive/Xach_TSA_DDCEP2.jpeg',
+    '/assets/Past-events-archive/Xach_TSA_DDCEP3.jpeg',
+    '/assets/Past-events-archive/Xach_Claire_DDCEP1.jpeg',
+    '/assets/Past-events-archive/Xach_Claire_DDCEP2.jpeg',
+    '/assets/Past-events-archive/Xach_Claire_DDCEP3.jpeg',
+    '/assets/Past-events-archive/Xach_DepositSilk_DDCEP1.jpeg',
+    '/assets/Past-events-archive/Xach_DepositSilk_DDCEP3.jpeg',
+    '/assets/Past-events-archive/Xach_DepositSilk_DDCEP5.jpeg',
+    '/assets/Past-events-archive/Xach_Lagtime_DDCEP1.jpeg',
+    '/assets/Past-events-archive/Xach_Lagtime_DDCEP2.jpeg',
+    '/assets/Past-events-archive/Xach_Lagtime_DDCEP3.jpeg',
+    '/assets/Past-events-archive/xach_Lagtime_BitRot1.jpeg',
+    '/assets/Past-events-archive/xach_Lagtime_BitRot2.jpeg',
+    '/assets/Past-events-archive/xach_Lagtime_BitRot3.jpeg',
+    '/assets/Past-events-archive/xach_Yiding_BitRot1.jpeg',
+    '/assets/Past-events-archive/xach_Yiding_BitRot2.jpeg',
+    '/assets/Past-events-archive/xach_Yiding_BitRot3.jpeg',
+    '/assets/DCCeP/Events/FilmNight/FilmNight-1.jpeg',
+    '/assets/DCCeP/Events/FilmNight/FilmNight-4.jpeg',
+    '/assets/DCCeP/Events/FilmNight/FilmNight-5.jpeg',
+  ],
+};
+// schema.json events render dynamically on these pages (keyed by event.exhibition)
+const SITEMAP_EVENT_PAGES = {
+  'can-we-start-again': '/can-we-start-again/',
+  'does-cloud-compute': '/does-cloud-compute-ever-precipitate/',
+};
+const SITEMAP_PAGE_ORDER = ['/','/can-we-start-again/','/BitRot/','/does-cloud-compute-ever-precipitate/','/mixed-signals/','/open-projector/','/phreak-mag/','/past-events/','/exhibitions/'];
+
+function xmlEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function sitemapAbs(p){
+  if(!p) return '';
+  const u = /^https?:/i.test(p) ? p : SITE_ORIGIN+(p.startsWith('/')?p:'/'+p);
+  return u.replace(/ /g,'%20');
+}
+
+function buildImageSitemapXML(schemaData, galleriesData){
+  const pages = new Map(); // page URL path → ordered Set of absolute image URLs
+  const add = (page, img) => {
+    const u = sitemapAbs(img); if(!u) return;
+    if(!pages.has(page)) pages.set(page, new Set());
+    pages.get(page).add(u);
+  };
+  Object.entries(SITEMAP_STATIC).forEach(([page,imgs]) => imgs.forEach(i => add(page,i)));
+
+  // Gallery images → the gallery's page (full-size version, matching the existing sitemap)
+  (galleriesData?.galleries||[]).forEach(gal => {
+    (gal.images||[]).forEach(im => add(gal.page||'/', im.full||im.src));
+  });
+
+  // Event / exhibition images from schema.json, mapped to the page where they
+  // actually render dynamically (hidden items don't render, so skip them)
+  (schemaData?.['@graph']||[]).forEach(item => {
+    if(item.visible===false) return;
+    const imgs = item.images||[];
+    if(isExhibition(item)){ imgs.forEach(im => add('/exhibitions/', im.full||im.src)); return; }
+    if(!isEvent(item)) return;
+    const page = SITEMAP_EVENT_PAGES[item.exhibition];
+    if(page) imgs.forEach(im => add(page, im.full||im.src));
+  });
+
+  const keys = [...SITEMAP_PAGE_ORDER.filter(k=>pages.has(k)), ...[...pages.keys()].filter(k=>!SITEMAP_PAGE_ORDER.includes(k))];
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset\n  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n';
+  keys.forEach(page => {
+    xml += '\n  <url>\n    <loc>'+xmlEsc(SITE_ORIGIN+page)+'</loc>\n';
+    pages.get(page).forEach(u => {
+      xml += '    <image:image>\n      <image:loc>'+xmlEsc(u)+'</image:loc>\n    </image:image>\n';
+    });
+    xml += '  </url>\n';
+  });
+  return xml + '\n</urlset>\n';
+}
+
+// PUT a UTF-8 text file to the repo via the contents API (create or update)
+async function ghPutText(path, text, message, headers, owner, repo, branch){
+  const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+  let sha = null;
+  const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
+  if(getRes.ok) sha = (await getRes.json()).sha;
+  else if(getRes.status !== 404){
+    const err = await getRes.json().catch(()=>({}));
+    throw new Error(err.message || `GitHub API ${getRes.status}`);
+  }
+  const bytes = new TextEncoder().encode(text);
+  const content = btoa(Array.from(bytes, b => String.fromCharCode(b)).join(''));
+  const body = { message, content, branch };
+  if(sha) body.sha = sha;
+  const putRes = await fetch(apiBase, { method:'PUT', headers, body: JSON.stringify(body) });
+  if(!putRes.ok){
+    const err = await putRes.json().catch(()=>({}));
+    throw new Error(err.message || `GitHub API ${putRes.status}`);
+  }
+}
+
+async function pushImageSitemap(headers, owner, repo, branch){
+  // Current mode's dataset is local; the other comes from the live site
+  let schema = datasets.events, gals = datasets.gallery;
+  if(!schema){ const r = await fetch('/json/schema.json');    if(!r.ok) throw new Error('schema.json unavailable');    schema = await r.json(); }
+  if(!gals){   const r = await fetch('/json/galleries.json'); if(!r.ok) throw new Error('galleries.json unavailable'); gals   = await r.json(); }
+  const xml = buildImageSitemapXML(schema, gals);
+  await ghPutText('image-sitemap.xml', xml, 'Update image-sitemap.xml via JSON editor', headers, owner, repo, branch);
+
+  // Bump <lastmod> for the image sitemap in sitemap-index.xml (best-effort)
+  try {
+    const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/sitemap-index.xml?ref=${branch}`, { headers });
+    if(r.ok){
+      const j = await r.json();
+      const cur = new TextDecoder().decode(Uint8Array.from(atob(j.content.replace(/\n/g,'')), c => c.charCodeAt(0)));
+      const today = new Date().toISOString().slice(0,10);
+      const upd = cur.replace(/(<loc>[^<]*image-sitemap\.xml<\/loc>\s*<lastmod>)[^<]*(<\/lastmod>)/, `$1${today}$2`);
+      if(upd !== cur) await ghPutText('sitemap-index.xml', upd, 'Bump image sitemap lastmod', headers, owner, repo, branch);
+    }
+  } catch(e){ console.warn('sitemap-index.xml update skipped:', e); }
 }
 
 // ── OPEN PROJECTOR ARCHIVE SYNC ──────────────────────────
