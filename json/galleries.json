@@ -199,6 +199,78 @@
           "full": "/assets/OpenProj/Nikos-Open-Proj-6.jpg",
           "alt": "Person presenting at open projector event",
           "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-9.webp",
+          "full": "/assets/OpenProj/OpenProjector-9.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-10.webp",
+          "full": "/assets/OpenProj/OpenProjector-10.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-11.webp",
+          "full": "/assets/OpenProj/OpenProjector-11.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-12.webp",
+          "full": "/assets/OpenProj/OpenProjector-12.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-13.webp",
+          "full": "/assets/OpenProj/OpenProjector-13.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-14.webp",
+          "full": "/assets/OpenProj/OpenProjector-14.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-15.webp",
+          "full": "/assets/OpenProj/OpenProjector-15.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-16.webp",
+          "full": "/assets/OpenProj/OpenProjector-16.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-17.webp",
+          "full": "/assets/OpenProj/OpenProjector-17.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-18.webp",
+          "full": "/assets/OpenProj/OpenProjector-18.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-19.webp",
+          "full": "/assets/OpenProj/OpenProjector-19.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        },
+        {
+          "src": "/assets/OpenProj/OpenProjector-20.webp",
+          "full": "/assets/OpenProj/OpenProjector-20.jpeg",
+          "alt": "Person Presenting",
+          "caption": ""
         }
       ]
     },
@@ -609,7 +681,14 @@
       "thumbDir": "assets/CanWeStartAgain/Gallery",
       "fullDir": "assets/CanWeStartAgain/Gallery",
       "filePrefix": "CWSA",
-      "images": []
+      "images": [
+        {
+          "src": "/assets/CanWeStartAgain/Gallery/DELETEME.webp",
+          "full": "/assets/CanWeStartAgain/Gallery/DELETEME.jpeg",
+          "alt": "Person presenting at open projector event",
+          "caption": ""
+        }
+      ]
     }
   ]
 }
