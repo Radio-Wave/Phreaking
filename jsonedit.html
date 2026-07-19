@@ -1595,6 +1595,18 @@ function imgRow(img,i){
           <span class="img-convert-panel-label">Thumbnail · WebP</span>
           <img id="ico-webp-img-${i}" src="" alt="webp preview">
           <span class="img-convert-size" id="ico-webp-size-${i}">—</span>
+          <div class="img-quality-row">
+            <span>W</span>
+            <input type="range" min="400" max="6000" step="50" value="1200" id="ico-webp-width-slider-${i}"
+              oninput="updateWebpWidth(${i},this.value)">
+            <span id="ico-webp-width-label-${i}" style="min-width:44px">1200px</span>
+          </div>
+          <div class="img-quality-row">
+            <span>Q</span>
+            <input type="range" min="30" max="100" value="80" id="ico-webp-qual-slider-${i}"
+              oninput="updateWebpQuality(${i},this.value)">
+            <span id="ico-webp-qual-label-${i}" style="min-width:30px">80%</span>
+          </div>
           <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-webp-${i}" onclick="stageImg(${i},'webp')">+ Save for push</button>
           <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub(${i},'webp')">↑ Upload now</button>
           <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'webp')">↓ Download</button>
@@ -1692,24 +1704,31 @@ function estimateSizeKB(dataURL){
   return Math.round((dataURL.split(',')[1]||'').length*0.75/1024);
 }
 
-function convertToWebP(imgEl){
+// convertToWebP(img) → auto quality (binary-searched to 100–300 KB), 1200px cap.
+// convertToWebP(img, quality, maxWidth) → explicit % quality + width, like convertToJPEG.
+// Always returns the quality used (0–100) so the UI slider can reflect it.
+function convertToWebP(imgEl, quality, maxWidth){
   const canvas=document.createElement('canvas');
   let w=imgEl.naturalWidth, h=imgEl.naturalHeight;
-  const MAX=1200;
-  if(w>MAX||h>MAX){ const s=Math.min(MAX/w,MAX/h); w=Math.round(w*s); h=Math.round(h*s); }
+  const MAX=maxWidth||1200;
+  if(w>MAX){ const s=MAX/w; w=Math.round(w*s); h=Math.round(h*s); }
   canvas.width=w; canvas.height=h;
   canvas.getContext('2d').drawImage(imgEl,0,0,w,h);
-  // Binary-search quality to land in 100–300 KB
-  let lo=0.05, hi=1.0, dataURL='', sizeKB=0;
+  if(quality!=null){
+    const dataURL=canvas.toDataURL('image/webp',quality/100);
+    return {dataURL, sizeKB:estimateSizeKB(dataURL), quality:Math.round(quality)};
+  }
+  // Auto: binary-search quality to land in 100–300 KB
+  let lo=0.05, hi=1.0, dataURL='', sizeKB=0, q=0.7;
   for(let n=0;n<10;n++){
-    const q=(lo+hi)/2;
+    q=(lo+hi)/2;
     dataURL=canvas.toDataURL('image/webp',q);
     sizeKB=estimateSizeKB(dataURL);
     if(sizeKB>300) hi=q;
     else if(sizeKB<100) lo=q;
     else break;
   }
-  return {dataURL, sizeKB};
+  return {dataURL, sizeKB, quality:Math.round(q*100)};
 }
 
 function convertToJPEG(imgEl, quality, maxWidth){
@@ -1727,10 +1746,13 @@ function convertImgBoth(imgIdx, imgEl){
   const key=imgConvKey(imgIdx);
   const prevQ=imgConvState[key]?.quality||85;
   const prevW=imgConvState[key]?.maxWidth||Math.min(imgEl.naturalWidth,2000);
-  const webp=convertToWebP(imgEl);
+  const prevWebpQ=imgConvState[key]?.webpQuality;                      // undefined → auto on first convert
+  const prevWebpW=imgConvState[key]?.webpMaxWidth||Math.min(imgEl.naturalWidth,1200);
+  const webp=convertToWebP(imgEl,prevWebpQ,prevWebpW);
   const jpeg=convertToJPEG(imgEl,prevQ/100,prevW);
   imgConvState[key]={srcImg:imgEl, webpDataURL:webp.dataURL, webpSize:webp.sizeKB,
-    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:prevQ, maxWidth:prevW};
+    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:prevQ, maxWidth:prevW,
+    webpQuality:webp.quality, webpMaxWidth:prevWebpW};
 
   // Replace any old blob URLs for this slot, then create fresh ones
   const old=imgPreviewCache[key];
@@ -1755,6 +1777,11 @@ function showConvUI(imgIdx){
   const el=id=>document.getElementById(id);
   if(el('ico-webp-img-'+imgIdx))  el('ico-webp-img-'+imgIdx).src=s.webpDataURL;
   if(el('ico-webp-size-'+imgIdx)) el('ico-webp-size-'+imgIdx).textContent=s.webpSize+' KB';
+  if(el('ico-webp-qual-slider-'+imgIdx)) el('ico-webp-qual-slider-'+imgIdx).value=s.webpQuality;
+  if(el('ico-webp-qual-label-'+imgIdx))  el('ico-webp-qual-label-'+imgIdx).textContent=s.webpQuality+'%';
+  const wwSlider=el('ico-webp-width-slider-'+imgIdx);
+  if(wwSlider){ wwSlider.max=Math.max(s.srcImg.naturalWidth,400); wwSlider.value=s.webpMaxWidth; }
+  if(el('ico-webp-width-label-'+imgIdx)) el('ico-webp-width-label-'+imgIdx).textContent=s.webpMaxWidth+'px';
   const jSize=el('ico-jpeg-size-'+imgIdx);
   if(jSize){
     jSize.textContent=s.jpegSize+' KB'+(s.jpegSize>1024?' ⚠ >1 MB':'');
@@ -1837,6 +1864,34 @@ function updateJpegWidth(imgIdx, val){
     imgPreviewCache[pkey].jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL));
     renderPreview();
   }
+}
+
+// Re-encode the WebP thumbnail from current state, refresh its preview + blob
+function reconvertWebp(imgIdx, labelId, labelText){
+  const key=imgConvKey(imgIdx);
+  const s=imgConvState[key]; if(!s) return;
+  const res=convertToWebP(s.srcImg,s.webpQuality,s.webpMaxWidth);
+  s.webpDataURL=res.dataURL; s.webpSize=res.sizeKB;
+  const el=id=>document.getElementById(id);
+  if(el('ico-webp-img-'+imgIdx))  el('ico-webp-img-'+imgIdx).src=res.dataURL;
+  if(el('ico-webp-size-'+imgIdx)) el('ico-webp-size-'+imgIdx).textContent=res.sizeKB+' KB';
+  if(el(labelId)) el(labelId).textContent=labelText;
+  // Refresh webp blob URL so the live preview reflects the new thumbnail
+  if(imgPreviewCache[key]){
+    URL.revokeObjectURL(imgPreviewCache[key].webp);
+    imgPreviewCache[key].webp=URL.createObjectURL(dataURLToBlob(res.dataURL));
+    renderPreview();
+  }
+}
+function updateWebpQuality(imgIdx, val){
+  const s=imgConvState[imgConvKey(imgIdx)]; if(!s) return;
+  s.webpQuality=parseInt(val);
+  reconvertWebp(imgIdx,'ico-webp-qual-label-'+imgIdx,val+'%');
+}
+function updateWebpWidth(imgIdx, val){
+  const s=imgConvState[imgConvKey(imgIdx)]; if(!s) return;
+  s.webpMaxWidth=parseInt(val);
+  reconvertWebp(imgIdx,'ico-webp-width-label-'+imgIdx,val+'px');
 }
 
 function downloadConvert(imgIdx, type){
@@ -3463,10 +3518,13 @@ function galConvert(im, imgEl){
   const prev=galConv.get(im)||{};
   const q=prev.quality||85;
   const w=prev.maxWidth||Math.min(imgEl.naturalWidth,2000);
-  const webp=convertToWebP(imgEl);
+  const wq=prev.webpQuality;                                     // undefined → auto on first convert
+  const ww=prev.webpMaxWidth||Math.min(imgEl.naturalWidth,1200);
+  const webp=convertToWebP(imgEl,wq,ww);
   const jpeg=convertToJPEG(imgEl,q/100,w);
   galConv.set(im,{srcImg:imgEl, webpDataURL:webp.dataURL, webpSize:webp.sizeKB,
-    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:q, maxWidth:w});
+    jpegDataURL:jpeg.dataURL, jpegSize:jpeg.sizeKB, quality:q, maxWidth:w,
+    webpQuality:webp.quality, webpMaxWidth:ww});
   const old=galPrev.get(im);
   if(old){ URL.revokeObjectURL(old.webp); URL.revokeObjectURL(old.jpeg); }
   galPrev.set(im,{
@@ -3526,6 +3584,12 @@ function buildGalleryForm(){
           <span class="img-convert-panel-label">Thumbnail · WebP</span>
           <img id="gico-webp-img" src="${hasConv?s.webpDataURL:''}" alt="webp preview">
           <span class="img-convert-size" id="gico-webp-size">${hasConv?s.webpSize+' KB':'—'}</span>
+          <div class="img-quality-row"><span>W</span>
+            <input type="range" min="400" max="6000" step="50" id="gico-webp-width" value="${hasConv?s.webpMaxWidth:1200}" oninput="galUpdateWebpWidth(this.value)">
+            <span id="gico-webp-width-label" style="min-width:44px">${hasConv?s.webpMaxWidth:1200}px</span></div>
+          <div class="img-quality-row"><span>Q</span>
+            <input type="range" min="30" max="100" id="gico-webp-qual" value="${hasConv?s.webpQuality:80}" oninput="galUpdateWebpQuality(this.value)">
+            <span id="gico-webp-qual-label" style="min-width:30px">${hasConv?s.webpQuality:80}%</span></div>
         </div>
         <div class="img-convert-panel">
           <span class="img-convert-panel-label">Full · JPEG</span>
@@ -3616,6 +3680,38 @@ function galApplyJpegUI(res, labelId, labelText){
 function galRefreshJpegBlob(im,res){
   const p=galPrev.get(im);
   if(p){ URL.revokeObjectURL(p.jpeg); p.jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL)); renderPreview(); }
+}
+
+function galUpdateWebpQuality(val){
+  const cur=galCur(); if(!cur) return;
+  const s=galConv.get(cur.im); if(!s) return;
+  s.webpQuality=parseInt(val);
+  const res=convertToWebP(s.srcImg,s.webpQuality,s.webpMaxWidth);
+  s.webpDataURL=res.dataURL; s.webpSize=res.sizeKB;
+  galApplyWebpUI(res,'gico-webp-qual-label',val+'%');
+  galRefreshWebpBlob(cur.im,res); galRestageIfStaged(cur.im);
+}
+function galUpdateWebpWidth(val){
+  const cur=galCur(); if(!cur) return;
+  const s=galConv.get(cur.im); if(!s) return;
+  s.webpMaxWidth=parseInt(val);
+  const res=convertToWebP(s.srcImg,s.webpQuality,s.webpMaxWidth);
+  s.webpDataURL=res.dataURL; s.webpSize=res.sizeKB;
+  galApplyWebpUI(res,'gico-webp-width-label',val+'px');
+  galRefreshWebpBlob(cur.im,res); galRestageIfStaged(cur.im);
+}
+function galApplyWebpUI(res, labelId, labelText){
+  const img=document.getElementById('gico-webp-img'); if(img) img.src=res.dataURL;
+  const sz=document.getElementById('gico-webp-size'); if(sz) sz.textContent=res.sizeKB+' KB';
+  const lbl=document.getElementById(labelId); if(lbl) lbl.textContent=labelText;
+}
+// The webp blob backs the list thumb, form thumb and preview, so refresh all three
+function galRefreshWebpBlob(im,res){
+  const p=galPrev.get(im); if(!p) return;
+  URL.revokeObjectURL(p.webp);
+  p.webp=URL.createObjectURL(dataURLToBlob(res.dataURL));
+  const ft=document.querySelector('.gal-form-thumb'); if(ft) ft.src=p.webp;
+  renderList(); renderPreview();
 }
 
 // ── STAGING ──
