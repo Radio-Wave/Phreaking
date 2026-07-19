@@ -698,7 +698,8 @@
       "affiliation": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "sortOrder": 3
+      "sortOrder": 3,
+      "visible": false
     },
     {
       "@type": "Person",
@@ -743,6 +744,22 @@
       "url": "",
       "linkLabel": "",
       "visible": false
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phreaking.co.uk/#artist-guy-altarace-sherman-can-we-start-again",
+      "name": "Guy Altarace-Sherman",
+      "exhibition": "can-we-start-again",
+      "jobTitle": "Artist",
+      "description": "Guy Altarace-Sherman is a British multimedia performance artist concerned with play and machinic interaction. Through the recycling of obsolete purpose-built hardware & edited performative video work, they explore how diverging digital personas persist through the over-processing & compression inherent in how we share data and reflective of the multifaceted nature of modern technological systems .\nThe production of alternative, responsive work seeks to address our collective media entanglement and build a continuing dialogue between consumer and consumable in a post-human technocratic world order.",
+      "url": "mailto: guyaltarace@gmail.com",
+      "linkLabel": "Contact",
+      "sameAs": [],
+      "knowsAbout": [],
+      "affiliation": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "sortOrder": 6
     }
   ]
 }
