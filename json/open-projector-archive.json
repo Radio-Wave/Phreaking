@@ -5,12 +5,48 @@
       "label": "Open Projector #1",
       "date": "17.01.26",
       "presenters": [
-        { "number": 1, "name": "Sophie", "project": "Geometric image weaving", "link": "sophienadel.com", "socials": "@snart.98" },
-        { "number": 2, "name": "Melissa", "project": "Bacteria 3D scanning for a game // installation", "link": "melissayunzhi.li", "socials": "@melissaliyunzhi" },
-        { "number": 3, "name": "Elia", "project": "Conscript Theatre: Sci-Fi theatre", "link": "conscript-theatre.com", "socials": "@conscripttheatre" },
-        { "number": 4, "name": "Martin Dittus", "project": "Graphical computer interface + animations on modern laptop", "link": "--", "socials": "--" },
-        { "number": 5, "name": "--", "project": "Autopoetic -- poetry", "link": "--", "socials": "--" },
-        { "number": 6, "name": "Jack Jesse", "project": "3D scans of Kew Garden specimens", "link": "--", "socials": "@jack__jesse" }
+        {
+          "number": 1,
+          "name": "Sophie",
+          "project": "Geometric image weaving",
+          "link": "sophienadel.com",
+          "socials": "@snart.98"
+        },
+        {
+          "number": 2,
+          "name": "Melissa",
+          "project": "Bacteria 3D scanning for a game // installation",
+          "link": "melissayunzhi.li",
+          "socials": "@melissaliyunzhi"
+        },
+        {
+          "number": 3,
+          "name": "Elia",
+          "project": "Conscript Theatre: Sci-Fi theatre",
+          "link": "conscript-theatre.com",
+          "socials": "@conscripttheatre"
+        },
+        {
+          "number": 4,
+          "name": "Martin Dittus",
+          "project": "Graphical computer interface + animations on modern laptop",
+          "link": "--",
+          "socials": "--"
+        },
+        {
+          "number": 5,
+          "name": "--",
+          "project": "Autopoetic -- poetry",
+          "link": "--",
+          "socials": "--"
+        },
+        {
+          "number": 6,
+          "name": "Jack Jesse",
+          "project": "3D scans of Kew Garden specimens",
+          "link": "--",
+          "socials": "@jack__jesse"
+        }
       ]
     },
     {
@@ -18,13 +54,55 @@
       "label": "Open Projector #2",
       "date": "01.03.26",
       "presenters": [
-        { "number": 1, "name": "Izzy", "project": "Audio rendering of live TFL tube lines", "link": "iso-bel.computer/tubesounds", "socials": "iso-bel.computer" },
-        { "number": 2, "name": "Melissa", "project": "Home is a dwelling path -- 3D world narration", "link": "home is a dwelling path", "socials": "@melissayunzhi" },
-        { "number": 3, "name": "(didn't get your details, message us!)", "project": "The idealist collective", "link": "idealistscollective.org", "socials": "(didn't get your details, message us!)" },
-        { "number": 4, "name": "Nikos", "project": "File explorer mini games", "link": "nikos.kourous.net", "socials": "@nikoskourous" },
-        { "number": 5, "name": "Daniel", "project": "Home jellyfin movie server", "link": "jellyfin.org/", "socials": "--" },
-        { "number": 6, "name": "Sneha", "project": "Nginx Visualizer -- animation of website crawls and robots", "link": "codercat.xyz/nginx-visualizer/", "socials": "@snayss" },
-        { "number": 7, "name": "Elleya", "project": "Paper sculpture & study on collaberative play", "link": "yelleygenkin@gmail.com", "socials": "@yelleygenkin" }
+        {
+          "number": 1,
+          "name": "Izzy",
+          "project": "Audio rendering of live TFL tube lines",
+          "link": "iso-bel.computer/tubesounds",
+          "socials": "iso-bel.computer"
+        },
+        {
+          "number": 2,
+          "name": "Melissa",
+          "project": "Home is a dwellling path -- 3D world narration",
+          "link": "home is a dwelling path",
+          "socials": "@melissayunzhi"
+        },
+        {
+          "number": 3,
+          "name": "(didn't get your details, message us!)",
+          "project": "The idealist collective",
+          "link": "idealistscollective.org",
+          "socials": "(didn't get your details, message us!)"
+        },
+        {
+          "number": 4,
+          "name": "Nikos",
+          "project": "File explorer mini games",
+          "link": "nikos.kourous.net",
+          "socials": "@nikoskourous"
+        },
+        {
+          "number": 5,
+          "name": "Daniel",
+          "project": "Home jellyfin movie server",
+          "link": "jellyfin.org/",
+          "socials": "--"
+        },
+        {
+          "number": 6,
+          "name": "Sneha",
+          "project": "Nginx Visualizer -- animation of website crawls and robots",
+          "link": "codercat.xyz/nginx-visualizer/",
+          "socials": "@snayss"
+        },
+        {
+          "number": 7,
+          "name": "Elleya",
+          "project": "Paper sculpture & study on collaberative play",
+          "link": "yelleygenkin@gmail.com",
+          "socials": "@yelleygenkin"
+        }
       ]
     },
     {
@@ -32,21 +110,111 @@
       "label": "Open Projector #3",
       "date": "31.03.26",
       "presenters": [
-        { "number": 1, "name": "Maya", "project": "Screaming computer", "link": "cheng.organic", "socials": "--" },
-        { "number": 2, "name": "Nikos", "project": "File explorer adventure game", "link": "nikos.kourous.net", "socials": "@nikoskourous" },
-        { "number": 3, "name": "Melissa", "project": "Performance lecture wip", "link": "melissayunzhi.li", "socials": "@melissayunzhi" },
-        { "number": 4, "name": "Anna", "project": "films with abstract erotic bedroom items and telephone conversation", "link": "film 1 film 2", "socials": "@anna.leyko" },
-        { "number": 5, "name": "Nikhar", "project": "Video to synthizier", "link": "nikharyadav.cargo.site", "socials": "@notscinotart" },
-        { "number": 6, "name": "Demi from Hackney", "project": "Graffiti practice + banned from tate modern", "link": "--", "socials": "@demi.fh" },
-        { "number": 7, "name": "Kyle", "project": "Physical led sound triangle responsive scultpure", "link": "formandstructure.co/tetralume", "socials": "@form.structure" },
-        { "number": 8, "name": "Jordan", "project": "Poetic practice on body dismporhia and the aquatic self", "link": "research link", "socials": "@yourunclecozy" },
-        { "number": 9, "name": "Ameer", "project": "tiny browser based game engine and world builder", "link": "libi.xyz", "socials": "@storyofameer" },
-        { "number": 10, "name": "Adam", "project": "3D modeling practice - flowers, blender, and sculpture", "link": "adamelwardany.cargo.site", "socials": "@adamelwardany_art" },
-        { "number": 11, "name": "Leo", "project": "Funky 3D animations -- corperate tech goofydog, furry alien abduction +", "link": "portfolio", "socials": "portfolio" },
-        { "number": 12, "name": "Khalid", "project": "AR Murder Mystery Game London", "link": "linktr.ee/khaliddoesfilm", "socials": "@thatmurdermystery" },
-        { "number": 13, "name": "Kourosh", "project": "LLM MP parliment searching for labour", "link": "--", "socials": "@kouroshsimpkins" },
-        { "number": 14, "name": "Arinze", "project": "Touchdesigner projects & animations", "link": "--", "socials": "@eznira.appio" },
-        { "number": 15, "name": "Taehoon", "project": "Custom MaxSMP sequencer", "link": "--", "socials": "@tankengine04" }
+        {
+          "number": 1,
+          "name": "Maya",
+          "project": "Screaming computer",
+          "link": "cheng.organic",
+          "socials": "--"
+        },
+        {
+          "number": 2,
+          "name": "Nikos",
+          "project": "File explorer adventure game",
+          "link": "nikos.kourous.net",
+          "socials": "@nikoskourous"
+        },
+        {
+          "number": 3,
+          "name": "Melissa",
+          "project": "Performance lecture wip",
+          "link": "melissayunzhi.li",
+          "socials": "@melissayunzhi"
+        },
+        {
+          "number": 4,
+          "name": "Anna",
+          "project": "films with abstract erotic bedroom items and telephone conversation",
+          "link": "film 1 film 2",
+          "socials": "@anna.leyko"
+        },
+        {
+          "number": 5,
+          "name": "Nikhar",
+          "project": "Video to synthizier",
+          "link": "nikharyadav.cargo.site",
+          "socials": "@notscinotart"
+        },
+        {
+          "number": 6,
+          "name": "Demi from Hackney",
+          "project": "Graffiti practice + banned from tate modern",
+          "link": "--",
+          "socials": "@demi.fh"
+        },
+        {
+          "number": 7,
+          "name": "Kyle",
+          "project": "Physical led sound triangle responsive scultpure",
+          "link": "formandstructure.co/tetralume",
+          "socials": "@form.structure"
+        },
+        {
+          "number": 8,
+          "name": "Jordan",
+          "project": "Poetic practice on body dismporhia and the aquatic self",
+          "link": "research link",
+          "socials": "@yourunclecozy"
+        },
+        {
+          "number": 9,
+          "name": "Ameer",
+          "project": "tiny browser based game engine and world builder",
+          "link": "libi.xyz",
+          "socials": "@storyofameer"
+        },
+        {
+          "number": 10,
+          "name": "Adam",
+          "project": "3D modeling practice - flowers, blender, and sculpture",
+          "link": "adamelwardany.cargo.site",
+          "socials": "@adamelwardany_art"
+        },
+        {
+          "number": 11,
+          "name": "Leo",
+          "project": "Funky 3D animations -- corperate tech goofydog, furry alien abduction +",
+          "link": "portfolio",
+          "socials": "portfolio"
+        },
+        {
+          "number": 12,
+          "name": "Khalid",
+          "project": "AR Murder Mystery Game London",
+          "link": "linktr.ee/khaliddoesfilm",
+          "socials": "@thatmurdermystery"
+        },
+        {
+          "number": 13,
+          "name": "Kourosh",
+          "project": "LLM MP parliment searching for labour",
+          "link": "--",
+          "socials": "@kouroshsimpkins"
+        },
+        {
+          "number": 14,
+          "name": "Arinze",
+          "project": "Touchdesigner projects & animations",
+          "link": "--",
+          "socials": "@eznira.appio"
+        },
+        {
+          "number": 15,
+          "name": "Taehoon",
+          "project": "Custom MaxSMP sequencer",
+          "link": "--",
+          "socials": "@tankengine04"
+        }
       ]
     },
     {
@@ -54,20 +222,104 @@
       "label": "Open Projector #4",
       "date": "28.04.26",
       "presenters": [
-        { "number": 1, "name": "Maya", "project": "Online 3D chatroom website, mayas world", "link": "may4w0r1d.com", "socials": "manlikemaya@gmail.com" },
-        { "number": 2, "name": "den", "project": "On humans, chilling, and purr magazine", "link": "den@purr.you", "socials": "@purrden" },
-        { "number": 3, "name": "Ben", "project": "An endless scroll about the internet, while George Michael plays", "link": "http://whisper.elwyn.co", "socials": "@elwynco" },
-        { "number": 4, "name": "camila", "project": "Montage visual exploring current job market & tech layoffs", "link": "camilajalfonso.com", "socials": "@ikilledtech" },
-        { "number": 5, "name": "Elia (Conscript Theatre)", "project": "Techno-Physical Theatre Company - Untitled Robot Story", "link": "conscript-theatre.com", "socials": "@conscripttheatre, @elia.fielden" },
-        { "number": 6, "name": "(didn't get your details, message us!)", "project": "Touchdesigner oscilator world exploring stress & relaxation", "link": "(didn't get your details, message us!)", "socials": "(didn't get your details, message us!)" },
-        { "number": 7, "name": "(didn't get your details, message us!)", "project": "Lylac, an app for sharing and exploring artist studios", "link": "(didn't get your details, message us!)", "socials": "(didn't get your details, message us!)" },
-        { "number": 8, "name": "Elleya", "project": "A project abour reimaging museum maps / tours by creating your own sites & routes", "link": "yelleygenkin@gmail.com", "socials": "@yelleygenkin" },
-        { "number": 9, "name": "May", "project": "JPEG DCT Visualisation", "link": "cheng.organic", "socials": "--" },
-        { "number": 10, "name": "Hannah", "project": "Artemis II Visulisation with Photos", "link": "(didn't get your details, message us!)", "socials": "(didn't get your details, message us!)" },
-        { "number": 11, "name": "(didn't get your details, message us!)", "project": "Short film & practice around the 3D modelling of Pakistani artifacts and cultural heritage", "link": "(didn't get your details, message us!)", "socials": "(didn't get your details, message us!)" },
-        { "number": 12, "name": "Izzy", "project": "Scraping and analsysis of MumsNet, exploring online transphobia", "link": "github.com/iso-bel-computer/ywabm", "socials": "--" },
-        { "number": 13, "name": "(didn't get your details, message us!)", "project": "Drawing with a typewriter, using symbols and letters", "link": "(didn't get your details, message us!)", "socials": "(didn't get your details, message us!)" },
-        { "number": 14, "name": "Grace", "project": "Chinese district photography with mediapipe under kings cross bridge", "link": "--", "socials": "@gracewjy111" }
+        {
+          "number": 1,
+          "name": "Maya",
+          "project": "Online 3D chatroom website, mayas world",
+          "link": "may4w0r1d.com",
+          "socials": "manlikemaya@gmail.com"
+        },
+        {
+          "number": 2,
+          "name": "den",
+          "project": "On humans, chilling, and purr magazine",
+          "link": "den@purr.you",
+          "socials": "@purrden"
+        },
+        {
+          "number": 3,
+          "name": "Ben",
+          "project": "An endless scroll about the internet, while George Michael plays",
+          "link": "http://whisper.elwyn.co",
+          "socials": "@elwynco"
+        },
+        {
+          "number": 4,
+          "name": "camila",
+          "project": "Montage visual exploring current job market & tech layoffs",
+          "link": "camilajalfonso.com",
+          "socials": "@ikilledtech"
+        },
+        {
+          "number": 5,
+          "name": "Elia (Conscript Theatre)",
+          "project": "Techno-Physical Theatre Company - Untitled Robot Story",
+          "link": "conscript-theatre.com",
+          "socials": "@conscripttheatre, @elia.fielden"
+        },
+        {
+          "number": 6,
+          "name": "(didn't get your details, message us!)",
+          "project": "Touchdesigner oscilator world exploring stress & relaxation",
+          "link": "(didn't get your details, message us!)",
+          "socials": "(didn't get your details, message us!)"
+        },
+        {
+          "number": 7,
+          "name": "(didn't get your details, message us!)",
+          "project": "Lylac, an app for sharing and exploring artist studios",
+          "link": "(didn't get your details, message us!)",
+          "socials": "(didn't get your details, message us!)"
+        },
+        {
+          "number": 8,
+          "name": "Elleya",
+          "project": "A project abour reimaging museum maps / tours by creating your own sites & routes",
+          "link": "yelleygenkin@gmail.com",
+          "socials": "@yelleygenkin"
+        },
+        {
+          "number": 9,
+          "name": "May",
+          "project": "JPEG DCT Visualisation",
+          "link": "cheng.organic",
+          "socials": "--"
+        },
+        {
+          "number": 10,
+          "name": "Hannah",
+          "project": "Artemis II Visulisation with Photos",
+          "link": "(didn't get your details, message us!)",
+          "socials": "(didn't get your details, message us!)"
+        },
+        {
+          "number": 11,
+          "name": "(didn't get your details, message us!)",
+          "project": "Short film & practice around the 3D modelling of Pakistani artifacts and cultural heritage",
+          "link": "(didn't get your details, message us!)",
+          "socials": "(didn't get your details, message us!)"
+        },
+        {
+          "number": 12,
+          "name": "Izzy",
+          "project": "Scraping and analsysis of MumsNet, exploring online transphobia",
+          "link": "github.com/iso-bel-computer/ywabm",
+          "socials": "--"
+        },
+        {
+          "number": 13,
+          "name": "(didn't get your details, message us!)",
+          "project": "Drawing with a typewriter, using symbols and letters",
+          "link": "(didn't get your details, message us!)",
+          "socials": "(didn't get your details, message us!)"
+        },
+        {
+          "number": 14,
+          "name": "Grace",
+          "project": "Chinese district photography with mediapipe under kings cross bridge",
+          "link": "--",
+          "socials": "@gracewjy111"
+        }
       ]
     },
     {
@@ -75,18 +327,90 @@
       "label": "Open Projector #5",
       "date": "26.05.26",
       "presenters": [
-        { "number": 1, "name": "Nikos", "project": "Secret laptop webcam pictures for dataset training", "link": "nikos.kourous.net", "socials": "@nikoskourous" },
-        { "number": 2, "name": "Elmira", "project": "Them and Us -- understanding both sides and participatory engagement", "link": "elmiraselivanova.com", "socials": "@twoarmedshiva" },
-        { "number": 3, "name": "Marcus S", "project": "Short animated film, inspired by religious and medieval iconography and found footage", "link": "link to film", "socials": "@marcus.stalmanis" },
-        { "number": 4, "name": "Vishal", "project": "In Transit -- A playbook to get off your phones on the underground", "link": "--", "socials": "@vishalmehta10 & @andfriends.works" },
-        { "number": 5, "name": "Fran", "project": "A simulation of slime mould to create an anti facial recognition mask", "link": "franhayes.com", "socials": "@_frangry_" },
-        { "number": 6, "name": "Farida", "project": "Soundtracking The Witness trailer with custom-made diegetic sound", "link": "--", "socials": "@frd.ysf" },
-        { "number": 7, "name": "Elleya", "project": "Schematic mapping to track ideas and thoughts", "link": "https://www.youtube.com/@yel13y", "socials": "@yelleygenkin" },
-        { "number": 8, "name": "Taehoon", "project": "On relaxation, projection mapping + touch designer", "link": "--", "socials": "@tankengine04" },
-        { "number": 9, "name": "Marcus R", "project": "Performance lecture on sentience, AI meaning making, words, and mortality", "link": "marcusround.art", "socials": "@marcus___rnd" },
-        { "number": 10, "name": "Minghao", "project": "Art practice engaging with speculative ecology through sculpture and installation", "link": "minghaowu.com", "socials": "@minghaowuu" },
-        { "number": 11, "name": "Nathan", "project": "journeypaint - a custom paint app", "link": "journeypaint.fun", "socials": "@nathansonic" },
-        { "number": 12, "name": "Izzy", "project": "A simulatory online sandbox world map with terrain types, physics, and animals", "link": "https://www.iso-bel.computer/fallingland", "socials": "--" }
+        {
+          "number": 1,
+          "name": "Nikos",
+          "project": "Secret laptop webcam pictures for dataset training",
+          "link": "nikos.kourous.net",
+          "socials": "@nikoskourous"
+        },
+        {
+          "number": 2,
+          "name": "Elmira",
+          "project": "Them and Us -- understanding both sides and participatory engagement",
+          "link": "elmiraselivanova.com",
+          "socials": "@twoarmedshiva"
+        },
+        {
+          "number": 3,
+          "name": "Marcus S",
+          "project": "Short animated film, inspired by religious and medieval iconography and found footage",
+          "link": "link to film",
+          "socials": "@marcus.stalmanis"
+        },
+        {
+          "number": 4,
+          "name": "Vishal",
+          "project": "In Transit -- A playbook to get off your phones on the underground",
+          "link": "--",
+          "socials": "@vishalmehta10 & @andfriends.works"
+        },
+        {
+          "number": 5,
+          "name": "Fran",
+          "project": "A simulation of slime mould to create an anti facial recognition mask",
+          "link": "franhayes.com",
+          "socials": "@_frangry_"
+        },
+        {
+          "number": 6,
+          "name": "Farida",
+          "project": "Soundtracking The Witness trailer with custom-made diegetic sound",
+          "link": "--",
+          "socials": "@frd.ysf"
+        },
+        {
+          "number": 7,
+          "name": "Elleya",
+          "project": "Schematic mapping to track ideas and thoughts",
+          "link": "https://www.youtube.com/@yel13y",
+          "socials": "@yelleygenkin"
+        },
+        {
+          "number": 8,
+          "name": "Taehoon",
+          "project": "On relaxation, projection mapping + touch designer",
+          "link": "--",
+          "socials": "@tankengine04"
+        },
+        {
+          "number": 9,
+          "name": "Marcus R",
+          "project": "Performance lecture on sentience, AI meaning making, words, and mortality",
+          "link": "marcusround.art",
+          "socials": "@marcus___rnd"
+        },
+        {
+          "number": 10,
+          "name": "Minghao",
+          "project": "Art practice engaging with speculative ecology through sculpture and installation",
+          "link": "minghaowu.com",
+          "socials": "@minghaowuu"
+        },
+        {
+          "number": 11,
+          "name": "Nathan",
+          "project": "journeypaint - a custom paint app",
+          "link": "journeypaint.fun",
+          "socials": "@nathansonic"
+        },
+        {
+          "number": 12,
+          "name": "Izzy",
+          "project": "A simulatory online sandbox world map with terrain types, physics, and animals",
+          "link": "https://www.iso-bel.computer/fallingland",
+          "socials": "--"
+        }
       ]
     },
     {
@@ -94,20 +418,111 @@
       "label": "Open Projector #6",
       "date": "30.06.26",
       "presenters": [
-        { "number": 1, "name": "HOO", "project": "A projection project for a house party: stimulate dreams through light passing through your eyelid", "link": "--", "socials": "@hoo.labs" },
-        { "number": 2, "name": "Nuria and Aous", "project": "A site-specific project in an old prison cell, custom cricket instrument and light + sound installation", "link": "https://www.nuriarovira.com/cricket-in-the-cell", "socials": "https://nuriarovira.com/ https://houseaous.com/ @aoushamoud @a_nur.rovira" },
-        { "number": 3, "name": "Michael Woodruff", "project": "A map for digital art spaces in London + expressionist approach to after effects", "link": "nectarmotion.com", "socials": "@nectarmotion" },
-        { "number": 4, "name": "William Wong", "project": "Custom tool for mapping 3D space for 3D storytelling", "link": "https://www.linkedin.com/in/william-wong-37854577", "socials": "@thewilliamwong" },
-        { "number": 5, "name": "Alastair Ball & Tristan Spill & Sally Charlton", "project": "Art action school through social art & experimental education (CBS)", "link": "https://solarpunk.london/", "socials": "@solarpunkldn" },
-        { "number": 6, "name": "Marcus Stalmanis", "project": "A short film about a robot based off a found archive + bts", "link": "--", "socials": "@marcus.stalmanis" },
-        { "number": 7, "name": "Marilyn Ma", "project": "Research and projects on HCI -- creating instruments in VR", "link": "--", "socials": "@marilynn_mm" },
-        { "number": 8, "name": "Fran", "project": "--", "link": "--", "socials": "--" },
-        { "number": 9, "name": "Adam", "project": "--", "link": "--", "socials": "--" },
-        { "number": 10, "name": "Daniel", "project": "Clubz", "link": "thenewdigerati.com", "socials": "@thenewdigerati" },
-        { "number": 11, "name": "Mewes", "project": "Pigeons!!!", "link": "mewes-space.xyz/pages/pigeons!!!!.html", "socials": "@4mewes" },
-        { "number": 12, "name": "Xach", "project": "Vine panels", "link": "--", "socials": "--" },
-        { "number": 13, "name": "Duncan", "project": "Pigeons & Falafel", "link": "pigeons.duncanpetrie.com falafel.fyi", "socials": "@probablyduncan" },
-        { "number": 14, "name": "Kitty", "project": "--", "link": "plasticdino.net", "socials": "@plasticd1no" }
+        {
+          "number": 1,
+          "name": "HOO",
+          "project": "A projection project for a house party: stimulate dreams through light passing through your eyelid",
+          "link": "--",
+          "socials": "@hoo.labs"
+        },
+        {
+          "number": 2,
+          "name": "Nuria and Aous",
+          "project": "A site-specific project in an old prison cell, custom cricket instrument and light + sound installation",
+          "link": "https://www.nuriarovira.com/cricket-in-the-cell",
+          "socials": "https://nuriarovira.com/ https://houseaous.com/\n@aoushamoud @ a_nur.rovira"
+        },
+        {
+          "number": 3,
+          "name": "Michael Woodruff",
+          "project": "A map for digital art spaces in London + expressionist approach to after effects",
+          "link": "nectarmotion.com",
+          "socials": "@ nectarmotion"
+        },
+        {
+          "number": 4,
+          "name": "William Wong",
+          "project": "Custom tool for mapping 3D space for 3D storytelling",
+          "link": "https://www.linkedin.com/in/william-wong-37854577",
+          "socials": "@ thewilliamwong"
+        },
+        {
+          "number": 5,
+          "name": "Alastair Ball & Tristan Spill & Sally Charlton",
+          "project": "Art action school through social art & experimental education (CBS)",
+          "link": "https://solarpunk.london/",
+          "socials": "@ solarpunkldn"
+        },
+        {
+          "number": 6,
+          "name": "Marcus Stalmanis",
+          "project": "A short film about a robot based off a found archive + bts",
+          "link": "--",
+          "socials": "@ marcus.stalmanis"
+        },
+        {
+          "number": 7,
+          "name": "Marilyn Ma",
+          "project": "Research and projects on HCI -- creating instruments in VR",
+          "link": "--",
+          "socials": "@marilynn_mm"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "label": "Open Projector #7",
+      "date": "30.06.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "Fran",
+          "project": "An update on exploring slime moulds as anti facial reconision masks",
+          "link": "franhayes.com",
+          "socials": "@_frangry_"
+        },
+        {
+          "number": 2,
+          "name": "Adam",
+          "project": "3D modeling practice - flowers, blender, and sculpture",
+          "link": "adamelwardany.cargo.site",
+          "socials": "@adamelwardany_art"
+        },
+        {
+          "number": 3,
+          "name": "Daniel",
+          "project": "Clubz",
+          "link": "thenewdigerati.com",
+          "socials": "@ thenewdigerati"
+        },
+        {
+          "number": 4,
+          "name": "Mewes",
+          "project": "Pigeons!!!",
+          "link": "mewes-space.xyz/pages/pigeons!!!!.html",
+          "socials": "@ 4mewes"
+        },
+        {
+          "number": 5,
+          "name": "Xach",
+          "project": "VIne panels",
+          "link": "xachhill.com",
+          "socials": "@xach_hill"
+        },
+        {
+          "number": 6,
+          "name": "Duncan",
+          "project": "Pigeons & Falafel",
+          "link": "pigeons.duncanpetrie.com\nfalafel.fyi",
+          "socials": "@ probablyduncan"
+        },
+        {
+          "number": 7,
+          "name": "Kitty",
+          "project": "--",
+          "link": "plasticdino.net",
+          "socials": "@ plasticd1no"
+        }
       ]
     }
   ]
