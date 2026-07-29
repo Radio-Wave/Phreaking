@@ -871,7 +871,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <h3>Open Projector Archive Sync</h3>
     <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:6px;">
       Pulls the current rows from the
-      <a href="https://docs.google.com/spreadsheets/d/1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk/edit?gid=0#gid=0" target="_blank" rel="noopener">Open Projector Google Sheet</a>,
+      <a href="https://docs.google.com/spreadsheets/d/1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk/edit?gid=288465562#gid=288465562" target="_blank" rel="noopener">Open Projector Google Sheet</a>,
       parses them into <code style="font-family:var(--mono)">json/open-projector-archive.json</code>'s shape, and lets you review before pushing. The sheet is the source of truth — edit content there, then sync here. Nothing is written until you click Push.
     </p>
     <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
@@ -2810,7 +2810,7 @@ async function pushImageSitemap(headers, owner, repo, branch){
 
 // ── OPEN PROJECTOR ARCHIVE SYNC ──────────────────────────
 const OP_ARCHIVE_SHEET_ID = '1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk';
-const OP_ARCHIVE_GID = '0';
+const OP_ARCHIVE_GID = '288465562';   // current archive tab; gid 0 is the superseded layout
 let archiveData = null;
 
 function openArchiveModal(){
@@ -2846,40 +2846,61 @@ function parseCSV(text){
 }
 
 // Turns the sheet's raw rows into { events:[{ id, label, date, presenters:[...] }] }.
-// Session headers look like "OPEN PROJECTOR #3 -- 31.03.26" (optionally prefixed "NEXT:");
-// a stray duplicate header row mid-table (same id as the session already open) is dropped;
-// blank rows and the trailing site-contact rows (phreaking.co.uk / phreakingcollective) are skipped.
-// Presenter numbers are reassigned 1..N per session from row order, ignoring the sheet's own
-// numbering gaps so a dropped duplicate header never shows up as a missing number.
+//
+// The sheet opens with a title/contact block and only then the column header row
+// ("OP | Presenter name | Project | Project link | Socials"); everything above that row is skipped.
+// Column A now carries a session tag ("#8") rather than a presenter number, and sessions run
+// newest-first, so rows are collected by session id instead of by position: an untagged row falls
+// back to the session whose header (or tagged row) was last seen, and a repeated header merges into
+// the session already built rather than starting a duplicate. Session headers look like
+// "OPEN PROJECTOR #8 -- 28.07.26" — a trailing "-- images" note in the header is ignored.
+// Presenter numbers are reassigned 1..N per session from row order, so untagged rows and the
+// sheet's own numbering gaps never surface as missing numbers.
 function buildArchiveFromRows(rows){
-  const events = [];
+  const byId = new Map();
   let current = null;
   const HEADER_RE = /OPEN PROJECTOR\s*#?\s*(\d+)/i;
+  const TAG_RE = /^#?\s*(\d+)$/;
   const DATE_RE = /(\d{1,2}\.\d{1,2}\.\d{2,4})/;
-  const isBlankRow = (r) => r.every((c) => !String(c || '').trim());
+  // Cells arrive with hard line breaks and stray padding from multi-line sheet entries. The site
+  // re-splits every cell on whitespace when it renders, so flatten it here; the same pass closes up
+  // the "@ handle" typo the sheet is full of, which would otherwise render as two tokens.
+  const cell = (v) => String(v == null ? '' : v)
+    .replace(/\s+/g, ' ')
+    .replace(/(^|\s)@\s+(?=\S)/g, '$1@')
+    .trim();
 
-  rows.forEach((r, i) => {
-    if(i === 0) return; // column header row
-    if(isBlankRow(r)) return;
+  const session = (id) => {
+    let ev = byId.get(id);
+    if(!ev){ ev = { id, label: `Open Projector #${id}`, date: '', presenters: [] }; byId.set(id, ev); }
+    return ev;
+  };
 
-    const name = String(r[1] || '').trim();
-    const project = String(r[2] || '').trim();
-    const link = String(r[3] || '').trim();
-    const socials = String(r[4] || '').trim();
+  let start = rows.findIndex((r) => r.some((c) => /presenter name/i.test(String(c || ''))));
+  start = start === -1 ? 0 : start + 1;
+
+  rows.slice(start).forEach((r) => {
+    const tag = cell(r[0]);
+    const name = cell(r[1]);
+    const project = cell(r[2]);
+    const link = cell(r[3]);
+    const socials = cell(r[4]);
 
     const headerMatch = name.match(HEADER_RE);
     if(headerMatch){
-      const id = Number(headerMatch[1]);
-      if(current && current.id === id) return; // stray duplicate header row
+      current = session(Number(headerMatch[1]));
       const dateMatch = name.match(DATE_RE);
-      current = { id, label: `Open Projector #${id}`, date: dateMatch ? dateMatch[1] : '', presenters: [] };
-      events.push(current);
+      if(dateMatch && !current.date) current.date = dateMatch[1];
       return;
     }
 
-    if(/phreaking\.co\.uk|phreakingcollective/i.test(name) && !project && !link && !socials) return;
+    if(!name && !project && !link && !socials) return; // blank / spacer row
+    // site-contact rows, wherever the sheet parks them
+    if(!link && !socials && /phreaking\.co\.uk|phreakingcollective/i.test(`${name} ${project}`)) return;
 
-    if(!current) return; // row before any recognised session header
+    const tagMatch = tag.match(TAG_RE);
+    if(tagMatch) current = session(Number(tagMatch[1]));
+    if(!current) return; // row before any recognised session
 
     current.presenters.push({
       number: null,
@@ -2890,8 +2911,8 @@ function buildArchiveFromRows(rows){
     });
   });
 
+  const events = [...byId.values()].sort((a, b) => a.id - b.id);
   events.forEach((ev) => ev.presenters.forEach((p, idx) => { p.number = idx + 1; }));
-  events.sort((a, b) => a.id - b.id);
   return { events };
 }
 
