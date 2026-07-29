@@ -430,35 +430,35 @@
           "name": "Nuria and Aous",
           "project": "A site-specific project in an old prison cell, custom cricket instrument and light + sound installation",
           "link": "https://www.nuriarovira.com/cricket-in-the-cell",
-          "socials": "https://nuriarovira.com/ https://houseaous.com/\n@aoushamoud @ a_nur.rovira"
+          "socials": "https://nuriarovira.com/ https://houseaous.com/ @aoushamoud @a_nur.rovira"
         },
         {
           "number": 3,
           "name": "Michael Woodruff",
           "project": "A map for digital art spaces in London + expressionist approach to after effects",
           "link": "nectarmotion.com",
-          "socials": "@ nectarmotion"
+          "socials": "@nectarmotion"
         },
         {
           "number": 4,
           "name": "William Wong",
           "project": "Custom tool for mapping 3D space for 3D storytelling",
           "link": "https://www.linkedin.com/in/william-wong-37854577",
-          "socials": "@ thewilliamwong"
+          "socials": "@thewilliamwong"
         },
         {
           "number": 5,
           "name": "Alastair Ball & Tristan Spill & Sally Charlton",
           "project": "Art action school through social art & experimental education (CBS)",
           "link": "https://solarpunk.london/",
-          "socials": "@ solarpunkldn"
+          "socials": "@solarpunkldn"
         },
         {
           "number": 6,
           "name": "Marcus Stalmanis",
           "project": "A short film about a robot based off a found archive + bts",
           "link": "--",
-          "socials": "@ marcus.stalmanis"
+          "socials": "@marcus.stalmanis"
         },
         {
           "number": 7,
@@ -472,7 +472,7 @@
     {
       "id": 7,
       "label": "Open Projector #7",
-      "date": "30.06.26",
+      "date": "30.0.26",
       "presenters": [
         {
           "number": 1,
@@ -491,37 +491,107 @@
         {
           "number": 3,
           "name": "Daniel",
-          "project": "Clubz",
+          "project": "Clubz - an events aggregate with elements of social media + the new digerati",
           "link": "thenewdigerati.com",
-          "socials": "@ thenewdigerati"
+          "socials": "@thenewdigerati"
         },
         {
           "number": 4,
           "name": "Mewes",
           "project": "Pigeons!!!",
           "link": "mewes-space.xyz/pages/pigeons!!!!.html",
-          "socials": "@ 4mewes"
+          "socials": "@4mewes"
         },
         {
           "number": 5,
           "name": "Xach",
-          "project": "VIne panels",
+          "project": "On his vine panel installation & the software behind it",
           "link": "xachhill.com",
           "socials": "@xach_hill"
         },
         {
           "number": 6,
           "name": "Duncan",
-          "project": "Pigeons & Falafel",
-          "link": "pigeons.duncanpetrie.com\nfalafel.fyi",
-          "socials": "@ probablyduncan"
+          "project": "Pigeons & a map of Falafel spots and thoughts",
+          "link": "pigeons.duncanpetrie.com falafel.fyi",
+          "socials": "@probablyduncan"
         },
         {
           "number": 7,
           "name": "Kitty",
           "project": "Exploring diy queer web building",
           "link": "plasticdino.net",
-          "socials": "@ plasticd1no"
+          "socials": "@plasticd1no"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "label": "Open Projector #8",
+      "date": "28.07.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "Nikos",
+          "project": "exploring beepbox.co website, a tool for random, quick and fun music making",
+          "link": "nikos.kourous.net",
+          "socials": "@nikoskourous"
+        },
+        {
+          "number": 2,
+          "name": "Jurgen & Fleima",
+          "project": "a public plant library for communal & guerilla gardening",
+          "link": "--",
+          "socials": "@fleimaaa @jurgenforsters"
+        },
+        {
+          "number": 3,
+          "name": "Izzy",
+          "project": "a communal instrument controlled by package pings to a server",
+          "link": "https://www.iso-bel.computer/fallingland",
+          "socials": "--"
+        },
+        {
+          "number": 4,
+          "name": "Daphne",
+          "project": "an animated 3D film about a lost watch made using live music controlled lighting",
+          "link": "--",
+          "socials": "--"
+        },
+        {
+          "number": 5,
+          "name": "Alina",
+          "project": "An Interactive Installation for Burning Man 2026 & other interactive work",
+          "link": "--",
+          "socials": "@mityukovaaaaa"
+        },
+        {
+          "number": 6,
+          "name": "William",
+          "project": "A platform for algorythmic & generated movement that responds to poetry",
+          "link": "(send us later!)",
+          "socials": "@thewilliamwong"
+        },
+        {
+          "number": 7,
+          "name": "Yufan",
+          "project": "Creating poetry out of console logs & abstract paintings from code",
+          "link": "--",
+          "socials": "@yufan3914"
+        },
+        {
+          "number": 8,
+          "name": "Radha",
+          "project": "A deep dive project & publication about car parks & the cultures inside them",
+          "link": "(send us later!)",
+          "socials": "_ourparking"
+        },
+        {
+          "number": 9,
+          "name": "Amin",
+          "project": "3D animations of repeating character meshes & body parts, + a custom plug in for generative motion rigging in unity",
+          "link": "github.com/",
+          "socials": "@_aminHP"
         }
       ]
     }
