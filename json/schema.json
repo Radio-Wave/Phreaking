@@ -2480,7 +2480,7 @@
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-olivia-ema",
-      "name": "Olivia Ema",
+      "name": "Interactive Digital Art: Tools for Collective Feeling and Becoming",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Wednesday 8th July — 18:00–19:00",
@@ -2492,13 +2492,13 @@
           "alt": ""
         },
         {
-          "src": "",
-          "full": "",
+          "src": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_2.jpg",
           "alt": ""
         },
         {
-          "src": "",
-          "full": "",
+          "src": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_3.jpg",
           "alt": ""
         }
       ],
@@ -2510,7 +2510,9 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "Olivia Ema",
+      "pastEvents": false
     },
     {
       "@type": "PerformanceEvent",
