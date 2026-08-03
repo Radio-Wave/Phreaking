@@ -969,6 +969,66 @@ function isEvent(item){
 function getEvents(){ return (data&&data['@graph'])?data['@graph'].filter(isEvent):[]; }
 function typeLabel(t){ const a=Array.isArray(t)?t[0]:t; return TYPE_MAP[a]||a||'Event'; }
 
+// ── EVENT PERFORMER LINKING ────────────────────────────────
+// An event's performer(s) reference Person/Organization @ids already living
+// in the same @graph (edited via Artists mode) — this just lets an event
+// pick from them, so their name renders as a link to their own site
+// (Person.url) wherever the event is shown, incl. the Past Events archive.
+function performerIds(ev){
+  const p=ev&&ev.performer;
+  if(!p) return [];
+  return (Array.isArray(p)?p:[p]).map(x=>x&&x['@id']).filter(Boolean);
+}
+function personByRef(id){ return (data&&data['@graph']||[]).find(i=>i['@id']===id); }
+function performerRows(ev){
+  const ids=performerIds(ev);
+  if(!ids.length) return `<p style="font-size:11px;color:var(--muted);margin:2px 0 6px">No performer linked yet — add one below, or use Credit Text for an unlinked credit.</p>`;
+  return ids.map((id,i)=>{
+    const person=personByRef(id);
+    const name=person?person.name:id;
+    const url=person?person.url:'';
+    return `<div class="arr-row">
+      <input value="${esc(name)}${url?' — '+esc(url):' — (not found in Artists)'}" readonly style="opacity:.75">
+      <button class="btn btn-err btn-sm" onclick="removePerformer(${i})">×</button>
+    </div>`;
+  }).join('');
+}
+function performerCandidateOptions(){
+  return (data&&data['@graph']||[])
+    .filter(i=>{
+      const t=i&&i['@type']; const types=Array.isArray(t)?t:[t];
+      return types.includes && (types.includes('Person')||types.includes('Organization')) && i['@id']!=='https://phreaking.co.uk/#phreaking';
+    })
+    .sort((a,b)=>(a.name||'').localeCompare(b.name||''))
+    .map(p=>`<option value="${esc(p['@id'])}">${esc(p.name||p['@id'])}</option>`)
+    .join('');
+}
+function setPerformerIds(ev, ids){
+  if(!ids.length) delete ev.performer;
+  else ev.performer = ids.length>1 ? ids.map(id=>({'@id':id})) : {'@id':ids[0]};
+}
+function addPerformerFromSelect(sel){
+  const id=sel.value; if(!id) return;
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  const ids=performerIds(ev);
+  if(!ids.includes(id)) ids.push(id);
+  setPerformerIds(ev, ids);
+  sel.value='';
+  markUnsaved(); rebuildPerformerRows(); renderPreview();
+}
+function removePerformer(i){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  const ids=performerIds(ev);
+  ids.splice(i,1);
+  setPerformerIds(ev, ids);
+  markUnsaved(); rebuildPerformerRows(); renderPreview();
+}
+function rebuildPerformerRows(){
+  const c=document.getElementById('perfEd');
+  const ev=data['@graph'][curIdx];
+  if(c&&ev) c.innerHTML=performerRows(ev);
+}
+
 function isArtist(item){
   if(!item||!item['@type']) return false;
   const t=item['@type'];
@@ -1425,6 +1485,21 @@ function buildForm(){
         <input id="ef-date" value="${esc(ev.displayDate||'')}" placeholder="e.g. Saturday 12th April — 14:00–17:00" oninput="liveUp()">
         <button type="button" class="cal-trigger" onclick="calOpen('ef-date')" title="Pick date/time">&#128197;</button>
       </div></div>
+    <div class="field"><label>Performer(s) <span style="font-weight:400;color:var(--muted)">(their name links to their own website wherever this event is shown)</span></label>
+      <div class="arr-editor" id="perfEd">${performerRows(ev)}</div>
+      <select id="ef-add-performer" onchange="addPerformerFromSelect(this)">
+        <option value="">+ Add performer…</option>
+        ${performerCandidateOptions()}
+      </select>
+    </div>
+    <div class="field"><label>Credit Text <span style="font-weight:400;color:var(--muted)">(plain-text credit shown instead of / alongside a linked performer, e.g. "Various Artists")</span></label>
+      <input id="ef-credittext" value="${esc(ev.creditText||'')}" placeholder="Various Artists" oninput="liveUp()"></div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:7px;cursor:pointer;text-transform:none;letter-spacing:normal;font-size:12px;color:var(--ink)">
+        <input type="checkbox" id="ef-pastevents" ${ev.pastEvents?'checked':''} onchange="liveUp()" style="width:auto">
+        Show on Past Events page
+      </label>
+    </div>
     <div class="field"><label>Description</label>
       <textarea id="ef-desc" rows="5" oninput="liveUp()">${esc(ev.description||'')}</textarea></div>
     <div class="frow">
@@ -1970,6 +2045,9 @@ function liveUp(){
   ev.label=g('ef-label')||ev.label;
   ev.sortOrder=s?parseInt(s):ev.sortOrder;
   ev.displayDate=g('ef-date')??ev.displayDate;
+  ev.creditText=g('ef-credittext')??ev.creditText;
+  const pe=document.getElementById('ef-pastevents');
+  if(pe) ev.pastEvents = pe.checked;
   ev.description=g('ef-desc')??ev.description;
   ev.eventCompletedUrl=g('ef-url')??ev.eventCompletedUrl;
   ev.eventCompletedUrlLabel=g('ef-url-label')??ev.eventCompletedUrlLabel;
@@ -2167,6 +2245,21 @@ function renderDCC(evs){
   return h+'</div>';
 }
 
+// Performer name(s) linked to their own site (Person/Organization.url),
+// falling back to a plain-text creditText (e.g. "Various Artists") — the
+// same credit shown in the real Past Events archive.
+function creditHTML(ev){
+  const ids=performerIds(ev);
+  if(ids.length){
+    return ids.map(id=>{
+      const p=personByRef(id);
+      if(!p) return esc(id);
+      return p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a>` : esc(p.name);
+    }).join(' &amp; ');
+  }
+  return ev.creditText ? esc(ev.creditText) : '';
+}
+
 function renderPE(evs){
   const g=groupByExh(evs);
   let h='<div class="r-pe">';
@@ -2180,12 +2273,15 @@ function renderPE(evs){
           return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy">`;
         }).join('')
       }</div>`:'';
+      const credit=creditHTML(ev);
+      const creditLine=(credit||ev.displayDate)?`<div class="ecredit">${credit}${credit&&ev.displayDate?' — ':''}${ev.displayDate?esc(ev.displayDate):''}</div>`:'';
       h+=`<div class="ecard${hiddenClass(ev)}">
         <div class="etop">
           <div>
             <span class="etype">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
+            ${ev.pastEvents?'<span class="etype" style="opacity:.55;margin-left:5px">✓ Past Events</span>':''}
             <h3>${esc(ev.name||'Untitled')}</h3>
-            ${ev.displayDate?`<div class="ecredit">${esc(ev.displayDate)}</div>`:''}
+            ${creditLine}
           </div>
           ${ev.exhibition?`<div class="eseries">${esc(EXH_NAMES[ev.exhibition]||ev.exhibition)}</div>`:''}
         </div>

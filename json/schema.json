@@ -580,7 +580,8 @@
       },
       "description": "A web-based performance exploring climate modelling through digital aesthetics and architectural thinking. Moving between early numerical forecasting and contemporary synthetic intelligence, Counter-Modelling challenged the aesthetics of computational realism, presenting climate prediction as a site of tension between technological development and climate futures.",
       "keywords": "climate modelling, digital aesthetics, computational realism, web performance, AI, architecture",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -652,7 +653,8 @@
       },
       "description": "A talk showing how practices that treat AI as a material rather than a tool or creative agent allow artists to make critical works presenting new ways of understanding unfathomably complex computational systems.",
       "keywords": "AI as material, machine learning, critical AI, generative art, computational art",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -724,7 +726,8 @@
       },
       "description": "A flâneur's guide to mapping the new geographies of connection, exploring internet and communications infrastructures, physical and digital topographies, and contemporary data emissions.",
       "keywords": "internet infrastructure, digital geography, network culture, data, cloud computing",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -732,10 +735,31 @@
       "name": "Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina",
       "url": "https://phreaking.co.uk/past-events#event-artificial-intimacies",
       "exhibition": "bitrot",
+      "label": "Talk",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "eventStatus": "https://schema.org/EventPastdue",
       "startDate": "2025",
       "endDate": "2025",
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp",
+          "full": "/assets/Past-events-archive/erin-anthony-lecture_phreaking_nikos_kourous_vazquez_12.webp",
+          "alt": "Erin Robinson and Anthony Frisby presenting Artificial Intimacies and Erotics of the Synthetic Self at Phreaking Collective's BitRot exhibition, London, 2025",
+          "credit": "Nikos Kourous Vazquez"
+        },
+        {
+          "src": "/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp",
+          "full": "/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_05.webp",
+          "alt": "Erin Robinson and Anthony Frisby during their lecture on XXX Machina at BitRot, Phreaking Collective, London, 2025",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp",
+          "full": "/assets/Past-events-archive/erin-anthony-lecture_phreaking_xach_hill_44.webp",
+          "alt": "Audience at Erin Robinson and Anthony Frisby's Artificial Intimacies lecture, BitRot, Phreaking Collective, London, 2025",
+          "credit": "Xach Hill"
+        }
+      ],
       "location": {
         "@type": "Place",
         "name": "Phreaking Collective",
@@ -765,7 +789,8 @@
       },
       "description": "A lecture exploring the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience, discussing artificial intimacies, eroticism, and digital embodiment.",
       "keywords": "artificial intimacy, digital embodiment, post-structuralism, postmodernism, computational desire, XXX Machina",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -773,10 +798,31 @@
       "name": "Long Live The New Flesh (or Whatever)",
       "url": "https://phreaking.co.uk/past-events#event-long-live",
       "exhibition": "bitrot",
+      "label": "Talk",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "eventStatus": "https://schema.org/EventPastdue",
       "startDate": "2025",
       "endDate": "2025",
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp",
+          "full": "/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_32.webp",
+          "alt": "Dian Joy presenting Long Live The New Flesh (or Whatever) at Phreaking Collective's BitRot exhibition, London, 2025",
+          "credit": "Melissa Li Yunzhi"
+        },
+        {
+          "src": "/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp",
+          "full": "/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_melissa-li-yunzhi_33.webp",
+          "alt": "Dian Joy during Long Live The New Flesh (or Whatever) lecture at BitRot, Phreaking Collective, London, 2025",
+          "credit": "Melissa Li Yunzhi"
+        },
+        {
+          "src": "/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp",
+          "full": "/assets/Past-events-archive/dian-joy-performance-lecture-phreaking_xach_hill_31.webp",
+          "alt": "Audience at Dian Joy's Long Live The New Flesh lecture, BitRot, Phreaking Collective, London, 2025",
+          "credit": "Xach Hill"
+        }
+      ],
       "location": {
         "@type": "Place",
         "name": "Phreaking Collective",
@@ -801,7 +847,8 @@
       },
       "description": "A lecture exploring how desire functions as a mechanism of discipline and ideological capture within the contemporary digital landscape, drawing from media theory, philosophy, and digital folklore, with a close reading of Videodrome.",
       "keywords": "media theory, digital folklore, desire, platform culture, algorithmic culture, Videodrome, meme culture",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -873,7 +920,8 @@
       },
       "description": "A workshop exploring technology as it relates to collective sound making, tracing London's experimental collective performance scene of the 1970s and how those methods apply to current art culture.",
       "keywords": "sound art, collective performance, experimental music, workshop, London, 1970s",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -945,7 +993,8 @@
       },
       "description": "A hands-on, beginner-friendly personal web-making workshop exploring HTML, CSS and JavaScript to create personalised and poetic webpages and tell digital stories.",
       "keywords": "web design, HTML, CSS, JavaScript, internet art, digital storytelling, workshop",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -1017,7 +1066,8 @@
       },
       "description": "A workshop covering file formats, permacomputing, bytebeats, generative image-making, and Unicode-art, introduced through speculative art projects and computer science fundamentals.",
       "keywords": "permacomputing, file formats, bytebeats, generative art, Unicode art, computer science, workshop",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -1089,7 +1139,8 @@
       },
       "description": "A workshop exploring Cables.gl, a free open-source node-based live coding tool for WebGL development, covering live video manipulation, interactive visuals, and input devices including MIDI and webcams.",
       "keywords": "creative coding, Cables.gl, WebGL, live coding, interactive visuals, MIDI, workshop",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -1125,7 +1176,26 @@
       },
       "description": "A hands-on workshop reviving dead pages from Glitch.com's shutdown, reverse-engineering lost websites from thumbnail previews and rebuilding them from scratch using HTML, CSS and JavaScript.",
       "keywords": "HTML, CSS, JavaScript, glitch art, web archaeology, internet culture, workshop",
-      "visible": true
+      "visible": true,
+      "label": "Workshop",
+      "images": [
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch1.webp",
+          "full": "/assets/BitRotEventImgs/Glitch1.JPG",
+          "alt": "Participants coding together during Oops, You Found A Glitch workshop at Phreaking Collective's BitRot exhibition, London, 2025"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch2.webp",
+          "full": "/assets/BitRotEventImgs/Glitch2.JPG",
+          "alt": "Participants rebuilding lost websites during Oops, You Found A Glitch at BitRot, Phreaking Collective, London, 2025"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Glitch5.webp",
+          "full": "/assets/BitRotEventImgs/Glitch5.JPG",
+          "alt": "Facilitator demonstrating web rebuilding techniques during Oops, You Found A Glitch, Phreaking Collective, London, 2025"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -1161,7 +1231,26 @@
       },
       "description": "A two-hour workshop treating everyday objects as narrative anchors bridging physical material to virtual, inspired by methods from Melissa Li Yunzhi's project Home is a Dwelling Path.",
       "keywords": "storytelling, object-oriented narrative, digital art, new media, workshop",
-      "visible": true
+      "visible": true,
+      "label": "Workshop",
+      "images": [
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning1.webp",
+          "full": "/assets/BitRotEventImgs/Scanning1.JPG",
+          "alt": "Group discussion during Object Oriented Storytelling: From Field to Virtual workshop at Phreaking Collective's BitRot exhibition, London, 2025"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning2.webp",
+          "full": "/assets/BitRotEventImgs/Scanning2.jpg",
+          "alt": "Participants experimenting with object scanning during Object Oriented Storytelling at BitRot, Phreaking Collective, London, 2025"
+        },
+        {
+          "src": "/assets/BitRotEventImgs/thumbs/Scanning5.webp",
+          "full": "/assets/BitRotEventImgs/Scanning5.JPEG",
+          "alt": "3D scanning demonstration with projection during Object Oriented Storytelling workshop, Phreaking Collective, London, 2025"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1197,7 +1286,28 @@
       },
       "description": "A live coding performance by the live coding group That Sounds Exciting!",
       "keywords": "live coding, algorithmic performance, creative coding, performance",
-      "visible": true
+      "visible": true,
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/Xach_TSA_DDCEP1.webp",
+          "full": "/assets/Past-events-archive/Xach_TSA_DDCEP1.jpeg",
+          "alt": "That Sounds Exciting! performing at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_TSA_DDCEP2.webp",
+          "full": "/assets/Past-events-archive/Xach_TSA_DDCEP2.jpeg",
+          "alt": "Audience watching That Sounds Exciting! at Does Cloud Compute (ever) Precipitate?, Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_TSA_DDCEP3.webp",
+          "full": "/assets/Past-events-archive/Xach_TSA_DDCEP3.jpeg",
+          "alt": "Performance setup during That Sounds Exciting! at Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1233,7 +1343,28 @@
       },
       "description": "A performance by Claire McMichael at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
       "keywords": "performance art, experimental performance, London",
-      "visible": true
+      "visible": true,
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/Xach_Claire_DDCEP1.webp",
+          "full": "/assets/Past-events-archive/Xach_Claire_DDCEP1.jpeg",
+          "alt": "Claire McMichael performing at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_Claire_DDCEP2.webp",
+          "full": "/assets/Past-events-archive/Xach_Claire_DDCEP2.jpeg",
+          "alt": "Claire McMichael on stage during Does Cloud Compute (ever) Precipitate?, Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_Claire_DDCEP3.webp",
+          "full": "/assets/Past-events-archive/Xach_Claire_DDCEP3.jpeg",
+          "alt": "Audience and staging during Claire McMichael's performance at Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1267,9 +1398,30 @@
         "availability": "https://schema.org/SoldOut",
         "validFrom": "2026"
       },
-      "description": "A performance by Deposit Silk at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026.",
+      "description": "From the artist: \"This performance experimented with livecoding audio, using FM synthesis, modulating sinewaves and sawtooth waves. I used euclidean rhythms which created clashes and unfamiliar patterns in the sound. Sampling pop-cultural references and internet one-liners behave as my vocals for my sound usually. The livecoding of the audio and visuals is done through Strudel.cc, this performance mixed ambient sound and noise together. Usually, I look to my livecoding peers for reference, sometimes remixing their code, I am a fan of open-source and community knowledge sharing.\"",
       "keywords": "performance art, experimental performance, London",
-      "visible": true
+      "visible": true,
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/Xach_DepositSilk_DDCEP2.webp",
+          "full": "/assets/Past-events-archive/Xach_DepositSilk_DDCEP1.jpeg",
+          "alt": "Deposit Silk performing at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_DepositSilk_DDCEP4.webp",
+          "full": "/assets/Past-events-archive/Xach_DepositSilk_DDCEP3.jpeg",
+          "alt": "Deposit Silk on stage during Does Cloud Compute (ever) Precipitate?, Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_DepositSilk_DDCEP6.webp",
+          "full": "/assets/Past-events-archive/Xach_DepositSilk_DDCEP5.jpeg",
+          "alt": "Audience and performance setup during Deposit Silk at Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1303,9 +1455,30 @@
         "availability": "https://schema.org/SoldOut",
         "validFrom": "2026"
       },
-      "description": "Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using live YouTube video tabs and a virtual piano.",
+      "description": "Lagtime Seedling scores and performs audio-visual compositions made entirely within web browser windows using a large number of live youtube.com video tabs. Through a meticulously choreographed way of using their laptop, they create narrative and musical journeys through strange and overlooked corners of the web. Transparency and accessibility is central to their practice: Lagtime Seedling doesn't use any traditional music software. Instead, all their sound comes from youtube tabs and a piano keyboard on a separate virtualpiano.net browser window. They interact with their browser as anyone could, using keyboard shortcuts to navigate many tabs and windows quickly, and interact with videos through youtube's default hotkeys. The sound and visuals of lagtime's compositions, being pulled straight from youtube, carry on a certain algorithmic qualia. Full of ASMR, slime squishing, nail scratching, and soft spoken words, their compositions reflect the overstimulating experience of being online. Through a carefully arranged score, lagtime recontextualises online content, extracting overlooked emotion embedded within it.",
       "keywords": "browser performance, audio-visual, live coding, YouTube, internet art, ASMR",
-      "visible": true
+      "visible": true,
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/Xach_Lagtime_DDCEP1.webp",
+          "full": "/assets/Past-events-archive/Xach_Lagtime_DDCEP1.jpeg",
+          "alt": "Lagtime Seedling performing at Phreaking Collective's Does Cloud Compute (ever) Precipitate? exhibition, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_Lagtime_DDCEP2.webp",
+          "full": "/assets/Past-events-archive/Xach_Lagtime_DDCEP2.jpeg",
+          "alt": "Lagtime Seedling's browser-based performance setup at Does Cloud Compute (ever) Precipitate?, London, 2026",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/Xach_Lagtime_DDCEP3.webp",
+          "full": "/assets/Past-events-archive/Xach_Lagtime_DDCEP3.jpeg",
+          "alt": "Audience watching Lagtime Seedling at Phreaking Collective, London, 2026",
+          "credit": "Xach Hill"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1339,9 +1512,10 @@
         "availability": "https://schema.org/SoldOut",
         "validFrom": "2026"
       },
-      "description": "Live coders from Algorave London, featuring Sinsé, Nadezhda, and Daniel performing algorithmic and generative music.",
+      "description": "Live coders from Algorave London, featuring Sinsé (@ladysinsemilla), Nadezhda (@nadyaviaproxy), and Daniel (@algorave_london), performing algorithmic and generative music.",
       "keywords": "live coding, algorave, algorithmic music, generative art, performance",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1377,7 +1551,8 @@
       },
       "description": "A live coding performance integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
       "keywords": "live coding, algorithmic composition, generative visuals, AI art, performance",
-      "visible": true
+      "visible": true,
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1411,9 +1586,30 @@
         "availability": "https://schema.org/SoldOut",
         "validFrom": "2025"
       },
-      "description": "A live browser window performance using YouTube video tabs, an online piano, and overlapping browser windows.",
+      "description": "A live browser window performance by Lagtime Seedling who uses youtube video tabs, an online piano, and overlapping browser windows to create narrative audio-visual compositions. This set involved a more improvised approach to their otherwise heavily choreographed process as they browsed the web and played piano melodies live on stage.",
       "keywords": "browser performance, audio-visual, improvisation, internet art, live performance",
-      "visible": true
+      "visible": true,
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/xach_Lagtime_BitRot1.webp",
+          "full": "/assets/Past-events-archive/xach_Lagtime_BitRot1.jpeg",
+          "alt": "Lagtime Seedling performing at Phreaking Collective's BitRot exhibition, London, 2025",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/xach_Lagtime_BitRot2.webp",
+          "full": "/assets/Past-events-archive/xach_Lagtime_BitRot2.jpeg",
+          "alt": "Lagtime Seedling's browser-based performance setup at BitRot, London, 2025",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/xach_Lagtime_BitRot3.webp",
+          "full": "/assets/Past-events-archive/xach_Lagtime_BitRot3.jpeg",
+          "alt": "Audience watching Lagtime Seedling at BitRot, Phreaking Collective, London, 2025",
+          "credit": "Xach Hill"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1449,7 +1645,28 @@
       },
       "description": "A live performance using a custom-built modular synthesizer.",
       "keywords": "modular synthesis, electronic music, performance art, synthesizer",
-      "visible": true
+      "visible": true,
+      "images": [
+        {
+          "src": "/assets/Past-events-archive/xach_Yiding_BitRot1.webp",
+          "full": "/assets/Past-events-archive/xach_Yiding_BitRot1.jpeg",
+          "alt": "Yiding Zhang performing at Phreaking Collective's BitRot exhibition, London, 2025",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/xach_Yiding_BitRot2.webp",
+          "full": "/assets/Past-events-archive/xach_Yiding_BitRot2.jpeg",
+          "alt": "Yiding Zhang using a modular synthesizer at BitRot, Phreaking Collective, London, 2025",
+          "credit": "Xach Hill"
+        },
+        {
+          "src": "/assets/Past-events-archive/xach_Yiding_BitRot3.webp",
+          "full": "/assets/Past-events-archive/xach_Yiding_BitRot3.jpeg",
+          "alt": "Audience and performance setup during Yiding Zhang's set at Phreaking Collective, London, 2025",
+          "credit": "Xach Hill"
+        }
+      ],
+      "pastEvents": true
     },
     {
       "@type": "ScreeningEvent",
@@ -1518,7 +1735,9 @@
       },
       "description": "An evening of computational, experimental, and artist-led short films bending narrative, fracturing reality, and playing at the edges of code, image, and memory. Featuring films by Lucy Ellis, Autojektor, Atay Ilgun, Maggie Maggot, Erinne Huston, Dana Fox, Shannon Lu, Verona Gryshchuk, Max Colson, Natalie Maximova, Isaac Ward, Tilly Hawkins (Nukleopatra), Ned Caderni, Iman Javaid and Julian Law, Ngo Chun Phoenix Tse, Mati Granica, and Yidi Chen.",
       "keywords": "experimental film, artist film, short film, computational art, screening, London",
-      "visible": true
+      "visible": true,
+      "creditText": "Various Artists",
+      "pastEvents": true
     },
     {
       "@type": "Event",
