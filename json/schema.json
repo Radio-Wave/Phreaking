@@ -2407,13 +2407,13 @@
           "alt": ""
         },
         {
-          "src": "/assets/CanWeStartAgain/Events/atay-ilgun-spiral/atay-ilgun-spiral_2.webp",
-          "full": "/assets/CanWeStartAgain/Events/atay-ilgun-spiral/atay-ilgun-spiral_2.jpg",
+          "src": "",
+          "full": "",
           "alt": ""
         },
         {
-          "src": "/assets/CanWeStartAgain/Events/atay-ilgun-spiral/atay-ilgun-spiral_3.webp",
-          "full": "/assets/CanWeStartAgain/Events/atay-ilgun-spiral/atay-ilgun-spiral_3.jpg",
+          "src": "",
+          "full": "",
           "alt": ""
         }
       ],
@@ -2425,9 +2425,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true,
-      "creditText": "",
-      "pastEvents": true
+      "visible": true
     },
     {
       "@type": "Event",
@@ -2482,7 +2480,7 @@
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-olivia-ema",
-      "name": "Interactive Digital Art: Tools for Collective Feeling and Becoming",
+      "name": "Olivia Ema",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Wednesday 8th July — 18:00–19:00",
@@ -2494,13 +2492,13 @@
           "alt": ""
         },
         {
-          "src": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_2.webp",
-          "full": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_2.jpg",
+          "src": "",
+          "full": "",
           "alt": ""
         },
         {
-          "src": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_3.webp",
-          "full": "/assets/CanWeStartAgain/Events/interactive-digital-art-tools-for-collective-feeling-and-becoming/interactive-digital-art-tools-for-collective-feeling-and-becoming_3.jpg",
+          "src": "",
+          "full": "",
           "alt": ""
         }
       ],
@@ -2512,9 +2510,7 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true,
-      "creditText": "Olivia Ema",
-      "pastEvents": false
+      "visible": true
     },
     {
       "@type": "PerformanceEvent",
