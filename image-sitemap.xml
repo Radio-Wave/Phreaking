@@ -40,9 +40,6 @@
       <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/CWSTA-Logo-Clean-White.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Gallery/DELETEME.jpeg</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://phreaking.co.uk/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_1.jpg</image:loc>
     </image:image>
     <image:image>
@@ -527,6 +524,42 @@
   <url>
     <loc>https://phreaking.co.uk/open-projector/</loc>
     <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-9.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-10.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-11.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-12.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-13.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-14.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-15.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-16.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-17.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-18.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-19.jpeg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-20.jpeg</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector_3-1.jpg</image:loc>
     </image:image>
     <image:image>
@@ -588,42 +621,6 @@
     </image:image>
     <image:image>
       <image:loc>https://phreaking.co.uk/assets/OpenProj/Nikos-Open-Proj-6.jpg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-9.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-10.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-11.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-12.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-13.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-14.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-15.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-16.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-17.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-18.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-19.jpeg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://phreaking.co.uk/assets/OpenProj/OpenProjector-20.jpeg</image:loc>
     </image:image>
   </url>
 
