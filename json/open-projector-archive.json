@@ -555,8 +555,8 @@
           "number": 4,
           "name": "Daphne",
           "project": "an animated 3D film about a lost watch made using live music controlled lighting",
-          "link": "--",
-          "socials": "--"
+          "link": "https://www.daphnechudesgin.com/",
+          "socials": "@artandtech.ting"
         },
         {
           "number": 5,
@@ -569,7 +569,7 @@
           "number": 6,
           "name": "William",
           "project": "A platform for algorythmic & generated movement that responds to poetry",
-          "link": "(send us later!)",
+          "link": "https://github.com/WWStoryMode/BodyPrompt",
           "socials": "@thewilliamwong"
         },
         {
@@ -583,14 +583,14 @@
           "number": 8,
           "name": "Radha",
           "project": "A deep dive project & publication about car parks & the cultures inside them",
-          "link": "(send us later!)",
+          "link": "ourparking.net",
           "socials": "_ourparking"
         },
         {
           "number": 9,
           "name": "Amin",
           "project": "3D animations of repeating character meshes & body parts, + a custom plug in for generative motion rigging in unity",
-          "link": "github.com/",
+          "link": "https://github.com/Amin-HP/Kimodo-Unity",
           "socials": "@_aminHP"
         }
       ]
