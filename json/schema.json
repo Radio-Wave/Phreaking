@@ -2425,7 +2425,9 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -2723,7 +2725,9 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": true
     },
     {
       "@type": "Event",
