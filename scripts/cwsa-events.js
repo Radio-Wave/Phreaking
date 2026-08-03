@@ -148,16 +148,31 @@
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-  function fullImage(event) {
-    var img = event.images && event.images.length > 0 ? event.images[0] : null;
-    if (!img) return null;
-    var src = img.full || img.src;
-    return src ? { src: src, alt: img.alt || event.name + ' poster' } : null;
+  // Full-resolution gallery images for an event, falling back to the thumb
+  // when there's no separate full-size version.
+  function fullImages(event) {
+    return (event.images || []).map(function (img) {
+      var src = img.full || img.src;
+      return src ? { src: src, thumb: img.src || src, alt: img.alt || event.name + ' poster' } : null;
+    }).filter(Boolean);
   }
 
   function preload(index) {
-    var img = fullImage(eventsData[index]);
+    var img = fullImages(eventsData[index])[0];
     if (img) { var pre = new Image(); pre.src = img.src; }
+  }
+
+  // The <img> currently shown as the modal's main poster — swapped in place
+  // when a thumbnail is clicked, rather than rebuilding the whole figure.
+  var mGalleryImg = null;
+
+  function setGalleryImage(images, i) {
+    if (!mGalleryImg || !images[i]) return;
+    mGalleryImg.src = images[i].src;
+    mGalleryImg.alt = images[i].alt;
+    mPoster.querySelectorAll('.cwsa-modal__thumb').forEach(function (t, ti) {
+      t.classList.toggle('active', ti === i);
+    });
   }
 
   function openModal(index) {
@@ -174,15 +189,34 @@
     mDay.textContent = when.day;
     mTime.textContent = when.time;
 
-    // Poster — always the full-resolution jpeg, never the webp thumb
+    // Poster — always the full-resolution jpeg, never the webp thumb.
+    // Multiple images render as a main image plus a thumbnail strip that
+    // swaps it in place, so a gallery of event photos lives in one card.
     mPoster.innerHTML = '';
-    var img = fullImage(event);
-    if (img) {
-      var el = document.createElement('img');
-      el.src = img.src;
-      el.alt = img.alt;
-      mPoster.appendChild(el);
+    mGalleryImg = null;
+    var images = fullImages(event);
+    if (images.length) {
       mPoster.classList.remove('cwsa-modal__poster--empty');
+      var el = document.createElement('img');
+      el.src = images[0].src;
+      el.alt = images[0].alt;
+      mPoster.appendChild(el);
+      mGalleryImg = el;
+
+      if (images.length > 1) {
+        var thumbs = document.createElement('div');
+        thumbs.className = 'cwsa-modal__thumbs';
+        images.forEach(function (im, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'cwsa-modal__thumb' + (i === 0 ? ' active' : '');
+          b.setAttribute('aria-label', 'Show photo ' + (i + 1) + ' of ' + images.length);
+          b.innerHTML = '<img src="' + im.thumb + '" alt="" loading="lazy">';
+          b.addEventListener('click', function () { setGalleryImage(images, i); });
+          thumbs.appendChild(b);
+        });
+        mPoster.appendChild(thumbs);
+      }
     } else {
       mPoster.classList.add('cwsa-modal__poster--empty');
       mPoster.innerHTML = '<span>poster<br>loading&hellip;</span>';
@@ -292,10 +326,15 @@
     var idSlug = (event['@id'] || '').split('#')[1];
     if (idSlug) card.id = 'evt-' + idSlug;
 
-    var img = event.images && event.images.length > 0 ? event.images[0] : null;
+    var images = event.images || [];
+    var img = images.length > 0 ? images[0] : null;
     var poster = img && img.src
       ? '<img src="' + img.src + '" alt="' + (img.alt || event.name + ' poster') + '" loading="lazy">'
       : 'Event<br>Poster';
+    var extraImages = images.length - 1;
+    var posterCount = extraImages > 0
+      ? '<span class="cwsa-event-poster-count" aria-hidden="true">+' + extraImages + '</span>'
+      : '';
 
     var label = event.label
       ? '<span class="cwsa-event-label">' + event.label + '</span>'
@@ -331,7 +370,7 @@
         link +
         '<span class="cwsa-event-more" aria-hidden="true">[ + open ]</span>' +
       '</div>' +
-      '<div class="cwsa-event-poster">' + poster + '</div>';
+      '<div class="cwsa-event-poster">' + poster + posterCount + '</div>';
 
     // Whole card opens the detail view; inline booking links still work
     card.tabIndex = 0;

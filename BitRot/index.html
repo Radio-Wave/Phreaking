@@ -143,8 +143,9 @@
   </section>
 
   <section class="pc-gallery" aria-label="Gallery">
-    
-  <div class="pc-grid">
+    <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+         The figures below are a static fallback shown only if that JSON can't be fetched. -->
+  <div class="pc-grid" id="bitrot-show-grid" data-gallery-id="bitrot-show">
     <!-- Item 1 -->
     <figure class="pc-item">
       <img
@@ -521,7 +522,9 @@
 </section>
 
 <section class="pc-gallery" aria-label="Workshops & Talks">
-  <div class="pc-grid">
+  <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+       The figures below are a static fallback shown only if that JSON can't be fetched. -->
+  <div class="pc-grid" id="bitrot-events-grid" data-gallery-id="bitrot-events">
         <!-- second gallery items -->
     <!-- Event: Long live the new flesh (or whatever) -->
     <figure class="pc-item">
@@ -788,6 +791,8 @@
     </div>
 
   <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/site-gallery.js"></script>
+  <script src="/scripts/gallery.js"></script>
   <script src="/scripts/artists.js"></script>
   <script src="/scripts/bitRot.js"></script>
 </body>

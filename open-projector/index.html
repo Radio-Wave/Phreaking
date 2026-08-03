@@ -14,6 +14,135 @@
   <link rel="icon" href="/assets/PhreakingLogoSquare_white.ico" sizes="any">
 
     <link rel="canonical" href="https://phreaking.co.uk/open-projector/">
+  <style>
+    .op-archive-intro {
+      max-width: 72ch;
+    }
+
+    .op-archive-sheet-link {
+      display: inline-block;
+      padding: 6px 14px;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.2;
+      font-family: inherit;
+      margin: 20px 0;
+    }
+
+    .op-archive-sessions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .op-archive-sessions button {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.15rem;
+      font: inherit;
+      cursor: pointer;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--rule);
+      background: transparent;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      font-size: 12px;
+    }
+
+    .op-archive-sessions button .op-archive-date {
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+    }
+
+    .op-archive-sessions button:hover {
+      color: var(--ink);
+    }
+
+    .op-archive-sessions button.is-active {
+      background: var(--ink);
+      color: var(--bg, #000);
+      border-color: var(--ink);
+    }
+
+    .op-archive-sessions button.is-active .op-archive-date {
+      opacity: 0.85;
+    }
+
+    .op-archive-wrap {
+      border: 1px solid var(--rule);
+      background: rgba(255, 255, 255, 0.03);
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .op-archive-table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 13px;
+    }
+
+    .op-archive-table th,
+    .op-archive-table td {
+      padding: 0.7rem 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      vertical-align: top;
+      text-align: left;
+      word-break: break-word;
+    }
+
+    .op-archive-table th {
+      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .op-archive-table td {
+      color: var(--muted);
+    }
+
+    .op-archive-table .col-number {
+      width: 56px;
+      color: var(--ink);
+    }
+
+    .op-archive-table a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+      word-break: break-all;
+    }
+
+    .op-archive-empty {
+      opacity: 0.4;
+    }
+
+    .op-archive-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.8rem;
+      padding: 0.1rem 0.35rem;
+      border: 1px solid var(--rule);
+      color: var(--ink);
+    }
+
+    @media (max-width: 640px) {
+      .op-archive-table {
+        font-size: 12px;
+      }
+    }
+  </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -83,36 +212,36 @@
       </section>
 
 
-      <h3 id="open-projector-gallery-title" style="font-size: 24px;">Open Projector Archive</h3>
+      <h3 id="open-projector-archive-title" style="font-size: 24px;">Open Projector Archive</h3>
 
-            <p>
-            Explore and discover the amazing projects shared at previous open projectors through our open projector archive document: 
-      <a 
-    href="https://docs.google.com/spreadsheets/d/1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk/edit?gid=0#gid=0"
-    target="_blank"
-    style="
-      display:inline-block;
-      padding:6px 14px;
-      background:#000;
-      color:#fff;
-      border:1px solid #fff;
-      text-decoration:none;
-      border-radius:4px;
-      font-size:14px;
-      line-height:1.2;
-      font-family:inherit;
-      margin-top:20px;
-      margin-bottom: 20px;
-    "
-  >
-    Archive
-  </a>
-     
-          </p>
+      <p class="op-archive-intro">
+        Explore and discover the amazing projects shared at previous Open Projectors below, or open the source document on Google Sheets:
+        <br>
+        <a
+          class="op-archive-sheet-link"
+          href="https://docs.google.com/spreadsheets/d/1m3PGX3pvsREM946rGHhW3SFP1CHuK8PWjcWf_6VWvzk/edit?gid=0#gid=0"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open in Google Sheets ↗
+        </a>
+      </p>
+
+      <nav class="op-archive-sessions" role="tablist" aria-label="Choose an Open Projector session" data-op-archive-nav>
+        <!-- Session tabs are rendered by /scripts/open-projector-archive.js -->
+      </nav>
+
+      <section class="op-archive-wrap" aria-labelledby="open-projector-archive-title" data-op-archive-grid data-op-archive-src="/json/open-projector-archive.json">
+        <!-- Table is rendered from /json/open-projector-archive.json by /scripts/open-projector-archive.js -->
+      </section>
+
+      <h3 id="open-projector-gallery-title" style="font-size: 24px; margin-top: 2rem;">Open Projector Gallery</h3>
 
       <section id="open-projector-gallery" aria-labelledby="open-projector-gallery-title">
         <section class="pc-gallery" aria-label="Open Projector gallery">
-          <div class="pc-grid" id="open-projector-gallery-grid">
+          <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+               The figures below are a static fallback shown only if that JSON can't be fetched. -->
+          <div class="pc-grid" id="open-projector-gallery-grid" data-gallery-id="open-projector">
             
             <figure class="pc-item">
               <img src="/assets/OpenProj/OpenProjector_3-1.webp" data-full="/assets/OpenProj/OpenProjector_3-1.jpg" alt="Person presenting at open projector event" loading="lazy" decoding="async" />
@@ -208,8 +337,10 @@
   </main>
 
   <script defer src="/scripts/sidebar.js"></script>
+  <script defer src="/scripts/site-gallery.js"></script>
   <script defer src="/scripts/gallery.js"></script>
   <script defer src="/scripts/calendar.js"></script>
+  <script defer src="/scripts/open-projector-archive.js"></script>
 </body>
 
 </html>

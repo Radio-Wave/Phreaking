@@ -168,11 +168,6 @@
             </div>
           </div>
 
-          <!-- <div class="meta-block">
-                        <h2>Exhibition dates</h2>
-                                    <p>4th July - 12th July</p>
-                                              </div>-->
-
           <div class="meta-block">
             <h2>Festival dates</h2>
             <p>8th - 12th July</p>
@@ -184,8 +179,9 @@
           <a href="#about">About</a><span class="jump-sep">,</span>
           <a href="#timetable">Timetable</a><span class="jump-sep">,</span>
           <a href="#events">All events</a><span class="jump-sep">,</span>
-          <a href="#exhibition">Exhibition</a><span class="jump-sep">,</span>
-          <a href="#artists">Artists</a>
+          <a href="#artists">Artists</a><span class="jump-sep">,</span>
+          <span data-gallery-reveal="can-we-start-again" style="display:none"><a href="#gallery">Gallery</a><span class="jump-sep">,</span></span>
+          <a href="#credits">Credits</a><span class="jump-sep"></span>
         </nav>
 
         <section id="about" aria-labelledby="about-heading">
@@ -233,20 +229,62 @@
           </div>
         </section>
 
-        <!-- <section id="exhibition" aria-labelledby="exhibition-heading">
-          <h2 id="exhibition-heading" class="section-title">Exhibition</h2>
-          <section class="body-copy">
-            <p>Exhibition details coming soon.</p>
-          </section>
-        </section> -->
-
         <section id="artists" aria-labelledby="artists-heading">
-          <h2 id="artists-heading" class="section-title">Artists</h2>
+          <h2 id="artists-heading" class="section-title">Exhibiting Artists</h2>
           <div class="artists-grid" id="artists-grid" data-exhibition="can-we-start-again">
             <p class="cwsa-loading">Loading artists&hellip;</p>
           </div>
+        </section>
 
-          <p>More artists announced soon.</p>
+        <section id="gallery" aria-labelledby="gallery-heading" data-gallery-section style="display:none">
+          <h2 id="gallery-heading" class="section-title">Gallery</h2>
+          <section class="pc-gallery" aria-label="Can We Start Again gallery">
+            <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+                 The whole section stays hidden until the gallery has images. -->
+            <div class="pc-grid" id="cwsa-gallery-grid" data-gallery-id="can-we-start-again" data-gallery-hide-empty></div>
+          </section>
+        </section>
+
+        <section id="credits" aria-labelledby="credits-heading">
+          <h2 id="credits-heading" class="section-title">Credits</h2>
+          <p class="credits-intro"><em>Can We Start Again?</em> brought to you by:</p>
+
+          <div class="credits-tiers">
+            <div class="credits-tier">
+              <h3 class="credits-tier-label">Organisers</h3>
+              <ul class="credits-names">
+                <li><a href="https://xachhill.com/About.html" target="_blank" rel="noreferrer">Xach Hill</a></li>
+                <li><a href="https://melissayunzhi.li/" target="_blank" rel="noreferrer">Melissa Yunzhi Li</a></li>
+                <li><a href="https://nikos.kourous.net/" target="_blank" rel="noreferrer">Nikos Kourous Vázquez</a></li>
+              </ul>
+            </div>
+
+            <div class="credits-tier">
+              <h3 class="credits-tier-label">Supported by</h3>
+              <ul class="credits-names">
+                <li><a href="https://www.instagram.com/jack__jesse/" target="_blank" rel="noreferrer">Jack Jessé</a></li>
+                <li><a href="https://lyrarobinson.art/" target="_blank" rel="noreferrer">Lyra Robinson</a></li>
+                <li><a href="https://www.instagram.com/phoenixislakea/" target="_blank" rel="noreferrer">Phoenix Isla Kea</a></li>
+              </ul>
+            </div>
+
+            <div class="credits-tier">
+              <h3 class="credits-tier-label">Technician</h3>
+              <ul class="credits-names">
+                <li><a href="https://www.instagram.com/eryneep" target="_blank" rel="noreferrer">Eryn English-Polch</a></li>
+              </ul>
+            </div>
+
+            <div class="credits-tier">
+              <h3 class="credits-tier-label">Volunteers</h3>
+              <ul class="credits-names">
+                <li>Rose Kessler</li>
+                <li>Fran Hayes</li>
+                <li>Priyal Patel</li>
+                <li>Sarah Humadi</li>
+              </ul>
+            </div>
+          </div> 
         </section>
 
       </div>
@@ -258,6 +296,8 @@
   </main>
 
   <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/site-gallery.js"></script>
+  <script src="/scripts/gallery.js"></script>
   <script src="/scripts/can-we-start-again.js"></script>
   <script src="/scripts/cwsa-events.js"></script>
   <script src="/scripts/cwsa-timetable.js"></script>

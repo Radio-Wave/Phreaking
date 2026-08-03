@@ -145,7 +145,9 @@
           <section id="dccp-gallery" aria-labelledby="dccp-gallery-title">
             <h3 id="dccp-gallery-title">Gallery</h3>
             <section class="pc-gallery" aria-label="Does Cloud Compute exhibition gallery">
-              <div class="pc-grid">
+              <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
+                   The figures below are a static fallback shown only if that JSON can't be fetched. -->
+              <div class="pc-grid" data-gallery-id="dccep">
                 <figure class="pc-item">
                   <img src="/assets/DCCeP/Artwork/DDCeP-01.webp" data-full="/assets/DCCeP/Artwork/DDCeP-01.jpg"
                     alt="Wide Show of exhibtion" loading="lazy" decoding="async" />
@@ -374,6 +376,7 @@
 
   </main>
   <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/site-gallery.js"></script>
   <script src="/scripts/gallery.js"></script>
   <script src="/scripts/artists.js"></script>
   <script src="/scripts/does-cloud-compute.js"></script>
