@@ -21,6 +21,28 @@ function itemType(item) {
   return Array.isArray(t) ? t[0] : t;
 }
 
+const MONTHS = {
+  jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+  jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+};
+
+// Chronological sort key built from displayDate (e.g. "Friday 16th January —
+// 18:00–19:00"), falling back to just the startDate year when an event has
+// no displayDate — so it still lands in the right year, ahead of anything
+// dated later that same year.
+function chronoKey(ev) {
+  const year = parseInt(ev.startDate, 10) || 0;
+  const dd = ev.displayDate || '';
+  const dm = dd.match(/(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)/);
+  if (!dm) return year * 1000000;
+  const day = parseInt(dm[1], 10);
+  const month = MONTHS[dm[2].slice(0, 3).toLowerCase()];
+  if (!month) return year * 1000000;
+  const tm = dd.match(/(\d{1,2}):(\d{2})/);
+  const quarterHours = tm ? Math.floor((parseInt(tm[1], 10) * 60 + parseInt(tm[2], 10)) / 15) : 0;
+  return year * 1000000 + month * 10000 + day * 100 + quarterHours;
+}
+
 function eventCategory(ev) {
   return CATEGORY_BY_TYPE[itemType(ev)] || null;
 }
@@ -63,6 +85,7 @@ function buildCard(ev, personsMap, exhMap) {
 
   const article = document.createElement('article');
   article.className = 'event-card';
+  article.dataset.chronoKey = String(chronoKey(ev));
   const idSlug = (ev['@id'] || '').split('#')[1];
   if (idSlug) article.id = idSlug.startsWith('event-') ? idSlug : 'event-' + idSlug;
   article.setAttribute('itemscope', '');
@@ -153,6 +176,20 @@ function renderPastEvents(data) {
     const sectionId = { talks: 'section-talks', workshops: 'section-workshops', performances: 'section-performances', screenings: 'section-screenings' }[key];
     updateCount(sectionId, n);
   });
+
+  // Default order: newest first, matching the sort button's initial label
+  Object.values(stacks).forEach(stack => sortStack(stack, true));
+}
+
+function sortStack(stack, descending) {
+  if (!stack) return;
+  const cards = Array.from(stack.children);
+  cards.sort((a, b) => {
+    const ka = parseFloat(a.dataset.chronoKey) || 0;
+    const kb = parseFloat(b.dataset.chronoKey) || 0;
+    return descending ? kb - ka : ka - kb;
+  });
+  cards.forEach(card => stack.appendChild(card));
 }
 
 function initPastEvents() {
@@ -216,16 +253,11 @@ function initFilterSortLightbox() {
   window.addEventListener('hashchange', applyHashFilter);
   window.addEventListener('resize', () => { movePill(document.querySelector('.filter-btn.active')); });
 
-  let isDescending = true;
+  let isDescending = true; // matches the "newest first" default order rendered above
   sortBtn.addEventListener('click', () => {
     isDescending = !isDescending;
     sortBtn.textContent = isDescending ? 'Sort: Newest First ↓' : 'Sort: Oldest First ↑';
-    const eventStacks = document.querySelectorAll('.event-stack');
-    eventStacks.forEach(stack => {
-      const cards = Array.from(stack.children);
-      cards.reverse();
-      cards.forEach(card => stack.appendChild(card));
-    });
+    document.querySelectorAll('.event-stack').forEach(stack => sortStack(stack, isDescending));
   });
 
   const galleryImages = Array.from(document.querySelectorAll('.image-row img'));
