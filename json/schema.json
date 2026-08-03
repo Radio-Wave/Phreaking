@@ -2427,7 +2427,7 @@
       },
       "visible": true,
       "creditText": "",
-      "pastEvents": false
+      "pastEvents": true
     },
     {
       "@type": "Event",
