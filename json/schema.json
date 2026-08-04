@@ -2667,17 +2667,29 @@
           "src": "/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_1.webp",
           "full": "/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/melissa-yunzhi-li/melissa-yunzhi-li_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/from-concrete-to-cyberspace-performance-lecture-by-yunzhi-melissa-li-tickets-1992945686196",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "From Concrete to Cyberspace. In this 30-minute performance lecture, Melissa explores how urban architecture from the 1990s and digital platforms from the 2000s meet identity formation and social needs in Georgia, while navigating through a 3D built world.",
+      "description": "Yunzhi Melissa Li, a Chengdu-born, London-based computational artist whose practice spans interactive installations, web-based experiments, and immersive 3D environments, delivered a 30-minute narrated performance lecture navigating a custom-built 3D world. Through it, she explored how urban architecture from 1990s post-Soviet Georgia and digital platforms from the 2000s meet identity formation and social needs, examining how images, code, and audience interaction shape memory and place.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": true
     },
     {
       "@type": "Event",
