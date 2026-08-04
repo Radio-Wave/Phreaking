@@ -2395,7 +2395,7 @@
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-atay-ilgun-spiral",
-      "name": "Atay Ilgun - spiral",
+      "name": "Spiral: the shape of cultural temporality & protocol-art",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Friday 10th July — 18:30–19:30",
@@ -2419,14 +2419,14 @@
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/spiral-the-shape-of-cultural-temporality-protocol-art-talk-by-atay-ilgun-tickets-1992946589899",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Taking his artistic practice spanning early AI, crypto and protocol art, this talk thinks through cultural time and the hype cycle, and takes the spiral as a counterform that reads emergence and obsolescence together. Network and protocol art are proposed as forms whose internal time is structurally different: work that operates from inside its infrastructure and holds its prior states forward as material. Rather than a break from market-dependent digital culture, this is a reality hack within it, working on the rules that decide what is real. It moves through Otherness and the ./spiral exhibition, co-curated with jonooo on SuperRare, alongside soft world, a curatorial studio for protocol art: instances of a shift toward a quieter, more durable version of what digital culture could still become.",
+      "description": "Atay Ilgun, a London-based artist, creative technologist, and curator whose work bridges AI, web3, event curation, and experimental art, drew on his practice across early AI, crypto, and protocol art to think through cultural time and the hype cycle, using the spiral as a form that reads emergence and obsolescence together. He proposed network and protocol art as work that operates from inside its own infrastructure, holding its prior states forward as material rather than breaking from market-dependent digital culture — a reality hack from within it. The talk moved through Otherness and the ./spiral exhibition, co-curated with jonooo on SuperRare, alongside soft world, his curatorial studio for protocol art, examining hypercycles, crypto, and alternative paths toward a quieter, more durable version of what digital culture could still become.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true,
-      "creditText": "",
+      "creditText": "Atay Ilgun",
       "pastEvents": true
     },
     {
@@ -2694,7 +2694,7 @@
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-marcus-round",
-      "name": "Marcus Round",
+      "name": "An I Without a Face",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Saturday 11th July — 14:00–14:30",
@@ -2704,17 +2704,29 @@
           "src": "/assets/CanWeStartAgain/Events/marcus-round/marcus-round_1.webp",
           "full": "/assets/CanWeStartAgain/Events/marcus-round/marcus-round_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/an-i-without-a-face/an-i-without-a-face_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/an-i-without-a-face/an-i-without-a-face_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/an-i-without-a-face/an-i-without-a-face_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/an-i-without-a-face/an-i-without-a-face_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/an-i-without-a-face-performance-lecture-by-marcus-round-tickets-1992945916886",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "A performance lecture on his tarot cards, AI, and life and death.",
+      "description": "Marcus Round moved between magic trick, technical demonstration, and personal essay to ask what we mean when we say \"I\" — in a sentence, in a chatbot, in a body, in grief. Expanded from a shorter work first presented with tiat at the Internet Archive, the lecture searched for the human voice in a world of endlessly generated language, guiding the audience through a group tarot card game session to explore chatbot sentience, meaning-making, and grief.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "Marcus Round",
+      "pastEvents": true
     },
     {
       "@type": "ScreeningEvent",
