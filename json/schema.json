@@ -2634,17 +2634,29 @@
           "src": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_1.webp",
           "full": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/no-notes-making-music-with-synt/no-notes-making-music-with-synt_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/no-notes-what-is-synt-and-how-to-make-music-without-notes-tickets-1992944735352",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "What is SyntÉ and how do you make music without notes?! We take over our machines by delving into their software guts, then install and play with SyntÉ, a live coding language for sound. Please bring a laptop if you can; headphones are helpful but not necessary. Led by Daniel.",
+      "description": "Daniel Arves took participants into the software guts of their own machines, installing and playing with Syntə, a live coding language for sound, to make music directly from the command line rather than from notes. Daniel, who helps run events and performances as part of the local live coding scene, brought his enthusiasm for the practice into a session about taking over your machine and making sound from the inside out.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": false
     },
     {
       "@type": "PerformanceEvent",
@@ -2668,7 +2680,7 @@
     {
       "@type": "EducationEvent",
       "@id": "https://phreaking.co.uk/past-events#event-cranberry-lemonade-cwsa",
-      "name": "Cranberry Lemonade — Hyperlink Workshop",
+      "name": "Hyperlink Workshop",
       "exhibition": "can-we-start-again",
       "label": "Workshop",
       "displayDate": "Friday 10th July — 13:00–15:30",
@@ -2678,17 +2690,29 @@
           "src": "/assets/CanWeStartAgain/Events/cranberry-lemonade-hyperlink-workshop/cranberry-lemonade-hyperlink-workshop_1.webp",
           "full": "/assets/CanWeStartAgain/Events/cranberry-lemonade-hyperlink-workshop/cranberry-lemonade-hyperlink-workshop_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/hyperlink-workshop/hyperlink-workshop_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/hyperlink-workshop/hyperlink-workshop_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/hyperlink-workshop/hyperlink-workshop_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/hyperlink-workshop/hyperlink-workshop_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/building-a-hypertext-portal-html-workshop-by-cranberrylemonade-tickets-1992945091417",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "A hyperlink workshop with Cranberry Lemonade.",
+      "description": "Focused on hyperlinks and HTML, this beginner-friendly workshop by Cranberry Lemonade built toward a collaborative network of websites, with participants creating individualistic, poetic pages that reintroduced them to the playfulness of the early web.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "Cranberry Lemonade",
+      "pastEvents": true
     },
     {
       "@type": "Event",
