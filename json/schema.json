@@ -2656,7 +2656,7 @@
       },
       "visible": true,
       "creditText": "",
-      "pastEvents": false
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -2888,7 +2888,9 @@
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": false
     },
     {
       "@type": "Event",
