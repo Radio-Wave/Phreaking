@@ -2657,7 +2657,7 @@
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-melissa-li-cwsa",
-      "name": "Melissa Yunzhi Li",
+      "name": "From Concrete to Cyberspace",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Friday 10th July — 16:30–17:00",
@@ -2688,7 +2688,7 @@
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true,
-      "creditText": "",
+      "creditText": "Melissa Yunzhi Li",
       "pastEvents": true
     },
     {
@@ -2833,7 +2833,7 @@
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-tiziana-alocci",
-      "name": "Tiziana Alocci",
+      "name": "Designing Futures Through Absence of Data",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Saturday 11th July — 17:30–19:00",
@@ -2843,17 +2843,29 @@
           "src": "/assets/CanWeStartAgain/Events/tiziana-alocci/tiziana-alocci_1.webp",
           "full": "/assets/CanWeStartAgain/Events/tiziana-alocci/tiziana-alocci_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/designing-futures-through-absence-of-data/designing-futures-through-absence-of-data_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/designing-futures-through-absence-of-data/designing-futures-through-absence-of-data_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/designing-futures-through-absence-of-data/designing-futures-through-absence-of-data_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/designing-futures-through-absence-of-data/designing-futures-through-absence-of-data_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/designing-futures-through-absence-of-data-talk-by-tiziana-alocci-tickets-1992947658094",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Designing Futures Through Absence of Data. As our digital systems increasingly optimise for speed, extraction, prediction, and surveillance, what happens to everything they cannot measure? In this talk, data artist and lecturer Tiziana Alocci argues why the absence of data — or what is not counted — matters, sometimes even more than what is recorded. Drawing on projects that transform invisible data such as soundscapes, personal testimonies, found online data, and electromagnetic fields into data-driven installations, she explores how alternative forms of data collection can challenge dominant technological narratives and reveal what contemporary systems routinely overlook.",
+      "description": "Data artist and UAL Associate Lecturer Tiziana Alocci asked what happens to everything digital systems cannot measure as they optimise for speed, extraction, prediction, and surveillance, arguing that the absence of data often matters more than what gets recorded. Drawing on her projects transforming invisible data — soundscapes, personal testimonies, found online data, electromagnetic fields — into data-driven installations, she explored how alternative data collection methods can challenge dominant technological narratives and surface what contemporary systems routinely overlook, turning seen and unseen data alike into something tangible and perceivable.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "Tiziana Alocci",
+      "pastEvents": true
     },
     {
       "@type": "Event",
