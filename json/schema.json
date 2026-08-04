@@ -2467,22 +2467,34 @@
           "src": "/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_1.webp",
           "full": "/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/worldbuilding-as-resistance-creating-3d-sanctuaries/worldbuilding-as-resistance-creating-3d-sanctuaries_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/worldbuilding-as-resistance-creating-3d-sanctuaries-with-libi-engine-tickets-1992943235867",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "In a digital world dominated by corporate platforms and surveillance, worldbuilding is an act of resistance. Join this hands-on workshop and reclaim the web by creating your own sovereign 3D sanctuaries — virtual art galleries, personal rooms, tree-lined worlds, or tranquil escapes that are yours to own, shape, and share with just a link. Using the browser-based Libi Engine, you will worldbuild at a personal scale: bring your own assets or start with ready-made models, then decorate and personalise your space with lighting, atmosphere, audio, and meaningful details. No prior experience is required — just bring curiosity and a laptop (a mouse is recommended). By the end of this two-hour workshop you will have a fully accessible, standalone 3D world that can be shared through the web. Hosted by Ameer Ali and Ericka Simon.",
+      "description": "Ameer Ali and Ericka Simon, founders of LiBi, led this hands-on workshop using their browser-based worldbuilding engine to explore its potential for creating sovereign 3D spaces. Participants worked at a personal scale, using their own assets or ready-made models to shape rooms and small landscapes and personalise them with lighting, atmosphere, audio, and detail, framing worldbuilding as an act of resistance against corporate platforms and surveillance. By the end of the session, participants had a standalone 3D world shareable through the web, alongside foundational skills for building interactive experiences going forward.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "LiBi Engine",
+      "pastEvents": true
     },
     {
       "@type": "Event",
       "@id": "https://phreaking.co.uk/past-events#event-olivia-ema",
-      "name": "Olivia Ema",
+      "name": "Interactive digital art: Tools for collective feeling and becoming",
       "exhibition": "can-we-start-again",
       "label": "Talk",
       "displayDate": "Wednesday 8th July — 18:00–19:00",
@@ -2513,7 +2525,7 @@
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true,
-      "creditText": "",
+      "creditText": "Olivia Ema",
       "pastEvents": true
     },
     {
