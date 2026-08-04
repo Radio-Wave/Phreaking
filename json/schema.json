@@ -2560,17 +2560,29 @@
           "src": "/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_1.webp",
           "full": "/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/encrypted-embroidery/encrypted-embroidery_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/encrypted-embroidery-workshop-by-sophie-nadel-tickets-1992943904868",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Encrypted Embroidery is a design system supported by the Data Reclamation Handbook both created by Sophie Nadel. \n\nIn an increasingly all encompassing technology environment, the practice of encrypting information in embroidery encourages users to store their information offline. Not only does embroidery allow for slow, meditative creative practice, it also recentres a craft historically dismissed as ‘women’s work’. \n\nDo you have an address important to you? A password or secret phrase? Translate it into a hidden code and embroider it onto your belongings to keep it with you but away from prying eyes that aim to hold all your data. \n",
+      "description": "Sophie Nadel led a hands-on workshop teaching participants how to translate an address, password, or secret phrase into a hidden code and embroider it onto their belongings, drawing on her design system supported by the Data Reclamation Handbook. The practice encouraged storing information offline, away from prying data collection, while offering a slow, meditative approach to data sovereignty that recentred embroidery as a craft historically dismissed as \"women's work.\" Participants brought their own items to embroider, with needles, scissors, and materials provided.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "Sophie Nadel",
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -2585,17 +2597,29 @@
           "src": "/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_1.webp",
           "full": "/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_1.jpg",
           "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/ringtone-workshop/ringtone-workshop_3.jpg",
+          "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/ringtone-workshop-by-kat-macdonald-tickets-1992944609977",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "When did you last hear your ringtone? Artist Kat Macdonald leads participants through the history of ringtone customisation and the politics of sound in the commons. Using the Ring Tone Text Transfer Language (RTTTL), developed by Nokia in 1996 as a method of making and easily sharing ringtones between early mobile phones, participants make their own shareable ringtones. Bring your laptop!",
+      "description": "Kat Macdonald, a London-based sound and performance artist exploring collective practice, desire, and public space through technology and performance, led participants through the history of ringtone customization and the politics of sound in the commons. Using RTTTL, the Ring Tone Text Transfer Language developed by Nokia in 1996 to make and share ringtones between early mobile phones, participants made and shared their own custom ringtones, centering ideas around the politics of sound in public space.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "Kat McDonald",
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
