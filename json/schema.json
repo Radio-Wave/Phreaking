@@ -2494,25 +2494,27 @@
           "alt": ""
         },
         {
-          "src": "",
-          "full": "",
+          "src": "/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_2.webp",
+          "full": "/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_2.jpg",
           "alt": ""
         },
         {
-          "src": "",
-          "full": "",
+          "src": "/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_3.webp",
+          "full": "/assets/CanWeStartAgain/Events/olivia-ema/olivia-ema_3.jpg",
           "alt": ""
         }
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/interactive-digital-art-tools-for-collective-feeling-and-becoming-tickets-1992943491632",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Olivia Ema is a lecturer at University of the Arts London, a digital artist, and founder of a creative technology studio. She shares her observations on how interactive digital art and technology shape the way we perceive space, ourselves, and each other.\n\nSpeaking as a Black woman working in creative technology, the talk reflects on how identity and intuition shape the systems and worlds we build. It explores how digital systems, built using interactive software like Touchdesigner, can hold presence, respond to a room, and shift something in people almost without them noticing.\n\nDrawing on Olivia's projects, including an interactive floor installation reflecting on grief and large-scale installations across London from Outernet to Piccadilly, the session moves through both the technical process and what's actually driving it underneath.",
+      "description": "Olivia Ema, a lecturer at University of the Arts London, digital artist, and founder of a creative technology studio, spoke as a Black woman working in creative technology about how identity and intuition shape the systems and worlds she builds. She walked through how digital systems built in software like Touchdesigner could hold presence, respond to a room, and shift something in people almost without them noticing, drawing on her own projects — an interactive floor installation reflecting on grief, and large-scale installations across London from Outernet to Piccadilly. The talk moved through both the technical process behind the work and what was actually driving it underneath, staying grounded in theory and critical awareness throughout.\nSpeaking as a Black woman working in creative technology, the talk reflects on how identity and intuition shape the systems and worlds we build. It explores how digital systems, built using interactive software like Touchdesigner, can hold presence, respond to a room, and shift something in people almost without them noticing.\n\nDrawing on Olivia's projects, including an interactive floor installation reflecting on grief and large-scale installations across London from Outernet to Piccadilly, the session moves through both the technical process and what's actually driving it underneath.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
