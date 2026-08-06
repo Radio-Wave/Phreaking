@@ -2360,6 +2360,25 @@
               "altHtml": "Willow Swan + Ellis Berwick, <em>Slow Impulse</em> 2026"
             }
           ]
+        },
+        {
+          "title": "The London Community Laptop Orchestra",
+          "artists": "",
+          "description": "The London community laptop orchestra is a community run laptop orchestra making sounds in a variety of unusual places.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_1.jpg",
+              "alt": "The London Community Laptop Orchestra, Slow Impulse 2026",
+              "altHtml": "The London Community Laptop Orchestra, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_2.jpg",
+              "alt": "The London Community Laptop Orchestra, Slow Impulse 2026",
+              "altHtml": "The London Community Laptop Orchestra, <em>Slow Impulse</em> 2026"
+            }
+          ]
         }
       ],
       "creditText": "",
