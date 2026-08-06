@@ -2318,7 +2318,7 @@
       "visible": false
     },
     {
-      "@type": "PerformingArtsEvent",
+      "@type": "PerformanceEvent",
       "@id": "https://phreaking.co.uk/past-events#event-slow-impulse",
       "name": "Slow Impulse",
       "exhibition": "can-we-start-again",
