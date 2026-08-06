@@ -2318,11 +2318,11 @@
       "visible": false
     },
     {
-      "@type": "ScreeningEvent",
+      "@type": "PerformingArtsEvent",
       "@id": "https://phreaking.co.uk/past-events#event-slow-impulse",
       "name": "Slow Impulse",
       "exhibition": "can-we-start-again",
-      "label": "Experimental Performance Night",
+      "label": "Performance Night",
       "displayDate": "Sunday 12th July — 18:00–22:00",
       "sortOrder": 16,
       "images": [
@@ -2334,13 +2334,36 @@
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/slow-impulse-an-experimental-sound-night-tickets-1992718307099",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Slow Impulse will be an evening of experimental sound night that journeys through traditional, analogue, and technological ways of sound making. Join us in a large school hall for this very exciting, beautiful, and immersive sound night!",
+      "description": "Slow Impulse, an experimental sound night, was the final closing event of our festival Can We Start Again? and moved through six sets that each pulled sound from unexpected places. Ellis Berwick and Willow Swan opened with their sculptural, industrial instruments, setting a tone that was as much about materials as music. The London Community Laptop Orchestra followed, creating a communal space within the stage for people to play and interact with their laptops and phones before settling into a slower stretch of harmonizing healing frequencies. Genia Isachenko then took over with a rig of amplifiers, speakers and an old radio, weaving vocals through static and interference. Lagtime Seedling and Rosemary Moss played a double youtube duet across two projectors on either side of the large school hall. Conscript Theatre's Elia Fielden and Emile Belli reworked fragments of 'Untitled Robot Story,' folding writing about military machinery, memory and love into sound. Finally, the night closed with a full concerto of phones and alarms, guitars, cello and piano alongside ringtones and clocks.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "performances": [
+        {
+          "title": "Willow Swan + Ellis Berwick",
+          "artists": "",
+          "description": "Willow Swan and Ellis Berwick are an artist duo working across sound, sculpture, and performance. Rooted in a shared interest in repurposing industrial materials into improvised instruments, their collaborative practice transforms functional structures into resonant, site-responsive sonic forms.\n",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_1.jpg",
+              "alt": "Willow Swan + Ellis Berwick, Slow Impulse 2026",
+              "altHtml": "Willow Swan + Ellis Berwick, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_2.jpg",
+              "alt": "Willow Swan + Ellis Berwick, Slow Impulse 2026",
+              "altHtml": "Willow Swan + Ellis Berwick, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        }
+      ],
+      "creditText": "",
+      "pastEvents": true
     },
     {
       "@type": "Event",
