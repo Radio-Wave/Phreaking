@@ -2379,6 +2379,63 @@
               "altHtml": "The London Community Laptop Orchestra, <em>Slow Impulse</em> 2026"
             }
           ]
+        },
+        {
+          "title": "Genia Isachenko",
+          "artists": "",
+          "description": "Genia Isachenko is a sound artist and vocalist working with obsolete tech and experimental performance. Presenting a live surround set using discarded amplifiers and speakers to create their own diffusion array, and exploring the timbral differences of radio, interference and voice through song.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_1.jpg",
+              "alt": "Genia Isachenko, Slow Impulse 2026",
+              "altHtml": "Genia Isachenko, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_2.jpg",
+              "alt": "Genia Isachenko, Slow Impulse 2026",
+              "altHtml": "Genia Isachenko, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        },
+        {
+          "title": "Lagtime Seedling + Rosemary Moss",
+          "artists": "",
+          "description": "Lagtime Seedling creates audio-visual compositions on their laptop using live web browser windows and overlapping youtube video tabs, while Rosemary Moss draws from their musical background to create intimate sound worlds to deconstruct and index experience. While they independently approach sound in different ways, through collaboration, they settle in a new and unexplored in-between zone.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_1.jpg",
+              "alt": "Lagtime Seedling + Rosemary Moss, Slow Impulse 2026",
+              "altHtml": "Lagtime Seedling + Rosemary Moss, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_2.jpg",
+              "alt": "Lagtime Seedling + Rosemary Moss, Slow Impulse 2026",
+              "altHtml": "Lagtime Seedling + Rosemary Moss, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        },
+        {
+          "title": "Elia Fielden & Emile Belli // Conscript Theatre",
+          "artists": "",
+          "description": "Conscript Theatre is a hyper-material performance company bringing creative technology onstage alongside new writing, experimental performance, and alternative dramaturgy. For this performance, sound artists Elia Fielden and Emile Belli present fragments from Conscript's new show, 'Untitled Robot Story', a piece about robotic military machinery, memory, and love.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_1.jpg",
+              "alt": "Elia Fielden & Emile Belli // Conscript Theatre, Slow Impulse 2026",
+              "altHtml": "Elia Fielden &amp; Emile Belli // Conscript Theatre, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_2.jpg",
+              "alt": "Elia Fielden & Emile Belli // Conscript Theatre, Slow Impulse 2026",
+              "altHtml": "Elia Fielden &amp; Emile Belli // Conscript Theatre, <em>Slow Impulse</em> 2026"
+            }
+          ]
         }
       ],
       "creditText": "",
