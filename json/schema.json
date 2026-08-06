@@ -2318,11 +2318,11 @@
       "visible": false
     },
     {
-      "@type": "ScreeningEvent",
+      "@type": "PerformanceEvent",
       "@id": "https://phreaking.co.uk/past-events#event-slow-impulse",
       "name": "Slow Impulse",
       "exhibition": "can-we-start-again",
-      "label": "Experimental Performance Night",
+      "label": "Performance Night",
       "displayDate": "Sunday 12th July — 18:00–22:00",
       "sortOrder": 16,
       "images": [
@@ -2334,13 +2334,112 @@
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/slow-impulse-an-experimental-sound-night-tickets-1992718307099",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Slow Impulse will be an evening of experimental sound night that journeys through traditional, analogue, and technological ways of sound making. Join us in a large school hall for this very exciting, beautiful, and immersive sound night!",
+      "description": "Slow Impulse, an experimental sound night, was the final closing event of our festival Can We Start Again? and moved through six sets that each pulled sound from unexpected places. Ellis Berwick and Willow Swan opened with their sculptural, industrial instruments, setting a tone that was as much about materials as music. The London Community Laptop Orchestra followed, creating a communal space within the stage for people to play and interact with their laptops and phones before settling into a slower stretch of harmonizing healing frequencies. Genia Isachenko then took over with a rig of amplifiers, speakers and an old radio, weaving vocals through static and interference. Lagtime Seedling and Rosemary Moss played a double youtube duet across two projectors on either side of the large school hall. Conscript Theatre's Elia Fielden and Emile Belli reworked fragments of 'Untitled Robot Story,' folding writing about military machinery, memory and love into sound. Finally, the night closed with a full concerto of phones and alarms, guitars, cello and piano alongside ringtones and clocks.",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "performances": [
+        {
+          "title": "Willow Swan + Ellis Berwick",
+          "artists": "",
+          "description": "Willow Swan and Ellis Berwick are an artist duo working across sound, sculpture, and performance. Rooted in a shared interest in repurposing industrial materials into improvised instruments, their collaborative practice transforms functional structures into resonant, site-responsive sonic forms.\n",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_1.jpg",
+              "alt": "Willow Swan + Ellis Berwick, Slow Impulse 2026",
+              "altHtml": "Willow Swan + Ellis Berwick, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_willow-swan-ellis-berwick_2.jpg",
+              "alt": "Willow Swan + Ellis Berwick, Slow Impulse 2026",
+              "altHtml": "Willow Swan + Ellis Berwick, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        },
+        {
+          "title": "The London Community Laptop Orchestra",
+          "artists": "",
+          "description": "The London community laptop orchestra is a community run laptop orchestra making sounds in a variety of unusual places.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_1.jpg",
+              "alt": "The London Community Laptop Orchestra, Slow Impulse 2026",
+              "altHtml": "The London Community Laptop Orchestra, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_the-london-community-laptop-orchestra_2.jpg",
+              "alt": "The London Community Laptop Orchestra, Slow Impulse 2026",
+              "altHtml": "The London Community Laptop Orchestra, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        },
+        {
+          "title": "Genia Isachenko",
+          "artists": "",
+          "description": "Genia Isachenko is a sound artist and vocalist working with obsolete tech and experimental performance. Presenting a live surround set using discarded amplifiers and speakers to create their own diffusion array, and exploring the timbral differences of radio, interference and voice through song.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_1.jpg",
+              "alt": "Genia Isachenko, Slow Impulse 2026",
+              "altHtml": "Genia Isachenko, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_genia-isachenko_2.jpg",
+              "alt": "Genia Isachenko, Slow Impulse 2026",
+              "altHtml": "Genia Isachenko, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        },
+        {
+          "title": "Lagtime Seedling + Rosemary Moss",
+          "artists": "",
+          "description": "Lagtime Seedling creates audio-visual compositions on their laptop using live web browser windows and overlapping youtube video tabs, while Rosemary Moss draws from their musical background to create intimate sound worlds to deconstruct and index experience. While they independently approach sound in different ways, through collaboration, they settle in a new and unexplored in-between zone.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_1.jpg",
+              "alt": "Lagtime Seedling + Rosemary Moss, Slow Impulse 2026",
+              "altHtml": "Lagtime Seedling + Rosemary Moss, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_lagtime-seedling-rosemary-moss_2.jpg",
+              "alt": "Lagtime Seedling + Rosemary Moss, Slow Impulse 2026",
+              "altHtml": "Lagtime Seedling + Rosemary Moss, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        },
+        {
+          "title": "Elia Fielden & Emile Belli // Conscript Theatre",
+          "artists": "",
+          "description": "Conscript Theatre is a hyper-material performance company bringing creative technology onstage alongside new writing, experimental performance, and alternative dramaturgy. For this performance, sound artists Elia Fielden and Emile Belli present fragments from Conscript's new show, 'Untitled Robot Story', a piece about robotic military machinery, memory, and love.",
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_1.jpg",
+              "alt": "Elia Fielden & Emile Belli // Conscript Theatre, Slow Impulse 2026",
+              "altHtml": "Elia Fielden &amp; Emile Belli // Conscript Theatre, <em>Slow Impulse</em> 2026"
+            },
+            {
+              "src": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_2.webp",
+              "full": "/assets/CanWeStartAgain/Events/slow-impulse/slow-impulse_elia-fielden-emile-belli-conscript-theatre_2.jpg",
+              "alt": "Elia Fielden & Emile Belli // Conscript Theatre, Slow Impulse 2026",
+              "altHtml": "Elia Fielden &amp; Emile Belli // Conscript Theatre, <em>Slow Impulse</em> 2026"
+            }
+          ]
+        }
+      ],
+      "creditText": "",
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -2446,13 +2545,15 @@
       ],
       "eventCompletedUrl": "https://www.eventbrite.co.uk/e/1992947724292?aff=oddtdtcreator",
       "eventCompletedUrlLabel": "[Event Over]",
-      "description": "Speed Running the World of Things. As part of this programme Nina Davies opens up her research in progress, presenting it as a fragmented talk. Opening with teenagers speedrunning a Scientology building, she traces a series of tangents through Boston Dynamics' dancing robots, NASA's 'riding the skin' VR experiments, and the world models that teach physical AI to rehearse being in our world before it arrives. Drawing on several years of research into what happens to human movement when it leaves the body, the talk arrives at a single question: as physical AI inherits human movement to navigate a human-built world, what new forms of embodied literacy must we develop to navigate it in return?",
+      "description": "Speed Running the World of Things. As part of this programme Nina Dvies opens up her research in progress, presenting it as a fragmented talk. Opening with teenagers speedrunning a Scientology building, she traces a series of tangents through Boston Dynamics' dancing robots, NASA's 'riding the skin' VR experiments, and the world models that teach physical AI to rehearse being in our world before it arrives. Drawing on several years of research into what happens to human movement when it leaves the body, the talk arrives at a single question: as physical AI inherits human movement to navigate a human-built world, what new forms of embodied literacy must we develop to navigate it in return?",
       "startDate": "2026",
       "endDate": "2026",
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
-      "visible": true
+      "visible": true,
+      "creditText": "",
+      "pastEvents": false
     },
     {
       "@type": "EducationEvent",

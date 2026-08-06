@@ -143,9 +143,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   background:rgba(239,68,68,.9);color:#fff;letter-spacing:.03em;pointer-events:none;}
 
 .prev-frame{flex:1;overflow-y:auto;}
-#prevOverlay:empty{display:none;}
-#prevOverlay{position:absolute;inset:0;z-index:20;}
-.pright{position:relative;}
 .prev-frame::-webkit-scrollbar{width:7px;}
 .prev-frame::-webkit-scrollbar-track{background:#0a0a0a;}
 .prev-frame::-webkit-scrollbar-thumb{background:#2a2a35;border-radius:4px;}
@@ -458,67 +455,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .r-gallery .gal-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:3px;}
 .r-gallery .gal-grid figcaption{font-size:.62rem;color:#9a9aa5;padding:.25rem 0 .4rem;line-height:1.4;}
 .r-gallery .gal-empty{color:#666;font-size:.85rem;padding:1rem 0 2rem;}
-
-/* ── PERFORMANCE NIGHT: form sub-editor ── */
-.perf-editor{display:flex;flex-direction:column;gap:9px;}
-.perf-block{background:var(--bg);border:1px solid var(--brd);border-radius:6px;padding:11px;display:flex;flex-direction:column;gap:8px;}
-.perf-block-head{display:flex;align-items:center;justify-content:space-between;gap:6px;
-  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
-.perf-block-head .perf-block-n{color:var(--acc2);}
-.perf-block-tools{display:flex;gap:4px;align-items:center;}
-.perf-block-tools button{flex-shrink:0;}
-.perf-block input,.perf-block textarea{background:var(--surf);border:1px solid var(--brd);color:var(--ink);
-  padding:6px 8px;border-radius:5px;font-family:var(--ui);font-size:12px;width:100%;}
-.perf-block textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
-.perf-block input:focus,.perf-block textarea:focus{outline:none;border-color:var(--accent);}
-.perf-sub-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
-.perf-alt-note{font-size:10px;color:var(--muted);line-height:1.6;background:rgba(255,255,255,.03);
-  border:1px solid var(--brd);border-radius:4px;padding:6px 8px;}
-.perf-alt-note code{font-family:var(--mono);color:var(--acc2);font-size:10px;}
-.img-entry input[readonly]{opacity:.7;cursor:default;}
-/* colour picker row */
-.color-row{display:flex;gap:6px;align-items:center;}
-.color-row input[type=color]{width:38px;height:32px;padding:2px;background:var(--inp);
-  border:1px solid var(--brd);border-radius:5px;cursor:pointer;flex-shrink:0;}
-.color-row input[type=text]{flex:1;font-family:var(--mono);font-size:11px;}
-.deep-link-row{font-size:10px;font-family:var(--mono);color:var(--muted);margin-top:4px;word-break:break-all;}
-
-/* ── PERFORMANCE NIGHT: past-events preview card + modal ── */
-.r-pe .ecard.pn-card{cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;}
-.r-pe .ecard.pn-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.55);border-color:#fff;}
-.r-pe .pn-hint{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;letter-spacing:.06em;
-  text-transform:uppercase;opacity:.65;margin-top:.9rem;}
-.r-pe .ecard.pn-card:hover .pn-hint{opacity:1;}
-.r-pe .pn-hint-chev{display:inline-block;}
-/* modal is absolute inside the preview frame, not fixed, so it stays in the pane */
-.r-pe .pn-modal{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  padding:18px;background:rgba(0,0,0,.86);}
-.r-pe .pn-modal-card{position:relative;display:flex;flex-direction:column;width:100%;height:100%;
-  background:#000;border:1px solid #fff;box-shadow:0 20px 60px rgba(0,0,0,.6);overflow:hidden;}
-.r-pe .pn-modal-head{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:start;
-  padding:16px;border-bottom:1px solid #fff;}
-.r-pe .pn-modal-label{display:inline-flex;border:1px solid #fff;border-radius:999px;padding:.1rem .5rem;
-  font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem;}
-.r-pe .pn-modal-head h3{font-family:'VT323',monospace;font-size:1.9rem;font-weight:400;line-height:1;margin:0;}
-.r-pe .pn-modal-when{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem;text-align:right;
-  font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;}
-.r-pe .pn-modal-time{opacity:.65;text-transform:none;}
-.r-pe .pn-modal-close{background:none;border:none;color:#999;font-family:inherit;font-size:2.25rem;
-  line-height:.8;cursor:pointer;padding:0 0 4px 8px;}
-.r-pe .pn-modal-close:hover{color:#fff;}
-.r-pe .pn-modal-scroll{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:16px;}
-.r-pe .pn-modal-intro{display:flex;align-items:flex-start;gap:14px;}
-.r-pe .pn-modal-desc{flex:0 0 50%;max-width:50%;min-width:0;text-align:justify;font-size:calc(.85rem + 2px);line-height:1.7;color:#eee;}
-.r-pe .pn-modal-poster{flex:0 0 auto;align-self:flex-start;max-width:40%;line-height:0;}
-.r-pe .pn-modal-poster img{height:100%;width:auto;max-width:100%;object-fit:cover;display:block;
-  border:1px solid rgba(255,255,255,.15);border-radius:3px;}
-.r-pe .pn-perf{padding:14px 0;border-top:1px solid rgba(255,255,255,.18);}
-.r-pe .pn-perf:first-child{border-top:none;padding-top:0;}
-.r-pe .pn-perf-n{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;opacity:.55;}
-.r-pe .pn-perf h4{font-family:'VT323',monospace;font-size:1.5rem;line-height:1.15;margin:.15rem 0 .1rem;font-weight:400;}
-.r-pe .pn-perf-artists{font-size:.8rem;color:#ccc;margin-bottom:.4rem;}
-.r-pe .pn-perf-desc{font-size:.84rem;line-height:1.65;color:#eee;margin:.35rem 0 .6rem;}
-.r-pe .pn-empty{font-size:.82rem;opacity:.6;padding:.6rem 0;}
 </style>
 </head>
 <body>
@@ -610,7 +546,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     <div class="prev-frame" id="prevFrame">
       <div class="prev-ph">Load a JSON file to preview events</div>
     </div>
-    <div id="prevOverlay"></div>
   </div>
 </div>
 
@@ -976,7 +911,7 @@ const stagedImages   = new Map(); // repoPath → {content (base64), label}
 
 // Dynamic lists — populated from JSON on load, user can extend
 let knownExhibitions = ['does-cloud-compute', 'bitrot', 'can-we-start-again'];
-let knownLabels = ['Workshop', 'Talk', 'Performance', 'Screening', 'Event', 'Performance Night'];
+let knownLabels = ['Workshop', 'Talk', 'Performance', 'Screening', 'Event'];
 let knownTypes = [
   {value:'EducationEvent', label:'Workshop'},
   {value:'Event', label:'Event / Talk'},
@@ -1033,100 +968,6 @@ function isEvent(item){
 }
 function getEvents(){ return (data&&data['@graph'])?data['@graph'].filter(isEvent):[]; }
 function typeLabel(t){ const a=Array.isArray(t)?t[0]:t; return TYPE_MAP[a]||a||'Event'; }
-
-// ── PERFORMANCE NIGHT SUBTYPE ─────────────────────────────
-// A "Performance Night" is an ordinary PerformingArtsEvent whose badge is
-// "Performance Night" (legacy: "experimental performance night"). It carries an
-// extra `performances` array — one block per act, each with its own images —
-// which powers the expandable card on the live Past Events page. Every other
-// event type is completely unaffected by the code below.
-const PERF_NIGHT_LABEL = 'Performance Night';
-const PERF_NIGHT_ALIASES = ['performance night','experimental performance night'];
-function isPerfNight(ev){
-  return !!ev && PERF_NIGHT_ALIASES.includes(String(ev.label||'').trim().toLowerCase());
-}
-// Older entries were badged "experimental performance night"; the badge is now
-// simply "Performance Night", so rewrite them on load and keep the label list clean.
-function migratePerfNightLabels(){
-  let n=0;
-  (data?.['@graph']||[]).forEach(item=>{
-    if(isEvent(item)&&isPerfNight(item)&&item.label!==PERF_NIGHT_LABEL){ item.label=PERF_NIGHT_LABEL; n++; }
-  });
-  return n;
-}
-// Guarantees at least one performance block so the form always shows one
-function ensurePerformances(ev, silent){
-  if(!ev) return [];
-  if(!Array.isArray(ev.performances)) ev.performances=[];
-  if(!ev.performances.length){
-    ev.performances.push({title:'',artists:'',description:'',images:[]});
-    if(!silent) markUnsaved();
-  }
-  ev.performances.forEach(p=>{ if(!Array.isArray(p.images)) p.images=[]; });
-  return ev.performances;
-}
-// Year shown alongside the event name in auto-composed alt text
-function eventYear(ev){
-  const m=String(ev&&(ev.startDate||ev.endDate)||'').match(/\d{4}/);
-  if(m) return m[0];
-  const d=String(ev&&ev.displayDate||'').match(/\d{4}/);
-  return d?d[0]:'';
-}
-// "[performance title], [event name] [year]" — plain for alt, <em> for captions
-function perfImgAlt(ev, pi, html){
-  const p=(ev.performances||[])[pi]||{};
-  const t=String(p.title||'').trim();
-  const n=String(ev.name||'').trim();
-  const y=eventYear(ev);
-  if(html) return `${esc(t)}${t&&n?', ':''}<em>${esc(n)}</em>${y?' '+esc(y):''}`;
-  return `${t}${t&&n?', ':''}${n}${y?' '+y:''}`.trim();
-}
-// Alt text is derived, never hand-typed — re-stamp it whenever the source fields move
-function syncPerfAlts(ev){
-  if(!ev||!Array.isArray(ev.performances)) return;
-  ev.performances.forEach((p,pi)=>{
-    (p.images||[]).forEach(im=>{
-      im.alt     = perfImgAlt(ev,pi,false);
-      im.altHtml = perfImgAlt(ev,pi,true);
-    });
-  });
-}
-// Deep-link slug — '#my-event' on /past-events/ opens this card expanded
-function eventSlug(ev){ return ev&&ev.name?slug(ev.name):''; }
-// Full live URL — the hash always sits after the trailing slash of the page path
-function pnDeepLink(ev){ return 'https://phreaking.co.uk/past-events/#'+(eventSlug(ev)||'…'); }
-
-// ── IMAGE SLOTS ───────────────────────────────────────────
-// The image editor/converter is addressed by a "slot" string so the exact same
-// pipeline serves both event-level images ('0','1',…) and per-performance
-// images ('p0-1' = block 0, image 1). Event-level slots are still plain
-// indices, so every existing DOM id and conversion-state key is unchanged.
-function slotParse(s){
-  const m=String(s).match(/^p(\d+)-(\d+)$/);
-  return m ? {pi:+m[1], i:+m[2]} : {pi:null, i:parseInt(s,10)||0};
-}
-function slotOf(i, pi){ return (pi==null||pi===undefined) ? String(i) : `p${pi}-${i}`; }
-// The array a slot lives in (creating it when needed), or null if the block is gone
-function slotImages(ev, s){
-  if(!ev) return null;
-  const {pi}=slotParse(s);
-  if(pi==null){ if(!Array.isArray(ev.images)) ev.images=[]; return ev.images; }
-  const p=(ev.performances||[])[pi];
-  if(!p) return null;
-  if(!Array.isArray(p.images)) p.images=[];
-  return p.images;
-}
-function slotImg(ev, s){
-  const arr=slotImages(ev,s); if(!arr) return null;
-  return arr[slotParse(s).i]||null;
-}
-// Every slot on the current item, event-level first — used to restore convert UI
-function allSlots(ev){
-  if(!ev) return [];
-  const out=(ev.images||[]).map((_,i)=>String(i));
-  (ev.performances||[]).forEach((p,pi)=>(p.images||[]).forEach((_,i)=>out.push(slotOf(i,pi))));
-  return out;
-}
 
 // ── EVENT PERFORMER LINKING ────────────────────────────────
 // An event's performer(s) reference Person/Organization @ids already living
@@ -1232,9 +1073,8 @@ function setMode(m){
 function newItem(){ mode==='signals' ? newSignalsSession() : mode==='gallery' ? newGalleryImage() : mode==='artists' ? showAddArtistModal() : showAddModal(); }
 
 // ── OPTION BUILDERS ───────────────────────────────────────
-function exhOptions(cur, allowNone){
-  return (allowNone?`<option value=""${!cur?' selected':''}>— none —</option>`:'') +
-    knownExhibitions.map(k=>
+function exhOptions(cur){
+  return knownExhibitions.map(k=>
     `<option value="${esc(k)}"${cur===k?' selected':''}>${esc(EXH_NAMES[k]||k)}</option>`
   ).join('') + `<option value="__add__">+ Add new exhibition…</option>`;
 }
@@ -1389,7 +1229,6 @@ function refreshPrevFilters(){
 // ── EXTRACT KNOWN VALUES FROM JSON ────────────────────────
 function extractFromData(){
   if(!data||mode==='signals'||mode==='gallery') return;
-  if(mode==='events') migratePerfNightLabels();
   const items = mode==='artists' ? getArtists() : getEvents();
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
@@ -1432,7 +1271,6 @@ function loadFromFile(e){
 function onLoaded(msg){
   datasets[mode]=data;
   extractFromData();
-  if(mode==='events') pnFromHash();   // /#slug opens that Performance Night card
   markSaved(); renderList(); renderPreview();
   refreshExhDropdowns(); refreshPrevFilters();
   setStatus(msg, countLabel()); toast(msg,'ok');
@@ -1614,17 +1452,15 @@ function buildForm(){
   if(isExhibition(ev)){ buildExhibitionForm(ev); return; }
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
-  const pn=isPerfNight(ev);
-  if(pn) ensurePerformances(ev, true);
   const imgs=ev.images||[];
 
   document.getElementById('editBody').innerHTML=`
     <div class="field"><label>Event Name</label>
       <input id="ef-name" value="${esc(ev.name||'')}" oninput="liveUp()"></div>
     <div class="frow">
-      <div class="field"><label>Exhibition${pn?' <span style="font-weight:400;color:var(--muted)">(optional)</span>':''}</label>
+      <div class="field"><label>Exhibition</label>
         <select id="ef-exh" data-prev="${esc(ev.exhibition||'')}" onchange="anChange(this,'exh','liveUp')">
-          ${exhOptions(ev.exhibition||'', pn)}
+          ${exhOptions(ev.exhibition||'')}
         </select></div>
       <div class="field"><label>Event Type</label>
         <select id="ef-type" data-prev="${esc(t||'')}" onchange="anChange(this,'type','liveUp')">
@@ -1644,28 +1480,18 @@ function buildForm(){
       <div class="field"><label>Sort Order</label>
         <input type="number" id="ef-sort" value="${ev.sortOrder??''}" min="1" oninput="liveUp()"></div>
     </div>
-    ${pn?`
-    <div class="field"><label>Venue</label>
-      <input id="ef-venue" value="${esc(ev.venue||'')}" placeholder="e.g. ANNEX by The Koppel Project" oninput="liveUp()"></div>
-    <div class="field"><label>Card Background <span style="font-weight:400;color:var(--muted)">(this card only, on Past Events)</span></label>
-      <div class="color-row">
-        <input type="color" id="ef-cardcolor-pick" value="${esc(ev.cardColor||'#000000')}" oninput="setCardColor(this.value)">
-        <input type="text" id="ef-cardcolor" value="${esc(ev.cardColor||'')}" placeholder="#000000 — blank = site default" onchange="setCardColor(this.value)">
-        <button class="btn btn-ghost btn-sm" onclick="setCardColor('')">Clear</button>
-      </div></div>`:''}
     <div class="field"><label>Display Date</label>
       <div class="cal-wrap">
         <input id="ef-date" value="${esc(ev.displayDate||'')}" placeholder="e.g. Saturday 12th April — 14:00–17:00" oninput="liveUp()">
         <button type="button" class="cal-trigger" onclick="calOpen('ef-date')" title="Pick date/time">&#128197;</button>
       </div></div>
-    ${pn?'':`
     <div class="field"><label>Performer(s) <span style="font-weight:400;color:var(--muted)">(their name links to their own website wherever this event is shown)</span></label>
       <div class="arr-editor" id="perfEd">${performerRows(ev)}</div>
       <select id="ef-add-performer" onchange="addPerformerFromSelect(this)">
         <option value="">+ Add performer…</option>
         ${performerCandidateOptions()}
       </select>
-    </div>`}
+    </div>
     <div class="field"><label>Credit Text <span style="font-weight:400;color:var(--muted)">(plain-text credit shown instead of / alongside a linked performer, e.g. "Various Artists")</span></label>
       <input id="ef-credittext" value="${esc(ev.creditText||'')}" placeholder="Various Artists" oninput="liveUp()"></div>
     <div class="field">
@@ -1688,136 +1514,11 @@ function buildForm(){
       <div class="field"><label>End Date</label>
         <input id="ef-end" value="${esc(ev.endDate||'')}" placeholder="2025" oninput="liveUp()"></div>
     </div>
-    <div class="field"><label>${pn?'Poster / Event Images <span style="font-weight:400;color:var(--muted)">(first image is the main poster)</span>':'Images'}</label>
-      <div class="imgs-editor" id="imgsEd">${imgs.map((img,i)=>imgRow(img,i)).join('')}</div>
+    <div class="field"><label>Images</label>
+      <div class="imgs-editor" id="imgsEd">${imgs.map(imgRow).join('')}</div>
       <button class="add-img" onclick="addImg()">+ Add Image</button>
-    </div>
-    ${pn?`
-    <div class="field">
-      <label>Performance Log <span style="font-weight:400;color:var(--muted)">(one block per act — shown in the expanded card)</span></label>
-      <div class="perf-editor" id="perfBlocks">${perfBlocksHTML(ev)}</div>
-      <button class="add-img" onclick="addPerfBlock()">+ Add performance block</button>
-      <div class="deep-link-row" id="ef-deeplink">Deep link: ${esc(pnDeepLink(ev))}</div>
-    </div>`:''}`;
+    </div>`;
   restoreAllConvUI();
-}
-
-// ── PERFORMANCE BLOCKS (Performance Night only) ───────────
-function perfBlocksHTML(ev){
-  return (ev.performances||[]).map((p,pi)=>perfBlockHTML(ev,p,pi)).join('');
-}
-function perfBlockHTML(ev,p,pi){
-  const n=(ev.performances||[]).length;
-  return `<div class="perf-block" id="pb-${pi}">
-    <div class="perf-block-head">
-      <span class="perf-block-n">Performance ${pi+1}</span>
-      <span class="perf-block-tools">
-        <button class="btn btn-ghost btn-sm" onclick="movePerfBlock(${pi},-1)" ${pi===0?'disabled style="opacity:.35"':''} title="Move up">↑</button>
-        <button class="btn btn-ghost btn-sm" onclick="movePerfBlock(${pi},1)" ${pi===n-1?'disabled style="opacity:.35"':''} title="Move down">↓</button>
-        <button class="btn btn-err btn-sm" onclick="removePerfBlock(${pi})">Remove</button>
-      </span>
-    </div>
-    <span class="perf-sub-label">Performance Title</span>
-    <input id="pf-title-${pi}" value="${esc(p.title||'')}" placeholder="e.g. Deposit Silk" oninput="setPerf(${pi},'title',this.value)">
-    <span class="perf-sub-label">Artists <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span>
-    <input id="pf-artists-${pi}" value="${esc(p.artists||'')}" placeholder="e.g. Lagtime Seedling &amp; Orangespy" oninput="setPerf(${pi},'artists',this.value)">
-    <span class="perf-sub-label">Description</span>
-    <textarea id="pf-desc-${pi}" rows="3" oninput="setPerf(${pi},'description',this.value)">${esc(p.description||'')}</textarea>
-    <span class="perf-sub-label">Images</span>
-    <div class="imgs-editor" id="imgsEd-p${pi}">${(p.images||[]).map((img,i)=>imgRow(img,i,pi)).join('')}</div>
-    <button class="add-img" onclick="addImg(${pi})">+ Add image to this performance</button>
-    <div class="perf-alt-note">Alt text is generated automatically:
-      <code id="pf-alt-${pi}">${esc(perfImgAlt(ev,pi,false)||'[title], [event name] [year]')}</code></div>
-  </div>`;
-}
-function rebuildPerfBlocks(){
-  const ev=data['@graph'][curIdx]; if(!ev) return;
-  const c=document.getElementById('perfBlocks');
-  if(c){ c.innerHTML=perfBlocksHTML(ev); restoreAllConvUI(); }
-}
-function setPerf(pi,field,val){
-  const ev=data['@graph'][curIdx]; if(!ev) return;
-  const p=(ev.performances||[])[pi]; if(!p) return;
-  p[field]=val;
-  if(field==='title'){
-    syncPerfAlts(ev);
-    const lab=document.getElementById('pf-alt-'+pi);
-    if(lab) lab.textContent=perfImgAlt(ev,pi,false)||'[title], [event name] [year]';
-    refreshAltInputs(pi);
-  }
-  markUnsaved(); renderPreview();
-}
-// Alt inputs are read-only mirrors of the derived value
-function refreshAltInputs(pi){
-  const ev=data['@graph'][curIdx]; if(!ev) return;
-  const blocks = pi==null ? (ev.performances||[]).map((_,x)=>x) : [pi];
-  blocks.forEach(bi=>{
-    const p=(ev.performances||[])[bi]; if(!p) return;
-    (p.images||[]).forEach((im,i)=>{
-      const el=document.getElementById('ie-alt-'+slotOf(i,bi));
-      if(el) el.value=im.alt||'';
-    });
-    const note=document.getElementById('pf-alt-'+bi);
-    if(note) note.textContent=perfImgAlt(ev,bi,false)||'[title], [event name] [year]';
-  });
-  const dl=document.getElementById('ef-deeplink');
-  if(dl) dl.textContent='Deep link: '+pnDeepLink(ev);
-}
-function addPerfBlock(){
-  const ev=data['@graph'][curIdx]; if(!ev) return;
-  if(!Array.isArray(ev.performances)) ev.performances=[];
-  ev.performances.push({title:'',artists:'',description:'',images:[]});
-  markUnsaved(); rebuildPerfBlocks(); renderPreview();
-}
-function removePerfBlock(pi){
-  const ev=data['@graph'][curIdx]; if(!ev||!Array.isArray(ev.performances)) return;
-  const p=ev.performances[pi];
-  const hasContent=p&&(p.title||p.artists||p.description||(p.images||[]).length);
-  if(hasContent&&!confirm(`Remove performance ${pi+1}${p.title?' ("'+p.title+'")':''}? Its images stay in the repo but are dropped from this event.`)) return;
-  ev.performances.splice(pi,1);
-  // Conversion state is keyed by block index — shift everything above down one
-  remapPerfConvState(old => old===pi ? null : (old>pi ? old-1 : old));
-  ensurePerformances(ev, true);
-  markUnsaved(); rebuildPerfBlocks(); renderPreview();
-}
-function movePerfBlock(pi,dir){
-  const ev=data['@graph'][curIdx]; if(!ev||!Array.isArray(ev.performances)) return;
-  const j=pi+dir; if(j<0||j>=ev.performances.length) return;
-  [ev.performances[pi],ev.performances[j]]=[ev.performances[j],ev.performances[pi]];
-  remapPerfConvState(old => old===pi ? j : (old===j ? pi : old));
-  syncPerfAlts(ev);
-  markUnsaved(); rebuildPerfBlocks(); renderPreview();
-}
-// Re-key imgConvState / imgPreviewCache when block indices move, so uploaded-but-
-// unpushed conversions follow their block instead of being silently orphaned.
-function remapPerfConvState(mapFn){
-  const pre=curIdx+'_p';
-  const move=(store, revoke)=>{
-    const moved={};
-    Object.keys(store).filter(k=>k.startsWith(pre)).forEach(k=>{
-      const rest=k.slice(pre.length);              // '<pi>-<i>'
-      const dash=rest.indexOf('-');
-      const oldPi=parseInt(rest.slice(0,dash),10);
-      const tail=rest.slice(dash);
-      const newPi=mapFn(oldPi);
-      if(newPi==null){ if(revoke) revoke(store[k]); }
-      else moved[curIdx+'_p'+newPi+tail]=store[k];
-      delete store[k];
-    });
-    Object.assign(store,moved);
-  };
-  move(imgConvState);
-  move(imgPreviewCache, c=>{ URL.revokeObjectURL(c.webp); URL.revokeObjectURL(c.jpeg); });
-}
-function setCardColor(val){
-  const ev=data['@graph'][curIdx]; if(!ev) return;
-  const v=String(val||'').trim();
-  if(v) ev.cardColor=v; else delete ev.cardColor;
-  const txt=document.getElementById('ef-cardcolor');
-  const pick=document.getElementById('ef-cardcolor-pick');
-  if(txt) txt.value=v;
-  if(pick&&/^#[0-9a-f]{6}$/i.test(v)) pick.value=v;
-  markUnsaved(); renderPreview();
 }
 
 function buildExhibitionForm(ex){
@@ -1852,7 +1553,7 @@ function buildExhibitionForm(ex){
       <label>Link Label <span style="font-weight:400;color:var(--muted)">(used in "View the full X page ↗")</span></label>
       <input id="ef-link-label" value="${esc(ex.linkLabel||'')}" placeholder="e.g. DCCeP, BitRot, V&amp;A Gallery" oninput="liveUp()"></div>
     <div class="field"><label>Images</label>
-      <div class="imgs-editor" id="imgsEd">${imgs.map((img,i)=>imgRow(img,i)).join('')}</div>
+      <div class="imgs-editor" id="imgsEd">${imgs.map(imgRow).join('')}</div>
       <button class="add-img" onclick="addImg()">+ Add Image</button>
     </div>`;
   restoreAllConvUI();
@@ -1948,132 +1649,106 @@ function liveUpArtist(ar){
   renderPreview();
 }
 
-// `pi` is the performance-block index for per-performance images, or omitted for
-// event-level images. Everything below is addressed by the resulting slot id.
-function imgRow(img,i,pi){
-  const s=slotOf(i,pi);
-  const perf=(pi!=null&&pi!==undefined);
-  const head=perf ? 'Image '+(i+1) : (i===0?'Poster / Primary':'Image '+(i+1));
-  return `<div class="img-entry" id="ie-${s}">
+function imgRow(img,i){
+  return `<div class="img-entry" id="ie-${i}">
     <div class="img-entry-head">
-      <span>${head}</span>
-      <button class="btn btn-err btn-sm" onclick="removeImg('${s}')">Remove</button>
+      <span>${i===0?'Poster / Primary':'Image '+(i+1)}</span>
+      <button class="btn btn-err btn-sm" onclick="removeImg(${i})">Remove</button>
     </div>
-    <input id="ie-src-${s}" placeholder="src (thumbnail path)" value="${esc(img.src||'')}" onchange="setImg('${s}','src',this.value)">
-    <input id="ie-full-${s}" placeholder="full (lightbox path — blank = same as src)" value="${esc(img.full&&img.full!==img.src?img.full:'')}" onchange="setImg('${s}','full',this.value)">
-    ${perf
-      ? `<input id="ie-alt-${s}" placeholder="alt text (auto)" value="${esc(img.alt||'')}" readonly title="Generated from the performance title, event name and year">`
-      : `<input id="ie-alt-${s}" placeholder="alt text" value="${esc(img.alt||'')}" onchange="setImg('${s}','alt',this.value)">`}
+    <input id="ie-src-${i}" placeholder="src (thumbnail path)" value="${esc(img.src||'')}" onchange="setImg(${i},'src',this.value)">
+    <input id="ie-full-${i}" placeholder="full (lightbox path — blank = same as src)" value="${esc(img.full&&img.full!==img.src?img.full:'')}" onchange="setImg(${i},'full',this.value)">
+    <input placeholder="alt text" value="${esc(img.alt||'')}" onchange="setImg(${i},'alt',this.value)">
     <div class="img-upload-area">
       <label class="btn btn-ghost btn-sm" style="cursor:pointer">
         ↑ Upload &amp; Convert
-        <input type="file" accept="image/*" style="display:none" onchange="handleImgUpload('${s}',this)">
+        <input type="file" accept="image/*" style="display:none" onchange="handleImgUpload(${i},this)">
       </label>
     </div>
-    <div class="img-convert-out" id="ico-${s}" style="display:none">
+    <div class="img-convert-out" id="ico-${i}" style="display:none">
       <div class="img-convert-panels">
         <div class="img-convert-panel">
           <span class="img-convert-panel-label">Thumbnail · WebP</span>
-          <img id="ico-webp-img-${s}" src="" alt="webp preview">
-          <span class="img-convert-size" id="ico-webp-size-${s}">—</span>
+          <img id="ico-webp-img-${i}" src="" alt="webp preview">
+          <span class="img-convert-size" id="ico-webp-size-${i}">—</span>
           <div class="img-quality-row">
             <span>W</span>
-            <input type="range" min="400" max="6000" step="50" value="1200" id="ico-webp-width-slider-${s}"
-              oninput="updateWebpWidth('${s}',this.value)">
-            <span id="ico-webp-width-label-${s}" style="min-width:44px">1200px</span>
+            <input type="range" min="400" max="6000" step="50" value="1200" id="ico-webp-width-slider-${i}"
+              oninput="updateWebpWidth(${i},this.value)">
+            <span id="ico-webp-width-label-${i}" style="min-width:44px">1200px</span>
           </div>
           <div class="img-quality-row">
             <span>Q</span>
-            <input type="range" min="30" max="100" value="80" id="ico-webp-qual-slider-${s}"
-              oninput="updateWebpQuality('${s}',this.value)">
-            <span id="ico-webp-qual-label-${s}" style="min-width:30px">80%</span>
+            <input type="range" min="30" max="100" value="80" id="ico-webp-qual-slider-${i}"
+              oninput="updateWebpQuality(${i},this.value)">
+            <span id="ico-webp-qual-label-${i}" style="min-width:30px">80%</span>
           </div>
-          <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-webp-${s}" onclick="stageImg('${s}','webp')">+ Save for push</button>
-          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub('${s}','webp')">↑ Upload now</button>
-          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert('${s}','webp')">↓ Download</button>
+          <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-webp-${i}" onclick="stageImg(${i},'webp')">+ Save for push</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub(${i},'webp')">↑ Upload now</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'webp')">↓ Download</button>
         </div>
         <div class="img-convert-panel">
           <span class="img-convert-panel-label">Full · JPEG</span>
-          <img id="ico-jpeg-img-${s}" src="" alt="jpeg preview">
-          <span class="img-convert-size" id="ico-jpeg-size-${s}">—</span>
+          <img id="ico-jpeg-img-${i}" src="" alt="jpeg preview">
+          <span class="img-convert-size" id="ico-jpeg-size-${i}">—</span>
           <div class="img-quality-row">
             <span>W</span>
-            <input type="range" min="400" max="6000" step="50" value="2000" id="ico-width-slider-${s}"
-              oninput="updateJpegWidth('${s}',this.value)">
-            <span id="ico-width-label-${s}" style="min-width:44px">2000px</span>
+            <input type="range" min="400" max="6000" step="50" value="2000" id="ico-width-slider-${i}"
+              oninput="updateJpegWidth(${i},this.value)">
+            <span id="ico-width-label-${i}" style="min-width:44px">2000px</span>
           </div>
           <div class="img-quality-row">
             <span>Q</span>
-            <input type="range" min="30" max="100" value="85" id="ico-qual-slider-${s}"
-              oninput="updateJpegQuality('${s}',this.value)">
-            <span id="ico-qual-label-${s}" style="min-width:30px">85%</span>
+            <input type="range" min="30" max="100" value="85" id="ico-qual-slider-${i}"
+              oninput="updateJpegQuality(${i},this.value)">
+            <span id="ico-qual-label-${i}" style="min-width:30px">85%</span>
           </div>
-          <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-jpeg-${s}" onclick="stageImg('${s}','jpeg')">+ Save for push</button>
-          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub('${s}','jpeg')">↑ Upload now</button>
-          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert('${s}','jpeg')">↓ Download</button>
+          <button class="btn btn-ok btn-sm" style="width:100%;margin-top:4px" id="ico-stage-jpeg-${i}" onclick="stageImg(${i},'jpeg')">+ Save for push</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="uploadImgToGitHub(${i},'jpeg')">↑ Upload now</button>
+          <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:2px" onclick="downloadConvert(${i},'jpeg')">↓ Download</button>
         </div>
       </div>
-      <button class="img-apply-paths" onclick="applyConvertPaths('${s}')">↗ Auto-fill src &amp; full paths</button>
+      <button class="img-apply-paths" onclick="applyConvertPaths(${i})">↗ Auto-fill src &amp; full paths</button>
       <div class="img-disclaimer">
-        <strong>Target folder:</strong> <code id="ico-folder-${s}">—</code><br>
-        Filenames: <code id="ico-fname-${s}">—</code> &nbsp;/&nbsp; <code id="ico-fname-full-${s}">—</code><br>
+        <strong>Target folder:</strong> <code id="ico-folder-${i}">—</code><br>
+        Filenames: <code id="ico-fname-${i}">—</code> &nbsp;/&nbsp; <code id="ico-fname-full-${i}">—</code><br>
         Click <strong>↑ Upload</strong> to push directly to GitHub, or <strong>↓ Download</strong> to save manually.
       </div>
     </div>
   </div>`;
 }
 
-// pi omitted → event-level images; pi given → that performance block's images
-function addImg(pi){
+function addImg(){
   const ev=data['@graph'][curIdx];
-  const arr=slotImages(ev, slotOf(0,pi));
-  if(!arr) return;
-  arr.push({src:'',full:'',alt:''});
-  if(pi!=null&&pi!==undefined) syncPerfAlts(ev);
+  if(!ev.images) ev.images=[];
+  ev.images.push({src:'',full:'',alt:''});
   markUnsaved(); liveUp();
-  redrawImgs(pi);
+  document.getElementById('imgsEd').innerHTML=(ev.images||[]).map(imgRow).join('');
   restoreAllConvUI();
 }
-function removeImg(s){
+function removeImg(i){
   const ev=data['@graph'][curIdx];
-  const {pi,i}=slotParse(s);
-  const arr=slotImages(ev,s); if(!arr) return;
-  arr.splice(i,1);
-  // Indices shift within this group — wipe its conv + preview state
-  const prefix = (pi==null) ? curIdx+'_' : curIdx+'_p'+pi+'-';
-  // (an event-level prefix also matches 'p…' keys — keep other blocks' state intact)
-  const inGroup = k => k.startsWith(prefix) && (pi!=null || !k.slice(prefix.length).startsWith('p'));
-  Object.keys(imgConvState).filter(inGroup).forEach(k=>delete imgConvState[k]);
-  Object.keys(imgPreviewCache).filter(inGroup).forEach(k=>{
+  ev.images.splice(i,1);
+  // Indices shift — wipe all conv + preview state for this event
+  const prefix=curIdx+'_';
+  Object.keys(imgConvState).filter(k=>k.startsWith(prefix)).forEach(k=>delete imgConvState[k]);
+  Object.keys(imgPreviewCache).filter(k=>k.startsWith(prefix)).forEach(k=>{
     URL.revokeObjectURL(imgPreviewCache[k].webp);
     URL.revokeObjectURL(imgPreviewCache[k].jpeg);
     delete imgPreviewCache[k];
   });
   markUnsaved(); liveUp();
-  redrawImgs(pi);
-  restoreAllConvUI();
+  document.getElementById('imgsEd').innerHTML=(ev.images||[]).map(imgRow).join('');
 }
-function redrawImgs(pi){
-  const ev=data['@graph'][curIdx]; if(!ev) return;
-  if(pi==null||pi===undefined){
-    const c=document.getElementById('imgsEd');
-    if(c) c.innerHTML=(ev.images||[]).map((img,i)=>imgRow(img,i)).join('');
-  } else {
-    const c=document.getElementById('imgsEd-p'+pi);
-    const p=(ev.performances||[])[pi];
-    if(c&&p) c.innerHTML=(p.images||[]).map((img,i)=>imgRow(img,i,pi)).join('');
-  }
-}
-function setImg(s,field,val){
+function setImg(i,field,val){
   const ev=data['@graph'][curIdx];
-  const im=slotImg(ev,s); if(!im) return;
-  im[field]=val;
-  if(field==='src'&&!im.full) im.full=val;
+  if(!ev.images||!ev.images[i]) return;
+  ev.images[i][field]=val;
+  if(field==='src'&&!ev.images[i].full) ev.images[i].full=val;
   markUnsaved(); renderPreview();
 }
 
 // ── IMAGE CONVERSION ──────────────────────────────────────
-function imgConvKey(slot){ return curIdx+'_'+slot; }
+function imgConvKey(imgIdx){ return curIdx+'_'+imgIdx; }
 
 function dataURLToBlob(dataURL){
   const parts=dataURL.split(','), mime=parts[0].match(/:(.*?);/)[1], bin=atob(parts[1]);
@@ -2083,18 +1758,18 @@ function dataURLToBlob(dataURL){
 }
 
 // Returns a live blob URL for preview, or null if none cached
-function imgPreviewURL(ev, slot, which){
+function imgPreviewURL(ev, imgIdx, which){
   const gi=data['@graph'].indexOf(ev);
-  const c=imgPreviewCache[gi+'_'+slot];
+  const c=imgPreviewCache[gi+'_'+imgIdx];
   return c ? (which==='full' ? c.jpeg : c.webp) : null;
 }
 
-function handleImgUpload(slot, input){
+function handleImgUpload(imgIdx, input){
   const file=input.files[0]; if(!file) return;
   const reader=new FileReader();
   reader.onload=e=>{
     const im=new Image();
-    im.onload=()=>convertImgBoth(slot,im);
+    im.onload=()=>convertImgBoth(imgIdx,im);
     im.src=e.target.result;
   };
   reader.readAsDataURL(file);
@@ -2142,8 +1817,8 @@ function convertToJPEG(imgEl, quality, maxWidth){
   return {dataURL, sizeKB:estimateSizeKB(dataURL)};
 }
 
-function convertImgBoth(slot, imgEl){
-  const key=imgConvKey(slot);
+function convertImgBoth(imgIdx, imgEl){
+  const key=imgConvKey(imgIdx);
   const prevQ=imgConvState[key]?.quality||85;
   const prevW=imgConvState[key]?.maxWidth||Math.min(imgEl.naturalWidth,2000);
   const prevWebpQ=imgConvState[key]?.webpQuality;                      // undefined → auto on first convert
@@ -2162,79 +1837,79 @@ function convertImgBoth(slot, imgEl){
     jpeg:URL.createObjectURL(dataURLToBlob(jpeg.dataURL))
   };
 
-  showConvUI(slot);
+  showConvUI(imgIdx);
   renderPreview(); // show uploaded image live in preview panel
 }
 
-function showConvUI(slot){
-  const key=imgConvKey(slot);
-  const s=imgConvState[key]; if(!s||!s.srcImg) return;
-  const out=document.getElementById('ico-'+slot); if(!out) return;
+function showConvUI(imgIdx){
+  const key=imgConvKey(imgIdx);
+  const s=imgConvState[key]; if(!s) return;
+  const out=document.getElementById('ico-'+imgIdx); if(!out) return;
   out.style.display='block';
 
   const ev=data?.['@graph']?.[curIdx];
 
   const el=id=>document.getElementById(id);
-  if(el('ico-webp-img-'+slot))  el('ico-webp-img-'+slot).src=s.webpDataURL;
-  if(el('ico-webp-size-'+slot)) el('ico-webp-size-'+slot).textContent=s.webpSize+' KB';
-  if(el('ico-webp-qual-slider-'+slot)) el('ico-webp-qual-slider-'+slot).value=s.webpQuality;
-  if(el('ico-webp-qual-label-'+slot))  el('ico-webp-qual-label-'+slot).textContent=s.webpQuality+'%';
-  const wwSlider=el('ico-webp-width-slider-'+slot);
+  if(el('ico-webp-img-'+imgIdx))  el('ico-webp-img-'+imgIdx).src=s.webpDataURL;
+  if(el('ico-webp-size-'+imgIdx)) el('ico-webp-size-'+imgIdx).textContent=s.webpSize+' KB';
+  if(el('ico-webp-qual-slider-'+imgIdx)) el('ico-webp-qual-slider-'+imgIdx).value=s.webpQuality;
+  if(el('ico-webp-qual-label-'+imgIdx))  el('ico-webp-qual-label-'+imgIdx).textContent=s.webpQuality+'%';
+  const wwSlider=el('ico-webp-width-slider-'+imgIdx);
   if(wwSlider){ wwSlider.max=Math.max(s.srcImg.naturalWidth,400); wwSlider.value=s.webpMaxWidth; }
-  if(el('ico-webp-width-label-'+slot)) el('ico-webp-width-label-'+slot).textContent=s.webpMaxWidth+'px';
-  const jSize=el('ico-jpeg-size-'+slot);
+  if(el('ico-webp-width-label-'+imgIdx)) el('ico-webp-width-label-'+imgIdx).textContent=s.webpMaxWidth+'px';
+  const jSize=el('ico-jpeg-size-'+imgIdx);
   if(jSize){
     jSize.textContent=s.jpegSize+' KB'+(s.jpegSize>1024?' ⚠ >1 MB':'');
     jSize.className='img-convert-size'+(s.jpegSize>1024?' warn':'');
   }
-  if(el('ico-jpeg-img-'+slot))    el('ico-jpeg-img-'+slot).src=s.jpegDataURL;
-  if(el('ico-qual-slider-'+slot)) el('ico-qual-slider-'+slot).value=s.quality;
-  if(el('ico-qual-label-'+slot))  el('ico-qual-label-'+slot).textContent=s.quality+'%';
-  const wSlider=el('ico-width-slider-'+slot);
+  if(el('ico-jpeg-img-'+imgIdx))    el('ico-jpeg-img-'+imgIdx).src=s.jpegDataURL;
+  if(el('ico-qual-slider-'+imgIdx)) el('ico-qual-slider-'+imgIdx).value=s.quality;
+  if(el('ico-qual-label-'+imgIdx))  el('ico-qual-label-'+imgIdx).textContent=s.quality+'%';
+  const wSlider=el('ico-width-slider-'+imgIdx);
   if(wSlider){ wSlider.max=Math.max(s.srcImg.naturalWidth,400); wSlider.value=s.maxWidth; }
-  if(el('ico-width-label-'+slot)) el('ico-width-label-'+slot).textContent=s.maxWidth+'px';
+  if(el('ico-width-label-'+imgIdx)) el('ico-width-label-'+imgIdx).textContent=s.maxWidth+'px';
 
   // Populate folder/filename info using exhibition-aware paths
   if(ev){
-    const webpPath = imgAssetPath(ev, slot, 'webp');
-    const jpegPath = imgAssetPath(ev, slot, 'jpeg');
+    const webpPath = imgAssetPath(ev, imgIdx, 'webp');
+    const jpegPath = imgAssetPath(ev, imgIdx, 'jpeg');
     const folder   = webpPath.replace(/\/[^/]+$/, '/');
-    if(el('ico-folder-'+slot))    el('ico-folder-'+slot).textContent=folder;
-    if(el('ico-fname-'+slot))     el('ico-fname-'+slot).textContent=webpPath.split('/').pop();
-    if(el('ico-fname-full-'+slot))el('ico-fname-full-'+slot).textContent=jpegPath.split('/').pop();
+    if(el('ico-folder-'+imgIdx))    el('ico-folder-'+imgIdx).textContent=folder;
+    if(el('ico-fname-'+imgIdx))     el('ico-fname-'+imgIdx).textContent=webpPath.split('/').pop();
+    if(el('ico-fname-full-'+imgIdx))el('ico-fname-full-'+imgIdx).textContent=jpegPath.split('/').pop();
 
     // Restore "Saved" state on stage buttons if already queued
     const markStaged = (btnId) => {
       const b = el(btnId);
       if(b){ b.textContent='✓ Saved'; b.style.background='var(--ok)'; b.style.color='#000'; }
     };
-    if(stagedImages.has(webpPath)) markStaged('ico-stage-webp-'+slot);
-    if(stagedImages.has(jpegPath)) markStaged('ico-stage-jpeg-'+slot);
+    if(stagedImages.has(webpPath)) markStaged('ico-stage-webp-'+imgIdx);
+    if(stagedImages.has(jpegPath)) markStaged('ico-stage-jpeg-'+imgIdx);
   }
 }
 
 function restoreAllConvUI(){
-  const ev=data?.['@graph']?.[curIdx]; if(!ev) return;
-  allSlots(ev).forEach(showConvUI);
+  const ev=data?.['@graph']?.[curIdx]; if(!ev?.images) return;
+  ev.images.forEach((_,i)=>showConvUI(i));
 }
 
-function updateJpegQuality(slot, val){
-  const key=imgConvKey(slot);
+function updateJpegQuality(imgIdx, val){
+  const key=imgConvKey(imgIdx);
   const s=imgConvState[key]; if(!s) return;
   s.quality=parseInt(val);
   const res=convertToJPEG(s.srcImg,s.quality/100,s.maxWidth);
   s.jpegDataURL=res.dataURL; s.jpegSize=res.sizeKB;
   const el=id=>document.getElementById(id);
-  if(el('ico-jpeg-img-'+slot)) el('ico-jpeg-img-'+slot).src=res.dataURL;
-  const jSize=el('ico-jpeg-size-'+slot);
+  if(el('ico-jpeg-img-'+imgIdx)) el('ico-jpeg-img-'+imgIdx).src=res.dataURL;
+  const jSize=el('ico-jpeg-size-'+imgIdx);
   if(jSize){
     jSize.textContent=res.sizeKB+' KB'+(res.sizeKB>1024?' ⚠ >1 MB':'');
     jSize.className='img-convert-size'+(res.sizeKB>1024?' warn':'');
   }
-  if(el('ico-qual-label-'+slot)) el('ico-qual-label-'+slot).textContent=val+'%';
+  if(el('ico-qual-label-'+imgIdx)) el('ico-qual-label-'+imgIdx).textContent=val+'%';
 
   // Refresh jpeg blob URL so the live preview reflects new quality
-  const pkey=imgConvKey(slot);
+  const pkey=imgConvKey(imgIdx);
   if(imgPreviewCache[pkey]){
     URL.revokeObjectURL(imgPreviewCache[pkey].jpeg);
     imgPreviewCache[pkey].jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL));
@@ -2242,23 +1917,23 @@ function updateJpegQuality(slot, val){
   }
 }
 
-function updateJpegWidth(slot, val){
-  const key=imgConvKey(slot);
+function updateJpegWidth(imgIdx, val){
+  const key=imgConvKey(imgIdx);
   const s=imgConvState[key]; if(!s) return;
   s.maxWidth=parseInt(val);
   const res=convertToJPEG(s.srcImg,s.quality/100,s.maxWidth);
   s.jpegDataURL=res.dataURL; s.jpegSize=res.sizeKB;
   const el=id=>document.getElementById(id);
-  if(el('ico-jpeg-img-'+slot)) el('ico-jpeg-img-'+slot).src=res.dataURL;
-  const jSize=el('ico-jpeg-size-'+slot);
+  if(el('ico-jpeg-img-'+imgIdx)) el('ico-jpeg-img-'+imgIdx).src=res.dataURL;
+  const jSize=el('ico-jpeg-size-'+imgIdx);
   if(jSize){
     jSize.textContent=res.sizeKB+' KB'+(res.sizeKB>1024?' ⚠ >1 MB':'');
     jSize.className='img-convert-size'+(res.sizeKB>1024?' warn':'');
   }
-  if(el('ico-width-label-'+slot)) el('ico-width-label-'+slot).textContent=val+'px';
+  if(el('ico-width-label-'+imgIdx)) el('ico-width-label-'+imgIdx).textContent=val+'px';
 
   // Refresh jpeg blob URL so the live preview reflects new width
-  const pkey=imgConvKey(slot);
+  const pkey=imgConvKey(imgIdx);
   if(imgPreviewCache[pkey]){
     URL.revokeObjectURL(imgPreviewCache[pkey].jpeg);
     imgPreviewCache[pkey].jpeg=URL.createObjectURL(dataURLToBlob(res.dataURL));
@@ -2267,14 +1942,14 @@ function updateJpegWidth(slot, val){
 }
 
 // Re-encode the WebP thumbnail from current state, refresh its preview + blob
-function reconvertWebp(slot, labelId, labelText){
-  const key=imgConvKey(slot);
+function reconvertWebp(imgIdx, labelId, labelText){
+  const key=imgConvKey(imgIdx);
   const s=imgConvState[key]; if(!s) return;
   const res=convertToWebP(s.srcImg,s.webpQuality,s.webpMaxWidth);
   s.webpDataURL=res.dataURL; s.webpSize=res.sizeKB;
   const el=id=>document.getElementById(id);
-  if(el('ico-webp-img-'+slot))  el('ico-webp-img-'+slot).src=res.dataURL;
-  if(el('ico-webp-size-'+slot)) el('ico-webp-size-'+slot).textContent=res.sizeKB+' KB';
+  if(el('ico-webp-img-'+imgIdx))  el('ico-webp-img-'+imgIdx).src=res.dataURL;
+  if(el('ico-webp-size-'+imgIdx)) el('ico-webp-size-'+imgIdx).textContent=res.sizeKB+' KB';
   if(el(labelId)) el(labelId).textContent=labelText;
   // Refresh webp blob URL so the live preview reflects the new thumbnail
   if(imgPreviewCache[key]){
@@ -2283,23 +1958,23 @@ function reconvertWebp(slot, labelId, labelText){
     renderPreview();
   }
 }
-function updateWebpQuality(slot, val){
-  const s=imgConvState[imgConvKey(slot)]; if(!s) return;
+function updateWebpQuality(imgIdx, val){
+  const s=imgConvState[imgConvKey(imgIdx)]; if(!s) return;
   s.webpQuality=parseInt(val);
-  reconvertWebp(slot,'ico-webp-qual-label-'+slot,val+'%');
+  reconvertWebp(imgIdx,'ico-webp-qual-label-'+imgIdx,val+'%');
 }
-function updateWebpWidth(slot, val){
-  const s=imgConvState[imgConvKey(slot)]; if(!s) return;
+function updateWebpWidth(imgIdx, val){
+  const s=imgConvState[imgConvKey(imgIdx)]; if(!s) return;
   s.webpMaxWidth=parseInt(val);
-  reconvertWebp(slot,'ico-webp-width-label-'+slot,val+'px');
+  reconvertWebp(imgIdx,'ico-webp-width-label-'+imgIdx,val+'px');
 }
 
-function downloadConvert(slot, type){
-  const key=imgConvKey(slot);
+function downloadConvert(imgIdx, type){
+  const key=imgConvKey(imgIdx);
   const s=imgConvState[key]; if(!s) return;
   const ev=data?.['@graph']?.[curIdx];
-  const fname=ev ? imgAssetPath(ev, slot, type).split('/').pop()
-                 : 'image.'+(type==='webp'?'webp':'jpg');
+  const evSlug=ev?.name?slug(ev.name):'event';
+  const fname=`${evSlug}_${imgIdx+1}.${type==='webp'?'webp':'jpg'}`;
   const a=Object.assign(document.createElement('a'),
     {href:type==='webp'?s.webpDataURL:s.jpegDataURL, download:fname});
   a.click();
@@ -2307,22 +1982,14 @@ function downloadConvert(slot, type){
 }
 
 // Returns the repo-relative path for a converted image (no leading slash)
-function imgAssetPath(ev, slot, type){
+function imgAssetPath(ev, imgIdx, type){
   const evSlug = ev.name ? slug(ev.name) : 'item';
-  const {pi,i} = slotParse(slot);
-  const n      = i + 1;
+  const n      = imgIdx + 1;
   const ext    = type === 'webp' ? '.webp' : '.jpg';
-  // Per-performance images keep the event's folder but get an act-specific stem,
-  // e.g. assets/DCCeP/Events/signal-bleed/signal-bleed_deposit-silk_2.webp
-  let stem = evSlug;
-  if(pi != null){
-    const p = (ev.performances||[])[pi] || {};
-    stem = `${evSlug}_${p.title ? slug(p.title) : 'performance-'+(pi+1)}`;
-  }
 
   // Exhibition entries go into assets/ExhibitionEx/<slug>/
   if(isExhibition(ev)){
-    return `assets/ExhibitionEx/${evSlug}/${stem}_${n}${ext}`;
+    return `assets/ExhibitionEx/${evSlug}/${evSlug}_${n}${ext}`;
   }
 
   const exh = ev.exhibition || '';
@@ -2330,22 +1997,21 @@ function imgAssetPath(ev, slot, type){
   if      (exh === 'can-we-start-again') folder = `assets/CanWeStartAgain/Events/${evSlug}`;
   else if (exh === 'does-cloud-compute') folder = `assets/DCCeP/Events/${evSlug}`;
   else if (exh === 'bitrot')             folder = `assets/BitRotEventImgs/${evSlug}`;
-  else if (exh)                          folder = `assets/${slug(exh)}/Events/${evSlug}`;
-  else                                   folder = `assets/Past-events-archive/${evSlug}`;
-  return `${folder}/${stem}_${n}${ext}`;
+  else                                   folder = `assets/${slug(exh)||'other'}/Events/${evSlug}`;
+  return `${folder}/${evSlug}_${n}${ext}`;
 }
 
-function applyConvertPaths(slot){
+function applyConvertPaths(imgIdx){
   const ev=data?.['@graph']?.[curIdx];
-  const im=slotImg(ev,slot); if(!im) return;
-  const src  = '/'+imgAssetPath(ev, slot, 'webp');
-  const full = '/'+imgAssetPath(ev, slot, 'jpeg');
-  im.src=src;
-  im.full=full;
+  if(!ev||!ev.images?.[imgIdx]) return;
+  const src  = '/'+imgAssetPath(ev, imgIdx, 'webp');
+  const full = '/'+imgAssetPath(ev, imgIdx, 'jpeg');
+  ev.images[imgIdx].src=src;
+  ev.images[imgIdx].full=full;
   markUnsaved(); renderPreview();
   const el=id=>document.getElementById(id);
-  if(el('ie-src-'+slot))  el('ie-src-'+slot).value=src;
-  if(el('ie-full-'+slot)) el('ie-full-'+slot).value=full;
+  if(el('ie-src-'+imgIdx))  el('ie-src-'+imgIdx).value=src;
+  if(el('ie-full-'+imgIdx)) el('ie-full-'+imgIdx).value=full;
   toast('Paths updated','ok');
 }
 
@@ -2373,13 +2039,10 @@ function liveUp(){
   if(isExhibition(ev)){ liveUpExhibition(ev); return; }
   const g=id=>document.getElementById(id)?.value;
   const s=g('ef-sort');
-  const wasPN=isPerfNight(ev);
   ev.name=g('ef-name')||ev.name;
-  const exh=g('ef-exh');
-  if(exh!==undefined){ if(exh==='') delete ev.exhibition; else ev.exhibition=exh; }
+  ev.exhibition=g('ef-exh')||ev.exhibition;
   ev['@type']=g('ef-type')||ev['@type'];
   ev.label=g('ef-label')||ev.label;
-  const venue=g('ef-venue'); if(venue!==undefined){ if(venue.trim()) ev.venue=venue; else delete ev.venue; }
   ev.sortOrder=s?parseInt(s):ev.sortOrder;
   ev.displayDate=g('ef-date')??ev.displayDate;
   ev.creditText=g('ef-credittext')??ev.creditText;
@@ -2391,13 +2054,9 @@ function liveUp(){
   ev.startDate=g('ef-start')??ev.startDate;
   ev.endDate=g('ef-end')??ev.endDate;
   const vis=g('ef-visible'); if(vis!==undefined) ev.visible = vis!=='false';
-  const nowPN=isPerfNight(ev);
-  if(nowPN){ ensurePerformances(ev, true); syncPerfAlts(ev); refreshAltInputs(null); }
   markUnsaved();
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   renderPreview();
-  // Switching the badge in or out of Performance Night changes which fields exist
-  if(nowPN!==wasPN) buildForm();
 }
 function saveEdit(){ liveUp(); renderList(); toast('Saved','ok'); }
 function deleteEvent(){
@@ -2503,7 +2162,6 @@ function renderPreview(){
   const frame=document.getElementById('prevFrame');
   if(!data){ frame.innerHTML='<div class="prev-ph">Load a JSON file to preview</div>'; return; }
 
-  pnRenderOverlay([]);
   if(mode==='signals'){ renderSignalsPreview(frame); return; }
   if(mode==='gallery'){ renderGalleryPreview(frame); return; }
   if(mode==='artists'){ renderArtistsPreview(frame); return; }
@@ -2513,7 +2171,6 @@ function renderPreview(){
     return;
   }
 
-
   const evs=getEvents()
     .filter(ev=>showHidden||ev.visible!==false)
     .filter(ev=>prevFilter==='all'||ev.exhibition===prevFilter)
@@ -2521,33 +2178,7 @@ function renderPreview(){
   if(!evs.length){ frame.innerHTML='<div class="prev-ph">No events match this filter</div>'; return; }
   const fn={dcc:renderDCC,pe:renderPE,minimal:renderMin,cwsa:renderCWSA}[renderStyle]||renderDCC;
   frame.innerHTML=fn(evs);
-  pnRenderOverlay(evs);
 }
-
-// The Performance Night modal is mounted over the whole preview pane rather
-// than inside the scrolling list, so it appears where the reader is looking.
-function pnRenderOverlay(evs){
-  const ov=document.getElementById('prevOverlay');
-  if(!ov) return;
-  const slug=[...pnExpanded][0];
-  const ev=(renderStyle==='pe'&&slug)
-    ? (evs||getEvents()).find(e=>isPerfNight(e)&&eventSlug(e)===slug) : null;
-  ov.innerHTML=ev?`<div class="r-pe">${pnModalHTML(ev)}</div>`:'';
-  if(ev) pnSizePreviewPoster();
-}
-// Mirrors the live page: poster starts at 500px, then tracks the description
-// 1:1 once the text is taller, capped to the preview pane.
-function pnSizePreviewPoster(){
-  const ov=document.getElementById('prevOverlay'); if(!ov) return;
-  const fig=ov.querySelector('.pn-modal-poster'); if(!fig) return;
-  const desc=ov.querySelector('.pn-modal-desc');
-  const textH=desc?desc.getBoundingClientRect().height:0;
-  const cap=Math.max(160, ov.clientHeight*0.62);
-  fig.style.height=Math.round(Math.min(Math.max(textH,500),cap))+'px';
-  const img=fig.querySelector('img');
-  if(img&&!img.dataset.pnSized){ img.dataset.pnSized='1'; img.addEventListener('load',pnSizePreviewPoster,{once:true}); }
-}
-window.addEventListener('resize',pnSizePreviewPoster);
 
 function renderArtistsPreview(frame){
   const arts=getArtists()
@@ -2629,80 +2260,6 @@ function creditHTML(ev){
   return ev.creditText ? esc(ev.creditText) : '';
 }
 
-// The three thumbnails on a condensed Performance Night card: the event poster
-// followed by the lead image of the first two performance blocks.
-function pnCondensedImgs(ev){
-  const out=[];
-  if((ev.images||[]).length){
-    const im=ev.images[0];
-    out.push({src:imgPreviewURL(ev,'0','src')||im.src, alt:im.alt||''});
-  }
-  (ev.performances||[]).forEach((p,pi)=>{
-    if(out.length>=3) return;
-    const im=(p.images||[])[0]; if(!im) return;
-    out.push({src:imgPreviewURL(ev,slotOf(0,pi),'src')||im.src, alt:im.alt||''});
-  });
-  // Fall back to the event's own images if there aren't enough performance shots
-  (ev.images||[]).slice(1).forEach(im=>{
-    if(out.length>=3) return;
-    const i=ev.images.indexOf(im);
-    out.push({src:imgPreviewURL(ev,String(i),'src')||im.src, alt:im.alt||''});
-  });
-  return out.slice(0,3);
-}
-function pnSplitDate(dd){
-  const t=String(dd||'').trim();
-  if(!t) return {day:'',time:''};
-  const m=t.match(/\d{1,2}:\d{2}(?:\s*[–—-]\s*\d{1,2}:\d{2})?/);
-  if(!m) return {day:t,time:''};
-  return {day:t.slice(0,m.index).replace(/[\s,–—-]+$/,'').trim(), time:m[0].replace(/\s+/g,'')};
-}
-// Mirrors the modal the live Past Events page opens on click
-function pnModalHTML(ev){
-  const when=pnSplitDate(ev.displayDate);
-  const poster=(ev.images||[])[0];
-  const posterSrc=poster?(imgPreviewURL(ev,'0','full')||imgPreviewURL(ev,'0','src')||poster.full||poster.src):'';
-  const blocks=(ev.performances||[]).filter(p=>p.title||p.artists||p.description||(p.images||[]).length);
-  const log = blocks.length ? blocks.map(p=>{
-    const idx=(ev.performances||[]).indexOf(p);
-    const imgs=(p.images||[]).length?`<div class="imgrow">${
-      (p.images||[]).map((im,i)=>{
-        const src=imgPreviewURL(ev,slotOf(i,idx),'src')||im.src;
-        return `<img src="${esc(src)}" alt="${esc(im.alt||'')}" loading="lazy">`;
-      }).join('')
-    }</div>`:'';
-    return `<div class="pn-perf">
-      <div class="pn-perf-n">Performance ${idx+1}</div>
-      <h4>${esc(p.title||'Untitled')}</h4>
-      ${p.artists?`<div class="pn-perf-artists">${esc(p.artists)}</div>`:''}
-      ${p.description?`<div class="pn-perf-desc">${esc(p.description)}</div>`:''}
-      ${imgs}
-    </div>`;
-  }).join('') : `<div class="pn-empty">No performance blocks filled in yet.</div>`;
-  return `<div class="pn-modal" onclick="if(event.target===this)pnToggle(event,'${esc(eventSlug(ev))}')">
-    <div class="pn-modal-card"${ev.cardColor?` style="background:${esc(ev.cardColor)}"`:''} onclick="event.stopPropagation()">
-      <div class="pn-modal-head">
-        <div class="pn-modal-headline">
-          <span class="pn-modal-label">${esc(PERF_NIGHT_LABEL)}</span>
-          <h3>${esc(ev.name||'Untitled')}</h3>
-        </div>
-        <div class="pn-modal-when">
-          <span>${esc(when.day||ev.startDate||'')}</span>
-          <span class="pn-modal-time">${esc(when.time)}</span>
-        </div>
-        <button class="pn-modal-close" onclick="pnToggle(event,'${esc(eventSlug(ev))}')" aria-label="Close">[ × ]</button>
-      </div>
-      <div class="pn-modal-scroll">
-        <div class="pn-modal-intro">
-          ${posterSrc?`<div class="pn-modal-poster"><img src="${esc(posterSrc)}" alt="${esc(poster.alt||'')}"></div>`:''}
-          <div class="pn-modal-desc">${esc(ev.description||'')}</div>
-        </div>
-        <div class="pn-modal-log">${log}</div>
-      </div>
-    </div>
-  </div>`;
-}
-
 function renderPE(evs){
   const g=groupByExh(evs);
   let h='<div class="r-pe">';
@@ -2710,24 +2267,18 @@ function renderPE(evs){
   [..._ord.filter(k=>g[k]),...Object.keys(g).filter(k=>!_ord.includes(k))].forEach(exh=>{
     h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="estack">`;
     g[exh].forEach(ev=>{
-      const pn=isPerfNight(ev);
-      const thumbs = pn ? pnCondensedImgs(ev)
-        : (ev.images||[]).slice(0,3).map((img,i)=>({src:imgPreviewURL(ev,String(i),'src')||img.src, alt:img.alt||''}));
-      const imgRow=thumbs.length?`<div class="imgrow">${
-        thumbs.map(t=>`<img src="${esc(t.src)}" alt="${esc(t.alt)}" loading="lazy">`).join('')
+      const imgRow=ev.images&&ev.images.length?`<div class="imgrow">${
+        ev.images.slice(0,3).map((img,i)=>{
+          const src=imgPreviewURL(ev,i,'src')||img.src;
+          return `<img src="${esc(src)}" alt="${esc(img.alt)}" loading="lazy">`;
+        }).join('')
       }</div>`:'';
       const credit=creditHTML(ev);
-      const venue=pn&&ev.venue?esc(ev.venue):'';
-      const meta=[credit,ev.displayDate?esc(ev.displayDate):'',venue].filter(Boolean).join(' — ');
-      const creditLine=meta?`<div class="ecredit">${meta}</div>`:'';
-      const evSlugStr=eventSlug(ev);
-      const open=pn&&pnExpanded.has(evSlugStr);
-      const style=pn&&ev.cardColor?` style="background:${esc(ev.cardColor)}"`:'';
-      h+=`<div class="ecard${hiddenClass(ev)}${pn?' pn-card':''}${open?' pn-open':''}"${style}${
-        pn?` data-pn="${esc(evSlugStr)}" tabindex="0" role="button" aria-haspopup="dialog" onclick="pnToggle(event,'${esc(evSlugStr)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();pnToggle(event,'${esc(evSlugStr)}');}"`:''}>
+      const creditLine=(credit||ev.displayDate)?`<div class="ecredit">${credit}${credit&&ev.displayDate?' — ':''}${ev.displayDate?esc(ev.displayDate):''}</div>`:'';
+      h+=`<div class="ecard${hiddenClass(ev)}">
         <div class="etop">
           <div>
-            <span class="etype">${esc(pn?PERF_NIGHT_LABEL:(ev.label||typeLabel(ev['@type'])||'Event'))}</span>
+            <span class="etype">${esc(ev.label||typeLabel(ev['@type'])||'Event')}</span>
             ${ev.pastEvents?'<span class="etype" style="opacity:.55;margin-left:5px">✓ Past Events</span>':''}
             <h3>${esc(ev.name||'Untitled')}</h3>
             ${creditLine}
@@ -2737,36 +2288,11 @@ function renderPE(evs){
         ${imgRow}
         <div class="edesc">${esc(ev.description||'')}</div>
         ${ev.eventCompletedUrl?`<div class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></div>`:''}
-        ${pn?`<div class="pn-hint"><span class="pn-hint-chev">↗</span>View ${(ev.performances||[]).length} performance${((ev.performances||[]).length)===1?'':'s'}</div>`:''}
       </div>`;
     });
     h+=`</div>`;
   });
   return h+'</div>';
-}
-
-// ── EXPAND / COLLAPSE + HASH ROUTING (mirrors the live Past Events page) ──
-const pnExpanded=new Set();
-function pnToggle(e, evSlugStr){
-  // Links inside the card keep working normally
-  if(e&&e.target&&e.target.closest&&e.target.closest('a')) return;
-  if(e&&e.stopPropagation) e.stopPropagation();
-  if(pnExpanded.has(evSlugStr)) pnExpanded.delete(evSlugStr);
-  else { pnExpanded.clear(); pnExpanded.add(evSlugStr); }
-  pnSyncHash();
-  renderPreview();
-}
-// The editor's own URL is left alone — its path isn't /past-events/, so writing
-// a hash here would only produce a misleading link. The canonical deep link is
-// shown in the form instead.
-function pnSyncHash(){}
-// '#my-event' and '#event-my-event' both open the card, matching the live page
-function pnFromHash(){
-  const raw=decodeURIComponent(String(location.hash||'').replace(/^#/,''));
-  if(!raw) return;
-  const want=raw.replace(/^event-/,'');
-  const hit=getEvents().find(ev=>isPerfNight(ev)&&eventSlug(ev)===want);
-  if(hit){ pnExpanded.clear(); pnExpanded.add(want); }
 }
 
 function renderMin(evs){
@@ -3322,11 +2848,6 @@ function buildImageSitemapXML(schemaData, galleriesData){
     if(!isEvent(item)) return;
     const page = SITEMAP_EVENT_PAGES[item.exhibition];
     if(page) imgs.forEach(im => add(page, im.full||im.src));
-    // Performance Night blocks render inside the expanded card on /past-events/
-    if(isPerfNight(item)){
-      (item.performances||[]).forEach(p =>
-        (p.images||[]).forEach(im => add('/past-events/', im.full||im.src)));
-    }
   });
 
   const keys = [...SITEMAP_PAGE_ORDER.filter(k=>pages.has(k)), ...[...pages.keys()].filter(k=>!SITEMAP_PAGE_ORDER.includes(k))];
@@ -3594,28 +3115,28 @@ async function pushArchiveToGitHub(){
 }
 
 // ── STAGE IMAGES FOR BATCH PUSH ──────────────────────────
-function stageImg(slot, type){
+function stageImg(imgIdx, type){
   const cfg = ghLoad();
   if(!cfg.owner || !cfg.repo || !cfg.token){ openGhModal(); return; }
 
-  const key = imgConvKey(slot);
+  const key = imgConvKey(imgIdx);
   const s   = imgConvState[key];
   if(!s){ toast('No converted image — upload a file first'); return; }
 
   const ev = data?.['@graph']?.[curIdx];
   if(!ev) return;
 
-  const repoPath = imgAssetPath(ev, slot, type);
+  const repoPath = imgAssetPath(ev, imgIdx, type);
   const dataURL  = type === 'webp' ? s.webpDataURL : s.jpegDataURL;
   const content  = dataURL.split(',')[1];
   const fname    = repoPath.split('/').pop();
 
   stagedImages.set(repoPath, { content, label: fname });
-  applyConvertPaths(slot);
+  applyConvertPaths(imgIdx);
   updateStagedBadge();
 
   // Update the button to show it's queued
-  const btn = document.getElementById(`ico-stage-${type}-${slot}`);
+  const btn = document.getElementById(`ico-stage-${type}-${imgIdx}`);
   if(btn){ btn.textContent = '✓ Saved'; btn.style.background = 'var(--ok)'; btn.style.color = '#000'; }
 
   toast(`Saved: ${fname} — will push with JSON`, 'ok');
@@ -3637,18 +3158,18 @@ function updateStagedBadge(){
 }
 
 // ── IMAGE UPLOAD TO GITHUB ────────────────────────────────
-async function uploadImgToGitHub(slot, type){
+async function uploadImgToGitHub(imgIdx, type){
   const cfg = ghLoad();
   if(!cfg.owner || !cfg.repo || !cfg.token){ openGhModal(); return; }
 
-  const key = imgConvKey(slot);
+  const key = imgConvKey(imgIdx);
   const s   = imgConvState[key];
   if(!s){ toast('No converted image — upload a file first'); return; }
 
   const ev = data?.['@graph']?.[curIdx];
   if(!ev){ return; }
 
-  const repoPath = imgAssetPath(ev, slot, type);
+  const repoPath = imgAssetPath(ev, imgIdx, type);
   const dataURL  = type === 'webp' ? s.webpDataURL : s.jpegDataURL;
   const content  = dataURL.split(',')[1]; // already base64
 
@@ -3688,7 +3209,7 @@ async function uploadImgToGitHub(slot, type){
 
     toast(`Uploaded: ${fname}`, 'ok');
     // Auto-fill the src/full paths in the JSON after successful upload
-    applyConvertPaths(slot);
+    applyConvertPaths(imgIdx);
 
   } catch(e){
     toast('Upload failed: ' + e.message);
@@ -4393,13 +3914,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   loadFromSite();
   updateGhButton();
   updateStagedBadge();
-});
-
-window.addEventListener('hashchange', ()=>{
-  if(mode!=='events'||!data) return;
-  const before=[...pnExpanded][0];
-  pnExpanded.clear(); pnFromHash();
-  if([...pnExpanded][0]!==before) renderPreview();
 });
 
 document.addEventListener('keydown', e=>{
