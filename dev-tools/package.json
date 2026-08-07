@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Dev-only tooling for the Past Events static-HTML baker. Not served.",
+  "devDependencies": {
+    "jsdom": "24.1.3"
+  }
+}

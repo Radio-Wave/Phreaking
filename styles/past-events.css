@@ -169,3 +169,27 @@ body.pn-modal-open{overflow:hidden;}
   .event-card.pn-card:hover{transform:none;}
   .pn-modal__card{animation:none;}
 }
+
+/* ── Baked Performance Night detail ─────────────────────────────────────────
+   Every act — title, artists, description, photos — is real markup inside its
+   own card in the HTML the server sends, not something JavaScript builds on
+   click. The card keeps its condensed appearance because the block is `hidden`;
+   opening the modal moves that same node into .pn-modal__scroll and unhides it,
+   so there is only ever one copy of an act in the document.
+
+   display:contents lets the moved block dissolve into the modal's flex column,
+   which is why .pn-modal__intro / .pn-modal__log lay out exactly as they did
+   when the modal built its own body. The [hidden] rule has to be written out
+   explicitly: an author display:contents would otherwise beat the UA sheet's
+   [hidden]{display:none} and leak the detail onto the card. */
+.pn-detail{display:contents;}
+.pn-detail[hidden]{display:none;}
+
+/* Without JavaScript there is no modal, so index.html's <noscript> block
+   reveals .pn-detail in place; these rules give it a sane single-column
+   layout when that happens. */
+.event-card .pn-detail:not([hidden]) .pn-modal__intro{display:block;}
+.event-card .pn-detail:not([hidden]) .pn-modal__desc{flex:1 1 auto;max-width:100%;}
+.event-card .pn-detail:not([hidden]) .pn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
+.event-card .pn-detail:not([hidden]) .pn-modal__poster img{width:100%;height:auto;}
+.event-card .pn-detail:not([hidden]) .pn-modal__log{margin-top:1.5rem;}

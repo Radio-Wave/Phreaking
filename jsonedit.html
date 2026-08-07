@@ -519,6 +519,78 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .r-pe .pn-perf-artists{font-size:.8rem;color:#ccc;margin-bottom:.4rem;}
 .r-pe .pn-perf-desc{font-size:.84rem;line-height:1.65;color:#eee;margin:.35rem 0 .6rem;}
 .r-pe .pn-empty{font-size:.82rem;opacity:.6;padding:.6rem 0;}
+
+/* ── PAST EVENTS PREVIEW ──────────────────────────────────────────────────
+   The "Past Events" preview style renders the real baked markup, so it needs
+   the real classes. These are scoped to .r-pe so nothing else in the editor
+   is affected, and they mirror past-events.css closely enough to judge a card
+   by — this pane is a proof of what will be published, not a pixel clone of
+   the live site. */
+.r-pe{background:#000;color:#fff;padding:14px;font-family:var(--mono);}
+.r-pe .sec-head{color:#bdbdbd;font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+  margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid #333;}
+.r-pe .event-stack{display:flex;flex-direction:column;gap:14px;}
+.r-pe .event-card{border:1px solid #fff;padding:14px;border-radius:4px;background:rgba(255,255,255,.01);}
+.r-pe .event-card.prev-hidden{opacity:.45;border-style:dashed;}
+.r-pe .event-card.pn-card{cursor:pointer;}
+.r-pe .event-card.pn-card:hover{background:rgba(255,255,255,.05);}
+.r-pe .event-top{display:flex;justify-content:space-between;gap:14px;margin-bottom:8px;flex-wrap:wrap;}
+.r-pe .event-meta{display:flex;flex-direction:column;gap:5px;}
+.r-pe .event-type{display:inline-flex;width:fit-content;border:1px solid #fff;border-radius:999px;
+  padding:1px 8px;font-size:9px;text-transform:uppercase;letter-spacing:.06em;}
+.r-pe .event-card h3{font-size:16px;line-height:1.25;text-transform:capitalize;margin:6px 0 3px;font-weight:600;}
+.r-pe .event-credit{color:#d0d0d0;font-size:11px;line-height:1.55;}
+.r-pe .event-credit strong{color:#fff;}
+.r-pe .event-credit a{color:#fff;text-decoration:underline;}
+.r-pe .event-series{color:#bdbdbd;font-size:10px;text-transform:uppercase;letter-spacing:.08em;text-align:right;}
+.r-pe .event-description{margin:10px 0 12px;color:#efefef;font-size:11.5px;line-height:1.65;}
+.r-pe .event-link{margin-top:8px;font-size:11px;color:#d0d0d0;}
+.r-pe .event-link a{text-decoration:underline;}
+.r-pe .image-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+.r-pe .image-row button{appearance:none;border:none;background:none;padding:0;cursor:zoom-in;}
+.r-pe .image-row img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;
+  border:1px solid rgba(255,255,255,.15);display:block;}
+.r-pe .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+.r-pe .pn-hint{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:9.5px;
+  text-transform:uppercase;letter-spacing:.06em;color:#cfcfcf;}
+.r-pe .pn-detail[hidden]{display:none;}
+
+/* modal, mounted over the whole preview pane */
+#prevOverlay .pn-modal{position:absolute;inset:0;display:flex;padding:10px;}
+#prevOverlay .pn-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.86);}
+#prevOverlay .pn-modal__card{position:relative;display:flex;flex-direction:column;
+  width:100%;height:100%;background:#000;border:1px solid #fff;}
+#prevOverlay .pn-modal__head{display:grid;grid-template-columns:1fr auto auto;gap:12px;
+  align-items:start;padding:12px 14px;border-bottom:1px solid #fff;}
+#prevOverlay .pn-modal__label{display:inline-flex;border:1px solid #fff;border-radius:999px;
+  padding:1px 8px;margin-bottom:6px;font-size:9px;text-transform:uppercase;letter-spacing:.06em;}
+#prevOverlay .pn-modal__title{margin:0;font-size:20px;font-weight:600;text-transform:capitalize;line-height:1.1;}
+#prevOverlay .pn-modal__when{display:flex;flex-direction:column;align-items:flex-end;gap:2px;
+  font-size:10px;text-align:right;}
+#prevOverlay .pn-modal__time{color:var(--muted);}
+#prevOverlay .pn-modal__close{appearance:none;border:none;background:transparent;color:var(--muted);
+  font-family:var(--mono);font-size:13px;cursor:pointer;padding:0 0 0 8px;}
+#prevOverlay .pn-modal__close:hover{color:#fff;}
+#prevOverlay .pn-modal__scroll{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:16px;}
+#prevOverlay .pn-modal__intro{display:flex;align-items:flex-start;gap:14px;}
+#prevOverlay .pn-modal__desc{flex:0 0 50%;max-width:50%;text-align:justify;}
+#prevOverlay .pn-modal__desc p{margin:0 0 .9em;color:#efefef;font-size:11.5px;line-height:1.7;}
+#prevOverlay .pn-modal__poster{flex:0 0 auto;margin:0;line-height:0;max-width:40%;}
+#prevOverlay .pn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;
+  display:block;border:1px solid rgba(255,255,255,.15);border-radius:3px;}
+#prevOverlay .pn-modal__log{display:flex;flex-direction:column;}
+#prevOverlay .pn-perf{padding:14px 0;border-top:1px solid rgba(255,255,255,.18);}
+#prevOverlay .pn-perf:first-child{border-top:none;padding-top:0;}
+#prevOverlay .pn-perf-n{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#bdbdbd;}
+#prevOverlay .pn-perf-title{font-size:15px;font-weight:600;text-transform:capitalize;margin:3px 0 2px;}
+#prevOverlay .pn-perf-artists{color:#d0d0d0;font-size:11px;margin-bottom:5px;}
+#prevOverlay .pn-perf-desc{margin:5px 0 10px;color:#efefef;font-size:11px;line-height:1.7;}
+#prevOverlay .image-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+#prevOverlay .image-row button{appearance:none;border:none;background:none;padding:0;}
+#prevOverlay .image-row img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;
+  border:1px solid rgba(255,255,255,.15);display:block;}
+#prevOverlay .pn-empty{color:#bdbdbd;font-size:11px;}
+#prevOverlay .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
 </style>
 </head>
 <body>
@@ -901,6 +973,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
         </div>
       </div>
       <div class="field">
+        <label>Past Events page path <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:normal;">— rebuilt and pushed automatically with every Events push</span></label>
+        <input type="text" id="ghPagePath" placeholder="past-events/index.html" style="font-family:var(--mono);font-size:11px;" onkeydown="if(event.key==='Enter')saveGhConfig()">
+      </div>
+      <div class="field">
         <div class="gh-label-row">
           <label>Personal Access Token *</label>
           <button type="button" class="gh-info-btn" id="ghInfoBtn" onclick="toggleGhInfo()" title="How to get a token">?</button>
@@ -955,6 +1031,13 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
     </div>
   </div>
 </div>
+
+<!-- The Past Events renderer. Loaded here so "Push to GitHub" can generate the
+     static markup for /past-events/index.html with exactly the code that runs on
+     the live page — one renderer, no second implementation to drift out of step.
+     The flag stops it from trying to hydrate this page, which is not that page. -->
+<script>window.__PE_NO_AUTO_INIT__ = true;</script>
+<script src="/scripts/past-events.js"></script>
 
 <script>
 // ── STATE ──────────────────────────────────────────────────
@@ -1054,16 +1137,125 @@ function migratePerfNightLabels(){
   });
   return n;
 }
-// Guarantees at least one performance block so the form always shows one
+// ── ACTS: schema.org `subEvent` (current) / `performances` (legacy) ───────
+// The act list used to be a bespoke `performances` array of
+// {title, artists, description, images}. It is now a schema.org-shaped
+// `subEvent` array of PerformingArtsEvent objects — {name, performer,
+// description, images} — because that is what the structured data we publish
+// has to say. Older files still open: actList() reads either shape, and
+// migrateActs() rewrites them in memory the moment a file is loaded — no user
+// action, nothing to remember to click.
+//
+// `images` deliberately keeps its editor shape ({src, full, alt, altHtml}).
+// It is the input to the conversion/staging pipeline, and the slot addressing
+// scheme ('p0-1' = act 0, image 1) is load-bearing for how files get named in
+// the repo. The JSON-LD generator turns it into schema.org `image` on the way
+// out; this file stays a CMS format.
+const ACT_TYPE='PerformingArtsEvent';
+function actList(ev){
+  if(!ev) return [];
+  if(Array.isArray(ev.subEvent)) return ev.subEvent;
+  if(Array.isArray(ev.performances)) return ev.performances;
+  return [];
+}
+// Acts with anything in them — the form always keeps one blank block, which
+// should not be counted or rendered anywhere.
+function actBlocks(ev){
+  return actList(ev).filter(p=>p&&(actGet(p,'title')||actGet(p,'artists')||p.description||actGet(p,'images').length));
+}
+function actGet(p, field){
+  if(!p) return field==='images' ? [] : '';
+  if(field==='title')   return (p.name!=null&&p.name!=='') ? p.name : (p.title||'');
+  if(field==='artists') return (typeof p.performer==='string'&&p.performer!=='') ? p.performer : (p.artists||'');
+  if(field==='images')  return Array.isArray(p.images) ? p.images : [];
+  return p[field]||'';
+}
+function actSet(p, field, val){
+  if(!p) return;
+  if(field==='title'){   p.name=val;      delete p.title;   return; }
+  if(field==='artists'){ p.performer=val; delete p.artists; return; }
+  p[field]=val;
+}
+function newAct(){ return {'@type':ACT_TYPE, name:'', performer:'', description:'', images:[]}; }
+// A fresh object in a stable key order, so migrated JSON stays readable
+function canonicalAct(p){
+  return {
+    '@type': ACT_TYPE,
+    name:        actGet(p,'title'),
+    performer:   actGet(p,'artists'),
+    description: (p&&p.description)||'',
+    images:      actGet(p,'images'),
+  };
+}
+// Rewrites one event's acts into the `subEvent` shape; returns true if it had any
+function migrateActsOn(ev){
+  if(!ev||!isPerfNight(ev)) return false;
+  if(!Array.isArray(ev.subEvent) && !Array.isArray(ev.performances)) return false;
+  const wasLegacy = !Array.isArray(ev.subEvent) || 'performances' in ev
+    || actList(ev).some(p=>p&&(p.title!==undefined||p.artists!==undefined||p['@type']!==ACT_TYPE));
+  ev.subEvent = actList(ev).map(canonicalAct);
+  delete ev.performances;
+  return wasLegacy;
+}
+function migrateActs(){
+  let n=0;
+  (data?.['@graph']||[]).forEach(item=>{ if(isEvent(item)&&migrateActsOn(item)) n++; });
+  return n;
+}
+
+// ── VENUE → schema.org location ───────────────────────────
+// The Venue field used to write a bare `venue` string. It now writes a proper
+// Place under `location`; `venue` is still read for older files and dropped on
+// load. Only a venue that isn't the collective's own space is shown on the
+// card — every event carries the home address as its default location, and
+// echoing that after the organiser credit would just be noise.
+const HOME_VENUE='Phreaking Collective';
+function homePlace(){
+  return {'@type':'Place', name:HOME_VENUE,
+    address:{'@type':'PostalAddress', addressLocality:'London', addressCountry:'GB'}};
+}
+function eventVenue(ev){
+  if(!ev) return '';
+  const loc=ev.location;
+  if(loc&&typeof loc==='object'&&loc.name&&loc.name!==HOME_VENUE) return loc.name;
+  if(typeof ev.venue==='string') return ev.venue;
+  return '';
+}
+function setEventVenue(ev, val){
+  if(!ev) return;
+  const v=String(val||'').trim();
+  delete ev.venue;
+  if(!v){
+    if(ev.location&&typeof ev.location==='object'&&ev.location.name&&ev.location.name!==HOME_VENUE){
+      ev.location=homePlace();
+    }
+    return;
+  }
+  if(!ev.location||typeof ev.location!=='object'||ev.location.name!==v){
+    ev.location={'@type':'Place', name:v};
+  }
+}
+function migrateVenues(){
+  let n=0;
+  (data?.['@graph']||[]).forEach(item=>{
+    if(!isEvent(item)||typeof item.venue!=='string') return;
+    setEventVenue(item, item.venue);
+    n++;
+  });
+  return n;
+}
+
+// Guarantees at least one act block so the form always shows one
 function ensurePerformances(ev, silent){
   if(!ev) return [];
-  if(!Array.isArray(ev.performances)) ev.performances=[];
-  if(!ev.performances.length){
-    ev.performances.push({title:'',artists:'',description:'',images:[]});
+  if(!Array.isArray(ev.subEvent)) ev.subEvent=actList(ev).map(canonicalAct);
+  delete ev.performances;
+  if(!ev.subEvent.length){
+    ev.subEvent.push(newAct());
     if(!silent) markUnsaved();
   }
-  ev.performances.forEach(p=>{ if(!Array.isArray(p.images)) p.images=[]; });
-  return ev.performances;
+  ev.subEvent.forEach(p=>{ if(!Array.isArray(p.images)) p.images=[]; });
+  return ev.subEvent;
 }
 // Year shown alongside the event name in auto-composed alt text
 function eventYear(ev){
@@ -1074,8 +1266,8 @@ function eventYear(ev){
 }
 // "[performance title], [event name] [year]" — plain for alt, <em> for captions
 function perfImgAlt(ev, pi, html){
-  const p=(ev.performances||[])[pi]||{};
-  const t=String(p.title||'').trim();
+  const p=actList(ev)[pi]||{};
+  const t=String(actGet(p,'title')||'').trim();
   const n=String(ev.name||'').trim();
   const y=eventYear(ev);
   if(html) return `${esc(t)}${t&&n?', ':''}<em>${esc(n)}</em>${y?' '+esc(y):''}`;
@@ -1083,9 +1275,9 @@ function perfImgAlt(ev, pi, html){
 }
 // Alt text is derived, never hand-typed — re-stamp it whenever the source fields move
 function syncPerfAlts(ev){
-  if(!ev||!Array.isArray(ev.performances)) return;
-  ev.performances.forEach((p,pi)=>{
-    (p.images||[]).forEach(im=>{
+  if(!ev) return;
+  actList(ev).forEach((p,pi)=>{
+    actGet(p,'images').forEach(im=>{
       im.alt     = perfImgAlt(ev,pi,false);
       im.altHtml = perfImgAlt(ev,pi,true);
     });
@@ -1111,7 +1303,7 @@ function slotImages(ev, s){
   if(!ev) return null;
   const {pi}=slotParse(s);
   if(pi==null){ if(!Array.isArray(ev.images)) ev.images=[]; return ev.images; }
-  const p=(ev.performances||[])[pi];
+  const p=actList(ev)[pi];
   if(!p) return null;
   if(!Array.isArray(p.images)) p.images=[];
   return p.images;
@@ -1124,7 +1316,7 @@ function slotImg(ev, s){
 function allSlots(ev){
   if(!ev) return [];
   const out=(ev.images||[]).map((_,i)=>String(i));
-  (ev.performances||[]).forEach((p,pi)=>(p.images||[]).forEach((_,i)=>out.push(slotOf(i,pi))));
+  actList(ev).forEach((p,pi)=>actGet(p,'images').forEach((_,i)=>out.push(slotOf(i,pi))));
   return out;
 }
 
@@ -1387,9 +1579,20 @@ function refreshPrevFilters(){
 }
 
 // ── EXTRACT KNOWN VALUES FROM JSON ────────────────────────
+// Migrations that ran on the last load, reported once in onLoaded()
+let lastMigration = {labels:0, acts:0, venues:0};
+
 function extractFromData(){
   if(!data||mode==='signals'||mode==='gallery') return;
-  if(mode==='events') migratePerfNightLabels();
+  // Data shape migrations run automatically, in memory, every time a file is
+  // opened — there is no button for them and nothing to remember.
+  if(mode==='events'){
+    lastMigration = {
+      labels: migratePerfNightLabels(),
+      acts:   migrateActs(),
+      venues: migrateVenues(),
+    };
+  }
   const items = mode==='artists' ? getArtists() : getEvents();
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
@@ -1436,6 +1639,17 @@ function onLoaded(msg){
   markSaved(); renderList(); renderPreview();
   refreshExhDropdowns(); refreshPrevFilters();
   setStatus(msg, countLabel()); toast(msg,'ok');
+
+  // Say what was migrated, and mark the file dirty so it actually gets saved
+  const m=lastMigration;
+  if(mode==='events'&&(m.labels||m.acts||m.venues)){
+    const bits=[];
+    if(m.labels) bits.push(`${m.labels} legacy badge${m.labels>1?'s':''}`);
+    if(m.acts)   bits.push(`${m.acts} performance night${m.acts>1?'s':''} → subEvent`);
+    if(m.venues) bits.push(`${m.venues} venue${m.venues>1?'s':''} → location`);
+    markUnsaved();
+    setTimeout(()=>toast('Migrated: '+bits.join(', ')+' — push to save', ''), 1200);
+  }
 }
 function downloadJSON(){
   if(!data){ toast('Nothing to download'); return; }
@@ -1646,7 +1860,7 @@ function buildForm(){
     </div>
     ${pn?`
     <div class="field"><label>Venue</label>
-      <input id="ef-venue" value="${esc(ev.venue||'')}" placeholder="e.g. ANNEX by The Koppel Project" oninput="liveUp()"></div>
+      <input id="ef-venue" value="${esc(eventVenue(ev))}" placeholder="e.g. ANNEX by The Koppel Project" oninput="liveUp()"></div>
     <div class="field"><label>Card Background <span style="font-weight:400;color:var(--muted)">(this card only, on Past Events)</span></label>
       <div class="color-row">
         <input type="color" id="ef-cardcolor-pick" value="${esc(ev.cardColor||'#000000')}" oninput="setCardColor(this.value)">
@@ -1707,10 +1921,10 @@ function buildForm(){
 
 // ── PERFORMANCE BLOCKS (Performance Night only) ───────────
 function perfBlocksHTML(ev){
-  return (ev.performances||[]).map((p,pi)=>perfBlockHTML(ev,p,pi)).join('');
+  return actList(ev).map((p,pi)=>perfBlockHTML(ev,p,pi)).join('');
 }
 function perfBlockHTML(ev,p,pi){
-  const n=(ev.performances||[]).length;
+  const n=actList(ev).length;
   return `<div class="perf-block" id="pb-${pi}">
     <div class="perf-block-head">
       <span class="perf-block-n">Performance ${pi+1}</span>
@@ -1721,13 +1935,13 @@ function perfBlockHTML(ev,p,pi){
       </span>
     </div>
     <span class="perf-sub-label">Performance Title</span>
-    <input id="pf-title-${pi}" value="${esc(p.title||'')}" placeholder="e.g. Deposit Silk" oninput="setPerf(${pi},'title',this.value)">
+    <input id="pf-title-${pi}" value="${esc(actGet(p,'title'))}" placeholder="e.g. Deposit Silk" oninput="setPerf(${pi},'title',this.value)">
     <span class="perf-sub-label">Artists <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span>
-    <input id="pf-artists-${pi}" value="${esc(p.artists||'')}" placeholder="e.g. Lagtime Seedling &amp; Orangespy" oninput="setPerf(${pi},'artists',this.value)">
+    <input id="pf-artists-${pi}" value="${esc(actGet(p,'artists'))}" placeholder="e.g. Lagtime Seedling &amp; Orangespy" oninput="setPerf(${pi},'artists',this.value)">
     <span class="perf-sub-label">Description</span>
     <textarea id="pf-desc-${pi}" rows="3" oninput="setPerf(${pi},'description',this.value)">${esc(p.description||'')}</textarea>
     <span class="perf-sub-label">Images</span>
-    <div class="imgs-editor" id="imgsEd-p${pi}">${(p.images||[]).map((img,i)=>imgRow(img,i,pi)).join('')}</div>
+    <div class="imgs-editor" id="imgsEd-p${pi}">${actGet(p,'images').map((img,i)=>imgRow(img,i,pi)).join('')}</div>
     <button class="add-img" onclick="addImg(${pi})">+ Add image to this performance</button>
     <div class="perf-alt-note">Alt text is generated automatically:
       <code id="pf-alt-${pi}">${esc(perfImgAlt(ev,pi,false)||'[title], [event name] [year]')}</code></div>
@@ -1740,8 +1954,8 @@ function rebuildPerfBlocks(){
 }
 function setPerf(pi,field,val){
   const ev=data['@graph'][curIdx]; if(!ev) return;
-  const p=(ev.performances||[])[pi]; if(!p) return;
-  p[field]=val;
+  const p=actList(ev)[pi]; if(!p) return;
+  actSet(p,field,val);
   if(field==='title'){
     syncPerfAlts(ev);
     const lab=document.getElementById('pf-alt-'+pi);
@@ -1753,10 +1967,10 @@ function setPerf(pi,field,val){
 // Alt inputs are read-only mirrors of the derived value
 function refreshAltInputs(pi){
   const ev=data['@graph'][curIdx]; if(!ev) return;
-  const blocks = pi==null ? (ev.performances||[]).map((_,x)=>x) : [pi];
+  const blocks = pi==null ? actList(ev).map((_,x)=>x) : [pi];
   blocks.forEach(bi=>{
-    const p=(ev.performances||[])[bi]; if(!p) return;
-    (p.images||[]).forEach((im,i)=>{
+    const p=actList(ev)[bi]; if(!p) return;
+    actGet(p,'images').forEach((im,i)=>{
       const el=document.getElementById('ie-alt-'+slotOf(i,bi));
       if(el) el.value=im.alt||'';
     });
@@ -1768,25 +1982,28 @@ function refreshAltInputs(pi){
 }
 function addPerfBlock(){
   const ev=data['@graph'][curIdx]; if(!ev) return;
-  if(!Array.isArray(ev.performances)) ev.performances=[];
-  ev.performances.push({title:'',artists:'',description:'',images:[]});
+  ensurePerformances(ev, true);
+  ev.subEvent.push(newAct());
   markUnsaved(); rebuildPerfBlocks(); renderPreview();
 }
 function removePerfBlock(pi){
-  const ev=data['@graph'][curIdx]; if(!ev||!Array.isArray(ev.performances)) return;
-  const p=ev.performances[pi];
-  const hasContent=p&&(p.title||p.artists||p.description||(p.images||[]).length);
-  if(hasContent&&!confirm(`Remove performance ${pi+1}${p.title?' ("'+p.title+'")':''}? Its images stay in the repo but are dropped from this event.`)) return;
-  ev.performances.splice(pi,1);
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  ensurePerformances(ev, true);
+  const p=ev.subEvent[pi]; if(!p) return;
+  const title=actGet(p,'title');
+  const hasContent=title||actGet(p,'artists')||p.description||actGet(p,'images').length;
+  if(hasContent&&!confirm(`Remove performance ${pi+1}${title?' ("'+title+'")':''}? Its images stay in the repo but are dropped from this event.`)) return;
+  ev.subEvent.splice(pi,1);
   // Conversion state is keyed by block index — shift everything above down one
   remapPerfConvState(old => old===pi ? null : (old>pi ? old-1 : old));
   ensurePerformances(ev, true);
   markUnsaved(); rebuildPerfBlocks(); renderPreview();
 }
 function movePerfBlock(pi,dir){
-  const ev=data['@graph'][curIdx]; if(!ev||!Array.isArray(ev.performances)) return;
-  const j=pi+dir; if(j<0||j>=ev.performances.length) return;
-  [ev.performances[pi],ev.performances[j]]=[ev.performances[j],ev.performances[pi]];
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  ensurePerformances(ev, true);
+  const j=pi+dir; if(j<0||j>=ev.subEvent.length) return;
+  [ev.subEvent[pi],ev.subEvent[j]]=[ev.subEvent[j],ev.subEvent[pi]];
   remapPerfConvState(old => old===pi ? j : (old===j ? pi : old));
   syncPerfAlts(ev);
   markUnsaved(); rebuildPerfBlocks(); renderPreview();
@@ -2063,8 +2280,8 @@ function redrawImgs(pi){
     if(c) c.innerHTML=(ev.images||[]).map((img,i)=>imgRow(img,i)).join('');
   } else {
     const c=document.getElementById('imgsEd-p'+pi);
-    const p=(ev.performances||[])[pi];
-    if(c&&p) c.innerHTML=(p.images||[]).map((img,i)=>imgRow(img,i,pi)).join('');
+    const p=actList(ev)[pi];
+    if(c&&p) c.innerHTML=actGet(p,'images').map((img,i)=>imgRow(img,i,pi)).join('');
   }
 }
 function setImg(s,field,val){
@@ -2319,8 +2536,9 @@ function imgAssetPath(ev, slot, type){
   // e.g. assets/DCCeP/Events/signal-bleed/signal-bleed_deposit-silk_2.webp
   let stem = evSlug;
   if(pi != null){
-    const p = (ev.performances||[])[pi] || {};
-    stem = `${evSlug}_${p.title ? slug(p.title) : 'performance-'+(pi+1)}`;
+    const p = actList(ev)[pi] || {};
+    const t = actGet(p,'title');
+    stem = `${evSlug}_${t ? slug(t) : 'performance-'+(pi+1)}`;
   }
 
   // Exhibition entries go into assets/ExhibitionEx/<slug>/
@@ -2382,7 +2600,7 @@ function liveUp(){
   if(exh!==undefined){ if(exh==='') delete ev.exhibition; else ev.exhibition=exh; }
   ev['@type']=g('ef-type')||ev['@type'];
   ev.label=g('ef-label')||ev.label;
-  const venue=g('ef-venue'); if(venue!==undefined){ if(venue.trim()) ev.venue=venue; else delete ev.venue; }
+  const venue=g('ef-venue'); if(venue!==undefined) setEventVenue(ev, venue);
   ev.sortOrder=s?parseInt(s):ev.sortOrder;
   ev.displayDate=g('ef-date')??ev.displayDate;
   ev.creditText=g('ef-credittext')??ev.creditText;
@@ -2534,13 +2752,50 @@ function pnRenderOverlay(evs){
   const ov=document.getElementById('prevOverlay');
   if(!ov) return;
   const slug=[...pnExpanded][0];
-  const ev=(renderStyle==='pe'&&slug)
-    ? (evs||getEvents()).find(e=>isPerfNight(e)&&eventSlug(e)===slug) : null;
-  ov.innerHTML=ev?`<div class="r-pe">${pnModalHTML(ev)}</div>`:'';
-  if(ev) pnSizePreviewPoster();
+  if(renderStyle!=='pe'||!slug){ ov.innerHTML=''; return; }
+
+  // Exactly what the live page does on click: take the .pn-detail block that is
+  // already baked into the card and clone it into the modal shell. No second
+  // copy of the modal markup exists here to drift out of step.
+  // Filtered in JS rather than an attribute-selector string, so this doesn't
+  // depend on CSS.escape() — a real DOM API, but not one every environment
+  // that might load this page provides.
+  const card=[...document.querySelectorAll('#prevFrame .event-card.pn-card')]
+    .find(c=>c.dataset.slug===slug);
+  if(!card){ ov.innerHTML=''; return; }
+  const detail=card.querySelector('.pn-detail');
+
+  ov.innerHTML=`<div class="r-pe"><div class="pn-modal" aria-hidden="false" role="dialog" aria-modal="true">
+    <div class="pn-modal__backdrop" data-pn-close="1"></div>
+    <div class="pn-modal__card"${card.dataset.pnColor?` style="background:${esc(card.dataset.pnColor)}"`:''}>
+      <div class="pn-modal__head">
+        <div class="pn-modal__headline">
+          <span class="pn-modal__label">${esc(PERF_NIGHT_LABEL)}</span>
+          <h2 class="pn-modal__title">${esc(card.querySelector('h3')?card.querySelector('h3').textContent:'')}</h2>
+        </div>
+        <div class="pn-modal__when">
+          <span class="pn-modal__day">${esc(card.dataset.pnDay||'')}</span>
+          <span class="pn-modal__time">${esc(card.dataset.pnTime||'')}</span>
+        </div>
+        <button type="button" class="pn-modal__close" data-pn-close="1" aria-label="Close">[ &times; ]</button>
+      </div>
+      <div class="pn-modal__scroll"></div>
+    </div>
+  </div></div>`;
+
+  const scroll=ov.querySelector('.pn-modal__scroll');
+  if(detail&&scroll){
+    const clone=detail.cloneNode(true);
+    clone.removeAttribute('hidden');
+    clone.removeAttribute('id');
+    while(clone.firstChild) scroll.appendChild(clone.firstChild);
+  }
+  ov.querySelectorAll('[data-pn-close]').forEach(el=>{
+    el.addEventListener('click',e=>pnToggle(e,slug));
+  });
+  pnSizePreviewPoster();
 }
-// Mirrors the live page: poster starts at 500px, then tracks the description
-// 1:1 once the text is taller, capped to the preview pane.
+
 function pnSizePreviewPoster(){
   const ov=document.getElementById('prevOverlay'); if(!ov) return;
   const fig=ov.querySelector('.pn-modal-poster'); if(!fig) return;
@@ -2635,119 +2890,70 @@ function creditHTML(ev){
 
 // The three thumbnails on a condensed Performance Night card: the event poster
 // followed by the lead image of the first two performance blocks.
-function pnCondensedImgs(ev){
-  const out=[];
-  if((ev.images||[]).length){
-    const im=ev.images[0];
-    out.push({src:imgPreviewURL(ev,'0','src')||im.src, alt:im.alt||''});
-  }
-  (ev.performances||[]).forEach((p,pi)=>{
-    if(out.length>=3) return;
-    const im=(p.images||[])[0]; if(!im) return;
-    out.push({src:imgPreviewURL(ev,slotOf(0,pi),'src')||im.src, alt:im.alt||''});
-  });
-  // Fall back to the event's own images if there aren't enough performance shots
-  (ev.images||[]).slice(1).forEach(im=>{
-    if(out.length>=3) return;
-    const i=ev.images.indexOf(im);
-    out.push({src:imgPreviewURL(ev,String(i),'src')||im.src, alt:im.alt||''});
-  });
-  return out.slice(0,3);
-}
-function pnSplitDate(dd){
-  const t=String(dd||'').trim();
-  if(!t) return {day:'',time:''};
-  const m=t.match(/\d{1,2}:\d{2}(?:\s*[–—-]\s*\d{1,2}:\d{2})?/);
-  if(!m) return {day:t,time:''};
-  return {day:t.slice(0,m.index).replace(/[\s,–—-]+$/,'').trim(), time:m[0].replace(/\s+/g,'')};
-}
-// Mirrors the modal the live Past Events page opens on click
-function pnModalHTML(ev){
-  const when=pnSplitDate(ev.displayDate);
-  const poster=(ev.images||[])[0];
-  const posterSrc=poster?(imgPreviewURL(ev,'0','full')||imgPreviewURL(ev,'0','src')||poster.full||poster.src):'';
-  const blocks=(ev.performances||[]).filter(p=>p.title||p.artists||p.description||(p.images||[]).length);
-  const log = blocks.length ? blocks.map(p=>{
-    const idx=(ev.performances||[]).indexOf(p);
-    const imgs=(p.images||[]).length?`<div class="imgrow">${
-      (p.images||[]).map((im,i)=>{
-        const src=imgPreviewURL(ev,slotOf(i,idx),'src')||im.src;
-        return `<img src="${esc(src)}" alt="${esc(im.alt||'')}" loading="lazy">`;
-      }).join('')
-    }</div>`:'';
-    return `<div class="pn-perf">
-      <div class="pn-perf-n">Performance ${idx+1}</div>
-      <h4>${esc(p.title||'Untitled')}</h4>
-      ${p.artists?`<div class="pn-perf-artists">${esc(p.artists)}</div>`:''}
-      ${p.description?`<div class="pn-perf-desc">${esc(p.description)}</div>`:''}
-      ${imgs}
-    </div>`;
-  }).join('') : `<div class="pn-empty">No performance blocks filled in yet.</div>`;
-  return `<div class="pn-modal" onclick="if(event.target===this)pnToggle(event,'${esc(eventSlug(ev))}')">
-    <div class="pn-modal-card"${ev.cardColor?` style="background:${esc(ev.cardColor)}"`:''} onclick="event.stopPropagation()">
-      <div class="pn-modal-head">
-        <div class="pn-modal-headline">
-          <span class="pn-modal-label">${esc(PERF_NIGHT_LABEL)}</span>
-          <h3>${esc(ev.name||'Untitled')}</h3>
-        </div>
-        <div class="pn-modal-when">
-          <span>${esc(when.day||ev.startDate||'')}</span>
-          <span class="pn-modal-time">${esc(when.time)}</span>
-        </div>
-        <button class="pn-modal-close" onclick="pnToggle(event,'${esc(eventSlug(ev))}')" aria-label="Close">[ × ]</button>
-      </div>
-      <div class="pn-modal-scroll">
-        <div class="pn-modal-intro">
-          ${posterSrc?`<div class="pn-modal-poster"><img src="${esc(posterSrc)}" alt="${esc(poster.alt||'')}"></div>`:''}
-          <div class="pn-modal-desc">${esc(ev.description||'')}</div>
-        </div>
-        <div class="pn-modal-log">${log}</div>
-      </div>
-    </div>
-  </div>`;
+// pnCondensedImgs / pnSplitDate / pnModalHTML used to build a second, editor-only
+// copy of the card and modal markup. They are gone: the preview now renders the
+// shared past-events.js output and clones the baked .pn-detail into the modal,
+// so there is exactly one description of what a Performance Night looks like.
+
+// Editor-only hooks on top of the shared renderer: images that have been
+// converted locally but not pushed yet resolve to their blob URL, and hidden /
+// past-events state is flagged so the list stays readable while editing.
+function peCtx(){
+  const R=window.PastEventsRender;
+  if(!R) return null;
+  const ctx=R.buildContext(data);
+  ctx.imgSrc=(ev,slot,which)=>imgPreviewURL(ev,slot,which)||'';
+  ctx.cardClass=ev=>hiddenClass(ev).trim();
+  ctx.afterBadge=ev=>ev.pastEvents
+    ? '<span class="event-type" style="opacity:.55;margin-left:5px">&#10003; Past Events</span>'
+    : '';
+  return ctx;
 }
 
 function renderPE(evs){
+  const R=window.PastEventsRender;
+  if(!R||typeof R.renderCardHTML!=='function'){
+    return '<div class="prev-ph">past-events.js did not load, so the Past Events preview '
+      + '(and the static page generator) are unavailable.</div>';
+  }
+  const ctx=peCtx();
   const g=groupByExh(evs);
   let h='<div class="r-pe">';
   const _ord=['does-cloud-compute','bitrot','untagged'];
   [..._ord.filter(k=>g[k]),...Object.keys(g).filter(k=>!_ord.includes(k))].forEach(exh=>{
-    h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="estack">`;
+    h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div><div class="event-stack">`;
     g[exh].forEach(ev=>{
-      const pn=isPerfNight(ev);
-      const thumbs = pn ? pnCondensedImgs(ev)
-        : (ev.images||[]).slice(0,3).map((img,i)=>({src:imgPreviewURL(ev,String(i),'src')||img.src, alt:img.alt||''}));
-      const imgRow=thumbs.length?`<div class="imgrow">${
-        thumbs.map(t=>`<img src="${esc(t.src)}" alt="${esc(t.alt)}" loading="lazy">`).join('')
-      }</div>`:'';
-      const credit=creditHTML(ev);
-      const venue=pn&&ev.venue?esc(ev.venue):'';
-      const meta=[credit,ev.displayDate?esc(ev.displayDate):'',venue].filter(Boolean).join(' — ');
-      const creditLine=meta?`<div class="ecredit">${meta}</div>`:'';
-      const evSlugStr=eventSlug(ev);
-      const open=pn&&pnExpanded.has(evSlugStr);
-      const style=pn&&ev.cardColor?` style="background:${esc(ev.cardColor)}"`:'';
-      h+=`<div class="ecard${hiddenClass(ev)}${pn?' pn-card':''}${open?' pn-open':''}"${style}${
-        pn?` data-pn="${esc(evSlugStr)}" tabindex="0" role="button" aria-haspopup="dialog" onclick="pnToggle(event,'${esc(evSlugStr)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();pnToggle(event,'${esc(evSlugStr)}');}"`:''}>
-        <div class="etop">
-          <div>
-            <span class="etype">${esc(pn?PERF_NIGHT_LABEL:(ev.label||typeLabel(ev['@type'])||'Event'))}</span>
-            ${ev.pastEvents?'<span class="etype" style="opacity:.55;margin-left:5px">✓ Past Events</span>':''}
-            <h3>${esc(ev.name||'Untitled')}</h3>
-            ${creditLine}
-          </div>
-          ${ev.exhibition?`<div class="eseries">${esc(EXH_NAMES[ev.exhibition]||ev.exhibition)}</div>`:''}
-        </div>
-        ${imgRow}
-        <div class="edesc">${esc(pn&&ev.previewDescription?ev.previewDescription:(ev.description||''))}</div>
-        ${ev.eventCompletedUrl?`<div class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></div>`:''}
-        ${pn?`<div class="pn-hint"><span class="pn-hint-chev">↗</span>View ${(ev.performances||[]).length} performance${((ev.performances||[]).length)===1?'':'s'}</div>`:''}
-      </div>`;
+      try{
+        h+=R.renderCardHTML(ev,ctx);
+      }catch(err){
+        h+=`<div class="prev-ph">${esc(ev.name||'Untitled')} cannot be rendered: ${esc(err.message)}</div>`;
+      }
     });
     h+=`</div>`;
   });
   return h+'</div>';
 }
+
+// The preview's cards are the real baked markup, which carries no inline
+// handlers, so clicks are delegated from the frame — the editor equivalent of
+// the live page's hydration step.
+document.addEventListener('click',e=>{
+  const frame=document.getElementById('prevFrame');
+  if(!frame||!frame.contains(e.target)) return;
+  const card=e.target.closest('.event-card.pn-card');
+  if(!card||!card.dataset.slug) return;
+  if(e.target.closest('a')) return;
+  pnToggle(e,card.dataset.slug);
+});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ') return;
+  const card=e.target&&e.target.closest?e.target.closest('.event-card.pn-card'):null;
+  if(!card||!card.dataset.slug) return;
+  const frame=document.getElementById('prevFrame');
+  if(!frame||!frame.contains(card)) return;
+  e.preventDefault();
+  pnToggle(e,card.dataset.slug);
+});
 
 // ── EXPAND / COLLAPSE + HASH ROUTING (mirrors the live Past Events page) ──
 const pnExpanded=new Set();
@@ -3054,6 +3260,7 @@ function openGhModal(){
   document.getElementById('ghSignalsPath').value = cfg.signalsPath || 'json/signals.json';
   document.getElementById('ghGalleryPath').value = cfg.galleryPath || 'json/galleries.json';
   document.getElementById('ghArchivePath').value = cfg.archivePath || 'json/open-projector-archive.json';
+  document.getElementById('ghPagePath').value = cfg.pagePath || PE_PAGE_DEFAULT;
   document.getElementById('ghToken').value  = cfg.token  || '';
   document.getElementById('ghModal').classList.add('on');
   setTimeout(()=>document.getElementById('ghOwner').focus(), 50);
@@ -3074,6 +3281,7 @@ function saveGhConfig(){
     signalsPath: document.getElementById('ghSignalsPath').value.trim() || 'json/signals.json',
     galleryPath: document.getElementById('ghGalleryPath').value.trim() || 'json/galleries.json',
     archivePath: document.getElementById('ghArchivePath').value.trim() || 'json/open-projector-archive.json',
+    pagePath: document.getElementById('ghPagePath').value.trim() || PE_PAGE_DEFAULT,
     token:  document.getElementById('ghToken').value.trim(),
   };
   if(!cfg.owner || !cfg.repo){ toast('Owner and repository are required'); return; }
@@ -3093,6 +3301,97 @@ function updateGhButton(){
   btn.style.opacity = ready ? '1' : '0.55';
 }
 
+// ── STATIC PAST EVENTS PAGE ───────────────────────────────
+// Every Events push regenerates /past-events/index.html from the same renderer
+// the live page runs, and pushes it in the same operation. There is deliberately
+// no separate button, checkbox or command for this: if it could be skipped, the
+// page would quietly drift back to being empty for anything that doesn't execute
+// JavaScript, which is the entire problem this exists to fix.
+const PE_PAGE_DEFAULT='past-events/index.html';
+
+function peRenderer(){
+  const R = window.PastEventsRender;
+  if(!R || typeof R.renderPage!=='function'){
+    throw new Error('past-events.js did not load, so the static page generator is unavailable. '
+      + 'Check that /scripts/past-events.js is reachable from this page, then push again.');
+  }
+  return R;
+}
+
+// Read index.html as it currently stands in the repo, splice the generated
+// regions into it, and hand back the text plus diagnostics. Throws on anything
+// that would put a broken or incomplete page on the site — the caller runs this
+// before writing a single byte, so a failure here costs nothing.
+async function bakePastEventsPage(schemaData, headers, owner, repo, branch, pagePath, msgEl){
+  const R = peRenderer();
+  if(msgEl) msgEl.textContent='Generating static Past Events page…';
+
+  const page = R.renderPage(schemaData);
+  if(page.fatal) throw new Error(page.fatal);
+
+  const apiBase=`https://api.github.com/repos/${owner}/${repo}/contents/${pagePath}`;
+  const getRes=await fetch(`${apiBase}?ref=${branch}`,{headers});
+  if(!getRes.ok){
+    if(getRes.status===404){
+      throw new Error(`${pagePath} was not found in ${owner}/${repo}. `
+        + 'Check the "Past Events page path" under ⚙ GitHub.');
+    }
+    const err=await getRes.json().catch(()=>({}));
+    throw new Error(`Could not read ${pagePath}: ${err.message||getRes.status}`);
+  }
+  const meta=await getRes.json();
+  const current=new TextDecoder().decode(
+    Uint8Array.from(atob(String(meta.content||'').replace(/\n/g,'')), c=>c.charCodeAt(0)));
+
+  const applied=R.applyRegions(current, page.regions);
+  if(applied.missing.length){
+    throw new Error(`${pagePath} is missing generator markers: ${applied.missing.join(', ')}. `
+      + 'Restore the matching <!-- PE:START:… --> / <!-- PE:END:… --> pairs before pushing.');
+  }
+
+  // Nothing outside the markers may change. The meta tags, hero copy, sidebar
+  // and page shell are hand-authored and not the generator's to touch.
+  if(R.outsideRegions(current)!==R.outsideRegions(applied.html)){
+    throw new Error(`The generator would have altered hand-authored parts of ${pagePath}. Push aborted.`);
+  }
+
+  // And the result has to actually contain the content — re-derived from the
+  // JSON, rather than taking the generator's word for its own output.
+  const check=R.verifyBakedHTML(applied.html, schemaData);
+  if(!check.ok){
+    throw new Error(`The generated ${pagePath} is missing content for ${check.problems.length} item(s): `
+      + check.problems.slice(0,3).join('; ') + (check.problems.length>3?' …':''));
+  }
+
+  return { text: applied.html, sha: meta.sha, page, verified: check.checked };
+}
+
+// Turns a bake result into the one-line summary the toast shows and the longer
+// per-event detail the console carries.
+function bakeSummary(bake){
+  const p=bake.page;
+  let status=`${p.baked} baked`;
+  if(p.skipped) status+=`, ${p.skipped} skipped`;
+  if(p.warnings.length) status+=`, ${p.warnings.length} warning${p.warnings.length>1?'s':''}`;
+
+  if(p.errors.length||p.warnings.length){
+    console.group('Past Events — bake report');
+    p.errors.forEach(e=>console.error('SKIPPED: '+e));
+    p.warnings.forEach(w=>console.warn('WARNING: '+w));
+    console.groupEnd();
+  }
+
+  let note='';
+  if(p.errors.length){
+    note = ` — ${p.skipped} event${p.skipped>1?'s':''} skipped: ${p.errors[0]}`
+      + (p.errors.length>1?` (+${p.errors.length-1} more in the console)`:'');
+  } else if(p.warnings.length){
+    note = ` — ${p.warnings.length} warning${p.warnings.length>1?'s':''}: ${p.warnings[0]}`
+      + (p.warnings.length>1?` (+${p.warnings.length-1} more in the console)`:'');
+  }
+  return {status, note, clean: !p.errors.length && !p.warnings.length};
+}
+
 async function pushToGitHub(){
   if(!data){ toast('No JSON loaded — nothing to push'); return; }
   const cfg = ghLoad();
@@ -3109,6 +3408,7 @@ async function pushToGitHub(){
       : mode==='gallery'
         ? (cfg.galleryPath || 'json/galleries.json')
         : (cfg.path || 'json/schema.json');
+  const pagePath = cfg.pagePath || PE_PAGE_DEFAULT;
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -3121,6 +3421,13 @@ async function pushToGitHub(){
   loadEl.classList.add('on');
 
   try {
+    // 0. Regenerate the static Past Events page before anything is written.
+    //    If this throws, the push stops here and nothing has been changed.
+    let bake = null;
+    if(mode==='events'){
+      bake = await bakePastEventsPage(data, headers, owner, repo, branch, pagePath, msgEl);
+    }
+
     // 1. Upload all staged images
     const staged = [...stagedImages.entries()];
     for(let si = 0; si < staged.length; si++){
@@ -3173,6 +3480,21 @@ async function pushToGitHub(){
       throw new Error(err.message || `GitHub API ${putRes.status}`);
     }
 
+    // 2b. Push the regenerated page alongside the JSON it was generated from.
+    //     The sha we read during the bake is passed through, so a concurrent
+    //     edit to index.html fails loudly instead of being silently clobbered.
+    if(bake){
+      msgEl.textContent = 'Pushing static Past Events page…';
+      try {
+        await ghPutText(pagePath, bake.text,
+          `Rebuild ${pagePath} from schema.json via JSON editor`,
+          headers, owner, repo, branch, bake.sha);
+      } catch(e){
+        throw new Error(`JSON pushed, but ${pagePath} did not: ${e.message}. `
+          + 'Push again to bring the static page back in step.');
+      }
+    }
+
     // 3. Keep the image sitemap in sync — events & gallery pushes change site images
     let sitemapNote = '';
     if(mode==='events' || mode==='gallery'){
@@ -3186,11 +3508,19 @@ async function pushToGitHub(){
 
     markSaved();
     const imgCount = staged.length;
-    setStatus(`Pushed to ${owner}/${repo}`, countLabel());
-    const okMsg = imgCount > 0
-      ? `Pushed: ${imgCount} image${imgCount > 1 ? 's' : ''} + JSON`
-      : 'Pushed to GitHub!';
-    toast(okMsg + sitemapNote, sitemapNote ? '' : 'ok');
+    const summary = bake ? bakeSummary(bake) : null;
+
+    setStatus(`Pushed to ${owner}/${repo}`,
+      summary ? `${countLabel()} · ${summary.status}` : countLabel());
+
+    const bits = [];
+    if(imgCount) bits.push(`${imgCount} image${imgCount > 1 ? 's' : ''}`);
+    bits.push('JSON');
+    if(bake) bits.push(`Past Events page (${bake.page.baked} event${bake.page.baked===1?'':'s'})`);
+    const okMsg = 'Pushed: ' + bits.join(' + ');
+    const bakeNote = summary ? summary.note : '';
+    toast(okMsg + bakeNote + sitemapNote,
+      (!sitemapNote && (!summary || summary.clean)) ? 'ok' : '');
 
   } catch(e){
     toast('Push failed: ' + e.message);
@@ -3230,8 +3560,10 @@ const SITEMAP_STATIC = {
   '/phreak-mag/': [
     '/assets/PhreakMag/PHREAKMAG-BANNER.webp',
   ],
-  // /past-events/ is a fully static page (its JS only injects JSON-LD + filtering),
-  // so its image list is maintained here, mirroring the page markup.
+  // /past-events/ is now generated: every visible past event's images are added
+  // to this page automatically in buildImageSitemapXML below. This hand-picked
+  // seed list is kept as a floor — historical entries that predate the generator
+  // stay listed whether or not they are still in schema.json.
   '/past-events/': [
     '/assets/DCCeP/Events/CounterModeling/CounterModelling-3.jpg',
     '/assets/DCCeP/Events/CounterModeling/CounterModelling-1.jpg',
@@ -3326,10 +3658,13 @@ function buildImageSitemapXML(schemaData, galleriesData){
     if(!isEvent(item)) return;
     const page = SITEMAP_EVENT_PAGES[item.exhibition];
     if(page) imgs.forEach(im => add(page, im.full||im.src));
-    // Performance Night blocks render inside the expanded card on /past-events/
-    if(isPerfNight(item)){
-      (item.performances||[]).forEach(p =>
-        (p.images||[]).forEach(im => add('/past-events/', im.full||im.src)));
+    // Everything flagged for the archive is now baked into /past-events/
+    // directly, so list its images against that page too. The hand-maintained
+    // seed list above still stands: this adds, it never replaces.
+    if(item.pastEvents===true){
+      imgs.forEach(im => add('/past-events/', im.full||im.src));
+      actList(item).forEach(p =>
+        actGet(p,'images').forEach(im => add('/past-events/', im.full||im.src)));
     }
   });
 
@@ -3346,14 +3681,16 @@ function buildImageSitemapXML(schemaData, galleriesData){
 }
 
 // PUT a UTF-8 text file to the repo via the contents API (create or update)
-async function ghPutText(path, text, message, headers, owner, repo, branch){
+async function ghPutText(path, text, message, headers, owner, repo, branch, knownSha){
   const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-  let sha = null;
-  const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
-  if(getRes.ok) sha = (await getRes.json()).sha;
-  else if(getRes.status !== 404){
-    const err = await getRes.json().catch(()=>({}));
-    throw new Error(err.message || `GitHub API ${getRes.status}`);
+  let sha = knownSha || null;
+  if(!sha){
+    const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
+    if(getRes.ok) sha = (await getRes.json()).sha;
+    else if(getRes.status !== 404){
+      const err = await getRes.json().catch(()=>({}));
+      throw new Error(err.message || `GitHub API ${getRes.status}`);
+    }
   }
   const bytes = new TextEncoder().encode(text);
   const content = btoa(Array.from(bytes, b => String.fromCharCode(b)).join(''));
