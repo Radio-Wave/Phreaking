@@ -215,7 +215,7 @@ function buildCard(ev, personsMap, exhMap) {
       </div>
       ${showSeries ? `<div class="event-series" aria-label="Exhibition: ${esc(exh.name)}, ${esc(year)}"><a href="${esc(exh.url)}" target="_blank" rel="noreferrer" class="inline-link">${esc(exh.name)}</a> / ${esc(year)}</div>` : ''}
     </div>
-    <p class="event-description" itemprop="description">${esc(ev.description || '')}</p>
+    <p class="event-description" itemprop="description">${esc(pn && ev.previewDescription ? ev.previewDescription : (ev.description || ''))}</p>
     ${pn
       ? imageRowHTML(ev, { imgs: pnPreviewImages(ev), cls: 'pn-preview-row', preview: true, label: `Preview photos from ${esc(ev.name)}` })
       : imageRowHTML(ev)}

@@ -1674,6 +1674,9 @@ function buildForm(){
         Show on Past Events page
       </label>
     </div>
+    ${pn?`
+    <div class="field"><label>Preview Description <span style="font-weight:400;color:var(--muted)">(shorter — shown on the collapsed card; the full description below only appears once expanded)</span></label>
+      <textarea id="ef-preview-desc" rows="3" oninput="liveUp()">${esc(ev.previewDescription||'')}</textarea></div>`:''}
     <div class="field"><label>Description</label>
       <textarea id="ef-desc" rows="5" oninput="liveUp()">${esc(ev.description||'')}</textarea></div>
     <div class="frow">
@@ -2386,6 +2389,7 @@ function liveUp(){
   const pe=document.getElementById('ef-pastevents');
   if(pe) ev.pastEvents = pe.checked;
   ev.description=g('ef-desc')??ev.description;
+  if(wasPN){ const pd=g('ef-preview-desc'); if(pd!==undefined){ if(pd.trim()) ev.previewDescription=pd; else delete ev.previewDescription; } }
   ev.eventCompletedUrl=g('ef-url')??ev.eventCompletedUrl;
   ev.eventCompletedUrlLabel=g('ef-url-label')??ev.eventCompletedUrlLabel;
   ev.startDate=g('ef-start')??ev.startDate;
@@ -2735,7 +2739,7 @@ function renderPE(evs){
           ${ev.exhibition?`<div class="eseries">${esc(EXH_NAMES[ev.exhibition]||ev.exhibition)}</div>`:''}
         </div>
         ${imgRow}
-        <div class="edesc">${esc(ev.description||'')}</div>
+        <div class="edesc">${esc(pn&&ev.previewDescription?ev.previewDescription:(ev.description||''))}</div>
         ${ev.eventCompletedUrl?`<div class="elink"><a href="${esc(ev.eventCompletedUrl)}" target="_blank">${esc(ev.eventCompletedUrlLabel||'Event Completed')} ↗</a></div>`:''}
         ${pn?`<div class="pn-hint"><span class="pn-hint-chev">↗</span>View ${(ev.performances||[]).length} performance${((ev.performances||[]).length)===1?'':'s'}</div>`:''}
       </div>`;
