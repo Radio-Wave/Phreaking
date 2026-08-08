@@ -23,7 +23,10 @@
  *                         actually contain every event, and every Performance
  *                         Night act, as real text and real <img src>?
  *   C. structured data  — JSON-LD validity, typing, no internal fields;
- *                         microdata nesting; itemprop="image" on every image
+ *                         microdata nesting; itemprop="image" on every image;
+ *                         and that the microdata and the JSON-LD assert the
+ *                         SAME fields — Google reads both independently, so a
+ *                         gap between them reports one event twice
  *   D. hydration        — jsdom against the baked page: filtering, sorting,
  *                         modal open/close, lightbox, #slug deep-linking
  *   E. diagnostics      — malformed events are named and isolated; clean data
@@ -198,6 +201,11 @@ section('C. Structured data');
 
 const ldRaw = INDEX.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 let LD = null;
+/* Hoisted out of the `if (LD)` block below: the microdata checks further down
+ * compare themselves against the JSON-LD, and a parity check is only meaningful
+ * if it can see both representations at once. Stays [] if the JSON-LD failed to
+ * parse, in which case that failure is already reported above. */
+let LD_EVENTS = [];
 try { LD = JSON.parse(ldRaw[1].replace(/<\\\//g, '</')); ok('baked JSON-LD parses', true); }
 catch (e) { ok('baked JSON-LD parses', false, e.message); }
 
@@ -211,6 +219,7 @@ if (LD) {
     .forEach((f) => ok('JSON-LD is free of internal field ' + f, !has(flat, f)));
 
   const ldEvents = LD['@graph'].filter((n) => /Event$/.test(String(n['@type'])) && n.startDate);
+  LD_EVENTS = ldEvents;
   ok('JSON-LD contains every baked event', ldEvents.length >= page.baked, `${ldEvents.length} vs ${page.baked}`);
 
   const ISO = /^\d{4}(-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?)?$/;
@@ -261,10 +270,27 @@ if (LD) {
   ok('an actual collective credit ("Various Artists") is still typed PerformingGroup',
     !!groupCredit && groupCredit.performer['@type'] === 'PerformingGroup');
 
+  /* Root Cause A. `location` is required by Google's Event validator, and an
+   * event with neither a `location` object nor a `venue` string used to get
+   * none at all — ~19 critical errors in Search Console. locationOf() now falls
+   * back to the collective's own address, so this holds for every event
+   * regardless of what anyone typed into the editor. */
+  ok('every baked event has a location in JSON-LD', ldEvents.every((e) => !!e.location));
+
   const places = ldEvents.filter((e) => e.location);
   ok('every location is a typed Place',
     places.every((e) => e.location['@type'] === 'Place'),
     'venue is now schema.org location');
+  ok('every JSON-LD location carries a name',
+    places.every((e) => !!e.location.name));
+
+  /* Acts inherit the parent night's location via actNode(); called out
+   * separately because that inheritance is what silently produced a further 6
+   * flagged items once the parent's own location was missing. */
+  const ldActs = ldEvents.reduce((acc, e) => acc.concat(e.subEvent || []), []);
+  ok('the fixture has JSON-LD acts to check', ldActs.length > 0);
+  ok('every JSON-LD act inherits a location from its parent night',
+    ldActs.every((a) => !!a.location));
 
   // A node is "defined" wherever it appears with an @type — including inline,
   // e.g. subEvent acts or the WebSite under isPartOf. A bare {"@id": …} is a
@@ -313,6 +339,89 @@ const subEventNodes = [...doc0.querySelectorAll('[itemprop="subEvent"]')];
 eq('acts are subEvent microdata inside the card', subEventNodes.length, P.actsOf(PN).length);
 ok('act microdata sits inside the Performance Night card\'s own itemscope',
   subEventNodes.every((n) => n.closest('.event-card.pn-card')));
+
+/* ── Microdata ↔ JSON-LD parity (Root Cause B) ─────────────────────────────
+ * Google's Rich Results parser reads the JSON-LD and the inline microdata
+ * independently, for the same real-world event. Whichever is less complete gets
+ * reported as a second, broken copy of that event — which is what produced
+ * every "same act appears twice, once clean, once with 2 critical + 5
+ * non-critical issues" entry in Search Console.
+ *
+ * These compare microdata counts against the JSON-LD rather than against
+ * hard-coded numbers, so they keep holding as events are added.
+ *
+ * The ExhibitionEvent series nodes ("BitRot", "Does Cloud Compute?") are in
+ * ldEvents but are not cards — they are referenced series, rendered as a
+ * scoped `about`/`superEvent` inside a card, not as an <article> of their own.
+ * Excluded here so card-for-card comparisons line up. */
+const ldCards = LD_EVENTS.filter((e) => String(e['@type']) !== 'ExhibitionEvent');
+eq('the JSON-LD card nodes and the baked articles are the same population',
+  ldCards.length, doc0.querySelectorAll('.event-card').length);
+
+/* NOTE the `>` combinator. Each act now carries its own [itemprop="location"]
+ * nested inside the card (.pn-detail → … → .pn-perf), so a descendant selector
+ * would count cards *and* acts and over-report. The card's own location scope
+ * is emitted as part of the meta block, which is the first direct child of the
+ * <article> — so the DOM structure itself keeps the two apart, with no
+ * :not()/closest() filtering needed. */
+const cardLocationMeta = [...doc0.querySelectorAll('.event-card > [itemprop="location"]')];
+eq('every card with a JSON-LD location also has it in microdata',
+  cardLocationMeta.length, ldCards.filter((e) => e.location).length);
+ok('every card location scope is a typed Place carrying a name',
+  cardLocationMeta.every((n) => /schema\.org\/Place/.test(n.getAttribute('itemtype') || '') &&
+    n.querySelector('[itemprop="name"]')));
+
+const cardOrganizerMeta = [...doc0.querySelectorAll('.event-card > [itemprop="organizer"]')];
+eq('every card with a JSON-LD organizer also has it in microdata',
+  cardOrganizerMeta.length, ldCards.filter((e) => e.organizer).length);
+ok('the card organizer is a scoped Organization with a name and url',
+  cardOrganizerMeta.every((n) => n.hasAttribute('itemscope') &&
+    /schema\.org\/Organization/.test(n.getAttribute('itemtype') || '') &&
+    n.querySelector('[itemprop="name"]') && n.querySelector('[itemprop="url"]')));
+
+/* `offers` is optional in Google's validator, unlike location — so the test is
+ * parity, not presence. An event that genuinely had no ticketing must not have
+ * one invented for it, and one that has an Offer in JSON-LD must not be missing
+ * it from the microdata. */
+const cardOffersMeta = [...doc0.querySelectorAll('.event-card > [itemprop="offers"]')];
+eq('cards carry offers microdata exactly where the JSON-LD does — no more, no less',
+  cardOffersMeta.length, ldCards.filter((e) => e.offers).length);
+ok('the fixture has both kinds of event to make that meaningful',
+  cardOffersMeta.length > 0 && cardOffersMeta.length < ldCards.length,
+  cardOffersMeta.length + ' of ' + ldCards.length + ' cards have an offer');
+ok('every offers scope is a typed Offer',
+  cardOffersMeta.every((n) => /schema\.org\/Offer/.test(n.getAttribute('itemtype') || '')));
+
+/* Per-act microdata used to carry name/performer/description/image and nothing
+ * else, while the JSON-LD subEvent for the same act carried dates, status,
+ * attendance mode and location. Each act now states its own. */
+const actCount = P.actsOf(PN).length;
+['eventStatus', 'eventAttendanceMode', 'startDate'].forEach((prop) => {
+  eq('every act carries ' + prop + ' in its own microdata, not just JSON-LD',
+    doc0.querySelectorAll('.pn-perf meta[itemprop="' + prop + '"]').length, actCount);
+});
+eq('every act carries its own location scope, not just JSON-LD',
+  doc0.querySelectorAll('.pn-perf [itemprop="location"]').length, actCount);
+
+/* acts intentionally carry no endDate in JSON-LD — see actNode(), which sets
+ * only startDate on the subEvent node. The act microdata does emit endDate when
+ * the night has one, so this direction is deliberately not a parity check:
+ * microdata asserting more than the JSON-LD is not a validation error, and
+ * widening actNode()'s output was out of scope. Not an oversight. */
+const actEndDates = doc0.querySelectorAll('.pn-perf meta[itemprop="endDate"]').length;
+ok('act endDate is present in microdata where the night has one (JSON-LD asserts none, by design)',
+  actEndDates === 0 || actEndDates === actCount,
+  actEndDates + ' of ' + actCount + ' acts — expected all or none, matching the parent night');
+
+/* Fix A has to be a renderer fallback, not per-event data entry: the whole
+ * point is that a newly-created event cannot silently lack a location again. */
+ok('locationOf() falls back to a real named Place for an event with no location data',
+  !!(P.locationOf({ name: 'Untitled', startDate: '2026' }) || {}).name);
+ok('an explicit location still wins over the fallback',
+  P.locationOf({ location: { '@type': 'Place', name: 'ANNEX by The Koppel Project' } }).name ===
+    'ANNEX by The Koppel Project');
+ok('a legacy `venue` string still wins over the fallback',
+  P.locationOf({ venue: 'Somewhere Else' }).name === 'Somewhere Else');
 
 /* =======================================================================
  * D. Hydration against the baked page
@@ -684,6 +793,23 @@ if (ed) {
   // The editor's script declares its state with let/const, so it lives in the
   // global lexical scope rather than on `window`; reach it through eval.
   const run = (src) => w.eval(src);
+
+  /* ── One definition of the collective's own address ──────────────────────
+   * locationOf() falls back to homePlace() so no event can be published
+   * without a location. The editor writes the same object into `location` when
+   * the Venue field is cleared. Two literals would drift — and drift here is
+   * invisible, because both halves would still validate while quietly
+   * disagreeing about where the events happened. The editor therefore
+   * delegates, and this asserts it. */
+  ok('the editor takes HOME_VENUE from the shared renderer',
+    run('HOME_VENUE') === P.HOME_VENUE, run('HOME_VENUE') + ' vs ' + P.HOME_VENUE);
+  ok('the editor takes the home address from the shared renderer, not a second copy',
+    JSON.stringify(run('homePlace()')) === JSON.stringify(P.homePlace()),
+    JSON.stringify(run('homePlace()')));
+  ok('jsonedit.html contains no second copy of the postal address',
+    !/addressLocality/.test(EDITOR),
+    'the editor should reach the address through PastEventsRender.homePlace()');
+
   w.__fixture = clone(legacy);
   run('data = __fixture; datasets.events = data; mode = "events";');
 

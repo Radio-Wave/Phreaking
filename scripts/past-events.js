@@ -177,12 +177,28 @@
    * actual external venue — every event carries location "Phreaking Collective"
    * as its default, and repeating that after the organiser credit would be
    * noise (and a visible change to cards that render fine today). */
+  /* The collective's own address, as written by the JSON editor onto every
+   * event that has a location at all. Kept here — not only in jsonedit.html —
+   * so the renderer is never dependent on the editor being the source of truth
+   * for it: an event created without a venue still resolves to a real Place. */
+  function homePlace() {
+    return {
+      '@type': 'Place',
+      name: HOME_VENUE,
+      address: { '@type': 'PostalAddress', addressLocality: 'London', addressCountry: 'GB' }
+    };
+  }
+
   function locationOf(ev) {
     if (!ev) return null;
     if (ev.location && typeof ev.location === 'object' && ev.location.name) return ev.location;
     if (typeof ev.location === 'string' && ev.location) return { '@type': 'Place', name: ev.location };
     if (typeof ev.venue === 'string' && ev.venue) return { '@type': 'Place', name: ev.venue };
-    return null;
+    /* Every event has a real location — the collective's own address — even if
+     * no specific venue was ever entered. Google's validator treats `location`
+     * as required, and a missing one is the single biggest source of critical
+     * errors in the Rich Results report. */
+    return homePlace();
   }
 
   function displayVenue(ev) {
@@ -412,15 +428,64 @@
     return out.slice(0, 3);
   }
 
+  /* ── Shared microdata fragments ────────────────────────────────────────────
+   * The inline microdata and the JSON-LD are read independently by Google for
+   * the same real-world event, so they must agree. These two builders are the
+   * microdata counterparts of cleanPlace() and buildJsonLd()'s Offer node, and
+   * are used by both the card and each act so there is one implementation to
+   * keep in step rather than three hand-written copies. */
+  function placeMicrodata(loc) {
+    if (!loc || !loc.name) return '';
+    var a = loc.address;
+    return '<span itemprop="location" itemscope itemtype="https://schema.org/Place">' +
+      '<meta itemprop="name" content="' + esc(loc.name) + '">' +
+      (a && a.addressLocality
+        ? '<span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">' +
+          '<meta itemprop="addressLocality" content="' + esc(a.addressLocality) + '">' +
+          (a.addressCountry
+            ? '<meta itemprop="addressCountry" content="' + esc(a.addressCountry) + '">' : '') +
+          '</span>'
+        : '') +
+      '</span>';
+  }
+
+  /* Mirrors the JSON-LD Offer exactly, including `validFrom` being the real ISO
+   * start rather than the bare year the editor stores. Absent offers stay
+   * absent: `offers` is optional in Google's validator and inventing one for an
+   * event that never had ticketing would be a fabrication. */
+  function buildOffersMicrodata(offers, iso, url) {
+    if (!offers || typeof offers !== 'object') return '';
+    return '<span itemprop="offers" itemscope itemtype="https://schema.org/Offer">' +
+      (offers.price != null ? '<meta itemprop="price" content="' + esc(String(offers.price)) + '">' : '') +
+      (offers.priceCurrency ? '<meta itemprop="priceCurrency" content="' + esc(offers.priceCurrency) + '">' : '') +
+      (offers.availability ? '<link itemprop="availability" href="' + esc(offers.availability) + '">' : '') +
+      (iso && iso.start ? '<meta itemprop="validFrom" content="' + esc(iso.start) + '">' : '') +
+      '<link itemprop="url" href="' + esc(url || PAGE_URL) + '">' +
+      '</span>';
+  }
+
   /* The performance log — one section per act, each its own subEvent itemscope
    * with its own lightbox gallery. This is baked into the card (hidden) and
    * moved into the modal on open; it is never rebuilt from JSON at view time. */
   function performanceLogHTML(ev, imgSrc) {
     var blocks = actsOf(ev);
     if (!blocks.length) return '<p class="pn-empty">Details for this night are being added.</p>';
+    /* The same values actNode() computes for the JSON-LD subEvent, from the same
+     * helpers — an act's dates, status and location are the parent night's. Both
+     * representations describe one real-world act, so they have to carry the
+     * same field set or Google reports the act twice, once incomplete. */
+    var iso = isoDatesFor(ev);
+    var loc = locationOf(ev);
+    var status = normaliseEventStatus(ev.eventStatus);
+    var mode = ev.eventAttendanceMode || DEFAULT_ATTENDANCE_MODE;
     return blocks.map(function (p, i) {
       var title = p.title || 'Untitled';
       return '<section class="pn-perf" itemprop="subEvent" itemscope itemtype="https://schema.org/PerformingArtsEvent">' +
+        '<meta itemprop="eventStatus" content="' + esc(status) + '">' +
+        '<meta itemprop="eventAttendanceMode" content="' + esc(mode) + '">' +
+        (iso.start ? '<meta itemprop="startDate" content="' + esc(iso.start) + '">' : '') +
+        (iso.end ? '<meta itemprop="endDate" content="' + esc(iso.end) + '">' : '') +
+        (loc ? placeMicrodata(loc) : '') +
         '<div class="pn-perf-n">Performance ' + (i + 1) + '</div>' +
         '<h4 class="pn-perf-title" itemprop="name">' + esc(title) + '</h4>' +
         (p.artists
@@ -555,18 +620,14 @@
       '<meta itemprop="eventAttendanceMode" content="' + esc(ev.eventAttendanceMode || DEFAULT_ATTENDANCE_MODE) + '">' +
       (iso.start ? '<meta itemprop="startDate" content="' + esc(iso.start) + '">' : '') +
       (iso.end ? '<meta itemprop="endDate" content="' + esc(iso.end) + '">' : '') +
-      (loc
-        ? '<span itemprop="location" itemscope itemtype="https://schema.org/Place">' +
-          '<meta itemprop="name" content="' + esc(loc.name) + '">' +
-          (loc.address && loc.address.addressLocality
-            ? '<span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">' +
-              '<meta itemprop="addressLocality" content="' + esc(loc.address.addressLocality) + '">' +
-              (loc.address.addressCountry
-                ? '<meta itemprop="addressCountry" content="' + esc(loc.address.addressCountry) + '">' : '') +
-              '</span>'
-            : '') +
-          '</span>'
-        : '') +
+      placeMicrodata(loc) +
+      /* The organiser the JSON-LD asserts via `@id` on the Organization node.
+       * Microdata has no cross-document references, so it is stated inline. */
+      '<span itemprop="organizer" itemscope itemtype="https://schema.org/Organization">' +
+        '<meta itemprop="name" content="' + esc(HOME_VENUE) + '">' +
+        '<link itemprop="url" href="' + SITE_ORIGIN + '/">' +
+      '</span>' +
+      buildOffersMicrodata(ev.offers, iso, ev.eventCompletedUrl || PAGE_URL) +
       fullDescMeta;
 
     var body = [
@@ -1581,6 +1642,8 @@
     actsOf: actsOf,
     rawActs: rawActs,
     locationOf: locationOf,
+    homePlace: homePlace,
+    HOME_VENUE: HOME_VENUE,
     displayVenue: displayVenue,
     chronoKey: chronoKey,
     isoDatesFor: isoDatesFor,

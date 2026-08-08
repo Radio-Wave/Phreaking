@@ -1219,11 +1219,19 @@ function migrateActsOn(ev){
 // load. Only a venue that isn't the collective's own space is shown on the
 // card — every event carries the home address as its default location, and
 // echoing that after the organiser credit would just be noise.
-const HOME_VENUE='Phreaking Collective';
-function homePlace(){
-  return {'@type':'Place', name:HOME_VENUE,
-    address:{'@type':'PostalAddress', addressLocality:'London', addressCountry:'GB'}};
-}
+//
+// Both the name and the address object come from the shared renderer, which
+// needs them anyway: locationOf() falls back to homePlace() so that no event can
+// be published without a location, even one created with the Venue field left
+// empty. Defining them here as well would be two sources of truth for the
+// collective's own address, and the renderer's copy is the one Google sees.
+// test-past-events.js asserts the editor and the renderer agree.
+// The name falls back to a literal only so that a failed script load leaves the
+// editor usable enough to show its own "past-events.js did not load" banner
+// rather than dying at parse time; homePlace() is a hard delegation, because
+// writing a half-known address into the data would be worse than an error.
+const HOME_VENUE=(window.PastEventsRender&&window.PastEventsRender.HOME_VENUE)||'Phreaking Collective';
+function homePlace(){ return peRenderer().homePlace(); }
 function eventVenue(ev){
   if(!ev) return '';
   const loc=ev.location;
