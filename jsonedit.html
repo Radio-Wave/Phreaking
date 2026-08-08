@@ -553,7 +553,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .r-pe .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
 .r-pe .pn-hint{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:9.5px;
   text-transform:uppercase;letter-spacing:.06em;color:#cfcfcf;}
-.r-pe .pn-detail[hidden]{display:none;}
+.r-pe .pn-detail.pn-detail--stowed{display:none;}
 
 /* modal, mounted over the whole preview pane */
 #prevOverlay .pn-modal{position:absolute;inset:0;display:flex;padding:10px;}
@@ -2786,7 +2786,7 @@ function pnRenderOverlay(evs){
   const scroll=ov.querySelector('.pn-modal__scroll');
   if(detail&&scroll){
     const clone=detail.cloneNode(true);
-    clone.removeAttribute('hidden');
+    clone.classList.remove('pn-detail--stowed');
     clone.removeAttribute('id');
     while(clone.firstChild) scroll.appendChild(clone.firstChild);
   }

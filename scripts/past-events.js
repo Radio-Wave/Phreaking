@@ -311,6 +311,26 @@
    * 3. Markup generation — pure string functions, no DOM
    * ==================================================================== */
 
+  /* A `creditText` string has no @id to look up an actual @type, so its type
+   * has to be inferred from the text itself. Defaulting to Person and only
+   * promoting to PerformingGroup on real evidence of multiple people or an
+   * explicit collective — rather than the reverse — matches how the data
+   * actually skews: most creditText entries here are one named individual
+   * (an event without a proper Person/Organization record yet), and only a
+   * few ("Various Artists") are genuinely groups. This is a heuristic, not a
+   * lookup: a one-word brand/studio name that is actually a duo (nothing in
+   * the string signals that) will still be inferred as Person. The precise
+   * fix for a specific name is the same one used everywhere else in this
+   * file — give it a real Person/Organization entry with an @id, so its type
+   * comes from data instead of a guess. */
+  function creditTextType(text) {
+    var t = String(text || '').trim();
+    if (!t) return 'Person';
+    if (/\b(various artists|collective|ensemble|orchestra|company|theatre|theater|crew)\b/i.test(t)) return 'PerformingGroup';
+    if (/&|\+|,|\band\b/i.test(t)) return 'PerformingGroup';
+    return 'Person';
+  }
+
   /* Linked performer credits, each wrapped in its own Person itemscope. The old
    * markup applied itemprop="name"/"url" with no containing scope, which made
    * them properties of the Event itself rather than of a Person. */
@@ -331,7 +351,7 @@
       if (parts.length) return parts.join(' &amp; ');
     }
     return ev.creditText
-      ? '<span itemprop="performer" itemscope itemtype="https://schema.org/PerformingGroup">' +
+      ? '<span itemprop="performer" itemscope itemtype="https://schema.org/' + creditTextType(ev.creditText) + '">' +
         '<span itemprop="name">' + esc(ev.creditText) + '</span></span>'
       : '';
   }
@@ -404,7 +424,8 @@
         '<div class="pn-perf-n">Performance ' + (i + 1) + '</div>' +
         '<h4 class="pn-perf-title" itemprop="name">' + esc(title) + '</h4>' +
         (p.artists
-          ? '<div class="pn-perf-artists" itemprop="performer" itemscope itemtype="https://schema.org/PerformingGroup">' +
+          ? '<div class="pn-perf-artists" itemprop="performer" itemscope itemtype="https://schema.org/' +
+            creditTextType(p.artists) + '">' +
             '<span itemprop="name">' + esc(p.artists) + '</span></div>'
           : '') +
         (p.description ? '<p class="pn-perf-desc" itemprop="description">' + esc(p.description) + '</p>' : '') +
@@ -441,7 +462,7 @@
         '<div class="pn-modal__desc">' + paras + '</div>' +
         '</div>'
       : '';
-    return '<div class="pn-detail" id="detail-' + esc(slug) + '" data-pn-detail="' + esc(slug) + '" hidden>' +
+    return '<div class="pn-detail pn-detail--stowed" id="detail-' + esc(slug) + '" data-pn-detail="' + esc(slug) + '">' +
       (intro ? '\n  ' + intro : '') +
       '\n  <div class="pn-modal__log">\n  ' + performanceLogHTML(ev, imgSrc) + '\n  </div>' +
       '\n</div>';
@@ -603,6 +624,37 @@
    * 4. Per-event validation
    * ==================================================================== */
 
+  /* Flags a description that says the same thing twice — a paragraph copied
+   * verbatim, or a later paragraph that closely paraphrases an earlier one
+   * (e.g. a draft left in alongside its edited replacement, which can start
+   * with entirely different words while covering the same ground). Compares
+   * paragraphs pairwise by the overlap of their significant words (Jaccard on
+   * words of length >=4, so common short words like "the"/"and" don't drive a
+   * false match) — a plain prefix comparison misses paraphrases that open
+   * differently, which is exactly the real case this exists to catch.
+   * Deliberately just a warning at a conservative threshold: this never
+   * rewrites or trims anyone's copy, only names the problem so it can be
+   * fixed by hand, and a merely-related pair of paragraphs should not trip it. */
+  function firstDuplicateParagraph(description) {
+    var paras = String(description).split(/\n{2,}|\n/).map(function (p) { return p.trim(); }).filter(Boolean);
+    if (paras.length < 2) return null;
+    var wordSets = paras.map(function (p) {
+      var words = p.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(function (w) { return w.length >= 4; });
+      return { words: words, set: new Set(words) };
+    });
+    for (var i = 0; i < paras.length; i++) {
+      if (wordSets[i].words.length < 12) continue;    // too short for overlap to mean much
+      for (var j = 0; j < i; j++) {
+        if (wordSets[j].words.length < 12) continue;
+        var shared = 0;
+        wordSets[i].set.forEach(function (w) { if (wordSets[j].set.has(w)) shared++; });
+        var smaller = Math.min(wordSets[i].set.size, wordSets[j].set.size);
+        if (smaller > 0 && shared / smaller >= 0.6) return paras[i];
+      }
+    }
+    return null;
+  }
+
   function describe(ev, index) {
     var name = (ev && ev.name) ? String(ev.name) : '';
     var id = (ev && ev['@id']) ? (String(ev['@id']).split('#')[1] || String(ev['@id'])) : '';
@@ -647,6 +699,14 @@
 
     if (!ev.description || !String(ev.description).trim()) {
       warnings.push(who + ' has no description — its card will carry no body text for search engines to read');
+    } else {
+      var dupPara = firstDuplicateParagraph(ev.description);
+      if (dupPara) {
+        warnings.push(who + ' description repeats itself — a paragraph starting "' +
+          dupPara.slice(0, 50) + (dupPara.length > 50 ? '…' : '') +
+          '" appears more than once (near-verbatim). This bakes fine, but wastes ' +
+          'the space a search snippet or an AI summary has to work with — worth trimming by hand.');
+      }
     }
     if (!ev.startDate && !ev.displayDate) warnings.push(who + ' has no startDate or displayDate');
 
@@ -835,7 +895,7 @@
       '@id': base + '-act-' + (i + 1),
       name: act.title || 'Untitled'
     };
-    if (act.artists) node.performer = { '@type': 'PerformingGroup', name: act.artists };
+    if (act.artists) node.performer = { '@type': creditTextType(act.artists), name: act.artists };
     if (act.description) node.description = String(act.description).trim();
     var imgs = act.images.map(function (im) { return absUrl(im.full || im.src); }).filter(Boolean);
     if (imgs.length) node.image = imgs;
@@ -891,8 +951,9 @@
       var loc = locationOf(ev);
       if (loc) node.location = cleanPlace(loc);
 
-      /* Every event lives on this one page by design — see the note in
-       * index.html about why fragments are not independently indexable. */
+      /* Every event lives on this one page: URL fragments are never sent to
+       * the server and are folded into the base URL at indexing time, so each
+       * event's canonical URL is the page itself. */
       node.url = PAGE_URL;
 
       if (org) node.organizer = { '@id': org['@id'] };
@@ -904,7 +965,7 @@
           ? { '@id': perfIds[0] }
           : perfIds.map(function (id) { return { '@id': id }; });
       } else if (ev.creditText) {
-        node.performer = { '@type': 'PerformingGroup', name: String(ev.creditText) };
+        node.performer = { '@type': creditTextType(ev.creditText), name: String(ev.creditText) };
       }
 
       var imgs = (ev.images || []).map(function (im) { return absUrl(im.full || im.src); }).filter(Boolean);
@@ -1250,7 +1311,7 @@
 
     var scroll = modal.querySelector('.pn-modal__scroll');
     scroll.appendChild(detail);
-    detail.removeAttribute('hidden');
+    detail.classList.remove('pn-detail--stowed');
     pnOpenDetail = detail;
     pnOpenCard = card;
 
@@ -1268,7 +1329,7 @@
   /* Put the detail block back where it was baked, hidden again. */
   function restoreDetail() {
     if (pnOpenDetail && pnOpenCard) {
-      pnOpenDetail.setAttribute('hidden', '');
+      pnOpenDetail.classList.add('pn-detail--stowed');
       pnOpenCard.appendChild(pnOpenDetail);
     }
     pnOpenDetail = null;

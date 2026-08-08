@@ -167,6 +167,11 @@ ok('every Performance Night act title, description and image is in the raw marku
 ok('act markup is real content, not an empty JS-filled container',
   (INDEX.match(/class="pn-perf"/g) || []).length === acts.length);
 
+ok('the act detail block is never marked with the HTML `hidden` attribute — ' +
+  'some text-extraction/summarisation tools specifically strip [hidden] content, ' +
+  'and this is exactly the content that must not be stripped',
+  !/<div class="pn-detail[^"]*"[^>]*\shidden(\s|>)/.test(INDEX));
+
 ok('"Slow Impulse" + a named act are both findable in one raw-text search',
   has(TEXT, 'Slow Impulse') && has(TEXT, 'Genia Isachenko') && has(TEXT, 'The London Community Laptop Orchestra'));
 
@@ -240,6 +245,21 @@ if (LD) {
   const withPerformer = ldEvents.filter((e) => e.performer);
   ok('performers are objects or @id references, never bare strings',
     withPerformer.every((e) => [].concat(e.performer).every((p) => p && typeof p === 'object')));
+
+  const soloCreditTexts = SCHEMA['@graph'].filter((e) =>
+    e.pastEvents && e.creditText && !/various|,|&|\band\b|\+/i.test(e.creditText));
+  ok('the fixture actually has solo-name creditText entries to check', soloCreditTexts.length > 0);
+  const mistyped = soloCreditTexts.filter((e) => {
+    const n = ldEvents.find((x) => x.name === e.name);
+    return n && n.performer && n.performer['@type'] !== 'Person';
+  });
+  ok('a single named individual credited via creditText is typed Person, not PerformingGroup',
+    mistyped.length === 0,
+    mistyped.map((e) => e.creditText).join(', '));
+
+  const groupCredit = ldEvents.find((e) => e.performer && e.performer.name === 'Various Artists');
+  ok('an actual collective credit ("Various Artists") is still typed PerformingGroup',
+    !!groupCredit && groupCredit.performer['@type'] === 'PerformingGroup');
 
   const places = ldEvents.filter((e) => e.location);
   ok('every location is a typed Place',
@@ -321,7 +341,7 @@ const W = dom.window;
 ok('hydration does not re-create cards (no fetch needed)',
   doc.querySelectorAll('.event-card').length === PAST.length);
 ok('hydration marks the document as JS-capable', doc.documentElement.classList.contains('js') ||
-  doc.querySelectorAll('.pn-detail[hidden]').length > 0);
+  doc.querySelectorAll('.pn-detail.pn-detail--stowed').length > 0);
 
 /* filtering */
 const talksBtn = doc.querySelector('.filter-btn[data-filter="talks"]');
@@ -364,8 +384,10 @@ eq('condensed card shows three preview thumbnails',
   pnCard.querySelectorAll('.pn-preview-row img').length, 3);
 ok('condensed card shows the preview description, not the full one',
   pnCard.querySelector('.event-description').textContent.trim().startsWith(PN.previewDescription.trim().slice(0, 40)));
-ok('the detail block is baked inside the card and hidden for JS users',
-  pnCard.querySelector('.pn-detail') && pnCard.querySelector('.pn-detail').hasAttribute('hidden'));
+ok('the detail block is baked inside the card and visually stowed for JS users',
+  pnCard.querySelector('.pn-detail') && pnCard.querySelector('.pn-detail').classList.contains('pn-detail--stowed'));
+ok('…via a CSS class, not the semantic `hidden` attribute some text extractors strip',
+  !pnCard.querySelector('.pn-detail').hasAttribute('hidden'));
 
 pnCard.dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
 let modal = doc.querySelector('.pn-modal');
@@ -391,7 +413,7 @@ eq('modal: url gains the deep-link hash', dom.window.location.hash, '#slow-impul
 modal.querySelector('.pn-modal__close').dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
 eq('modal: closes on the close button', modal.getAttribute('aria-hidden'), 'true');
 ok('modal: the detail block goes back into its card',
-  pnCard.querySelector('.pn-detail') !== null && pnCard.querySelector('.pn-detail').hasAttribute('hidden'));
+  pnCard.querySelector('.pn-detail') !== null && pnCard.querySelector('.pn-detail').classList.contains('pn-detail--stowed'));
 
 pnCard.dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
 doc.dispatchEvent(new W.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
@@ -506,6 +528,63 @@ const noAltPage = P.renderPage(noAlt);
 eq('a missing alt is a warning, not a skip', noAltPage.baked, PAST.length);
 ok('…and it is still reported',
   noAltPage.warnings.some((w) => has(w, altVictim.name) && /alt/.test(w)));
+
+/* alt-text coverage — every baked image must describe itself */
+const altless = [];
+PAST.forEach((ev) => {
+  (ev.images || []).forEach((im, i) => {
+    if (!String(im.alt || '').trim()) altless.push(`${ev.name} image ${i + 1}`);
+  });
+  P.actsOf(ev).forEach((a, ai) => {
+    (a.images || []).forEach((im, i) => {
+      if (!String(im.alt || '').trim()) altless.push(`${ev.name} act ${ai + 1} image ${i + 1}`);
+    });
+  });
+});
+ok('every image in schema.json carries alt text', altless.length === 0,
+  altless.slice(0, 5).join(', '));
+/* The lightbox shell's placeholder <img src="" alt=""> is excluded: it is
+   empty until JS fills both attributes on open, so a blank alt is correct. */
+const bakedImgs = [...doc0.querySelectorAll('.event-card img')];
+const emptyAlt = bakedImgs.filter((i) => !String(i.getAttribute('alt') || '').trim());
+ok('no baked card image ships an empty alt attribute', emptyAlt.length === 0,
+  emptyAlt.length + ' empty of ' + bakedImgs.length);
+ok('a clean push reports zero warnings',
+  clean.warnings.length === 0, clean.warnings.slice(0, 3).join('; '));
+
+/* near-duplicate description content — a warning, never an edit.
+   Tested against a constructed fixture rather than real data: production
+   schema.json should stay clean, so the check must not depend on an actual
+   event being broken to prove it works. */
+const dupFixture = clone(SCHEMA);
+const dupTarget = dupFixture['@graph'].find((e) => e.pastEvents && e.description);
+const dupOriginal = dupTarget.description;
+dupTarget.description = dupOriginal +
+  '\n\n' + dupOriginal.split(/[.!?]\s/).slice(0, 2).join('. ') + '.';
+const dupPage = P.renderPage(dupFixture);
+const dupWarnings = dupPage.warnings.filter((w) => /repeats itself/.test(w));
+ok('a near-duplicate paragraph is caught even when it opens with the same words',
+  dupWarnings.length === 1 && has(dupWarnings[0], dupTarget.name),
+  JSON.stringify(dupWarnings));
+ok('the duplicate-content check is a warning, not an error — it still bakes',
+  dupPage.errors.every((e) => !/repeats itself/.test(e)) && dupPage.baked === PAST.length);
+ok('the diagnostic never rewrites the description — the duplicate is baked verbatim',
+  Object.values(dupPage.regions).join('').split(P.esc(dupOriginal.slice(0, 60))).length - 1 >= 1);
+
+/* a paraphrase that merely shares a topic must NOT trip the check */
+const paraFixture = clone(SCHEMA);
+const paraTarget = paraFixture['@graph'].find((e) => e.pastEvents && e.description);
+paraTarget.description = 'The session opened with a long discussion of networked sound and ' +
+  'improvised electronics across several decades of practice in London.' +
+  '\n\nAfterwards the group shared a meal and talked about funding, venues, ' +
+  'and how difficult it has become to book affordable rehearsal rooms nearby.';
+ok('two genuinely different paragraphs do not false-positive',
+  P.renderPage(paraFixture).warnings.every((w) => !/repeats itself/.test(w)));
+
+/* and the real dataset is clean */
+ok('the committed schema.json has no duplicated descriptions left',
+  clean.warnings.every((w) => !/repeats itself/.test(w)),
+  clean.warnings.filter((w) => /repeats itself/.test(w)).join('; '));
 
 /* total failure blocks the push */
 const allBad = clone(SCHEMA);
