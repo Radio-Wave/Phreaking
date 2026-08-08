@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://phreaking.co.uk/sitemap-index.xml
+Disallow: /dev-tools/
+Disallow: /jsonedit.html
+Disallow: /jsonedit(backup-pre-perfnightchanges).html
