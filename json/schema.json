@@ -2341,10 +2341,15 @@
         "@id": "https://phreaking.co.uk/#phreaking"
       },
       "visible": true,
-      "performances": [
+      "creditText": "",
+      "pastEvents": true,
+      "previewDescription": "A six act experimental performance night delving into sounds from unusual sources, emanating throughout a large school hall to close off our fesival <<Can We Start Again?",
+      "cardColor": "#421700",
+      "subEvent": [
         {
-          "title": "Willow Swan + Ellis Berwick",
-          "artists": "",
+          "@type": "PerformingArtsEvent",
+          "name": "Willow Swan + Ellis Berwick",
+          "performer": "",
           "description": "Willow Swan and Ellis Berwick are an artist duo working across sound, sculpture, and performance. Rooted in a shared interest in repurposing industrial materials into improvised instruments, their collaborative practice transforms functional structures into resonant, site-responsive sonic forms.\n",
           "images": [
             {
@@ -2362,8 +2367,9 @@
           ]
         },
         {
-          "title": "The London Community Laptop Orchestra",
-          "artists": "",
+          "@type": "PerformingArtsEvent",
+          "name": "The London Community Laptop Orchestra",
+          "performer": "",
           "description": "The London community laptop orchestra is a community run laptop orchestra making sounds in a variety of unusual places.",
           "images": [
             {
@@ -2381,8 +2387,9 @@
           ]
         },
         {
-          "title": "Genia Isachenko",
-          "artists": "",
+          "@type": "PerformingArtsEvent",
+          "name": "Genia Isachenko",
+          "performer": "",
           "description": "Genia Isachenko is a sound artist and vocalist working with obsolete tech and experimental performance. Presenting a live surround set using discarded amplifiers and speakers to create their own diffusion array, and exploring the timbral differences of radio, interference and voice through song.",
           "images": [
             {
@@ -2400,8 +2407,9 @@
           ]
         },
         {
-          "title": "Lagtime Seedling + Rosemary Moss",
-          "artists": "",
+          "@type": "PerformingArtsEvent",
+          "name": "Lagtime Seedling + Rosemary Moss",
+          "performer": "",
           "description": "Lagtime Seedling creates audio-visual compositions on their laptop using live web browser windows and overlapping youtube video tabs, while Rosemary Moss draws from their musical background to create intimate sound worlds to deconstruct and index experience. While they independently approach sound in different ways, through collaboration, they settle in a new and unexplored in-between zone.",
           "images": [
             {
@@ -2419,8 +2427,9 @@
           ]
         },
         {
-          "title": "Elia Fielden & Emile Belli // Conscript Theatre",
-          "artists": "",
+          "@type": "PerformingArtsEvent",
+          "name": "Elia Fielden & Emile Belli // Conscript Theatre",
+          "performer": "",
           "description": "Conscript Theatre is a hyper-material performance company bringing creative technology onstage alongside new writing, experimental performance, and alternative dramaturgy. For this performance, sound artists Elia Fielden and Emile Belli present fragments from Conscript's new show, 'Untitled Robot Story', a piece about robotic military machinery, memory, and love.",
           "images": [
             {
@@ -2438,8 +2447,9 @@
           ]
         },
         {
-          "title": "A Concerto for Strings & Alarms",
-          "artists": "",
+          "@type": "PerformingArtsEvent",
+          "name": "A Concerto for Strings & Alarms",
+          "performer": "",
           "description": "“Concerto for Strings & Alarms” is a musical concerto composed and played for a variety of alarms and ringtones, featuring two guitarists, a cellist, a pianist, alongside phones, clocks, and interference. \n",
           "images": [
             {
@@ -2456,11 +2466,7 @@
             }
           ]
         }
-      ],
-      "creditText": "",
-      "pastEvents": true,
-      "previewDescription": "A six act experimental performance night delving into sounds from unusual sources, emanating throughout a large school hall to close off our fesival <<Can We Start Again?",
-      "cardColor": "#421700"
+      ]
     },
     {
       "@type": "Event",
