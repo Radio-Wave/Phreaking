@@ -1130,6 +1130,19 @@ function isPerfNight(ev){
 }
 // Older entries were badged "experimental performance night"; the badge is now
 // simply "Performance Night", so rewrite them on load and keep the label list clean.
+// Counts what WOULD migrate, without touching anything. Called on load so
+// the person can see what's outstanding; the counts themselves have no side
+// effect on `data`.
+function legacyDataSummary(){
+  let labels=0, acts=0, venues=0;
+  (data?.['@graph']||[]).forEach(item=>{
+    if(!isEvent(item)) return;
+    if(isPerfNight(item)&&item.label!==PERF_NIGHT_LABEL) labels++;
+    if(isPerfNight(item)&&(!Array.isArray(item.subEvent)||'performances' in item)) acts++;
+    if(typeof item.venue==='string') venues++;
+  });
+  return {labels, acts, venues};
+}
 function migratePerfNightLabels(){
   let n=0;
   (data?.['@graph']||[]).forEach(item=>{
@@ -1142,9 +1155,11 @@ function migratePerfNightLabels(){
 // {title, artists, description, images}. It is now a schema.org-shaped
 // `subEvent` array of PerformingArtsEvent objects — {name, performer,
 // description, images} — because that is what the structured data we publish
-// has to say. Older files still open: actList() reads either shape, and
-// migrateActs() rewrites them in memory the moment a file is loaded — no user
-// action, nothing to remember to click.
+// has to say. Older files still open: actList() reads either shape at any
+// time, and the shape converts in memory the moment that specific record's
+// edit panel opens (buildForm() → ensurePerformances() → migrateActsOn()) —
+// not on load, and not for records nobody has touched. See legacyDataSummary()
+// for the load-time, non-mutating heads-up shown in the toast.
 //
 // `images` deliberately keeps its editor shape ({src, full, alt, altHtml}).
 // It is the input to the conversion/staging pipeline, and the slot addressing
@@ -1197,11 +1212,6 @@ function migrateActsOn(ev){
   delete ev.performances;
   return wasLegacy;
 }
-function migrateActs(){
-  let n=0;
-  (data?.['@graph']||[]).forEach(item=>{ if(isEvent(item)&&migrateActsOn(item)) n++; });
-  return n;
-}
 
 // ── VENUE → schema.org location ───────────────────────────
 // The Venue field used to write a bare `venue` string. It now writes a proper
@@ -1235,21 +1245,12 @@ function setEventVenue(ev, val){
     ev.location={'@type':'Place', name:v};
   }
 }
-function migrateVenues(){
-  let n=0;
-  (data?.['@graph']||[]).forEach(item=>{
-    if(!isEvent(item)||typeof item.venue!=='string') return;
-    setEventVenue(item, item.venue);
-    n++;
-  });
-  return n;
-}
 
 // Guarantees at least one act block so the form always shows one
 function ensurePerformances(ev, silent){
   if(!ev) return [];
-  if(!Array.isArray(ev.subEvent)) ev.subEvent=actList(ev).map(canonicalAct);
-  delete ev.performances;
+  migrateActsOn(ev);                          // performances → subEvent, if this record is still legacy
+  if(!Array.isArray(ev.subEvent)) ev.subEvent=[];  // non-Performance-Night events: nothing to migrate, just guarantee the array
   if(!ev.subEvent.length){
     ev.subEvent.push(newAct());
     if(!silent) markUnsaved();
@@ -1584,15 +1585,20 @@ let lastMigration = {labels:0, acts:0, venues:0};
 
 function extractFromData(){
   if(!data||mode==='signals'||mode==='gallery') return;
-  // Data shape migrations run automatically, in memory, every time a file is
-  // opened — there is no button for them and nothing to remember.
-  if(mode==='events'){
-    lastMigration = {
-      labels: migratePerfNightLabels(),
-      acts:   migrateActs(),
-      venues: migrateVenues(),
-    };
-  }
+  // Data shape is DETECTED here, on every load, so the person sees what's
+  // outstanding — but nothing is REWRITTEN here any more. Migration used to
+  // run unconditionally on load and mark the whole file dirty, which meant a
+  // push made for a completely unrelated reason (fixing a typo in an
+  // Exhibition's description, say) could silently carry a shape conversion
+  // for records nobody had actually looked at, at that push's expense if the
+  // migration had gone wrong.
+  //
+  // Now: acts migrate in memory the moment that specific event's edit panel
+  // opens (see buildForm() → ensurePerformances()/migrateActsOn()), venue
+  // migrates the moment that field is actually saved (see liveUp() →
+  // setEventVenue()), and the legacy label normalises alongside the acts.
+  // A push only ever carries a shape change for a record someone opened.
+  if(mode==='events') lastMigration = legacyDataSummary();
   const items = mode==='artists' ? getArtists() : getEvents();
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
@@ -1640,15 +1646,16 @@ function onLoaded(msg){
   refreshExhDropdowns(); refreshPrevFilters();
   setStatus(msg, countLabel()); toast(msg,'ok');
 
-  // Say what was migrated, and mark the file dirty so it actually gets saved
+  // Say what's outstanding. This is a heads-up, not a change: nothing was
+  // rewritten, so the file is NOT marked dirty and this push is not affected
+  // by it. Each item converts only once you open that specific record.
   const m=lastMigration;
   if(mode==='events'&&(m.labels||m.acts||m.venues)){
     const bits=[];
     if(m.labels) bits.push(`${m.labels} legacy badge${m.labels>1?'s':''}`);
-    if(m.acts)   bits.push(`${m.acts} performance night${m.acts>1?'s':''} → subEvent`);
-    if(m.venues) bits.push(`${m.venues} venue${m.venues>1?'s':''} → location`);
-    markUnsaved();
-    setTimeout(()=>toast('Migrated: '+bits.join(', ')+' — push to save', ''), 1200);
+    if(m.acts)   bits.push(`${m.acts} performance night${m.acts>1?'s':''} still using the old act shape`);
+    if(m.venues) bits.push(`${m.venues} venue${m.venues>1?'s':''} still a plain string`);
+    setTimeout(()=>toast('Still on the old data shape: '+bits.join(', ')+' — open each one and save to convert it', ''), 1200);
   }
 }
 function downloadJSON(){
@@ -1829,7 +1836,10 @@ function buildForm(){
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
   const pn=isPerfNight(ev);
-  if(pn) ensurePerformances(ev, true);
+  if(pn){
+    if(ev.label!==PERF_NIGHT_LABEL) ev.label=PERF_NIGHT_LABEL;   // legacy badge, this record only
+    ensurePerformances(ev, true);                                 // legacy act shape, this record only
+  }
   const imgs=ev.images||[];
 
   document.getElementById('editBody').innerHTML=`

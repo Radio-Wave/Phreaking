@@ -691,26 +691,63 @@ if (ed) {
   try { run('extractFromData();'); } catch (e) { migrated = false; }
   ok('extractFromData runs on load (no user action)', migrated);
 
+  /* The whole point of this section: loading a file must not rewrite it.
+   * Migration is detected here — surfaced to the person — but nothing in
+   * `data` changes until they actually open the specific record. */
+  const preOpen = run('data["@graph"].find(e => isPerfNight(e))');
+  ok('loading legacy data does NOT migrate it — `performances` survives untouched',
+    Array.isArray(preOpen.performances) && preOpen.performances.length === 6);
+  ok('…and `subEvent` is not created on load', !('subEvent' in preOpen));
+  eq('…and the legacy label is not rewritten on load', preOpen.label, 'experimental performance night');
+  ok('a load-only session has nothing to push that a person did not touch',
+    JSON.stringify(run('data["@graph"].find(e => isPerfNight(e))')) === JSON.stringify(preOpen));
+
+  const summary = run('lastMigration');
+  eq('the outstanding-migration count is detected correctly (acts)', summary.acts, 1);
+  eq('the outstanding-migration count is detected correctly (labels)', summary.labels, 1);
+  eq('…without needing to touch venues for this fixture', summary.venues, 0);
+
+  /* Now simulate actually opening that one record — the real trigger. */
+  const pnIndex = run('data["@graph"].findIndex(e => isPerfNight(e))');
+  run(`curIdx = ${pnIndex}; buildForm();`);
+
   const ev = run('data["@graph"].find(e => isPerfNight(e))');
-  ok('legacy `performances` is migrated to `subEvent` automatically', Array.isArray(ev.subEvent));
+  ok('opening the record migrates `performances` to `subEvent`', Array.isArray(ev.subEvent));
   ok('…and the legacy key is removed', !('performances' in ev));
   eq('…with every act preserved', ev.subEvent.length, 6);
   ok('…renamed to the schema.org `name` field', ev.subEvent.every((a) => typeof a.name === 'string' && a.name));
   ok('…and typed', ev.subEvent.every((a) => a['@type'] === 'PerformingArtsEvent'));
   ok('…keeping every act image', ev.subEvent.every((a) => Array.isArray(a.images)));
-  eq('the legacy badge is normalised', ev.label, 'Performance Night');
+  eq('the legacy badge is normalised, same touch-point as the acts', ev.label, 'Performance Night');
+
+  /* A second, never-opened legacy record must stay exactly as it was —
+   * this is the actual blast-radius guarantee, not just "migration works". */
+  const untouched = clone(legacy);
+  const secondPn = clone(untouched['@graph'].find((e) => P.isPerfNight(e)));
+  secondPn['@id'] += '-2'; secondPn.name += ' (second)';
+  untouched['@graph'].push(secondPn);
+  w.__fixture2 = untouched;
+  run('data = __fixture2; datasets.events = data; mode = "events"; extractFromData();');
+  const untouchedIdx = run('data["@graph"].findIndex(e => isPerfNight(e))'); // the first one, index 0 of the two
+  run(`curIdx = ${untouchedIdx}; buildForm();`);
+  const openedOne = run('data["@graph"].filter(e => isPerfNight(e))[0]');
+  const stillLegacy = run('data["@graph"].filter(e => isPerfNight(e))[1]');
+  ok('opening one Performance Night migrates only that record',
+    Array.isArray(openedOne.subEvent) && Array.isArray(stillLegacy.performances) && !('subEvent' in stillLegacy));
 
   /* slot addressing must survive the rename */
   ok('event-level image slots still resolve',
-    !!run('slotImg(data["@graph"].find(e=>isPerfNight(e)), "0")'));
+    !!run('slotImg(data["@graph"].find(e=>isPerfNight(e)&&Array.isArray(e.subEvent)), "0")'));
   ok('per-act image slots still resolve (p0-1)',
-    !!run('slotImg(data["@graph"].find(e=>isPerfNight(e)), "p0-1")'));
+    !!run('slotImg(data["@graph"].find(e=>isPerfNight(e)&&Array.isArray(e.subEvent)), "p0-1")'));
   eq('slotOf still builds the documented shape', run('slotOf(1, 0)'), 'p0-1');
   eq('allSlots covers event + act images',
-    run('allSlots(data["@graph"].find(e=>isPerfNight(e))).length'),
-    (ev.images || []).length + ev.subEvent.reduce((n, a) => n + (a.images || []).length, 0));
+    run('allSlots(data["@graph"].find(e=>isPerfNight(e)&&Array.isArray(e.subEvent))).length'),
+    (openedOne.images || []).length + openedOne.subEvent.reduce((n, a) => n + (a.images || []).length, 0));
 
-  /* preview pane matches the baked output */
+  /* preview pane matches the baked output — reload the single-fixture case */
+  run('data = __fixture; datasets.events = data; mode = "events"; extractFromData();');
+  run(`curIdx = ${pnIndex}; buildForm();`); // preview renders whatever is in memory, so migrate first
   run('curIdx = null; renderStyle = "pe"; prevFilter = "all"; showHidden = false; renderPreview();');
   const frame = w.document.getElementById('prevFrame');
   ok('the preview pane renders real .event-card markup',
