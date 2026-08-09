@@ -91,6 +91,30 @@
   var PN_BADGE = 'Performance Night';
   var PN_ALIASES = ['performance night', 'experimental performance night'];
 
+  /* ── Film Night ────────────────────────────────────────────────────────────
+   * A screening badged "Film Night" carries a list of films, each with its own
+   * title, artist credit, description and images. Structurally this mirrors
+   * Performance Night — condensed card, full-screen modal, every film baked
+   * into the card as real markup — but the structured data is deliberately a
+   * different shape.
+   *
+   * An act at a performance night IS an event: it happens at a time, in a
+   * place, and schema.org models it as `subEvent` → PerformingArtsEvent. A film
+   * at a screening is NOT an event; it is a *work* that the event presents.
+   * schema.org gives ScreeningEvent exactly one property for that relationship,
+   * `workPresented`, whose expected type is Movie. So a film carries name /
+   * creator / description / image / url and nothing else — emitting startDate
+   * or location on a Movie, as acts do, would be inventing properties the type
+   * does not have.
+   *
+   * There is no legacy shape to read here: unlike `performances` → `subEvent`,
+   * this feature shipped as `workPresented` from the start. If that ever
+   * changes, migrate per-record inside the editor's buildForm(), never on load.
+   * The same badge-driven opt-in applies: a plain "Screening" is untouched by
+   * everything below, exactly as a plain "Performance" is by the acts code. */
+  var FN_BADGE = 'Film Night';
+  var FN_ALIASES = ['film night'];
+
   /* The collective's own name: when an event's location is just "us", the venue
    * is not worth repeating in the credit line (it is already the organiser). */
   var HOME_VENUE = 'Phreaking Collective';
@@ -130,6 +154,16 @@
     return !!ev && PN_ALIASES.indexOf(String((ev && ev.label) || '').trim().toLowerCase()) !== -1;
   }
 
+  function isFilmNight(ev) {
+    return !!ev && FN_ALIASES.indexOf(String((ev && ev.label) || '').trim().toLowerCase()) !== -1;
+  }
+
+  /* Either subtype — used wherever the two behave identically (clickable card,
+   * preview description, deep-linkable modal) so neither can be forgotten. */
+  function hasDetailView(ev) {
+    return isPerfNight(ev) || isFilmNight(ev);
+  }
+
   function absUrl(p) {
     if (!p) return '';
     return /^https?:/i.test(p) ? p : SITE_ORIGIN + (String(p).charAt(0) === '/' ? p : '/' + p);
@@ -167,6 +201,46 @@
       var a = normaliseAct(p, i);
       if (!a) return;
       if (a.title || a.artists || a.description || a.images.length) out.push(a);
+    });
+    return out;
+  }
+
+  /* ── Films: `workPresented` ────────────────────────────────────────────────
+   * The same read-only, non-mutating treatment the acts get. One shape only —
+   * see the Film Night note above. `artists` is read from `creator` (what the
+   * editor writes) or a bare `artists` key, so a hand-edited file using the
+   * looser name still renders. */
+  function rawFilms(ev) {
+    return (ev && Array.isArray(ev.workPresented)) ? ev.workPresented : [];
+  }
+
+  /* `index` is the film's position in the stored array, which is what the image
+   * slot scheme ('f0-1' = film 0, image 1) addresses — the same arrangement
+   * acts use with 'p0-1', in a separate namespace so the two cannot collide. */
+  function normaliseFilm(f, index) {
+    if (!f || typeof f !== 'object') return null;
+    var creator = f.creator;
+    var credit = '';
+    if (typeof creator === 'string') credit = creator;
+    else if (creator && typeof creator === 'object') credit = creator.name || '';
+    if (!credit) credit = f.artists || '';
+    return {
+      title: (f.name != null && f.name !== '') ? f.name : (f.title || ''),
+      artists: credit,
+      description: f.description || '',
+      images: Array.isArray(f.images) ? f.images : [],
+      index: index
+    };
+  }
+
+  /* Films worth rendering — the editor always keeps one blank block in the
+   * form, and a blank block is not a film. */
+  function filmsOf(ev) {
+    var out = [];
+    rawFilms(ev).forEach(function (f, i) {
+      var m = normaliseFilm(f, i);
+      if (!m) return;
+      if (m.title || m.artists || m.description || m.images.length) out.push(m);
     });
     return out;
   }
@@ -347,6 +421,26 @@
     return 'Person';
   }
 
+  /* The same problem for a film's credit, with a different answer. schema.org's
+   * `creator` expects Person or Organization; PerformingGroup is technically a
+   * subtype of Organization and so would validate, but it means "a group that
+   * performs", which is the wrong claim about people who made a film. So the
+   * promotion here is to plain Organization, and only on evidence of an actual
+   * studio/collective rather than merely two names joined by "&" — a pair of
+   * co-directors is two people, not an organisation, and Person is the less
+   * wrong of the two available answers for them. As everywhere else in this
+   * file, the precise fix for a specific credit is real data: give the film's
+   * maker a Person/Organization record with an @id and the type stops being a
+   * guess. */
+  function filmCreatorType(text) {
+    var t = String(text || '').trim();
+    if (!t) return 'Person';
+    if (/\b(collective|studio|studios|productions?|company|films?|pictures|media|lab|labs|group)\b/i.test(t)) {
+      return 'Organization';
+    }
+    return 'Person';
+  }
+
   /* Linked performer credits, each wrapped in its own Person itemscope. The old
    * markup applied itemprop="name"/"url" with no containing scope, which made
    * them properties of the Event itself rather than of a Person. */
@@ -421,6 +515,23 @@
       if (out.length >= 3) return;
       var im = (p.images || [])[0];
       if (im) out.push({ img: im, slot: 'p' + p.index + '-0' });
+    });
+    own.slice(1).forEach(function (im, i) {
+      if (out.length < 3) out.push({ img: im, slot: String(i + 1) });
+    });
+    return out.slice(0, 3);
+  }
+
+  /* The Film Night equivalent: the event poster, then the lead still from the
+   * first films. Same three-up strip as every other card at rest. */
+  function fnPreviewImages(ev) {
+    var out = [];
+    var own = ev.images || [];
+    if (own.length) out.push({ img: own[0], slot: '0' });
+    filmsOf(ev).forEach(function (f) {
+      if (out.length >= 3) return;
+      var im = (f.images || [])[0];
+      if (im) out.push({ img: im, slot: 'f' + f.index + '-0' });
     });
     own.slice(1).forEach(function (im, i) {
       if (out.length < 3) out.push({ img: im, slot: String(i + 1) });
@@ -533,6 +644,74 @@
       '\n</div>';
   }
 
+  /* The film log — one section per film, each its own Movie itemscope with its
+   * own lightbox gallery. Baked into the card (stowed) and moved into the modal
+   * on open, exactly as the performance log is.
+   *
+   * The field set is the microdata counterpart of filmNode() below, and is kept
+   * deliberately in step with it: Google reads the inline microdata and the
+   * JSON-LD independently for the same Movie, and whichever is less complete is
+   * reported as a second, broken copy of it. Adding a property to one of these
+   * two functions without the other is the bug this comment exists to prevent.
+   *
+   * Note what is absent: no startDate, no eventStatus, no location. Those are
+   * Event properties, correct on an act, meaningless on a Movie. The night's
+   * own <article> carries them for the screening itself. */
+  function filmLogHTML(ev, imgSrc) {
+    var blocks = filmsOf(ev);
+    if (!blocks.length) return '<p class="fn-empty">Details for this screening are being added.</p>';
+    return blocks.map(function (f, i) {
+      var title = f.title || 'Untitled';
+      return '<section class="fn-film" itemprop="workPresented" itemscope itemtype="https://schema.org/Movie">' +
+        '<link itemprop="url" href="' + esc(PAGE_URL) + '">' +
+        '<div class="fn-film-n">Film ' + (i + 1) + '</div>' +
+        '<h4 class="fn-film-title" itemprop="name">' + esc(title) + '</h4>' +
+        (f.artists
+          ? '<div class="fn-film-artists" itemprop="creator" itemscope itemtype="https://schema.org/' +
+            filmCreatorType(f.artists) + '">' +
+            '<span itemprop="name">' + esc(f.artists) + '</span></div>'
+          : '') +
+        (f.description ? '<p class="fn-film-desc" itemprop="description">' + esc(f.description) + '</p>' : '') +
+        imageRowHTML(ev, {
+          imgs: f.images || [],
+          label: 'Stills from ' + esc(title) + ' at ' + esc(ev.name),
+          ofName: title,
+          imgSrc: imgSrc,
+          slotFor: function (j) { return 'f' + f.index + '-' + j; }
+        }) +
+        '</section>';
+    }).join('\n');
+  }
+
+  /* The Film Night detail block. Same contract as pnDetailHTML(): real content,
+   * collapsed by a CSS class and never the `hidden` attribute, moved (not
+   * cloned) into the modal on open. Its own .fn-* namespace throughout, so the
+   * two features cannot select, stow or restore each other's nodes. */
+  function fnDetailHTML(ev, slug, imgSrc) {
+    var poster = (ev.images || [])[0];
+    var posterSrc = poster
+      ? ((imgSrc && (imgSrc(ev, '0', 'full') || imgSrc(ev, '0', 'src'))) || poster.full || poster.src)
+      : '';
+    var paras = String(ev.description || '')
+      .split(/\n{2,}/)
+      .filter(function (t) { return t.trim(); })
+      .map(function (t) { return '<p>' + esc(t.trim()) + '</p>'; })
+      .join('');
+    var intro = (paras || poster)
+      ? '<div class="fn-modal__intro">' +
+        (poster
+          ? '<figure class="fn-modal__poster"><img src="' + esc(posterSrc) + '" alt="' +
+            esc(poster.alt || '') + '" loading="lazy" decoding="async"></figure>'
+          : '') +
+        '<div class="fn-modal__desc">' + paras + '</div>' +
+        '</div>'
+      : '';
+    return '<div class="fn-detail fn-detail--stowed" id="detail-' + esc(slug) + '" data-fn-detail="' + esc(slug) + '">' +
+      (intro ? '\n  ' + intro : '') +
+      '\n  <div class="fn-modal__log">\n  ' + filmLogHTML(ev, imgSrc) + '\n  </div>' +
+      '\n</div>';
+  }
+
   function normaliseEventStatus(v) {
     var s = String(v || '');
     return VALID_EVENT_STATUS.indexOf(s) !== -1 ? s : DEFAULT_EVENT_STATUS;
@@ -554,6 +733,10 @@
     var year = ev.startDate || '';
     var showSeries = ev.exhibition === 'bitrot' && exh;
     var pn = isPerfNight(ev);
+    var fn = isFilmNight(ev);
+    /* The two subtypes are mutually exclusive — one label per event — and
+     * everything below that is common to both keys off `detail`. */
+    var detail = pn ? 'pn' : (fn ? 'fn' : '');
     var evSlug = slugify(ev.name);
     var idSlug = String(ev['@id'] || '').split('#')[1] || '';
     if (idSlug && idSlug.indexOf('event-') !== 0) idSlug = 'event-' + idSlug;
@@ -561,10 +744,10 @@
     var iso = isoDatesFor(ev);
     var when = splitDisplayDate(ev.displayDate);
     var loc = locationOf(ev);
-    var venue = pn ? displayVenue(ev) : '';
+    var venue = detail ? displayVenue(ev) : '';
 
     var attrs = [
-      'class="event-card' + (pn ? ' pn-card' : '') +
+      'class="event-card' + (detail ? ' ' + detail + '-card' : '') +
         ((ctx.cardClass && ctx.cardClass(ev)) ? ' ' + ctx.cardClass(ev) : '') + '"',
       'data-chrono-key="' + esc(String(chronoKey(ev))) + '"',
       'data-category="' + esc(cat.key) + '"'
@@ -573,12 +756,12 @@
     attrs.push('itemscope');
     attrs.push('itemtype="https://schema.org/' + esc(schemaTypeFor(ev)) + '"');
     attrs.push('aria-labelledby="' + esc(titleId) + '"');
-    if (pn) {
+    if (detail) {
       attrs.push('data-slug="' + esc(evSlug) + '"');
-      attrs.push('data-pn-day="' + esc(when.day || ev.startDate || '') + '"');
-      attrs.push('data-pn-time="' + esc(when.time) + '"');
+      attrs.push('data-' + detail + '-day="' + esc(when.day || ev.startDate || '') + '"');
+      attrs.push('data-' + detail + '-time="' + esc(when.time) + '"');
       if (ev.cardColor) {
-        attrs.push('data-pn-color="' + esc(ev.cardColor) + '"');
+        attrs.push('data-' + detail + '-color="' + esc(ev.cardColor) + '"');
         attrs.push('style="background:' + esc(ev.cardColor) + '"');
       }
       attrs.push('role="button"');
@@ -600,15 +783,20 @@
         esc(exh.name) + '</a></span></strong>'
       : '';
 
-    var nBlocks = pn ? actsOf(ev).length : 0;
-    var hint = pn
-      ? '<div class="pn-hint"><span class="pn-hint-chev">&#8599;</span>' +
-        '<span class="pn-hint-text">View ' + nBlocks + ' performance' + (nBlocks === 1 ? '' : 's') + '</span></div>'
-      : '';
+    var hint = '';
+    if (pn) {
+      var nActs = actsOf(ev).length;
+      hint = '<div class="pn-hint"><span class="pn-hint-chev">&#8599;</span>' +
+        '<span class="pn-hint-text">View ' + nActs + ' performance' + (nActs === 1 ? '' : 's') + '</span></div>';
+    } else if (fn) {
+      var nFilms = filmsOf(ev).length;
+      hint = '<div class="fn-hint"><span class="fn-hint-chev">&#8599;</span>' +
+        '<span class="fn-hint-text">View ' + nFilms + ' film' + (nFilms === 1 ? '' : 's') + '</span></div>';
+    }
 
     /* When a shorter previewDescription is shown on the card, the structured
      * description must still be the full one. */
-    var usePreview = pn && !!ev.previewDescription;
+    var usePreview = !!detail && !!ev.previewDescription;
     var cardText = usePreview ? ev.previewDescription : (ev.description || '');
     var descAttr = usePreview ? 'itemprop="disambiguatingDescription"' : 'itemprop="description"';
     var fullDescMeta = usePreview
@@ -633,8 +821,8 @@
     var body = [
       '<div class="event-top">' +
         '<div class="event-meta">' +
-          '<span class="event-type" aria-label="Event type: ' + (pn ? PN_BADGE : esc(cat.badge)) + '">' +
-            (pn ? PN_BADGE : esc(cat.badge)) + '</span>' +
+          '<span class="event-type" aria-label="Event type: ' + (pn ? PN_BADGE : fn ? FN_BADGE : esc(cat.badge)) + '">' +
+            (pn ? PN_BADGE : fn ? FN_BADGE : esc(cat.badge)) + '</span>' +
           ((ctx.afterBadge && ctx.afterBadge(ev)) || '') +
           '<div>' +
             '<h3 id="' + esc(titleId) + '" itemprop="name">' + esc(ev.name) + '</h3>' +
@@ -648,14 +836,14 @@
           : '') +
       '</div>',
       '<p class="event-description" ' + descAttr + '>' + esc(cardText) + '</p>',
-      pn
+      detail
         ? (function () {
-            var previews = pnPreviewImages(ev);
+            var previews = pn ? pnPreviewImages(ev) : fnPreviewImages(ev);
             return imageRowHTML(ev, {
               imgs: previews.map(function (x) { return x.img; }),
               slotFor: function (i) { return previews[i].slot; },
               imgSrc: ctx.imgSrc,
-              cls: 'pn-preview-row', preview: true,
+              cls: detail + '-preview-row', preview: true,
               label: 'Preview photos from ' + esc(ev.name)
             });
           }())
@@ -665,7 +853,8 @@
           esc(ev.eventCompletedUrlLabel || 'Event Completed') + '</a></p>'
         : '',
       hint,
-      pn ? pnDetailHTML(ev, evSlug, ctx.imgSrc) : ''
+      pn ? pnDetailHTML(ev, evSlug, ctx.imgSrc)
+        : fn ? fnDetailHTML(ev, evSlug, ctx.imgSrc) : ''
     ].filter(Boolean);
 
     /* One logical block per line: this markup is machine-generated but it lands
@@ -799,6 +988,42 @@
       }
     }
 
+    if (isFilmNight(ev)) {
+      /* `workPresented` is a property of ScreeningEvent. A Film Night badge on
+       * some other @type would publish it against a type that does not define
+       * it, which Google reports as an unknown property rather than an error —
+       * so this is a warning that names the mismatch, not a skip, and nothing
+       * here rewrites the badge or the type on the person's behalf. */
+      if (itemType(ev) !== 'ScreeningEvent') {
+        warnings.push(who + ' is badged "' + FN_BADGE + '" but its @type is "' + (itemType(ev) || 'none') +
+          '" — schema.org only defines workPresented on ScreeningEvent, so its films will be ' +
+          'published against a type that has no such property. Set Event Type to Screening.');
+      }
+      if (ev.workPresented != null && !Array.isArray(ev.workPresented)) {
+        errors.push(who + ' is a Film Night but its film list is not an array');
+      } else {
+        if (!filmsOf(ev).length) {
+          warnings.push(who + ' is a Film Night with no films filled in — its detail view will be empty');
+        }
+        rawFilms(ev).forEach(function (f, i) {
+          var label = who + ' film ' + (i + 1);
+          if (!f || typeof f !== 'object') { errors.push(label + ' is not an object'); return; }
+          var m = normaliseFilm(f);
+          if (!(m.title || m.artists || m.description || m.images.length)) return; /* blank placeholder block */
+          if (!m.title) warnings.push(label + ' has no title — it will render as "Untitled"');
+          if (f.images != null && !Array.isArray(f.images)) {
+            errors.push(label + ' has an "images" field that is not an array');
+            return;
+          }
+          m.images.forEach(function (img, j) {
+            if (!img || typeof img !== 'object') errors.push(label + ' image ' + (j + 1) + ' is not an object');
+            else if (!img.src) errors.push(label + ' image ' + (j + 1) + ' has no src');
+            else if (!img.alt || !String(img.alt).trim()) warnings.push(label + ' image ' + (j + 1) + ' has no alt text');
+          });
+        });
+      }
+    }
+
     return { errors: errors, warnings: warnings };
   }
 
@@ -812,8 +1037,10 @@
       slug: slugify(ev.name),
       name: String(ev.name || ''),
       description: String(ev.description || ''),
-      cardText: String((isPerfNight(ev) && ev.previewDescription) ? ev.previewDescription : (ev.description || '')),
+      cardText: String((hasDetailView(ev) && ev.previewDescription) ? ev.previewDescription : (ev.description || '')),
       isPerfNight: isPerfNight(ev),
+      isFilmNight: isFilmNight(ev),
+      hasDetailView: hasDetailView(ev),
       category: (eventCategory(ev) || {}).key || '',
       imageSrcs: (ev.images || []).map(function (i) { return i && i.src; }).filter(Boolean),
       acts: actsOf(ev).map(function (a) {
@@ -822,6 +1049,14 @@
           artists: a.artists,
           description: a.description,
           imageSrcs: a.images.map(function (i) { return i && i.src; }).filter(Boolean)
+        };
+      }),
+      films: filmsOf(ev).map(function (f) {
+        return {
+          title: f.title,
+          artists: f.artists,
+          description: f.description,
+          imageSrcs: f.images.map(function (i) { return i && i.src; }).filter(Boolean)
         };
       })
     };
@@ -970,6 +1205,27 @@
     return node;
   }
 
+  /* The JSON-LD counterpart of one .fn-film block. Its field set is the same
+   * one filmLogHTML() emits as microdata, deliberately and exactly — see the
+   * note there. A Movie is a work, not an event, so there is no startDate,
+   * eventStatus, attendance mode or location here, and no superEvent either:
+   * schema.org has no inverse of workPresented, so the containment is asserted
+   * once, by the screening pointing at the film. */
+  function filmNode(ev, film, i) {
+    var base = String(ev['@id'] || (SITE_ORIGIN + '/past-events#event-' + slugify(ev.name)));
+    var node = {
+      '@type': 'Movie',
+      '@id': base + '-film-' + (i + 1),
+      name: film.title || 'Untitled'
+    };
+    if (film.artists) node.creator = { '@type': filmCreatorType(film.artists), name: film.artists };
+    if (film.description) node.description = String(film.description).trim();
+    var imgs = film.images.map(function (im) { return absUrl(im.full || im.src); }).filter(Boolean);
+    if (imgs.length) node.image = imgs;
+    node.url = PAGE_URL;
+    return node;
+  }
+
   /* Internal-only editor fields with no schema.org meaning. Kept as an explicit
    * list so the intent is legible, and asserted by the test suite: nothing on
    * this list may appear anywhere in the published JSON-LD.
@@ -1058,6 +1314,11 @@
       if (isPerfNight(ev)) {
         var acts = actsOf(ev);
         if (acts.length) node.subEvent = acts.map(function (a, i) { return actNode(ev, a, i); });
+      }
+
+      if (isFilmNight(ev)) {
+        var films = filmsOf(ev);
+        if (films.length) node.workPresented = films.map(function (f, i) { return filmNode(ev, f, i); });
       }
 
       events.push(node);
@@ -1214,7 +1475,7 @@
       if (sig.cardText && text.indexOf(textOf(sig.cardText).slice(0, 60)) === -1) {
         problems.push(who + ': card description missing from the generated HTML');
       }
-      if (sig.isPerfNight && sig.description &&
+      if (sig.hasDetailView && sig.description &&
           text.indexOf(textOf(sig.description).slice(0, 60)) === -1) {
         problems.push(who + ': full description missing from the baked detail block');
       }
@@ -1234,6 +1495,17 @@
           if (html.indexOf('src="' + esc(src) + '"') === -1) problems.push(label + ': image ' + src + ' missing');
         });
       });
+      sig.films.forEach(function (f, i) {
+        var label = who + ' film ' + (i + 1);
+        if (f.title && text.indexOf(textOf(f.title)) === -1) problems.push(label + ': title missing');
+        if (f.artists && text.indexOf(textOf(f.artists)) === -1) problems.push(label + ': credit missing');
+        if (f.description && text.indexOf(textOf(f.description).slice(0, 60)) === -1) {
+          problems.push(label + ': description missing');
+        }
+        f.imageSrcs.forEach(function (src) {
+          if (html.indexOf('src="' + esc(src) + '"') === -1) problems.push(label + ': image ' + src + ' missing');
+        });
+      });
     });
 
     return { ok: problems.length === 0, problems: problems, checked: checked };
@@ -1244,11 +1516,30 @@
    * ==================================================================== */
 
   var VALID_FILTERS = ['talks', 'workshops', 'performances', 'screenings'];
-  var PN_CARDS = {};       /* slug → card element */
-  var pnModal = null;
+
+  /* ── Detail cards (Performance Night + Film Night) ─────────────────────────
+   * Both subtypes bake a collapsed detail block into their card and open it in
+   * a full-screen dialog. The behaviour is identical; only the class namespace
+   * and the badge differ. Rather than a second copy of the modal code — which
+   * would be two things to keep in step, and the exact drift this codebase has
+   * already paid for once — the machinery below is written once and keyed by
+   * this table. Adding a third subtype means adding a row here. */
+  var DETAIL_KINDS = {
+    pn: { cls: 'pn', badge: PN_BADGE, cardClass: 'pn-card' },
+    fn: { cls: 'fn', badge: FN_BADGE, cardClass: 'fn-card' }
+  };
+  var DETAIL_CARDS = {};   /* slug → card element, both kinds */
+  var MODALS = { pn: null, fn: null };
   var pnLastFocus = null;
   var pnOpenDetail = null;
   var pnOpenCard = null;
+  var pnOpenKind = null;
+
+  /* Which subtype a baked card is, read off the markup rather than tracked in
+   * parallel state — the class is what the renderer actually emitted. */
+  function kindOfCard(card) {
+    return (card && card.classList.contains('fn-card')) ? 'fn' : 'pn';
+  }
 
   function stacks() {
     return {
@@ -1307,102 +1598,149 @@
   }
 
   function indexPnCards() {
-    PN_CARDS = {};
-    Array.prototype.slice.call(document.querySelectorAll('.event-card.pn-card')).forEach(function (card) {
-      var slug = card.dataset.slug;
-      if (slug) PN_CARDS[slug] = card;
+    DETAIL_CARDS = {};
+    Array.prototype.slice.call(document.querySelectorAll('.event-card.pn-card, .event-card.fn-card'))
+      .forEach(function (card) {
+        var slug = card.dataset.slug;
+        if (slug) DETAIL_CARDS[slug] = card;
+      });
+  }
+
+  function ensureModal(kind) {
+    if (MODALS[kind]) return MODALS[kind];
+    var c = DETAIL_KINDS[kind].cls;
+    var modal = document.createElement('div');
+    modal.className = c + '-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', c + '-modal-title');
+    modal.innerHTML =
+      '<div class="' + c + '-modal__backdrop"></div>' +
+      '<div class="' + c + '-modal__card" role="document">' +
+        '<div class="' + c + '-modal__head">' +
+          '<div class="' + c + '-modal__headline">' +
+            '<span class="' + c + '-modal__label"></span>' +
+            '<h2 class="' + c + '-modal__title" id="' + c + '-modal-title"></h2>' +
+          '</div>' +
+          '<div class="' + c + '-modal__when">' +
+            '<span class="' + c + '-modal__day"></span>' +
+            '<span class="' + c + '-modal__time"></span>' +
+          '</div>' +
+          '<button type="button" class="' + c + '-modal__close" aria-label="Close">[ &times; ]</button>' +
+        '</div>' +
+        '<div class="' + c + '-modal__scroll"></div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    modal.querySelector('.' + c + '-modal__close').addEventListener('click', function () { closePnModal(true); });
+    modal.querySelector('.' + c + '-modal__backdrop').addEventListener('click', function () { closePnModal(true); });
+    /* clicking the padding around the card also dismisses */
+    modal.addEventListener('click', function (e) { if (e.target === modal) closePnModal(true); });
+    MODALS[kind] = modal;
+    return modal;
+  }
+
+  /* Kept as the public name it has always had. True when EITHER dialog is up —
+   * only one can be, since opening one closes the other. */
+  function pnModalIsOpen() {
+    return !!openModalEl();
+  }
+
+  /* Visually dismiss whichever dialog is up, without touching focus or history
+   * — those belong to closePnModal(), which is the user-facing close. */
+  function hideOpenModal() {
+    var m = openModalEl();
+    if (!m) return;
+    m.setAttribute('aria-hidden', 'true');
+    delete m.dataset.slug;
+    Object.keys(DETAIL_KINDS).forEach(function (k) {
+      document.body.classList.remove(DETAIL_KINDS[k].cls + '-modal-open');
     });
   }
 
-  function ensurePnModal() {
-    if (pnModal) return pnModal;
-    pnModal = document.createElement('div');
-    pnModal.className = 'pn-modal';
-    pnModal.setAttribute('aria-hidden', 'true');
-    pnModal.setAttribute('role', 'dialog');
-    pnModal.setAttribute('aria-modal', 'true');
-    pnModal.setAttribute('aria-labelledby', 'pn-modal-title');
-    pnModal.innerHTML =
-      '<div class="pn-modal__backdrop"></div>' +
-      '<div class="pn-modal__card" role="document">' +
-        '<div class="pn-modal__head">' +
-          '<div class="pn-modal__headline">' +
-            '<span class="pn-modal__label"></span>' +
-            '<h2 class="pn-modal__title" id="pn-modal-title"></h2>' +
-          '</div>' +
-          '<div class="pn-modal__when">' +
-            '<span class="pn-modal__day"></span>' +
-            '<span class="pn-modal__time"></span>' +
-          '</div>' +
-          '<button type="button" class="pn-modal__close" aria-label="Close">[ &times; ]</button>' +
-        '</div>' +
-        '<div class="pn-modal__scroll"></div>' +
-      '</div>';
-    document.body.appendChild(pnModal);
-
-    pnModal.querySelector('.pn-modal__close').addEventListener('click', function () { closePnModal(true); });
-    pnModal.querySelector('.pn-modal__backdrop').addEventListener('click', function () { closePnModal(true); });
-    /* clicking the padding around the card also dismisses */
-    pnModal.addEventListener('click', function (e) { if (e.target === pnModal) closePnModal(true); });
-    return pnModal;
-  }
-
-  function pnModalIsOpen() {
-    return !!pnModal && pnModal.getAttribute('aria-hidden') === 'false';
+  function openModalEl() {
+    var open = null;
+    Object.keys(MODALS).forEach(function (k) {
+      var m = MODALS[k];
+      if (m && m.getAttribute('aria-hidden') === 'false') open = m;
+    });
+    return open;
   }
 
   /* Opens the dialog around the card's own baked detail block. The nodes are
    * moved, not copied and not regenerated — there is only ever one copy of an
    * act's text in the document, and it is the copy the crawler read. */
   function openPnModal(slug, writeUrl) {
-    var card = PN_CARDS[slug];
+    var card = DETAIL_CARDS[slug];
     if (!card) return;
-    var detail = card.querySelector('[data-pn-detail]');
+    var kind = kindOfCard(card);
+    var k = DETAIL_KINDS[kind];
+    var c = k.cls;
+    /* Found by attribute, not by class, so a card can only ever hand over its
+     * own kind of detail block. */
+    var detail = card.querySelector('[data-' + c + '-detail]');
     if (!detail) return;
-    if (pnOpenDetail && pnOpenDetail !== detail) restoreDetail();
+    /* Switching straight from one detail card to another: send the previous
+     * block home AND dismiss the shell it was in. With one shared modal these
+     * were the same act; with a shell per subtype they are not, and skipping
+     * the second leaves an empty Performance Night dialog stranded on screen
+     * behind the Film Night one. */
+    if (pnOpenDetail && pnOpenDetail !== detail) {
+      restoreDetail();
+      hideOpenModal();
+    }
 
-    var modal = ensurePnModal();
+    var modal = ensureModal(kind);
     var h3 = card.querySelector('h3');
-    modal.querySelector('.pn-modal__label').textContent = PN_BADGE;
-    modal.querySelector('.pn-modal__title').textContent = h3 ? h3.textContent : '';
-    modal.querySelector('.pn-modal__day').textContent = card.dataset.pnDay || '';
-    modal.querySelector('.pn-modal__time').textContent = card.dataset.pnTime || '';
-    modal.querySelector('.pn-modal__card').style.background = card.dataset.pnColor || '';
+    modal.querySelector('.' + c + '-modal__label').textContent = k.badge;
+    modal.querySelector('.' + c + '-modal__title').textContent = h3 ? h3.textContent : '';
+    modal.querySelector('.' + c + '-modal__day').textContent = card.dataset[c + 'Day'] || '';
+    modal.querySelector('.' + c + '-modal__time').textContent = card.dataset[c + 'Time'] || '';
+    modal.querySelector('.' + c + '-modal__card').style.background = card.dataset[c + 'Color'] || '';
     modal.dataset.slug = slug;
 
-    var scroll = modal.querySelector('.pn-modal__scroll');
+    var scroll = modal.querySelector('.' + c + '-modal__scroll');
     scroll.appendChild(detail);
-    detail.classList.remove('pn-detail--stowed');
+    detail.classList.remove(c + '-detail--stowed');
     pnOpenDetail = detail;
     pnOpenCard = card;
+    pnOpenKind = kind;
 
     pnLastFocus = document.activeElement;
     modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('pn-modal-open');
+    document.body.classList.add(c + '-modal-open');
     scroll.scrollTop = 0;
-    modal.querySelector('.pn-modal__close').focus();
+    modal.querySelector('.' + c + '-modal__close').focus();
     pnSizePoster();
-    var posterImg = modal.querySelector('.pn-modal__poster img');
+    var posterImg = modal.querySelector('.' + c + '-modal__poster img');
     if (posterImg) posterImg.addEventListener('load', pnSizePoster, { once: true });
     if (writeUrl) window.history.pushState(null, '', '#' + slug);
   }
 
-  /* Put the detail block back where it was baked, hidden again. */
+  /* Put the detail block back where it was baked, stowed again — with the
+   * class its own namespace uses, so a Film Night never gets re-collapsed by
+   * the Performance Night rule (or the reverse, which would leave it visible
+   * on the card). */
   function restoreDetail() {
     if (pnOpenDetail && pnOpenCard) {
-      pnOpenDetail.classList.add('pn-detail--stowed');
+      pnOpenDetail.classList.add(DETAIL_KINDS[pnOpenKind || 'pn'].cls + '-detail--stowed');
       pnOpenCard.appendChild(pnOpenDetail);
     }
     pnOpenDetail = null;
     pnOpenCard = null;
+    pnOpenKind = null;
   }
 
   function closePnModal(writeUrl) {
+    var modal = openModalEl();
     restoreDetail();
-    if (!pnModal || pnModal.getAttribute('aria-hidden') === 'true') return;
-    pnModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('pn-modal-open');
-    delete pnModal.dataset.slug;
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    Object.keys(DETAIL_KINDS).forEach(function (k) {
+      document.body.classList.remove(DETAIL_KINDS[k].cls + '-modal-open');
+    });
+    delete modal.dataset.slug;
     if (pnLastFocus && pnLastFocus.focus) pnLastFocus.focus();
     pnLastFocus = null;
     if (writeUrl) window.history.pushState(null, '', window.location.pathname);
@@ -1414,9 +1752,11 @@
    * taller than that, capped so it can't outgrow the viewport. */
   var PN_POSTER_MIN = 500;
   function pnSizePoster() {
-    if (!pnModalIsOpen()) return;
-    var desc = pnModal.querySelector('.pn-modal__desc');
-    var fig = pnModal.querySelector('.pn-modal__poster');
+    var modal = openModalEl();
+    if (!modal) return;
+    var c = DETAIL_KINDS[pnOpenKind || 'pn'].cls;
+    var desc = modal.querySelector('.' + c + '-modal__desc');
+    var fig = modal.querySelector('.' + c + '-modal__poster');
     if (!fig) return;
     if (window.innerWidth <= 760) { fig.style.height = ''; return; }
     var textH = desc ? desc.getBoundingClientRect().height : 0;
@@ -1469,11 +1809,11 @@
      * The hash does double duty here: it already carries the active filter
      * (#talks, #performances…), so an event slug is only treated as an event
      * when it isn't one of the filter names. */
-    Object.keys(PN_CARDS).forEach(function (slug) {
-      var card = PN_CARDS[slug];
+    Object.keys(DETAIL_CARDS).forEach(function (slug) {
+      var card = DETAIL_CARDS[slug];
       card.addEventListener('click', function (e) {
         if (e.target.closest('a')) return;                            /* links keep their behaviour */
-        if (e.target.closest('.image-row:not(.pn-preview-row)')) return;
+        if (e.target.closest('.image-row:not(.pn-preview-row):not(.fn-preview-row)')) return;
         openPnModal(slug, true);
       });
       card.addEventListener('keydown', function (e) {
@@ -1494,12 +1834,13 @@
        * schema.json already carry the "event-" prefix. */
       var slug = '';
       if (raw) {
-        if (PN_CARDS[slugify(raw)]) slug = slugify(raw);
-        else if (PN_CARDS[slugify(raw.replace(/^event-/, ''))]) slug = slugify(raw.replace(/^event-/, ''));
+        if (DETAIL_CARDS[slugify(raw)]) slug = slugify(raw);
+        else if (DETAIL_CARDS[slugify(raw.replace(/^event-/, ''))]) slug = slugify(raw.replace(/^event-/, ''));
       }
       setFilter('all', false);
       if (!slug) { closePnModal(false); return; }
-      if (pnModal && pnModal.dataset.slug === slug && pnModalIsOpen()) return;
+      var open = openModalEl();
+      if (open && open.dataset.slug === slug) return;
       openPnModal(slug, false);
     }
 
@@ -1530,7 +1871,7 @@
     var galleryImages = [];
     function refreshGallery() {
       galleryImages = Array.prototype.slice
-        .call(document.querySelectorAll('.image-row:not(.pn-preview-row) img'))
+        .call(document.querySelectorAll('.image-row:not(.pn-preview-row):not(.fn-preview-row) img'))
         .filter(function (img) { return !img.closest('[hidden]'); });
     }
     refreshGallery();
@@ -1569,7 +1910,7 @@
 
     /* Delegated so images revealed by the modal are picked up automatically */
     document.addEventListener('click', function (e) {
-      var fig = e.target.closest('.image-row:not(.pn-preview-row) figure');
+      var fig = e.target.closest('.image-row:not(.pn-preview-row):not(.fn-preview-row) figure');
       if (!fig) return;
       var img = fig.querySelector('img');
       refreshGallery();
@@ -1626,6 +1967,8 @@
     /* constants */
     PN_BADGE: PN_BADGE,
     PN_ALIASES: PN_ALIASES,
+    FN_BADGE: FN_BADGE,
+    FN_ALIASES: FN_ALIASES,
     CATEGORY_BY_TYPE: CATEGORY_BY_TYPE,
     CATEGORY_KEYS: CATEGORY_KEYS,
     REGION_KEYS: REGION_KEYS,
@@ -1639,8 +1982,12 @@
     itemType: itemType,
     eventCategory: eventCategory,
     isPerfNight: isPerfNight,
+    isFilmNight: isFilmNight,
+    hasDetailView: hasDetailView,
     actsOf: actsOf,
     rawActs: rawActs,
+    filmsOf: filmsOf,
+    rawFilms: rawFilms,
     locationOf: locationOf,
     homePlace: homePlace,
     HOME_VENUE: HOME_VENUE,

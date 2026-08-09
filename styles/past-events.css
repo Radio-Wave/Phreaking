@@ -199,3 +199,119 @@ body.pn-modal-open{overflow:hidden;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__poster img{width:100%;height:auto;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__log{margin-top:1.5rem;}
+
+/* ── Film Night ─────────────────────────────────────────────────────────────
+   Structurally the twin of Performance Night above: a clickable condensed card
+   and a full-screen detail modal. The rules are written out separately rather
+   than added to the .pn-* selector lists, and that duplication is deliberate.
+   These are two features that happen to look alike today; sharing a selector
+   would mean a future tweak to one silently restyling the other, and a shared
+   stow class would let one feature's JavaScript collapse or reveal the other's
+   content. Keeping the namespaces apart is what makes them independent.
+
+   Anything genuinely shared — .event-card, .image-row, .pc-lightbox, .sr-only —
+   is still shared, because that markup really is the same markup. */
+.event-card.fn-card{cursor:pointer;transition:background .2s ease,border-color .2s ease,transform .18s var(--transition),box-shadow .18s var(--transition);}
+.event-card.fn-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.55);border-color:#fff;}
+.event-card.fn-card:focus-visible{outline:2px solid #fff;outline-offset:3px;}
+.event-card.fn-card a{cursor:pointer;}
+.fn-preview-row [role="listitem"]{display:block;}
+.fn-preview-row img{cursor:inherit;}
+.fn-hint{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:#cfcfcf;}
+.event-card.fn-card:hover .fn-hint{color:#fff;}
+.fn-hint-chev{display:inline-block;transition:transform .2s ease;}
+.event-card.fn-card:hover .fn-hint-chev{transform:translate(2px,-2px);}
+
+/* ---- modal shell ---- */
+.fn-modal{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,44px);}
+.fn-modal[aria-hidden="true"]{display:none;}
+body.fn-modal-open{overflow:hidden;}
+.fn-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.86);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
+.fn-modal__card{position:relative;display:flex;flex-direction:column;width:100%;height:100%;max-height:100%;
+  background:#000;border:1px solid var(--rule);box-shadow:0 24px 80px rgba(0,0,0,.6);animation:fn-modal-in .28s ease both;}
+@keyframes fn-modal-in{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* ---- head: badge + title left, date/time + close right ---- */
+.fn-modal__head{display:grid;grid-template-columns:1fr auto auto;gap:clamp(12px,3vw,32px);align-items:start;
+  padding:clamp(16px,3vw,28px);border-bottom:1px solid var(--rule);}
+.fn-modal__headline{min-width:0;}
+.fn-modal__label{display:inline-flex;border:1px solid #fff;border-radius:999px;padding:.15rem .6rem;margin-bottom:.6rem;
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;}
+.fn-modal__title{margin:0;font-family:'VT323',monospace;font-size:clamp(2rem,5vw,3.4rem);font-weight:400;line-height:1;
+  text-transform:capitalize;overflow-wrap:break-word;}
+.fn-modal__when{display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;text-align:right;padding-top:.2rem;white-space:nowrap;}
+.fn-modal__day{font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;}
+.fn-modal__time{font-size:.9rem;letter-spacing:.06em;color:var(--muted);}
+.fn-modal__when :empty{display:none;}
+.fn-modal__close{appearance:none;border:none;background:transparent;font-family:inherit;font-size:3rem;color:var(--muted);
+  cursor:pointer;padding:0 0 .4rem .6rem;line-height:.8;transition:color .15s ease;}
+.fn-modal__close:hover,.fn-modal__close:focus-visible{color:#fff;}
+
+/* ---- scrolling body ---- */
+.fn-modal__scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding:clamp(16px,3vw,28px);display:flex;flex-direction:column;gap:clamp(16px,3vw,28px);}
+.fn-modal__scroll::-webkit-scrollbar{width:7px;}
+.fn-modal__scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.05);}
+.fn-modal__scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border-radius:4px;}
+
+/* description left, poster right — poster matches the text block's height */
+.fn-modal__intro{display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,28px);}
+.fn-modal__desc{flex:0 0 50%;max-width:50%;min-width:0;text-align:justify;hyphens:auto;}
+.fn-modal__desc p{margin:0 0 1em;color:#efefef;line-height:1.75;font-size:calc(.97rem + 2px);}
+.fn-modal__desc p:last-child{margin-bottom:0;}
+.fn-modal__poster{flex:0 0 auto;align-self:flex-start;margin:0;line-height:0;max-width:40%;}
+.fn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;display:block;
+  border:1px solid rgba(255,255,255,.15);border-radius:4px;}
+
+/* ---- film log ---- */
+.fn-modal__log{display:flex;flex-direction:column;}
+.fn-film{padding:clamp(16px,2.5vw,26px) 0;border-top:1px solid rgba(255,255,255,.18);}
+.fn-film:first-child{border-top:none;padding-top:0;}
+.fn-film-n{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:#bdbdbd;}
+.fn-film-title{font-family:'VT323',monospace;font-size:2.1rem;font-weight:400;line-height:1.1;text-transform:capitalize;margin:.2rem 0 .1rem;}
+.fn-film-artists{color:#d0d0d0;font-size:.95rem;margin-bottom:.5rem;}
+.fn-film-desc{margin:.5rem 0 1rem;color:#efefef;max-width:980px;line-height:1.75;font-size:.95rem;}
+.fn-empty{color:#bdbdbd;font-size:.95rem;padding:.5rem 0 1rem;}
+
+@media(max-width:760px){
+  .fn-modal{padding:0;}
+  .fn-modal__card{width:100%;height:100%;border:none;}
+  .fn-modal__head{grid-template-columns:1fr auto;grid-template-areas:"headline close" "when when";}
+  .fn-modal__headline{grid-area:headline;}
+  .fn-modal__close{grid-area:close;}
+  .fn-modal__when{grid-area:when;flex-direction:row;justify-content:space-between;width:100%;white-space:normal;}
+  .fn-modal__intro{flex-direction:column;}
+  .fn-modal__desc{flex:1 1 auto;max-width:100%;}
+  .fn-modal__poster{max-width:100%;align-self:auto;min-height:0;}
+  .fn-modal__poster img{width:100%;height:auto;max-height:52vh;}
+  .fn-film-title{font-size:1.8rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  .event-card.fn-card,.fn-hint-chev{transition:none;}
+  .event-card.fn-card:hover{transform:none;}
+  .fn-modal__card{animation:none;}
+}
+
+/* ── Baked Film Night detail ────────────────────────────────────────────────
+   Same contract as the Performance Night block above, for the same reason:
+   every film's title, credit, description and stills are real markup inside
+   the card in the HTML the server sends. Collapsed via the .fn-detail--stowed
+   CSS class and never the HTML `hidden` attribute, because `hidden` means "not
+   currently relevant" and several text-extraction libraries used by
+   summarisers and AI crawlers strip [hidden] elements specifically — which is
+   exactly the content this whole architecture exists to put in front of them.
+
+   display:contents lets the moved block dissolve into the modal's flex column.
+   The --stowed rule is written out explicitly because an author display:contents
+   would otherwise win and leak the detail onto the card. */
+.fn-detail{display:contents;}
+.fn-detail.fn-detail--stowed{display:none;}
+
+/* Without JavaScript there is no modal, so index.html's <noscript> block
+   overrides .fn-detail--stowed back to visible; these rules give it a sane
+   single-column layout when that happens. */
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__intro{display:block;}
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__desc{flex:1 1 auto;max-width:100%;}
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__poster img{width:100%;height:auto;}
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__log{margin-top:1.5rem;}

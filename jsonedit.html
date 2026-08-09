@@ -591,6 +591,44 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   border:1px solid rgba(255,255,255,.15);display:block;}
 #prevOverlay .pn-empty{color:#bdbdbd;font-size:11px;}
 #prevOverlay .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+
+/* Film Night — its own namespace, for the same reason past-events.css keeps
+   them apart: these are two independent features that currently look alike. */
+.r-pe .event-card.fn-card{cursor:pointer;}
+.r-pe .event-card.fn-card:hover{background:rgba(255,255,255,.05);}
+.r-pe .fn-hint{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:9.5px;
+  text-transform:uppercase;letter-spacing:.06em;color:#cfcfcf;}
+.r-pe .fn-detail.fn-detail--stowed{display:none;}
+#prevOverlay .fn-modal{position:absolute;inset:0;display:flex;padding:10px;}
+#prevOverlay .fn-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.86);}
+#prevOverlay .fn-modal__card{position:relative;display:flex;flex-direction:column;
+  width:100%;height:100%;background:#000;border:1px solid #fff;}
+#prevOverlay .fn-modal__head{display:grid;grid-template-columns:1fr auto auto;gap:12px;
+  align-items:start;padding:12px 14px;border-bottom:1px solid #fff;}
+#prevOverlay .fn-modal__label{display:inline-flex;border:1px solid #fff;border-radius:999px;
+  padding:1px 8px;margin-bottom:6px;font-size:9px;text-transform:uppercase;letter-spacing:.06em;}
+#prevOverlay .fn-modal__title{margin:0;font-size:20px;font-weight:600;text-transform:capitalize;line-height:1.1;}
+#prevOverlay .fn-modal__when{display:flex;flex-direction:column;align-items:flex-end;gap:2px;
+  font-size:10px;text-align:right;}
+#prevOverlay .fn-modal__time{color:var(--muted);}
+#prevOverlay .fn-modal__close{appearance:none;border:none;background:transparent;color:var(--muted);
+  font-family:var(--mono);font-size:13px;cursor:pointer;padding:0 0 0 8px;}
+#prevOverlay .fn-modal__close:hover{color:#fff;}
+#prevOverlay .fn-modal__scroll{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:16px;}
+#prevOverlay .fn-modal__intro{display:flex;align-items:flex-start;gap:14px;}
+#prevOverlay .fn-modal__desc{flex:0 0 50%;max-width:50%;text-align:justify;}
+#prevOverlay .fn-modal__desc p{margin:0 0 .9em;color:#efefef;font-size:11.5px;line-height:1.7;}
+#prevOverlay .fn-modal__poster{flex:0 0 auto;margin:0;line-height:0;max-width:40%;}
+#prevOverlay .fn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;
+  display:block;border:1px solid rgba(255,255,255,.15);border-radius:3px;}
+#prevOverlay .fn-modal__log{display:flex;flex-direction:column;}
+#prevOverlay .fn-film{padding:14px 0;border-top:1px solid rgba(255,255,255,.18);}
+#prevOverlay .fn-film:first-child{border-top:none;padding-top:0;}
+#prevOverlay .fn-film-n{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#bdbdbd;}
+#prevOverlay .fn-film-title{font-size:15px;font-weight:600;text-transform:capitalize;margin:3px 0 2px;}
+#prevOverlay .fn-film-artists{color:#d0d0d0;font-size:11px;margin-bottom:5px;}
+#prevOverlay .fn-film-desc{margin:5px 0 10px;color:#efefef;font-size:11px;line-height:1.7;}
+#prevOverlay .fn-empty{color:#bdbdbd;font-size:11px;}
 </style>
 </head>
 <body>
@@ -1059,7 +1097,7 @@ const stagedImages   = new Map(); // repoPath → {content (base64), label}
 
 // Dynamic lists — populated from JSON on load, user can extend
 let knownExhibitions = ['does-cloud-compute', 'bitrot', 'can-we-start-again'];
-let knownLabels = ['Workshop', 'Talk', 'Performance', 'Screening', 'Event', 'Performance Night'];
+let knownLabels = ['Workshop', 'Talk', 'Performance', 'Screening', 'Event', 'Performance Night', 'Film Night'];
 let knownTypes = [
   {value:'EducationEvent', label:'Workshop'},
   {value:'Event', label:'Event / Talk'},
@@ -1213,6 +1251,89 @@ function migrateActsOn(ev){
   return wasLegacy;
 }
 
+// ── FILM NIGHT SUBTYPE ────────────────────────────────────
+// A "Film Night" is an ordinary ScreeningEvent whose badge is "Film Night". It
+// carries a `workPresented` array — one block per film, each with its own
+// images — which powers the expandable card on the live Past Events page.
+// Every other event, including a plain "Screening", is untouched by this.
+//
+// The badge is the opt-in, exactly as it is for Performance Night. The data
+// shape is NOT the same: an act is a sub-event of the night, a film is a work
+// the night presents, so this is schema.org `workPresented` → Movie rather
+// than `subEvent` → PerformingArtsEvent. See the long note in past-events.js.
+//
+// There is deliberately no legacy shape and no migration path: this feature
+// shipped as `workPresented`. If one is ever needed, follow the acts pattern —
+// convert inside buildForm(), for the one record someone actually opened,
+// never in a file-wide scan on load.
+const FILM_NIGHT_LABEL = 'Film Night';
+const FILM_NIGHT_ALIASES = ['film night'];
+function isFilmNight(ev){
+  return !!ev && FILM_NIGHT_ALIASES.includes(String(ev.label||'').trim().toLowerCase());
+}
+// Either subtype — both get a clickable card, a preview description and a modal
+function hasDetailView(ev){ return isPerfNight(ev)||isFilmNight(ev); }
+
+const FILM_TYPE='Movie';
+function filmList(ev){
+  if(!ev) return [];
+  return Array.isArray(ev.workPresented) ? ev.workPresented : [];
+}
+// Films with anything in them — the form always keeps one blank block, which
+// should not be counted or rendered anywhere.
+function filmBlocks(ev){
+  return filmList(ev).filter(f=>f&&(filmGet(f,'title')||filmGet(f,'artists')||f.description||filmGet(f,'images').length));
+}
+// `creator` is the schema.org field; `artists` is accepted on the way in so a
+// hand-edited file using the looser name still opens.
+function filmGet(f, field){
+  if(!f) return field==='images' ? [] : '';
+  if(field==='title')   return (f.name!=null&&f.name!=='') ? f.name : (f.title||'');
+  if(field==='artists'){
+    if(typeof f.creator==='string'&&f.creator!=='') return f.creator;
+    if(f.creator&&typeof f.creator==='object'&&f.creator.name) return f.creator.name;
+    return f.artists||'';
+  }
+  if(field==='images')  return Array.isArray(f.images) ? f.images : [];
+  return f[field]||'';
+}
+function filmSet(f, field, val){
+  if(!f) return;
+  if(field==='title'){   f.name=val;    delete f.title;   return; }
+  if(field==='artists'){ f.creator=val; delete f.artists; return; }
+  f[field]=val;
+}
+function newFilm(){ return {'@type':FILM_TYPE, name:'', creator:'', description:'', images:[]}; }
+// Guarantees at least one film block so the form always shows one
+function ensureFilms(ev, silent){
+  if(!ev) return [];
+  if(!Array.isArray(ev.workPresented)) ev.workPresented=[];
+  if(!ev.workPresented.length){
+    ev.workPresented.push(newFilm());
+    if(!silent) markUnsaved();
+  }
+  ev.workPresented.forEach(f=>{ if(!Array.isArray(f.images)) f.images=[]; });
+  return ev.workPresented;
+}
+// "[film title], [event name] [year]" — plain for alt, <em> for captions
+function filmImgAlt(ev, fi, html){
+  const f=filmList(ev)[fi]||{};
+  const t=String(filmGet(f,'title')||'').trim();
+  const n=String(ev.name||'').trim();
+  const y=eventYear(ev);
+  if(html) return `${esc(t)}${t&&n?', ':''}<em>${esc(n)}</em>${y?' '+esc(y):''}`;
+  return `${t}${t&&n?', ':''}${n}${y?' '+y:''}`.trim();
+}
+function syncFilmAlts(ev){
+  if(!ev) return;
+  filmList(ev).forEach((f,fi)=>{
+    filmGet(f,'images').forEach(im=>{
+      im.alt     = filmImgAlt(ev,fi,false);
+      im.altHtml = filmImgAlt(ev,fi,true);
+    });
+  });
+}
+
 // ── VENUE → schema.org location ───────────────────────────
 // The Venue field used to write a bare `venue` string. It now writes a proper
 // Place under `location`; `venue` is still read for older files and dropped on
@@ -1302,16 +1423,30 @@ function pnDeepLink(ev){ return 'https://phreaking.co.uk/past-events/#'+(eventSl
 // pipeline serves both event-level images ('0','1',…) and per-performance
 // images ('p0-1' = block 0, image 1). Event-level slots are still plain
 // indices, so every existing DOM id and conversion-state key is unchanged.
+// 'p0-1' addresses act 0 / image 1; 'f0-1' addresses film 0 / image 1. Two
+// separate prefixes rather than one shared index, so an act's staged upload can
+// never be handed to a film (or land in a film's folder) if a record's badge is
+// switched from one subtype to the other mid-edit.
 function slotParse(s){
   const m=String(s).match(/^p(\d+)-(\d+)$/);
-  return m ? {pi:+m[1], i:+m[2]} : {pi:null, i:parseInt(s,10)||0};
+  if(m) return {kind:'act', pi:+m[1], fi:null, i:+m[2]};
+  const f=String(s).match(/^f(\d+)-(\d+)$/);
+  if(f) return {kind:'film', pi:null, fi:+f[1], i:+f[2]};
+  return {kind:'event', pi:null, fi:null, i:parseInt(s,10)||0};
 }
 function slotOf(i, pi){ return (pi==null||pi===undefined) ? String(i) : `p${pi}-${i}`; }
+function filmSlotOf(i, fi){ return `f${fi}-${i}`; }
 // The array a slot lives in (creating it when needed), or null if the block is gone
 function slotImages(ev, s){
   if(!ev) return null;
-  const {pi}=slotParse(s);
-  if(pi==null){ if(!Array.isArray(ev.images)) ev.images=[]; return ev.images; }
+  const {kind,pi,fi}=slotParse(s);
+  if(kind==='event'){ if(!Array.isArray(ev.images)) ev.images=[]; return ev.images; }
+  if(kind==='film'){
+    const f=filmList(ev)[fi];
+    if(!f) return null;
+    if(!Array.isArray(f.images)) f.images=[];
+    return f.images;
+  }
   const p=actList(ev)[pi];
   if(!p) return null;
   if(!Array.isArray(p.images)) p.images=[];
@@ -1326,6 +1461,7 @@ function allSlots(ev){
   if(!ev) return [];
   const out=(ev.images||[]).map((_,i)=>String(i));
   actList(ev).forEach((p,pi)=>actGet(p,'images').forEach((_,i)=>out.push(slotOf(i,pi))));
+  filmList(ev).forEach((f,fi)=>filmGet(f,'images').forEach((_,i)=>out.push(filmSlotOf(i,fi))));
   return out;
 }
 
@@ -1649,7 +1785,7 @@ function loadFromFile(e){
 function onLoaded(msg){
   datasets[mode]=data;
   extractFromData();
-  if(mode==='events') pnFromHash();   // /#slug opens that Performance Night card
+  if(mode==='events') pnFromHash();   // /#slug opens that Performance/Film Night card
   markSaved(); renderList(); renderPreview();
   refreshExhDropdowns(); refreshPrevFilters();
   setStatus(msg, countLabel()); toast(msg,'ok');
@@ -1844,19 +1980,22 @@ function buildForm(){
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
   const pn=isPerfNight(ev);
+  const fn=isFilmNight(ev);
+  const dv=pn||fn;                       // fields both subtypes share
   if(pn){
     if(ev.label!==PERF_NIGHT_LABEL) ev.label=PERF_NIGHT_LABEL;   // legacy badge, this record only
     ensurePerformances(ev, true);                                 // legacy act shape, this record only
   }
+  if(fn) ensureFilms(ev, true);          // guarantee one blank block to type into
   const imgs=ev.images||[];
 
   document.getElementById('editBody').innerHTML=`
     <div class="field"><label>Event Name</label>
       <input id="ef-name" value="${esc(ev.name||'')}" oninput="liveUp()"></div>
     <div class="frow">
-      <div class="field"><label>Exhibition${pn?' <span style="font-weight:400;color:var(--muted)">(optional)</span>':''}</label>
+      <div class="field"><label>Exhibition${dv?' <span style="font-weight:400;color:var(--muted)">(optional)</span>':''}</label>
         <select id="ef-exh" data-prev="${esc(ev.exhibition||'')}" onchange="anChange(this,'exh','liveUp')">
-          ${exhOptions(ev.exhibition||'', pn)}
+          ${exhOptions(ev.exhibition||'', dv)}
         </select></div>
       <div class="field"><label>Event Type</label>
         <select id="ef-type" data-prev="${esc(t||'')}" onchange="anChange(this,'type','liveUp')">
@@ -1876,7 +2015,7 @@ function buildForm(){
       <div class="field"><label>Sort Order</label>
         <input type="number" id="ef-sort" value="${ev.sortOrder??''}" min="1" oninput="liveUp()"></div>
     </div>
-    ${pn?`
+    ${dv?`
     <div class="field"><label>Venue</label>
       <input id="ef-venue" value="${esc(eventVenue(ev))}" placeholder="e.g. ANNEX by The Koppel Project" oninput="liveUp()"></div>
     <div class="field"><label>Card Background <span style="font-weight:400;color:var(--muted)">(this card only, on Past Events)</span></label>
@@ -1890,7 +2029,7 @@ function buildForm(){
         <input id="ef-date" value="${esc(ev.displayDate||'')}" placeholder="e.g. Saturday 12th April — 14:00–17:00" oninput="liveUp()">
         <button type="button" class="cal-trigger" onclick="calOpen('ef-date')" title="Pick date/time">&#128197;</button>
       </div></div>
-    ${pn?'':`
+    ${dv?'':`
     <div class="field"><label>Performer(s) <span style="font-weight:400;color:var(--muted)">(their name links to their own website wherever this event is shown)</span></label>
       <div class="arr-editor" id="perfEd">${performerRows(ev)}</div>
       <select id="ef-add-performer" onchange="addPerformerFromSelect(this)">
@@ -1906,7 +2045,7 @@ function buildForm(){
         Show on Past Events page
       </label>
     </div>
-    ${pn?`
+    ${dv?`
     <div class="field"><label>Preview Description <span style="font-weight:400;color:var(--muted)">(shorter — shown on the collapsed card; the full description below only appears once expanded)</span></label>
       <textarea id="ef-preview-desc" rows="3" oninput="liveUp()">${esc(ev.previewDescription||'')}</textarea></div>`:''}
     <div class="field"><label>Description</label>
@@ -1923,7 +2062,7 @@ function buildForm(){
       <div class="field"><label>End Date</label>
         <input id="ef-end" value="${esc(ev.endDate||'')}" placeholder="2025" oninput="liveUp()"></div>
     </div>
-    <div class="field"><label>${pn?'Poster / Event Images <span style="font-weight:400;color:var(--muted)">(first image is the main poster)</span>':'Images'}</label>
+    <div class="field"><label>${dv?'Poster / Event Images <span style="font-weight:400;color:var(--muted)">(first image is the main poster)</span>':'Images'}</label>
       <div class="imgs-editor" id="imgsEd">${imgs.map((img,i)=>imgRow(img,i)).join('')}</div>
       <button class="add-img" onclick="addImg()">+ Add Image</button>
     </div>
@@ -1933,8 +2072,130 @@ function buildForm(){
       <div class="perf-editor" id="perfBlocks">${perfBlocksHTML(ev)}</div>
       <button class="add-img" onclick="addPerfBlock()">+ Add performance block</button>
       <div class="deep-link-row" id="ef-deeplink">Deep link: ${esc(pnDeepLink(ev))}</div>
+    </div>`:''}
+    ${fn?`
+    <div class="field">
+      <label>Film Lineup <span style="font-weight:400;color:var(--muted)">(one block per film — shown in the expanded card)</span></label>
+      <div class="perf-editor" id="filmBlocks">${filmBlocksHTML(ev)}</div>
+      <button class="add-img" onclick="addFilmBlock()">+ Add film</button>
+      <div class="deep-link-row" id="ef-deeplink">Deep link: ${esc(pnDeepLink(ev))}</div>
     </div>`:''}`;
   restoreAllConvUI();
+}
+
+// ── FILM BLOCKS (Film Night only) ─────────────────────────
+// The editor chrome (.perf-block etc.) is shared with the performance blocks —
+// it is form furniture, not the published card, and there is nothing to gain
+// from two copies of the same styling. The element IDs are NOT shared: films
+// use fb-/ff-/imgsEd-f so that a record which somehow held both kinds of block
+// could never have one overwrite the other's inputs.
+function filmBlocksHTML(ev){
+  return filmList(ev).map((f,fi)=>filmBlockHTML(ev,f,fi)).join('');
+}
+function filmBlockHTML(ev,f,fi){
+  const n=filmList(ev).length;
+  return `<div class="perf-block" id="fb-${fi}">
+    <div class="perf-block-head">
+      <span class="perf-block-n">Film ${fi+1}</span>
+      <span class="perf-block-tools">
+        <button class="btn btn-ghost btn-sm" onclick="moveFilmBlock(${fi},-1)" ${fi===0?'disabled style="opacity:.35"':''} title="Move up">↑</button>
+        <button class="btn btn-ghost btn-sm" onclick="moveFilmBlock(${fi},1)" ${fi===n-1?'disabled style="opacity:.35"':''} title="Move down">↓</button>
+        <button class="btn btn-err btn-sm" onclick="removeFilmBlock(${fi})">Remove</button>
+      </span>
+    </div>
+    <span class="perf-sub-label">Film Title</span>
+    <input id="ff-title-${fi}" value="${esc(filmGet(f,'title'))}" placeholder="e.g. Tidal Drift" oninput="setFilm(${fi},'title',this.value)">
+    <span class="perf-sub-label">Artist / Filmmaker <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span>
+    <input id="ff-artists-${fi}" value="${esc(filmGet(f,'artists'))}" placeholder="e.g. Lucy Ellis" oninput="setFilm(${fi},'artists',this.value)">
+    <span class="perf-sub-label">Description</span>
+    <textarea id="ff-desc-${fi}" rows="3" oninput="setFilm(${fi},'description',this.value)">${esc(f.description||'')}</textarea>
+    <span class="perf-sub-label">Images</span>
+    <div class="imgs-editor" id="imgsEd-f${fi}">${filmGet(f,'images').map((img,i)=>imgRow(img,i,null,fi)).join('')}</div>
+    <button class="add-img" onclick="addFilmImg(${fi})">+ Add image to this film</button>
+    <div class="perf-alt-note">Alt text is generated automatically:
+      <code id="ff-alt-${fi}">${esc(filmImgAlt(ev,fi,false)||'[title], [event name] [year]')}</code></div>
+  </div>`;
+}
+function rebuildFilmBlocks(){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  const c=document.getElementById('filmBlocks');
+  if(c){ c.innerHTML=filmBlocksHTML(ev); restoreAllConvUI(); }
+}
+function setFilm(fi,field,val){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  const f=filmList(ev)[fi]; if(!f) return;
+  filmSet(f,field,val);
+  if(field==='title'){
+    syncFilmAlts(ev);
+    const lab=document.getElementById('ff-alt-'+fi);
+    if(lab) lab.textContent=filmImgAlt(ev,fi,false)||'[title], [event name] [year]';
+    refreshFilmAltInputs(fi);
+  }
+  markUnsaved(); renderPreview();
+}
+function refreshFilmAltInputs(fi){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  const blocks = fi==null ? filmList(ev).map((_,x)=>x) : [fi];
+  blocks.forEach(bi=>{
+    const f=filmList(ev)[bi]; if(!f) return;
+    filmGet(f,'images').forEach((im,i)=>{
+      const el=document.getElementById('ie-alt-'+filmSlotOf(i,bi));
+      if(el) el.value=im.alt||'';
+    });
+    const note=document.getElementById('ff-alt-'+bi);
+    if(note) note.textContent=filmImgAlt(ev,bi,false)||'[title], [event name] [year]';
+  });
+  const dl=document.getElementById('ef-deeplink');
+  if(dl) dl.textContent='Deep link: '+pnDeepLink(ev);
+}
+function addFilmBlock(){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  ensureFilms(ev, true);
+  ev.workPresented.push(newFilm());
+  markUnsaved(); rebuildFilmBlocks(); renderPreview();
+}
+function removeFilmBlock(fi){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  ensureFilms(ev, true);
+  const f=ev.workPresented[fi]; if(!f) return;
+  const title=filmGet(f,'title');
+  const hasContent=title||filmGet(f,'artists')||f.description||filmGet(f,'images').length;
+  if(hasContent&&!confirm(`Remove film ${fi+1}${title?' ("'+title+'")':''}? Its images stay in the repo but are dropped from this event.`)) return;
+  ev.workPresented.splice(fi,1);
+  // Conversion state is keyed by block index — shift everything above down one
+  remapFilmConvState(old => old===fi ? null : (old>fi ? old-1 : old));
+  ensureFilms(ev, true);
+  markUnsaved(); rebuildFilmBlocks(); renderPreview();
+}
+function moveFilmBlock(fi,dir){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  ensureFilms(ev, true);
+  const j=fi+dir; if(j<0||j>=ev.workPresented.length) return;
+  [ev.workPresented[fi],ev.workPresented[j]]=[ev.workPresented[j],ev.workPresented[fi]];
+  remapFilmConvState(old => old===fi ? j : (old===j ? fi : old));
+  syncFilmAlts(ev);
+  markUnsaved(); rebuildFilmBlocks(); renderPreview();
+}
+// The film-slot twin of remapPerfConvState — same job, 'f' prefix, so an
+// uploaded-but-unpushed conversion follows its film instead of being orphaned.
+function remapFilmConvState(mapFn){
+  const pre=curIdx+'_f';
+  const move=(store, revoke)=>{
+    const moved={};
+    Object.keys(store).filter(k=>k.startsWith(pre)).forEach(k=>{
+      const rest=k.slice(pre.length);              // '<fi>-<i>'
+      const dash=rest.indexOf('-');
+      const oldFi=parseInt(rest.slice(0,dash),10);
+      const tail=rest.slice(dash);
+      const newFi=mapFn(oldFi);
+      if(newFi==null){ if(revoke) revoke(store[k]); }
+      else moved[curIdx+'_f'+newFi+tail]=store[k];
+      delete store[k];
+    });
+    Object.assign(store,moved);
+  };
+  move(imgConvState);
+  move(imgPreviewCache, c=>{ URL.revokeObjectURL(c.webp); URL.revokeObjectURL(c.jpeg); });
 }
 
 // ── PERFORMANCE BLOCKS (Performance Night only) ───────────
@@ -2188,9 +2449,10 @@ function liveUpArtist(ar){
 
 // `pi` is the performance-block index for per-performance images, or omitted for
 // event-level images. Everything below is addressed by the resulting slot id.
-function imgRow(img,i,pi){
-  const s=slotOf(i,pi);
-  const perf=(pi!=null&&pi!==undefined);
+function imgRow(img,i,pi,fi){
+  const film=(fi!=null&&fi!==undefined);
+  const s=film ? filmSlotOf(i,fi) : slotOf(i,pi);
+  const perf=(pi!=null&&pi!==undefined)||film;
   const head=perf ? 'Image '+(i+1) : (i===0?'Poster / Primary':'Image '+(i+1));
   return `<div class="img-entry" id="ie-${s}">
     <div class="img-entry-head">
@@ -2200,7 +2462,7 @@ function imgRow(img,i,pi){
     <input id="ie-src-${s}" placeholder="src (thumbnail path)" value="${esc(img.src||'')}" onchange="setImg('${s}','src',this.value)">
     <input id="ie-full-${s}" placeholder="full (lightbox path — blank = same as src)" value="${esc(img.full&&img.full!==img.src?img.full:'')}" onchange="setImg('${s}','full',this.value)">
     ${perf
-      ? `<input id="ie-alt-${s}" placeholder="alt text (auto)" value="${esc(img.alt||'')}" readonly title="Generated from the performance title, event name and year">`
+      ? `<input id="ie-alt-${s}" placeholder="alt text (auto)" value="${esc(img.alt||'')}" readonly title="Generated from the ${film?'film':'performance'} title, event name and year">`
       : `<input id="ie-alt-${s}" placeholder="alt text" value="${esc(img.alt||'')}" onchange="setImg('${s}','alt',this.value)">`}
     <div class="img-upload-area">
       <label class="btn btn-ghost btn-sm" style="cursor:pointer">
@@ -2272,15 +2534,29 @@ function addImg(pi){
   redrawImgs(pi);
   restoreAllConvUI();
 }
+// The film-block equivalent, kept separate so the two slot namespaces never mix
+function addFilmImg(fi){
+  const ev=data['@graph'][curIdx];
+  const arr=slotImages(ev, filmSlotOf(0,fi));
+  if(!arr) return;
+  arr.push({src:'',full:'',alt:''});
+  syncFilmAlts(ev);
+  markUnsaved(); liveUp();
+  redrawFilmImgs(fi);
+  restoreAllConvUI();
+}
 function removeImg(s){
   const ev=data['@graph'][curIdx];
-  const {pi,i}=slotParse(s);
+  const {kind,pi,fi,i}=slotParse(s);
   const arr=slotImages(ev,s); if(!arr) return;
   arr.splice(i,1);
   // Indices shift within this group — wipe its conv + preview state
-  const prefix = (pi==null) ? curIdx+'_' : curIdx+'_p'+pi+'-';
-  // (an event-level prefix also matches 'p…' keys — keep other blocks' state intact)
-  const inGroup = k => k.startsWith(prefix) && (pi!=null || !k.slice(prefix.length).startsWith('p'));
+  const prefix = kind==='act' ? curIdx+'_p'+pi+'-'
+               : kind==='film' ? curIdx+'_f'+fi+'-'
+               : curIdx+'_';
+  // (an event-level prefix also matches 'p…'/'f…' keys — keep other blocks' state intact)
+  const inGroup = k => k.startsWith(prefix) &&
+    (kind!=='event' || !/^[pf]/.test(k.slice(prefix.length)));
   Object.keys(imgConvState).filter(inGroup).forEach(k=>delete imgConvState[k]);
   Object.keys(imgPreviewCache).filter(inGroup).forEach(k=>{
     URL.revokeObjectURL(imgPreviewCache[k].webp);
@@ -2288,8 +2564,14 @@ function removeImg(s){
     delete imgPreviewCache[k];
   });
   markUnsaved(); liveUp();
-  redrawImgs(pi);
+  if(kind==='film') redrawFilmImgs(fi); else redrawImgs(pi);
   restoreAllConvUI();
+}
+function redrawFilmImgs(fi){
+  const ev=data['@graph'][curIdx]; if(!ev) return;
+  const c=document.getElementById('imgsEd-f'+fi);
+  const f=filmList(ev)[fi];
+  if(c&&f) c.innerHTML=filmGet(f,'images').map((img,i)=>imgRow(img,i,null,fi)).join('');
 }
 function redrawImgs(pi){
   const ev=data['@graph'][curIdx]; if(!ev) return;
@@ -2547,7 +2829,7 @@ function downloadConvert(slot, type){
 // Returns the repo-relative path for a converted image (no leading slash)
 function imgAssetPath(ev, slot, type){
   const evSlug = ev.name ? slug(ev.name) : 'item';
-  const {pi,i} = slotParse(slot);
+  const {pi,fi,i} = slotParse(slot);
   const n      = i + 1;
   const ext    = type === 'webp' ? '.webp' : '.jpg';
   // Per-performance images keep the event's folder but get an act-specific stem,
@@ -2557,6 +2839,13 @@ function imgAssetPath(ev, slot, type){
     const p = actList(ev)[pi] || {};
     const t = actGet(p,'title');
     stem = `${evSlug}_${t ? slug(t) : 'performance-'+(pi+1)}`;
+  }
+  // Per-film images do the same, e.g.
+  // assets/CanWeStartAgain/Events/film-night/film-night_tidal-drift_1.webp
+  if(fi != null){
+    const f = filmList(ev)[fi] || {};
+    const t = filmGet(f,'title');
+    stem = `${evSlug}_${t ? slug(t) : 'film-'+(fi+1)}`;
   }
 
   // Exhibition entries go into assets/ExhibitionEx/<slug>/
@@ -2613,6 +2902,7 @@ function liveUp(){
   const g=id=>document.getElementById(id)?.value;
   const s=g('ef-sort');
   const wasPN=isPerfNight(ev);
+  const wasFN=isFilmNight(ev);
   ev.name=g('ef-name')||ev.name;
   const exh=g('ef-exh');
   if(exh!==undefined){ if(exh==='') delete ev.exhibition; else ev.exhibition=exh; }
@@ -2625,19 +2915,21 @@ function liveUp(){
   const pe=document.getElementById('ef-pastevents');
   if(pe) ev.pastEvents = pe.checked;
   ev.description=g('ef-desc')??ev.description;
-  if(wasPN){ const pd=g('ef-preview-desc'); if(pd!==undefined){ if(pd.trim()) ev.previewDescription=pd; else delete ev.previewDescription; } }
+  if(wasPN||wasFN){ const pd=g('ef-preview-desc'); if(pd!==undefined){ if(pd.trim()) ev.previewDescription=pd; else delete ev.previewDescription; } }
   ev.eventCompletedUrl=g('ef-url')??ev.eventCompletedUrl;
   ev.eventCompletedUrlLabel=g('ef-url-label')??ev.eventCompletedUrlLabel;
   ev.startDate=g('ef-start')??ev.startDate;
   ev.endDate=g('ef-end')??ev.endDate;
   const vis=g('ef-visible'); if(vis!==undefined) ev.visible = vis!=='false';
   const nowPN=isPerfNight(ev);
+  const nowFN=isFilmNight(ev);
   if(nowPN){ ensurePerformances(ev, true); syncPerfAlts(ev); refreshAltInputs(null); }
+  if(nowFN){ ensureFilms(ev, true); syncFilmAlts(ev); refreshFilmAltInputs(null); }
   markUnsaved();
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   renderPreview();
-  // Switching the badge in or out of Performance Night changes which fields exist
-  if(nowPN!==wasPN) buildForm();
+  // Switching the badge in or out of either subtype changes which fields exist
+  if(nowPN!==wasPN||nowFN!==wasFN) buildForm();
 }
 function saveEdit(){ liveUp(); renderList(); toast('Saved','ok'); }
 function deleteEvent(){
@@ -2778,33 +3070,37 @@ function pnRenderOverlay(evs){
   // Filtered in JS rather than an attribute-selector string, so this doesn't
   // depend on CSS.escape() — a real DOM API, but not one every environment
   // that might load this page provides.
-  const card=[...document.querySelectorAll('#prevFrame .event-card.pn-card')]
+  const card=[...document.querySelectorAll('#prevFrame .event-card.pn-card, #prevFrame .event-card.fn-card')]
     .find(c=>c.dataset.slug===slug);
   if(!card){ ov.innerHTML=''; return; }
-  const detail=card.querySelector('.pn-detail');
+  // Same namespace the shared renderer baked this card in, so the shell around
+  // the cloned detail always matches the detail itself.
+  const c=card.classList.contains('fn-card')?'fn':'pn';
+  const badge=c==='fn'?FILM_NIGHT_LABEL:PERF_NIGHT_LABEL;
+  const detail=card.querySelector('.'+c+'-detail');
 
-  ov.innerHTML=`<div class="r-pe"><div class="pn-modal" aria-hidden="false" role="dialog" aria-modal="true">
-    <div class="pn-modal__backdrop" data-pn-close="1"></div>
-    <div class="pn-modal__card"${card.dataset.pnColor?` style="background:${esc(card.dataset.pnColor)}"`:''}>
-      <div class="pn-modal__head">
-        <div class="pn-modal__headline">
-          <span class="pn-modal__label">${esc(PERF_NIGHT_LABEL)}</span>
-          <h2 class="pn-modal__title">${esc(card.querySelector('h3')?card.querySelector('h3').textContent:'')}</h2>
+  ov.innerHTML=`<div class="r-pe"><div class="${c}-modal" aria-hidden="false" role="dialog" aria-modal="true">
+    <div class="${c}-modal__backdrop" data-pn-close="1"></div>
+    <div class="${c}-modal__card"${card.dataset[c+'Color']?` style="background:${esc(card.dataset[c+'Color'])}"`:''}>
+      <div class="${c}-modal__head">
+        <div class="${c}-modal__headline">
+          <span class="${c}-modal__label">${esc(badge)}</span>
+          <h2 class="${c}-modal__title">${esc(card.querySelector('h3')?card.querySelector('h3').textContent:'')}</h2>
         </div>
-        <div class="pn-modal__when">
-          <span class="pn-modal__day">${esc(card.dataset.pnDay||'')}</span>
-          <span class="pn-modal__time">${esc(card.dataset.pnTime||'')}</span>
+        <div class="${c}-modal__when">
+          <span class="${c}-modal__day">${esc(card.dataset[c+'Day']||'')}</span>
+          <span class="${c}-modal__time">${esc(card.dataset[c+'Time']||'')}</span>
         </div>
-        <button type="button" class="pn-modal__close" data-pn-close="1" aria-label="Close">[ &times; ]</button>
+        <button type="button" class="${c}-modal__close" data-pn-close="1" aria-label="Close">[ &times; ]</button>
       </div>
-      <div class="pn-modal__scroll"></div>
+      <div class="${c}-modal__scroll"></div>
     </div>
   </div></div>`;
 
-  const scroll=ov.querySelector('.pn-modal__scroll');
+  const scroll=ov.querySelector('.'+c+'-modal__scroll');
   if(detail&&scroll){
     const clone=detail.cloneNode(true);
-    clone.classList.remove('pn-detail--stowed');
+    clone.classList.remove(c+'-detail--stowed');
     clone.removeAttribute('id');
     while(clone.firstChild) scroll.appendChild(clone.firstChild);
   }
@@ -2816,8 +3112,8 @@ function pnRenderOverlay(evs){
 
 function pnSizePreviewPoster(){
   const ov=document.getElementById('prevOverlay'); if(!ov) return;
-  const fig=ov.querySelector('.pn-modal-poster'); if(!fig) return;
-  const desc=ov.querySelector('.pn-modal-desc');
+  const fig=ov.querySelector('.pn-modal__poster,.fn-modal__poster'); if(!fig) return;
+  const desc=ov.querySelector('.pn-modal__desc,.fn-modal__desc');
   const textH=desc?desc.getBoundingClientRect().height:0;
   const cap=Math.max(160, ov.clientHeight*0.62);
   fig.style.height=Math.round(Math.min(Math.max(textH,500),cap))+'px';
@@ -2958,14 +3254,14 @@ function renderPE(evs){
 document.addEventListener('click',e=>{
   const frame=document.getElementById('prevFrame');
   if(!frame||!frame.contains(e.target)) return;
-  const card=e.target.closest('.event-card.pn-card');
+  const card=e.target.closest('.event-card.pn-card,.event-card.fn-card');
   if(!card||!card.dataset.slug) return;
   if(e.target.closest('a')) return;
   pnToggle(e,card.dataset.slug);
 });
 document.addEventListener('keydown',e=>{
   if(e.key!=='Enter'&&e.key!==' ') return;
-  const card=e.target&&e.target.closest?e.target.closest('.event-card.pn-card'):null;
+  const card=e.target&&e.target.closest?e.target.closest('.event-card.pn-card,.event-card.fn-card'):null;
   if(!card||!card.dataset.slug) return;
   const frame=document.getElementById('prevFrame');
   if(!frame||!frame.contains(card)) return;
@@ -2993,7 +3289,7 @@ function pnFromHash(){
   const raw=decodeURIComponent(String(location.hash||'').replace(/^#/,''));
   if(!raw) return;
   const want=raw.replace(/^event-/,'');
-  const hit=getEvents().find(ev=>isPerfNight(ev)&&eventSlug(ev)===want);
+  const hit=getEvents().find(ev=>hasDetailView(ev)&&eventSlug(ev)===want);
   if(hit){ pnExpanded.clear(); pnExpanded.add(want); }
 }
 
@@ -3683,6 +3979,8 @@ function buildImageSitemapXML(schemaData, galleriesData){
       imgs.forEach(im => add('/past-events/', im.full||im.src));
       actList(item).forEach(p =>
         actGet(p,'images').forEach(im => add('/past-events/', im.full||im.src)));
+      filmList(item).forEach(f =>
+        filmGet(f,'images').forEach(im => add('/past-events/', im.full||im.src)));
     }
   });
 

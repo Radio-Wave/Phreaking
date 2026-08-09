@@ -931,6 +931,446 @@ if (ed) {
 }
 
 /* =======================================================================
+ * FN. Film Night
+ *
+ * schema.json deliberately contains no Film Night yet — the capability ships
+ * before the content does, and nobody's real data is being invented to test it.
+ * So this section builds one from the existing CWSA screening and drives it
+ * through the identical path a real one would take: renderPage → applyRegions
+ * → the raw bytes a crawler receives → jsdom hydration → the editor's preview.
+ *
+ * It mirrors the Performance Night sections above deliberately, assertion for
+ * assertion, because "does a Film Night behave exactly like a Performance
+ * Night" is the actual requirement.
+ * ==================================================================== */
+section('FN. Film Night');
+
+const FILM_FIXTURE = clone(SCHEMA);
+const FNE = FILM_FIXTURE['@graph'].find((e) => e['@id'] === 'https://phreaking.co.uk/past-events#event-cwsa-film-night');
+ok('the Film Night fixture targets a real screening', !!FNE);
+FNE.label = 'Film Night';
+FNE.previewDescription = 'An evening of computational arts moving image work, shown on 16mm and digital.';
+FNE.cardColor = '#0d1b2a';
+FNE.workPresented = [
+  {
+    '@type': 'Movie',
+    name: 'Tidal Drift',
+    creator: 'Verona Gryshchuk',
+    description: 'A slow study of shoreline erosion rendered entirely from tide-gauge telemetry, printed to 16mm and re-scanned.',
+    images: [
+      { src: '/assets/CanWeStartAgain/Events/film-night/tidal-drift_1.webp',
+        full: '/assets/CanWeStartAgain/Events/film-night/tidal-drift_1.jpg',
+        alt: 'Still from Tidal Drift, Film Night 2026' },
+      { src: '/assets/CanWeStartAgain/Events/film-night/tidal-drift_2.webp',
+        full: '/assets/CanWeStartAgain/Events/film-night/tidal-drift_2.jpg',
+        alt: 'Second still from Tidal Drift, Film Night 2026' },
+    ],
+  },
+  {
+    '@type': 'Movie',
+    name: 'Cold Storage Lullaby',
+    creator: 'Autojektor Studio',
+    description: 'Footage recovered from decommissioned data-centre security tapes, slowed until the compression artefacts become the subject.',
+    images: [
+      { src: '/assets/CanWeStartAgain/Events/film-night/cold-storage_1.webp',
+        full: '/assets/CanWeStartAgain/Events/film-night/cold-storage_1.jpg',
+        alt: 'Still from Cold Storage Lullaby, Film Night 2026' },
+    ],
+  },
+];
+
+const FILMS = P.filmsOf(FNE);
+eq('the fixture Film Night has films to check', FILMS.length, 2);
+ok('a plain Screening is not a Film Night', !P.isFilmNight(
+  SCHEMA['@graph'].find((e) => e['@id'] === 'https://phreaking.co.uk/past-events#event-cwsa-film-night')));
+ok('a Film Night is not mistaken for a Performance Night', !P.isPerfNight(FNE));
+ok('…and a Performance Night is not mistaken for a Film Night', !P.isFilmNight(PN));
+
+const fnPage = P.renderPage(FILM_FIXTURE);
+ok('a Film Night bakes without errors', fnPage.errors.length === 0, JSON.stringify(fnPage.errors.slice(0, 2)));
+eq('…and nothing is skipped', fnPage.skipped, 0);
+ok('…and with no warnings', fnPage.warnings.length === 0, fnPage.warnings.slice(0, 3).join('; '));
+
+const FN_INDEX = P.applyRegions(INDEX, fnPage.regions).html;
+const FN_TEXT = rawText(FN_INDEX);
+
+/* ── raw HTML: zero JavaScript executed ─────────────────────────────────── */
+let filmProblems = [];
+FILMS.forEach((f, i) => {
+  if (!has(FN_TEXT, rawText(f.title))) filmProblems.push(`film ${i + 1} title "${f.title}"`);
+  if (!has(FN_TEXT, rawText(f.artists))) filmProblems.push(`film ${i + 1} credit "${f.artists}"`);
+  if (!has(FN_TEXT, rawText(f.description).slice(0, 70))) filmProblems.push(`film ${i + 1} description`);
+  (f.images || []).forEach((im) => {
+    if (!has(FN_INDEX, 'src="' + im.src + '"')) filmProblems.push(`film ${i + 1} image ${im.src}`);
+  });
+});
+ok('every film title, credit, description and image is in the raw markup',
+  filmProblems.length === 0, filmProblems.join(', '));
+
+ok('film markup is real content, not an empty JS-filled container',
+  (FN_INDEX.match(/class="fn-film"/g) || []).length === FILMS.length);
+
+ok('the film detail block is never marked with the HTML `hidden` attribute — ' +
+  'some text-extraction/summarisation tools specifically strip [hidden] content',
+  !/<div class="fn-detail[^"]*"[^>]*\shidden(\s|>)/.test(FN_INDEX));
+
+/* The no-JS path. index.html's <noscript> block is what reveals a stowed
+ * detail block for a visitor without JavaScript — and it names its classes
+ * literally, so a new subtype whose namespace is missing from it is invisible
+ * to those visitors while looking perfectly fine to everyone else. Rather than
+ * hard-coding the two we know about, this derives every stow class the
+ * renderer can actually emit and insists the block covers all of them, so the
+ * next subtype cannot ship without it. */
+const noscriptBlock = (INDEX.match(/<noscript>[\s\S]*?<\/noscript>/) || [''])[0];
+const stowClasses = [...new Set((SCRIPT.match(/[a-z]+-detail--stowed/g) || []))];
+ok('the renderer emits the stow classes this check knows to look for',
+  stowClasses.length >= 2, stowClasses.join(', '));
+const uncovered = stowClasses.filter((c) => !has(noscriptBlock, '.' + c));
+ok('index.html\'s <noscript> block reveals every stowed detail block, ' +
+  'so no subtype\'s content is hidden from visitors without JavaScript',
+  uncovered.length === 0, 'not covered: ' + uncovered.join(', '));
+ok('…including the Film Night namespace specifically',
+  has(noscriptBlock, '.fn-detail.fn-detail--stowed{display:block') &&
+  has(noscriptBlock, '.event-card.fn-card{cursor:default;}'));
+
+ok('Film Night full description is baked (not just the preview)',
+  has(FN_TEXT, rawText(FNE.description).slice(0, 40)));
+ok('Film Night preview description is on the condensed card',
+  has(FN_TEXT, rawText(FNE.previewDescription).slice(0, 40)));
+
+ok('the renderer\'s own verifier agrees the Film Night page is complete',
+  P.verifyBakedHTML(FN_INDEX, FILM_FIXTURE).ok,
+  P.verifyBakedHTML(FN_INDEX, FILM_FIXTURE).problems.slice(0, 3).join('; '));
+
+ok('a hollowed-out film block is caught by the verifier',
+  !P.verifyBakedHTML(FN_INDEX.replace(/<section class="fn-film"[\s\S]*?<\/section>/g, ''), FILM_FIXTURE).ok);
+
+/* ── structured data ────────────────────────────────────────────────────── */
+const fnLd = fnPage.jsonLd['@graph'].find((n) => n.name === FNE.name && n.workPresented);
+ok('the Film Night is a typed workPresented graph', !!fnLd && Array.isArray(fnLd.workPresented));
+if (fnLd && fnLd.workPresented) {
+  eq('every film is present as workPresented', fnLd.workPresented.length, FILMS.length);
+  ok('films are typed Movie, not PerformingArtsEvent',
+    fnLd.workPresented.every((m) => m['@type'] === 'Movie'));
+  ok('films carry a name and a stable @id',
+    fnLd.workPresented.every((m) => m.name && /-film-\d+$/.test(String(m['@id']))));
+  ok('a film credit becomes schema.org `creator`, not `performer` or `director`',
+    fnLd.workPresented.every((m) => !!m.creator && !m.performer && !m.director));
+  ok('a personal credit is typed Person',
+    fnLd.workPresented[0].creator['@type'] === 'Person',
+    JSON.stringify(fnLd.workPresented[0].creator));
+  ok('a studio credit is typed Organization, not PerformingGroup',
+    fnLd.workPresented[1].creator['@type'] === 'Organization',
+    JSON.stringify(fnLd.workPresented[1].creator));
+  /* A Movie is a work, not an event. Emitting Event properties on it would be
+   * asserting fields the type does not define — the reason this is NOT a
+   * copy of actNode(). */
+  ok('films carry no Event-only properties (startDate/eventStatus/location)',
+    fnLd.workPresented.every((m) => !m.startDate && !m.eventStatus && !m.location && !m.eventAttendanceMode));
+  ok('film images are absolute URLs',
+    fnLd.workPresented.every((m) => (m.image || []).every((u) => /^https:\/\//.test(u))));
+  ok('the Film Night itself keeps its own location — films do not remove it', !!fnLd.location);
+  ok('a Film Night does not also emit subEvent', !fnLd.subEvent);
+  ok('the editor-shaped `images` key never reaches the JSON-LD',
+    !has(JSON.stringify(fnPage.jsonLd), '"images"'));
+}
+
+/* ── microdata ↔ JSON-LD parity ─────────────────────────────────────────── */
+const fnDoc = new JSDOM(FN_INDEX).window.document;
+const fnCard = fnDoc.querySelector('.event-card.fn-card');
+ok('the Film Night card exists and is its own namespace, not .pn-card',
+  !!fnCard && !fnCard.classList.contains('pn-card'));
+
+const filmNodes = [...fnDoc.querySelectorAll('[itemprop="workPresented"]')];
+eq('films are workPresented microdata inside the card', filmNodes.length, FILMS.length);
+ok('every film scope is a typed Movie',
+  filmNodes.every((n) => /schema\.org\/Movie/.test(n.getAttribute('itemtype') || '')));
+ok('film microdata sits inside the Film Night card\'s own itemscope',
+  filmNodes.every((n) => n.closest('.event-card.fn-card')));
+ok('every film carries a name in microdata',
+  filmNodes.every((n) => n.querySelector('[itemprop="name"]')));
+ok('every film credit is a properly scoped creator, matching the JSON-LD',
+  filmNodes.every((n) => {
+    const c = n.querySelector('[itemprop="creator"]');
+    return c && c.hasAttribute('itemscope') &&
+      /schema\.org\/(Person|Organization)/.test(c.getAttribute('itemtype') || '') &&
+      c.querySelector('[itemprop="name"]');
+  }));
+ok('every film still carries itemprop="image" on each still',
+  [...fnCard.querySelectorAll('.fn-film .image-row img')].every((i) => i.getAttribute('itemprop') === 'image'));
+
+/* The field sets must agree in BOTH directions — a property in one
+ * representation and not the other is what gets an entity reported twice. */
+const ldFilmProps = new Set();
+fnLd.workPresented.forEach((m) => Object.keys(m).forEach((k) => { if (k[0] !== '@') ldFilmProps.add(k); }));
+const mdFilmProps = new Set();
+filmNodes.forEach((n) => [...n.querySelectorAll('[itemprop]')]
+  .filter((el) => el.closest('[itemprop="workPresented"]') === n &&
+    (!el.parentElement.closest('[itemscope]') || el.parentElement.closest('[itemscope]') === n))
+  .forEach((el) => mdFilmProps.add(el.getAttribute('itemprop'))));
+ok('every JSON-LD film property also appears in the film microdata',
+  [...ldFilmProps].every((k) => mdFilmProps.has(k)),
+  'missing from microdata: ' + [...ldFilmProps].filter((k) => !mdFilmProps.has(k)).join(', '));
+ok('every film microdata property also appears in the JSON-LD',
+  [...mdFilmProps].every((k) => ldFilmProps.has(k)),
+  'missing from JSON-LD: ' + [...mdFilmProps].filter((k) => !ldFilmProps.has(k)).join(', '));
+
+/* NOTE the `>` combinator, for the same reason the acts version needs it:
+ * films nest inside the card, so a descendant selector would overcount. */
+eq('the card\'s own location scope is not double-counted by nested films',
+  fnDoc.querySelectorAll('.event-card.fn-card > [itemprop="location"]').length, 1);
+eq('a Film Night card still carries its own organizer',
+  fnDoc.querySelectorAll('.event-card.fn-card > [itemprop="organizer"]').length, 1);
+
+/* ── hydration ──────────────────────────────────────────────────────────── */
+function bootFN(hash) {
+  const dom = new JSDOM(FN_INDEX, {
+    url: 'https://phreaking.co.uk/past-events/' + (hash || ''),
+    runScripts: 'outside-only',
+    pretendToBeVisual: true,
+    virtualConsole: new VirtualConsole(),
+  });
+  dom.window.eval(SCRIPT);
+  dom.window.document.dispatchEvent(new dom.window.Event('DOMContentLoaded', { bubbles: true }));
+  return dom;
+}
+
+const fdom = bootFN();
+const fdoc = fdom.window.document;
+const FW = fdom.window;
+const fCard = fdoc.querySelector('.event-card.fn-card');
+
+ok('the Film Night card is present and focusable',
+  fCard && fCard.getAttribute('role') === 'button' && fCard.getAttribute('tabindex') === '0');
+eq('condensed card shows the Film Night badge',
+  fCard.querySelector('.event-type').textContent.trim(), 'Film Night');
+eq('condensed card keeps its per-card background',
+  fCard.style.background.replace(/\s/g, ''), 'rgb(13,27,42)');
+eq('condensed card shows three preview thumbnails',
+  fCard.querySelectorAll('.fn-preview-row img').length, 3);
+ok('condensed card shows the preview description, not the full one',
+  fCard.querySelector('.event-description').textContent.trim()
+    .startsWith(FNE.previewDescription.trim().slice(0, 40)));
+ok('the detail block is baked inside the card and visually stowed for JS users',
+  fCard.querySelector('.fn-detail') && fCard.querySelector('.fn-detail').classList.contains('fn-detail--stowed'));
+ok('…via a CSS class, not the semantic `hidden` attribute',
+  !fCard.querySelector('.fn-detail').hasAttribute('hidden'));
+eq('the card hint counts films, not performances',
+  fCard.querySelector('.fn-hint-text').textContent.trim(), 'View 2 films');
+
+fCard.dispatchEvent(new FW.MouseEvent('click', { bubbles: true }));
+const fModal = fdoc.querySelector('.fn-modal');
+ok('modal: opens on card click', fModal && fModal.getAttribute('aria-hidden') === 'false');
+eq('modal: title', fModal.querySelector('.fn-modal__title').textContent.trim(), FNE.name);
+eq('modal: badge', fModal.querySelector('.fn-modal__label').textContent.trim(), 'Film Night');
+eq('modal: date top-right', fModal.querySelector('.fn-modal__day').textContent.trim(), 'Friday 10th July');
+eq('modal: time top-right', fModal.querySelector('.fn-modal__time').textContent.trim(), '19:30–21:00');
+ok('modal: poster and description are laid out side by side',
+  fModal.querySelector('.fn-modal__intro .fn-modal__poster') && fModal.querySelector('.fn-modal__intro .fn-modal__desc'));
+ok('modal: shows the FULL description, not the preview',
+  fModal.querySelector('.fn-modal__desc').textContent.indexOf(FNE.description.slice(0, 40)) !== -1);
+eq('modal: every film is listed in order', fModal.querySelectorAll('.fn-film').length, FILMS.length);
+ok('modal: film titles/credits/descriptions/images are all there',
+  FILMS.every((f, i) => {
+    const sec = fModal.querySelectorAll('.fn-film')[i];
+    return sec.textContent.indexOf(f.title) !== -1 &&
+      sec.textContent.indexOf(f.artists) !== -1 &&
+      sec.textContent.indexOf(f.description.trim().slice(0, 40)) !== -1 &&
+      sec.querySelectorAll('img').length === (f.images || []).length;
+  }));
+eq('modal: the detail node is MOVED, not copied — one instance in the document',
+  fdoc.querySelectorAll('[data-fn-detail]').length, 1);
+eq('modal: url gains the deep-link hash', fdom.window.location.hash, '#film-night');
+
+fModal.querySelector('.fn-modal__close').dispatchEvent(new FW.MouseEvent('click', { bubbles: true }));
+eq('modal: closes on the close button', fModal.getAttribute('aria-hidden'), 'true');
+ok('modal: the detail block goes back into its card, stowed with its OWN class',
+  fCard.querySelector('.fn-detail') !== null &&
+  fCard.querySelector('.fn-detail').classList.contains('fn-detail--stowed') &&
+  !fCard.querySelector('.fn-detail').classList.contains('pn-detail--stowed'));
+
+fCard.dispatchEvent(new FW.KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+eq('modal: opens from the keyboard', fdoc.querySelector('.fn-modal').getAttribute('aria-hidden'), 'false');
+fdoc.dispatchEvent(new FW.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+eq('modal: closes on Escape', fdoc.querySelector('.fn-modal').getAttribute('aria-hidden'), 'true');
+fCard.dispatchEvent(new FW.MouseEvent('click', { bubbles: true }));
+fdoc.querySelector('.fn-modal__backdrop').dispatchEvent(new FW.MouseEvent('click', { bubbles: true }));
+eq('modal: backdrop click dismisses', fdoc.querySelector('.fn-modal').getAttribute('aria-hidden'), 'true');
+
+/* a Film Night preview thumbnail opens the card, not the lightbox */
+const fdom2 = bootFN();
+fdom2.window.document.querySelector('.fn-preview-row figure')
+  .dispatchEvent(new fdom2.window.MouseEvent('click', { bubbles: true }));
+eq('Film Night preview thumbs open the modal, not the lightbox',
+  fdom2.window.document.querySelector('.pc-lightbox').getAttribute('aria-hidden'), 'true');
+eq('…and the modal did open',
+  fdom2.window.document.querySelector('.fn-modal').getAttribute('aria-hidden'), 'false');
+
+/* deep-linking — the same generalised hash router, not a second one */
+eq('deep link /#film-night opens that modal on load',
+  bootFN('#film-night').window.document.querySelector('.fn-modal').getAttribute('aria-hidden'), 'false');
+eq('deep link /#event-film-night (the @id form) also opens it',
+  bootFN('#event-film-night').window.document.querySelector('.fn-modal').getAttribute('aria-hidden'), 'false');
+const fdom5 = bootFN('#workshops');
+ok('a filter hash still filters rather than being read as a film slug',
+  fdom5.window.document.querySelector('#section-workshops').classList.contains('hidden') === false &&
+  fdom5.window.document.querySelector('#section-talks').classList.contains('hidden') === true);
+
+/* the two features coexist on one page without interfering */
+const fdom6 = bootFN('#slow-impulse');
+eq('a Performance Night deep link still opens the PN modal on a page that has both',
+  fdom6.window.document.querySelector('.pn-modal').getAttribute('aria-hidden'), 'false');
+ok('…and the Film Night detail stays stowed in its own card',
+  fdom6.window.document.querySelector('.event-card.fn-card .fn-detail')
+    .classList.contains('fn-detail--stowed'));
+const fdom7 = bootFN();
+fdom7.window.document.querySelector('.event-card.pn-card')
+  .dispatchEvent(new fdom7.window.MouseEvent('click', { bubbles: true }));
+fdom7.window.document.querySelector('.event-card.fn-card')
+  .dispatchEvent(new fdom7.window.MouseEvent('click', { bubbles: true }));
+eq('opening a Film Night closes an open Performance Night',
+  fdom7.window.document.querySelector('.pn-modal').getAttribute('aria-hidden'), 'true');
+eq('…and the Film Night modal is the one now open',
+  fdom7.window.document.querySelector('.fn-modal').getAttribute('aria-hidden'), 'false');
+ok('…and the Performance Night detail went home to its own card, stowed',
+  fdom7.window.document.querySelector('.event-card.pn-card .pn-detail')
+    .classList.contains('pn-detail--stowed'));
+
+/* plain screenings are untouched */
+const plainScreenings = [...fdoc.querySelectorAll('#section-screenings .event-card:not(.fn-card)')];
+ok('plain Screenings on the same page are not clickable dialogs',
+  plainScreenings.length > 0 && plainScreenings.every((c) => !c.hasAttribute('role')),
+  plainScreenings.length + ' plain screenings');
+ok('…and carry no film markup at all',
+  plainScreenings.every((c) => !c.querySelector('[itemprop="workPresented"]') && !c.querySelector('.fn-detail')));
+
+/* ── diagnostics ────────────────────────────────────────────────────────── */
+const badFilms = clone(FILM_FIXTURE);
+badFilms['@graph'].find((e) => P.isFilmNight(e)).workPresented = 'not an array';
+const badFilmsPage = P.renderPage(badFilms);
+ok('malformed film data is caught and named',
+  badFilmsPage.errors.some((e) => /Film Night|film-night/.test(e)),
+  JSON.stringify(badFilmsPage.errors.slice(0, 2)));
+ok('…and the rest of the page still bakes',
+  badFilmsPage.fatal === null && badFilmsPage.baked === PAST.length - 1);
+
+const badFilmImg = clone(FILM_FIXTURE);
+badFilmImg['@graph'].find((e) => P.isFilmNight(e)).workPresented[0].images[0].src = '';
+ok('a film image with no src is reported specifically',
+  P.renderPage(badFilmImg).errors.some((m) => /film 1 image 1/.test(m)),
+  JSON.stringify(P.renderPage(badFilmImg).errors.slice(0, 2)));
+
+const noAltFilm = clone(FILM_FIXTURE);
+noAltFilm['@graph'].find((e) => P.isFilmNight(e)).workPresented[0].images[0].alt = '';
+const noAltFilmPage = P.renderPage(noAltFilm);
+eq('a missing film alt is a warning, not a skip', noAltFilmPage.baked, PAST.length);
+ok('…and it is still reported', noAltFilmPage.warnings.some((w) => /film 1 image 1/.test(w) && /alt/.test(w)));
+
+const untitledFilm = clone(FILM_FIXTURE);
+untitledFilm['@graph'].find((e) => P.isFilmNight(e)).workPresented[0].name = '';
+ok('an untitled film is a named warning, never an invented placeholder title',
+  P.renderPage(untitledFilm).warnings.some((w) => /film 1 has no title/.test(w)));
+
+const emptyFn = clone(FILM_FIXTURE);
+delete emptyFn['@graph'].find((e) => P.isFilmNight(e)).workPresented;
+ok('a Film Night with no lineup yet still bakes, with a warning',
+  P.renderPage(emptyFn).errors.length === 0 &&
+  P.renderPage(emptyFn).warnings.some((w) => /no films filled in/.test(w)));
+
+const wrongType = clone(FILM_FIXTURE);
+wrongType['@graph'].find((e) => P.isFilmNight(e))['@type'] = 'PerformingArtsEvent';
+ok('a Film Night badge on a non-ScreeningEvent is warned about, since ' +
+  'workPresented is only defined on ScreeningEvent',
+  P.renderPage(wrongType).warnings.some((w) => /ScreeningEvent/.test(w)));
+
+/* ── editor preview parity ──────────────────────────────────────────────── */
+let fnEd = null;
+try { fnEd = bootEditor(); } catch (e) { /* reported in F2 */ }
+if (fnEd) {
+  const w = fnEd.window;
+  const run = (src) => w.eval(src);
+  w.__fnFixture = clone(FILM_FIXTURE);
+  run('data = __fnFixture; datasets.events = data; mode = "events"; extractFromData();');
+
+  eq('the editor recognises the Film Night badge', run('isFilmNight(data["@graph"].find(e=>e.label==="Film Night"))'), true);
+  eq('film image slots resolve in their own namespace (f0-1)',
+    !!run('slotImg(data["@graph"].find(e=>isFilmNight(e)), "f0-1")'), true);
+  ok('an act slot does not resolve against a film',
+    !run('slotImg(data["@graph"].find(e=>isFilmNight(e)), "p0-1")'));
+  eq('allSlots covers event + film images',
+    run('allSlots(data["@graph"].find(e=>isFilmNight(e))).length'),
+    (FNE.images || []).length + FNE.workPresented.reduce((n, f) => n + (f.images || []).length, 0));
+  ok('film images get a film-specific filename stem, not the event\'s',
+    has(run('imgAssetPath(data["@graph"].find(e=>isFilmNight(e)), "f0-1", "webp")'), 'film-night_tidal-drift_2.webp'),
+    run('imgAssetPath(data["@graph"].find(e=>isFilmNight(e)), "f0-1", "webp")'));
+
+  /* opening the record must not rewrite it — there is no migration here */
+  const before = JSON.stringify(run('data["@graph"].find(e=>isFilmNight(e))'));
+  const fnIdx = run('data["@graph"].findIndex(e=>isFilmNight(e))');
+  run(`curIdx = ${fnIdx}; buildForm();`);
+  const after = run('data["@graph"].find(e=>isFilmNight(e))');
+  /* There is no migration for films, so opening the record must be a pure read:
+   * ensureFilms() only ever adds a block to an EMPTY lineup, matching how
+   * ensurePerformances() leaves a populated act list alone. A push after merely
+   * looking at a Film Night must carry no change to it. */
+  eq('opening a populated Film Night mutates nothing',
+    JSON.stringify(after), before);
+  ok('the form renders exactly one block per film',
+    w.document.querySelectorAll('#filmBlocks .perf-block').length === FILMS.length);
+
+  /* …and an empty lineup does get its one blank block to type into */
+  w.__emptyFn = clone(FILM_FIXTURE);
+  delete w.__emptyFn['@graph'].find((e) => P.isFilmNight(e)).workPresented;
+  run('data = __emptyFn; datasets.events = data; mode = "events"; extractFromData();');
+  run(`curIdx = ${fnIdx}; buildForm();`);
+  eq('opening a Film Night with no lineup yet offers one blank block',
+    run('data["@graph"].find(e=>isFilmNight(e)).workPresented.length'), 1);
+  run('data = __fnFixture; datasets.events = data; mode = "events"; extractFromData();');
+  run(`curIdx = ${fnIdx}; buildForm();`);
+  ok('the form uses film-specific input ids, not the performance ones',
+    !!w.document.getElementById('ff-title-0') && !w.document.getElementById('pf-title-0'));
+
+  run('curIdx = null; renderStyle = "pe"; prevFilter = "all"; showHidden = false; renderPreview();');
+  const frame = w.document.getElementById('prevFrame');
+  ok('the preview pane renders the Film Night card', !!frame.querySelector('.event-card.fn-card'));
+  ok('the preview pane bakes films into the card too',
+    frame.querySelectorAll('.event-card.fn-card .fn-film').length === FILMS.length);
+  ok('the preview pane carries the same microdata',
+    !!frame.querySelector('[itemprop="workPresented"][itemscope]'));
+
+  /* Not merely similar — the same markup. The blank trailing block the form
+   * adds is not a film, so it must not appear in either rendering. */
+  const previewFn = frame.querySelector('.event-card.fn-card');
+  const bakedFn = fnDoc.querySelector('.event-card.fn-card');
+  const stripEditorOnly = (html) => html
+    .replace(/<span class="event-type" style="opacity:\.55[^<]*<\/span>/g, '')
+    .replace(/ class="event-card fn-card[^"]*"/, ' class="event-card fn-card"')
+    .replace(/\s+/g, ' ').trim();
+  eq('the preview card is byte-identical to the baked card',
+    stripEditorOnly(previewFn.outerHTML), stripEditorOnly(bakedFn.outerHTML));
+
+  run('pnExpanded.clear(); pnExpanded.add("film-night"); renderPreview();');
+  const ov = w.document.getElementById('prevOverlay');
+  ok('the preview modal opens over the pane', !!ov.querySelector('.fn-modal'));
+  ok('the preview modal uses the Film Night shell, not the Performance Night one',
+    !!(ov.querySelector('.fn-modal__head') && ov.querySelector('.fn-modal__scroll') &&
+       ov.querySelector('.fn-modal__intro') && ov.querySelector('.fn-modal__log')) &&
+    !ov.querySelector('.pn-modal'));
+  eq('the preview modal lists every film', ov.querySelectorAll('.fn-film').length, FILMS.length);
+  ok('the preview modal shows the full description, not the preview one',
+    ov.querySelector('.fn-modal__desc').textContent.indexOf(FNE.description.slice(0, 40)) !== -1);
+  eq('the preview modal head carries the badge',
+    ov.querySelector('.fn-modal__label').textContent.trim(), 'Film Night');
+  run('pnExpanded.clear(); renderPreview();');
+  eq('closing the preview modal empties the overlay',
+    w.document.getElementById('prevOverlay').innerHTML.trim(), '');
+
+  const fnXml = run('buildImageSitemapXML(data, { galleries: [] })');
+  ok('the image sitemap lists per-film images', has(fnXml, 'tidal-drift_1.jpg'));
+  ok('…and still lists per-act images', has(fnXml, 'slow-impulse_genia-isachenko_1'));
+}
+
+/* =======================================================================
  * G. Drift between the baked page and the live render
  * ==================================================================== */
 section('G. Drift');

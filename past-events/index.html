@@ -47,7 +47,11 @@
   <!-- PE:END:pe-jsonld -->
 
   <!-- Without JavaScript there is no modal to open, so the Performance Night
-       act log is shown in place instead of being folded away. -->
+       act log and the Film Night lineup are shown in place instead of being
+       folded away. One rule set per feature: the two namespaces are kept
+       separate on purpose (see past-events.css), so neither can be revealed or
+       re-collapsed by the other's rules. Any new detail subtype needs its own
+       block added here, or its content is invisible to no-JS visitors. -->
   <noscript>
     <style>
       .pn-detail.pn-detail--stowed{display:block;margin-top:2rem;}
@@ -57,6 +61,13 @@
       .pn-detail .pn-modal__poster img{width:100%;height:auto;}
       .event-card.pn-card{cursor:default;}
       .pn-hint{display:none;}
+      .fn-detail.fn-detail--stowed{display:block;margin-top:2rem;}
+      .fn-detail .fn-modal__intro{display:block;}
+      .fn-detail .fn-modal__desc{max-width:100%;}
+      .fn-detail .fn-modal__poster{max-width:100%;margin-bottom:1.5rem;}
+      .fn-detail .fn-modal__poster img{width:100%;height:auto;}
+      .event-card.fn-card{cursor:default;}
+      .fn-hint{display:none;}
     </style>
   </noscript>
 
