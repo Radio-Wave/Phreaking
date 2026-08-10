@@ -3207,7 +3207,7 @@
       "@id": "https://phreaking.co.uk/#artwork-i-missed-the-bus-because-it-wasn-t-real-bitrot",
       "name": "I Missed the Bus Because it Wasn't Real",
       "exhibition": "bitrot",
-      "sortOrder": 2,
+      "sortOrder": 7,
       "visibleOn": [
         "/BitRot/"
       ],
@@ -3235,7 +3235,8 @@
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-maisy-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
@@ -3577,7 +3578,7 @@
       "@id": "https://phreaking.co.uk/#artwork-chorus-inutil-bitrot",
       "name": "Chorus Inútil",
       "exhibition": "bitrot",
-      "sortOrder": 13,
+      "sortOrder": 2,
       "visibleOn": [
         "/BitRot/"
       ],
@@ -3610,14 +3611,15 @@
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-nikos-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
       "@id": "https://phreaking.co.uk/#artwork-the-screens-i-had-weren-t-enough-i-had-to-go-out-and-get-three-more-bitrot",
       "name": "The screens I had weren't enough; I had to go out and get three more",
       "exhibition": "bitrot",
-      "sortOrder": 14,
+      "sortOrder": 4,
       "visibleOn": [
         "/BitRot/"
       ],
@@ -3651,14 +3653,15 @@
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-eryn-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
       "@id": "https://phreaking.co.uk/#artwork-gone-fishing-bitrot",
       "name": "Gone Fishing",
       "exhibition": "bitrot",
-      "sortOrder": 15,
+      "sortOrder": 5,
       "visibleOn": [
         "/BitRot/"
       ],
@@ -3690,7 +3693,8 @@
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-lyra-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
@@ -3736,7 +3740,7 @@
       "@id": "https://phreaking.co.uk/#artwork-typeface-bitrot",
       "name": "TYPEFACE",
       "exhibition": "bitrot",
-      "sortOrder": 17,
+      "sortOrder": 4,
       "visibleOn": [
         "/BitRot/"
       ],
@@ -3766,7 +3770,8 @@
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-lucy-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
@@ -4000,18 +4005,18 @@
       ],
       "images": [
         {
-          "src": "/assets/DCCeP/Artwork/DDCeP-17.webp",
-          "full": "/assets/DCCeP/Artwork/DDCeP-17.jpg",
-          "alt": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst",
-          "gallery": "dccep",
-          "galleryRef": "DDCeP-17"
-        },
-        {
           "src": "/assets/DCCeP/Artwork/DDCeP-20.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-20.jpg",
           "alt": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst",
           "gallery": "dccep",
           "galleryRef": "DDCeP-20"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-17.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-17.jpg",
+          "alt": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst",
+          "gallery": "dccep",
+          "galleryRef": "DDCeP-17"
         }
       ],
       "visible": true,
@@ -4052,18 +4057,18 @@
       ],
       "images": [
         {
-          "src": "/assets/DCCeP/Artwork/DDCeP-06.webp",
-          "full": "/assets/DCCeP/Artwork/DDCeP-06.jpg",
-          "alt": "Potatos nailed to a wall with a screen of a Potato",
-          "gallery": "dccep",
-          "galleryRef": "DDCeP-06"
-        },
-        {
           "src": "/assets/DCCeP/Artwork/DDCeP-07.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-07.jpg",
           "alt": "Potatos nailed to a wall with a screen of a Potato",
           "gallery": "dccep",
           "galleryRef": "DDCeP-07"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-06.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-06.jpg",
+          "alt": "Potatos nailed to a wall with a screen of a Potato",
+          "gallery": "dccep",
+          "galleryRef": "DDCeP-06"
         }
       ],
       "visible": true,
@@ -4099,18 +4104,18 @@
       ],
       "images": [
         {
-          "src": "/assets/DCCeP/Artwork/DDCeP-08.webp",
-          "full": "/assets/DCCeP/Artwork/DDCeP-08.jpg",
-          "alt": "A screen held with metal bars, showing erotic material",
-          "gallery": "dccep",
-          "galleryRef": "DDCeP-08"
-        },
-        {
           "src": "/assets/DCCeP/Artwork/DDCeP-09.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-09.jpg",
           "alt": "A screen held with metal bars, showing erotic material",
           "gallery": "dccep",
           "galleryRef": "DDCeP-09"
+        },
+        {
+          "src": "/assets/DCCeP/Artwork/DDCeP-08.webp",
+          "full": "/assets/DCCeP/Artwork/DDCeP-08.jpg",
+          "alt": "A screen held with metal bars, showing erotic material",
+          "gallery": "dccep",
+          "galleryRef": "DDCeP-08"
         }
       ],
       "visible": true,
