@@ -8,6 +8,7 @@
   <link rel="canonical" href="https://phreaking.co.uk/BitRot/" />
   <link rel="stylesheet" href="/styles/bitRotStyles.css" />
   <link rel="stylesheet" href="/styles/sidebar.css" />
+  <link rel="stylesheet" href="/styles/artwork.css" />
   <!-- VT323 for h2 -->
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
@@ -59,15 +60,10 @@
       <img src="/assets/PhreakingLogoWhite.png" alt="Phreaking Collective" decoding="async">
     </a>
   </header>
-      <!-- keep marquee if you like; now it sits in the right column -->
-      <marquee class="banner" scrollamount="3" scrolldelay="0" behavior="scroll" loop="true" direction="left">
-        COPELAND GALLERY 7TH–10TH AUGUST PRIVATE VIEW THURSDAY 7TH 5PM * COPELAND GALLERY 7TH–10TH AUGUST PRIVATE VIEW THURSDAY 7TH 5PM *
-      </marquee>
-
   <div class="hero">
     <nav class="nav nav--right">
       <ul>
-        <li><a href="#press">press release</a></li>
+        <li><a href="#artwork">Artwork</a></li>
         <li><a href="#location">location</a></li>
 
         <li><a href="#about">about</a></li>
@@ -88,440 +84,79 @@
     </nav>
   </div>
 
-  <figure class="landscape-photo">
-    <img src="/assets/phreakingRot.png" alt="Pixel-sorted telephone operator artwork for BitRot" fetchpriority="high" decoding="async">
-  </figure>
+  <div class="hero-split">
+    <div class="hero-split__text">
+      <!-- 1. Intro quote -->
+      <blockquote class="intro-quote">
+        “We fear forgetting, losing memories, and want to store and archive everything, throwing nothing away.
+        Do we have the courage to forget?”
+        <footer>
+          — Matilde Crucitti, <cite>Losing the Backup</cite>
+        </footer>
+      </blockquote>
 
+      <div class="body-text">
+        <p>
+          The Phreaking Collective invited visitors to <strong>Bit Rot</strong>, a group exhibition that explores the
+          fragility, decay,
+          and obsolescence of our digital age. Taking its name from the slow degradation of digital files over time,
+          Bit Rot stages a post-human reflection on the technologies that once promised progress and the lives they now
+          leave behind.
+        </p>
 
-  <section id="press">
-    <h2>Press Release</h2>
+        <p>
+          Visitors were invited into a world where bots are trained on the voices of forgotten users and inactive profiles,
+          where decaying systems generate new poetics, and where digital forgetting becomes an act of care.
+          Curated by a collective of computational artists born into the internet age, Bit Rot is both a mourning space
+          and a speculative future archive.
+        </p>
 
-    <!-- 1. Intro quote -->
-    <blockquote class="intro-quote">
-      “We fear forgetting, losing memories, and want to store and archive everything, throwing nothing away.
-      Do we have the courage to forget?”
-      <footer>
-        — Matilde Crucitti, <cite>Losing the Backup</cite>
-      </footer>
-    </blockquote>
-
-    <div class="body-text">
-      <p>
-        The Phreaking Collective invited visitors to <strong>Bit Rot</strong>, a group exhibition that explores the
-        fragility, decay,
-        and obsolescence of our digital age. Taking its name from the slow degradation of digital files over time,
-        Bit Rot stages a post-human reflection on the technologies that once promised progress and the lives they now
-        leave behind.
-      </p>
-
-      <p>
-        Visitors were invited into a world where bots are trained on the voices of forgotten users and inactive profiles,
-        where decaying systems generate new poetics, and where digital forgetting becomes an act of care.
-        Curated by a collective of computational artists born into the internet age, Bit Rot is both a mourning space
-        and a speculative future archive.
-      </p>
-
-      <p>
-        Alongside the exhibition, the Phreaking Collective hosted a weekend of free public programming,
-        including hands-on workshops, artist talks, live performances, and community events.
-        This will open access to new forms of digital literacy, storytelling, and cultural memory.
-      </p>
+        <p>
+          Alongside the exhibition, the Phreaking Collective hosted a weekend of free public programming,
+          including hands-on workshops, artist talks, live performances, and community events.
+          This will open access to new forms of digital literacy, storytelling, and cultural memory.
+        </p>
+      </div>
     </div>
 
-    <!-- 3. Keywords at the end -->
-    <div class="keywords">
-      <h3>Keywords</h3>
-      <ul>
-        <li>Digital Afterlife</li>
-        <li>Internet Archive</li>
-        <li>Algorithmic Drift</li>
-        <li>Ephemerality</li>
-      </ul>
-    </div>
-
-
-  </section>
-
-  <section class="pc-gallery" aria-label="Gallery">
-    <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
-         The figures below are a static fallback shown only if that JSON can't be fetched. -->
-  <div class="pc-grid" id="bitrot-show-grid" data-gallery-id="bitrot-show">
-    <!-- Item 1 -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/Room3Horizontal_1.webp"
-        data-full="/assets/BitRotShowImgs/Room3Horizontal_1.JPG"
-        alt="Wide show of gallery with art installation"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>BitRot Room 3</figcaption>
+    <figure class="landscape-photo hero-split__image">
+      <img src="/assets/phreakingRot.png" alt="Pixel-sorted telephone operator artwork for BitRot" fetchpriority="high" decoding="async">
     </figure>
-
-    <!-- Item 2 -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/Room2.webp"
-        data-full="/assets/BitRotShowImgs/Room2.JPG"
-        alt="Wide shot of a gallery with art installations"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>BitRot Room 2</figcaption>
-    </figure>
-
-    <!-- Item 3 -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/Room1Vertical.webp"
-        data-full="/assets/BitRotShowImgs/Room1Vertical.JPG"
-        alt="Gallery Wide Shot"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>BitRot Room 1</figcaption>
-    </figure>
-
-    <!-- Item 4 -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/Room3Vertical.webp"
-        data-full="/assets/BitRotShowImgs/Room3Vertical.JPG"
-        alt="Gallery Wide Shot"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>BitRot Room 3</figcaption>
-    </figure>
-
-    <!-- Item 5 -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistZepu.webp"
-        data-full="/assets/BitRotShowImgs/ArtistZepu.jpg"
-        alt="sculpture with skylight behind"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>A rather favourable I - Zepu Li</figcaption>
-    </figure>
-
-      <!-- Yunzhi / Melissa Li -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistYunzhi.webp"
-        data-full="/assets/BitRotShowImgs/ArtistYunzhi.JPG"
-        alt="Hear how you look, see how you sound"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Hear how you look, see how you sound — Yunzhi/Melissa Li</figcaption>
-    </figure>
-
-    <!-- Xach Hill -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistXach.webp"
-        data-full="/assets/BitRotShowImgs/ArtistXach.JPG"
-        alt="The place where its buried"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>The place where its buried — Xach Hill</figcaption>
-    </figure>
-
-        <!-- Nikos -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistNikos.webp"
-        data-full="/assets/BitRotShowImgs/ArtistNikos.JPG"
-        alt="Monitors stacked on-top cinder blocks"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption> Chorus Inútil  - Nikos Antonio Kourous Vázquez </figcaption>
-    </figure>
-
-    <!-- Lyra Robinson -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistLyra.webp"
-        data-full="/assets/BitRotShowImgs/ArtistLyra.JPG"
-        alt="Gone Fishing"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Gone Fishing — Lyra Robinson</figcaption>
-    </figure>
-
-    <!-- Jack Jessé and Paula Molina -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistJackJessePaula.webp"
-        data-full="/assets/BitRotShowImgs/ArtistJackJessePaula.JPG"
-        alt="Caught on CCTV"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Caught on CCTV — Jack Jessé and Paula Molina</figcaption>
-    </figure>
-
-    <!-- Louise Wan -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistLouise.webp"
-        data-full="/assets/BitRotShowImgs/ArtistLouise.jpg"
-        alt="i tried to remember but…."
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>i tried to remember but…. — Louise Wan</figcaption>
-    </figure>
-
-    <!-- Jin Xie (image 1) -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistJin.webp"
-        data-full="/assets/BitRotShowImgs/ArtistJin.jpg"
-        alt="Subtle Crisis"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Subtle Crisis — Jin Xie</figcaption>
-    </figure>
-
-    <!-- Phoenix Isla Kea -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistPhonex.webp"
-        data-full="/assets/BitRotShowImgs/ArtistPhonex.jpg"
-        alt="fyp"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>fyp — Phoenix Isla Kea</figcaption>
-    </figure>
-
-    <!-- METAL_UPA -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistMetalUPA.webp"
-        data-full="/assets/BitRotShowImgs/ArtistMetalUPA.jpg"
-        alt="Internet Checkpoints"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Internet Checkpoints — METAL_UPA</figcaption>
-    </figure>
-
-    <!-- Lucy Ellis (TYPEFACE) -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistLucyTypeface.webp"
-        data-full="/assets/BitRotShowImgs/ArtistLucyTypeface.jpeg"
-        alt="TYPEFACE"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>TYPEFACE — Lucy Ellis</figcaption>
-    </figure>
-
-    <!-- Charlotte Young and Phoebe Rayner -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/Artist.webp"
-        data-full="/assets/BitRotShowImgs/ArtistCharlotte.jpg"
-        alt="Me, Her, and the Computer"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Me, Her, and the Computer — Charlotte Young and Phoebe Rayner</figcaption>
-    </figure>
-
-        <!-- Maisy Charlton -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistMaisy.webp"
-        data-full="/assets/BitRotShowImgs/ArtistMaisy.JPG"
-        alt="I Missed the Bus Because it Wasn't; Real"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>I Missed the Bus Because it Wasn't Real — Maisy Charlton</figcaption>
-    </figure>
-
-    <!-- Rizq Yazed -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistRizq.webp"
-        data-full="/assets/BitRotShowImgs/ArtistRizq.jpg"
-        alt="memes are the only true contemporary art"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>memes are the only true contemporary art — Rizq Yazed</figcaption>
-    </figure>
-
-    <!-- Eryn English-Polch -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistEryn.webp"
-        data-full="/assets/BitRotShowImgs/ArtistEryn.jpg"
-        alt="The screens I had weren't enough; I had to go out and get three more"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>The screens I had weren't enough; I had to go out and get three more — Eryn English-Polch</figcaption>
-    </figure>
-
-    <!-- Lucy Ellis (Edu2000) -->
-    <figure class="pc-item">
-      <img
-        src="/assets/BitRotShowImgs/Thumbnails/ArtistLucyApple.webp"
-        data-full="/assets/BitRotShowImgs/ArtistLucyApple.jpg"
-        alt="Edu2000"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Edu2000 — Lucy Ellis</figcaption>
-    </figure>
-    
-
   </div>
-</section>
 
-
-  <section id="location">
-    <h2>Location &amp; Event</h2>
-
-    <div class="map-wrapper">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1242.6827420946436!2d-0.06769508911244726!3d51.46980533514341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487603a1052b792b%3A0xfe44f90973f73f67!2sCopeland%20Gallery!5e0!3m2!1sen!2suk!4v1751044170755!5m2!1sen!2suk"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+  <section class="hero-photos" aria-label="Show photos">
+    <div class="hero-photos__row">
+      <figure class="hero-photos__item hero-photos__item--wide">
+        <img src="/assets/BitRotShowImgs/Room3Horizontal_1.JPG" alt="Wide show of gallery with art installation" loading="lazy" decoding="async">
+      </figure>
+      <figure class="hero-photos__item hero-photos__item--tall">
+        <img src="/assets/BitRotShowImgs/Room3Vertical.JPG" alt="Gallery wide shot" loading="lazy" decoding="async">
+      </figure>
     </div>
-
-    <div class="btn-wrapper">
-      <a class="btn btn--calendar" href="/assets/bit-rot.ics" download>
-        + Add to calendar
-      </a>
+    <div class="hero-photos__row">
+      <figure class="hero-photos__item hero-photos__item--wide">
+        <img src="/assets/BitRotShowImgs/Room2.JPG" alt="Wide shot of a gallery with art installations" loading="lazy" decoding="async">
+      </figure>
+      <figure class="hero-photos__item hero-photos__item--tall">
+        <img src="/assets/BitRotShowImgs/Room1Vertical.JPG" alt="Gallery wide shot" loading="lazy" decoding="async">
+      </figure>
     </div>
-
   </section>
-  
-<section id="schedule">
-  <h2>SCHEDULE</h2>
 
-  <p><strong>Show open:</strong> 8–10 August, 10:00 AM–5:00 PM</p>
-  <p><strong>Private View:</strong> 7 August, 6:00–9:30 PM</p>
-  <p><strong>After Party:</strong> 7 August, 9:30 PM–12:00 AM</p>
-
-  <br>
-
-  <p><strong>Performances on 7 August:</strong></p>
-  <p>6:30 PM: Zhanlan (OrangeSpy)</p>
-  <p>7:30 PM: Lagtime_Seedling</p>
-  <p>8:30 PM: Yiding Zhang</p>
-
-  <br>
-
-  <p><strong>Events:</strong></p>
-  <p class="pc-schedule-line"><strong>Thu 8 August, 6:30 PM</strong> — <em>Long live the new flesh (or whatever)</em>, performance lecture by Dian Joy.</p>
-  <p class="pc-schedule-line"><strong>Sat 9 August, 11:00 AM–2:00 PM</strong> — <em>oops, you found a glitch</em>, public HTML workshop.</p>
-  <p class="pc-schedule-line"><strong>Sat 9 August, 3:00 PM</strong> — <em>Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina</em>, lecture by Erin Robinson & Anthony Frisby.</p>
-  <p class="pc-schedule-line"><strong>Sun 10 August, 1:00–3:00 PM</strong> — <em>Object Oriented Storytelling: From Field to Virtual</em>, 3D scanning & worldbuilding workshop.</p>
-</section>
-
-
-
+  <section id="artwork" aria-labelledby="artwork-heading">
+    <h2 id="artwork-heading">Artwork</h2>
+    <div id="artwork-grid"
+         data-artwork-exhibition="bitrot"
+         data-artwork-page="/BitRot/"
+         data-artwork-hide-empty>
+      <p class="aw-empty">Loading artwork…</p>
+    </div>
+  </section>
 
   <section id="events" aria-labelledby="events-heading">
-  <h2 id="events-heading">Events</h2>
+    <h2 id="events-heading">Event</h2>
 
-  <div class="events-grid">
-    <!-- TALK 1 -->
-    <article class="artist-card event-card">
-      <span class="event-label">Talk</span>
-      <h3>Artificial Intimacies &amp; Erotics of the Synthetic Self: Making XXX Machina</h3>
-      <time class="event-time" datetime="2025-08-09T15:00+01:00">Saturday 9 August — 3:00 PM</time>
-
-      <figure class="event-media">
-        <img src="/assets/Talk_Erin.png" alt="Artificial Intimacies talk artwork" loading="lazy" decoding="async">
-      </figure>
-
-      <p class="event-desc">
-        Lecture given by Erin Robinson &amp; Anthony Frisby, hosted by Lyra Robinson and Nikos Antonio Kourous Vázquez.
-      </p>
-
-      <p class="artist-link">
-        <a href="https://www.eventbrite.co.uk/e/artificial-intimacies-erotics-of-the-synthetic-self-making-xxx-machina-tickets-1526914555539"
-           target="_blank" rel="noopener">Claim your free ticket</a>
-      </p>
-    </article>
-
-    <!-- TALK 2 -->
-    <article class="artist-card event-card">
-      <span class="event-label">Talk</span>
-      <h3>Long Live The New Flesh (or Whatever)</h3>
-      <time class="event-time" datetime="2025-08-08T18:30+01:00">Friday 8 August — 6:30 PM</time>
-
-      <figure class="event-media">
-        <img src="/assets/Talk_DIan.png" alt="Long Live The New Flesh poster" loading="lazy" decoding="async">
-      </figure>
-
-      <p class="event-desc">
-        A performance lecture given by Dian Joy.
-      </p>
-
-      <p class="artist-link">
-        <a href="https://www.eventbrite.com/e/long-live-the-new-flesh-or-whatever-tickets-1537795149689"
-           target="_blank" rel="noopener">Claim your free ticket</a>
-      </p>
-    </article>
-
-    <!-- WORKSHOP 1 -->
-    <article class="artist-card event-card">
-      <span class="event-label">Workshop</span>
-      <h3>Oops, You Found A Glitch</h3>
-      <time class="event-time" datetime="2025-08-09T11:00+01:00">Saturday 9 August — 11:00–2:00 PM</time>
-
-      <figure class="event-media">
-        <img src="/assets/workshop_glitch.png" alt="Oops, You Found A Glitch workshop poster — reviving broken Glitch.com sites" loading="lazy" decoding="async">
-      </figure>
-
-      <p class="event-desc">
-        This workshop had participants revive “dead” Glitch.com websites by reverse‑engineering thumbnails and rebuilding URLs using simple HTML &amp; CSS.
-      </p>
-
-      <p class="artist-link">
-        <a href="https://www.eventbrite.co.uk/e/oops-you-found-a-glitch-html-workshop-tickets-1547997645629"
-           target="_blank" rel="noopener">Claim your free ticket</a>
-      </p>
-    </article>
-
-    <!-- WORKSHOP 2 -->
-    <article class="artist-card event-card">
-      <span class="event-label">Workshop</span>
-      <h3>Object Oriented Storytelling: From Field to Virtual</h3>
-      <time class="event-time" datetime="2025-08-10T13:00+01:00">Sunday 10 August — 1:00–3:00 PM</time>
-
-      <figure class="event-media">
-        <img src="/assets/Workshop_Melissa.png" alt="Object Oriented Storytelling: From Field to Virtual workshop poster" loading="lazy" decoding="async">
-      </figure>
-
-      <p class="event-desc">
-        In this two-hour workshop, participants learned to treat everyday objects as narrative anchors that bridge physical material to virtual.
-      </p>
-
-      <p class="artist-link">
-        <a href="https://www.eventbrite.co.uk/e/object-oriented-storytelling-from-field-to-virtual-tickets-1553270286239"
-           target="_blank" rel="noopener">Claim your free ticket</a>
-      </p>
-    </article>
-  </div>
-</section>
-
-<section class="pc-gallery" aria-label="Workshops & Talks">
+    <section class="pc-gallery" aria-label="Workshops & Talks">
   <!-- Grid is populated from /json/galleries.json by /scripts/site-gallery.js.
        The figures below are a static fallback shown only if that JSON can't be fetched. -->
   <div class="pc-grid" id="bitrot-events-grid" data-gallery-id="bitrot-events">
@@ -735,6 +370,119 @@
     </figure>
   </div>
 </section>
+
+    <div class="events-grid">
+    <!-- TALK 1 -->
+    <article class="artist-card event-card">
+      <span class="event-label">Talk</span>
+      <h3>Artificial Intimacies &amp; Erotics of the Synthetic Self: Making XXX Machina</h3>
+      <time class="event-time" datetime="2025-08-09T15:00+01:00">Saturday 9 August — 3:00 PM</time>
+
+      <figure class="event-media">
+        <img src="/assets/Talk_Erin.png" alt="Artificial Intimacies talk artwork" loading="lazy" decoding="async">
+      </figure>
+
+      <p class="event-desc">
+        Lecture given by Erin Robinson &amp; Anthony Frisby, hosted by Lyra Robinson and Nikos Antonio Kourous Vázquez.
+      </p>
+
+      <p class="artist-link">
+        <a href="https://www.eventbrite.co.uk/e/artificial-intimacies-erotics-of-the-synthetic-self-making-xxx-machina-tickets-1526914555539"
+           target="_blank" rel="noopener">Claim your free ticket</a>
+      </p>
+    </article>
+
+    <!-- TALK 2 -->
+    <article class="artist-card event-card">
+      <span class="event-label">Talk</span>
+      <h3>Long Live The New Flesh (or Whatever)</h3>
+      <time class="event-time" datetime="2025-08-08T18:30+01:00">Friday 8 August — 6:30 PM</time>
+
+      <figure class="event-media">
+        <img src="/assets/Talk_DIan.png" alt="Long Live The New Flesh poster" loading="lazy" decoding="async">
+      </figure>
+
+      <p class="event-desc">
+        A performance lecture given by Dian Joy.
+      </p>
+
+      <p class="artist-link">
+        <a href="https://www.eventbrite.com/e/long-live-the-new-flesh-or-whatever-tickets-1537795149689"
+           target="_blank" rel="noopener">Claim your free ticket</a>
+      </p>
+    </article>
+
+    <!-- WORKSHOP 1 -->
+    <article class="artist-card event-card">
+      <span class="event-label">Workshop</span>
+      <h3>Oops, You Found A Glitch</h3>
+      <time class="event-time" datetime="2025-08-09T11:00+01:00">Saturday 9 August — 11:00–2:00 PM</time>
+
+      <figure class="event-media">
+        <img src="/assets/workshop_glitch.png" alt="Oops, You Found A Glitch workshop poster — reviving broken Glitch.com sites" loading="lazy" decoding="async">
+      </figure>
+
+      <p class="event-desc">
+        This workshop had participants revive “dead” Glitch.com websites by reverse‑engineering thumbnails and rebuilding URLs using simple HTML &amp; CSS.
+      </p>
+
+      <p class="artist-link">
+        <a href="https://www.eventbrite.co.uk/e/oops-you-found-a-glitch-html-workshop-tickets-1547997645629"
+           target="_blank" rel="noopener">Claim your free ticket</a>
+      </p>
+    </article>
+
+    <!-- WORKSHOP 2 -->
+    <article class="artist-card event-card">
+      <span class="event-label">Workshop</span>
+      <h3>Object Oriented Storytelling: From Field to Virtual</h3>
+      <time class="event-time" datetime="2025-08-10T13:00+01:00">Sunday 10 August — 1:00–3:00 PM</time>
+
+      <figure class="event-media">
+        <img src="/assets/Workshop_Melissa.png" alt="Object Oriented Storytelling: From Field to Virtual workshop poster" loading="lazy" decoding="async">
+      </figure>
+
+      <p class="event-desc">
+        In this two-hour workshop, participants learned to treat everyday objects as narrative anchors that bridge physical material to virtual.
+      </p>
+
+      <p class="artist-link">
+        <a href="https://www.eventbrite.co.uk/e/object-oriented-storytelling-from-field-to-virtual-tickets-1553270286239"
+           target="_blank" rel="noopener">Claim your free ticket</a>
+      </p>
+    </article>
+  </div>
+  </section>
+
+
+<section id="schedule">
+  <h2>SCHEDULE</h2>
+
+  <p><strong>Show open:</strong> 8–10 August, 10:00 AM–5:00 PM</p>
+  <p><strong>Private View:</strong> 7 August, 6:00–9:30 PM</p>
+  <p><strong>After Party:</strong> 7 August, 9:30 PM–12:00 AM</p>
+
+  <br>
+
+  <p><strong>Performances on 7 August:</strong></p>
+  <p>6:30 PM: Zhanlan (OrangeSpy)</p>
+  <p>7:30 PM: Lagtime_Seedling</p>
+  <p>8:30 PM: Yiding Zhang</p>
+
+  <br>
+
+  <p><strong>Events:</strong></p>
+  <p class="pc-schedule-line"><strong>Thu 8 August, 6:30 PM</strong> — <em>Long live the new flesh (or whatever)</em>, performance lecture by Dian Joy.</p>
+  <p class="pc-schedule-line"><strong>Sat 9 August, 11:00 AM–2:00 PM</strong> — <em>oops, you found a glitch</em>, public HTML workshop.</p>
+  <p class="pc-schedule-line"><strong>Sat 9 August, 3:00 PM</strong> — <em>Artificial Intimacies & Erotics of the Synthetic Self: Making XXX Machina</em>, lecture by Erin Robinson & Anthony Frisby.</p>
+  <p class="pc-schedule-line"><strong>Sun 10 August, 1:00–3:00 PM</strong> — <em>Object Oriented Storytelling: From Field to Virtual</em>, 3D scanning & worldbuilding workshop.</p>
+</section>
+
+
+
+
+  
+
   <section id="about">
     <h2>ABOUT US</h2>
     <p>
@@ -770,6 +518,18 @@
     </p>
   </section>
 
+  <section id="location">
+    <h2>Location &amp; Event</h2>
+
+    <div class="map-wrapper">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1242.6827420946436!2d-0.06769508911244726!3d51.46980533514341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487603a1052b792b%3A0xfe44f90973f73f67!2sCopeland%20Gallery!5e0!3m2!1sen!2suk!4v1751044170755!5m2!1sen!2suk"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+  </section>
+
   <section id="contact">
     <h2>Contact</h2>
     <p>
@@ -794,6 +554,7 @@
   <script src="/scripts/site-gallery.js"></script>
   <script src="/scripts/gallery.js"></script>
   <script src="/scripts/artists.js"></script>
+  <script src="/scripts/artwork.js"></script>
   <script src="/scripts/bitRot.js"></script>
 </body>
 

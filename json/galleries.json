@@ -4,6 +4,7 @@
       "id": "mixed-signals",
       "title": "Mixed Signals — Previous Sessions",
       "short": "Mixed Signals",
+      "exhibition": null,
       "page": "/mixed-signals/",
       "thumbDir": "assets/MixedSignals",
       "fullDir": "assets/MixedSignals",
@@ -69,12 +70,12 @@
       "id": "open-projector",
       "title": "Open Projector — Gallery",
       "short": "Open Projector",
+      "exhibition": null,
       "page": "/open-projector/",
       "thumbDir": "assets/OpenProj",
       "fullDir": "assets/OpenProj",
       "filePrefix": "OpenProjector",
       "images": [
-
         {
           "src": "/assets/OpenProj/OpenProjector-9.webp",
           "full": "/assets/OpenProj/OpenProjector-9.jpeg",
@@ -279,6 +280,7 @@
       "id": "bitrot-show",
       "title": "BitRot — Exhibition",
       "short": "BitRot Show",
+      "exhibition": "bitrot",
       "page": "/BitRot/",
       "thumbDir": "assets/BitRotShowImgs/Thumbnails",
       "fullDir": "assets/BitRotShowImgs",
@@ -318,13 +320,13 @@
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistYunzhi.webp",
           "full": "/assets/BitRotShowImgs/ArtistYunzhi.JPG",
           "alt": "Hear how you look, see how you sound",
-          "caption": "Hear how you look, see how you sound — Yunzhi/Melissa Li"
+          "caption": "Hear how you look, see how you sound - Yunzhi / Melissa Li"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistXach.webp",
           "full": "/assets/BitRotShowImgs/ArtistXach.JPG",
           "alt": "The place where its buried",
-          "caption": "The place where its buried — Xach Hill"
+          "caption": "The place where its buried - Xach Hill"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistNikos.webp",
@@ -336,43 +338,43 @@
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLyra.webp",
           "full": "/assets/BitRotShowImgs/ArtistLyra.JPG",
           "alt": "Gone Fishing",
-          "caption": "Gone Fishing — Lyra Robinson"
+          "caption": "Gone Fishing - Lyra Robinson"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistJackJessePaula.webp",
           "full": "/assets/BitRotShowImgs/ArtistJackJessePaula.JPG",
           "alt": "Caught on CCTV",
-          "caption": "Caught on CCTV — Jack Jessé and Paula Molina"
+          "caption": "Caught on CCTV - Jack Jessé & Paula Molina"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLouise.webp",
           "full": "/assets/BitRotShowImgs/ArtistLouise.jpg",
           "alt": "i tried to remember but….",
-          "caption": "i tried to remember but…. — Louise Wan"
+          "caption": "i tried to remember but…. - Louise Wan"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistJin.webp",
           "full": "/assets/BitRotShowImgs/ArtistJin.jpg",
           "alt": "Subtle Crisis",
-          "caption": "Subtle Crisis — Jin Xie"
+          "caption": "Subtle Crisis - Jin Xie"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistPhonex.webp",
           "full": "/assets/BitRotShowImgs/ArtistPhonex.jpg",
           "alt": "fyp",
-          "caption": "fyp — Phoenix Isla Kea"
+          "caption": "fyp - Phoenix Isla Kea"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistMetalUPA.webp",
           "full": "/assets/BitRotShowImgs/ArtistMetalUPA.jpg",
           "alt": "Internet Checkpoints",
-          "caption": "Internet Checkpoints — METAL_UPA"
+          "caption": "Internet Checkpoints - METAL_UPA"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLucyTypeface.webp",
           "full": "/assets/BitRotShowImgs/ArtistLucyTypeface.jpeg",
           "alt": "TYPEFACE",
-          "caption": "TYPEFACE — Lucy Ellis"
+          "caption": "TYPEFACE - Lucy Ellis"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/Artist.webp",
@@ -384,25 +386,25 @@
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistMaisy.webp",
           "full": "/assets/BitRotShowImgs/ArtistMaisy.JPG",
           "alt": "I Missed the Bus Because it Wasn't; Real",
-          "caption": "I Missed the Bus Because it Wasn't Real — Maisy Charlton"
+          "caption": "I Missed the Bus Because it Wasn't Real - Maisy Charlton"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistRizq.webp",
           "full": "/assets/BitRotShowImgs/ArtistRizq.jpg",
           "alt": "memes are the only true contemporary art",
-          "caption": "memes are the only true contemporary art — Rizq Yazed"
+          "caption": "memes are the only true contemporary art - Rizq Yazed"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistEryn.webp",
           "full": "/assets/BitRotShowImgs/ArtistEryn.jpg",
           "alt": "The screens I had weren't enough; I had to go out and get three more",
-          "caption": "The screens I had weren't enough; I had to go out and get three more — Eryn English-Polch"
+          "caption": "The screens I had weren't enough; I had to go out and get three more - Eryn English-Polch"
         },
         {
           "src": "/assets/BitRotShowImgs/Thumbnails/ArtistLucyApple.webp",
           "full": "/assets/BitRotShowImgs/ArtistLucyApple.jpg",
           "alt": "Edu2000",
-          "caption": "Edu2000 — Lucy Ellis"
+          "caption": "Edu2000 - Lucy Ellis"
         }
       ]
     },
@@ -410,6 +412,7 @@
       "id": "bitrot-events",
       "title": "BitRot — Workshops & Talks",
       "short": "BitRot Events",
+      "exhibition": "bitrot",
       "page": "/BitRot/",
       "thumbDir": "assets/BitRotEventImgs/thumbs",
       "fullDir": "assets/BitRotEventImgs",
@@ -541,6 +544,7 @@
       "id": "dccep",
       "title": "Does Cloud Compute — Gallery",
       "short": "DCCeP",
+      "exhibition": "does-cloud-compute",
       "page": "/does-cloud-compute-ever-precipitate/",
       "thumbDir": "assets/DCCeP/Artwork",
       "fullDir": "assets/DCCeP/Artwork",
@@ -568,49 +572,49 @@
           "src": "/assets/DCCeP/Artwork/DDCeP-04.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-04.jpg",
           "alt": "LED Panels and steel, from above",
-          "caption": "I Live There, With you - Xach Hill"
+          "caption": "I live there with you - Xach Hill"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-05.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-05.jpg",
           "alt": "LED Panels and steel",
-          "caption": "I Live There, With you - Xach Hill"
+          "caption": "I live there with you - Xach Hill"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-06.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-06.jpg",
           "alt": "Potatos nailed to a wall with a screen of a Potato",
-          "caption": "I Potato, Self Portrait - Nikos Antonio Kourous Vázquez"
+          "caption": "i potato self-portrait - Nikos Antonio Kourous Vázquez"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-07.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-07.jpg",
           "alt": "Potatos nailed to a wall with a screen of a Potato",
-          "caption": "I Potato, Self Portrait - Nikos Antonio Kourous Vázquez"
+          "caption": "i potato self-portrait - Nikos Antonio Kourous Vázquez"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-08.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-08.jpg",
           "alt": "A screen held with metal bars, showing erotic material",
-          "caption": "Joy - Lyra Robbinson"
+          "caption": "Joy - Lyra Robinson"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-09.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-09.jpg",
           "alt": "A screen held with metal bars, showing erotic material",
-          "caption": "Joy - Lyra Robbinson"
+          "caption": "Joy - Lyra Robinson"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-18.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-18.jpg",
           "alt": "A screen held with metal bars, showing a still life scene of fruit in the centre",
-          "caption": "Master in Training - Yunzhi / Melissa Li"
+          "caption": "Master in training - Yunzhi / Melissa Li"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-19.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-19.jpg",
           "alt": "A screen held with metal bars, showing a still life scene of fruit in the centre",
-          "caption": "Master in Training - Yunzhi / Melissa Li"
+          "caption": "Master in training - Yunzhi / Melissa Li"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-10.webp",
@@ -640,36 +644,36 @@
           "src": "/assets/DCCeP/Artwork/DDCeP-14.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-14.jpg",
           "alt": "Screen surrounded by wires, with a plate on a webbrowser",
-          "caption": "Recursive Wait - David Lazar"
+          "caption": "recursive_wait - David Lazăr"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-15.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-15.jpg",
           "alt": "Screen surrounded by wires, with a plate on a webbrowser",
-          "caption": "Recursive Wait - David Lazar"
+          "caption": "recursive_wait - David Lazăr"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-16.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-16.jpg",
-          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "alt": "Angel Duster - Dylan Morris",
           "caption": "Angel Duster - Dylan Morris"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-21.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-21.jpg",
-          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "alt": "Angel Duster - Dylan Morris",
           "caption": "Angel Duster - Dylan Morris"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-17.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-17.jpg",
-          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "alt": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst",
           "caption": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst"
         },
         {
           "src": "/assets/DCCeP/Artwork/DDCeP-20.webp",
           "full": "/assets/DCCeP/Artwork/DDCeP-20.jpg",
-          "alt": "Screen surrounded by wires, with a plate on a webbrowser",
+          "alt": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst",
           "caption": "Precipitation Network - Phoenix Isla Kea & Jasmine Broadhurst"
         }
       ]
@@ -678,12 +682,12 @@
       "id": "can-we-start-again",
       "title": "Can We Start Again? — Gallery",
       "short": "CWSA",
+      "exhibition": "can-we-start-again",
       "page": "/can-we-start-again/",
       "thumbDir": "assets/CanWeStartAgain/Gallery",
       "fullDir": "assets/CanWeStartAgain/Gallery",
       "filePrefix": "CWSA",
-      "images": [
-      ]
+      "images": []
     }
   ]
 }

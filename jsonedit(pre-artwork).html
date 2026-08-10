@@ -430,25 +430,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 
 /* ── GALLERIES LIST ── */
 .gal-count{font-weight:400;font-size:9px;background:rgba(255,255,255,.08);border-radius:8px;padding:1px 6px;letter-spacing:0;}
-
-/* Artwork mode — editor chrome only. The artwork CARD styling lives in
-   /styles/artwork.css, which the preview pane loads, so the preview is styled
-   by the same file the live page uses. Nothing here restyles a card. */
-.aw-imgtools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:2px;}
-.aw-imgtools select{width:auto;flex:0 0 auto;}
-.aw-pick-group{margin-bottom:14px;}
-.aw-pick-head{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.aw-pick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;}
-.aw-pick-item{padding:0;border:1px solid var(--brd);border-radius:5px;background:var(--inp);
-  color:var(--ink);font-family:var(--ui);font-size:10px;text-align:left;cursor:pointer;overflow:hidden;
-  display:flex;flex-direction:column;transition:border-color .15s ease,transform .15s ease;}
-.aw-pick-item:hover{border-color:var(--accent);transform:translateY(-2px);}
-.aw-pick-item.is-chosen{border-color:var(--ok);opacity:.6;}
-.aw-pick-item img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#111;}
-.aw-pick-item span{padding:5px 6px;line-height:1.3;color:var(--muted);
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.aw-pick-empty{font-size:11px;color:var(--muted);margin:4px 0;}
 .gal-item{display:flex;align-items:center;gap:10px;padding:6px;margin:2px 10px;border:1px solid var(--brd);border-radius:6px;
   cursor:pointer;background:var(--bg);border-left:2px solid transparent;transition:.1s;}
 .gal-item:hover{background:rgba(255,255,255,.04);}
@@ -658,7 +639,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   <div class="mode-tabs">
     <button class="mtab on" data-mode="events" onclick="setMode('events')">Events</button>
     <button class="mtab" data-mode="artists" onclick="setMode('artists')">Artists</button>
-    <button class="mtab" data-mode="artwork" onclick="setMode('artwork')">Artwork</button>
     <button class="mtab" data-mode="signals" onclick="setMode('signals')">Signals</button>
     <button class="mtab" data-mode="gallery" onclick="setMode('gallery')">Galleries</button>
   </div>
@@ -957,72 +937,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   </div>
 </div>
 
-<!-- New Artwork Modal — deliberately minimal, matching the Events/Artists
-     add-flow: just enough to create the record, then straight into the full
-     form. Exhibition lists HOSTED shows only; see hostedExhibitionKeys(). -->
-<div class="modal-ov" id="addArtworkModal">
-  <div class="modal" style="width:420px;">
-    <h3>New Artwork</h3>
-    <div class="fields">
-      <div class="field">
-        <label>Artwork Name *</label>
-        <input type="text" id="nwName" placeholder="e.g. Precipitation Network"
-          onkeydown="if(event.key==='Enter')submitNewArtwork()">
-      </div>
-      <div class="field">
-        <label>Exhibition</label>
-        <select id="nwExh" onchange="anChange(this,'exh','')"></select>
-      </div>
-    </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
-      Artist, images and description are set on the next screen. The year defaults
-      to the exhibition's own start year unless you override it.
-    </p>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" onclick="closeAddArtworkModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="submitNewArtwork()">Create Artwork</button>
-    </div>
-  </div>
-</div>
-
-<!-- Add-a-vocabulary-value modal, shared by Art Form and Art Medium. One modal
-     parameterised by kind rather than two near-identical copies. -->
-<div class="modal-ov" id="addVocabModal">
-  <div class="modal" style="width:380px;">
-    <h3 id="avTitle">New Value</h3>
-    <div class="fields">
-      <div class="field">
-        <label id="avLabel">Value *</label>
-        <input type="text" id="avName" onkeydown="if(event.key==='Enter')confirmAddVocab()">
-      </div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" onclick="closeAddVocabModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="confirmAddVocab()">Add</button>
-    </div>
-  </div>
-</div>
-
-<!-- Gallery image picker. New UI: nothing else in this editor browses
-     galleries.json for a single image. Scoped to the artwork's exhibition by
-     default because that is nearly always what's wanted. -->
-<div class="modal-ov" id="awPickModal">
-  <div class="modal" style="width:min(880px,94vw);max-height:86vh;display:flex;flex-direction:column;">
-    <h3>Pick an image from the gallery</h3>
-    <p style="font-size:11px;color:var(--muted);margin:2px 0 8px;">
-      Gallery images are the source of truth. Picking one links it — it is not copied,
-      and deleting this artwork later will not delete the image.
-    </p>
-    <label style="display:flex;gap:6px;align-items:center;font-size:11px;color:var(--muted);margin-bottom:8px;">
-      <input type="checkbox" onchange="awTogglePickScope(this)"> show all galleries
-    </label>
-    <div id="awPickBody" style="overflow-y:auto;flex:1;"></div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" onclick="awClosePicker()">Done</button>
-    </div>
-  </div>
-</div>
-
 <!-- New Exhibition Entry Modal -->
 <div class="modal-ov" id="newExhModal">
   <div class="modal" style="width:400px;">
@@ -1163,45 +1077,11 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 <script>window.__PE_NO_AUTO_INIT__ = true;</script>
 <script src="/scripts/past-events.js"></script>
 
-<!-- Same trick as past-events.js above: the editor's Artwork preview runs the
-     REAL card/modal renderer that the exhibition pages run, so there is one
-     implementation and the preview cannot drift from the live page. The flag
-     stops it auto-mounting, since this page has no [data-artwork-exhibition]
-     container and does its own fetching. The stylesheet comes along so the
-     preview looks like the page rather than approximately like it. -->
-<script>window.__AW_NO_AUTO_INIT__ = true;</script>
-<script src="/scripts/artwork.js"></script>
-<link rel="stylesheet" href="/styles/artwork.css">
-
 <script>
 // ── STATE ──────────────────────────────────────────────────
-let mode = 'events';                       // 'events' | 'artists' | 'artwork' | 'signals' | 'gallery'
+let mode = 'events';                       // 'events' | 'artists' | 'signals' | 'gallery'
 const datasets = { events:null, artists:null, signals:null, gallery:null };
-
-// ── DIRTY TRACKING IS PER-DATASET, NOT PER-MODE ────────────────────────────
-// It used to be keyed by mode, which worked while every mode owned exactly one
-// file. Artwork mode breaks that: it edits schema.json, but creating an artist
-// inline writes artists.json, and registering an uploaded image writes
-// galleries.json — one mode, up to three dirty files. Keying the flag by
-// DATASET instead means "which files need pushing" is answerable without
-// asking which tab happens to be open, and the 40-odd existing markUnsaved()
-// call sites keep working unchanged because the zero-argument form still means
-// "the dataset the current mode is editing".
 const unsaved  = { events:false, artists:false, signals:false, gallery:false };
-
-// Which dataset each mode's `data` pointer refers to. Artwork is an alias of
-// events: it is a VIEW over schema.json, not a fifth file. See isArtwork().
-const DATASET_OF_MODE = {
-  events:'events', artwork:'events', artists:'artists', signals:'signals', gallery:'gallery'
-};
-function dsOf(m){ return DATASET_OF_MODE[m||mode] || 'events'; }
-
-// Every dataset a given mode is allowed to touch — used to decide which dots
-// light up and which files a push from this mode has to write.
-const DATASETS_TOUCHED_BY = {
-  events:['events'], artwork:['events','artists','gallery'],
-  artists:['artists'], signals:['signals'], gallery:['gallery']
-};
 let data = null;                           // mirror of datasets[mode]
 let curIdx = null;
 let exhFilter = 'all';
@@ -1250,83 +1130,6 @@ function isExhibition(item){
 }
 function getExhibitions(){ return (data&&data['@graph'])?data['@graph'].filter(isExhibition):[]; }
 
-// ── ARTWORK ────────────────────────────────────────────────────────────────
-// WHERE ARTWORK LIVES, AND WHY IT ISN'T A FIFTH FILE
-//
-// Artwork records are @graph entries in schema.json, exactly like Exhibitions
-// — NOT a separate document like artists.json. Three reasons, in order:
-//
-//  1. The brief's stated goal is "fully integrate artwork information into
-//     schema.json". Artists is the wrong precedent for that; Exhibitions is
-//     the right one, and it already exists in this file.
-//  2. curIdx is a bare index into data['@graph'], and every helper worth
-//     reusing — arrRow/addArr/setArr, imgRow/slotImages/stageImg, the whole
-//     convert-and-stage pipeline — reads data['@graph'][curIdx] off the
-//     ambient `data`. Artwork living in the current graph means they all work
-//     untouched.
-//  3. It minimises cross-file work. Artwork in schema.json leaves exactly ONE
-//     cross-file dependency (the artist registry). Artwork in its own file
-//     would make both the artist link and the exhibition-year lookup
-//     cross-file, for no gain.
-//
-// So setMode('artwork') points `data` at datasets.events. The Artwork tab is a
-// VIEW over schema.json, not a fetch target. See setMode().
-const ARTWORK_TYPE = 'VisualArtwork';
-function isArtwork(item){
-  if(!item) return false;
-  const t=item['@type'];
-  if(!t) return false;
-  return (Array.isArray(t)?t:[t]).includes(ARTWORK_TYPE);
-}
-function getArtwork(){ return (data&&data['@graph'])?data['@graph'].filter(isArtwork):[]; }
-
-// Artwork's Exhibition dropdown lists HOSTED exhibitions only — the shows
-// Phreaking actually stages. The `featured` entries (V&A, Photographers
-// Gallery, Folder02) are press-mention showcases: they carry no startDate, no
-// gallery and no artist roster, so an artwork tagged to one would have no year
-// to inherit and nowhere to put its images. Excluding them here is cheaper
-// than handling four kinds of broken downstream.
-function hostedExhibitionKeys(){
-  const fromData=getExhibitions()
-    .filter(e=>e.exhibitionCategory==='hosted')
-    .map(e=>String(e['@id']||'').split('#')[1])
-    .filter(Boolean);
-  // knownExhibitions is the fallback: can-we-start-again has no ExhibitionEvent
-  // node in schema.json at all yet, but artists and events are already tagged
-  // to it, so it must still be selectable.
-  const merged=[...new Set([...fromData, ...knownExhibitions])];
-  return merged.filter(k=>!FEATURED_EXH_KEYS.has(k));
-}
-const FEATURED_EXH_KEYS = new Set(['exhibition-ddw','exhibition-tpg','exhibition-folder02']);
-
-function artworkExhOptions(cur){
-  return hostedExhibitionKeys().map(k=>
-    `<option value="${esc(k)}"${cur===k?' selected':''}>${esc(EXH_NAMES[k]||k)}</option>`
-  ).join('') + `<option value="__add__">+ Add new exhibition…</option>`;
-}
-
-// Controlled vocabularies for artForm / artMedium. Dynamic lists extended
-// through the SAME `+ Add new…` / anChange() mechanism the exhibition, label
-// and type dropdowns already use — deliberately not a second dropdown
-// mechanism sitting next to the first one.
-let knownArtForms = [
-  'Generative Art','Interactive Installation','Data Visualization','Algorithmic Art',
-  'AI/ML Art','Video & Moving Image','Sound Art','Net Art / Web-based','Sculpture','Painting'
-];
-let knownArtMediums = [
-  'Code / Software','Custom Software & Sensors','Video','Sound','Digital Print','3D Print',
-  'Projection','Mixed Media','Electronics & Circuitry','Photography','Paint on Canvas'
-];
-function vocabOptions(list, cur, kind){
-  const known=list.slice();
-  // A value already on the record that isn't in the starting vocab must still
-  // show as selected rather than silently resetting to the first option.
-  if(cur&&!known.includes(cur)) known.unshift(cur);
-  return `<option value=""${!cur?' selected':''}>— none —</option>` +
-    known.map(v=>`<option value="${esc(v)}"${cur===v?' selected':''}>${esc(v)}</option>`).join('') +
-    `<option value="__add__">+ Add new ${esc(kind)}…</option>`;
-}
-
 // ── UTILS ──────────────────────────────────────────────────
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
@@ -1340,24 +1143,9 @@ function setStatus(t,c=''){
   document.getElementById('stext').textContent=t;
   document.getElementById('scount').textContent=c;
 }
-// ds omitted → the dataset the current mode is editing. Artwork mode passes
-// 'artists' / 'gallery' explicitly when a cross-file write happens.
-function markUnsaved(ds){ unsaved[ds||dsOf()]=true; updateUnsavedDot(); }
-function markSaved(ds){
-  if(ds){ unsaved[ds]=false; }
-  else { (DATASETS_TOUCHED_BY[mode]||[dsOf()]).forEach(k=>unsaved[k]=false); }
-  updateUnsavedDot();
-}
-function dirtyDatasets(){ return (DATASETS_TOUCHED_BY[mode]||[dsOf()]).filter(k=>unsaved[k]); }
-function updateUnsavedDot(){
-  const dirty=dirtyDatasets();
-  const dot=document.getElementById('udot');
-  dot.classList.toggle('on', dirty.length>0);
-  // Which files are outstanding matters more in artwork mode than anywhere
-  // else, because the person can dirty a file they never opened a tab for.
-  dot.title = dirty.length ? 'Unsaved: '+dirty.map(k=>DS_FILE_LABEL[k]||k).join(', ') : '';
-}
-const DS_FILE_LABEL = { events:'schema.json', artists:'artists.json', signals:'signals.json', gallery:'galleries.json' };
+function markUnsaved(){ unsaved[mode]=true; updateUnsavedDot(); }
+function markSaved(){ unsaved[mode]=false; updateUnsavedDot(); }
+function updateUnsavedDot(){ document.getElementById('udot').classList.toggle('on', !!unsaved[mode]); }
 
 function isEvent(item){
   if(!item||!item['@type']) return false;
@@ -1747,54 +1535,38 @@ function getSignalsSessions(){ return (data&&Array.isArray(data.sessions))?data.
 function countLabel(){
   if(mode==='signals') return getSignalsSessions().length+' sessions';
   if(mode==='gallery') return galFlat().length+' images in '+getGalleries().length+' galleries';
-  if(mode==='artwork') return getArtwork().length+' artworks';
   return mode==='artists' ? getArtists().length+' artists' : getEvents().length+' events';
 }
-const MODE_NOUN = { signals:'sessions', gallery:'gallery', artists:'artists', artwork:'artwork', events:'events' };
-const MODE_LIST_TITLE = { signals:'Sessions', gallery:'Galleries', artists:'Artists', artwork:'Artwork', events:'Events' };
 
 // ── MODE SWITCH (Events / Artists) ────────────────────────
 function setMode(m){
   if(m===mode) return;
   if(curIdx!==null) closeEdit();
   mode = m;
-  // Artwork rides on the events dataset — dsOf() resolves the alias, so
-  // switching to Artwork before Events has ever been opened still triggers the
-  // schema.json fetch below rather than wiring up a fifth fetch target.
-  data = datasets[dsOf(m)];
+  data = datasets[mode];
   document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('on', b.dataset.mode===m));
   // Events-only render selector
   const rs=document.getElementById('renderSel'); if(rs) rs.style.display = m==='events'?'':'none';
   // Exhibition select is irrelevant in signals / gallery mode
   const tb=document.getElementById('tbExhSel'); if(tb) tb.style.display = (m==='signals'||m==='gallery')?'none':'';
   // List header + reset filters
-  document.getElementById('listHeadTitle').textContent = MODE_LIST_TITLE[m]||'Events';
+  document.getElementById('listHeadTitle').textContent =
+    m==='signals'?'Sessions':(m==='gallery'?'Galleries':(m==='artists'?'Artists':'Events'));
   exhFilter='all'; prevFilter='all';
   if(tb){ tb.value='all'; tb.dataset.prev='all'; }
   updateUnsavedDot();
-  // Artwork needs artists.json for its artist picker and galleries.json for
-  // its image picker, neither of which is `data`. Warm both in the background
-  // on entering the mode so the form opens with a populated dropdown instead
-  // of an empty one that fills in a moment later.
-  if(m==='artwork'){ ensureArtistsCache(); ensureGalleriesCache(); }
-  if(!datasets[dsOf(m)]){
-    loadFromSite();           // first visit to this dataset — fetch it
+  if(!datasets[mode]){
+    loadFromSite();           // first visit to this mode — fetch it
   } else {
     extractFromData();
     renderList(); renderPreview();
     refreshExhDropdowns(); refreshPrevFilters();
-    setStatus('Editing '+(MODE_NOUN[m]||'events'), countLabel());
+    setStatus('Editing '+(m==='signals'?'sessions':(m==='gallery'?'gallery':(m==='artists'?'artists':'events'))), countLabel());
   }
 }
 
 // "+ New" button dispatcher
-function newItem(){
-  if(mode==='signals') return newSignalsSession();
-  if(mode==='gallery') return newGalleryImage();
-  if(mode==='artists') return showAddArtistModal();
-  if(mode==='artwork') return showAddArtworkModal();
-  return showAddModal();
-}
+function newItem(){ mode==='signals' ? newSignalsSession() : mode==='gallery' ? newGalleryImage() : mode==='artists' ? showAddArtistModal() : showAddModal(); }
 
 // ── OPTION BUILDERS ───────────────────────────────────────
 function exhOptions(cur, allowNone){
@@ -1830,10 +1602,6 @@ function anChange(sel, kind, cb){
   if(kind==='exh')   showAddExhModal();
   else if(kind==='label') showAddLabelModal();
   else if(kind==='type')  showAddTypeModal();
-  // Art form / medium reuse this same handler and the same modal shape rather
-  // than introducing a second "add a value to a dropdown" mechanism.
-  else if(kind==='artform')   showAddVocabModal('artform');
-  else if(kind==='artmedium') showAddVocabModal('artmedium');
 }
 
 // Topbar exhibition select has its own handler because it also drives the filter
@@ -1975,13 +1743,7 @@ function extractFromData(){
   // setEventVenue()), and the legacy label normalises alongside the acts.
   // A push only ever carries a shape change for a record someone opened.
   if(mode==='events') lastMigration = legacyDataSummary();
-  // Artwork nodes are not events and not artists, so neither getEvents() nor
-  // getArtists() sees them. Without this branch an exhibition key that exists
-  // ONLY on artwork records would never reach knownExhibitions, and its group
-  // heading would silently render as the raw key.
-  const items = mode==='artwork' ? getArtwork().concat(getEvents())
-              : mode==='artists' ? getArtists()
-              : getEvents();
+  const items = mode==='artists' ? getArtists() : getEvents();
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
       knownExhibitions.push(ev.exhibition);
@@ -1997,28 +1759,6 @@ function extractFromData(){
         EVENT_TYPES.add(t);
       }
     }
-  });
-
-  // knownArtForms / knownArtMediums start as a fixed 10-item seed list, unlike
-  // knownExhibitions/knownLabels/knownTypes which are re-derived from the data
-  // on every load. That asymmetry was a real gap: a value written by hand in
-  // the editor, or programmatically by something outside it (a migration
-  // script, another tool), would save into schema.json correctly but never
-  // become a picker OPTION again — vocabOptions() shows it as the selected
-  // value on the one record that has it (that fallback already existed) but it
-  // would not appear for the NEXT artwork someone fills in, silently forcing
-  // them to retype free text that should have been one click.
-  //
-  // Scanned unconditionally over the schema's own artwork records — not gated
-  // on mode==='artwork' the way the exhibition/label/type block above is
-  // gated on 'events' — so opening the Events tab on a freshly-loaded
-  // schema.json still picks up vocab from artwork nobody has clicked into yet.
-  // getArtwork() reads data['@graph'], which is empty/absent on the
-  // artists/signals/gallery datasets, so this is a harmless no-op outside
-  // events/artwork mode rather than something that needs its own guard.
-  getArtwork().forEach(ar=>{
-    if(ar.artForm && !knownArtForms.includes(ar.artForm)) knownArtForms.push(ar.artForm);
-    if(ar.artMedium && !knownArtMediums.includes(ar.artMedium)) knownArtMediums.push(ar.artMedium);
   });
 }
 
@@ -2043,15 +1783,10 @@ function loadFromFile(e){
   r.readAsText(f);
 }
 function onLoaded(msg){
-  // Keyed by DATASET, not by mode: artwork mode loads schema.json into
-  // datasets.events, not into a phantom datasets.artwork. Likewise markSaved()
-  // is scoped to the dataset that was just loaded, so a freshly-fetched
-  // schema.json does not silently clear an unsaved artists.json sitting in
-  // memory from an inline artist creation.
-  datasets[dsOf()]=data;
+  datasets[mode]=data;
   extractFromData();
   if(mode==='events') pnFromHash();   // /#slug opens that Performance/Film Night card
-  markSaved(dsOf()); renderList(); renderPreview();
+  markSaved(); renderList(); renderPreview();
   refreshExhDropdowns(); refreshPrevFilters();
   setStatus(msg, countLabel()); toast(msg,'ok');
 
@@ -2069,9 +1804,7 @@ function onLoaded(msg){
 }
 function downloadJSON(){
   if(!data){ toast('Nothing to download'); return; }
-  // By dataset, so an artwork-mode download is schema.json (which is what it
-  // is editing) rather than a file named after the tab.
-  const fname = { artists:'artists.json', signals:'signals.json', gallery:'galleries.json', events:'schema.json' }[dsOf()] || 'schema.json';
+  const fname = mode==='artists' ? 'artists.json' : mode==='signals' ? 'signals.json' : mode==='gallery' ? 'galleries.json' : 'schema.json';
   const s=JSON.stringify(data,null,2);
   const a=Object.assign(document.createElement('a'),{
     href:URL.createObjectURL(new Blob([s],{type:'application/json'})), download:fname});
@@ -2115,7 +1848,6 @@ function renderList(){
   if(mode==='signals'){ renderSignalsList(el); return; }
   if(mode==='gallery'){ renderGalleryList(el); return; }
   if(mode==='artists'){ renderArtistList(el); return; }
-  if(mode==='artwork'){ renderArtworkList(el); return; }
 
   let html='';
   let exhHtml='';
@@ -2218,48 +1950,6 @@ function renderArtistList(el){
   el.innerHTML=html||'<div class="empty"><div class="empty-ico">∅</div><h3>No artists match filter</h3></div>';
 }
 
-// ── ARTWORK LIST ──────────────────────────────────────────
-// Same collapsible-group shape as renderArtistList, same EXH_NAMES headings,
-// same exhibition ordering — but the collapse keys are namespaced `aw:` so
-// collapsing BitRot here does not also collapse it in Artists. The two lists
-// look alike and are deliberately independent; Gallery mode already namespaces
-// its own group keys `gal:` for exactly the same reason.
-function awGroupKey(exh){ return 'aw:'+exh; }
-function renderArtworkList(el){
-  const works=getArtwork();
-  if(!works.length){ el.innerHTML='<div class="empty"><div class="empty-ico">◫</div><h3>No artwork yet</h3><p>Add an artwork to get started.</p></div>'; return; }
-
-  const groups={};
-  works.forEach(a=>{ const k=a.exhibition||'untagged'; (groups[k]||(groups[k]=[])).push(a); });
-  Object.values(groups).forEach(g=>g.sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99)));
-
-  const order=['can-we-start-again','does-cloud-compute','bitrot','untagged'];
-  const keys=[...order.filter(k=>groups[k]),...Object.keys(groups).filter(k=>!order.includes(k))];
-
-  let html='';
-  keys.forEach(exh=>{
-    if(exhFilter!=='all'&&exh!==exhFilter) return;
-    const gk=awGroupKey(exh);
-    const grpCollapsed=collapsedGroups.has(gk);
-    html+=`<div class="exh-group${grpCollapsed?' collapsed':''}" data-key="${esc(gk)}"><div class="exh-label" onclick="toggleGroup('${esc(gk)}')" title="Click to collapse/expand"><span class="exh-group-toggle">▾</span>${esc(EXH_NAMES[exh]||exh)}</div>`;
-    groups[exh].forEach(a=>{
-      const gi=data['@graph'].indexOf(a);
-      const hidden=a.visible===false;
-      const cover=(a.images||[])[0];
-      const names=awArtistNames(a);
-      html+=`<div class="eitem${curIdx===gi?' active':''}${hidden?' eitem-hidden':''}" onclick="selectEvent(${gi})">
-        ${cover&&cover.src?`<img class="gal-thumb" src="${esc(cover.src)}" alt="" loading="lazy">`:'<div class="gal-thumb-ph">◫</div>'}
-        <span class="eitem-name">${esc(a.name||'Untitled')}</span>
-        <span class="eitem-tag">${esc(names.join(' & ')||'no artist')}</span>
-        ${hidden?'<span class="eitem-vis-badge">hidden</span>':''}
-        ${a.sortOrder!=null?`<span class="eitem-ord">#${a.sortOrder}</span>`:''}
-      </div>`;
-    });
-    html+=`</div>`;
-  });
-  el.innerHTML=html||'<div class="empty"><div class="empty-ico">∅</div><h3>No artwork matches filter</h3></div>';
-}
-
 // ── EDIT FORM ─────────────────────────────────────────────
 function selectEvent(gi){ curIdx=gi; renderList(); openEdit(); }
 
@@ -2286,10 +1976,6 @@ function buildForm(){
   if(mode==='gallery'){ buildGalleryForm(); return; }
   const ev=data['@graph'][curIdx]; if(!ev) return;
   if(mode==='artists'){ buildArtistForm(ev); return; }
-  // Artwork branches off the item TYPE, not the mode, so an artwork can never
-  // fall through to the event form even if it is somehow selected from another
-  // list. Same guard style as isExhibition() directly below.
-  if(mode==='artwork'||isArtwork(ev)){ buildArtworkForm(ev); return; }
   if(isExhibition(ev)){ buildExhibitionForm(ev); return; }
   document.getElementById('editTitle').textContent=ev.name||'Untitled Event';
   const t=Array.isArray(ev['@type'])?ev['@type'][0]:ev['@type'];
@@ -2761,557 +2447,6 @@ function liveUpArtist(ar){
   renderPreview();
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
- * ARTWORK
- * ═══════════════════════════════════════════════════════════════════════════
- *
- * THE CROSS-FILE PROBLEM, AND HOW IT IS SOLVED HERE
- *
- * While you are editing an artwork, `data` points at schema.json. But the
- * artwork form needs two OTHER documents live in memory at the same time:
- *
- *   • artists.json — for the artist dropdown and the inline "+" that creates a
- *     new artist. This is the FULL-BIO registry that the public Artists page
- *     renders. It is NOT the same thing as the 17 lightweight Person stubs
- *     that live in schema.json's own @graph; those exist only so event
- *     performer credits have somewhere to point, they carry no bio, and they
- *     are not artists of anything. performerCandidateOptions() searches those.
- *     Artwork must never search those. Two registries, deliberately separate,
- *     and conflating them would put half-empty Person records on the public
- *     Artists page.
- *
- *   • galleries.json — because an artwork's images ARE gallery images. See the
- *     block above awStageArtworkImage() for why.
- *
- * Both are held in datasets.artists / datasets.gallery — the SAME slots the
- * Artists and Galleries tabs use — rather than in private caches. That is the
- * important bit: if you edit an artist in Artists mode, switch to Artwork and
- * create an artwork, both edits are in the one object and both go up in the
- * one push. A private cache would have produced two divergent copies of
- * artists.json and silently discarded one of them.
- * ═════════════════════════════════════════════════════════════════════════ */
-
-let awArtistsLoading = null, awGalleriesLoading = null;
-
-// Loads artists.json into datasets.artists if it isn't there yet. Never
-// touches `data` — the Artists tab and the Artwork tab share the object, but
-// only the Artists tab points `data` at it.
-function ensureArtistsCache(){
-  if(datasets.artists) return Promise.resolve(datasets.artists);
-  if(awArtistsLoading) return awArtistsLoading;
-  awArtistsLoading = fetch('/json/artists.json')
-    .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(j=>{
-      datasets.artists=j;
-      // A fetch is not an edit: loading the registry must not mark it dirty.
-      if(mode==='artwork'){ awRefreshArtistPicker(); renderList(); }
-      return j;
-    })
-    .catch(e=>{ toast('Could not load artists.json: '+e.message); return null; })
-    .finally(()=>{ awArtistsLoading=null; });
-  return awArtistsLoading;
-}
-function ensureGalleriesCache(){
-  if(datasets.gallery) return Promise.resolve(datasets.gallery);
-  if(awGalleriesLoading) return awGalleriesLoading;
-  awGalleriesLoading = fetch('/json/galleries.json')
-    .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(j=>{ datasets.gallery=j; awResyncImagesFromGallery(); return j; })
-    .catch(e=>{ toast('Could not load galleries.json: '+e.message); return null; })
-    .finally(()=>{ awGalleriesLoading=null; });
-  return awGalleriesLoading;
-}
-
-function awArtistGraph(){ return (datasets.artists&&datasets.artists['@graph'])||[]; }
-function awArtistById(id){ return awArtistGraph().find(a=>a&&a['@id']===id); }
-
-// Artist links are stored exactly the way event performer credits are:
-// {'@id': …}, a bare object for one and an array for several. Never a
-// duplicated name string — renaming an artist in Artists mode then has to
-// propagate nowhere, because nothing else holds a copy of the name.
-function awArtistIds(ar){
-  const a=ar&&ar.artist;
-  if(!a) return [];
-  return (Array.isArray(a)?a:[a]).map(x=>x&&x['@id']).filter(Boolean);
-}
-function awSetArtistIds(ar, ids){
-  if(!ids.length) delete ar.artist;
-  else ar.artist = ids.length>1 ? ids.map(id=>({'@id':id})) : {'@id':ids[0]};
-}
-function awArtistNames(ar){
-  return awArtistIds(ar).map(id=>{
-    const p=awArtistById(id);
-    // Falling back to the raw @id is deliberate: a dangling artist link should
-    // be visible in the list, not quietly render as an unattributed work.
-    return p?p.name:id;
-  });
-}
-
-// The dropdown defaults to artists of the SAME exhibition. artists.json holds
-// one Person per artist PER EXHIBITION — Yunzhi / Melissa Li exists twice,
-// #artist-yunzhi-bitrot and #artist-yunzhi-dccep, with different sortOrders —
-// so an unfiltered list is 34 entries containing visible duplicates and makes
-// it trivially easy to attach a DCCeP artwork to the BitRot copy of the same
-// person. The "show all exhibitions" toggle is the escape hatch for the case
-// where that is genuinely what you want.
-let awArtistShowAll = false;
-function awToggleArtistScope(el){ awArtistShowAll=!!el.checked; awRefreshArtistPicker(); }
-function awArtistCandidateOptions(ar){
-  const chosen=new Set(awArtistIds(ar));
-  const pool=awArtistGraph()
-    .filter(p=>p&&p['@id']&&!chosen.has(p['@id']))
-    .filter(p=>awArtistShowAll||!ar.exhibition||p.exhibition===ar.exhibition)
-    .sort((a,b)=>(a.name||'').localeCompare(b.name||''));
-  if(!pool.length){
-    return `<option value="">${awArtistGraph().length?'— no more artists in this exhibition —':'— loading artists.json… —'}</option>`;
-  }
-  return `<option value="">— link an artist… —</option>`+
-    pool.map(p=>`<option value="${esc(p['@id'])}">${esc(p.name||p['@id'])}${awArtistShowAll?' · '+esc(EXH_NAMES[p.exhibition]||p.exhibition||''):''}</option>`).join('');
-}
-function awArtistRows(ar){
-  const ids=awArtistIds(ar);
-  if(!ids.length) return `<p style="font-size:11px;color:var(--muted);margin:2px 0 6px">No artist linked yet — pick one below, or use + to create a new one.</p>`;
-  return ids.map((id,i)=>{
-    const p=awArtistById(id);
-    const label=p?`${p.name}${p.url?' — '+p.url:''}`:`${id} — (not found in artists.json)`;
-    return `<div class="arr-row">
-      <input value="${esc(label)}" readonly style="opacity:.75">
-      <button class="btn btn-err btn-sm" onclick="awRemoveArtist(${i})">×</button>
-    </div>`;
-  }).join('');
-}
-function awRefreshArtistPicker(){
-  const ar=data?.['@graph']?.[curIdx];
-  if(!ar||!isArtwork(ar)) return;
-  const rows=document.getElementById('awArtistRows');
-  if(rows) rows.innerHTML=awArtistRows(ar);
-  const sel=document.getElementById('awArtistSel');
-  if(sel) sel.innerHTML=awArtistCandidateOptions(ar);
-}
-function awAddArtistFromSelect(sel){
-  const id=sel.value; if(!id) return;
-  const ar=data['@graph'][curIdx]; if(!ar) return;
-  const ids=awArtistIds(ar);
-  if(!ids.includes(id)) ids.push(id);
-  awSetArtistIds(ar, ids);
-  markUnsaved();                       // schema.json — the artwork changed
-  awRefreshArtistPicker(); renderList(); renderPreview();
-}
-function awRemoveArtist(i){
-  const ar=data['@graph'][curIdx]; if(!ar) return;
-  const ids=awArtistIds(ar);
-  ids.splice(i,1);
-  awSetArtistIds(ar, ids);
-  markUnsaved();
-  awRefreshArtistPicker(); renderList(); renderPreview();
-}
-
-// The "[+]" next to the artist dropdown opens the SAME modal the Artists tab's
-// "+ New" opens — one implementation of "create an artist", not two that can
-// drift. showAddArtistModal() takes a target so it knows which document to
-// write into and where to go afterwards.
-function awNewArtist(){
-  const ar=data?.['@graph']?.[curIdx];
-  showAddArtistModal({ target:'artwork', exhibition: ar?ar.exhibition:'' });
-}
-
-/* ── ARTWORK IMAGES LIVE IN THE GALLERY ────────────────────────────────────
- *
- * "Saves image under the exhibition name in gallery" resolves to: the image is
- * registered as a real entry in that exhibition's gallery in galleries.json,
- * not merely dropped in a folder that happens to be named after the show.
- *
- * The evidence for that reading is in the data. The DCCeP gallery's thumbDir
- * is literally assets/DCCeP/Artwork, and its 21 images already ARE the artwork
- * documentation — their captions already read "I Live There, With you - Xach
- * Hill", "Bottled Up - Jack Jessé". Gallery was already the de facto artwork
- * image store. The brief also asks for "select from existing image from
- * gallery", which only makes sense if upload and pick write to and read from
- * the same collection.
- *
- * So: galleries.json is the SOURCE OF TRUTH for the image. The artwork record
- * holds a pointer (gallery id + basename) plus a cached copy of src/full/alt
- * for rendering. The cache is re-synced from galleries.json on every load (see
- * awResyncImagesFromGallery), so an alt text corrected in Gallery mode reaches
- * the artwork card without anyone editing the artwork.
- *
- * Consequence: deleting an artwork does NOT delete its gallery images. The
- * artwork owned a reference, never the file.
- * ───────────────────────────────────────────────────────────────────────── */
-
-function awGalleries(){ return (datasets.gallery&&Array.isArray(datasets.gallery.galleries))?datasets.gallery.galleries:[]; }
-
-// Galleries carry an `exhibition` field (added by
-// dev-tools/add-gallery-exhibition.js). LEGACY_GAL_EXH is the fallback for a
-// galleries.json that predates that field, so the editor degrades to working
-// rather than to an empty picker if the two files are deployed out of step.
-// It is a fallback, not the mapping — do not add new galleries here.
-const LEGACY_GAL_EXH = {
-  'dccep':'does-cloud-compute', 'bitrot-show':'bitrot', 'bitrot-events':'bitrot',
-  'can-we-start-again':'can-we-start-again'
-};
-function awGalExhibition(gal){
-  if(gal && Object.prototype.hasOwnProperty.call(gal,'exhibition')) return gal.exhibition;
-  return LEGACY_GAL_EXH[gal&&gal.id] ?? null;
-}
-// An exhibition may legitimately have more than one gallery — BitRot has both
-// bitrot-show and bitrot-events. Nothing here forces a canonical one; the form
-// lets the person pick which gallery an upload lands in.
-function awGalleriesFor(exh){ return awGalleries().filter(g=>awGalExhibition(g)===exh); }
-function awGalById(id){ return awGalleries().find(g=>g.id===id)||null; }
-function awBase(p){ return String(p||'').split('/').pop().replace(/\.[^.]+$/,''); }
-
-// The target gallery for new uploads: whichever gallery this artwork's images
-// already come from, else the first gallery matching its exhibition.
-function awTargetGallery(ar){
-  const used=(ar.images||[]).map(im=>im&&im.gallery).filter(Boolean);
-  if(ar.targetGallery){ const g=awGalById(ar.targetGallery); if(g) return g; }
-  if(used.length){ const g=awGalById(used[0]); if(g) return g; }
-  return awGalleriesFor(ar.exhibition)[0]||null;
-}
-
-// Re-point the cached src/full/alt at whatever galleries.json currently says.
-// Silent and non-dirtying: this is the cache catching up with the source of
-// truth, not an edit. An image whose gallery entry has been deleted keeps its
-// stale cached paths and is reported, rather than vanishing without a word.
-function awResyncImagesFromGallery(){
-  if(!datasets.events||!datasets.gallery) return;
-  let orphans=0, synced=0;
-  (datasets.events['@graph']||[]).forEach(ar=>{
-    if(!isArtwork(ar)) return;
-    (ar.images||[]).forEach(im=>{
-      if(!im||!im.gallery) return;               // hand-entered path, not gallery-backed
-      const gal=awGalById(im.gallery); if(!gal) return;
-      const match=(gal.images||[]).find(g=>awBase(g.src)===im.galleryRef||g.src===im.src);
-      if(!match){ orphans++; return; }
-      if(im.src!==match.src||im.full!==(match.full||match.src)||im.alt!==(match.alt||'')){
-        im.src=match.src; im.full=match.full||match.src; im.alt=match.alt||''; synced++;
-      }
-    });
-  });
-  if(orphans) setTimeout(()=>toast(`${orphans} artwork image${orphans>1?'s':''} no longer in the gallery — open the artwork to re-pick`, ''), 900);
-  if(synced&&mode==='artwork'){ renderList(); renderPreview(); }
-}
-
-// ── GALLERY IMAGE PICKER ──────────────────────────────────
-// Genuinely new UI: nothing in this editor browses galleries.json for a single
-// image before now. Scoped to the artwork's own exhibition by default, with an
-// all-galleries toggle for the cross-listed case.
-let awPickAll = false;
-function awOpenImagePicker(){
-  const ar=data?.['@graph']?.[curIdx]; if(!ar) return;
-  ensureGalleriesCache().then(()=>{ awRenderImagePicker(); });
-  document.getElementById('awPickModal').classList.add('on');
-  awRenderImagePicker();
-}
-function awClosePicker(){ document.getElementById('awPickModal').classList.remove('on'); }
-function awTogglePickScope(el){ awPickAll=!!el.checked; awRenderImagePicker(); }
-function awRenderImagePicker(){
-  const ar=data?.['@graph']?.[curIdx]; if(!ar) return;
-  const body=document.getElementById('awPickBody'); if(!body) return;
-  const gals=awPickAll?awGalleries():awGalleriesFor(ar.exhibition);
-  if(!awGalleries().length){ body.innerHTML='<p class="aw-pick-empty">Loading galleries.json…</p>'; return; }
-  if(!gals.length){ body.innerHTML=`<p class="aw-pick-empty">No gallery is tagged to ${esc(EXH_NAMES[ar.exhibition]||ar.exhibition||'this exhibition')}. Tick “all galleries”, or add an <code>exhibition</code> field to that gallery in galleries.json.</p>`; return; }
-  const chosen=new Set((ar.images||[]).map(im=>im&&im.src).filter(Boolean));
-  body.innerHTML=gals.map(gal=>{
-    const imgs=gal.images||[];
-    return `<div class="aw-pick-group">
-      <div class="aw-pick-head">${esc(gal.short||gal.title||gal.id)} <span class="gal-count">${imgs.length}</span></div>
-      <div class="aw-pick-grid">${
-        imgs.length?imgs.map(im=>`<button class="aw-pick-item${chosen.has(im.src)?' is-chosen':''}" title="${esc(im.caption||im.alt||'')}" onclick="awPickImage('${esc(gal.id)}','${esc(awBase(im.src))}')">
-          <img src="${esc(im.src)}" alt="" loading="lazy">
-          <span>${esc(im.caption||im.alt||awBase(im.src))}</span>
-        </button>`).join(''):'<p class="aw-pick-empty">This gallery has no images yet.</p>'
-      }</div>
-    </div>`;
-  }).join('');
-}
-function awPickImage(galId, base){
-  const ar=data?.['@graph']?.[curIdx]; if(!ar) return;
-  const gal=awGalById(galId); if(!gal) return;
-  const src=(gal.images||[]).find(im=>awBase(im.src)===base); if(!src) return;
-  if(!Array.isArray(ar.images)) ar.images=[];
-  if(ar.images.some(im=>im.src===src.src)){ toast('Already on this artwork'); return; }
-  ar.images.push({ src:src.src, full:src.full||src.src, alt:src.alt||'', gallery:galId, galleryRef:base });
-  markUnsaved();                       // schema.json only — the gallery is unchanged
-  buildForm(); renderList(); renderPreview();
-  awRenderImagePicker();
-  toast('Image linked from '+(gal.short||galId),'ok');
-}
-
-/* ── UPLOAD NAMING ─────────────────────────────────────────────────────────
- * The brief's naming rule — ArtworkName_Artist_[n].extension — differs from
- * every existing stem rule in imgAssetPath(), because no other stem folds in a
- * credited person's name. So it gets its own function rather than another
- * branch bolted onto imgAssetPath's slug/act/film ladder.
- *
- * The FOLDER and the EXTENSIONS come from the gallery, not from here: an
- * uploaded artwork image is a gallery image, so it lands in that gallery's own
- * thumbDir/fullDir and uses the .webp/.jpeg pair that galNewBase() already
- * produces for gallery uploads. Only the stem differs. One folder ending up
- * with two different extension conventions would be a worse outcome than one
- * folder with two basename conventions. */
-function awImgAssetPath(ar, slot, type){
-  const gal=awTargetGallery(ar);
-  const n=slotParse(slot).i+1;
-  const stem=`${slug(ar.name||'artwork')}_${slug(awArtistNames(ar)[0]||'unattributed')}_${n}`;
-  const ext=type==='webp'?'.webp':'.jpeg';       // .jpeg — matches galNewBase()
-  const dir=type==='webp'
-    ? (gal?gal.thumbDir:`assets/${slug(ar.exhibition||'untagged')}/Artwork`)
-    : (gal?gal.fullDir :`assets/${slug(ar.exhibition||'untagged')}/Artwork`);
-  return `${dir}/${stem}${ext}`;
-}
-
-// Called from stageImg()/uploadImgToGitHub() after a successful stage: the
-// uploaded file is a gallery image, so it has to appear in galleries.json or
-// it will not show in the gallery browser and will not reach the sitemap.
-// This is what makes galleries.json a second dirty file from artwork mode.
-function awRegisterUploadInGallery(ar, slot){
-  const gal=awTargetGallery(ar);
-  if(!gal){ toast('No gallery tagged to this exhibition — image staged but not registered'); return; }
-  const im=slotImg(ar,slot); if(!im) return;
-  const src='/'+awImgAssetPath(ar,slot,'webp');
-  const full='/'+awImgAssetPath(ar,slot,'jpeg');
-  const base=awBase(src);
-  if(!Array.isArray(gal.images)) gal.images=[];
-  let entry=gal.images.find(g=>awBase(g.src)===base);
-  if(!entry){
-    entry={ src, full, alt:im.alt||'', caption:awDefaultCaption(ar) };
-    gal.images.push(entry);
-  } else {
-    entry.src=src; entry.full=full;
-    if(im.alt) entry.alt=im.alt;
-  }
-  im.src=src; im.full=full; im.gallery=gal.id; im.galleryRef=base;
-  markUnsaved('gallery');              // galleries.json is now dirty too
-  markUnsaved();                       // …and so is schema.json
-}
-// Matches the caption convention the existing DCCeP gallery entries already
-// use: "Title - Artist".
-function awDefaultCaption(ar){
-  const names=awArtistNames(ar);
-  return (ar.name||'Untitled')+(names.length?' - '+names.join(' & '):'');
-}
-
-// ── ARTWORK: ADD MODAL ────────────────────────────────────
-function showAddArtworkModal(){
-  if(!data){ toast('Load schema.json first'); return; }
-  ensureArtistsCache(); ensureGalleriesCache();
-  const m=document.getElementById('addArtworkModal');
-  document.getElementById('nwName').value='';
-  const sel=document.getElementById('nwExh');
-  sel.innerHTML=artworkExhOptions('');
-  const hosted=hostedExhibitionKeys();
-  sel.value=hosted.includes('does-cloud-compute')?'does-cloud-compute':(hosted[0]||'');
-  sel.dataset.prev=sel.value;
-  m.classList.add('on');
-  setTimeout(()=>document.getElementById('nwName').focus(),50);
-}
-function closeAddArtworkModal(){ document.getElementById('addArtworkModal').classList.remove('on'); }
-function submitNewArtwork(){
-  const nameEl=document.getElementById('nwName');
-  const name=nameEl.value.trim(); if(!name){ toast('Enter an artwork name'); return; }
-  if(!data){ data={'@context':'https://schema.org','@graph':[]}; datasets.events=data; }
-  if(!Array.isArray(data['@graph'])) data['@graph']=[];
-
-  const exhEl=document.getElementById('nwExh');
-  const exh=(exhEl&&exhEl.value!=='__add__')?exhEl.value:(hostedExhibitionKeys()[0]||'does-cloud-compute');
-  const short=exh==='does-cloud-compute'?'dccep':exh;   // same shorthand submitNewArtist() uses
-  const maxOrd=getArtwork().filter(a=>a.exhibition===exh).reduce((m,a)=>Math.max(m,a.sortOrder||0),0);
-
-  const rec={
-    '@type':ARTWORK_TYPE,
-    '@id':`https://phreaking.co.uk/#artwork-${slug(name)}-${short}`,
-    name, exhibition:exh,
-    sortOrder:maxOrd+1,
-    // Defaults to its own exhibition's page. Stored as a resolved PATH, not an
-    // exhibition key — see the visibleOn note in buildArtworkForm().
-    visibleOn: SITEMAP_EVENT_PAGES[exh] ? [SITEMAP_EVENT_PAGES[exh]] : [],
-    description:'', artForm:'', artMedium:'', width:'', height:'',
-    url:'', linkLabel:'',
-    keywords:[], sameAs:[], images:[],
-    visible:true
-  };
-  // dateCreated is deliberately absent: it inherits the exhibition's startDate
-  // at render time, and is only written if someone overrides it in the form.
-
-  data['@graph'].push(rec);
-  markUnsaved();
-  closeAddArtworkModal();
-  renderList(); renderPreview();
-  selectEvent(data['@graph'].length-1);
-  toast('Artwork created: '+name,'ok');
-}
-
-// ── ARTWORK EDIT FORM ─────────────────────────────────────
-function buildArtworkForm(ar){
-  document.getElementById('editTitle').textContent=ar.name||'Untitled Artwork';
-  ensureArtistsCache(); ensureGalleriesCache();
-  // The full-screen card view is a carousel over ALL of an artwork's images,
-  // not just a single cover — so every artwork needs at least a couple of
-  // slots ready to fill, not just the one the record is created with. Padding
-  // only fires when images is genuinely EMPTY (never touched), not merely
-  // short: an artwork someone has already trimmed down to one image on
-  // purpose must not have two blank slots silently reappear every time the
-  // form is reopened. That's also why this lives here rather than in
-  // submitNewArtwork() — it applies uniformly to brand-new records AND to the
-  // already-imported skeleton records that were created with images:[].
-  if(!Array.isArray(ar.images)) ar.images=[];
-  if(ar.images.length===0){
-    ar.images.push({src:'',full:'',alt:''},{src:'',full:'',alt:''},{src:'',full:'',alt:''});
-    markUnsaved();
-  }
-  const imgs=ar.images||[];
-  const keywords=Array.isArray(ar.keywords)?ar.keywords:[];
-  const sameAs=Array.isArray(ar.sameAs)?ar.sameAs:[];
-  const visibleOn=Array.isArray(ar.visibleOn)?ar.visibleOn:[];
-  const inheritedYear=awInheritedYear(ar);
-  const gals=awGalleriesFor(ar.exhibition);
-  const target=awTargetGallery(ar);
-
-  document.getElementById('editBody').innerHTML=`
-    <div class="field"><label>Artwork Name</label>
-      <input id="ef-name" value="${esc(ar.name||'')}" oninput="liveUp()"></div>
-    <div class="frow">
-      <div class="field"><label>Exhibition</label>
-        <select id="ef-exh" data-prev="${esc(ar.exhibition||'')}" onchange="anChange(this,'exh','liveUp')">
-          ${artworkExhOptions(ar.exhibition||'')}
-        </select></div>
-      <div class="field"><label>Year
-        <span style="font-weight:400;color:var(--muted)">${inheritedYear?`(exhibition: ${esc(inheritedYear)})`:'(exhibition has none)'}</span></label>
-        <input id="ef-year" value="${esc(ar.dateCreated||'')}" placeholder="${esc(inheritedYear||'—')}" oninput="liveUp()"></div>
-      <div class="field"><label>Sort Order</label>
-        <input type="number" id="ef-sort" value="${ar.sortOrder??''}" min="1" oninput="liveUp()"></div>
-    </div>
-
-    <div class="field"><label>Artist${awArtistIds(ar).length>1?' <span style="font-weight:400;color:var(--muted)">(collaborative work)</span>':''}</label>
-      <div id="awArtistRows">${awArtistRows(ar)}</div>
-      <div class="arr-row">
-        <select id="awArtistSel" onchange="awAddArtistFromSelect(this)">${awArtistCandidateOptions(ar)}</select>
-        <button class="btn btn-ok btn-sm" onclick="awNewArtist()" title="Create a new artist in artists.json">+</button>
-      </div>
-      <label style="display:flex;gap:6px;align-items:center;font-size:11px;color:var(--muted);margin-top:4px;font-weight:400">
-        <input type="checkbox" ${awArtistShowAll?'checked':''} onchange="awToggleArtistScope(this)">
-        show artists from all exhibitions
-      </label>
-    </div>
-
-    <div class="field"><label>Visibility</label>
-      <select id="ef-visible" onchange="liveUp()">
-        <option value="true" ${ar.visible!==false?'selected':''}>Visible</option>
-        <option value="false" ${ar.visible===false?'selected':''}>Hidden</option>
-      </select></div>
-
-    <div class="field"><label>Artwork Description</label>
-      <textarea id="ef-desc" rows="6" oninput="liveUp()">${esc(ar.description||'')}</textarea></div>
-
-    <div class="frow">
-      <div class="field"><label>Art Form</label>
-        <select id="ef-artform" data-prev="${esc(ar.artForm||'')}" onchange="anChange(this,'artform','liveUp')">
-          ${vocabOptions(knownArtForms, ar.artForm||'', 'art form')}
-        </select></div>
-      <div class="field"><label>Art Medium</label>
-        <select id="ef-artmedium" data-prev="${esc(ar.artMedium||'')}" onchange="anChange(this,'artmedium','liveUp')">
-          ${vocabOptions(knownArtMediums, ar.artMedium||'', 'medium')}
-        </select></div>
-    </div>
-    <div class="frow">
-      <div class="field"><label>Width <span style="font-weight:400;color:var(--muted)">(free text, e.g. 120 cm)</span></label>
-        <input id="ef-width" value="${esc(ar.width||'')}" oninput="liveUp()"></div>
-      <div class="field"><label>Height</label>
-        <input id="ef-height" value="${esc(ar.height||'')}" oninput="liveUp()"></div>
-    </div>
-
-    <div class="frow">
-      <div class="field"><label>URL</label>
-        <input type="url" id="ef-url" value="${esc(ar.url||'')}" placeholder="https://example.com" oninput="liveUp()"></div>
-      <div class="field"><label>Link Label</label>
-        <input id="ef-linklabel" value="${esc(ar.linkLabel||'')}" placeholder="example.com" oninput="liveUp()"></div>
-    </div>
-
-    <div class="field"><label>Images
-        <span style="font-weight:400;color:var(--muted)">(first is the cover; images live in the gallery)</span></label>
-      <div class="aw-imgtools">
-        <button class="btn btn-ghost btn-sm" onclick="awOpenImagePicker()">▦ Pick from gallery</button>
-        <button class="add-img" style="width:auto;margin:0" onclick="awAddImage()">+ Add image</button>
-        ${gals.length>1?`<select id="ef-targetgal" onchange="liveUp()" title="Which gallery new uploads land in">
-          ${gals.map(g=>`<option value="${esc(g.id)}"${target&&target.id===g.id?' selected':''}>→ ${esc(g.short||g.id)}</option>`).join('')}
-        </select>`:''}
-      </div>
-      <p style="font-size:11px;color:var(--muted);margin:6px 0 4px">
-        ${target?`New uploads go to <code>${esc(target.thumbDir)}</code> as <code>${esc(slug(ar.name||'artwork'))}_${esc(slug(awArtistNames(ar)[0]||'unattributed'))}_N.webp</code> and register in the <strong>${esc(target.short||target.id)}</strong> gallery.`
-                :`No gallery is tagged to this exhibition yet — uploads will not be registered in galleries.json.`}
-      </p>
-      <div class="imgs-editor" id="imgsEd">${imgs.map((img,i)=>imgRow(img,i)).join('')}</div>
-    </div>
-
-    <div class="field"><label>Keywords / tags</label>
-      <div class="arr-editor" id="arr-keywords">${keywords.map((v,i)=>arrRow('keywords',v,i)).join('')}</div>
-      <button class="add-arr" onclick="addArr('keywords')">+ Add keyword</button></div>
-
-    <div class="field"><label>Same As <span style="font-weight:400;color:var(--muted)">(external references)</span></label>
-      <div class="arr-editor" id="arr-sameAs">${sameAs.map((v,i)=>arrRow('sameAs',v,i)).join('')}</div>
-      <button class="add-arr" onclick="addArr('sameAs')">+ Add URL</button></div>
-
-    <div class="field"><label>Shows on pages
-        <span style="font-weight:400;color:var(--muted)">(page paths, not exhibition keys)</span></label>
-      <div class="arr-editor" id="arr-visibleOn">${visibleOn.map((v,i)=>arrRow('visibleOn',v,i)).join('')}</div>
-      <button class="add-arr" onclick="addArr('visibleOn')">+ Add page</button>
-      <p style="font-size:11px;color:var(--muted);margin:6px 0 0">
-        Known pages: ${SITEMAP_PAGE_ORDER.map(p=>`<code>${esc(p)}</code>`).join(' ')}
-      </p></div>
-
-    <div class="field"><label>@id <span style="font-weight:400;color:var(--muted)">(JSON-LD identifier)</span></label>
-      <input id="ef-id" value="${esc(ar['@id']||'')}" style="font-family:var(--mono);font-size:11px;" oninput="liveUp()"></div>`;
-  restoreAllConvUI();
-}
-
-// "Exhibition, year (pulls by default from exhibition)": look the exhibition
-// node up and read its own startDate, rather than duplicating the year onto
-// every artwork — the same shape as eventVenue()/homePlace() defaulting to a
-// shared source of truth. Returns '' when the exhibition has no startDate
-// (can-we-start-again has no ExhibitionEvent node at all, and the `featured`
-// ones carry no dates). Nothing invents a year to fill the gap: a fabricated
-// date is a lie, a missing one is honest, and the card simply omits "(year)".
-function awInheritedYear(ar){
-  const frag=ar&&ar.exhibition;
-  const ex=getExhibitions().find(e=>String(e['@id']||'').split('#')[1]===frag);
-  return (ex&&ex.startDate)?String(ex.startDate):'';
-}
-
-function awAddImage(){
-  const ar=data['@graph'][curIdx]; if(!ar) return;
-  if(!Array.isArray(ar.images)) ar.images=[];
-  ar.images.push({src:'',full:'',alt:''});
-  markUnsaved(); buildForm();
-}
-
-function liveUpArtwork(ar){
-  const g=id=>document.getElementById(id)?.value;
-  const s=g('ef-sort');
-  ar.name       = g('ef-name') || ar.name;
-  const exh=g('ef-exh'); if(exh!==undefined&&exh!=='') ar.exhibition=exh;
-  // Empty year means "inherit from the exhibition" — store nothing rather than
-  // an empty string, so the absence is meaningful in the JSON too.
-  const yr=g('ef-year');
-  if(yr!==undefined){ if(yr.trim()) ar.dateCreated=yr.trim(); else delete ar.dateCreated; }
-  ar.sortOrder  = s ? parseInt(s) : ar.sortOrder;
-  ar.description= g('ef-desc')      ?? ar.description;
-  ar.artForm    = g('ef-artform')   ?? ar.artForm;
-  ar.artMedium  = g('ef-artmedium') ?? ar.artMedium;
-  ar.width      = g('ef-width')     ?? ar.width;
-  ar.height     = g('ef-height')    ?? ar.height;
-  ar.url        = g('ef-url')       ?? ar.url;
-  ar.linkLabel  = g('ef-linklabel') ?? ar.linkLabel;
-  const tg=g('ef-targetgal'); if(tg) ar.targetGallery=tg;
-  const id=g('ef-id'); if(id!==undefined&&id!=='') ar['@id']=id;
-  const vis=g('ef-visible');
-  if(vis!==undefined){ if(vis==='false') ar.visible=false; else ar.visible=true; }
-  markUnsaved();
-  document.getElementById('editTitle').textContent=ar.name||'Untitled Artwork';
-  renderPreview();
-}
-
 // `pi` is the performance-block index for per-performance images, or omitted for
 // event-level images. Everything below is addressed by the resulting slot id.
 function imgRow(img,i,pi,fi){
@@ -3693,12 +2828,6 @@ function downloadConvert(slot, type){
 
 // Returns the repo-relative path for a converted image (no leading slash)
 function imgAssetPath(ev, slot, type){
-  // Artwork's naming rule folds in the ARTIST's name, which no other stem here
-  // does, and its folder comes from the target gallery rather than from an
-  // exhibition→folder ladder. Rather than bolt a fifth branch onto the stem
-  // logic below, it gets its own function — see awImgAssetPath().
-  if(isArtwork(ev)) return awImgAssetPath(ev, slot, type);
-
   const evSlug = ev.name ? slug(ev.name) : 'item';
   const {pi,fi,i} = slotParse(slot);
   const n      = i + 1;
@@ -3769,7 +2898,6 @@ function liveUp(){
   if(mode==='gallery'){ liveUpGallery(); return; }
   const ev=data['@graph'][curIdx]; if(!ev) return;
   if(mode==='artists'){ liveUpArtist(ev); return; }
-  if(mode==='artwork'||isArtwork(ev)){ liveUpArtwork(ev); return; }
   if(isExhibition(ev)){ liveUpExhibition(ev); return; }
   const g=id=>document.getElementById(id)?.value;
   const s=g('ef-sort');
@@ -3813,20 +2941,7 @@ function deleteEvent(){
     return;
   }
   if(mode==='gallery'){ deleteGalleryImage(); return; }
-  const victim=data['@graph'][curIdx];
-  if(isArtwork(victim)){
-    // The artwork owned a REFERENCE to its images, never the files. Gallery is
-    // the source of truth, so deleting the record leaves galleries.json
-    // untouched and the images still browsable — say so, because "delete" that
-    // silently removed shared images would be very hard to undo.
-    const n=(victim.images||[]).filter(im=>im&&im.gallery).length;
-    if(!confirm(`Delete artwork "${victim?.name}"?`
-      +(n?`\n\nIts ${n} gallery image${n>1?'s':''} will stay in galleries.json — only the artwork record is removed.`:''))) return;
-    data['@graph'].splice(curIdx,1); markUnsaved();
-    closeEdit(); renderList(); renderPreview(); toast('Artwork deleted — gallery images kept');
-    return;
-  }
-  if(!confirm(`Delete "${victim?.name}"?`)) return;
+  if(!confirm(`Delete "${data['@graph'][curIdx]?.name}"?`)) return;
   data['@graph'].splice(curIdx,1); markUnsaved();
   closeEdit(); renderPreview(); toast((mode==='artists'?'Artist':'Event')+' deleted');
 }
@@ -3924,7 +3039,6 @@ function renderPreview(){
   if(mode==='signals'){ renderSignalsPreview(frame); return; }
   if(mode==='gallery'){ renderGalleryPreview(frame); return; }
   if(mode==='artists'){ renderArtistsPreview(frame); return; }
-  if(mode==='artwork'){ renderArtworkPreview(frame); return; }
 
   if(renderStyle==='exh'){
     frame.innerHTML=renderExhibitionsPage();
@@ -4033,44 +3147,6 @@ function renderArtistsPreview(frame){
     h+=`</div>`;
   });
   frame.innerHTML=h+'</div>';
-}
-
-// ── ARTWORK PREVIEW ───────────────────────────────────────
-// Runs the REAL renderer — scripts/artwork.js, the same file the live DCCeP
-// page loads — rather than a lookalike built here. Same reasoning as the Past
-// Events preview calling PastEventsRender: a preview that renders through a
-// second implementation is a preview of the wrong thing, and the two drift the
-// moment anyone touches either.
-//
-// Cards are hydrated after each render, so clicking one in the preview opens
-// the same modal, with the same carousel and the same Esc/arrow keys, that a
-// visitor gets. The card and modal are proven here before the page ever
-// loads them.
-function awRenderer(){
-  if(typeof ArtworkRender==='undefined'){
-    return null;   // script failed to load; caller shows a plain message
-  }
-  return ArtworkRender;
-}
-function renderArtworkPreview(frame){
-  const R=awRenderer();
-  if(!R){ frame.innerHTML='<div class="prev-ph">scripts/artwork.js did not load — preview unavailable</div>'; return; }
-  const works=getArtwork()
-    .filter(a=>showHidden||a.visible!==false)
-    .filter(a=>prevFilter==='all'||a.exhibition===prevFilter);
-  if(!works.length){ frame.innerHTML='<div class="prev-ph">No artwork matches this filter</div>'; return; }
-
-  // Group by exhibition, matching every other preview in this file.
-  const ctx=R.buildContext(data, datasets.artists);
-  const groups=groupByExh(works);
-  let h='';
-  Object.keys(groups).forEach(exh=>{
-    const list=groups[exh].sort((a,b)=>(a.sortOrder||99)-(b.sortOrder||99));
-    h+=`<div class="sec-head">${esc(EXH_NAMES[exh]||exh)}</div>`+R.renderGridHTML(list, ctx);
-  });
-  frame.innerHTML=h;
-  R.attachImageData(frame, works);
-  R.hydrate(frame);
 }
 
 function galleryDCC(ev){
@@ -4639,22 +3715,13 @@ async function pushToGitHub(){
   const repo   = cfg.repo   || 'phreaking';
   const token  = cfg.token;
   const branch = cfg.branch || 'main';
-  // Artwork pushes schema.json, same as Events — it is a view over that file,
-  // not a fifth document. Deliberately NOT a parallel push path.
-  const DS_PATH = {
-    events:  cfg.path         || 'json/schema.json',
-    artists: cfg.artistsPath  || 'json/artists.json',
-    signals: cfg.signalsPath  || 'json/signals.json',
-    gallery: cfg.galleryPath  || 'json/galleries.json',
-  };
-  const path = DS_PATH[dsOf()];
-  // Companion documents this mode may also have dirtied. Artwork can dirty
-  // artists.json (inline artist creation) and galleries.json (registering an
-  // uploaded image) without those tabs ever being opened — which is exactly
-  // why the dirty flags are per-dataset rather than per-mode.
-  const companions = (DATASETS_TOUCHED_BY[mode]||[])
-    .filter(ds => ds!==dsOf() && unsaved[ds] && datasets[ds])
-    .map(ds => ({ ds, path: DS_PATH[ds], data: datasets[ds] }));
+  const path   = mode==='artists'
+    ? (cfg.artistsPath || 'json/artists.json')
+    : mode==='signals'
+      ? (cfg.signalsPath || 'json/signals.json')
+      : mode==='gallery'
+        ? (cfg.galleryPath || 'json/galleries.json')
+        : (cfg.path || 'json/schema.json');
   const pagePath = cfg.pagePath || PE_PAGE_DEFAULT;
   const headers = {
     'Authorization': `Bearer ${token}`,
@@ -4671,13 +3738,7 @@ async function pushToGitHub(){
     // 0. Regenerate the static Past Events page before anything is written.
     //    If this throws, the push stops here and nothing has been changed.
     let bake = null;
-    // Artwork mode bakes too. It is editing schema.json, so the static Past
-    // Events page has to be regenerated from the same object being pushed or
-    // the two fall out of step. No artwork node ever carries pastEvents:true,
-    // so the bake simply skips them — the same way it already skips
-    // Exhibitions and Person stubs. No special-casing needed inside the
-    // renderer, and no second push path here.
-    if(mode==='events'||mode==='artwork'){
+    if(mode==='events'){
       bake = await bakePastEventsPage(data, headers, owner, repo, branch, pagePath, msgEl);
     }
 
@@ -4733,23 +3794,6 @@ async function pushToGitHub(){
       throw new Error(err.message || `GitHub API ${putRes.status}`);
     }
 
-    // 2a. Push companion JSON documents dirtied from this mode. Each is a
-    //     separate contents-API write, matching the existing "one push button,
-    //     several writes" shape. A companion failing after the main file
-    //     succeeded is reported loudly and leaves that dataset dirty, so
-    //     pushing again retries only what did not land.
-    const companionFailures = [];
-    for(const c of companions){
-      msgEl.textContent = `Pushing ${c.path}…`;
-      try {
-        await ghPutText(c.path, JSON.stringify(c.data, null, 2),
-          `Update ${c.path} via JSON editor (${mode} mode)`, headers, owner, repo, branch);
-        markSaved(c.ds);
-      } catch(e){
-        companionFailures.push(`${c.path}: ${e.message}`);
-      }
-    }
-
     // 2b. Push the regenerated page alongside the JSON it was generated from.
     //     The sha we read during the bake is passed through, so a concurrent
     //     edit to index.html fails loudly instead of being silently clobbered.
@@ -4767,7 +3811,7 @@ async function pushToGitHub(){
 
     // 3. Keep the image sitemap in sync — events & gallery pushes change site images
     let sitemapNote = '';
-    if(mode==='events' || mode==='gallery' || mode==='artwork'){
+    if(mode==='events' || mode==='gallery'){
       msgEl.textContent = 'Updating image sitemap…';
       try { await pushImageSitemap(headers, owner, repo, branch); }
       catch(e){
@@ -4776,12 +3820,7 @@ async function pushToGitHub(){
       }
     }
 
-    // Only the datasets that actually pushed are cleared; a failed companion
-    // stays dirty on purpose so the next push retries it.
-    markSaved(dsOf());
-    if(companionFailures.length){
-      toast('Some companion files did not push: '+companionFailures.join(' · '));
-    }
+    markSaved();
     const imgCount = staged.length;
     const summary = bake ? bakeSummary(bake) : null;
 
@@ -4900,14 +3939,6 @@ const SITEMAP_STATIC = {
 const SITEMAP_EVENT_PAGES = {
   'can-we-start-again': '/can-we-start-again/',
   'does-cloud-compute': '/does-cloud-compute-ever-precipitate/',
-  // bitrot was missing here even though '/BitRot/' is a real page in
-  // SITEMAP_PAGE_ORDER and in galleries.json's bitrot-show/bitrot-events
-  // `page` fields. Without it, submitNewArtwork()'s default `visibleOn:
-  // SITEMAP_EVENT_PAGES[exh] ? [...] : []` silently produced an EMPTY
-  // visibleOn for every BitRot artwork — meaning a new BitRot artwork would
-  // exist in schema.json but appear on no page at all until someone noticed
-  // and added the path by hand.
-  'bitrot': '/BitRot/',
 };
 const SITEMAP_PAGE_ORDER = ['/','/can-we-start-again/','/BitRot/','/does-cloud-compute-ever-precipitate/','/mixed-signals/','/open-projector/','/phreak-mag/','/past-events/','/exhibitions/'];
 
@@ -4938,20 +3969,6 @@ function buildImageSitemapXML(schemaData, galleriesData){
     if(item.visible===false) return;
     const imgs = item.images||[];
     if(isExhibition(item)){ imgs.forEach(im => add('/exhibitions/', im.full||im.src)); return; }
-    // Artwork is listed against every page it actually appears on, read from
-    // its own visibleOn field rather than from the static SITEMAP_EVENT_PAGES
-    // map. That is the whole reason visibleOn stores resolved page paths and
-    // not exhibition keys: an artwork cross-listed onto the homepage needs no
-    // second lookup table to be found here.
-    //
-    // Note these images are ALSO listed via the galleries.json pass above,
-    // against the gallery's own page. `add()` dedupes per page, and listing an
-    // image on two pages it genuinely appears on is correct, not a duplicate.
-    if(isArtwork(item)){
-      (Array.isArray(item.visibleOn)?item.visibleOn:[]).forEach(page =>
-        imgs.forEach(im => add(page, im.full||im.src)));
-      return;
-    }
     if(!isEvent(item)) return;
     const page = SITEMAP_EVENT_PAGES[item.exhibition];
     if(page) imgs.forEach(im => add(page, im.full||im.src));
@@ -5251,13 +4268,7 @@ function stageImg(slot, type){
   const fname    = repoPath.split('/').pop();
 
   stagedImages.set(repoPath, { content, label: fname });
-  // An uploaded artwork image is a GALLERY image: galleries.json is the source
-  // of truth for it, so it has to be registered there or it will never appear
-  // in the gallery browser, the picker, or the image sitemap. This is what
-  // makes galleries.json a second dirty file from artwork mode — handled by
-  // the per-dataset unsaved flags, not by switching tabs.
-  if(isArtwork(ev)) awRegisterUploadInGallery(ev, slot);
-  else applyConvertPaths(slot);
+  applyConvertPaths(slot);
   updateStagedBadge();
 
   // Update the button to show it's queued
@@ -5286,14 +4297,6 @@ function updateStagedBadge(){
 async function uploadImgToGitHub(slot, type){
   const cfg = ghLoad();
   if(!cfg.owner || !cfg.repo || !cfg.token){ openGhModal(); return; }
-  // "Upload now" and "Save for push" have to agree about what an artwork image
-  // IS. Both register it in galleries.json — otherwise an immediate upload
-  // would put a file in the gallery's folder that the gallery itself has never
-  // heard of, and it would be invisible everywhere except the artwork card.
-  {
-    const _ev = data?.['@graph']?.[curIdx];
-    if(_ev && isArtwork(_ev)) awRegisterUploadInGallery(_ev, slot);
-  }
 
   const key = imgConvKey(slot);
   const s   = imgConvState[key];
@@ -5394,62 +4397,15 @@ function submitNewExhibition(){
   toast('Exhibition "'+name+'" created','ok');
 }
 
-// ── ADD VOCABULARY VALUE (art form / art medium) ──────────
-let pendingVocabKind='';
-function showAddVocabModal(kind){
-  pendingVocabKind=kind;
-  const isForm=kind==='artform';
-  document.getElementById('avTitle').textContent=isForm?'New Art Form':'New Art Medium';
-  document.getElementById('avLabel').textContent=isForm?'Art Form *':'Art Medium *';
-  const el=document.getElementById('avName');
-  el.value=''; el.placeholder=isForm?'e.g. Kinetic Sculpture':'e.g. Thermal Printer';
-  document.getElementById('addVocabModal').classList.add('on');
-  setTimeout(()=>el.focus(),50);
-}
-function closeAddVocabModal(){ document.getElementById('addVocabModal').classList.remove('on'); }
-function confirmAddVocab(){
-  const el=document.getElementById('avName');
-  const v=el.value.trim(); if(!v){ el.focus(); return; }
-  const isForm=pendingVocabKind==='artform';
-  const list=isForm?knownArtForms:knownArtMediums;
-  if(!list.includes(v)) list.push(v);
-  closeAddVocabModal();
-  if(pendingANSel){
-    pendingANSel.innerHTML=vocabOptions(list, v, isForm?'art form':'medium');
-    pendingANSel.value=v; pendingANSel.dataset.prev=v;
-  }
-  if(pendingANCb) window[pendingANCb]();
-  pendingANSel=null; pendingANKind=''; pendingANCb=''; pendingVocabKind='';
-  toast((isForm?'Art form':'Medium')+' "'+v+'" added','ok');
-}
-
 // ── NEW ARTIST ────────────────────────────────────────────
-// Opened from two places: the Artists tab's own "+ New", and the [+] beside
-// the artist dropdown in the Artwork form. ONE implementation, parameterised —
-// two copies of "create an artist" is exactly the kind of drift this codebase
-// designs against, and the brief's "shows same menu that + New in artist page
-// shows" is asking for this modal, not a lookalike.
-//
-// `opts.target` decides which document is written and what happens afterwards:
-//   'artists' (default) — write datasets.artists, jump to the new record
-//   'artwork'           — write datasets.artists, link it to the open artwork
-//                         and stay put, because the person is mid-artwork
-let pendingArtistTarget='artists';
-function showAddArtistModal(opts){
-  opts=opts||{};
-  pendingArtistTarget=opts.target||'artists';
-  if(pendingArtistTarget==='artwork') ensureArtistsCache();
+function showAddArtistModal(){
   document.getElementById('addArtistModal').classList.add('on');
   document.getElementById('naName').value='';
   document.getElementById('naJob').value='Artist';
   const naExh=document.getElementById('naExh');
   if(naExh){
     naExh.innerHTML=exhOptions('');
-    // From the artwork form, default to the artwork's own exhibition — but
-    // leave it overridable, since an artist may be being added for elsewhere.
-    const want=opts.exhibition&&knownExhibitions.includes(opts.exhibition) ? opts.exhibition
-             : (knownExhibitions.includes('bitrot')?'bitrot':(knownExhibitions[0]||'bitrot'));
-    naExh.value=want;
+    naExh.value=knownExhibitions.includes('bitrot')?'bitrot':(knownExhibitions[0]||'bitrot');
     naExh.dataset.prev=naExh.value;
   }
   setTimeout(()=>document.getElementById('naName').focus(),50);
@@ -5459,13 +4415,9 @@ function submitNewArtist(){
   const nameEl=document.getElementById('naName');
   const name=nameEl.value.trim(); if(!name){ toast('Enter an artist name'); return; }
 
-  // The target document is always datasets.artists, NEVER the ambient `data`.
-  // Previously this wrote into `data` and then asserted datasets.artists=data,
-  // which is correct only while mode==='artists'; called from the Artwork tab
-  // that would have pushed a Person straight into schema.json's event graph.
-  if(!datasets.artists) datasets.artists={'@context':'https://schema.org','@graph':[]};
-  const adata=datasets.artists;
-  if(!Array.isArray(adata['@graph'])) adata['@graph']=[];
+  if(!data){ data={'@context':'https://schema.org','@graph':[]}; }
+  if(!Array.isArray(data['@graph'])) data['@graph']=[];
+  datasets.artists=data;
 
   const exhEl=document.getElementById('naExh');
   const jobEl=document.getElementById('naJob');
@@ -5473,8 +4425,7 @@ function submitNewArtist(){
   const job=(jobEl&&jobEl.value.trim())||'Artist';
   const short=exh==='does-cloud-compute'?'dccep':exh;
 
-  const maxOrd=(adata['@graph']||[]).filter(a=>isArtist(a)&&a.exhibition===exh)
-    .reduce((m,a)=>Math.max(m,a.sortOrder||0),0);
+  const maxOrd=getArtists().filter(a=>a.exhibition===exh).reduce((m,a)=>Math.max(m,a.sortOrder||0),0);
   const newArt={
     '@type':'Person',
     '@id':`https://phreaking.co.uk/#artist-${slug(name)}-${short}`,
@@ -5485,24 +4436,10 @@ function submitNewArtist(){
     sortOrder:maxOrd+1
   };
 
-  adata['@graph'].push(newArt);
-  markUnsaved('artists');            // artists.json is dirty regardless of tab
+  data['@graph'].push(newArt);
+  markUnsaved();
+  const newIdx=data['@graph'].length-1;
   closeAddArtistModal();
-
-  if(pendingArtistTarget==='artwork'){
-    // Link it straight onto the artwork being edited and stay in the form.
-    const ar=data?.['@graph']?.[curIdx];
-    if(ar&&isArtwork(ar)){
-      const ids=awArtistIds(ar); ids.push(newArt['@id']); awSetArtistIds(ar, ids);
-      markUnsaved();                 // …and so is schema.json
-      awRefreshArtistPicker(); renderList(); renderPreview();
-    }
-    pendingArtistTarget='artists';
-    toast('Artist created in artists.json and linked: '+name,'ok');
-    return;
-  }
-
-  const newIdx=adata['@graph'].length-1;
   renderList();
   renderPreview();
   selectEvent(newIdx);

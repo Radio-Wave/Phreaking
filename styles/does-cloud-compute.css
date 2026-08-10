@@ -51,9 +51,12 @@ body{
 
 /* layout */
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad) var(--pad); }
-.hero{ padding:calc(var(--pad) * 1.2) 0 var(--pad); }
+.hero{
+  padding:calc(var(--pad) * 1.2) 0 var(--pad);
+  border-bottom:1px solid var(--rule);
+}
 .title{
-  margin:0 0 var(--g);
+  margin:0;
   font-size: clamp(40px, 8vw, 84px);
   font-weight:600;
   letter-spacing:-0.5px;
@@ -62,38 +65,43 @@ body{
 .lede{
   max-width: 70ch;
   color:var(--muted);
+  margin-top: var(--g);
 }
 
-/* meta grid */
-.meta{
-  display:grid;
-  grid-template-columns: repeat(12, 1fr);
+/* About section: body copy + location/dates sitting to its right */
+.about-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
   gap: var(--g);
-  padding: var(--pad) 0;
-  border-top:1px solid var(--rule);
-  border-bottom:1px solid var(--rule);
-  margin-left: 0;
+  flex-wrap:wrap;
 }
-.meta-block:nth-child(1){ grid-column: span 5; }
-.meta-block:nth-child(2){ grid-column: span 4; }
-.meta-block:nth-child(3){ grid-column: span 3; }
+
+.about-meta{
+  display:flex;
+  flex-direction:column;
+  gap: .85rem;              /* tighter gap between Location and Dates */
+  min-width: 200px;
+  flex: 0 1 280px;
+}
 
 @media (max-width: 900px){
-  .meta{ grid-template-columns: 1fr; }
-  .meta-block{ grid-column: auto; }
+  .about-top{ flex-direction:column; }
+  .about-meta{
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:2rem;
+    padding-top: var(--g);
+  }
 }
 
-.meta h2{
-  font-size: clamp(16px,2.2vw,18px);
-  margin:0 0 .5rem 0;
+.meta-block h2{
+  font-size: clamp(15px,2vw,17px);
+  margin:0 0 .4rem 0;
   letter-spacing:.08em; text-transform:uppercase;
   color:var(--ink);
 }
-.keywords{ list-style:none; padding:0; margin:.25rem 0 0 0; display:flex; gap:.8rem; flex-wrap:wrap; }
-.keywords li{
-  border:1px solid var(--rule);
-  padding:.4rem .6rem; white-space:nowrap;
-}
+.meta-block p{ margin:0; color:var(--muted); }
 
 .map-strip{ width:100%; height:auto; display:block; margin-top:.5rem; border:1px solid var(--rule); }
 
@@ -101,6 +109,9 @@ body{
   margin: 0;              /* no extra left gap */
   padding: var(--pad) 0;  /* share the same left edge as .right */
   color: var(--ink); }
+
+/* the About heading sits directly above this copy, so it doesn't need its own top padding on top of the heading's */
+.about-top .body-copy{ padding-top: 0; }
 
 .btn{
   appearance:none; border:1px solid var(--ink); background:transparent; color:var(--ink);
@@ -258,6 +269,11 @@ body{
               /* the <hr> handles spacing */
 }
 
+/* About heading sits closer to its body copy than other section titles */
+.section-title--about{
+  padding-bottom: 0;
+}
+
 /* horizontal breaker that cancels .right padding so it bleeds edge to edge */
 
 .as-seen{
@@ -314,6 +330,24 @@ body{
   gap: var(--gap);
 }
 .pc-gallery.three-wide .pc-grid{ grid-template-columns: repeat(3, 1fr); }
+
+/* two big exhibition images: full content width, left-aligned, rectangular not square */
+.pc-gallery.two-wide{
+  max-width: none;
+  width: 100%;
+  margin: var(--pad) 0;
+}
+.pc-gallery.two-wide .pc-grid,
+.dccp-preview-grid{
+  grid-template-columns: repeat(2, 1fr);
+}
+.pc-gallery.two-wide .pc-item img{
+  aspect-ratio: 3 / 2;
+}
+@media (max-width:520px){
+  .pc-gallery.two-wide .pc-grid,
+  .dccp-preview-grid{ grid-template-columns: 1fr; }
+}
 @media (max-width:1100px){ .pc-grid{ grid-template-columns: repeat(3, 1fr); } }
 @media (max-width:800px){  .pc-grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width:520px){  .pc-grid{ grid-template-columns: 1fr; } }
