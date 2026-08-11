@@ -138,8 +138,7 @@
           "alt": "BitRot gallery detail"
         }
       ],
-      "visible": true,
-      "endDate": "2025"
+      "visible": true
     },
     {
       "@type": [
@@ -791,8 +790,7 @@
       "description": "A lecture exploring the making of XXX Machina, tracing its development across philosophy, technical process, and lived experience, discussing artificial intimacies, eroticism, and digital embodiment.",
       "keywords": "artificial intimacy, digital embodiment, post-structuralism, postmodernism, computational desire, XXX Machina",
       "visible": true,
-      "pastEvents": true,
-      "displayDate": "Saturday 9th August — 15:00"
+      "pastEvents": true
     },
     {
       "@type": "Event",
@@ -850,8 +848,7 @@
       "description": "A lecture exploring how desire functions as a mechanism of discipline and ideological capture within the contemporary digital landscape, drawing from media theory, philosophy, and digital folklore, with a close reading of Videodrome.",
       "keywords": "media theory, digital folklore, desire, platform culture, algorithmic culture, Videodrome, meme culture",
       "visible": true,
-      "pastEvents": true,
-      "displayDate": "Friday 8th August — 18:30"
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -1198,8 +1195,7 @@
           "alt": "Facilitator demonstrating web rebuilding techniques during Oops, You Found A Glitch, Phreaking Collective, London, 2025"
         }
       ],
-      "pastEvents": true,
-      "displayDate": "Saturday 9th August — 11:00–14:00"
+      "pastEvents": true
     },
     {
       "@type": "EducationEvent",
@@ -1254,8 +1250,7 @@
           "alt": "3D scanning demonstration with projection during Object Oriented Storytelling workshop, Phreaking Collective, London, 2025"
         }
       ],
-      "pastEvents": true,
-      "displayDate": "Sunday 10th August — 13:00–15:00"
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1557,8 +1552,7 @@
       "description": "A live coding performance integrating real-time audio-visual systems, algorithmic composition, AI-driven generative visuals, and sensor-based interactivity.",
       "keywords": "live coding, algorithmic composition, generative visuals, AI art, performance",
       "visible": true,
-      "pastEvents": true,
-      "displayDate": "Thursday 7th August — 18:30"
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1615,8 +1609,7 @@
           "credit": "Xach Hill"
         }
       ],
-      "pastEvents": true,
-      "displayDate": "Thursday 7th August — 19:30"
+      "pastEvents": true
     },
     {
       "@type": "PerformanceEvent",
@@ -1673,8 +1666,7 @@
           "credit": "Xach Hill"
         }
       ],
-      "pastEvents": true,
-      "displayDate": "Thursday 7th August — 20:30"
+      "pastEvents": true
     },
     {
       "@type": "ScreeningEvent",
@@ -2072,15 +2064,6 @@
       "description": "Exhibition Opening",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2229,15 +2212,6 @@
       "description": "",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2263,15 +2237,6 @@
       "description": "",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2297,15 +2262,6 @@
       "description": "",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2331,15 +2287,6 @@
       "description": "",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2365,15 +2312,6 @@
       "description": "",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2550,15 +2488,6 @@
       "description": "Join us to celebrate the launch of issue #2 of Phreak Mag. Hear from the magazine editor, and a panel talk with selected writers and artists from the magazine",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2584,15 +2513,6 @@
       "description": "A monthly art jam where participants are given a random computational material, process, and subject and have only a set time to create artwork. The sessions encourage collaboration and experimental approaches to digital tools.",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -2655,15 +2575,6 @@
       "description": "Speed Running the World of Things. As part of this programme Nina Dvies opens up her research in progress, presenting it as a fragmented talk. Opening with teenagers speedrunning a Scientology building, she traces a series of tangents through Boston Dynamics' dancing robots, NASA's 'riding the skin' VR experiments, and the world models that teach physical AI to rehearse being in our world before it arrives. Drawing on several years of research into what happens to human movement when it leaves the body, the talk arrives at a single question: as physical AI inherits human movement to navigate a human-built world, what new forms of embodied literacy must we develop to navigate it in return?",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3052,15 +2963,6 @@
       "description": "Festival of Perma Computing.",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3086,15 +2988,6 @@
       "description": "A panel talk through the themes of the project, our works, and the festival.",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3120,15 +3013,6 @@
       "description": "Phreaks Monthly Open Projector Returns!\n\nWith some retuning faces and open presentations.",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3193,15 +3077,6 @@
       "description": "Hangout with computational artists.",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3227,15 +3102,6 @@
       "description": "Festival of Perma Computing.",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3261,15 +3127,6 @@
       "description": "Opening drinks with DJ Sets from:\nMETAL_UPA,\nTharsis,\nSIIIO.\n",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
@@ -3295,15 +3152,6 @@
       "description": "An Evening with London Live Coding Group",
       "startDate": "2026",
       "endDate": "2026",
-      "location": {
-        "@type": "Place",
-        "name": "Phreaking Collective",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        }
-      },
       "organizer": {
         "@id": "https://phreaking.co.uk/#phreaking"
       },
