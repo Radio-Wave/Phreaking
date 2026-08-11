@@ -4630,6 +4630,125 @@ function bakeSummary(bake){
   return {status, note, clean: !p.errors.length && !p.warnings.length};
 }
 
+// ── STATIC ARTWORK ON EXHIBITION PAGES ────────────────────
+// Same discipline as the Past Events bake above, extended to a second content
+// type: every push that can change artwork markup regenerates the exhibition
+// pages from the same renderer the live pages hydrate, and pushes them in the
+// same operation. No button, no checkbox — a bake that can be skipped is a page
+// that quietly drifts back to being empty for anything that doesn't run JS.
+//
+// WHICH PAGES: read from ArtworkRender.ARTWORK_BAKE_PAGES in scripts/artwork.js,
+// deliberately NOT declared here and NOT in the ⚙ GitHub modal. That array is
+// the single source of truth, shared with dev-tools/build-artwork-pages.js;
+// adding a page (can-we-start-again, when its owner is ready) is a one-line
+// edit there and no edit at all here.
+function awRendererForBake(){
+  const R = awRenderer();
+  if(!R || typeof R.renderPageRegions!=='function'){
+    throw new Error('scripts/artwork.js did not load, so the exhibition-page generator is unavailable. '
+      + 'Check that /scripts/artwork.js is reachable from this page, then push again.');
+  }
+  return R;
+}
+
+// artists.json is a render input for artwork (artist names are resolved from
+// it, never duplicated into schema.json), so a bake needs it in memory even
+// when the person never opened the Artists tab.
+function ensureSchemaCache(){
+  if(datasets.events) return Promise.resolve(datasets.events);
+  return fetch('/json/schema.json')
+    .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(j=>{ datasets.events=j; return j; });
+}
+
+// Render, splice and verify EVERY approved page before writing a single byte
+// of any of them. All-or-nothing across pages: one page failing means no page
+// is written, and the error names every problem found rather than the first.
+async function bakeArtworkPages(schemaData, artistsData, headers, owner, repo, branch, msgEl){
+  const R = awRendererForBake();
+  const pages = R.ARTWORK_BAKE_PAGES || [];
+  const bakes = [];
+  const failures = [];
+
+  for(const cfg of pages){
+    if(msgEl) msgEl.textContent = `Generating static artwork for ${cfg.pagePath}…`;
+
+    const rendered = R.renderPageRegions(schemaData, artistsData, cfg);
+    if(rendered.fatal){ failures.push(`${cfg.pagePath}: ${rendered.fatal}`); continue; }
+
+    const apiBase=`https://api.github.com/repos/${owner}/${repo}/contents/${cfg.pagePath}`;
+    const getRes=await fetch(`${apiBase}?ref=${branch}`,{headers});
+    if(!getRes.ok){
+      if(getRes.status===404){
+        failures.push(`${cfg.pagePath} was not found in ${owner}/${repo}. `
+          + 'Fix the path in ARTWORK_BAKE_PAGES (scripts/artwork.js) or remove the page from it.');
+      } else {
+        const err=await getRes.json().catch(()=>({}));
+        failures.push(`Could not read ${cfg.pagePath}: ${err.message||getRes.status}`);
+      }
+      continue;
+    }
+    const meta=await getRes.json();
+    const current=new TextDecoder().decode(
+      Uint8Array.from(atob(String(meta.content||'').replace(/\n/g,'')), c=>c.charCodeAt(0)));
+
+    const applied=R.applyRegions(current, rendered.regions);
+    if(applied.missing.length){
+      failures.push(`${cfg.pagePath} is missing generator markers: ${applied.missing.join(', ')}. `
+        + 'Restore the matching <!-- AW:START:… --> / <!-- AW:END:… --> pairs before pushing.');
+      continue;
+    }
+
+    // The artists grid, the events feed, the galleries and the whole page shell
+    // are hand-authored or belong to another renderer. Not ours to touch.
+    if(R.outsideRegions(current)!==R.outsideRegions(applied.html)){
+      failures.push(`The generator would have altered hand-authored parts of ${cfg.pagePath}.`);
+      continue;
+    }
+
+    // Re-derived from the JSON, not taken on the generator's word — including
+    // each image's full-size path checked positionally against its own thumb,
+    // since that is what a baked carousel navigates on with no live fetch.
+    const check=R.verifyArtworkPageHTML(applied.html, rendered.list, rendered.ctx);
+    if(!check.ok){
+      failures.push(`${cfg.pagePath} is missing content for ${check.problems.length} item(s): `
+        + check.problems.slice(0,3).join('; ') + (check.problems.length>3?' …':''));
+      continue;
+    }
+
+    bakes.push({ pagePath: cfg.pagePath, text: applied.html, sha: meta.sha,
+                 page: rendered, verified: check.checked });
+  }
+
+  // Report every page's result in one throw, not just the first to fail.
+  if(failures.length) throw new Error(failures.join(' · '));
+  return bakes;
+}
+
+function artworkBakeSummary(bakes){
+  const total = bakes.reduce((n,b)=>n+b.page.baked, 0);
+  const errors = bakes.reduce((a,b)=>a.concat(b.page.errors), []);
+  const warnings = bakes.reduce((a,b)=>a.concat(b.page.warnings), []);
+  if(errors.length||warnings.length){
+    console.group('Artwork — bake report');
+    bakes.forEach(b=>{
+      console.log(`${b.pagePath}: ${b.page.baked} baked, verified ${b.verified}`);
+      b.page.errors.forEach(e=>console.error('  SKIPPED: '+e));
+      b.page.warnings.forEach(w=>console.warn('  WARNING: '+w));
+    });
+    console.groupEnd();
+  }
+  let note='';
+  if(errors.length){
+    note = ` — ${errors.length} artwork issue${errors.length>1?'s':''}: ${errors[0]}`
+      + (errors.length>1?` (+${errors.length-1} more in the console)`:'');
+  } else if(warnings.length){
+    note = ` — ${warnings.length} artwork warning${warnings.length>1?'s':''}: ${warnings[0]}`
+      + (warnings.length>1?` (+${warnings.length-1} more in the console)`:'');
+  }
+  return { total, note, clean: !errors.length && !warnings.length };
+}
+
 async function pushToGitHub(){
   if(!data){ toast('No JSON loaded — nothing to push'); return; }
   const cfg = ghLoad();
@@ -4679,6 +4798,31 @@ async function pushToGitHub(){
     // renderer, and no second push path here.
     if(mode==='events'||mode==='artwork'){
       bake = await bakePastEventsPage(data, headers, owner, repo, branch, pagePath, msgEl);
+    }
+
+    // 0b. Regenerate the static artwork on every approved exhibition page, on
+    //     the same terms: before anything is written, all-or-nothing across
+    //     pages, and a failure here stops the push with nothing changed.
+    //
+    //     Artists mode bakes too, and has to: artwork credits are RESOLVED from
+    //     artists.json at render time rather than duplicated into schema.json,
+    //     so renaming an artist changes what the baked exhibition pages should
+    //     say. Without this, a rename would push cleanly and leave every baked
+    //     artwork card quietly crediting the old name until the next artwork
+    //     push happened to fix it.
+    let awBakes = [];
+    if(mode==='events'||mode==='artwork'||mode==='artists'){
+      const awSchema  = (mode==='artists') ? await ensureSchemaCache() : data;
+      const awArtists = (mode==='artists') ? data : (datasets.artists || await ensureArtistsCache());
+      if(!awSchema){
+        throw new Error('Could not load schema.json, so the exhibition pages could not be rebuilt. '
+          + 'Push aborted rather than leaving the baked artwork out of step.');
+      }
+      if(!awArtists){
+        throw new Error('Could not load artists.json, so artwork credits could not be resolved. '
+          + 'Push aborted rather than baking artwork with unresolved artist references.');
+      }
+      awBakes = await bakeArtworkPages(awSchema, awArtists, headers, owner, repo, branch, msgEl);
     }
 
     // 1. Upload all staged images
@@ -4765,6 +4909,21 @@ async function pushToGitHub(){
       }
     }
 
+    // 2c. Push each regenerated exhibition page. Same shape as 2b: the sha read
+    //     during the bake is passed through, so a concurrent edit to one of
+    //     these pages fails loudly instead of being silently clobbered.
+    for(const b of awBakes){
+      msgEl.textContent = `Pushing ${b.pagePath}…`;
+      try {
+        await ghPutText(b.pagePath, b.text,
+          `Rebuild artwork on ${b.pagePath} from schema.json via JSON editor`,
+          headers, owner, repo, branch, b.sha);
+      } catch(e){
+        throw new Error(`JSON pushed, but ${b.pagePath} did not: ${e.message}. `
+          + 'Push again to bring the static page back in step.');
+      }
+    }
+
     // 3. Keep the image sitemap in sync — events & gallery pushes change site images
     let sitemapNote = '';
     if(mode==='events' || mode==='gallery' || mode==='artwork'){
@@ -4788,14 +4947,19 @@ async function pushToGitHub(){
     setStatus(`Pushed to ${owner}/${repo}`,
       summary ? `${countLabel()} · ${summary.status}` : countLabel());
 
+    const awSummary = awBakes.length ? artworkBakeSummary(awBakes) : null;
+
     const bits = [];
     if(imgCount) bits.push(`${imgCount} image${imgCount > 1 ? 's' : ''}`);
     bits.push('JSON');
     if(bake) bits.push(`Past Events page (${bake.page.baked} event${bake.page.baked===1?'':'s'})`);
+    if(awSummary) bits.push(`${awBakes.length} exhibition page${awBakes.length===1?'':'s'} `
+      + `(${awSummary.total} artwork${awSummary.total===1?'':'s'})`);
     const okMsg = 'Pushed: ' + bits.join(' + ');
     const bakeNote = summary ? summary.note : '';
-    toast(okMsg + bakeNote + sitemapNote,
-      (!sitemapNote && (!summary || summary.clean)) ? 'ok' : '');
+    const awNote = awSummary ? awSummary.note : '';
+    toast(okMsg + bakeNote + awNote + sitemapNote,
+      (!sitemapNote && (!summary || summary.clean) && (!awSummary || awSummary.clean)) ? 'ok' : '');
 
   } catch(e){
     toast('Push failed: ' + e.message);

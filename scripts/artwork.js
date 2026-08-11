@@ -30,6 +30,21 @@
  * That means what a crawler reads and what a visitor sees are the same nodes,
  * and it is why the description and the full image list are already in the DOM
  * before anyone clicks anything.
+ *
+ * KNOWN GAP — INLINE MICRODATA
+ * past-events.js treats microdata and JSON-LD as two independent
+ * representations kept in field-parity, because Google's Rich Results parser
+ * reads both separately and a mismatch reports one entity twice. This file
+ * emits NO inline microdata at all (no itemscope/itemprop on the card or the
+ * detail block) — only the JSON-LD below. That is a real gap against this
+ * codebase's own discipline, and it is left open DELIBERATELY rather than
+ * overlooked: closing it is a symmetric expansion of the SEO surface
+ * (itemprops on cover, description, artist, dimensions…), independent of
+ * baking, and it was kept out of the baking pass so that pass changed the
+ * pure layer's markup shape in exactly one way (the thumb data attributes
+ * below) instead of two at once. Close it as its own pass, in
+ * renderCardHTML/detailHTML, and extend verifyArtworkPageHTML to assert
+ * parity with buildJsonLd the way test-past-events.js section C does.
  * =========================================================================== */
 
 (function (root, factory) {
@@ -44,6 +59,50 @@
 
   var SITE_ORIGIN = 'https://phreaking.co.uk';
   var ARTWORK_TYPE = 'VisualArtwork';
+
+  /* =====================================================================
+   * WHICH PAGES GET BAKED — THE SOURCE OF TRUTH, AND IT IS THIS FILE
+   * =====================================================================
+   * Not jsonedit.html, and not dev-tools/build-artwork-pages.js. Both of
+   * those READ this array; neither carries its own copy. If you are looking
+   * for the artwork bake's page list and you started in the editor's GitHub
+   * settings modal, this is where you were headed — the modal configures
+   * `pagePath` for the single Past Events page and has nothing to do with
+   * artwork.
+   *
+   * TO ONBOARD A PAGE (e.g. can-we-start-again, deliberately absent below
+   * until its owner is ready): add one row here, then hand-place the four
+   * markers in that page's index.html —
+   *
+   *     <!-- AW:START:artwork-grid -->   <!-- AW:END:artwork-grid -->
+   *     <!-- AW:START:artwork-jsonld --> <!-- AW:END:artwork-jsonld -->
+   *
+   * — the grid pair inside the page's [data-artwork-exhibition] container,
+   * the jsonld pair in <head>. Nothing else needs editing anywhere. A page
+   * with a row here but no markers fails loudly at bake time rather than
+   * being silently skipped.
+   *
+   *   exhibition   — the exhibition key, used for reporting only
+   *   pagePath     — repo-relative path to the file that gets rewritten
+   *   artworkPage  — the resolved site path matched against each artwork's
+   *                  visibleOn[], i.e. the page's own data-artwork-page value
+   * ===================================================================== */
+  var ARTWORK_BAKE_PAGES = [
+    {
+      exhibition: 'does-cloud-compute',
+      pagePath: 'does-cloud-compute-ever-precipitate/index.html',
+      artworkPage: '/does-cloud-compute-ever-precipitate/'
+    },
+    {
+      exhibition: 'bitrot',
+      pagePath: 'BitRot/index.html',
+      artworkPage: '/BitRot/'
+    }
+  ];
+
+  /* Marker names bounding the generated regions. Prefixed AW:, never PE: —
+   * two generators writing into the same page must not share a namespace. */
+  var AW_REGION_KEYS = ['artwork-grid', 'artwork-jsonld'];
 
   /* =====================================================================
    * PURE LAYER — strings in, strings out. No DOM, no fetch.
@@ -169,11 +228,24 @@
     return slugify(art && art.name) || 'artwork';
   }
 
+  /* Each thumb carries its own full-size path and alt text as data attributes,
+   * alongside the thumbnail src on the <img> inside it. That is what makes a
+   * BAKED card's carousel work with no live data at all: readCarousel() builds
+   * its image list straight off these attributes when nothing has been handed
+   * to the card by a fetch. Before this, the thumb markup carried only the
+   * thumbnail path, so navigating past the first image needed schema.json +
+   * artists.json to have loaded successfully — a hidden fetch dependency that
+   * survived baking and failed silently, since the first image always worked.
+   * The attributes live on the <button>, not the <img>, so the thumbnail's own
+   * src stays the thumbnail's and nothing double-downloads. */
   function thumbStripHTML(imgs, slug) {
     if (imgs.length < 2) return '';
     var items = imgs.map(function (im, i) {
       return '<button type="button" class="aw-thumb' + (i === 0 ? ' is-current' : '') +
-        '" data-aw-index="' + i + '" aria-label="Show image ' + (i + 1) + ' of ' + imgs.length + '">' +
+        '" data-aw-index="' + i + '"' +
+        ' data-aw-full="' + esc(im.full || im.src) + '"' +
+        ' data-aw-alt="' + esc(im.alt || '') + '"' +
+        ' aria-label="Show image ' + (i + 1) + ' of ' + imgs.length + '">' +
         '<img src="' + esc(im.src || im.full) + '" alt="" loading="lazy" decoding="async">' +
         '</button>';
     }).join('');
@@ -187,12 +259,20 @@
       ? '<button type="button" class="aw-nav aw-nav--prev" aria-label="Previous image">&#8249;</button>' +
         '<button type="button" class="aw-nav aw-nav--next" aria-label="Next image">&#8250;</button>'
       : '';
-    /* Every image's full-size path rides along in data-aw-full/-src/-alt on the
+    /* Every image's full-size path rides along in data-aw-full/-alt on the
      * thumb buttons below; the carousel just swaps the main <img>. Only one
-     * <img> is ever the "main" one so the modal never double-downloads. */
+     * <img> is ever the "main" one so the modal never double-downloads.
+     *
+     * The same pair is repeated on .aw-main itself so the SINGLE-image case
+     * (no thumb strip is emitted at all below two images) reads through the
+     * same attribute path as the multi-image one, rather than readCarousel()
+     * having to fall back to scraping src/alt off the element. */
     return '<div class="aw-carousel" data-aw-count="' + imgs.length + '">' +
       '<div class="aw-stage">' +
-        '<img class="aw-main" src="' + esc(first.full || first.src) + '" alt="' + esc(first.alt || '') + '" decoding="async">' +
+        '<img class="aw-main" src="' + esc(first.full || first.src) + '"' +
+          ' data-aw-full="' + esc(first.full || first.src) + '"' +
+          ' data-aw-alt="' + esc(first.alt || '') + '"' +
+          ' alt="' + esc(first.alt || '') + '" decoding="async">' +
         nav +
       '</div></div>';
   }
@@ -313,6 +393,344 @@
   }
 
   /* =====================================================================
+   * BAKING — still the pure layer. Strings in, strings out, no DOM.
+   * =====================================================================
+   * Mirrors scripts/past-events.js sections 6/8/9 deliberately and closely:
+   * same marker-bounded string splice (never a DOM parse-and-reserialise,
+   * which would silently rewrite hand-authored markup across the whole
+   * page), same outside-the-markers equality check, same "re-derive what the
+   * content should be from the JSON and go looking for it in the output"
+   * verification. The mechanism is content-agnostic; only the marker prefix
+   * and the per-item checks differ.
+   * ===================================================================== */
+
+  function startMarker(key) { return '<!-- AW:START:' + key + ' -->'; }
+  function endMarker(key) { return '<!-- AW:END:' + key + ' -->'; }
+
+  function applyRegions(htmlText, regions) {
+    var out = String(htmlText);
+    var missing = [];
+    var applied = [];
+
+    Object.keys(regions).forEach(function (key) {
+      var s = startMarker(key);
+      var e = endMarker(key);
+      var si = out.indexOf(s);
+      var ei = out.indexOf(e);
+      if (si === -1 || ei === -1 || ei < si) { missing.push(key); return; }
+      if (out.indexOf(s, si + s.length) !== -1) { missing.push(key + ' (start marker appears more than once)'); return; }
+      if (out.indexOf(e, ei + e.length) !== -1) { missing.push(key + ' (end marker appears more than once)'); return; }
+
+      var lineStart = out.lastIndexOf('\n', si) + 1;
+      var indent = (out.slice(lineStart, si).match(/^[ \t]*/) || [''])[0];
+      var inner = String(regions[key] || '');
+      var block = inner
+        ? '\n' + indent + inner.split('\n').join('\n' + indent) + '\n' + indent
+        : '\n' + indent;
+      out = out.slice(0, si + s.length) + block + out.slice(ei);
+      applied.push(key);
+    });
+
+    return { html: out, missing: missing, applied: applied };
+  }
+
+  /* Everything outside the generated regions must survive a bake byte for
+   * byte. Blanking each region lets two versions of the file be compared. */
+  function outsideRegions(htmlText, keys) {
+    var out = String(htmlText);
+    (keys || AW_REGION_KEYS).forEach(function (key) {
+      var s = startMarker(key);
+      var e = endMarker(key);
+      var si = out.indexOf(s);
+      var ei = out.indexOf(e);
+      if (si === -1 || ei === -1 || ei < si) return;
+      out = out.slice(0, si + s.length) + '\u0000' + key + '\u0000' + out.slice(ei);
+    });
+    return out;
+  }
+
+  /* renderPageRegions(schemaData, artistsData, pageCfg) → everything a caller
+   * needs to rewrite one page. `pageCfg` is a row from ARTWORK_BAKE_PAGES.
+   *
+   *   regions  — marker key → markup
+   *   list/ctx — what was selected, for the caller's own verify pass
+   *   baked/skipped/errors/warnings — diagnostics surfaced after a push
+   *   fatal    — set when nothing usable could be produced (blocks the push)
+   */
+  function renderPageRegions(schemaData, artistsData, pageCfg) {
+    var result = {
+      page: (pageCfg && pageCfg.pagePath) || '',
+      exhibition: (pageCfg && pageCfg.exhibition) || '',
+      regions: {}, list: [], ctx: null,
+      baked: 0, skipped: 0, errors: [], warnings: [], fatal: null
+    };
+
+    if (!schemaData || typeof schemaData !== 'object' || !Array.isArray(schemaData['@graph'])) {
+      result.fatal = 'The loaded JSON has no "@graph" array — nothing can be generated.';
+      return result;
+    }
+    if (!pageCfg || !pageCfg.artworkPage) {
+      result.fatal = 'No artworkPage configured for this bake target.';
+      return result;
+    }
+
+    var ctx = buildContext(schemaData, artistsData);
+    result.ctx = ctx;
+
+    /* Selection is by page path only — exactly what autoInit() does live, and
+     * NOT filtered by exhibition as well. An artwork cross-listed onto a page
+     * it does not "belong" to is still on that page by its own visibleOn, and
+     * baking it out because its exhibition key differs would make the static
+     * page disagree with the client render. */
+    var candidates = artworkFor(schemaData, { page: pageCfg.artworkPage });
+
+    var kept = [];
+    var cards = [];
+    var seenSlugs = {};
+
+    candidates.forEach(function (art) {
+      var who = 'Artwork "' + String((art && art.name) || '(untitled)') + '"';
+      var slug = artworkSlug(art);
+      if (seenSlugs[slug]) {
+        result.warnings.push(who + ' shares the slug "' + slug + '" with another artwork on ' +
+          pageCfg.artworkPage + ' — verification can only match the first one');
+      }
+      seenSlugs[slug] = true;
+
+      if (!imagesOf(art).length) {
+        result.warnings.push(who + ' has no images — it will bake as a card with an empty cover');
+      }
+      artistRefs(art).forEach(function (id) {
+        if (!(ctx.artistsMap && ctx.artistsMap[id])) {
+          result.warnings.push(who + ' credits unknown artist ' + id +
+            ' — the raw @id will appear on the page until artists.json carries it');
+        }
+      });
+
+      var html;
+      try {
+        html = renderCardHTML(art, ctx);
+      } catch (err) {
+        result.errors.push(who + ' could not be rendered: ' + (err && err.message ? err.message : err));
+        result.skipped++;
+        return;
+      }
+      kept.push(art);
+      cards.push(html);
+      result.baked++;
+    });
+
+    if (candidates.length > 0 && result.baked === 0) {
+      result.fatal = 'All ' + candidates.length + ' artworks for ' + pageCfg.artworkPage +
+        ' failed to render — refusing to publish an empty artwork grid over a page that has artwork.';
+      return result;
+    }
+    if (candidates.length === 0) {
+      /* Not fatal: a page can legitimately be in the allowlist before its
+       * artwork records exist. The grid region bakes empty, the mount then
+       * contains no .aw-card, and autoInit() treats it as unbaked and takes
+       * the existing client path — including data-artwork-hide-empty. */
+      result.warnings.push('No artwork matches ' + pageCfg.artworkPage +
+        ' — the grid region will bake empty and the page falls back to its client-side behaviour.');
+    }
+
+    result.list = kept;
+    result.regions['artwork-grid'] = kept.length ? renderGridHTML(kept, ctx) : '';
+
+    var jsonLd;
+    try {
+      jsonLd = buildJsonLd(kept, ctx);
+    } catch (err) {
+      result.fatal = 'Structured data (JSON-LD) could not be generated: ' + (err && err.message ? err.message : err);
+      return result;
+    }
+    result.jsonLd = jsonLd;
+    /* id="artwork-jsonld" is load-bearing: injectJsonLd() checks for exactly
+     * this id and no-ops when it is already present, so a baked page cannot
+     * end up with two copies even if something does call it. One line, like
+     * pe-jsonld, because it is machine output living inside markers. */
+    result.regions['artwork-jsonld'] = kept.length
+      ? '<script type="application/ld+json" id="artwork-jsonld">' +
+        JSON.stringify(jsonLd).replace(/<\//g, '<\\/') +
+        '</script>'
+      : '';
+
+    return result;
+  }
+
+  /* ---------------------------------------------------------------------
+   * Verification. Like verifyBakedHTML(), this does NOT compare the
+   * generator's output to itself — it re-derives what each artwork should
+   * contain from the records and looks for it in the raw markup, which is
+   * what a crawler actually reads.
+   *
+   * It goes one step further than the Past Events verifier on images, and
+   * has to: per-image data is now written at TWO DOM positions (the
+   * thumbnail src on the <img>, the full-size path on the parent <button>'s
+   * data-aw-full). Checking only that the attribute exists somewhere would
+   * pass a bake that put the wrong image's full-size path on the wrong
+   * thumb, so the values are compared positionally against the record.
+   * ------------------------------------------------------------------- */
+
+  function awTextOf(s) {
+    return String(s || '')
+      .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+      .replace(/\s+/g, ' ').trim();
+  }
+
+  function awStripTags(html) {
+    return awTextOf(String(html).replace(/<[^>]*>/g, ' '));
+  }
+
+  /* The markup for one card, sliced out of the page by its slug so that a
+   * per-image positional check cannot accidentally match another card's
+   * images. */
+  function cardBlockFor(htmlText, slug) {
+    var needle = '<article class="aw-card" data-aw-slug="' + esc(slug) + '">';
+    var si = String(htmlText).indexOf(needle);
+    if (si === -1) return '';
+    var next = String(htmlText).indexOf('<article class="aw-card"', si + needle.length);
+    return next === -1 ? String(htmlText).slice(si) : String(htmlText).slice(si, next);
+  }
+
+  function thumbAttrsIn(cardBlock) {
+    var thumbsAt = cardBlock.indexOf('class="aw-thumbs"');
+    if (thumbsAt === -1) return [];
+    var strip = cardBlock.slice(thumbsAt);
+    var out = [];
+    var re = /<button[^>]*class="aw-thumb[^"]*"[^>]*>[\s\S]*?<\/button>/g;
+    var m;
+    while ((m = re.exec(strip)) !== null) {
+      var btn = m[0];
+      var full = /data-aw-full="([^"]*)"/.exec(btn);
+      var alt = /data-aw-alt="([^"]*)"/.exec(btn);
+      var src = /<img[^>]*\ssrc="([^"]*)"/.exec(btn);
+      out.push({
+        full: full ? full[1] : null,
+        alt: alt ? alt[1] : null,
+        src: src ? src[1] : null
+      });
+    }
+    return out;
+  }
+
+  /* verifyArtworkPageHTML(html, list, ctx) → { ok, problems[], checked }
+   * Pure string work, so it runs identically in the browser (the editor's
+   * pre-push sanity check) and in Node (the CLI and the tests). */
+  function verifyArtworkPageHTML(htmlText, list, ctx) {
+    var html = String(htmlText);
+    var text = awStripTags(html);
+    var problems = [];
+    var checked = 0;
+
+    (list || []).forEach(function (art) {
+      var who = 'Artwork "' + String((art && art.name) || '(untitled)') + '"';
+      var slug = artworkSlug(art);
+      var block = cardBlockFor(html, slug);
+      checked++;
+
+      if (!block) {
+        problems.push(who + ': no baked .aw-card with data-aw-slug="' + slug + '" in the generated HTML');
+        return;
+      }
+      var blockText = awStripTags(block);
+
+      if (art.name && blockText.indexOf(awTextOf(art.name)) === -1) {
+        problems.push(who + ': name missing from the generated HTML');
+      }
+      var line = artistLine(art, ctx);
+      if (line && blockText.indexOf(awTextOf(line)) === -1) {
+        problems.push(who + ': artist credit missing from the generated HTML');
+      }
+      if (art.description && blockText.indexOf(awTextOf(art.description).slice(0, 60)) === -1) {
+        problems.push(who + ': description missing from the baked detail block');
+      }
+
+      var imgs = imagesOf(art);
+      if (!imgs.length) return;
+
+      /* Cover: the condensed card's square image, thumbnail resolution. */
+      var coverSrc = imgs[0].src || imgs[0].full;
+      if (block.indexOf('class="aw-cover" src="' + esc(coverSrc) + '"') === -1) {
+        problems.push(who + ': cover image ' + coverSrc + ' has no <img class="aw-cover" src> in the generated HTML');
+      }
+
+      /* Main carousel image: full resolution, plus the data pair the baked
+       * carousel reads when no live fetch has populated the card. */
+      var mainFull = imgs[0].full || imgs[0].src;
+      var mainTag = /<img class="aw-main"[^>]*>/.exec(block);
+      if (!mainTag) {
+        problems.push(who + ': no <img class="aw-main"> in the baked carousel');
+      } else {
+        var tag = mainTag[0];
+        if (tag.indexOf('src="' + esc(mainFull) + '"') === -1) {
+          problems.push(who + ': the main carousel image is not ' + mainFull);
+        }
+        if (tag.indexOf('data-aw-full="' + esc(mainFull) + '"') === -1) {
+          problems.push(who + ': .aw-main is missing data-aw-full="' + mainFull +
+            '" — a baked carousel would depend on a live fetch');
+        }
+        if (tag.indexOf('data-aw-alt="' + esc(imgs[0].alt || '') + '"') === -1) {
+          problems.push(who + ': .aw-main data-aw-alt does not match the record');
+        }
+      }
+
+      if (imgs.length < 2) return;
+
+      /* Thumb strip: every image's own full path and alt, in record order,
+       * on its own button. Positional — not "the attribute exists". */
+      var thumbs = thumbAttrsIn(block);
+      if (thumbs.length !== imgs.length) {
+        problems.push(who + ': baked ' + thumbs.length + ' thumbnail button(s) for ' +
+          imgs.length + ' image(s)');
+        return;
+      }
+      imgs.forEach(function (im, i) {
+        var expFull = im.full || im.src;
+        var expSrc = im.src || im.full;
+        var expAlt = im.alt || '';
+        var got = thumbs[i];
+        if (got.full === null) {
+          problems.push(who + ' image ' + (i + 1) + ': thumbnail button has no data-aw-full — ' +
+            'a baked carousel would depend on a live fetch');
+        } else if (got.full !== esc(expFull)) {
+          problems.push(who + ' image ' + (i + 1) + ': data-aw-full is "' + got.full +
+            '", expected "' + esc(expFull) + '"');
+        }
+        if (got.src !== esc(expSrc)) {
+          problems.push(who + ' image ' + (i + 1) + ': thumbnail src is "' + got.src +
+            '", expected "' + esc(expSrc) + '"');
+        }
+        if (got.alt !== esc(expAlt)) {
+          problems.push(who + ' image ' + (i + 1) + ': data-aw-alt is "' + got.alt +
+            '", expected "' + esc(expAlt) + '"');
+        }
+      });
+    });
+
+    /* The structured-data block has to be there too, and has to carry the
+     * same artworks the cards do. */
+    if ((list || []).length) {
+      var ldAt = html.indexOf('<script type="application/ld+json" id="artwork-jsonld">');
+      if (ldAt === -1) {
+        problems.push('the baked JSON-LD block (id="artwork-jsonld") is missing from the generated HTML');
+      } else {
+        var ldEnd = html.indexOf('</script>', ldAt);
+        var ldRaw = html.slice(ldAt, ldEnd === -1 ? html.length : ldEnd).replace(/<\\\//g, '</');
+        (list || []).forEach(function (art) {
+          var id = art['@id'] || (SITE_ORIGIN + '/#artwork-' + artworkSlug(art));
+          if (ldRaw.indexOf(JSON.stringify(id).slice(1, -1)) === -1) {
+            problems.push('Artwork "' + String(art.name || '') + '": ' + id + ' missing from the baked JSON-LD');
+          }
+        });
+      }
+    }
+
+    return { ok: problems.length === 0, problems: problems, checked: checked };
+  }
+
+  /* =====================================================================
    * BROWSER LAYER — everything below touches the DOM.
    * ===================================================================== */
 
@@ -354,18 +772,48 @@
     return modalEl;
   }
 
+  /* Builds the modal's image list. Two sources, in this order:
+   *
+   *   1. card.__awImages — set by attachImageData() when a live fetch (or the
+   *      editor preview) has the real records to hand. Preferred because it is
+   *      the records themselves, unescaped and untruncated.
+   *   2. the DOM — data-aw-full / data-aw-alt baked onto each thumb button by
+   *      thumbStripHTML(), or onto .aw-main for a single-image artwork.
+   *
+   * (2) is why a baked card is fully interactive with no live data at all.
+   * Before it existed this function returned card.__awImages or nothing, so a
+   * baked page whose schema.json fetch failed — or which never fetched,
+   * because the mount was already baked — silently had a carousel that could
+   * not navigate past its first image. */
   function readCarousel() {
     carouselImgs = [];
     carouselIndex = 0;
-    var thumbs = modalBody.querySelectorAll('.aw-thumb img');
     var main = modalBody.querySelector('.aw-main');
     if (!main) return;
-    if (!thumbs.length) { carouselImgs = [{ src: main.getAttribute('src'), alt: main.getAttribute('alt') }]; return; }
-    /* Thumb srcs are the webp thumbnails; the main image wants the full-size
-     * file. The detail markup only carries thumbnail paths on the buttons, so
-     * the full path is derived from the card's own image list, stashed here at
-     * open time by openModal(). */
-    carouselImgs = openCard.__awImages || [];
+
+    if (openCard && openCard.__awImages && openCard.__awImages.length) {
+      carouselImgs = openCard.__awImages;
+      return;
+    }
+
+    var thumbs = modalBody.querySelectorAll('.aw-thumb');
+    if (thumbs.length) {
+      carouselImgs = Array.prototype.map.call(thumbs, function (btn) {
+        var img = btn.querySelector('img');
+        var thumbSrc = img ? img.getAttribute('src') : '';
+        var full = btn.getAttribute('data-aw-full') || thumbSrc || '';
+        return { src: thumbSrc || full, full: full, alt: btn.getAttribute('data-aw-alt') || '' };
+      });
+      return;
+    }
+
+    /* Single image: no strip is emitted, so .aw-main carries the pair. */
+    var mainFull = main.getAttribute('data-aw-full') || main.getAttribute('src') || '';
+    carouselImgs = [{
+      src: mainFull,
+      full: mainFull,
+      alt: main.getAttribute('data-aw-alt') || main.getAttribute('alt') || ''
+    }];
   }
 
   function showImage(i) {
@@ -468,11 +916,33 @@
    * container-driven shape site-gallery.js uses for galleries. The container
    * carries the page path so selection is by visibleOn, with the exhibition
    * only used as a secondary filter. */
+  /* A mount is baked when it already holds real cards. Checked PER MOUNT, not
+   * once per page: a page can be baked for one exhibition and later grow a
+   * second [data-artwork-exhibition] container that the bake allowlist has not
+   * caught up with yet. Skipping the fetch for the whole page because some
+   * other mount was baked would leave that second mount permanently empty, and
+   * the cause would be almost untraceable from the symptom. */
+  function isBakedMount(mount) {
+    return !!(mount && mount.querySelector('.aw-card'));
+  }
+
   function autoInit() {
     if (typeof document === 'undefined') return;
     var start = function () {
-      var mounts = Array.prototype.slice.call(document.querySelectorAll('[data-artwork-exhibition]'));
+      var all = Array.prototype.slice.call(document.querySelectorAll('[data-artwork-exhibition]'));
+      if (!all.length) return;
+
+      /* Baked mounts: hydrate the markup that is already there. No fetch, no
+       * re-render, no injectJsonLd — the JSON-LD is baked in <head> too. The
+       * carousel reads its images off the baked data attributes. */
+      var baked = all.filter(isBakedMount);
+      var mounts = all.filter(function (m) { return !isBakedMount(m); });
+      baked.forEach(function (mount) { hydrate(mount); });
+
+      /* Unbaked mounts keep exactly today's behaviour. If every mount on the
+       * page is baked, nothing below runs and the page makes no requests. */
       if (!mounts.length) return;
+
       Promise.all([
         fetch('/json/schema.json').then(function (r) { return r.json(); }),
         fetch('/json/artists.json').then(function (r) { return r.json(); }).catch(function () { return null; })
@@ -534,7 +1004,19 @@
     renderCardHTML: renderCardHTML,
     renderGridHTML: renderGridHTML,
     buildJsonLd: buildJsonLd,
+    /* baking — still pure. ARTWORK_BAKE_PAGES is the single source of truth
+     * for which pages get baked; jsonedit.html and dev-tools/build-artwork-
+     * pages.js both read it from here rather than carrying a copy. */
+    ARTWORK_BAKE_PAGES: ARTWORK_BAKE_PAGES,
+    AW_REGION_KEYS: AW_REGION_KEYS,
+    startMarker: startMarker,
+    endMarker: endMarker,
+    applyRegions: applyRegions,
+    outsideRegions: outsideRegions,
+    renderPageRegions: renderPageRegions,
+    verifyArtworkPageHTML: verifyArtworkPageHTML,
     /* browser */
+    isBakedMount: isBakedMount,
     hydrate: hydrate,
     attachImageData: attachImageData,
     openModal: openModal,
