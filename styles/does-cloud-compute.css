@@ -442,3 +442,26 @@ body{
 }
 
 .pc-lightbox__close:hover{ background: rgba(255,255,255,.08); }
+
+
+/* Exhibition quote — matched to the BitRot page quote style */
+.intro-quote{
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #ddd;
+  margin: 2rem auto;
+  max-width: 700px;
+  padding-left: 1rem;
+  border-left: 4px solid #fff;
+}
+.intro-quote footer{
+  margin-top: .5rem;
+  font-style: normal;
+  font-size: .9rem;
+  color: #bbb;
+}
+.intro-quote cite{
+  font-style: normal;
+  font-weight: bold;
+}
