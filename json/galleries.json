@@ -405,6 +405,24 @@
           "full": "/assets/BitRotShowImgs/ArtistLucyApple.jpg",
           "alt": "Edu2000",
           "caption": "Edu2000 - Lucy Ellis"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/the-ghost-of-two-mountains-ornithopter_zepu-li_1.webp",
+          "full": "/assets/BitRotShowImgs/the-ghost-of-two-mountains-ornithopter_zepu-li_1.jpeg",
+          "alt": "",
+          "caption": "The Ghost of two mountains, ornithopter. - Zepu Li"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/a-rather-favourable-ii_zepu-li_1.webp",
+          "full": "/assets/BitRotShowImgs/a-rather-favourable-ii_zepu-li_1.jpeg",
+          "alt": "",
+          "caption": "A rather favourable II - Zepu Li"
+        },
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/untitled_lucy-ellis_1.webp",
+          "full": "/assets/BitRotShowImgs/untitled_lucy-ellis_1.jpeg",
+          "alt": "",
+          "caption": "Untitled - Lucy Ellis"
         }
       ]
     },
