@@ -122,7 +122,7 @@
       ],
       "exhibitionCategory": "hosted",
       "sortOrder": 2,
-      "description": "Our inaugural show in Copeland Gallery on decay, entropy, and the poetry of corrupted data. A multi-room show featuring installations, type experiments, and audiovisual pieces from the collective.",
+      "description": "Our inaugural show in Copeland Gallery on decay, entropy, and the poetry of corrupted data. A multi-room show featuring installations, type experiments, and audiovisual pieces from the collective. ",
       "linkLabel": "BitRot",
       "images": [
         {
@@ -139,7 +139,8 @@
         }
       ],
       "visible": true,
-      "endDate": "2025"
+      "endDate": "2025",
+      "nameHtml": ""
     },
     {
       "@type": [
@@ -172,7 +173,7 @@
       ],
       "exhibitionCategory": "hosted",
       "sortOrder": 1,
-      "description": "A question about hidden infrastructures, energy, and the weather systems of data. Installations, sound, and computational works translate the cloud into something tangible.",
+      "description": "A question about hidden infrastructures, energy, and the weather systems of data. Installations, sound, and computational works translate the cloud into something tangible. ",
       "nameHtml": "Does Cloud Compute <em>(ever)</em> Precipitate?",
       "linkLabel": "DCCeP",
       "images": [
