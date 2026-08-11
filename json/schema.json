@@ -3331,12 +3331,26 @@
       "sameAs": [
         "https://instagram.com/ze_puli"
       ],
-      "images": [],
+      "images": [
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/the-ghost-of-two-mountains-ornithopter_zepu-li_1.webp",
+          "full": "/assets/BitRotShowImgs/the-ghost-of-two-mountains-ornithopter_zepu-li_1.jpeg",
+          "alt": "",
+          "gallery": "bitrot-show",
+          "galleryRef": "the-ghost-of-two-mountains-ornithopter_zepu-li_1"
+        },
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        }
+      ],
       "visible": true,
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-zepu-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
@@ -3393,12 +3407,31 @@
       "sameAs": [
         "https://instagram.com/ze_puli"
       ],
-      "images": [],
+      "images": [
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/a-rather-favourable-ii_zepu-li_1.webp",
+          "full": "/assets/BitRotShowImgs/a-rather-favourable-ii_zepu-li_1.jpeg",
+          "alt": "",
+          "gallery": "bitrot-show",
+          "galleryRef": "a-rather-favourable-ii_zepu-li_1"
+        },
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        },
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        }
+      ],
       "visible": true,
       "dateCreated": "2025",
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-zepu-bitrot"
-      }
+      },
+      "targetGallery": "bitrot-show"
     },
     {
       "@type": "VisualArtwork",
@@ -3795,7 +3828,25 @@
       "sameAs": [
         "https://instagram.com/lucy3llis"
       ],
-      "images": [],
+      "images": [
+        {
+          "src": "/assets/BitRotShowImgs/Thumbnails/untitled_lucy-ellis_1.webp",
+          "full": "/assets/BitRotShowImgs/untitled_lucy-ellis_1.jpeg",
+          "alt": "",
+          "gallery": "bitrot-show",
+          "galleryRef": "untitled_lucy-ellis_1"
+        },
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        },
+        {
+          "src": "",
+          "full": "",
+          "alt": ""
+        }
+      ],
       "visible": true,
       "dateCreated": "2025",
       "artist": {
