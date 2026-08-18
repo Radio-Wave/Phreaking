@@ -121,7 +121,7 @@
         "internet art"
       ],
       "exhibitionCategory": "hosted",
-      "sortOrder": 2,
+      "sortOrder": 3,
       "description": "Our inaugural show in Copeland Gallery on decay, entropy, and the poetry of corrupted data. A multi-room show featuring installations, type experiments, and audiovisual pieces from the collective. ",
       "linkLabel": "BitRot",
       "images": [
@@ -172,7 +172,7 @@
         "live coding"
       ],
       "exhibitionCategory": "hosted",
-      "sortOrder": 1,
+      "sortOrder": 2,
       "description": "A question about hidden infrastructures, energy, and the weather systems of data. Installations, sound, and computational works translate the cloud into something tangible. ",
       "nameHtml": "Does Cloud Compute <em>(ever)</em> Precipitate?",
       "linkLabel": "DCCeP",
@@ -4414,6 +4414,19 @@
       "artist": {
         "@id": "https://phreaking.co.uk/#artist-david-dccep"
       }
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#exhibition-can-we-start-start-again",
+      "name": "Can We Start Again?",
+      "exhibitionCategory": "hosted",
+      "sortOrder": 1,
+      "url": "https://phreaking.co.uk/can-we-start-again/",
+      "description": "A five-day Festival of Computational Arts asking whether we’ve gone too far. Has technology crossed the threshold, or can we start again?",
+      "linkLabel": "CWSA Festival",
+      "images": [],
+      "visible": true,
+      "nameHtml": "Can We Start Again?"
     }
   ]
 }
