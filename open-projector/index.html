@@ -142,6 +142,54 @@
         font-size: 12px;
       }
     }
+
+    /* --- Next event date -------------------------------------------------
+       The date text is written by the script at the bottom of this page.
+       .is-special is only added when a manual/special date is in use. */
+    .op-date {
+      margin: 0;
+    }
+
+    .op-date.is-special {
+      display: inline-block;
+      padding: 0.5rem 0.85rem;
+      border: 1px solid var(--ink);
+      border-radius: 4px;
+      animation: op-date-glow 2.6s ease-in-out infinite;
+    }
+
+    .op-date-flag {
+      display: none;
+      margin: 0.6rem 0 0;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .op-date.is-special + .op-date-flag {
+      display: block;
+    }
+
+    @keyframes op-date-glow {
+      0%, 100% {
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
+      }
+
+      50% {
+        border-color: #fff;
+        box-shadow: 0 0 18px 2px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .op-date.is-special {
+        animation: none;
+        border-color: #fff;
+        box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+      }
+    }
   </style>
 <script type="application/ld+json">
 {
@@ -190,8 +238,11 @@
       <section class="meta">
         <div class="meta-block">
           <h2>Date</h2>
-          <p><span id="dates-text">26th May 2026, 18:00 - 21:00</span></p>
-          <!-- <p><span id="dates-text">TBA</span></p> -->
+          <!-- Regular dates (last Tuesday of the month) are worked out automatically.
+               For a one-off/special date, edit the SPECIAL_EVENT block in the script at
+               the bottom of this page. -->
+          <p class="op-date" id="op-date-block"><time id="dates-text" datetime="">Last Tuesday of the month, 18:00 - 21:00</time></p>
+          <p class="op-date-flag" id="op-date-flag">Special edition</p>
          <button id="addCal" class="btn" type="button" onclick="window.location.href='/calendar/index.html'">+ Add to calendar</button>
           <br><br>
           <a href="https://www.eventbrite.co.uk/e/open-projector-tickets-1985613323903"> RSPV here</a>
@@ -341,6 +392,136 @@
   <script defer src="/scripts/gallery.js"></script>
   <script defer src="/scripts/calendar.js"></script>
   <script defer src="/scripts/open-projector-archive.js"></script>
+
+  <!-- =====================================================================
+       NEXT OPEN PROJECTOR DATE
+
+       Open Projector runs on the last Tuesday of every month, 18:00-21:00,
+       so the date in the "Date" block above is worked out automatically and
+       does not need editing each month.
+
+       SPECIAL / ONE-OFF EVENTS
+       To advertise a different date (special edition, moved date, a
+       collaboration), uncomment the SPECIAL_EVENT block below and fill it
+       in. A special date is given a glowing border so it reads as out of
+       the ordinary. Comment it out again (or delete it) to go back to the
+       automatic last-Tuesday date.
+
+       NOTE: the date must still be in the future. A special date that has
+       already been and gone is ignored (the automatic last-Tuesday date is
+       shown instead, and a warning is logged to the browser console) so the
+       page can never advertise an event that has already happened.
+       ===================================================================== -->
+  <script>
+    (() => {
+      const EVENT_START = "18:00"; // regular start time, 24h
+      const EVENT_END = "21:00";   // regular end time, 24h
+
+      // null = use the automatic "last Tuesday of the month" date.
+      let SPECIAL_EVENT = null;
+
+      //  ---- SPECIAL EVENT: uncomment the block below and edit ---------------
+      SPECIAL_EVENT = {
+        date: "2026-06-11",      // YYYY-MM-DD - MUST be in the future, see note below
+        start: "18:00",          // optional, defaults to EVENT_START
+        end: "21:00",            // optional, defaults to EVENT_END
+        flag: "Special edition"  // optional label shown under the date
+      };
+      // -------------------------------------------------------------------- 
+
+      const dateEl = document.getElementById("dates-text");
+      const blockEl = document.getElementById("op-date-block");
+      const flagEl = document.getElementById("op-date-flag");
+      if (!dateEl) return;
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function parseTime(value, fallback) {
+        const match = /^(\d{1,2}):(\d{2})$/.exec(String(value || "").trim());
+        if (match) return { hours: Number(match[1]), minutes: Number(match[2]) };
+        return fallback === undefined ? { hours: 18, minutes: 0 } : parseTime(fallback);
+      }
+
+      function withTime(day, time) {
+        return new Date(day.getFullYear(), day.getMonth(), day.getDate(), time.hours, time.minutes, 0, 0);
+      }
+
+      // Last Tuesday of the given month (monthIndex is 0-based and may overflow).
+      function lastTuesday(year, monthIndex) {
+        const day = new Date(year, monthIndex + 1, 0); // day 0 = last day of that month
+        day.setDate(day.getDate() - ((day.getDay() - 2 + 7) % 7)); // 2 = Tuesday
+        return day;
+      }
+
+      // The soonest last-Tuesday session that has not finished yet.
+      function nextRegularEvent(now) {
+        const start = parseTime(EVENT_START, "18:00");
+        const end = parseTime(EVENT_END, "21:00");
+        for (let offset = 0; offset < 13; offset += 1) {
+          const day = lastTuesday(now.getFullYear(), now.getMonth() + offset);
+          const endsAt = withTime(day, end);
+          if (endsAt >= now) {
+            return { start: withTime(day, start), end: endsAt, special: false };
+          }
+        }
+        return null;
+      }
+
+      function readSpecialEvent() {
+        if (!SPECIAL_EVENT || !SPECIAL_EVENT.date) return null;
+        const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(SPECIAL_EVENT.date).trim());
+        if (!parts) {
+          console.warn("Open Projector: SPECIAL_EVENT.date should look like \"2026-06-11\".");
+          return null;
+        }
+        const day = new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3]));
+        return {
+          start: withTime(day, parseTime(SPECIAL_EVENT.start, EVENT_START)),
+          end: withTime(day, parseTime(SPECIAL_EVENT.end, EVENT_END)),
+          special: true,
+          flag: SPECIAL_EVENT.flag || "Special edition"
+        };
+      }
+
+      function ordinal(dayOfMonth) {
+        if (dayOfMonth > 3 && dayOfMonth < 21) return dayOfMonth + "th";
+        return dayOfMonth + ({ 1: "st", 2: "nd", 3: "rd" }[dayOfMonth % 10] || "th");
+      }
+
+      function clock(date) {
+        return pad(date.getHours()) + ":" + pad(date.getMinutes());
+      }
+
+      function isoLocal(date) {
+        return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) +
+          "T" + clock(date);
+      }
+
+      const now = new Date();
+      let nextEvent = readSpecialEvent();
+
+      // A special date that has already been and gone falls back to the regular
+      // schedule, so the page never advertises an event in the past.
+      if (nextEvent && nextEvent.end < now) {
+        console.warn("Open Projector: SPECIAL_EVENT date \"" + SPECIAL_EVENT.date + "\" has already passed, so it is being ignored and the automatic last-Tuesday date is shown instead. Set a future date to bring the special event back.");
+        nextEvent = null;
+      }
+      if (!nextEvent) nextEvent = nextRegularEvent(now);
+      if (!nextEvent) return;
+
+      dateEl.textContent = ordinal(nextEvent.start.getDate()) + " " +
+        nextEvent.start.toLocaleDateString("en-GB", { month: "long" }) + " " +
+        nextEvent.start.getFullYear() + ", " + clock(nextEvent.start) + " - " + clock(nextEvent.end);
+      dateEl.setAttribute("datetime", isoLocal(nextEvent.start));
+
+      if (nextEvent.special) {
+        if (blockEl) blockEl.classList.add("is-special");
+        if (flagEl) flagEl.textContent = nextEvent.flag;
+      }
+    })();
+  </script>
 </body>
 
 </html>
