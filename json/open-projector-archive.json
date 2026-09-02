@@ -416,52 +416,59 @@
     {
       "id": 6,
       "label": "Open Projector #6",
-      "date": "30.06.26",
+      "date": "",
       "presenters": [
         {
           "number": 1,
+          "name": "bl",
+          "project": "--",
+          "link": "--",
+          "socials": "--"
+        },
+        {
+          "number": 2,
           "name": "HOO",
           "project": "A projection project for a house party: stimulate dreams through light passing through your eyelid",
           "link": "--",
           "socials": "@hoo.labs"
         },
         {
-          "number": 2,
+          "number": 3,
           "name": "Nuria and Aous",
           "project": "A site-specific project in an old prison cell, custom cricket instrument and light + sound installation",
           "link": "https://www.nuriarovira.com/cricket-in-the-cell",
           "socials": "https://nuriarovira.com/ https://houseaous.com/ @aoushamoud @a_nur.rovira"
         },
         {
-          "number": 3,
+          "number": 4,
           "name": "Michael Woodruff",
           "project": "A map for digital art spaces in London + expressionist approach to after effects",
           "link": "nectarmotion.com",
           "socials": "@nectarmotion"
         },
         {
-          "number": 4,
+          "number": 5,
           "name": "William Wong",
           "project": "Custom tool for mapping 3D space for 3D storytelling",
           "link": "https://www.linkedin.com/in/william-wong-37854577",
           "socials": "@thewilliamwong"
         },
         {
-          "number": 5,
+          "number": 6,
           "name": "Alastair Ball & Tristan Spill & Sally Charlton",
           "project": "Art action school through social art & experimental education (CBS)",
           "link": "https://solarpunk.london/",
           "socials": "@solarpunkldn"
         },
         {
-          "number": 6,
+          "number": 7,
           "name": "Marcus Stalmanis",
           "project": "A short film about a robot based off a found archive + bts",
           "link": "--",
           "socials": "@marcus.stalmanis"
         },
         {
-          "number": 7,
+          "number": 8,
           "name": "Marilyn Ma",
           "project": "Research and projects on HCI -- creating instruments in VR",
           "link": "--",
@@ -592,6 +599,55 @@
           "project": "3D animations of repeating character meshes & body parts, + a custom plug in for generative motion rigging in unity",
           "link": "https://github.com/Amin-HP/Kimodo-Unity",
           "socials": "@_aminHP"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "label": "Open Projector #9",
+      "date": "25.08.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "William Wong",
+          "project": "A update on research on algorythmic & generated movement that responds to poetry",
+          "link": "https://github.com/WWStoryMode/BodyPrompt",
+          "socials": "@thewilliamwong"
+        },
+        {
+          "number": 2,
+          "name": "Melissa Yunzhi Li",
+          "project": "Home is a swelling place research analysis",
+          "link": "home is a dwelling path",
+          "socials": "@melissayunzhi"
+        },
+        {
+          "number": 3,
+          "name": "Phoenix",
+          "project": "Dissitation on AI Slop: AI Slop as a scalable vector for Hybrid Warfare",
+          "link": "phoenixislakea.xyz",
+          "socials": "@phoenixislakea"
+        },
+        {
+          "number": 4,
+          "name": "Grisha Szep",
+          "project": "rewild the internernet",
+          "link": "gszep.com, decks.gszep.com/INSERTURLHERE",
+          "socials": "@__gszep__, contact@gszep.com"
+        },
+        {
+          "number": 5,
+          "name": "Ameer",
+          "project": "Generstive scriptingin Libi",
+          "link": "https://libi.xyz",
+          "socials": "@libi.xyz"
+        },
+        {
+          "number": 6,
+          "name": "Mo",
+          "project": "We Pretend a horror game out of Escape Studio",
+          "link": "https://store.steampowered.com/app/4689360/We_Pretend/",
+          "socials": "@_j0uska"
         }
       ]
     }
