@@ -385,3 +385,16 @@
   top: var(--btn-top);
   left: var(--btn-left);
 }
+
+/* ================================
+   Footer legal line (CIC details)
+   Loaded site-wide, so the company
+   number renders the same everywhere
+   ================================ */
+.footer-legal{
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.85em;
+  opacity: .7;
+  letter-spacing: .02em;
+}

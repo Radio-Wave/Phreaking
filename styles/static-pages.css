@@ -339,3 +339,13 @@ footer {
 
 .pc-lightbox__close:hover{ background: rgba(255,255,255,.08); }
 
+
+/* ================================
+   Company registration details
+   (About / Contact body copy)
+   ================================ */
+.org-details{
+  margin-top: 2rem;
+  font-size: 0.85em;
+  opacity: .7;
+}
