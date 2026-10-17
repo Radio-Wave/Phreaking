@@ -147,7 +147,6 @@
     },
     {
       "id": 4,
-      "current": true,
       "panels": [
         {
           "title": "Materials",
@@ -228,7 +227,8 @@
             }
           ]
         }
-      ]
+      ],
+      "current": true
     }
   ]
 }
