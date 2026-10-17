@@ -187,6 +187,48 @@
           ]
         }
       ]
+    },
+    {
+      "id": 5,
+      "panels": [
+        {
+          "title": "Materials",
+          "description": "Online found objects",
+          "links": [
+            {
+              "label": "Play HTML Fridge",
+              "url": "https://playhtml.fun/fridge",
+              "note": "Words left behind from other internet users"
+            },
+            {
+              "label": "Sun Through Clouds",
+              "url": "https://www.youtube.com/watch?v=tzsf-_Hp4Aw",
+              "note": "A old youtube video"
+            },
+            {
+              "label": "The Unsent Project",
+              "url": "https://theunsentproject.com/",
+              "note": "Notes left for strangers"
+            }
+          ]
+        },
+        {
+          "title": "Tools",
+          "description": "Digital making",
+          "links": [
+            {
+              "label": "Draw Chat",
+              "url": "https://draw.chat/dc2zfchidgoagtwcs3a2hz2c5kzur8:vyqwueaq0l4t42cg9ea13zsjjejlugsq5oc3#p1,0,0,r0,s1,tool=line",
+              "note": "Draw in collaboration"
+            },
+            {
+              "label": "Destroy a website",
+              "url": "https://destroy.spritefusion.com/",
+              "note": "With a stickman"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
