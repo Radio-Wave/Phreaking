@@ -224,6 +224,11 @@
               "label": "Destroy a website",
               "url": "https://destroy.spritefusion.com/",
               "note": "With a stickman"
+            },
+            {
+              "label": "Pixelr ",
+              "url": "https://pixlr.com/editor/",
+              "note": "Online Photo Editor"
             }
           ]
         }
