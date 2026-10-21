@@ -420,55 +420,48 @@
       "presenters": [
         {
           "number": 1,
-          "name": "bl",
-          "project": "--",
-          "link": "--",
-          "socials": "--"
-        },
-        {
-          "number": 2,
           "name": "HOO",
           "project": "A projection project for a house party: stimulate dreams through light passing through your eyelid",
           "link": "--",
           "socials": "@hoo.labs"
         },
         {
-          "number": 3,
+          "number": 2,
           "name": "Nuria and Aous",
           "project": "A site-specific project in an old prison cell, custom cricket instrument and light + sound installation",
           "link": "https://www.nuriarovira.com/cricket-in-the-cell",
           "socials": "https://nuriarovira.com/ https://houseaous.com/ @aoushamoud @a_nur.rovira"
         },
         {
-          "number": 4,
+          "number": 3,
           "name": "Michael Woodruff",
           "project": "A map for digital art spaces in London + expressionist approach to after effects",
           "link": "nectarmotion.com",
           "socials": "@nectarmotion"
         },
         {
-          "number": 5,
+          "number": 4,
           "name": "William Wong",
           "project": "Custom tool for mapping 3D space for 3D storytelling",
           "link": "https://www.linkedin.com/in/william-wong-37854577",
           "socials": "@thewilliamwong"
         },
         {
-          "number": 6,
+          "number": 5,
           "name": "Alastair Ball & Tristan Spill & Sally Charlton",
           "project": "Art action school through social art & experimental education (CBS)",
           "link": "https://solarpunk.london/",
           "socials": "@solarpunkldn"
         },
         {
-          "number": 7,
+          "number": 6,
           "name": "Marcus Stalmanis",
           "project": "A short film about a robot based off a found archive + bts",
           "link": "--",
           "socials": "@marcus.stalmanis"
         },
         {
-          "number": 8,
+          "number": 7,
           "name": "Marilyn Ma",
           "project": "Research and projects on HCI -- creating instruments in VR",
           "link": "--",
@@ -648,6 +641,139 @@
           "project": "We Pretend a horror game out of Escape Studio",
           "link": "https://store.steampowered.com/app/4689360/We_Pretend/",
           "socials": "@_j0uska"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "label": "Open Projector #10",
+      "date": "12.09.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "Annike Tan",
+          "project": "On the art of making cyberdecks",
+          "link": "--",
+          "socials": "@ubeboobey"
+        },
+        {
+          "number": 2,
+          "name": "Ambie Drew",
+          "project": "On Soft Bodies, Cold Machines and aesthetics of cuteness, internet culture, and female identity",
+          "link": "https://www.arebyte.com/ambie-drew",
+          "socials": "@ambiedrew"
+        },
+        {
+          "number": 3,
+          "name": "Izzy Hemmings",
+          "project": "On the art of personalized websites // past projects",
+          "link": "https://www.iso-bel.computer/",
+          "socials": "https://www.iso-bel.computer/"
+        },
+        {
+          "number": 4,
+          "name": "Wai Laam Ivan Chang",
+          "project": "On a blender-made 3D album cover & unreleased songs",
+          "link": "artbychang01@gmail.com",
+          "socials": "@art.by_chang.0"
+        },
+        {
+          "number": 5,
+          "name": "Michael Woodruff",
+          "project": "Quantum expressionist art",
+          "link": "nectarmotion.com",
+          "socials": "@nectarmotion"
+        },
+        {
+          "number": 6,
+          "name": "Robin Leverton",
+          "project": "On invisible urban network infrastructure",
+          "link": "https://robinlevertonart.com/",
+          "socials": "@robinleverton"
+        },
+        {
+          "number": 7,
+          "name": "Den",
+          "project": "Purr magazine thermal printer scrolls",
+          "link": "purr.you",
+          "socials": "@purrden"
+        },
+        {
+          "number": 8,
+          "name": "Elijah Zulu",
+          "project": "Traces traces traces - an app that turns moments and images into sound",
+          "link": "https://tracestracestraces.com/",
+          "socials": "@modeaxe"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "label": "Open Projector #11",
+      "date": "12.09.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "Nikos",
+          "project": "Development on a file explorer based text adventure game",
+          "link": "--",
+          "socials": "nikos.kourous.net"
+        },
+        {
+          "number": 2,
+          "name": "Izzy and May",
+          "project": "A local offline internet server that lets you navigate local websites",
+          "link": "be at set social peckham, connect to openwrt, and go to pi.setsocial:5000/hogmix",
+          "socials": "--"
+        },
+        {
+          "number": 3,
+          "name": "Mewes",
+          "project": "A film video project that combines and contrasts self-help, lock-in, and grind motivation content on youtube",
+          "link": "mewes-space.xyz/",
+          "socials": "@4mewes"
+        },
+        {
+          "number": 4,
+          "name": "Mo",
+          "project": "A beauitful 2D indie game that uses 2D assets in unreal engine, almost ready to release",
+          "link": "https://store.steampowered.com/app/4689360/We_Pretend/",
+          "socials": "@_j0uska"
+        },
+        {
+          "number": 5,
+          "name": "Kitty",
+          "project": "An online cute collage maker, currently exhibiting on External Pages, an online gallery",
+          "link": "https://externalpages.org/#kitty-ess",
+          "socials": "@external_pages @plasticd1no"
+        },
+        {
+          "number": 6,
+          "name": "Daniel",
+          "project": "A terminal based sound visualizer that turns sound into geometric visuals",
+          "link": "https://synte.codeberg.page/",
+          "socials": "@syntel8_"
+        },
+        {
+          "number": 7,
+          "name": "Alastair",
+          "project": "London school of solar punk: an artist led group dedicated to establishing tech-alternatives and teaching forward-thinking approaches to tech",
+          "link": "https://londonschoolofsolarpunk.substack.com/",
+          "socials": "@solarpunkldn"
+        },
+        {
+          "number": 8,
+          "name": "Robin",
+          "project": "On creating an exhibition programme held in a home, and how that changes your relationship to art. + a book about the project",
+          "link": "https://aptexhibitions.com/",
+          "socials": "--"
+        },
+        {
+          "number": 9,
+          "name": "Adam",
+          "project": "3D modeling portofolio",
+          "link": "adamelwardany.cargo.site",
+          "socials": "@adamelwardany_art"
         }
       ]
     }
