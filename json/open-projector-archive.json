@@ -710,7 +710,7 @@
     {
       "id": 11,
       "label": "Open Projector #11",
-      "date": "12.09.26",
+      "date": "29.09.26",
       "presenters": [
         {
           "number": 1,
@@ -774,6 +774,62 @@
           "project": "3D modeling portofolio",
           "link": "adamelwardany.cargo.site",
           "socials": "@adamelwardany_art"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "label": "Open Projector #12",
+      "date": "15.10.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "Nikos Kourous",
+          "project": "File explorer game development",
+          "link": "nikos.kourous.net",
+          "socials": "@nikoskourous"
+        },
+        {
+          "number": 2,
+          "name": "Tahmyna Rad",
+          "project": "Short film based on a poem",
+          "link": "https://www.instagram.com/tradisradd",
+          "socials": "@tradisradd"
+        },
+        {
+          "number": 3,
+          "name": "Elia Fielden",
+          "project": "The performer-operator, an interactive installation, & conscript theatre",
+          "link": "https://www.conscript-theatre.com/",
+          "socials": "@elia_fielden"
+        },
+        {
+          "number": 4,
+          "name": "Michaella Miller",
+          "project": "Investigations into bed bugs using an online desktop",
+          "link": "https://eilonvir.github.io/Bed-Bug-Archive/",
+          "socials": "@mijelly"
+        },
+        {
+          "number": 5,
+          "name": "Ann-Marie LeQuesne",
+          "project": "Looking and Seeing -- a short film observing visitors in an art gallery",
+          "link": "https://www.amlequesne.com/lookingandseeing",
+          "socials": "@amlequesne"
+        },
+        {
+          "number": 6,
+          "name": "Mrs Luva-Luva",
+          "project": "Web Junk -- tracking robot website visits",
+          "link": "https://mrsluvaluva.com/traffic/",
+          "socials": "@mrs_luvaluva"
+        },
+        {
+          "number": 7,
+          "name": "William Wong",
+          "project": "3D scanning people looking at art in a gallery",
+          "link": "https://www.i-for-interactive.com/2018/12/view-finder-hkipf-2018/",
+          "socials": "@thewilliamwong"
         }
       ]
     }
