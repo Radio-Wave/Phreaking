@@ -832,6 +832,62 @@
           "socials": "@thewilliamwong"
         }
       ]
+    },
+    {
+      "id": 13,
+      "label": "Open Projector #13",
+      "date": "27.10.26",
+      "presenters": [
+        {
+          "number": 1,
+          "name": "Jeremie Wenger",
+          "project": "Exploring poetic alogrythems",
+          "link": "jeremiewenger.com/sestina-generator",
+          "socials": "@jchwenger"
+        },
+        {
+          "number": 2,
+          "name": "River",
+          "project": "Exploration of algorythmic music website",
+          "link": "clavier36.com/about k-monk.org",
+          "socials": "@river__dillon"
+        },
+        {
+          "number": 3,
+          "name": "Izzy Hemmings",
+          "project": "London Community Laptop Orcistra Preview",
+          "link": "https://londoncommunitylaptoporchestra.net/",
+          "socials": "--"
+        },
+        {
+          "number": 4,
+          "name": "Rose",
+          "project": "Website Exploration",
+          "link": "rosekessler.com",
+          "socials": "rosekessler_"
+        },
+        {
+          "number": 5,
+          "name": "Xach",
+          "project": "Lighting installation with RGB lights in Copeland",
+          "link": "Xachhill.com",
+          "socials": "@xachHill_"
+        },
+        {
+          "number": 6,
+          "name": "Michael Woodruff",
+          "project": "A map for digital art spaces in London + expressionist approach to after effects",
+          "link": "nectarmotion.com",
+          "socials": "@nectarmotion"
+        },
+        {
+          "number": 7,
+          "name": "Wai Laam Ivan Chang",
+          "project": "artbychang01@gmail.com",
+          "link": "@art.by_chang.0",
+          "socials": "--"
+        }
+      ]
     }
   ]
 }
