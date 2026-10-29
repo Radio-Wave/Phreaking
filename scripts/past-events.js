@@ -616,6 +616,22 @@
     }).join('\n');
   }
 
+  /* The night's own photos after the poster. The detail intro shows only the
+   * first image, and the card's three-up strip fills with act/film stills before
+   * it reaches these, so without this row a second event photo would be baked
+   * nowhere at all — and verifyBakedHTML() rightly refuses that page. Slots
+   * '1', '2', … match the event-image scheme imageRowHTML uses on plain cards. */
+  function detailPhotosHTML(ev, kind, imgSrc) {
+    var extras = (ev.images || []).slice(1);
+    if (!extras.length) return '';
+    return '\n  ' + imageRowHTML(ev, {
+      imgs: extras,
+      cls: kind + '-modal__photos',
+      imgSrc: imgSrc,
+      slotFor: function (j) { return String(j + 1); }
+    });
+  }
+
   /* The full-detail block: poster + description + every act. Baked into the
    * card with `hidden`, revealed inside the modal (and by the no-JS stylesheet
    * in index.html, so a visitor without JavaScript reads it in place). */
@@ -640,6 +656,7 @@
       : '';
     return '<div class="pn-detail pn-detail--stowed" id="detail-' + esc(slug) + '" data-pn-detail="' + esc(slug) + '">' +
       (intro ? '\n  ' + intro : '') +
+      detailPhotosHTML(ev, 'pn', imgSrc) +
       '\n  <div class="pn-modal__log">\n  ' + performanceLogHTML(ev, imgSrc) + '\n  </div>' +
       '\n</div>';
   }
@@ -708,6 +725,7 @@
       : '';
     return '<div class="fn-detail fn-detail--stowed" id="detail-' + esc(slug) + '" data-fn-detail="' + esc(slug) + '">' +
       (intro ? '\n  ' + intro : '') +
+      detailPhotosHTML(ev, 'fn', imgSrc) +
       '\n  <div class="fn-modal__log">\n  ' + filmLogHTML(ev, imgSrc) + '\n  </div>' +
       '\n</div>';
   }

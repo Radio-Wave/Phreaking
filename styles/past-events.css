@@ -199,6 +199,7 @@ body.pn-modal-open{overflow:hidden;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__poster img{width:100%;height:auto;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__log{margin-top:1.5rem;}
+.event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__photos{margin-top:1.5rem;}
 
 /* ── Film Night ─────────────────────────────────────────────────────────────
    Structurally the twin of Performance Night above: a clickable condensed card
@@ -315,3 +316,4 @@ body.fn-modal-open{overflow:hidden;}
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__poster img{width:100%;height:auto;}
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__log{margin-top:1.5rem;}
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__photos{margin-top:1.5rem;}
