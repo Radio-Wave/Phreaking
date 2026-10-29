@@ -256,6 +256,20 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 .sdot{width:5px;height:5px;border-radius:50%;background:#fff;}
 .udot{width:7px;height:7px;border-radius:50%;background:var(--warn);display:none;}
 .udot.on{display:block;}
+.sbar-log{background:transparent;border:none;color:#fff;font:inherit;cursor:pointer;
+  text-decoration:underline;padding:0;margin-left:auto;}
+.sbar-log[hidden]{display:none;}
+
+/* ── PUSH LOG ── */
+.plog-group{margin-bottom:14px;}
+.plog-src{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;}
+.plog-item{display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5;
+  padding:6px 0;border-top:1px solid var(--brd);}
+.plog-tag{font-family:var(--mono);font-size:9px;padding:1px 5px;border-radius:3px;flex-shrink:0;margin-top:2px;}
+.plog-tag.err{background:rgba(239,68,68,.18);color:var(--err);}
+.plog-tag.warn{background:rgba(245,158,11,.18);color:var(--warn);}
+.plog-msg{word-break:break-word;}
+.plog-empty{font-size:12px;color:var(--muted);}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:34px;right:18px;padding:9px 14px;background:var(--surf);
@@ -747,6 +761,18 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
 <div class="sbar">
   <div class="sbar-item"><div class="sdot"></div><span id="stext">Ready</span></div>
   <div class="sbar-item" id="scount"></div>
+  <button class="sbar-log" id="sLogBtn" type="button" onclick="openPushLog()" hidden></button>
+</div>
+
+<div class="modal-ov" id="pushLogModal" onclick="if(event.target===this)closePushLog()">
+  <div class="modal" style="width:640px;">
+    <h3 id="pushLogTitle">Push log</h3>
+    <div id="pushLogBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" onclick="copyPushLog()">Copy</button>
+      <button class="btn btn-primary" type="button" onclick="closePushLog()">Close</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -4597,8 +4623,11 @@ async function bakePastEventsPage(schemaData, headers, owner, repo, branch, page
   // JSON, rather than taking the generator's word for its own output.
   const check=R.verifyBakedHTML(applied.html, schemaData);
   if(!check.ok){
-    throw new Error(`The generated ${pagePath} is missing content for ${check.problems.length} item(s): `
+    const err=new Error(`The generated ${pagePath} is missing content for ${check.problems.length} item(s): `
       + check.problems.slice(0,3).join('; ') + (check.problems.length>3?' …':''));
+    // The message is cut to three for the toast; the push log shows them all.
+    err.details=check.problems.map(p=>`${pagePath}: ${p}`);
+    throw err;
   }
 
   return { text: applied.html, sha: meta.sha, page, verified: check.checked };
@@ -4622,10 +4651,10 @@ function bakeSummary(bake){
   let note='';
   if(p.errors.length){
     note = ` — ${p.skipped} event${p.skipped>1?'s':''} skipped: ${p.errors[0]}`
-      + (p.errors.length>1?` (+${p.errors.length-1} more in the console)`:'');
+      + (p.errors.length>1?` (+${p.errors.length-1} more in the push log)`:'');
   } else if(p.warnings.length){
     note = ` — ${p.warnings.length} warning${p.warnings.length>1?'s':''}: ${p.warnings[0]}`
-      + (p.warnings.length>1?` (+${p.warnings.length-1} more in the console)`:'');
+      + (p.warnings.length>1?` (+${p.warnings.length-1} more in the push log)`:'');
   }
   return {status, note, clean: !p.errors.length && !p.warnings.length};
 }
@@ -4669,6 +4698,7 @@ async function bakeArtworkPages(schemaData, artistsData, headers, owner, repo, b
   const pages = R.ARTWORK_BAKE_PAGES || [];
   const bakes = [];
   const failures = [];
+  const expanded = {};   // failure text → its full problem list, for the push log
 
   for(const cfg of pages){
     if(msgEl) msgEl.textContent = `Generating static artwork for ${cfg.pagePath}…`;
@@ -4711,8 +4741,10 @@ async function bakeArtworkPages(schemaData, artistsData, headers, owner, repo, b
     // since that is what a baked carousel navigates on with no live fetch.
     const check=R.verifyArtworkPageHTML(applied.html, rendered.list, rendered.ctx);
     if(!check.ok){
-      failures.push(`${cfg.pagePath} is missing content for ${check.problems.length} item(s): `
-        + check.problems.slice(0,3).join('; ') + (check.problems.length>3?' …':''));
+      const f=`${cfg.pagePath} is missing content for ${check.problems.length} item(s): `
+        + check.problems.slice(0,3).join('; ') + (check.problems.length>3?' …':'');
+      failures.push(f);
+      expanded[f]=check.problems.map(p=>`${cfg.pagePath}: ${p}`);
       continue;
     }
 
@@ -4721,7 +4753,11 @@ async function bakeArtworkPages(schemaData, artistsData, headers, owner, repo, b
   }
 
   // Report every page's result in one throw, not just the first to fail.
-  if(failures.length) throw new Error(failures.join(' · '));
+  if(failures.length){
+    const err=new Error(failures.join(' · '));
+    err.details=failures.flatMap(f=>expanded[f]||[f]);
+    throw err;
+  }
   return bakes;
 }
 
@@ -4741,12 +4777,74 @@ function artworkBakeSummary(bakes){
   let note='';
   if(errors.length){
     note = ` — ${errors.length} artwork issue${errors.length>1?'s':''}: ${errors[0]}`
-      + (errors.length>1?` (+${errors.length-1} more in the console)`:'');
+      + (errors.length>1?` (+${errors.length-1} more in the push log)`:'');
   } else if(warnings.length){
     note = ` — ${warnings.length} artwork warning${warnings.length>1?'s':''}: ${warnings[0]}`
-      + (warnings.length>1?` (+${warnings.length-1} more in the console)`:'');
+      + (warnings.length>1?` (+${warnings.length-1} more in the push log)`:'');
   }
   return { total, note, clean: !errors.length && !warnings.length };
+}
+
+// ── PUSH LOG ──────────────────────────────────────────────
+// The toast and status bar only have room for counts and the first problem.
+// Every push records its full list of skipped items, warnings and failures
+// here, opened from the status bar, so "3 warnings" is always one click away
+// from what the three warnings are. Kept in memory for the last push only.
+let pushLog = null;
+const PUSH_LOG_LEVELS = {
+  error:   { tag:'FAILED',  cls:'err'  },
+  skipped: { tag:'SKIPPED', cls:'err'  },
+  warn:    { tag:'WARNING', cls:'warn' },
+};
+
+function recordPushLog(title, items){
+  pushLog = { title, when:new Date(), items };
+  const btn=document.getElementById('sLogBtn');
+  const n=k=>items.filter(i=>i.level===k).length;
+  const bits=[];
+  if(n('error'))   bits.push(`${n('error')} failed`);
+  if(n('skipped')) bits.push(`${n('skipped')} skipped`);
+  if(n('warn'))    bits.push(`${n('warn')} warning${n('warn')>1?'s':''}`);
+  btn.textContent = bits.length ? `View log (${bits.join(', ')})` : 'View log (no issues)';
+  btn.hidden=false;
+}
+
+function pushLogText(){
+  if(!pushLog) return '';
+  return [`${pushLog.title} — ${pushLog.when.toLocaleString()}`]
+    .concat(pushLog.items.map(i=>`[${PUSH_LOG_LEVELS[i.level].tag}] ${i.source}: ${i.msg}`))
+    .join('\n');
+}
+
+function openPushLog(){
+  if(!pushLog) return;
+  document.getElementById('pushLogTitle').textContent =
+    `${pushLog.title} — ${pushLog.when.toLocaleTimeString()}`;
+  const body=document.getElementById('pushLogBody');
+  if(!pushLog.items.length){
+    body.innerHTML='<p class="plog-empty">No warnings or problems on the last push.</p>';
+  } else {
+    // Grouped by source, in the order each source first appeared.
+    const groups=new Map();
+    pushLog.items.forEach(i=>{
+      if(!groups.has(i.source)) groups.set(i.source, []);
+      groups.get(i.source).push(i);
+    });
+    body.innerHTML=[...groups].map(([source, items])=>
+      `<div class="plog-group"><div class="plog-src">${esc(source)}</div>`
+      + items.map(i=>{
+          const L=PUSH_LOG_LEVELS[i.level];
+          return `<div class="plog-item"><span class="plog-tag ${L.cls}">${L.tag}</span>`
+            + `<span class="plog-msg">${esc(i.msg)}</span></div>`;
+        }).join('')
+      + '</div>').join('');
+  }
+  document.getElementById('pushLogModal').classList.add('on');
+}
+function closePushLog(){ document.getElementById('pushLogModal').classList.remove('on'); }
+function copyPushLog(){
+  navigator.clipboard.writeText(pushLogText())
+    .then(()=>toast('Push log copied','ok'), ()=>toast('Could not copy the log'));
 }
 
 async function pushToGitHub(){
@@ -4961,9 +5059,23 @@ async function pushToGitHub(){
     toast(okMsg + bakeNote + awNote + sitemapNote,
       (!sitemapNote && (!summary || summary.clean) && (!awSummary || awSummary.clean)) ? 'ok' : '');
 
+    const logItems = [];
+    if(bake){
+      bake.page.errors.forEach(m=>logItems.push({level:'skipped', source:pagePath, msg:m}));
+      bake.page.warnings.forEach(m=>logItems.push({level:'warn', source:pagePath, msg:m}));
+    }
+    awBakes.forEach(b=>{
+      b.page.errors.forEach(m=>logItems.push({level:'skipped', source:b.pagePath, msg:m}));
+      b.page.warnings.forEach(m=>logItems.push({level:'warn', source:b.pagePath, msg:m}));
+    });
+    companionFailures.forEach(m=>logItems.push({level:'error', source:'Companion files', msg:m}));
+    if(sitemapNote) logItems.push({level:'error', source:'Image sitemap', msg:sitemapNote.replace(/^ — /,'')});
+    recordPushLog(`Pushed to ${owner}/${repo}`, logItems);
+
   } catch(e){
     toast('Push failed: ' + e.message);
     setStatus('Push failed');
+    recordPushLog('Push failed', (e.details||[e.message]).map(m=>({level:'error', source:'Push', msg:m})));
   } finally {
     loadEl.classList.remove('on');
     msgEl.textContent = 'Loading JSON…';
@@ -6302,6 +6414,7 @@ document.addEventListener('keydown', e=>{
     if(document.getElementById('ghModal').classList.contains('on')) closeGhModal();
     if(document.getElementById('newExhModal').classList.contains('on')) closeNewExhibitionModal();
     if(document.getElementById('archiveModal').classList.contains('on')) closeArchiveModal();
+    if(document.getElementById('pushLogModal').classList.contains('on')) closePushLog();
   }
 });
 </script>
