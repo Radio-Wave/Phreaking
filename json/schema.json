@@ -3147,42 +3147,84 @@
           "name": "Tap Tap Tipety Tap",
           "creator": "Mrs Luva-Luva",
           "description": "A woman accidentally turns herself into a homogenous lump, which is harvested by Lucky Cat and sold at the LLM supermarket. Through absurdity and bodily transformation, the film reflects on the changing human psyche under algorithmic capitulation, where people become brands, emotions are packaged as content, identities collapse into meme-like simplifications, and data becomes a tradable commodity.",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_tap-tap-tipety-tap_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_tap-tap-tipety-tap_1.jpg",
+              "alt": "Tap Tap Tipety Tap, Film Night 2026",
+              "altHtml": "Tap Tap Tipety Tap, <em>Film Night</em> 2026"
+            }
+          ]
         },
         {
           "@type": "Movie",
           "name": "Digital Relics",
           "creator": "Mollie Tilley",
           "description": "‘D-R’ investigates my underrepresented community and its transformative rites and rituals through a fabulated ‘future archaeologist’ Avatar. The archaeologist coaxes out digital relics using several divination tools: sound, dance, doodle-bugging, and tasseography, all things my grandmother has taught me. Once he has sourced his excavation site, he begins to dig, but what he uncovers are entangled, fated timelines and looping histories that have been seeking him lifetime after lifetime.\n\nThis body of work reflects on cycles, rebirth, and concurrent timelines, presenting history and memory as continuous processes that do not have a definitive end.\n\nIn a sense, each project is a rebirth of the one before it, returning in a new body.",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_digital-relics_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_digital-relics_1.jpg",
+              "alt": "Digital Relics, Film Night 2026",
+              "altHtml": "Digital Relics, <em>Film Night</em> 2026"
+            }
+          ]
         },
         {
           "@type": "Movie",
           "name": "Transition 002: Home",
           "creator": "Peixian Wu",
           "description": "Transition 002: Home is a procedural cinematic work exploring home as both memory and repeated restart. Drawing from autobiographical experiences of migration, relocation, and unstable dwelling, the project translates domestic space into a virtual architecture shaped by repetition, replacement, and regeneration.\n\nA singular childhood home, associated with family memory and accumulated time, is placed in contrast with a procedurally generated field of temporary apartment-like units. Adapted from the logic of dungeon generation, these repeating rooms, windows, furniture, and workspaces form a spatial system of departure and return. Rather than reconstructing home realistically, the work asks how computation can hold emotional traces of instability, and whether each new dwelling becomes another attempt to begin again.",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_transition-002-home_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_transition-002-home_1.jpg",
+              "alt": "Transition 002: Home, Film Night 2026",
+              "altHtml": "Transition 002: Home, <em>Film Night</em> 2026"
+            }
+          ]
         },
         {
           "@type": "Movie",
           "name": "what could you be",
           "creator": "Yewon Jang",
           "description": "There are different lives we could have lived and the possibilities lost through our choices. I made a short animation in which society stages possibilities through the form of free choice, using the metaphor of Dol-jabi.\n\nDol-jabi is a first birthday tradition in Korea in which several symbolic objects are placed in front of a child, and the object they choose is believed to hint at their future.\n\nIn order to visualise this idea, I developed the project through a response box, body scanning, motion capture, audio visualisation, and other experimental processes.",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_what-could-you-be_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_what-could-you-be_1.jpg",
+              "alt": "what could you be, Film Night 2026",
+              "altHtml": "what could you be, <em>Film Night</em> 2026"
+            }
+          ]
         },
         {
           "@type": "Movie",
           "name": "Boots on the Ground",
           "creator": "Michael Woodruff",
           "description": "A companion animation to a digital print on show at LACDA (Los Angeles). Based on my digital abstraction and digital graffiti works, I create digital structures on a filmic timeline using media technologies from glitches, noises, blurs, glows and graphic systems as though they were brushstrokes themselves, with a lineage to the 50s abstract expressionists. This piece revolves around a hypothetical LA police call out to graffiti being made across the city.",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_boots-on-the-ground_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_boots-on-the-ground_1.jpg",
+              "alt": "Boots on the Ground, Film Night 2026",
+              "altHtml": "Boots on the Ground, <em>Film Night</em> 2026"
+            }
+          ]
         },
         {
           "@type": "Movie",
           "name": "SHATTRD",
           "creator": "uoshi",
           "description": "Trapped in endless reboots, a character’s identity dissolves. Using modded and pirated GTA: San Andreas footage alongside glitch interventions and datamoshing, the film turns the videogame space into an experimental essay on obsolescence, performance, and the individual.",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_shattrd_1.webp",
+              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_shattrd_1.jpg",
+              "alt": "SHATTRD, Film Night 2026",
+              "altHtml": "SHATTRD, <em>Film Night</em> 2026"
+            }
+          ]
         }
       ],
       "startDate": "2026",
