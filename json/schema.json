@@ -3147,84 +3147,42 @@
           "name": "Tap Tap Tipety Tap",
           "creator": "Mrs Luva-Luva",
           "description": "A woman accidentally turns herself into a homogenous lump, which is harvested by Lucky Cat and sold at the LLM supermarket. Through absurdity and bodily transformation, the film reflects on the changing human psyche under algorithmic capitulation, where people become brands, emotions are packaged as content, identities collapse into meme-like simplifications, and data becomes a tradable commodity.",
-          "images": [
-            {
-              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_tap-tap-tipety-tap_1.webp",
-              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_tap-tap-tipety-tap_1.jpg",
-              "alt": "Tap Tap Tipety Tap, Film Night 2026",
-              "altHtml": "Tap Tap Tipety Tap, <em>Film Night</em> 2026"
-            }
-          ]
+          "images": []
         },
         {
           "@type": "Movie",
           "name": "Digital Relics",
           "creator": "Mollie Tilley",
           "description": "‘D-R’ investigates my underrepresented community and its transformative rites and rituals through a fabulated ‘future archaeologist’ Avatar. The archaeologist coaxes out digital relics using several divination tools: sound, dance, doodle-bugging, and tasseography, all things my grandmother has taught me. Once he has sourced his excavation site, he begins to dig, but what he uncovers are entangled, fated timelines and looping histories that have been seeking him lifetime after lifetime.\n\nThis body of work reflects on cycles, rebirth, and concurrent timelines, presenting history and memory as continuous processes that do not have a definitive end.\n\nIn a sense, each project is a rebirth of the one before it, returning in a new body.",
-          "images": [
-            {
-              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_digital-relics_1.webp",
-              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_digital-relics_1.jpg",
-              "alt": "Digital Relics, Film Night 2026",
-              "altHtml": "Digital Relics, <em>Film Night</em> 2026"
-            }
-          ]
+          "images": []
         },
         {
           "@type": "Movie",
           "name": "Transition 002: Home",
           "creator": "Peixian Wu",
           "description": "Transition 002: Home is a procedural cinematic work exploring home as both memory and repeated restart. Drawing from autobiographical experiences of migration, relocation, and unstable dwelling, the project translates domestic space into a virtual architecture shaped by repetition, replacement, and regeneration.\n\nA singular childhood home, associated with family memory and accumulated time, is placed in contrast with a procedurally generated field of temporary apartment-like units. Adapted from the logic of dungeon generation, these repeating rooms, windows, furniture, and workspaces form a spatial system of departure and return. Rather than reconstructing home realistically, the work asks how computation can hold emotional traces of instability, and whether each new dwelling becomes another attempt to begin again.",
-          "images": [
-            {
-              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_transition-002-home_1.webp",
-              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_transition-002-home_1.jpg",
-              "alt": "Transition 002: Home, Film Night 2026",
-              "altHtml": "Transition 002: Home, <em>Film Night</em> 2026"
-            }
-          ]
+          "images": []
         },
         {
           "@type": "Movie",
           "name": "what could you be",
           "creator": "Yewon Jang",
           "description": "There are different lives we could have lived and the possibilities lost through our choices. I made a short animation in which society stages possibilities through the form of free choice, using the metaphor of Dol-jabi.\n\nDol-jabi is a first birthday tradition in Korea in which several symbolic objects are placed in front of a child, and the object they choose is believed to hint at their future.\n\nIn order to visualise this idea, I developed the project through a response box, body scanning, motion capture, audio visualisation, and other experimental processes.",
-          "images": [
-            {
-              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_what-could-you-be_1.webp",
-              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_what-could-you-be_1.jpg",
-              "alt": "what could you be, Film Night 2026",
-              "altHtml": "what could you be, <em>Film Night</em> 2026"
-            }
-          ]
+          "images": []
         },
         {
           "@type": "Movie",
           "name": "Boots on the Ground",
           "creator": "Michael Woodruff",
           "description": "A companion animation to a digital print on show at LACDA (Los Angeles). Based on my digital abstraction and digital graffiti works, I create digital structures on a filmic timeline using media technologies from glitches, noises, blurs, glows and graphic systems as though they were brushstrokes themselves, with a lineage to the 50s abstract expressionists. This piece revolves around a hypothetical LA police call out to graffiti being made across the city.",
-          "images": [
-            {
-              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_boots-on-the-ground_1.webp",
-              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_boots-on-the-ground_1.jpg",
-              "alt": "Boots on the Ground, Film Night 2026",
-              "altHtml": "Boots on the Ground, <em>Film Night</em> 2026"
-            }
-          ]
+          "images": []
         },
         {
           "@type": "Movie",
           "name": "SHATTRD",
           "creator": "uoshi",
           "description": "Trapped in endless reboots, a character’s identity dissolves. Using modded and pirated GTA: San Andreas footage alongside glitch interventions and datamoshing, the film turns the videogame space into an experimental essay on obsolescence, performance, and the individual.",
-          "images": [
-            {
-              "src": "/assets/CanWeStartAgain/Events/film-night/film-night_shattrd_1.webp",
-              "full": "/assets/CanWeStartAgain/Events/film-night/film-night_shattrd_1.jpg",
-              "alt": "SHATTRD, Film Night 2026",
-              "altHtml": "SHATTRD, <em>Film Night</em> 2026"
-            }
-          ]
+          "images": []
         }
       ],
       "startDate": "2026",
@@ -4640,6 +4598,122 @@
       "images": [],
       "visible": true,
       "nameHtml": "Can We Start Again?"
+    },
+    {
+      "@type": "ScreeningEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-film-night-3",
+      "name": "Film Night #3",
+      "exhibition": "oasis",
+      "label": "Film Night",
+      "displayDate": "Thursday 8th October — 18:00–21:00",
+      "sortOrder": 42,
+      "images": [
+        {
+          "src": "/assets/oasis/Events/film-night-3/film-night-3_1.webp",
+          "full": "/assets/oasis/Events/film-night-3/film-night-3_1.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/assets/oasis/Events/film-night-3/film-night-3_2.webp",
+          "full": "/assets/oasis/Events/film-night-3/film-night-3_2.jpg",
+          "alt": ""
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "The Phreaking Collective is collaborating with Peckham Oasis to host a curated night of computational art films in their brand-new screening space. The night celebrates independent filmmakers across London working with new forms of storytelling, production, and technology. \nFrom the data-scare future of precious and passed-down storage devices in Clara’s Harddrive, to intergalactic dreamgivers in Oneirokritikon, to an alien bacteria crossing a neverending landscape in A Fox Ate My Favourite Knickers, and a ballet of necromancy, birth, and transformation in Flowers of Flesh and Blood, each film creates a unique world that both reflects and dulls our contemporary reality.\n",
+      "startDate": "2026",
+      "endDate": "2026",
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "workPresented": [
+        {
+          "@type": "Movie",
+          "name": "A Fox Ate My Favourite Knickers",
+          "creator": "Fran Hayes",
+          "description": "An alien bacteria traverses across an even more alien landscape; a 3d scan of the artist's naked body, covered in computationally grown lichen and scattered with the letters from the poem that exists within the soundscape. The text takes inspiration from a recurrent interaction with a local neighbourhood fox who has taken a liking to the human residents' favourite garments. The interactions collapse the space between them - fox and human - decimating imagined hierarchies. It considers the overlaps between their intimate ecologies and of the deep networks that entangle all things.\n\nWritten, directed & animated by Fran Hayes\nMusic and sound design by Fran Hayes & ALEXANDER ALIEN",
+          "images": [
+            {
+              "src": "/assets/oasis/Events/film-night-3/film-night-3_a-fox-ate-my-favourite-knickers_1.webp",
+              "full": "/assets/oasis/Events/film-night-3/film-night-3_a-fox-ate-my-favourite-knickers_1.jpg",
+              "alt": "A Fox Ate My Favourite Knickers, Film Night #3 2026",
+              "altHtml": "A Fox Ate My Favourite Knickers, <em>Film Night #3</em> 2026"
+            }
+          ]
+        },
+        {
+          "@type": "Movie",
+          "name": "Oneirokritikon",
+          "creator": "Arna Beth",
+          "description": "Oneirokritikon is a non-linear research film exploring interstellar communication through the lens of Astrobiology’s theorized \"Dreamgivers\". Entities transmitting realities across galaxies via human sleep. Rooted in the ancient practice of dream interpretation (oneiromancy).",
+          "images": [
+            {
+              "src": "/assets/oasis/Events/film-night-3/film-night-3_oneirokritikon_1.webp",
+              "full": "/assets/oasis/Events/film-night-3/film-night-3_oneirokritikon_1.jpg",
+              "alt": "Oneirokritikon, Film Night #3 2026",
+              "altHtml": "Oneirokritikon, <em>Film Night #3</em> 2026"
+            }
+          ]
+        },
+        {
+          "@type": "Movie",
+          "name": "FLOWERS OF FLESH AND BLOOD",
+          "creator": "Xena MacNeil",
+          "description": "Flowers of Flesh and Blood is a ballet-inspired digital folk horror film, using unreal engine and motion capture technology to bring to life a simulated ritual involving the summoning of a Goddess, necromancy, birth, sacrifice, decay, cannibalism, and transformation. Drawing upon the folklore of fertility rites and rituals from the ancient pagan world, Flowers of Flesh and Blood seeks to realign the human ego with the cosmos by reminding us of the ecstasy and also the agony of renewal. It is a return to dionysian decadence; a descent into ritualism hysteria that highlights nature in all of her ambivalence, exposing the ouroboric cycle of life and death that we are all swallowed by.",
+          "images": [
+            {
+              "src": "/assets/oasis/Events/film-night-3/film-night-3_flowers-of-flesh-and-blood_1.webp",
+              "full": "/assets/oasis/Events/film-night-3/film-night-3_flowers-of-flesh-and-blood_1.jpg",
+              "alt": "FLOWERS OF FLESH AND BLOOD, Film Night #3 2026",
+              "altHtml": "FLOWERS OF FLESH AND BLOOD, <em>Film Night #3</em> 2026"
+            }
+          ]
+        },
+        {
+          "@type": "Movie",
+          "name": "Talk With Filmmakers",
+          "creator": "Xena MacNeil, Arna Beth (Fran Hayes)",
+          "description": "A conversation with filmmakers Xena MacNeil, Arna Beth about game engines, world making and insperations.\n \nFran Hayes joined in a pre recorded Video",
+          "images": [
+            {
+              "src": "/assets/oasis/Events/film-night-3/film-night-3_talk-with-filmmakers_1.webp",
+              "full": "/assets/oasis/Events/film-night-3/film-night-3_talk-with-filmmakers_1.jpg",
+              "alt": "Talk With Filmmakers, Film Night #3 2026",
+              "altHtml": "Talk With Filmmakers, <em>Film Night #3</em> 2026"
+            }
+          ]
+        },
+        {
+          "@type": "Movie",
+          "name": "Clara’s Hard Drive",
+          "creator": "Rosemary Moss and Remi Mirambeau",
+          "description": "The film is set in a vague future: a parallel reality in which most of the world's data centres have been closed by international agreement to address wasteful energy practices. Digital infrastructure persists, but is operated locally, upheld by universal technical literacy, a culture of mending and repair, and community-run internet hotspots.\nWith cloud storage curtailed and portable hard drives no longer manufactured, all that remains to store precious memories are drives already in circulation. Each time a drive changes hands, its previous owner writes a ReadMe.txt specifying what should be kept and deleted, a ceremony known as the \"Hand to Hand,\" overseen by trusted community members called Hard Drive Swimmers. The film follows three characters, Sofía, Nikos and Charles, as they confront a drive left behind with vague instructions.\nClara's Hard Drive is the clearest expression of Rosemary and Remy’s collaborative practice to date: an experimental moving image and multimedia project developed over the past two years, most recently selected for London Short Film Festival 2026 and screened at the ICA.\n\nThis screening was followed by a open discussion around the world of the film.",
+          "images": [
+            {
+              "src": "/assets/oasis/Events/film-night-3/film-night-3_clara-s-hard-drive_1.webp",
+              "full": "/assets/oasis/Events/film-night-3/film-night-3_clara-s-hard-drive_1.jpg",
+              "alt": "Clara’s Hard Drive, Film Night #3 2026",
+              "altHtml": "Clara’s Hard Drive, <em>Film Night #3</em> 2026"
+            },
+            {
+              "src": "/assets/oasis/Events/film-night-3/film-night-3_clara-s-hard-drive_2.webp",
+              "full": "/assets/oasis/Events/film-night-3/film-night-3_clara-s-hard-drive_2.jpg",
+              "alt": "Clara’s Hard Drive, Film Night #3 2026",
+              "altHtml": "Clara’s Hard Drive, <em>Film Night #3</em> 2026"
+            }
+          ]
+        }
+      ],
+      "location": {
+        "@type": "Place",
+        "name": "Peckham Oasis Gallery"
+      },
+      "creditText": "",
+      "pastEvents": true,
+      "cardColor": "#364178",
+      "previewDescription": "FIlm night of computational films in Peckham Oasis"
     }
   ]
 }
