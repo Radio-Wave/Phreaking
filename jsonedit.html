@@ -1892,7 +1892,18 @@ function confirmAddExh(){
   if(!knownExhibitions.includes(key)){
     knownExhibitions.push(key);
     EXH_NAMES[key]=name;
-    EVENT_TYPES.add(key); // allow tagging events with it
+  }
+  // Persist the section. Without a node in schema.json the key only lived in
+  // memory: the display name was lost on reload and an exhibition with no
+  // events yet vanished entirely. The @id fragment IS the key events carry
+  // (same convention as #bitrot / #does-cloud-compute), and with no
+  // exhibitionCategory it stays off the public exhibitions page.
+  if((mode==='events'||mode==='artwork')&&data&&Array.isArray(data['@graph'])){
+    const id=`https://phreaking.co.uk/#${key}`;
+    if(!data['@graph'].some(x=>x&&x['@id']===id)){
+      data['@graph'].push({'@type':'ExhibitionEvent','@id':id,name,url:'',description:'',images:[],visible:true});
+      markUnsaved();
+    }
   }
   closeAddExhModal();
   if(pendingANSel){ pendingANSel.innerHTML=exhOptions(key); pendingANSel.value=key; pendingANSel.dataset.prev=key; }
@@ -2008,6 +2019,15 @@ function extractFromData(){
   const items = mode==='artwork' ? getArtwork().concat(getEvents())
               : mode==='artists' ? getArtists()
               : getEvents();
+  // Sections saved by "+ Add new exhibition…" (see confirmAddExh) come back
+  // with their real display name, even before any event is tagged to them.
+  // Featured showcases and the legacy #exhibition-* ids are not event keys.
+  if(mode!=='artists') getExhibitions().forEach(ex=>{
+    const k=String(ex['@id']||'').split('#')[1];
+    if(!k||FEATURED_EXH_KEYS.has(k)||k.indexOf('exhibition-')===0) return;
+    if(!knownExhibitions.includes(k)) knownExhibitions.push(k);
+    if(!EXH_NAMES[k]&&ex.name) EXH_NAMES[k]=ex.name;
+  });
   items.forEach(ev=>{
     if(ev.exhibition&&!knownExhibitions.includes(ev.exhibition)){
       knownExhibitions.push(ev.exhibition);

@@ -797,8 +797,11 @@
     var partOf = exh
       ? 'Part of <strong><span itemprop="about superEvent" itemscope itemtype="https://schema.org/ExhibitionEvent">' +
         '<meta itemprop="name" content="' + esc(exh.name) + '">' +
-        '<a href="' + esc(exh.url) + '" target="_blank" rel="noreferrer" class="inline-link" itemprop="url">' +
-        esc(exh.name) + '</a></span></strong>'
+        (exh.url
+          ? '<a href="' + esc(exh.url) + '" target="_blank" rel="noreferrer" class="inline-link" itemprop="url">' +
+            esc(exh.name) + '</a>'
+          : esc(exh.name)) +
+        '</span></strong>'
       : '';
 
     var hint = '';
@@ -1583,6 +1586,38 @@
     cards.forEach(function (card) { stack.appendChild(card); });
   }
 
+  /* ── The All view ───────────────────────────────────────────────────────
+   * Cards are baked into their category sections, which is what a no-JS
+   * visitor or crawler reads. The All filter shows one chronological list
+   * instead, so the cards are physically MOVED into #section-all (not cloned:
+   * ids, the modal's DETAIL_CARDS references and the reading order all stay
+   * true) and moved home again when a single category is picked. */
+  function allStack() {
+    return document.querySelector('#section-all .event-stack');
+  }
+
+  function mergeIntoAll(descending) {
+    var all = allStack();
+    if (!all) return;
+    var st = stacks();
+    CATEGORY_KEYS.forEach(function (key) {
+      if (!st[key]) return;
+      Array.prototype.slice.call(st[key].children).forEach(function (card) { all.appendChild(card); });
+    });
+    sortStack(all, descending);
+  }
+
+  function splitFromAll(descending) {
+    var all = allStack();
+    if (!all || !all.children.length) return;
+    var st = stacks();
+    Array.prototype.slice.call(all.children).forEach(function (card) {
+      var home = st[card.dataset.category];
+      if (home) home.appendChild(card);
+    });
+    CATEGORY_KEYS.forEach(function (key) { sortStack(st[key], descending); });
+  }
+
   function updateCount(sectionId, n) {
     var section = document.getElementById(sectionId);
     if (!section) return;
@@ -1789,7 +1824,19 @@
     var pill = document.querySelector('.filter-pill');
     var sortBtn = document.getElementById('sort-btn');
 
+    var isDescending = true;  /* matches the "newest first" order the generator bakes */
+    var hasAllView = !!allStack();
+
     indexPnCards();
+
+    if (hasAllView) {
+      var total = document.querySelectorAll('.event-stack .event-card').length;
+      var allCount = document.querySelector('#section-all .section-count');
+      if (allCount) {
+        allCount.textContent = total + ' Event' + (total === 1 ? '' : 's');
+        allCount.setAttribute('aria-label', total + ' event' + (total === 1 ? '' : 's'));
+      }
+    }
 
     function movePill(button) {
       if (!button || !pill) return;
@@ -1806,9 +1853,15 @@
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', active);
       });
-      if (filter === 'all') {
+      if (filter === 'all' && hasAllView) {
+        mergeIntoAll(isDescending);
+        Array.prototype.forEach.call(sections, function (section) {
+          section.classList.toggle('hidden', section.dataset.category !== 'all');
+        });
+      } else if (filter === 'all') {
         Array.prototype.forEach.call(sections, function (section) { section.classList.remove('hidden'); });
       } else {
+        splitFromAll(isDescending);
         Array.prototype.forEach.call(sections, function (section) {
           section.classList.toggle('hidden', section.dataset.category !== filter);
         });
@@ -1870,7 +1923,6 @@
       pnSizePoster();
     });
 
-    var isDescending = true;  /* matches the "newest first" order the generator bakes */
     if (sortBtn) {
       sortBtn.addEventListener('click', function () {
         isDescending = !isDescending;

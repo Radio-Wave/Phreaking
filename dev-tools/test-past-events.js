@@ -461,11 +461,23 @@ ok('filter: clicking Talks hides the other sections',
 eq('filter: aria-selected follows the active tab', talksBtn.getAttribute('aria-selected'), 'true');
 
 doc.querySelector('.filter-btn[data-filter="all"]').dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
-ok('filter: All restores every section',
-  [...doc.querySelectorAll('.category-section')].every((s) => !s.classList.contains('hidden')));
+ok('filter: All shows only the merged section',
+  [...doc.querySelectorAll('.category-section')].every((s) =>
+    s.classList.contains('hidden') === (s.dataset.category !== 'all')));
+eq('filter: All holds every card in one list',
+  doc.querySelectorAll('#section-all .event-card').length, PAST.length);
+ok('filter: All mixes the categories rather than grouping them',
+  new Set([...doc.querySelectorAll('#section-all .event-card')].map((c) => c.dataset.category)).size > 1);
 
-/* sorting */
-const stack = doc.querySelector('#section-talks .event-stack');
+talksBtn.dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
+ok('filter: picking a category moves its cards home and empties All',
+  doc.querySelectorAll('#section-all .event-card').length === 0 &&
+  doc.querySelectorAll('#section-talks .event-card').length > 0 &&
+  [...doc.querySelectorAll('#section-talks .event-card')].every((c) => c.dataset.category === 'talks'));
+doc.querySelector('.filter-btn[data-filter="all"]').dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
+
+/* sorting — on the merged list, so it spans every category */
+const stack = doc.querySelector('#section-all .event-stack');
 const keysOf = () => [...stack.children].map((c) => parseFloat(c.dataset.chronoKey));
 const descending = keysOf();
 ok('baked order is newest-first by default',
@@ -534,7 +546,7 @@ doc.querySelector('.pn-modal__backdrop').dispatchEvent(new W.MouseEvent('click',
 eq('modal: backdrop click dismisses', doc.querySelector('.pn-modal').getAttribute('aria-hidden'), 'true');
 
 /* lightbox */
-const firstFigure = doc.querySelector('#section-talks .event-card .image-row figure');
+const firstFigure = doc.querySelector('#section-all .event-card[data-category="talks"] .image-row figure');
 firstFigure.dispatchEvent(new W.MouseEvent('click', { bubbles: true }));
 const lb = doc.querySelector('.pc-lightbox');
 eq('lightbox: opens from a card thumbnail', lb.getAttribute('aria-hidden'), 'false');
@@ -572,7 +584,7 @@ ok('a filter hash still filters rather than being read as a slug',
 const dom6 = bootPage();
 const doc6 = dom6.window.document;
 ['talks', 'workshops', 'performances', 'screenings'].forEach((k) => {
-  const cards = doc6.querySelectorAll('#section-' + k + ' .event-card');
+  const cards = doc6.querySelectorAll('.event-card[data-category="' + k + '"]');
   ok(`${k}: cards render with badge, title and credit line`,
     cards.length > 0 && [...cards].every((c) =>
       c.querySelector('.event-type') && c.querySelector('h3') && c.querySelector('.event-credit')));
@@ -1237,7 +1249,7 @@ ok('…and the Performance Night detail went home to its own card, stowed',
     .classList.contains('pn-detail--stowed'));
 
 /* plain screenings are untouched */
-const plainScreenings = [...fdoc.querySelectorAll('#section-screenings .event-card:not(.fn-card)')];
+const plainScreenings = [...fdoc.querySelectorAll('.event-card[data-category="screenings"]:not(.fn-card)')];
 ok('plain Screenings on the same page are not clickable dialogs',
   plainScreenings.length > 0 && plainScreenings.every((c) => !c.hasAttribute('role')),
   plainScreenings.length + ' plain screenings');
