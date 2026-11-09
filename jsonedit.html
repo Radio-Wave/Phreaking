@@ -605,12 +605,17 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   font-family:var(--mono);font-size:13px;cursor:pointer;padding:0 0 0 8px;}
 #prevOverlay .pn-modal__close:hover{color:#fff;}
 #prevOverlay .pn-modal__scroll{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:16px;}
-#prevOverlay .pn-modal__intro{display:flex;align-items:flex-start;gap:14px;}
-#prevOverlay .pn-modal__desc{flex:0 0 50%;max-width:50%;text-align:justify;}
+#prevOverlay .pn-modal__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"desc poster";align-items:start;gap:16px;}
+#prevOverlay .pn-modal__desc{grid-area:desc;min-width:0;text-align:left;overflow-wrap:break-word;}
 #prevOverlay .pn-modal__desc p{margin:0 0 .9em;color:#efefef;font-size:11.5px;line-height:1.7;}
-#prevOverlay .pn-modal__poster{flex:0 0 auto;margin:0;line-height:0;max-width:40%;}
-#prevOverlay .pn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;
+#prevOverlay .pn-modal__poster{grid-area:poster;margin:0;line-height:0;width:100%;position:sticky;top:0;}
+#prevOverlay .pn-modal__poster img{width:100%;height:auto;max-width:100%;
   display:block;border:1px solid rgba(255,255,255,.15);border-radius:3px;}
+#prevOverlay .pn-modal__photos,
+#prevOverlay .pn-perf .image-row{grid-template-columns:minmax(0,1fr);gap:8px;}
+#prevOverlay .pn-modal__photos img,
+#prevOverlay .pn-perf .image-row img{height:auto;aspect-ratio:auto;object-fit:contain;}
 #prevOverlay .pn-modal__log{display:flex;flex-direction:column;}
 #prevOverlay .pn-perf{padding:14px 0;border-top:1px solid rgba(255,255,255,.18);}
 #prevOverlay .pn-perf:first-child{border-top:none;padding-top:0;}
@@ -648,12 +653,17 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   font-family:var(--mono);font-size:13px;cursor:pointer;padding:0 0 0 8px;}
 #prevOverlay .fn-modal__close:hover{color:#fff;}
 #prevOverlay .fn-modal__scroll{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:16px;}
-#prevOverlay .fn-modal__intro{display:flex;align-items:flex-start;gap:14px;}
-#prevOverlay .fn-modal__desc{flex:0 0 50%;max-width:50%;text-align:justify;}
+#prevOverlay .fn-modal__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"desc poster";align-items:start;gap:16px;}
+#prevOverlay .fn-modal__desc{grid-area:desc;min-width:0;text-align:left;overflow-wrap:break-word;}
 #prevOverlay .fn-modal__desc p{margin:0 0 .9em;color:#efefef;font-size:11.5px;line-height:1.7;}
-#prevOverlay .fn-modal__poster{flex:0 0 auto;margin:0;line-height:0;max-width:40%;}
-#prevOverlay .fn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;
+#prevOverlay .fn-modal__poster{grid-area:poster;margin:0;line-height:0;width:100%;position:sticky;top:0;}
+#prevOverlay .fn-modal__poster img{width:100%;height:auto;max-width:100%;
   display:block;border:1px solid rgba(255,255,255,.15);border-radius:3px;}
+#prevOverlay .fn-modal__photos,
+#prevOverlay .fn-film .image-row{grid-template-columns:minmax(0,1fr);gap:8px;}
+#prevOverlay .fn-modal__photos img,
+#prevOverlay .fn-film .image-row img{height:auto;aspect-ratio:auto;object-fit:contain;}
 #prevOverlay .fn-modal__log{display:flex;flex-direction:column;}
 #prevOverlay .fn-film{padding:14px 0;border-top:1px solid rgba(255,255,255,.18);}
 #prevOverlay .fn-film:first-child{border-top:none;padding-top:0;}
@@ -4043,14 +4053,9 @@ function pnRenderOverlay(evs){
 }
 
 function pnSizePreviewPoster(){
+  // Poster sizes itself from its grid column (matches past-events.css).
   const ov=document.getElementById('prevOverlay'); if(!ov) return;
-  const fig=ov.querySelector('.pn-modal__poster,.fn-modal__poster'); if(!fig) return;
-  const desc=ov.querySelector('.pn-modal__desc,.fn-modal__desc');
-  const textH=desc?desc.getBoundingClientRect().height:0;
-  const cap=Math.max(160, ov.clientHeight*0.62);
-  fig.style.height=Math.round(Math.min(Math.max(textH,500),cap))+'px';
-  const img=fig.querySelector('img');
-  if(img&&!img.dataset.pnSized){ img.dataset.pnSized='1'; img.addEventListener('load',pnSizePreviewPoster,{once:true}); }
+  const fig=ov.querySelector('.pn-modal__poster,.fn-modal__poster'); if(fig) fig.style.height='';
 }
 window.addEventListener('resize',pnSizePreviewPoster);
 

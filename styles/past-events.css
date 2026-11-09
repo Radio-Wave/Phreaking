@@ -132,14 +132,24 @@ body.pn-modal-open{overflow:hidden;}
 .pn-modal__scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.05);}
 .pn-modal__scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border-radius:4px;}
 
-/* description left, poster right — poster matches the text block's height */
-.pn-modal__intro{display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,28px);}
-.pn-modal__desc{flex:0 0 50%;max-width:50%;min-width:0;text-align:justify;hyphens:auto;}
+/* description left, poster right — equal columns, poster at its natural
+   aspect ratio and sticky so it stays in view while the text scrolls past */
+.pn-modal__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"desc poster";
+  align-items:start;gap:clamp(16px,3vw,40px);}
+.pn-modal__desc{grid-area:desc;min-width:0;max-width:68ch;text-align:left;hyphens:manual;overflow-wrap:break-word;}
 .pn-modal__desc p{margin:0 0 1em;color:#efefef;line-height:1.75;font-size:calc(.97rem + 2px);}
 .pn-modal__desc p:last-child{margin-bottom:0;}
-.pn-modal__poster{flex:0 0 auto;align-self:flex-start;margin:0;line-height:0;max-width:40%;}
-.pn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;display:block;
+.pn-modal__poster{grid-area:poster;margin:0;line-height:0;width:100%;position:sticky;top:0;}
+.pn-modal__poster img{width:100%;height:auto;max-width:100%;display:block;
   border:1px solid rgba(255,255,255,.15);border-radius:4px;}
+
+/* act photos inside the open modal: each one full width at its natural shape */
+.pn-modal__scroll .pn-modal__photos,
+.pn-modal__scroll .pn-perf .image-row{grid-template-columns:minmax(0,1fr);gap:clamp(8px,1.5vw,16px);}
+.pn-modal__scroll .pn-modal__photos img,
+.pn-modal__scroll .pn-perf .image-row img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;}
+.pn-modal__scroll .pn-modal__photos img:hover,
+.pn-modal__scroll .pn-perf .image-row img:hover{transform:none;}
 
 /* ---- performance log ---- */
 .pn-modal__log{display:flex;flex-direction:column;}
@@ -158,10 +168,9 @@ body.pn-modal-open{overflow:hidden;}
   .pn-modal__headline{grid-area:headline;}
   .pn-modal__close{grid-area:close;}
   .pn-modal__when{grid-area:when;flex-direction:row;justify-content:space-between;width:100%;white-space:normal;}
-  .pn-modal__intro{flex-direction:column;}
-  .pn-modal__desc{flex:1 1 auto;max-width:100%;}
-  .pn-modal__poster{max-width:100%;align-self:auto;min-height:0;}
-  .pn-modal__poster img{width:100%;height:auto;max-height:52vh;}
+  .pn-modal__intro{grid-template-columns:minmax(0,1fr);grid-template-areas:"poster" "desc";}
+  .pn-modal__desc{max-width:100%;}
+  .pn-modal__poster{position:static;}
   .pn-perf-title{font-size:1.8rem;}
 }
 @media(prefers-reduced-motion:reduce){
@@ -195,7 +204,7 @@ body.pn-modal-open{overflow:hidden;}
    overrides .pn-detail--stowed back to visible; these rules give it a sane
    single-column layout when that happens. */
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__intro{display:block;}
-.event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__desc{flex:1 1 auto;max-width:100%;}
+.event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__desc{max-width:100%;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__poster img{width:100%;height:auto;}
 .event-card .pn-detail:not(.pn-detail--stowed) .pn-modal__log{margin-top:1.5rem;}
@@ -255,14 +264,24 @@ body.fn-modal-open{overflow:hidden;}
 .fn-modal__scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.05);}
 .fn-modal__scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border-radius:4px;}
 
-/* description left, poster right — poster matches the text block's height */
-.fn-modal__intro{display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,28px);}
-.fn-modal__desc{flex:0 0 50%;max-width:50%;min-width:0;text-align:justify;hyphens:auto;}
+/* description left, poster right — equal columns, poster at its natural
+   aspect ratio and sticky so it stays in view while the text scrolls past */
+.fn-modal__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"desc poster";
+  align-items:start;gap:clamp(16px,3vw,40px);}
+.fn-modal__desc{grid-area:desc;min-width:0;max-width:68ch;text-align:left;hyphens:manual;overflow-wrap:break-word;}
 .fn-modal__desc p{margin:0 0 1em;color:#efefef;line-height:1.75;font-size:calc(.97rem + 2px);}
 .fn-modal__desc p:last-child{margin-bottom:0;}
-.fn-modal__poster{flex:0 0 auto;align-self:flex-start;margin:0;line-height:0;max-width:40%;}
-.fn-modal__poster img{height:100%;width:auto;max-width:100%;object-fit:cover;display:block;
+.fn-modal__poster{grid-area:poster;margin:0;line-height:0;width:100%;position:sticky;top:0;}
+.fn-modal__poster img{width:100%;height:auto;max-width:100%;display:block;
   border:1px solid rgba(255,255,255,.15);border-radius:4px;}
+
+/* act photos inside the open modal: each one full width at its natural shape */
+.fn-modal__scroll .fn-modal__photos,
+.fn-modal__scroll .fn-film .image-row{grid-template-columns:minmax(0,1fr);gap:clamp(8px,1.5vw,16px);}
+.fn-modal__scroll .fn-modal__photos img,
+.fn-modal__scroll .fn-film .image-row img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;}
+.fn-modal__scroll .fn-modal__photos img:hover,
+.fn-modal__scroll .fn-film .image-row img:hover{transform:none;}
 
 /* ---- film log ---- */
 .fn-modal__log{display:flex;flex-direction:column;}
@@ -281,10 +300,9 @@ body.fn-modal-open{overflow:hidden;}
   .fn-modal__headline{grid-area:headline;}
   .fn-modal__close{grid-area:close;}
   .fn-modal__when{grid-area:when;flex-direction:row;justify-content:space-between;width:100%;white-space:normal;}
-  .fn-modal__intro{flex-direction:column;}
-  .fn-modal__desc{flex:1 1 auto;max-width:100%;}
-  .fn-modal__poster{max-width:100%;align-self:auto;min-height:0;}
-  .fn-modal__poster img{width:100%;height:auto;max-height:52vh;}
+  .fn-modal__intro{grid-template-columns:minmax(0,1fr);grid-template-areas:"poster" "desc";}
+  .fn-modal__desc{max-width:100%;}
+  .fn-modal__poster{position:static;}
   .fn-film-title{font-size:1.8rem;}
 }
 @media(prefers-reduced-motion:reduce){
@@ -312,7 +330,7 @@ body.fn-modal-open{overflow:hidden;}
    overrides .fn-detail--stowed back to visible; these rules give it a sane
    single-column layout when that happens. */
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__intro{display:block;}
-.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__desc{flex:1 1 auto;max-width:100%;}
+.event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__desc{max-width:100%;}
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__poster{max-width:100%;margin-bottom:1.25rem;}
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__poster img{width:100%;height:auto;}
 .event-card .fn-detail:not(.fn-detail--stowed) .fn-modal__log{margin-top:1.5rem;}

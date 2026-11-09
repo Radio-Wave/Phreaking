@@ -1799,23 +1799,17 @@
     if (writeUrl) window.history.pushState(null, '', window.location.pathname);
   }
 
-  /* The poster height is driven by the description block: CSS can't measure a
-   * sibling, so it's set here and kept in step on resize and once the image
-   * loads. Starts at 500px, then tracks the description 1:1 once the text is
-   * taller than that, capped so it can't outgrow the viewport. */
-  var PN_POSTER_MIN = 500;
+  /* The poster sizes itself from its grid column in CSS. This only clears any
+   * inline height a previous build may have set; kept so callers stay valid. */
   function pnSizePoster() {
     var modal = openModalEl();
     if (!modal) return;
     var c = DETAIL_KINDS[pnOpenKind || 'pn'].cls;
-    var desc = modal.querySelector('.' + c + '-modal__desc');
     var fig = modal.querySelector('.' + c + '-modal__poster');
     if (!fig) return;
-    if (window.innerWidth <= 760) { fig.style.height = ''; return; }
-    var textH = desc ? desc.getBoundingClientRect().height : 0;
-    var target = Math.max(textH, PN_POSTER_MIN);
-    var cap = Math.max(PN_POSTER_MIN, window.innerHeight * 0.72);
-    fig.style.height = Math.round(Math.min(target, cap)) + 'px';
+    // The poster now sizes itself from its column width (see past-events.css),
+    // so just clear any height an older build left inline.
+    fig.style.height = '';
   }
 
   function hydrate() {
