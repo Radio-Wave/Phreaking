@@ -4660,6 +4660,75 @@
       "visible": true
     },
     {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#mixed-signals",
+      "name": "Mixed Signals",
+      "url": "https://phreaking.co.uk/mixed-signals/",
+      "description": "Our computational art jam series.",
+      "images": [],
+      "visible": true
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#southbank-centre",
+      "name": "Creative Intelligence — Southbank Centre",
+      "url": "",
+      "location": {
+        "@type": "Place",
+        "name": "Southbank Centre",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Belvedere Road",
+          "addressLocality": "London",
+          "postalCode": "SE1 8XX",
+          "addressCountry": "GB"
+        }
+      },
+      "description": "",
+      "images": [],
+      "visible": true
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#set-vauxhall",
+      "name": "SET Vauxhall",
+      "url": "",
+      "location": {
+        "@type": "Place",
+        "name": "SET Vauxhall, Camelford House",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "89 Albert Embankment",
+          "addressLocality": "London",
+          "postalCode": "SE1 7TP",
+          "addressCountry": "GB"
+        }
+      },
+      "description": "",
+      "images": [],
+      "visible": true
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://phreaking.co.uk/#lethaby-gallery",
+      "name": "Process — Lethaby Gallery",
+      "url": "",
+      "location": {
+        "@type": "Place",
+        "name": "Lethaby Gallery",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1 Granary Square",
+          "addressLocality": "London",
+          "postalCode": "N1C 4AA",
+          "addressCountry": "GB"
+        }
+      },
+      "description": "",
+      "images": [],
+      "visible": true
+    },
+    {
       "@type": "ScreeningEvent",
       "@id": "https://phreaking.co.uk/past-events#event-film-night-3",
       "name": "Film Night #3",
@@ -4774,6 +4843,359 @@
       "pastEvents": true,
       "cardColor": "#364178",
       "previewDescription": "FIlm night of computational films in Peckham Oasis"
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-mixed-signals-1",
+      "name": "Mixed Signals #1",
+      "exhibition": "mixed-signals",
+      "label": "Workshop",
+      "displayDate": "Wednesday 22nd April — 18:00–21:00",
+      "sortOrder": 43,
+      "images": [
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_1.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_1.jpg",
+          "alt": "Poster for Mixed Signals #1 at Home Deptford"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_2.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_2.jpg",
+          "alt": "Participants working on laptops around a table at Mixed Signals #1, Home Deptford"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_3.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_3.jpg",
+          "alt": "Laptops and drinks crowded on a café table during Mixed Signals #1"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_4.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_4.jpg",
+          "alt": "Participants making work on their laptops at Mixed Signals #1, Home Deptford"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_5.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_5.jpg",
+          "alt": "A participant working on a dark-themed image on screen at Mixed Signals #1"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_6.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-1/mixed-signals-1_6.jpg",
+          "alt": "Participants gathered round a long table by the window at Mixed Signals #1"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "The very first Mixed Signals, our new computational art jam, held at Home Deptford. Bringing a life-drawing, art jam approach to computational art-making, each participant was given a specific digital tool to create with and encouraged to push it beyond its constraints to make something new. The evening moved between quick-fire sketch sections to experiment, longer periods to develop something with more intention, and collaborative moments to share and learn from each other. All places for the first session were claimed.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Home Deptford",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "37 Deptford High St",
+          "addressLocality": "London",
+          "postalCode": "SE8 4AD",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-mixed-signals-2",
+      "name": "Mixed Signals #2",
+      "exhibition": "mixed-signals",
+      "label": "Workshop",
+      "displayDate": "Wednesday 13th May — 18:00–21:00",
+      "sortOrder": 44,
+      "images": [
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-2/mixed-signals-2_1.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-2/mixed-signals-2_1.jpg",
+          "alt": "Poster for Mixed Signals #2 at Home Deptford"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "Mixed Signals returned to Home Deptford for its second session. Bringing a life-drawing, art jam approach to computational art-making, each participant was given a specific digital tool to create with and encouraged to push it beyond its constraints to make something new. The evening moved between quick-fire sketch sections to experiment, longer periods to develop something with more intention, and collaborative moments to share and learn from each other. Each session is different from the last: an open evening for anyone who likes messing around with computers and digital tools, wants to discover new ways of working, or just wants to hang out.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Home Deptford",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "37 Deptford High St",
+          "addressLocality": "London",
+          "postalCode": "SE8 4AD",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-mixed-signals-3",
+      "name": "Mixed Signals #3",
+      "exhibition": "mixed-signals",
+      "label": "Workshop",
+      "displayDate": "Wednesday 17th June — 18:00–21:00",
+      "sortOrder": 45,
+      "images": [
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-3/mixed-signals-3_1.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-3/mixed-signals-3_1.jpg",
+          "alt": "Poster for Mixed Signals #3"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "The third Mixed Signals, and the first in our new space in Oval. Bringing a life-drawing, art jam approach to computational art-making, each participant was given a specific digital tool to create with and encouraged to push it beyond its constraints to make something new. The evening moved between quick-fire sketch sections to experiment, longer periods to develop something with more intention, and collaborative moments to share and learn from each other. Free to attend, with a suggested donation towards costs and materials.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Phreaking Collective",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "55 Kennington Oval",
+          "addressLocality": "London",
+          "postalCode": "SE11 5SR",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-open-projector-southbank",
+      "name": "Open Projector: Southbank Centre Special Edition",
+      "exhibition": "southbank-centre",
+      "label": "Event",
+      "displayDate": "Saturday 12th September — 14:00",
+      "sortOrder": 46,
+      "images": [
+        {
+          "src": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_1.webp",
+          "full": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_1.jpg",
+          "alt": "Phreaking Collective introducing Open Projector on stage at Southbank Centre"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_2.webp",
+          "full": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_2.jpg",
+          "alt": "A full audience at Open Projector, Southbank Centre"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_3.webp",
+          "full": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_3.jpg",
+          "alt": "A presenter at a lectern with a 'Thanks for having me!' slide, Open Projector at Southbank Centre"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_4.webp",
+          "full": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_4.jpg",
+          "alt": "A presenter showing a desktop of open windows at Open Projector, Southbank Centre"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_5.webp",
+          "full": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_5.jpg",
+          "alt": "A presenter in front of a glitched, colourful projection at Open Projector, Southbank Centre"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_6.webp",
+          "full": "/assets/OpenProj/Events/open-projector-southbank/open-projector-southbank_6.jpg",
+          "alt": "A presenter introducing the Traces app at Open Projector, Southbank Centre"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "A special edition of Open Projector at Southbank Centre, invited by Peckham Digital as part of Get Your Hands Dirty with Creative Tech for Creative Intelligence. Three invited artists shared their practices: Annike Tan with her DIY cyberdecks, Ambie Drew with her research into girlhood, and Izzy Hemmings with her personalised websites.\n\nThe open floor followed, with presenters drawn at random from a hat: Wai Laam Ivan Chang with 3D album artwork and unreleased music, Michael Woodruff with quantum expressionist digital art, Den with Purr projects and thermal-printer magazine scrolls, Elijah Zulu with Traces, an app that turns moments and images into sound, and Robin Leverton with research into invisible urban network infrastructure.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Southbank Centre",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Belvedere Road",
+          "addressLocality": "London",
+          "postalCode": "SE1 8XX",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-set-open-studio",
+      "name": "SET Open Studio",
+      "exhibition": "set-vauxhall",
+      "label": "Event",
+      "displayDate": "Saturday 26th September — 14:00–18:00",
+      "sortOrder": 47,
+      "images": [],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "Five members of Phreaking Collective share a studio at SET Vauxhall, and for our inaugural Open Studio we opened the doors to show what we're working on. Part of 10 Years of SET, the whole building opened up for visitors to meet the artists and creatives working there. With Melissa Li Yunzhi, Xach Hill, Nikos Kourous, Lyra Robinson and Jack Jessé.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "SET Vauxhall, Camelford House",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "89 Albert Embankment",
+          "addressLocality": "London",
+          "postalCode": "SE1 7TP",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
+    },
+    {
+      "@type": "Event",
+      "@id": "https://phreaking.co.uk/past-events#event-open-projector-lethaby",
+      "name": "Open Projector at Lethaby Gallery",
+      "exhibition": "lethaby-gallery",
+      "label": "Event",
+      "displayDate": "Thursday 15th October — 16:00–18:00",
+      "sortOrder": 48,
+      "images": [
+        {
+          "src": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_1.webp",
+          "full": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_1.jpg",
+          "alt": "Audience watching a presentation at Open Projector, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_2.webp",
+          "full": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_2.jpg",
+          "alt": "A presenter showing a 3D-scanned face on screen at Open Projector, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_3.webp",
+          "full": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_3.jpg",
+          "alt": "A presenter speaking beside a screen of code at Open Projector, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_4.webp",
+          "full": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_4.jpg",
+          "alt": "A presenter gesturing to a slide at Open Projector, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_5.webp",
+          "full": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_5.jpg",
+          "alt": "A presenter at a laptop in front of a landscape image at Open Projector, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_6.webp",
+          "full": "/assets/OpenProj/Events/open-projector-lethaby/open-projector-lethaby_6.jpg",
+          "alt": "A presenter pointing to a screen at Open Projector, Lethaby Gallery"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "The first day of our two-day takeover of 'Process' at Lethaby Gallery, an exhibition of work by recent graduates spanning art, design and performance that explores the research, iterations and collaborations behind the creative process. Open Projector, our regular show-and-tell, invited anyone to plug into the projector and sound system and share something for a couple of minutes: a work in progress, a finished project, an artwork, an idea or a performance. Nothing needed to be polished; it was all about sharing ideas and connecting with each other.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Lethaby Gallery",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1 Granary Square",
+          "addressLocality": "London",
+          "postalCode": "N1C 4AA",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://phreaking.co.uk/past-events#event-mixed-signals-lethaby",
+      "name": "Mixed Signals at Lethaby Gallery",
+      "exhibition": "lethaby-gallery",
+      "label": "Workshop",
+      "displayDate": "Saturday 17th October — 15:00–17:00",
+      "sortOrder": 49,
+      "images": [
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_1.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_1.jpg",
+          "alt": "Poster for Mixed Signals at Lethaby Gallery"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_2.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_2.jpg",
+          "alt": "Participants around a long table with laptops at Mixed Signals, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_3.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_3.jpg",
+          "alt": "Mixed Signals participants working at tables in the Lethaby Gallery exhibition space"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_4.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_4.jpg",
+          "alt": "A colourful digital image on a laptop screen at Mixed Signals, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_5.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_5.jpg",
+          "alt": "Three participants sharing work at a laptop at Mixed Signals, Lethaby Gallery"
+        },
+        {
+          "src": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_6.webp",
+          "full": "/assets/MixedSignals/Events/mixed-signals-lethaby/mixed-signals-lethaby_6.jpg",
+          "alt": "Participants drawing and working on laptops at Mixed Signals, Lethaby Gallery"
+        }
+      ],
+      "eventCompletedUrl": "",
+      "eventCompletedUrlLabel": "[Event Over]",
+      "description": "The second day of our takeover of 'Process' at Lethaby Gallery saw the return of Mixed Signals, our computational art jam. Bringing a life-drawing, art jam approach to computational art-making, each participant was given a specific digital tool to create with and encouraged to push it beyond its constraints to make something new. The evening moved between quick-fire sketch sections to experiment, longer periods to develop something with more intention, and collaborative moments to share and learn from each other. Fitting an exhibition focused on experimentation, the session was all about the spontaneous and unexpected ways of getting somewhere new.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "location": {
+        "@type": "Place",
+        "name": "Lethaby Gallery",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1 Granary Square",
+          "addressLocality": "London",
+          "postalCode": "N1C 4AA",
+          "addressCountry": "GB"
+        }
+      },
+      "organizer": {
+        "@id": "https://phreaking.co.uk/#phreaking"
+      },
+      "visible": true,
+      "pastEvents": true
     }
   ]
 }
