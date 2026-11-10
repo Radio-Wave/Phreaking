@@ -185,8 +185,7 @@
             }
           ]
         }
-      ],
-      "current": true
+      ]
     },
     {
       "id": 5,
@@ -249,7 +248,7 @@
             },
             {
               "label": "Google Maps",
-              "url": "https://maps.google.com/",
+              "url": "https://www.google.com/maps/@51.524685,-0.1097389,3a,15y,221.39h,82.47t/data=!3m7!1e1!3m5!1s4ONVQcDhikoc0F5dJG7WFg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D7.534478382862844%26panoid%3D4ONVQcDhikoc0F5dJG7WFg%26yaw%3D221.38680111641693!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDUxMC4wIKXMDSoASAFQAw%3D%3D",
               "note": "Find People and Places"
             },
             {
@@ -269,13 +268,14 @@
               "note": "Online Image Editor"
             },
             {
-              "label": "",
-              "url": "",
-              "note": ""
+              "label": "Kid Pix",
+              "url": "https://kidpix.app/",
+              "note": "Silly Drawer"
             }
           ]
         }
-      ]
+      ],
+      "current": true
     }
   ]
 }
