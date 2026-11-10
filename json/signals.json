@@ -185,7 +185,8 @@
             }
           ]
         }
-      ]
+      ],
+      "current": true
     },
     {
       "id": 5,
@@ -232,8 +233,49 @@
             }
           ]
         }
-      ],
-      "current": true
+      ]
+    },
+    {
+      "id": 6,
+      "panels": [
+        {
+          "title": "MATERIALS",
+          "description": "Online found objects",
+          "links": [
+            {
+              "label": "Wikipedia Random Page",
+              "url": "http://wikipedia.org/wiki/Special:Random",
+              "note": "Takes you to a random Wikipedia article."
+            },
+            {
+              "label": "Google Maps",
+              "url": "https://maps.google.com/",
+              "note": "Find People and Places"
+            },
+            {
+              "label": "No Clip",
+              "url": "https://noclip.website/",
+              "note": "Online World Finder"
+            }
+          ]
+        },
+        {
+          "title": "Tools",
+          "description": "",
+          "links": [
+            {
+              "label": "Online Image Editor",
+              "url": "https://pixlr.com/editor/",
+              "note": "Online Image Editor"
+            },
+            {
+              "label": "",
+              "url": "",
+              "note": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
