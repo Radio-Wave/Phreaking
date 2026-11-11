@@ -292,11 +292,6 @@
               "label": "Kid Pix",
               "url": "https://kidpix.app/",
               "note": "Silly Drawer"
-            },
-            {
-              "label": "Notpad",
-              "url": "/signals/assets/notepad.txt",
-              "note": "Use your local notepad"
             }
           ]
         },
