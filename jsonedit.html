@@ -126,6 +126,21 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;
   cursor:pointer;font-family:var(--ui);font-size:11px;width:100%;transition:.15s;}
 .add-img:hover{color:var(--ink);border-color:#444;}
 
+/* signals: import tools/materials from previous sessions */
+.sig-imp{border:1px solid var(--brd);border-radius:5px;background:var(--bg);}
+.sig-imp summary{cursor:pointer;padding:8px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink);}
+.sig-imp-body{display:flex;flex-direction:column;gap:10px;padding:0 10px 10px;}
+.sig-imp-bar{display:flex;gap:6px;align-items:center;justify-content:flex-end;}
+.sig-imp-bar input,.sig-imp-bar select{background:var(--surf);border:1px solid var(--brd);color:var(--ink);
+  padding:5px 7px;border-radius:4px;font-family:var(--ui);font-size:11px;}
+.sig-imp-bar input{flex:1;min-width:0;}
+.sig-imp-group{display:flex;flex-direction:column;gap:2px;max-height:260px;overflow:auto;}
+.sig-imp-row{display:flex;align-items:center;gap:7px;padding:3px 2px;font-size:12px;cursor:pointer;border-radius:3px;}
+.sig-imp-row:hover{background:var(--surf);}
+.sig-imp-row.added{opacity:.45;cursor:default;}
+.sig-imp-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sig-imp-meta{font-size:10px;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;white-space:nowrap;}
+
 /* ── RIGHT PANEL ── */
 .pright{overflow:hidden;display:flex;flex-direction:column;background:#000;}
 .prev-bar{height:38px;background:var(--surf);border-bottom:1px solid var(--brd);
@@ -5928,6 +5943,7 @@ function buildSignalsForm(s){
       </div>`;
   }).join('');
   document.getElementById('editBody').innerHTML=`
+    ${signalsImportHtml(s)}
     <div class="field"><label>Session ID</label>
       <input type="number" id="sf-id" min="1" value="${s.id??''}" oninput="liveUpSignals()"></div>
     <div class="field"><label>Current session</label>
@@ -5941,6 +5957,118 @@ function buildSignalsForm(s){
     </div>`;
 }
 function rebuildSignalsForm(){ buildSignalsForm(data.sessions[curIdx]); }
+
+// IMPORT FROM PREVIOUS SESSIONS — most tools/materials repeat between sessions, so the form
+// offers every link used in other sessions (grouped by panel title, de-duplicated by URL) to
+// tick and add. Imported links go into the panel with the same title (case-insensitive),
+// which is created with its previous description if this session doesn't have it yet.
+let sigLib=[], sigImpSession=null, sigImpOpen=false;
+function sigKey(t){ return String(t||'').trim().toLowerCase(); }
+function sigLinkKey(l){
+  const u=String(l.url||'').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/+$/,'');
+  return u || 'label:'+sigKey(l.label);
+}
+function sigBlank(l){ return !(l.label||'').trim() && !(l.url||'').trim() && !(l.note||'').trim(); }
+function signalsLibrary(s){
+  const have=new Set();
+  (s.panels||[]).forEach(p=>(p.links||[]).forEach(l=>{ if(!sigBlank(l)) have.add(sigLinkKey(l)); }));
+  const groups=new Map();
+  getSignalsSessions().filter(o=>o!==s).slice().sort((a,b)=>(b.id||0)-(a.id||0)) // newest first
+    .forEach(o=>(o.panels||[]).forEach(p=>{
+      const k=sigKey(p.title); if(!k) return;
+      let g=groups.get(k);
+      if(!g){ g={title:p.title.trim(), description:p.description||'', links:[], byKey:new Map()}; groups.set(k,g); }
+      else if(g.title===g.title.toUpperCase() && p.title!==p.title.toUpperCase()) g.title=p.title.trim(); // prefer "Materials" over "MATERIALS"
+      if(!g.description && p.description) g.description=p.description;
+      (p.links||[]).forEach(l=>{
+        if(sigBlank(l)) return;
+        const lk=sigLinkKey(l), seen=g.byKey.get(lk);
+        if(seen){ if(!seen.sessions.includes(o.id)) seen.sessions.push(o.id); return; }
+        const e={key:lk, link:{label:l.label||'', url:l.url||'', note:l.note||''}, sessions:[o.id], added:have.has(lk)};
+        g.byKey.set(lk,e); g.links.push(e);
+      });
+    }));
+  return [...groups.values()].filter(g=>g.links.length);
+}
+function signalsImportHtml(s){
+  sigLib=signalsLibrary(s);
+  if(!sigLib.length) return '';
+  if(sigImpSession!==s){
+    sigImpSession=s;
+    sigImpOpen=!(s.panels||[]).some(p=>(p.links||[]).some(l=>!sigBlank(l))); // open by default on a new, empty session
+  }
+  const total=sigLib.reduce((n,g)=>n+g.links.length,0);
+  const others=[...new Set(sigLib.flatMap(g=>g.links.flatMap(e=>e.sessions)))].sort((a,b)=>b-a);
+  const groups=sigLib.map((g,gi)=>{
+    const rows=g.links.map((e,ei)=>`
+      <label class="sig-imp-row${e.added?' added':''}" data-q="${esc((e.link.label+' '+e.link.url+' '+e.link.note).toLowerCase())}" data-s=",${e.sessions.join(',')},">
+        <input type="checkbox" data-g="${gi}" data-e="${ei}"${e.added?' disabled':''} onchange="sigImpCount()">
+        <span class="sig-imp-label" title="${esc(e.link.url)}">${esc(e.link.label||e.link.url)}</span>
+        <span class="sig-imp-meta">${e.added?'added':'#'+e.sessions.slice().sort((a,b)=>a-b).join(' #')}</span>
+      </label>`).join('');
+    return `<div class="sig-imp-group" data-g="${gi}">
+      <div class="img-entry-head"><span>${esc(g.title)} · ${g.links.length}</span>
+        <button class="btn btn-sm" onclick="sigImpSelectGroup(${gi})">Select all</button></div>${rows}</div>`;
+  }).join('');
+  return `<details class="sig-imp"${sigImpOpen?' open':''} ontoggle="sigImpOpen=this.open">
+    <summary>Import from previous sessions <span class="sig-imp-meta">${total} tools &amp; materials</span></summary>
+    <div class="sig-imp-body">
+      <div class="sig-imp-bar">
+        <input id="sig-imp-q" placeholder="Filter by name, URL or note" oninput="sigImpFilter()">
+        <select id="sig-imp-from" onchange="sigImpSelectSession(this.value)">
+          <option value="">Select all from…</option>
+          ${others.map(id=>`<option value="${id}">Session ${id}</option>`).join('')}
+        </select>
+      </div>
+      ${groups}
+      <div class="sig-imp-bar">
+        <button class="btn btn-sm" onclick="sigImpClear()">Clear</button>
+        <button class="btn btn-sm btn-ok" id="sig-imp-add" onclick="sigImpAdd()" disabled>Add selected</button>
+      </div>
+    </div>
+  </details>`;
+}
+function sigImpBoxes(){ return [...document.querySelectorAll('.sig-imp input[type=checkbox]:not(:disabled)')]; }
+function sigImpVisible(cb){ return cb.closest('.sig-imp-row').style.display!=='none'; }
+function sigImpCount(){
+  const n=sigImpBoxes().filter(cb=>cb.checked).length, b=document.getElementById('sig-imp-add');
+  if(b){ b.disabled=!n; b.textContent=n?`Add ${n} selected`:'Add selected'; }
+}
+function sigImpFilter(){
+  const q=(document.getElementById('sig-imp-q')?.value||'').trim().toLowerCase();
+  document.querySelectorAll('.sig-imp-group').forEach(g=>{
+    let any=false;
+    g.querySelectorAll('.sig-imp-row').forEach(r=>{ const on=!q||r.dataset.q.includes(q); r.style.display=on?'':'none'; any=any||on; });
+    g.style.display=any?'':'none';
+  });
+}
+function sigImpSelectGroup(gi){
+  const boxes=sigImpBoxes().filter(cb=>cb.dataset.g===String(gi)&&sigImpVisible(cb));
+  const all=boxes.length&&boxes.every(cb=>cb.checked);
+  boxes.forEach(cb=>cb.checked=!all); sigImpCount();
+}
+function sigImpSelectSession(id){
+  if(!id) return;
+  sigImpBoxes().forEach(cb=>{ if(cb.closest('.sig-imp-row').dataset.s.includes(','+id+',')) cb.checked=true; });
+  document.getElementById('sig-imp-from').value=''; sigImpCount();
+}
+function sigImpClear(){ sigImpBoxes().forEach(cb=>cb.checked=false); sigImpCount(); }
+function sigImpAdd(){
+  const picks=sigImpBoxes().filter(cb=>cb.checked).map(cb=>sigLib[+cb.dataset.g].links[+cb.dataset.e] && {g:sigLib[+cb.dataset.g], e:sigLib[+cb.dataset.g].links[+cb.dataset.e]});
+  liveUpSignals();
+  const s=data.sessions[curIdx]; if(!s||!picks.length) return;
+  let n=0;
+  picks.forEach(({g,e})=>{
+    const panels=s.panels||(s.panels=[]);
+    let p=panels.find(p=>sigKey(p.title)===sigKey(g.title));
+    if(!p){ p={title:g.title, description:g.description, links:[]}; panels.push(p); }
+    p.links=(p.links||[]).filter(l=>!sigBlank(l)); // drop the empty placeholder link
+    if(p.links.some(l=>sigLinkKey(l)===e.key)) return;
+    p.links.push({...e.link}); n++;
+  });
+  markUnsaved(); rebuildSignalsForm(); renderPreview(); renderList();
+  toast(n+' link'+(n===1?'':'s')+' added','ok');
+}
 
 // LIVE UPDATE — scrape DOM back into the model
 function liveUpSignals(){
