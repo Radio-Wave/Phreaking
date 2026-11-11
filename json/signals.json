@@ -276,6 +276,84 @@
         }
       ],
       "current": true
+    },
+    {
+      "id": 7,
+      "panels": [
+        {
+          "title": "Tools",
+          "description": "Software, generators, utilities, archives, browsers, and live systems.",
+          "links": [
+            {
+              "label": "Online Image Editor",
+              "url": "https://pixlr.com/editor/",
+              "note": "Online Image Editor"
+            },
+            {
+              "label": "Kid Pix",
+              "url": "https://kidpix.app/",
+              "note": "Silly Drawer"
+            },
+            {
+              "label": "Notpad",
+              "url": "/signals/assets/notepad.txt",
+              "note": "Use your local notepad"
+            }
+          ]
+        },
+        {
+          "title": "Materials",
+          "description": "Online found objects",
+          "links": [
+            {
+              "label": "Wikipedia Random Page",
+              "url": "http://wikipedia.org/wiki/Special:Random",
+              "note": "Takes you to a random Wikipedia article."
+            },
+            {
+              "label": "No Clip",
+              "url": "https://noclip.website/",
+              "note": "Online World Finder"
+            },
+            {
+              "label": "Google Images",
+              "url": "https://images.google.com/",
+              "note": "Photo index"
+            },
+            {
+              "label": "Opens Random google street view",
+              "url": "https://www.mapcrunch.com/",
+              "note": "Have to click random first when the page loads"
+            },
+            {
+              "label": "Insecam",
+              "url": "http://www.insecam.org/en/byrating/",
+              "note": "Live CCTV Cams Worldwide"
+            }
+          ]
+        },
+        {
+          "title": "Examples",
+          "description": "",
+          "links": [
+            {
+              "label": "Example 1",
+              "url": "/signals/assets/example1.jpeg",
+              "note": "Squiggly Drawing"
+            },
+            {
+              "label": "Example 2",
+              "url": "/signals/assets/example2.jpeg",
+              "note": "Post Card"
+            },
+            {
+              "label": "Example 3",
+              "url": "/signals/assets/example3.jpeg",
+              "note": "Computer collage "
+            }
+          ]
+        }
+      ]
     }
   ]
 }
