@@ -63,30 +63,6 @@
           "full": "/assets/MixedSignals/MixedSignals1-9.jpeg",
           "alt": "Mixed Signals event",
           "caption": ""
-        },
-        {
-          "src": "/assets/MixedSignals/MixedSignals-1.webp",
-          "full": "/assets/MixedSignals/MixedSignals-1.jpeg",
-          "alt": "Presenter at a laptop beneath a projected grid of self-help videos, one captioned \"These 8 Habits quickly transformed my life\"",
-          "caption": ""
-        },
-        {
-          "src": "/assets/MixedSignals/MixedSignals-2.webp",
-          "full": "/assets/MixedSignals/MixedSignals-2.jpeg",
-          "alt": "Presenter in a pastel hair bow speaking at a sticker-covered laptop, a bright collage of cute characters projected behind",
-          "caption": ""
-        },
-        {
-          "src": "/assets/MixedSignals/MixedSignals-3.webp",
-          "full": "/assets/MixedSignals/MixedSignals-3.jpeg",
-          "alt": "Presenter at a laptop in front of a projected file browser of tree and rock images, terminal logs and a \"Narrator\" text box",
-          "caption": ""
-        },
-        {
-          "src": "/assets/MixedSignals/MixedSignals-4.webp",
-          "full": "/assets/MixedSignals/MixedSignals-4.jpeg",
-          "alt": "Two presenters at a table with laptops and a mixer, one gesturing as they speak into a microphone",
-          "caption": ""
         }
       ]
     },
@@ -386,6 +362,30 @@
           "src": "/assets/OpenProj/OpenProjector-34.webp",
           "full": "/assets/OpenProj/OpenProjector-34.jpeg",
           "alt": "Wide view of the venue with a presenter at a laptop beside a \"Social experiments\" slide, audience seated and a bar to the right",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals-4.webp",
+          "full": "/assets/MixedSignals/MixedSignals-4.jpeg",
+          "alt": "Two presenters at a table with laptops and a mixer, one gesturing as they speak into a microphone",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals-3.webp",
+          "full": "/assets/MixedSignals/MixedSignals-3.jpeg",
+          "alt": "Presenter at a laptop in front of a projected file browser of tree and rock images, terminal logs and a \"Narrator\" text box",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals-2.webp",
+          "full": "/assets/MixedSignals/MixedSignals-2.jpeg",
+          "alt": "Presenter in a pastel hair bow speaking at a sticker-covered laptop, a bright collage of cute characters projected behind",
+          "caption": ""
+        },
+        {
+          "src": "/assets/MixedSignals/MixedSignals-1.webp",
+          "full": "/assets/MixedSignals/MixedSignals-1.jpeg",
+          "alt": "Presenter at a laptop beneath a projected grid of self-help videos, one captioned \"These 8 Habits quickly transformed my life\"",
           "caption": ""
         }
       ]
